@@ -1,0 +1,132 @@
+Payone_credit_card:
+  translations:
+    en_US: 'Payone Credit Card'
+    de_DE: 'Payone Kreditkarte'
+payment.payone.credit-card:
+  translations:
+    en_US: 'Payone Credit Card'
+    de_DE: 'Payone Kreditkarte'
+Payone_credit_card.cardtype:
+  translations:
+    en_US: 'Card Type'
+    de_DE: 'Kreditkarten-Typ'
+Payone_credit_card.cardpan:
+  translations:
+    en_US: 'Card number'
+    de_DE: 'Kartennummer'
+Payone_credit_card.cardholder:
+  translations:
+    en_US: 'Card holder'
+    de_DE: 'Karteninhaber'
+Payone_credit_card.cardexpiredate:
+  translations:
+    en_US: 'Expiry date'
+    de_DE: 'Verfallsdatum'
+Payone_credit_card.cardcvc2:
+  translations:
+    en_US: 'CVC code'
+    de_DE: 'CVC (Kartenprüfnummer)'
+Payone_direct_debit:
+  translations:
+    en_US: 'Payone Direct Debit'
+    de_DE: 'Payone SEPA-Lastschrift'
+payment.payone.direct-debit:
+  translations:
+    en_US: 'Payone Direct Debit'
+    de_DE: 'Payone SEPA-Lastschrift'
+Payone_direct_debit.IBAN:
+  translations:
+    en_US: 'IBAN'
+    de_DE: 'IBAN'
+Payone_direct_debit.BIC:
+  translations:
+    en_US: 'BIC'
+    de_DE: 'BIC'
+Payone_prepayment:
+  translations:
+    en_US: 'Payone Prepayment'
+    de_DE: 'Payone Vorkasse'
+payment.payone.prepayment:
+  translations:
+    en_US: 'Payone Prepayment'
+    de_DE: 'Payone Vorkasse'
+Payone_invoice:
+  translations:
+    en_US: 'Payone Invoice'
+    de_DE: 'Payone Rechnung'
+payment.payone.invoice:
+  translations:
+    en_US: 'Payone Invoice'
+    de_DE: 'Payone Rechnung'
+Payone_e_wallet:
+  translations:
+    en_US: 'Payone E-Wallet'
+    de_DE: 'Payone E-Wallet'
+payment.payone.e_wallet:
+  translations:
+    en_US: 'Payone E-Wallet'
+    de_DE: 'Payone E-Wallet'
+'Your mandate as PDF':
+  translations:
+    en_US: 'Your mandate as PDF'
+    de_DE: 'Ihr Mandat als PDF'
+'Your Invoice as PDF':
+  translations:
+    en_US: 'Your Invoice as PDF'
+    de_DE: 'Ihre Rechnung als PDF'
+payone.order.payment_details:
+  translations:
+    en_US: 'Payment Details'
+    de_DE: 'Zahlungsdetails'
+payone.order.clearing_bank_account_holder:
+  translations:
+    en_US: 'Account holder'
+    de_DE: 'Zahlungsempfänger'
+payone.order.clearing_bank_account:
+  translations:
+    en_US: 'Bank Account'
+    de_DE: 'Kontonummer'
+payone.order.clearing_bank_code:
+  translations:
+    en_US: 'Bank Code'
+    de_DE: 'Bankleitzahl'
+payone.order.clearing_bank_iban:
+  translations:
+    en_US: 'IBAN'
+    de_DE: 'IBAN'
+payone.order.clearing_bank_bic:
+  translations:
+    en_US: 'BIC'
+    de_DE: 'BIC'
+payone.order.clearing_bank_city:
+  translations:
+    en_US: 'City'
+    de_DE: 'Stadt'
+payone.order.clearing_bank_name:
+  translations:
+    en_US: 'Bank'
+    de_DE: 'Bank'
+Payone_giropay_online_transfer:
+  translations:
+    en_US: 'Payone Giropay'
+    de_DE: 'Payone Giropay'
+payment.payone.giropay-online-transfer:
+  translations:
+    en_US: 'Payone Giropay'
+    de_DE: 'Payone Giropay'
+Payone_giropay_online_transfer.IBAN:
+  translations:
+    en_US: 'IBAN'
+    de_DE: 'IBAN'
+Payone_giropay_online_transfer.BIC:
+  translations:
+    en_US: 'BIC'
+    de_DE: 'BIC'
+payment.payone.online_bank_transfer:
+  translations:
+    de_DE: 'Payone Online-Überweisung'
+    en_US: 'Payone Online Bank Transfer'
+payment.payone.instant-online-transfer:
+  translations:
+    de_DE: 'Payone Sofort-Überweisung'
+    en_US: 'Payone Instant Bank Transfer'

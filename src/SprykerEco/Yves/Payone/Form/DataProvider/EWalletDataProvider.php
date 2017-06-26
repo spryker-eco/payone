@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+namespace SprykerEco\Yves\Payone\Form\DataProvider;
+
+use Generated\Shared\Transfer\PaymentTransfer;
+use Generated\Shared\Transfer\PayonePaymentTransfer;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use SprykerEco\Yves\Payone\Form\EWalletSubForm;
+use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+
+class EWalletDataProvider implements StepEngineFormDataProviderInterface
+{
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     */
+    public function getData(AbstractTransfer $quoteTransfer)
+    {
+        if ($quoteTransfer->getPayment() === null) {
+            $paymentTransfer = new PaymentTransfer();
+            $paymentTransfer->setPayone(new PayonePaymentTransfer());
+            $paymentTransfer->setPayoneEWallet(new PayonePaymentTransfer());
+            $quoteTransfer->setPayment($paymentTransfer);
+        }
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
+     *
+     * @return array
+     */
+    public function getOptions(AbstractTransfer $quoteTransfer)
+    {
+        return [
+            EWalletSubForm::OPTION_WALLET_CHOICES => $this->getEWalletTypes(),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getEWalletTypes()
+    {
+        return [
+            PayoneApiConstants::E_WALLET_TYPE_PAYPAL => 'PayPal',
+            PayoneApiConstants::E_WALLET_TYPE_PAY_DIRECT => 'Paydirekt',
+        ];
+    }
+
+}

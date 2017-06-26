@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<statemachine
+        xmlns="http://static.spryker.com"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://static.spryker.com http://static.spryker.com/oms-01.xsd">
+
+    <process name="PayoneOnlineTransfer" main="true">
+        <states>
+            <state name="new" reserved="true"/>
+            <state name="online transfer pending"/>
+            <state name="authorization pending"/>
+            <state name="authorization appointed"/>
+            <state name="underpaid" />
+            <state name="paid" />
+            <state name="invalid"/>
+            <state name="cancelled"/>
+            <state name="reservation cancellation pending"/>
+            <state name="shipped" />
+            <state name="refund failed clarification" />
+            <state name="closed" />
+            <state name="returned" />
+            <state name="refund pending" />
+            <state name="refunded" />
+        </states>
+
+        <transitions>
+            <transition happy="true" condition="Payone/AuthorizationIsApproved">
+                <source>new</source>
+                <target>authorization pending</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsAppointed" happy="true">
+                <source>authorization pending</source>
+                <target>authorization appointed</target>
+            </transition>
+
+            <transition condition="Payone/PaymentIsUnderPaid">
+                <source>authorization appointed</source>
+                <target>underpaid</target>
+            </transition>
+
+            <transition condition="Payone/PaymentIsPaid" happy="true">
+                <source>authorization appointed</source>
+                <target>paid</target>
+            </transition>
+
+            <transition condition="Payone/PaymentIsPaid">
+                <source>underpaid</source>
+                <target>paid</target>
+            </transition>
+
+            <transition condition="Payone/AuthorizationIsError">
+                <source>new</source>
+                <target>invalid</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition condition="Payone/AuthorizationIsRedirect">
+                <source>new</source>
+                <target>online transfer pending</target>
+                <event>authorize</event>
+            </transition>
+
+            <transition>
+                <source>online transfer pending</source>
+                <target>invalid</target>
+                <event>on redirect timeout</event>
+            </transition>
+
+            <transition>
+                <source>online transfer pending</source>
+                <target>cancelled</target>
+                <event>cancel redirect</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsAppointed" happy="true">
+                <source>online transfer pending</source>
+                <target>authorization appointed</target>
+            </transition>
+
+            <transition condition="Payone/CaptureIsApproved">
+                <source>authorization appointed</source>
+                <target>reservation cancellation pending</target>
+                <event>cancel reservation</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsCapture">
+                <source>reservation cancellation pending</source>
+                <target>cancelled</target>
+            </transition>
+
+            <transition happy="true">
+                <source>paid</source>
+                <target>shipped</target>
+                <event>ship</event>
+            </transition>
+
+            <transition happy="true">
+                <source>shipped</source>
+                <target>closed</target>
+                <event>wait for item return</event>
+            </transition>
+
+            <transition condition="Payone/RefundIsPossible">
+                <source>shipped</source>
+                <target>returned</target>
+                <event>return</event>
+            </transition>
+
+            <transition condition="Payone/RefundIsApproved">
+                <source>returned</source>
+                <target>refund pending</target>
+                <event>refund</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsRefund">
+                <source>refund pending</source>
+                <target>refunded</target>
+            </transition>
+
+            <transition>
+                <source>returned</source>
+                <target>refund failed clarification</target>
+                <event>refund</event>
+            </transition>
+
+            <transition>
+                <source>refund failed clarification</source>
+                <target>refunded</target>
+                <event>manual refund</event>
+            </transition>
+
+        </transitions>
+
+        <events>
+            <event name="authorize" onEnter="true" command="Payone/Authorize"/>
+            <event name="on redirect timeout" timeout="1hour" />
+            <event name="ship" manual="true" />
+            <event name="wait for item return" timeout="14days" />
+            <event name="cancel reservation" manual="true" command="Payone/Cancel"/>
+            <event name="cancel" manual="true"/>
+            <event name="return" manual="true" />
+            <event name="refund" onEnter="true" command="Payone/Refund" />
+            <event name="manual refund" manual="true" />
+            <event name="cancel redirect" />
+        </events>
+
+    </process>
+</statemachine>

@@ -1,0 +1,14 @@
+<div class="payment-subform payone-form payone-postfinance-card-online-transfer-form payment-form" id="payonePostfinanceCardOnlineTransfer">
+    <h3>{{ 'payment.payone.postfinance-card-online-transfer' | trans }}</h3>
+
+    <div class="field">
+        {{ form_widget(form.payonePostfinanceCardOnlineTransfer.onlinebanktransfertype) }}
+    </div>
+
+    <div class="field">
+        {{ form_widget(form.payonePostfinanceCardOnlineTransfer.bankcountry) }}
+    </div>
+
+    {{ form_errors(form) }}
+
+</div>

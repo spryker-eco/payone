@@ -1,0 +1,8 @@
+{% if quoteTransfer.payment.paymentMethod == 'payment.payone.direct_debit' %}
+    <a href="{{ url('payone-getfile', {'id': paymentDetail.mandateIdentification}) }}">{{ "Your Mandate as PDF" | trans }}</a>
+{% endif %}
+{% if quoteTransfer.payment.paymentMethod == 'payment.payone.invoice' %}
+    {% if paymentDetail is defined %}
+        <a href="{{ url('payone-getinvoice', {'id': paymentDetail.invoiceTitle}) }}">{{ "Your Invoice as PDF" | trans }}</a>
+    {% endif %}
+{% endif %}
