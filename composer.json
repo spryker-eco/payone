@@ -73,6 +73,10 @@
     {
       "type": "git",
       "url": "git@github.com:spryker/testify.git"
+    },
+    {
+      "type": "composer",
+      "url": "https://code.spryker.com/repo/private"
     }
   ],
   "description": "Payone module",
