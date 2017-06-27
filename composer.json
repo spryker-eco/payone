@@ -7,8 +7,8 @@
     }
   },
   "require": {
-    "spryker/config": "^3.0.0",
     "spryker/guzzle": "^2.1.0",
+    "spryker/config": "^3.0.0",
     "spryker/kernel": "^3.0.0",
     "spryker/oms": "^6.0.0",
     "spryker/propel-orm": "^1.0.0",
