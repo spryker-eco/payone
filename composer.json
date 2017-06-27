@@ -7,7 +7,6 @@
     }
   },
   "require": {
-    "symfony/console": "*",
     "spryker/guzzle": "^2.1.0",
     "spryker/config": "^3.0.0",
     "spryker/kernel": "^3.0.0",
@@ -26,12 +25,6 @@
   "suggest": {
     "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout."
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://code.spryker.com/repo/private"
-    }
-  ],
   "description": "Payone module",
   "license": "proprietary",
   "minimum-stability": "dev",
