@@ -25,60 +25,6 @@
   "suggest": {
     "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout."
   },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/guzzle.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/config.git"
-    },
-    {
-      "type": "git",
-      "url":  "git@github.com:spryker/kernel.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/oms.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/propel-orm.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/refund.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/sales.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/symfony.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/code-sniffer.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/propel.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/silex.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/testify.git"
-    },
-    {
-      "type": "composer",
-      "url": "https://code.spryker.com/repo/private"
-    }
-  ],
   "description": "Payone module",
   "license": "proprietary",
   "minimum-stability": "dev",
