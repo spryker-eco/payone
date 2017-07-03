@@ -73,13 +73,12 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
     {
         $currentYear = date('Y');
 
-        return [
-            $currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-            ++$currentYear => $currentYear,
-        ];
+        $result = [$currentYear => $currentYear];
+
+        for ($i = 0; $i < 19; $i++) {
+            $result[++$currentYear] = $currentYear;
+        }
+        return $result;
     }
 
     /**
