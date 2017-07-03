@@ -48,22 +48,6 @@ class Invoice extends AbstractMapper
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
 
-        $transactionContainer = new TransactionContainer();
-        $items = [];
-
-        $orderItems = $orderTransfer->requireItems()->getItems();
-        foreach ($orderItems as $orderItem) {
-            $items[] = $this->mapOrderItemToItemContainer($orderItem);
-        }
-
-        $expenses = $orderTransfer->getExpenses();
-        foreach ($expenses as $expense) {
-            $items[] = $this->mapExpenseToItemContainer($expense);
-        }
-
-        $transactionContainer->setItems($items);
-        $authorizationContainer->setInvoicing($transactionContainer);
-
         return $authorizationContainer;
     }
 
