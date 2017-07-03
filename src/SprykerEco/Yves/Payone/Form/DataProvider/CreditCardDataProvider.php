@@ -17,6 +17,11 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
 {
 
     /**
+     * @const int YEAR_CHOICES_AMOUNT
+     */
+    const YEAR_CHOICES_AMOUNT = 20;
+
+    /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
@@ -71,12 +76,11 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
      */
     protected function getYearChoices()
     {
+        $result = [];
         $currentYear = date('Y');
 
-        $result = [$currentYear => $currentYear];
-
-        for ($i = 0; $i < 19; $i++) {
-            $result[++$currentYear] = $currentYear;
+        for ($i = 0; $i < self::YEAR_CHOICES_AMOUNT; $i++) {
+            $result[$currentYear] = $currentYear++;
         }
         return $result;
     }
