@@ -22,9 +22,11 @@
     </div>
     {% endif %}
 
+    {% if form.payoneDirectDebit.bankcountry is defined %}
     <div class="field">
         {{ form_widget(form.payoneDirectDebit.bankcountry) }}
     </div>
+    {% endif %}
 
     <label>{{ 'Payone_direct_debit.IBAN' | trans }}</label>
     <div class="field">
