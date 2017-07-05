@@ -42,10 +42,9 @@ class PayoneFacadeMockBuilder
 
         // Mock the facade to override getFactory() and have it return out
         // previously created mock.
-        $facade = $testCase->getMock(
-            'SprykerEco\Zed\Payone\Business\PayoneFacade',
-            ['getFactory']
-        );
+        $facade = $testCase->getMockBuilder(
+            'SprykerEco\Zed\Payone\Business\PayoneFacade'
+        )->setMethods(['getFactory'])->getMock();
         $facade->expects($testCase->any())
             ->method('getFactory')
             ->will($testCase->returnValue($businessFactoryMock));
@@ -61,11 +60,15 @@ class PayoneFacadeMockBuilder
      */
     protected function getBusinessFactoryMock(AdapterInterface $adapter, PHPUnit_Framework_TestCase $testCase)
     {
-        $businessFactoryMock = $testCase->getMock(
-            'SprykerEco\Zed\Payone\Business\PayoneBusinessFactory',
-            ['createExecutionAdapter'],
-            []
-        );
+
+        $businessFactoryMock = $testCase->getMockBuilder(
+            'SprykerEco\Zed\Payone\Business\PayoneBusinessFactory'
+        )->setMethods(['createExecutionAdapter'])
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->getMock();
 
         $businessFactoryMock->setConfig(new PayoneConfig());
         $businessFactoryMock
