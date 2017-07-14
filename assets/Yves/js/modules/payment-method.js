@@ -9,41 +9,8 @@ var $ = require('jquery');
 
 function init(config) {
     var $form = $(config.formSelector);
-    $form.submit(function(ev) {
-        window.processPayoneResponse = function(response) {
-            console.log(response);
-            if (response.status == 'VALID') {
-                $form.find(config.cardpanInput).val('');
-                $form.find(config.cardcvc2Input).val('');
-                $form.find(config.pseudocardpanInput).val(response.pseudocardpan);
-                $form.unbind('submit').submit();
-            }
-            else {
-                alert(response.customermessage);
-            }
-        };
-        if ($(config.currentPaymentMethodSelector).val() === 'payoneCreditCard') {
-            ev.preventDefault();
-            var clientApiConfig = JSON.parse($form.find(config.clientApiConfigInput).val());
-            var data = $.extend({}, clientApiConfig, {
-                cardcvc2 : $form.find(config.cardcvc2Input).val() || 'wrong_value_empty_cvc2',
-                cardexpiremonth : $form.find(config.cardexpiremonthInput).val(),
-                cardexpireyear : $form.find(config.cardexpireyearInput).val(),
-                cardholder : $form.find(config.cardholderInput).val(),
-                cardpan : $form.find(config.cardpanInput).val(),
-                cardtype : $form.find(config.cardtypeInput).val(),
-                language: $form.find(config.languageInput).val().substr(0,2),
-            });
 
-            var options = {
-                return_type : 'json',
-                callback_function_name : 'processPayoneResponse'
-            };
-
-            var request = new PayoneRequest(data, options);
-            request.checkAndStore();
-        }
-    });
+    initHostedIframe(config);
 
     var $bankAccountModeBban = $form.find(config.bankAccountModeBbanInput);
     $bankAccountModeBban.change(function() {
@@ -66,6 +33,49 @@ function init(config) {
     } else {
         $bankAccountModeIbanBic.prop('checked', true);
         $bankAccountModeIbanBic.change();
+    }
+}
+
+function initHostedIframe(config) {
+    document.paymentform = document.getElementById(config.formId);
+    var $form = $(config.formSelector);
+    var clientApiConfig = JSON.parse($form.find(config.clientApiConfigInput).val());
+
+    var iframes = new Payone.ClientApi.HostedIFrames(config.hostedIframeConfig, clientApiConfig);
+    iframes.setCardType("V");
+
+    document.getElementById('cardtype').onchange = function () {
+        iframes.setCardType(this.value);              // on change: set new type of credit card to process
+    };
+
+    $form.find('[type="submit"]').click(function() {
+        check(iframes);
+        return false;
+    });
+}
+
+function check(iframes) {
+    //Fix to make payone remote script work correctly. It tries to remove some node but can't find it.
+    document.getElementsByTagName("body")[0].appendChild(document.createElement("p"));
+    window.PayoneGlobals.options.payoneScript = document.getElementsByTagName("body")[0].lastChild;
+
+    // Payone script works with such global array member.
+    // Since our function checkCallback is inside the module, it is absent in "window".
+    // Set it explicitly.
+    window['checkCallback'] = checkCallback;
+
+    if (iframes.isComplete()) {
+        iframes.creditCardCheck('checkCallback');
+    } else {
+        console.debug("The form is not complete");
+    }
+}
+
+function checkCallback(response) {
+    console.debug(response);
+    if (response.status === "VALID") {
+        document.getElementById("pseudocardpan").value = response.pseudocardpan;
+        document.paymentform.submit();
     }
 }
 
