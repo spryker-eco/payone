@@ -14,6 +14,7 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\Base\SpySalesOrderQuery;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use SprykerEco\Shared\Payone\PayoneConstants;
@@ -66,6 +67,14 @@ class GatewayController extends AbstractGatewayController
         }
 
         return $cancelRedirectTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     */
+    public function startPaypalExpressCheckoutAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->startPaypalExternalCheckout($quoteTransfer);
     }
 
     /**

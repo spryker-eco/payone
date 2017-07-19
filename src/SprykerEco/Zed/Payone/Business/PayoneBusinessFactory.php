@@ -23,6 +23,7 @@ use SprykerEco\Zed\Payone\Business\Order\OrderManager;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
@@ -182,6 +183,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             PayoneApiConstants::PAYMENT_METHOD_E_WALLET => $this->createEWallet($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT => $this->createPrepayment($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT => $this->createDirectDebit($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT => $this->createGenericPayment($storeConfig)
         ];
     }
 
@@ -301,6 +303,18 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $installer->setMessenger($messenger);
 
         return $installer;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Store $storeConfig
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment
+     */
+    protected function createGenericPayment($storeConfig)
+    {
+        $genericPayment = new GenericPayment($storeConfig);
+
+        return $genericPayment;
     }
 
 }

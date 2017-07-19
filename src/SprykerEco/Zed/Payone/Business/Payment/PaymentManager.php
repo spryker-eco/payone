@@ -14,14 +14,18 @@ use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardCheckRequestDataTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
+use Generated\Shared\Transfer\PayoneErrorTransfer;
+use Generated\Shared\Transfer\PayoneGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
@@ -35,6 +39,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerI
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
@@ -42,6 +47,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\BankAccountCheckRespon
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\GenericPaymentResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\ManageMandateResponseContainer;
@@ -128,11 +134,11 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\BasePaymentMethodMapperInterface $paymentMethodMapper
      *
      * @return void
      */
-    public function registerPaymentMethodMapper(PaymentMethodMapperInterface $paymentMethodMapper)
+    public function registerPaymentMethodMapper(BasePaymentMethodMapperInterface $paymentMethodMapper)
     {
         $paymentMethodMapper->setStandardParameter($this->standardParameter);
         $paymentMethodMapper->setSequenceNumberProvider($this->sequenceNumberProvider);
@@ -143,7 +149,7 @@ class PaymentManager implements PaymentManagerInterface
     /**
      * @param string $name
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface|null
+     * @return \SprykerEco\Zed\Payone\Business\Payment\BasePaymentMethodMapperInterface|null
      */
     protected function findPaymentMethodMapperByName($name)
     {
@@ -159,7 +165,7 @@ class PaymentManager implements PaymentManagerInterface
      *
      * @throws \SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\BasePaymentMethodMapperInterface
      */
     protected function getRegisteredPaymentMethodMapper($paymentMethodName)
     {
@@ -226,7 +232,7 @@ class PaymentManager implements PaymentManagerInterface
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\BasePaymentMethodMapperInterface
      */
     protected function getPaymentMethodMapper(SpyPaymentPayone $paymentEntity)
     {
@@ -283,6 +289,7 @@ class PaymentManager implements PaymentManagerInterface
     {
         $paymentEntity = $this->getPaymentEntity($idPayment);
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
+        //TODO: make interface segregation properly.
         $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentEntity);
         $this->setStandardParameter($requestContainer);
 
@@ -855,5 +862,46 @@ class PaymentManager implements PaymentManagerInterface
 
         $paymentDetailEntity->save();
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     */
+    public function startPaypalExternalCheckout(QuoteTransfer $quoteTransfer)
+    {
+        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT
+        );
+        $requestContainer = $paymentMethodMapper->mapQuoteToGenericRequest($quoteTransfer);
+        $responseTransfer = $this->performGenericRequest($requestContainer);
+
+
+        return $responseTransfer;
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer $requestContainer
+     *
+     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     */
+    protected function performGenericRequest(GenericPaymentContainer $requestContainer)
+    {
+        $this->setStandardParameter($requestContainer);
+
+        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+        $responseContainer = new GenericPaymentResponseContainer($rawResponse);
+        $responseTransfer = new PayoneStartPaypalExpressCheckoutTransfer();
+        $responseTransfer->setRedirectUrl($responseContainer->getRedirectUrl());
+        $responseTransfer->setWorkOrderId($responseContainer->getWorkOrderId());
+        $responseTransfer->setRawResponse(json_encode($rawResponse));
+        $responseTransfer->setStatus($responseContainer->getStatus());
+        $responseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
+        $responseTransfer->setErrorMessage($responseContainer->getErrormessage());
+        $responseTransfer->setErrorCode($responseContainer->getErrorcode());
+
+        return $responseTransfer;
+    }
+
 
 }

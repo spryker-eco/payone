@@ -23,7 +23,7 @@ abstract class AbstractContainer implements ContainerInterface
             if ($value instanceof ContainerInterface) {
                 $result = array_merge($result, $value->toArray());
             } else {
-                $result[$key] = $value;
+                $result[$this->getPreparedKey($key)] = $value;
             }
         }
         ksort($result);
@@ -38,11 +38,21 @@ abstract class AbstractContainer implements ContainerInterface
     {
         $stringArray = [];
         foreach ($this->toArray() as $key => $value) {
-            $stringArray[] = $key . ' = ' . $value;
+            $stringArray[] = $this->getPreparedKey($key) . ' = ' . $value;
         }
         $result = implode("\n", $stringArray);
 
         return $result;
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
+    protected function getPreparedKey($key)
+    {
+        return $key;
     }
 
 }

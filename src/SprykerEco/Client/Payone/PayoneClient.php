@@ -9,6 +9,7 @@ namespace SprykerEco\Client\Payone;
 
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
@@ -156,6 +157,16 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
     {
         return $this->getFactory()->createZedStub()->getInvoice($getInvoiceTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     */
+    public function startPaypalExpressCheckout(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createZedStub()->startPaypalExpressCheckout($quoteTransfer);
     }
 
 }

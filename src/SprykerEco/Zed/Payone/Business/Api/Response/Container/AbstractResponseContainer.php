@@ -53,7 +53,7 @@ abstract class AbstractResponseContainer
     public function init(array $data = [])
     {
         foreach ($data as $key => $value) {
-            $key = ucwords(str_replace('_', ' ', $key));
+            $key = $this->getPreparedKey($key);
             $method = 'set' . str_replace(' ', '', $key);
 
             if (method_exists($this, $method)) {
@@ -245,6 +245,16 @@ abstract class AbstractResponseContainer
     public function getRawResponse()
     {
         return $this->rawResponse;
+    }
+
+    /**
+     * @param $key
+     *
+     * @return string
+     */
+    protected function getPreparedKey($key)
+    {
+        return ucwords(str_replace('_', ' ', $key));
     }
 
 }

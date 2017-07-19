@@ -13,35 +13,8 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 
-interface PaymentMethodMapperInterface
+interface PaymentMethodMapperInterface extends BasePaymentMethodMapperInterface
 {
-
-    /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface $sequenceNumberProvider
-     *
-     * @return void
-     */
-    public function setSequenceNumberProvider(SequenceNumberProviderInterface $sequenceNumberProvider);
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     *
-     * @return void
-     */
-    public function setStandardParameter(PayoneStandardParameterTransfer $standardParameter);
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator $urlHmacGenerator
-     *
-     * @return void
-     */
-    public function setUrlHmacGenerator(UrlHmacGenerator $urlHmacGenerator);
-
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

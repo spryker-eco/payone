@@ -28,7 +28,7 @@ interface PaymentManagerInterface
      *
      * @return void
      */
-    public function registerPaymentMethodMapper(PaymentMethodMapperInterface $paymentMethodMapper);
+    public function registerPaymentMethodMapper(BasePaymentMethodMapperInterface $paymentMethodMapper);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer

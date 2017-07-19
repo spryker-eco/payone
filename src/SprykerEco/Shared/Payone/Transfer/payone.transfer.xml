@@ -320,8 +320,24 @@
         <property name="payoneEWallet" type="PayonePaymentEWallet"/>
         <property name="payonePrePayment" type="PayonePayment"/>
         <property name="payoneInvoice" type="PayonePayment"/>
+        <property name="payonePaypalExpressCheckout" type="PayonePaypalExpressCheckout" />
         <property name="summaryIncludePath" type="string"/>
         <property name="successIncludePath" type="string"/>
+    </transfer>
+
+    <transfer name="PayonePaypalExpressCheckout">
+        <property name="workOrderId" type="string" />
+    </transfer>
+
+    <transfer name="PayoneStartPaypalExpressCheckout">
+        <property name="workOrderId" type="string" />
+        <property name="redirectUrl" type="string" />
+        <property name="rawResponse" type="string" />
+        <property name="status" type="string" />
+        <property name="errorCode" type="int" />
+        <property name="errorMessage" type="string" />
+        <property name="customerMessage" type="string" />
+        <!--<property name="paydata" type="array?" />-->
     </transfer>
 
 </transfers>

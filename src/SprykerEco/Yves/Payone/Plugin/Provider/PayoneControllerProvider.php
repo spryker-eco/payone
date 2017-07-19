@@ -27,6 +27,21 @@ class PayoneControllerProvider extends YvesControllerProvider
         $this->createController('/payone/getfile', 'payone-getfile', 'payone', 'index', 'getFile')->method('GET|POST');
         $this->createController('/payone/regular-redirect-payment-cancellation', 'payone-cancel-redirect', 'Payone', 'index', 'cancelRedirect')->method('GET');
         $this->createController('/payone/getinvoice', 'payone-getinvoice', 'Payone', 'index', 'getInvoice')->method('GET');
+        $this->createController(
+            '/payone/checkout-with-paypal-button',
+            'payone-checkout-with-paypal-button',
+            'payone',
+            'index',
+            'checkoutWithPaypalButton'
+        )->method('GET');
+
+        $this->createController(
+            '/payone/paypal-express-checkout-start',
+            'payone-paypal-express-checkout-start',
+            'payone',
+            'checkout',
+            'startPaypalExpressCheckout'
+        )->method('GET');
     }
 
 }

@@ -264,6 +264,14 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
+     * @return \Spryker\Client\Cart\CartClient
+     */
+    public function getCartClient()
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CART);
+    }
+
+    /**
      * @return \Spryker\Client\Customer\CustomerClientInterface
      */
     public function createCustomerClient()

@@ -601,4 +601,14 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
         $this->getFactory()->createPaymentManager()->updatePaymentDetail($paymentData, $idOrder);
     }
 
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     */
+    public function startPaypalExternalCheckout(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createPaymentManager()->startPaypalExternalCheckout($quoteTransfer);
+    }
+
 }

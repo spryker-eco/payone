@@ -17,6 +17,8 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
     const CLIENT_CUSTOMER = 'customer client';
 
+    const CLIENT_CART = 'cart client';
+
     /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
@@ -30,6 +32,10 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::CLIENT_CUSTOMER] = function (Container $container) {
             return $container->getLocator()->customer()->client();
+        };
+
+        $container[self::CLIENT_CART] = function (Container $container) {
+            return $container->getLocator()->cart()->client();
         };
 
         return $container;

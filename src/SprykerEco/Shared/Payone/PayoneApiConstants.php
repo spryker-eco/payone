@@ -52,6 +52,9 @@ interface PayoneApiConstants
     // online transfer methods
     const PAYMENT_METHOD_ONLINE_BANK_TRANSFER = 'payment.payone.online_bank_transfer';
 
+    // external checkout methods
+    const PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT = 'payment.payone.paypal_external_checkout';
+
     // CLEARING TYPE
 
     const CLEARING_TYPE_DIRECT_DEBIT = 'elv';
@@ -124,6 +127,7 @@ interface PayoneApiConstants
     const REQUEST_TYPE_GETINVOICE = 'getinvoice';
     const REQUEST_TYPE_MANAGEMANDATE = 'managemandate';
     const REQUEST_TYPE_GETFILE = 'getfile';
+    const REQUEST_TYPE_GENERICPAYMENT = 'genericpayment';
 
     // ONLINE BANK TRANSFER TYPE
 
@@ -289,5 +293,9 @@ interface PayoneApiConstants
 
     const INVOICE_TITLE_PREFIX_INVOICE = 'RG';
     const INVOICE_TITLE_PREFIX_CREDIT_NOTE = 'GT';
+
+    // PAYPAL EXPRESS CHECKOUT ACTIONS
+    const PAYONE_EXPRESS_CHECKOUT_SET_ACTION = 'setexpresscheckout';
+    const PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION = 'getexpresscheckoutdetails';
 
 }

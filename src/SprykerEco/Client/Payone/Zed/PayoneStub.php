@@ -9,11 +9,14 @@ namespace SprykerEco\Client\Payone\Zed;
 
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
+use Generated\Shared\Transfer\PayoneExpressCheckoutTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 
 class PayoneStub extends ZedRequestStub
@@ -107,6 +110,19 @@ class PayoneStub extends ZedRequestStub
         return $this->zedStub->call(
             '/payone/gateway/cancel-redirect',
             $cancelRedirectTransfer
+        );
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     */
+    public function startPaypalExpressCheckout(QuoteTransfer $quoteTransfer)
+    {
+        return $this->zedStub->call(
+            '/payone/gateway/start-paypal-express-checkout',
+            $quoteTransfer
         );
     }
 
