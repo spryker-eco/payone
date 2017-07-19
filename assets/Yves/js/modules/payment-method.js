@@ -49,8 +49,10 @@ function initHostedIframe(config) {
     };
 
     $form.find('[type="submit"]').click(function() {
-        check(iframes);
-        return false;
+        if ($(config.currentPaymentMethodSelector).val() === 'payoneCreditCard') {
+            check(iframes);
+            return false;
+        }
     });
 }
 
