@@ -15,6 +15,11 @@ class PayoneControllerProvider extends YvesControllerProvider
 
     const ROUTE_LOGIN = 'login';
     const CHECKOUT_PAYMENT = 'checkout-payment';
+    const EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
+    const EXPRESS_CHECKOUT_START = 'payone-paypal-express-checkout-start';
+    const EXPRESS_CHECKOUT_SUCCESS = 'payone-paypal-express-checkout-success';
+    const EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
+    const EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
 
     /**
      * @param \Silex\Application $app
@@ -29,18 +34,42 @@ class PayoneControllerProvider extends YvesControllerProvider
         $this->createController('/payone/getinvoice', 'payone-getinvoice', 'Payone', 'index', 'getInvoice')->method('GET');
         $this->createController(
             '/payone/checkout-with-paypal-button',
-            'payone-checkout-with-paypal-button',
+            static::EXPRESS_CHECKOUT_BUTTON,
             'payone',
-            'index',
+            'expressCheckout',
             'checkoutWithPaypalButton'
         )->method('GET');
 
         $this->createController(
             '/payone/paypal-express-checkout-start',
-            'payone-paypal-express-checkout-start',
+            static::EXPRESS_CHECKOUT_START,
             'payone',
-            'checkout',
+            'expressCheckout',
             'startPaypalExpressCheckout'
+        )->method('GET');
+
+        $this->createController(
+            '/payone/expresscheckout/success',
+            static::EXPRESS_CHECKOUT_SUCCESS,
+            'payone',
+            'expressCheckout',
+            'success'
+        )->method('GET');
+
+        $this->createController(
+            '/payone/expresscheckout/failure',
+            static::EXPRESS_CHECKOUT_FAILURE,
+            'payone',
+            'expressCheckout',
+            'failure'
+        )->method('GET');
+
+        $this->createController(
+            '/payone/expresscheckout/back',
+            static::EXPRESS_CHECKOUT_BACK,
+            'payone',
+            'expressCheckout',
+            'back'
         )->method('GET');
     }
 

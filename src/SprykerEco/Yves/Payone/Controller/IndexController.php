@@ -126,14 +126,6 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @return array
-     */
-    public function checkoutWithPaypalButtonAction()
-    {
-        return $this->viewResponse();
-    }
-
-    /**
      * @param callable|null $callback
      * @param int $status
      * @param array $headers

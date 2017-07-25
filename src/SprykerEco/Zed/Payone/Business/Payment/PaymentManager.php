@@ -14,22 +14,19 @@ use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardCheckRequestDataTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
-use Generated\Shared\Transfer\PayoneErrorTransfer;
-use Generated\Shared\Transfer\PayoneGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
-use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer;
+use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
-use Propel\Runtime\Collection\ObjectCollection;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
@@ -864,16 +861,21 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
-     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function startPaypalExternalCheckout(QuoteTransfer $quoteTransfer)
+    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT
         );
-        $requestContainer = $paymentMethodMapper->mapQuoteToGenericRequest($quoteTransfer);
+        $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();
+        $baseGenericPaymentContainer->getPaydata()->setAction(PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_SET_ACTION);
+        $requestContainer = $paymentMethodMapper->mapRequestTransferToGenericPayment(
+            $baseGenericPaymentContainer,
+            $requestTransfer
+        );
         $responseTransfer = $this->performGenericRequest($requestContainer);
 
 
@@ -881,9 +883,33 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
+    {
+        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT
+        );
+
+        $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();
+        $baseGenericPaymentContainer->getPaydata()->setAction(
+            PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION
+        );
+        $requestContainer = $paymentMethodMapper->mapQuoteTransferToGenericPayment(
+            $baseGenericPaymentContainer,
+            $quoteTransfer
+        );
+        $responseTransfer = $this->performGenericRequest($requestContainer);
+
+        return $responseTransfer;
+    }
+
+    /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer $requestContainer
      *
-     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
     protected function performGenericRequest(GenericPaymentContainer $requestContainer)
     {
@@ -891,7 +917,7 @@ class PaymentManager implements PaymentManagerInterface
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new GenericPaymentResponseContainer($rawResponse);
-        $responseTransfer = new PayoneStartPaypalExpressCheckoutTransfer();
+        $responseTransfer = new PayonePaypalExpressCheckoutGenericPaymentResponseTransfer();
         $responseTransfer->setRedirectUrl($responseContainer->getRedirectUrl());
         $responseTransfer->setWorkOrderId($responseContainer->getWorkOrderId());
         $responseTransfer->setRawResponse(json_encode($rawResponse));
@@ -899,6 +925,16 @@ class PaymentManager implements PaymentManagerInterface
         $responseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
         $responseTransfer->setErrorMessage($responseContainer->getErrormessage());
         $responseTransfer->setErrorCode($responseContainer->getErrorcode());
+        $responseTransfer->setEmail($responseContainer->getEmail());
+        $responseTransfer->setShippingFirstName($responseContainer->getShippingFirstname());
+        $responseTransfer->setShippingLastName($responseContainer->getShippingLastname());
+        $responseTransfer->setShippingCompany($responseContainer->getShippingCompany());
+        $responseTransfer->setShippingCountry($responseContainer->getShippingCountry());
+        $responseTransfer->setShippingState($responseContainer->getShippingState());
+        $responseTransfer->setShippingStreet($responseContainer->getShippingStreet());
+        $responseTransfer->setShippingAddressAdition($responseContainer->getShippingAddressaddition());
+        $responseTransfer->setShippingCity($responseContainer->getShippingCity());
+        $responseTransfer->setShippingZip($responseContainer->getShippingZip());
 
         return $responseTransfer;
     }

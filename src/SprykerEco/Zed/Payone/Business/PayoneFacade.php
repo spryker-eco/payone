@@ -18,6 +18,7 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
+use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -602,13 +603,34 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    {
+        return $this->getFactory()->createPaymentManager()->startPaypalExpressCheckout($requestTransfer);
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function startPaypalExternalCheckout(QuoteTransfer $quoteTransfer)
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFactory()->createPaymentManager()->startPaypalExternalCheckout($quoteTransfer);
+        return $this->getFactory()->createPaymentManager()->getPaypalExpressCheckoutDetails($quoteTransfer);
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function placeExpressCheckoutOrder(QuoteTransfer $quoteTransfer)
+    {
+        $details = $this->getPaypalExpressCheckoutDetails($quoteTransfer);
+        return $this->getFactory()->createExpressCheckoutOrderSaver()->placeOrder($quoteTransfer, $details);
     }
 
 }

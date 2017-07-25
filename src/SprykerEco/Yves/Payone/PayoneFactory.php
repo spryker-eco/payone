@@ -32,6 +32,7 @@ use SprykerEco\Yves\Payone\Form\PostfinanceCardOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PostfinanceEfinanceOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PrePaymentForm;
 use SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm;
+use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
 use SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
@@ -77,6 +78,18 @@ class PayoneFactory extends AbstractFactory
     public function createPayoneHandler()
     {
         return new PayoneHandler();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler
+     */
+    public function createExpressCheckoutHandler()
+    {
+        return new ExpressCheckoutHandler(
+            $this->getPayoneClient(),
+            $this->createCartClient(),
+            $this->createCustomerClient()
+        );
     }
 
     /**
@@ -266,9 +279,17 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\Cart\CartClient
      */
-    public function getCartClient()
+    public function createCartClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CART);
+    }
+
+    /**
+     * @return \Spryker\Client\Checkout\CheckoutClientInterface
+     */
+    public function createCheckoutClient()
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CHECKOUT);
     }
 
     /**
@@ -277,6 +298,14 @@ class PayoneFactory extends AbstractFactory
     public function createCustomerClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CUSTOMER);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryBridge
+     */
+    public function createCustomerQueryContainer()
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::QUERY_CONTAINER_CUSTOMER);
     }
 
 }

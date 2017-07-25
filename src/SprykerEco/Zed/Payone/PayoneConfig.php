@@ -32,6 +32,7 @@ class PayoneConfig extends AbstractBundleConfig
     const PAYMENT_METHOD_PRZELEWY24_ONLINE_TRANSFER = 'payonePrzelewy24OnlineTransfer';
     const PAYMENT_METHOD_PRE_PAYMENT = 'payonePrePayment';
     const PAYMENT_METHOD_INVOICE = 'payoneInvoice';
+    const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = 'payonePaypalExpressChecout';
 
     /**
      * Fetches API request mode from config (could be 'live' or 'test').

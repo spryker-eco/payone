@@ -25,6 +25,21 @@ $config[PayoneConstants::PAYONE] = [
     PayoneConstants::PAYONE_EMPTY_SEQUENCE_NUMBER => 0,
 ];
 
+$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_SUCCESS_URL] = sprintf(
+    '%s/payone/expresscheckout/success',
+    $config[ApplicationConstants::BASE_URL_YVES]
+);
+
+$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_FAILURE_URL] = sprintf(
+    '%s/payone/expresscheckout/error',
+    $config[ApplicationConstants::BASE_URL_YVES]
+);
+
+$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_BACK_URL] = sprintf(
+    '%s/payone/expresscheckout/back',
+    $config[ApplicationConstants::BASE_URL_YVES]
+);
+
 $config[KernelConstants::DEPENDENCY_INJECTOR_YVES] = [
     'Checkout' => [
         'DummyPayment',

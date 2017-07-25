@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\Base\SpySalesOrderQuery;
@@ -70,11 +71,24 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function startPaypalExpressCheckoutAction(QuoteTransfer $quoteTransfer)
+    public function startPaypalExpressCheckoutAction(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
-        return $this->getFacade()->startPaypalExternalCheckout($quoteTransfer);
+        return $this->getFacade()->startPaypalExpressCheckout($requestTransfer);
+    }
+
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function placeExpressCheckoutOrderAction(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFacade()->placeExpressCheckoutOrder($quoteTransfer);
     }
 
     /**

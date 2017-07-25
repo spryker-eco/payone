@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -397,13 +402,21 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected function getPreparedKey($key)
     {
         $keyMap = [
-            'clearingType'  => 'clearingtype',
-            'narrativeText' => 'narrative_text',
-            'workOrderId'   => 'workorderid',
-            'walletType'    => 'wallettype',
-            'successUrl'    => 'successurl',
-            'errorUrl'      => 'errorurl',
-            'backUrl'       => 'backurl'
+            'clearingType'      => 'clearingtype',
+            'narrativeText'     => 'narrative_text',
+            'workOrderId'       => 'workorderid',
+            'shippingFirstName' => 'shipping_firstname',
+            'shippingLastName'  => 'shipping_lastname',
+            'shippingCompany'   => 'shipping_company',
+            'shippingStreet'    => 'shipping_street',
+            'shippingZip'       => 'shipping_zip',
+            'shippingCity'      => 'shipping_city',
+            'shippingState'     => 'shipping_state',
+            'shippingCountry'   => 'shipping_country',
+            'walletType'        => 'wallettype',
+            'successUrl'        => 'successurl',
+            'errorUrl'          => 'errorurl',
+            'backUrl'           => 'backurl'
         ];
         return isset($keyMap[$key]) ? $keyMap[$key] : $key;
     }

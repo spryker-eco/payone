@@ -329,7 +329,14 @@
         <property name="workOrderId" type="string" />
     </transfer>
 
-    <transfer name="PayoneStartPaypalExpressCheckout">
+    <transfer name="PayoneStartPaypalExpressCheckoutRequest">
+        <property name="quote" type="Quote" />
+        <property name="successUrl" type="string" />
+        <property name="failureUrl" type="string" />
+        <property name="backUrl" type="string" />
+    </transfer>
+
+    <transfer name="PayonePaypalExpressCheckoutGenericPaymentResponse">
         <property name="workOrderId" type="string" />
         <property name="redirectUrl" type="string" />
         <property name="rawResponse" type="string" />
@@ -337,7 +344,16 @@
         <property name="errorCode" type="int" />
         <property name="errorMessage" type="string" />
         <property name="customerMessage" type="string" />
-        <!--<property name="paydata" type="array?" />-->
+        <property name="email" type="string" />
+        <property name="shippingFirstName" type="string" />
+        <property name="shippingLastName" type="string" />
+        <property name="shippingCompany" type="string" />
+        <property name="shippingStreet" type="string" />
+        <property name="shippingAddressAdition" type="string" />
+        <property name="shippingZip" type="string" />
+        <property name="shippingCity" type="string" />
+        <property name="shippingState" type="string" />
+        <property name="shippingCountry" type="string" />
     </transfer>
 
 </transfers>

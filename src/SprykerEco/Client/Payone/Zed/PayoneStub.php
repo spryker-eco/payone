@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
+use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
@@ -114,14 +115,27 @@ class PayoneStub extends ZedRequestStub
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
-     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function startPaypalExpressCheckout(QuoteTransfer $quoteTransfer)
+    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
         return $this->zedStub->call(
             '/payone/gateway/start-paypal-express-checkout',
+            $requestTransfer
+        );
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function placeExpressCheckoutOrder(QuoteTransfer $quoteTransfer)
+    {
+        return $this->zedStub->call(
+            '/payone/gateway/place-express-checkout-order',
             $quoteTransfer
         );
     }

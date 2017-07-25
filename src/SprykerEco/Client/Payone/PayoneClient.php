@@ -9,12 +9,12 @@ namespace SprykerEco\Client\Payone;
 
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
-use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePersonalDataTransfer;
+use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
@@ -160,13 +160,23 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    {
+        return $this->getFactory()->createZedStub()->startPaypalExpressCheckout($requestTransfer);
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutTransfer
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function startPaypalExpressCheckout(QuoteTransfer $quoteTransfer)
+    public function placeExpressCheckoutOrder(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFactory()->createZedStub()->startPaypalExpressCheckout($quoteTransfer);
+        return $this->getFactory()->createZedStub()->placeExpressCheckoutOrder($quoteTransfer);
     }
 
 }

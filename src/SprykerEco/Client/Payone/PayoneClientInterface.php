@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
+use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -103,5 +104,27 @@ interface PayoneClientInterface
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
      */
     public function manageMandate(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Send start paypal express checkout to payone.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer);
+
+    /**
+     * Send place order request to zed.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function placeExpressCheckoutOrder(QuoteTransfer $quoteTransfer);
 
 }
