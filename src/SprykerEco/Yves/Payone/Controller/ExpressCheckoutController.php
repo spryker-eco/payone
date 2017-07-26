@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Payone\Controller;
 
+use Pyz\Yves\Cart\Plugin\Provider\CartControllerProvider;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 
@@ -50,19 +51,20 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function failureAction()
     {
-        return $this->viewResponse();
+        $this->addErrorMessage('Paypal transaction failed.');
+        return $this->redirectResponseInternal(CartControllerProvider::ROUTE_CART);
     }
 
     /**
-     * @return null
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function backAction()
     {
-        // probably redirect to cancel action
+        return $this->redirectResponseInternal(CartControllerProvider::ROUTE_CART);
     }
 
 }

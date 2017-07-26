@@ -107,7 +107,10 @@ class ExpressCheckoutOrderSaver implements ExpressCheckoutOrderSaverInterface
         $paymentDetailTransfer
             ->setAmount($quoteTransfer->getTotals()->getGrandTotal())
             ->setType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL)
-            ->setCurrency($this->config->getRequestStandardParameter()->getCurrency());
+            ->setCurrency($this->config->getRequestStandardParameter()->getCurrency())
+            ->setWorkOrderId(
+                $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->getWorkOrderId()
+            );
         $payone->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT);
         $payone->setPaymentDetail($paymentDetailTransfer);
 

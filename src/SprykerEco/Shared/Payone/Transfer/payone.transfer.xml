@@ -135,6 +135,7 @@
         <property name="clearingBankBic" type="string"/>
         <property name="clearingBankCity" type="string"/>
         <property name="clearingBankName" type="string"/>
+        <property name="workOrderId" type="string" />
     </transfer>
 
     <transfer name="PayoneBankAccountCheck">

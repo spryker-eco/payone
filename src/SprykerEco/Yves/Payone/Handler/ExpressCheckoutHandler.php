@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
 {
 
-    const PAYMENT_PROVIDER = 'Payone';
-
     /**
      * @var \SprykerEco\Client\Payone\PayoneClientInterface
      */

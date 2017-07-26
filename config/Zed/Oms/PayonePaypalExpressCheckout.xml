@@ -30,12 +30,6 @@
                 <event>pre-authorize</event>
             </transition>
 
-            <transition condition="Payone/PreAuthorizationIsRedirect">
-                <source>new</source>
-                <target>pre-authorization pending</target>
-                <event>pre-authorize</event>
-            </transition>
-
             <transition condition="Payone/PaymentIsAppointed" happy="true">
                 <source>pre-authorization pending</source>
                 <target>pre-authorization appointed</target>

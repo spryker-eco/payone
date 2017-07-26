@@ -103,6 +103,8 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $preAuthorizationContainer = new PreAuthorizationContainer();
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
 
+        $preAuthorizationContainer->setWorkOrderId($paymentEntity->getSpyPaymentPayoneDetail()->getWorkOrderId());
+
         return $preAuthorizationContainer;
     }
 
