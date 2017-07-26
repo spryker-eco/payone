@@ -88,7 +88,8 @@ class GatewayController extends AbstractGatewayController
      */
     public function placeExpressCheckoutOrderAction(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFacade()->placeExpressCheckoutOrder($quoteTransfer);
+        $details = $this->getFacade()->getPaypalExpressCheckoutDetails($quoteTransfer);
+        return $this->getFacade()->placeExpressCheckoutOrder($quoteTransfer, $details);
     }
 
     /**

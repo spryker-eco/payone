@@ -17,6 +17,7 @@ use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
@@ -623,13 +624,16 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $detailss
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function placeExpressCheckoutOrder(QuoteTransfer $quoteTransfer)
+    public function placeExpressCheckoutOrder(
+        QuoteTransfer $quoteTransfer,
+        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
+    )
     {
-        $details = $this->getPaypalExpressCheckoutDetails($quoteTransfer);
         return $this->getFactory()->createExpressCheckoutOrderSaver()->placeOrder($quoteTransfer, $details);
     }
 
