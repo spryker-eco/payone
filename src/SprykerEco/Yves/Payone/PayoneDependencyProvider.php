@@ -21,6 +21,8 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
     const CLIENT_CHECKOUT = 'checkout client';
 
+    const CLIENT_SHIPMENT = 'shipment client';
+
     const QUERY_CONTAINER_CUSTOMER = 'customer query container';
 
     /**
@@ -48,6 +50,10 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::CLIENT_CHECKOUT] = function (Container $container) {
             return $container->getLocator()->checkout()->client();
+        };
+
+        $container[self::CLIENT_SHIPMENT] = function (Container $container) {
+            return $container->getLocator()->shipment()->client();
         };
 
         return $container;

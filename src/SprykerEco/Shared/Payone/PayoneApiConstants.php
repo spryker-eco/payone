@@ -42,6 +42,7 @@ interface PayoneApiConstants
 
     // e-wallet methods
     const PAYMENT_METHOD_E_WALLET = 'payment.payone.e_wallet';
+    const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = 'payment.payone.paypal_external_checkout';
 
     // bank account based methods
     const PAYMENT_METHOD_DIRECT_DEBIT = 'payment.payone.direct_debit';
@@ -52,8 +53,6 @@ interface PayoneApiConstants
     // online transfer methods
     const PAYMENT_METHOD_ONLINE_BANK_TRANSFER = 'payment.payone.online_bank_transfer';
 
-    // external checkout methods
-    const PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT = 'payment.payone.paypal_external_checkout';
 
     // CLEARING TYPE
 

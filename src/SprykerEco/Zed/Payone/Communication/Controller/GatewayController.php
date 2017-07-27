@@ -80,16 +80,14 @@ class GatewayController extends AbstractGatewayController
         return $this->getFacade()->startPaypalExpressCheckout($requestTransfer);
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function placeExpressCheckoutOrderAction(QuoteTransfer $quoteTransfer)
+    public function getPaypalExpressCheckoutDetailsAction(QuoteTransfer $quoteTransfer)
     {
-        $details = $this->getFacade()->getPaypalExpressCheckoutDetails($quoteTransfer);
-        return $this->getFacade()->placeExpressCheckoutOrder($quoteTransfer, $details);
+        return $this->getFacade()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
 
     /**

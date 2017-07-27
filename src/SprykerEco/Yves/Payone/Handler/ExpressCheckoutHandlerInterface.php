@@ -15,4 +15,14 @@ interface ExpressCheckoutHandlerInterface
      */
     public function startPaypalExpressCheckout();
 
+    /**
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function placeOrder();
+
+    /**
+     * @return void
+     */
+    public function clearQuote();
+
 }

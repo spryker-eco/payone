@@ -868,7 +868,7 @@ class PaymentManager implements PaymentManagerInterface
     public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
-            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
         );
         $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();
         $baseGenericPaymentContainer->getPaydata()->setAction(PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_SET_ACTION);
@@ -890,7 +890,7 @@ class PaymentManager implements PaymentManagerInterface
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
     {
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
-            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
         );
 
         $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();

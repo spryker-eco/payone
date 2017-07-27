@@ -117,14 +117,10 @@ interface PayoneClientInterface
     public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
-     * Send place order request to zed.
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function placeExpressCheckoutOrder(QuoteTransfer $quoteTransfer);
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
 }

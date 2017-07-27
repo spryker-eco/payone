@@ -172,11 +172,11 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function placeExpressCheckoutOrder(QuoteTransfer $quoteTransfer)
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFactory()->createZedStub()->placeExpressCheckoutOrder($quoteTransfer);
+        return $this->getFactory()->createZedStub()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
 
 }

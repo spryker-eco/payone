@@ -130,12 +130,12 @@ class PayoneStub extends ZedRequestStub
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function placeExpressCheckoutOrder(QuoteTransfer $quoteTransfer)
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
     {
         return $this->zedStub->call(
-            '/payone/gateway/place-express-checkout-order',
+            '/payone/gateway/get-paypal-express-checkout-details',
             $quoteTransfer
         );
     }

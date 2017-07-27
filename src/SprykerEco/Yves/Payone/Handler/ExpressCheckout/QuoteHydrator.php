@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Order;
+namespace SprykerEco\Yves\Payone\Handler\ExpressCheckout;
 
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -17,63 +17,37 @@ use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
+use Spryker\Client\Customer\CustomerClientInterface;
+use Spryker\Client\Shipment\ShipmentClientInterface;
+use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCheckoutInterface;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryBridge;
-use SprykerEco\Zed\Payone\PayoneConfig;
+use SprykerEco\Shared\Payone\PayoneConstants;
+use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 
-class ExpressCheckoutOrderSaver implements ExpressCheckoutOrderSaverInterface
+class QuoteHydrator
 {
 
     /**
-     * @const PAYMENT_PROVIDER
+     * @var \Spryker\Client\Customer\CustomerClientInterface
      */
-    const PAYMENT_PROVIDER = 'Payone';
+    protected $customerClient;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCheckoutInterface
+     * @var \Spryker\Client\Shipment\ShipmentClientInterface
      */
-    protected $checkoutFacade;
+    protected $shipmentClient;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryInterface
-     */
-    protected $customerQueryContainer;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\PayoneConfig
-     */
-    protected $config;
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCheckoutInterface $checkoutFacade
-     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryInterface $customerQueryContainer
-     * @param \SprykerEco\Zed\Payone\PayoneConfig $config
+     * @param \Spryker\Client\Shipment\ShipmentClientInterface $shipmentClient
+     * @param \Spryker\Client\Customer\CustomerClientInterface $customerClient
      */
     public function __construct(
-        PayoneToCheckoutInterface $checkoutFacade,
-        PayoneToCustomerQueryBridge $customerQueryContainer,
-        PayoneConfig $config
+        ShipmentClientInterface $shipmentClient,
+        CustomerClientInterface $customerClient
     )
     {
-        $this->checkoutFacade = $checkoutFacade;
-        $this->customerQueryContainer = $customerQueryContainer;
-        $this->config = $config;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    public function placeOrder(
-        QuoteTransfer $quoteTransfer,
-        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-    )
-    {
-        $quoteTransfer = $this->getHydratedQuote($quoteTransfer, $details);
-        return $this->checkoutFacade->placeOrder($quoteTransfer);
+        $this->shipmentClient = $shipmentClient;
+        $this->customerClient = $customerClient;
     }
 
     /**
@@ -82,7 +56,7 @@ class ExpressCheckoutOrderSaver implements ExpressCheckoutOrderSaverInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
-    protected function getHydratedQuote(
+    public function getHydratedQuote(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details)
     {
@@ -107,16 +81,16 @@ class ExpressCheckoutOrderSaver implements ExpressCheckoutOrderSaverInterface
         $paymentDetailTransfer
             ->setAmount($quoteTransfer->getTotals()->getGrandTotal())
             ->setType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL)
-            ->setCurrency($this->config->getRequestStandardParameter()->getCurrency())
+            ->setCurrency(Store::getInstance()->getCurrencyIsoCode())
             ->setWorkOrderId(
                 $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->getWorkOrderId()
             );
-        $payone->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT);
+        $payone->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT);
         $payone->setPaymentDetail($paymentDetailTransfer);
 
         $paymentTransfer->setPayone($payone);
-        $paymentTransfer->setPaymentSelection(PayoneConfig::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT);
-        $paymentTransfer->setPaymentProvider(static::PAYMENT_PROVIDER);
+        $paymentTransfer->setPaymentSelection(PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE);
+        $paymentTransfer->setPaymentProvider(ExpressCheckoutHandler::PAYMENT_PROVIDER);
         $paypalExpressCheckoutPayment = new PayonePaypalExpressCheckoutTransfer();
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quoteTransfer->setPayment($paymentTransfer);
@@ -133,7 +107,16 @@ class ExpressCheckoutOrderSaver implements ExpressCheckoutOrderSaverInterface
     {
         $shipmentTransfer = new ShipmentTransfer();
 
-        //TODO: discuss what should be done here. What exactly shipping method to use.
+        $methods = $this->shipmentClient->getAvailableMethods($quoteTransfer)->getMethods();
+
+        if (count($methods) > 0) {
+            $shippingMethod = $methods[0];
+            $shippingMethod->setDefaultPrice(0);
+            $shipmentTransfer->setMethod($shippingMethod);
+            $quoteTransfer->setShipment($shipmentTransfer);
+            return $quoteTransfer;
+        }
+
         $shipmentTransfer->setMethod(
             (new ShipmentMethodTransfer())
                 ->setCarrierName('Paypal')
@@ -156,18 +139,15 @@ class ExpressCheckoutOrderSaver implements ExpressCheckoutOrderSaverInterface
     )
     {
         $customerEmail = $details->getEmail();
+        $customerTransfer = new CustomerTransfer();
+        $customerTransfer->setEmail($customerEmail);
+        $customerTransfer = $this->customerClient->getCustomerByEmail($customerTransfer);
 
-        $customer = $this->customerQueryContainer
-            ->queryCustomerByEmail($customerEmail)->findOne();
-
-        if (!empty($customer)) {
-            $customerTransfer = new CustomerTransfer();
-            $customerTransfer->fromArray($customer->toArray(), true);
+        if (!empty($customerTransfer->getFirstName())) {
             $quoteTransfer->setCustomer($customerTransfer);
             return $quoteTransfer;
         }
-        $customerTransfer = new CustomerTransfer();
-        $customerTransfer->setEmail($customerEmail);
+
         $customerTransfer->setFirstName($details->getShippingFirstName());
         $customerTransfer->setLastName($details->getShippingLastName());
         $customerTransfer->setCompany($details->getShippingCompany());
@@ -204,4 +184,5 @@ class ExpressCheckoutOrderSaver implements ExpressCheckoutOrderSaverInterface
 
         return $quoteTransfer;
     }
+
 }

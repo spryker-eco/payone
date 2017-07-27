@@ -5,23 +5,22 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Order;
+namespace SprykerEco\Yves\Payone\Handler\ExpressCheckout;
 
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
-interface ExpressCheckoutOrderSaverInterface
+interface QuoteHydratorInterface
 {
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
      *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
-    public function placeOrder(
+    public function getHydratedQuote(
         QuoteTransfer $quoteTransfer,
-        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-    );
+        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details);
 
 }

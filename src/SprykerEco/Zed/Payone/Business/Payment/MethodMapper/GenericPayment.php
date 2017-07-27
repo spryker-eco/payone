@@ -90,7 +90,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
      */
     public function getName()
     {
-        return PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXTERNAL_CHECKOUT;
+        return PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT;
     }
 
     /**
