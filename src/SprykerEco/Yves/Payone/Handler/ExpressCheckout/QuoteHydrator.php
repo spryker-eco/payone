@@ -70,10 +70,10 @@ class QuoteHydrator
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details)
     {
-        $this->updateQuoteWithPayment($quoteTransfer);
-        $this->updateQuoteWithShipment($quoteTransfer);
-        $this->updateQuoteWithCustomer($quoteTransfer, $details);
-        $this->updateQuoteWithAddresses($quoteTransfer, $details);
+        $this->hydrateQuoteWithPayment($quoteTransfer);
+        $this->hydrateQuoteWithShipment($quoteTransfer);
+        $this->hydrateQuoteWithCustomer($quoteTransfer, $details);
+        $this->hydrateQuoteWithAddresses($quoteTransfer, $details);
 
         return $quoteTransfer;
     }
@@ -83,7 +83,7 @@ class QuoteHydrator
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
-    protected function updateQuoteWithPayment(QuoteTransfer $quoteTransfer)
+    protected function hydrateQuoteWithPayment(QuoteTransfer $quoteTransfer)
     {
         $paymentTransfer = new PaymentTransfer();
         $payone = new PayonePaymentTransfer();
@@ -113,7 +113,7 @@ class QuoteHydrator
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
-    protected function updateQuoteWithShipment($quoteTransfer)
+    protected function hydrateQuoteWithShipment($quoteTransfer)
     {
         $shipmentTransfer = new ShipmentTransfer();
 
@@ -142,7 +142,7 @@ class QuoteHydrator
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
-    protected function updateQuoteWithCustomer(
+    protected function hydrateQuoteWithCustomer(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
     )
@@ -171,7 +171,7 @@ class QuoteHydrator
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      */
-    protected function updateQuoteWithAddresses(
+    protected function hydrateQuoteWithAddresses(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
     )
