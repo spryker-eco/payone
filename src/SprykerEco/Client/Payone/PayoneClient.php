@@ -32,7 +32,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @api
      *
-     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheck
+     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainer
      */
     public function getCreditCardCheckRequest()
     {
