@@ -15,7 +15,7 @@ use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use Symfony\Component\HttpFoundation\Request;
 
-class PayoneHandler
+class PayoneHandler implements PayoneHandlerInterface
 {
 
     const PAYMENT_PROVIDER = 'Payone';

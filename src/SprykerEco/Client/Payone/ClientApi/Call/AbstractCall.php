@@ -13,7 +13,7 @@ use SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest;
 use Spryker\Service\UtilEncoding\UtilEncodingService;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 
-abstract class AbstractCall
+abstract class AbstractCall implements CallInterface
 {
 
     /**
