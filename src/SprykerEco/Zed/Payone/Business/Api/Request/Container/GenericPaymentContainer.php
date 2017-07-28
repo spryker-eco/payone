@@ -19,7 +19,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     /**
      * @var string
      */
-    protected $clearingType;
+    protected $clearingtype;
 
     /**
      * @var int
@@ -34,7 +34,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     /**
      * @var string
      */
-    protected $narrativeText;
+    protected $narrative_text;
 
     /**
      * @var PaydataContainer
@@ -44,74 +44,74 @@ class GenericPaymentContainer extends AbstractRequestContainer
     /**
      * @var string
      */
-    protected $workOrderId;
+    protected $workorderid;
 
     /**
      * @var string
      */
-    protected $shippingFirstName;
+    protected $shipping_firstname;
 
     /**
      * @var string
      */
-    protected $shippingLastName;
+    protected $shipping_lastname;
 
     /**
      * @var string
      */
-    protected $shippingCompany;
+    protected $shipping_company;
 
     /**
      * @var string
      */
-    protected $shippingStreet;
+    protected $shipping_street;
 
     /**
      * @var string
      */
-    protected $shippingZip;
+    protected $shipping_zip;
 
     /**
      * @var string
      */
-    protected $shippingCity;
+    protected $shipping_city;
 
     /**
      * @var string
      */
-    protected $shippingState;
+    protected $shipping_state;
 
     /**
      * @var string
      */
-    protected $shippingCountry;
+    protected $shipping_country;
 
     /**
      * @var string
      */
-    protected $walletType;
+    protected $wallettype;
 
     /**
      * @var string
      */
-    protected $successUrl;
+    protected $successurl;
 
     /**
      * @var string
      */
-    protected $errorUrl;
+    protected $errorurl;
 
     /**
      * @var string
      */
-    protected $backUrl;
+    protected $backurl;
 
     /**
      * @return string
      */
     public function getClearingType()
     {
-        return $this->clearingType;
+        return $this->clearingtype;
     }
 
     /**
@@ -119,7 +119,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setClearingType($clearingType)
     {
-        $this->clearingType = $clearingType;
+        $this->clearingtype = $clearingType;
     }
 
     /**
@@ -159,7 +159,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getNarrativeText()
     {
-        return $this->narrativeText;
+        return $this->narrative_text;
     }
 
     /**
@@ -167,7 +167,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setNarrativeText($narrativeText)
     {
-        $this->narrativeText = $narrativeText;
+        $this->narrative_text = $narrativeText;
     }
 
     /**
@@ -191,7 +191,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getWorkOrderId()
     {
-        return $this->workOrderId;
+        return $this->workorderid;
     }
 
     /**
@@ -199,7 +199,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setWorkOrderId($workOrderId)
     {
-        $this->workOrderId = $workOrderId;
+        $this->workorderid = $workOrderId;
     }
 
     /**
@@ -207,7 +207,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getShippingFirstName()
     {
-        return $this->shippingFirstName;
+        return $this->shipping_firstname;
     }
 
     /**
@@ -215,7 +215,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setShippingFirstName($shippingFirstName)
     {
-        $this->shippingFirstName = $shippingFirstName;
+        $this->shipping_firstname = $shippingFirstName;
     }
 
     /**
@@ -223,7 +223,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getShippingLastName()
     {
-        return $this->shippingLastName;
+        return $this->shipping_lastname;
     }
 
     /**
@@ -231,7 +231,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setShippingLastName($shippingLastName)
     {
-        $this->shippingLastName = $shippingLastName;
+        $this->shipping_lastname = $shippingLastName;
     }
 
     /**
@@ -239,7 +239,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getShippingCompany()
     {
-        return $this->shippingCompany;
+        return $this->shipping_company;
     }
 
     /**
@@ -247,7 +247,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setShippingCompany($shippingCompany)
     {
-        $this->shippingCompany = $shippingCompany;
+        $this->shipping_company = $shippingCompany;
     }
 
     /**
@@ -255,7 +255,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getShippingStreet()
     {
-        return $this->shippingStreet;
+        return $this->shipping_street;
     }
 
     /**
@@ -263,7 +263,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setShippingStreet($shippingStreet)
     {
-        $this->shippingStreet = $shippingStreet;
+        $this->shipping_street = $shippingStreet;
     }
 
     /**
@@ -271,7 +271,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getShippingZip()
     {
-        return $this->shippingZip;
+        return $this->shipping_zip;
     }
 
     /**
@@ -279,7 +279,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setShippingZip($shippingZip)
     {
-        $this->shippingZip = $shippingZip;
+        $this->shipping_zip = $shippingZip;
     }
 
     /**
@@ -287,7 +287,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getShippingCity()
     {
-        return $this->shippingCity;
+        return $this->shipping_city;
     }
 
     /**
@@ -295,7 +295,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setShippingCity($shippingCity)
     {
-        $this->shippingCity = $shippingCity;
+        $this->shipping_city = $shippingCity;
     }
 
     /**
@@ -303,7 +303,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getShippingState()
     {
-        return $this->shippingState;
+        return $this->shipping_state;
     }
 
     /**
@@ -311,7 +311,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setShippingState($shippingState)
     {
-        $this->shippingState = $shippingState;
+        $this->shipping_state = $shippingState;
     }
 
     /**
@@ -319,7 +319,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getShippingCountry()
     {
-        return $this->shippingCountry;
+        return $this->shipping_country;
     }
 
     /**
@@ -327,7 +327,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setShippingCountry($shippingCountry)
     {
-        $this->shippingCountry = $shippingCountry;
+        $this->shipping_country = $shippingCountry;
     }
 
     /**
@@ -335,7 +335,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getWalletType()
     {
-        return $this->walletType;
+        return $this->wallettype;
     }
 
     /**
@@ -343,7 +343,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setWalletType($walletType)
     {
-        $this->walletType = $walletType;
+        $this->wallettype = $walletType;
     }
 
     /**
@@ -351,7 +351,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getSuccessUrl()
     {
-        return $this->successUrl;
+        return $this->successurl;
     }
 
     /**
@@ -359,7 +359,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setSuccessUrl($successUrl)
     {
-        $this->successUrl = $successUrl;
+        $this->successurl = $successUrl;
     }
 
     /**
@@ -367,7 +367,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getErrorUrl()
     {
-        return $this->errorUrl;
+        return $this->errorurl;
     }
 
     /**
@@ -375,7 +375,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setErrorUrl($errorUrl)
     {
-        $this->errorUrl = $errorUrl;
+        $this->errorurl = $errorUrl;
     }
 
     /**
@@ -383,7 +383,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function getBackUrl()
     {
-        return $this->backUrl;
+        return $this->backurl;
     }
 
     /**
@@ -391,34 +391,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      */
     public function setBackUrl($backUrl)
     {
-        $this->backUrl = $backUrl;
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
-    protected function getPreparedKey($key)
-    {
-        $keyMap = [
-            'clearingType'      => 'clearingtype',
-            'narrativeText'     => 'narrative_text',
-            'workOrderId'       => 'workorderid',
-            'shippingFirstName' => 'shipping_firstname',
-            'shippingLastName'  => 'shipping_lastname',
-            'shippingCompany'   => 'shipping_company',
-            'shippingStreet'    => 'shipping_street',
-            'shippingZip'       => 'shipping_zip',
-            'shippingCity'      => 'shipping_city',
-            'shippingState'     => 'shipping_state',
-            'shippingCountry'   => 'shipping_country',
-            'walletType'        => 'wallettype',
-            'successUrl'        => 'successurl',
-            'errorUrl'          => 'errorurl',
-            'backUrl'           => 'backurl'
-        ];
-        return isset($keyMap[$key]) ? $keyMap[$key] : $key;
+        $this->backurl = $backUrl;
     }
 
 }

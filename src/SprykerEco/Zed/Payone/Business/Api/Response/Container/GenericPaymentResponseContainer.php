@@ -13,52 +13,52 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     /**
      * @var string
      */
-    protected $workOrderId;
+    protected $workorderid;
 
     /**
      * @var string
      */
-    protected $shippingFirstName;
+    protected $shipping_firstname;
 
     /**
      * @var string
      */
-    protected $shippingLastName;
+    protected $shipping_lastname;
 
     /**
      * @var string
      */
-    protected $shippingCompany;
+    protected $shipping_company;
 
     /**
      * @var string
      */
-    protected $shippingStreet;
+    protected $shipping_street;
 
     /**
      * @var string
      */
-    protected $shippingZip;
+    protected $shipping_zip;
 
     /**
      * @var string
      */
-    protected $shippingCity;
+    protected $shipping_city;
 
     /**
      * @var string
      */
-    protected $shippingState;
+    protected $shipping_state;
 
     /**
      * @var string
      */
-    protected $shippingCountry;
+    protected $shipping_country;
 
     /**
      * @var string
      */
-    protected $shippingAddressAddition;
+    protected $shipping_addressaddition;
 
     /**
      * @var string
@@ -68,7 +68,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     /**
      * @var string
      */
-    protected $redirectUrl;
+    protected $redirecturl;
 
     /**
      * @param array $params
@@ -83,7 +83,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getWorkOrderId()
     {
-        return $this->workOrderId;
+        return $this->workorderid;
     }
 
     /**
@@ -93,7 +93,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setWorkOrderId(string $workOrderId)
     {
-        $this->workOrderId = $workOrderId;
+        $this->workorderid = $workOrderId;
     }
 
     /**
@@ -101,7 +101,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getRedirectUrl()
     {
-        return $this->redirectUrl;
+        return $this->redirecturl;
     }
 
     /**
@@ -111,7 +111,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setRedirectUrl(string $redirectUrl)
     {
-        $this->redirectUrl = $redirectUrl;
+        $this->redirecturl = $redirectUrl;
     }
 
     /**
@@ -119,7 +119,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingFirstName()
     {
-        return $this->shippingFirstName;
+        return $this->shipping_firstname;
     }
 
     /**
@@ -127,7 +127,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingFirstname(string $shippingFirstName)
     {
-        $this->shippingFirstName = $shippingFirstName;
+        $this->shipping_firstname = $shippingFirstName;
     }
 
     /**
@@ -135,7 +135,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingLastName()
     {
-        return $this->shippingLastName;
+        return $this->shipping_lastname;
     }
 
     /**
@@ -143,7 +143,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingLastName(string $shippingLastName)
     {
-        $this->shippingLastName = $shippingLastName;
+        $this->shipping_lastname = $shippingLastName;
     }
 
     /**
@@ -151,7 +151,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingCompany()
     {
-        return $this->shippingCompany;
+        return $this->shipping_company;
     }
 
     /**
@@ -159,7 +159,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingCompany(string $shippingCompany)
     {
-        $this->shippingCompany = $shippingCompany;
+        $this->shipping_company = $shippingCompany;
     }
 
     /**
@@ -167,7 +167,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingStreet()
     {
-        return $this->shippingStreet;
+        return $this->shipping_street;
     }
 
     /**
@@ -175,7 +175,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingStreet(string $shippingStreet)
     {
-        $this->shippingStreet = $shippingStreet;
+        $this->shipping_street = $shippingStreet;
     }
 
     /**
@@ -183,7 +183,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingZip()
     {
-        return $this->shippingZip;
+        return $this->shipping_zip;
     }
 
     /**
@@ -191,7 +191,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingZip(string $shippingZip)
     {
-        $this->shippingZip = $shippingZip;
+        $this->shipping_zip = $shippingZip;
     }
 
     /**
@@ -199,7 +199,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingCity()
     {
-        return $this->shippingCity;
+        return $this->shipping_city;
     }
 
     /**
@@ -207,7 +207,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingCity(string $shippingCity)
     {
-        $this->shippingCity = $shippingCity;
+        $this->shipping_city = $shippingCity;
     }
 
     /**
@@ -215,7 +215,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingState()
     {
-        return $this->shippingState;
+        return $this->shipping_state;
     }
 
     /**
@@ -223,7 +223,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingState(string $shippingState)
     {
-        $this->shippingState = $shippingState;
+        $this->shipping_state = $shippingState;
     }
 
     /**
@@ -231,7 +231,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingCountry()
     {
-        return $this->shippingCountry;
+        return $this->shipping_country;
     }
 
     /**
@@ -239,7 +239,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingCountry(string $shippingCountry)
     {
-        $this->shippingCountry = $shippingCountry;
+        $this->shipping_country = $shippingCountry;
     }
 
     /**
@@ -247,7 +247,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function getShippingAddressAddition()
     {
-        return $this->shippingAddressAddition;
+        return $this->shipping_addressaddition;
     }
 
     /**
@@ -255,7 +255,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     public function setShippingAddressAddition(string $shippingAddressAddition)
     {
-        $this->shippingAddressAddition = $shippingAddressAddition;
+        $this->shipping_addressaddition = $shippingAddressAddition;
     }
 
     /**
