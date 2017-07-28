@@ -28,6 +28,16 @@ class QuoteHydrator
 {
 
     /**
+     * @const string CARRIER_NAME
+     */
+    const CARRIER_NAME = 'Paypal';
+
+    /**
+     * @const int DEFAULT_SHIPPING_PRICE
+     */
+    const DEFAULT_SHIPPING_PRICE = 0;
+
+    /**
      * @var \Spryker\Client\Customer\CustomerClientInterface
      */
     protected $customerClient;
@@ -109,9 +119,8 @@ class QuoteHydrator
 
         $methods = $this->shipmentClient->getAvailableMethods($quoteTransfer)->getMethods();
 
-        if (count($methods) > 0) {
-            $shippingMethod = $methods[0];
-            $shippingMethod->setDefaultPrice(0);
+        if ($shippingMethod = reset($methods)) {
+            $shippingMethod->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE);
             $shipmentTransfer->setMethod($shippingMethod);
             $quoteTransfer->setShipment($shipmentTransfer);
             return $quoteTransfer;
@@ -119,8 +128,8 @@ class QuoteHydrator
 
         $shipmentTransfer->setMethod(
             (new ShipmentMethodTransfer())
-                ->setCarrierName('Paypal')
-                ->setDefaultPrice(0)
+                ->setCarrierName(static::CARRIER_NAME)
+                ->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE)
         );
         $quoteTransfer->setShipment($shipmentTransfer);
 
