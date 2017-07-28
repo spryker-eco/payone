@@ -26,8 +26,6 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     const STORE_CONFIG = 'store config';
     const FACADE_SALES = 'sales facade';
     const FACADE_GLOSSARY = 'glossary facade';
-    const FACADE_CHECKOUT = 'checkout facade';
-    const QUERY_CONTAINER_CUSTOMER = 'customer query container';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -64,14 +62,6 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::FACADE_GLOSSARY] = function (Container $container) {
             return new PayoneToGlossaryBridge($container->getLocator()->glossary()->facade());
-        };
-
-        $container[self::FACADE_CHECKOUT] = function (Container $container) {
-            return new PayoneToCheckoutBridge($container->getLocator()->checkout()->facade());
-        };
-
-        $container[self::QUERY_CONTAINER_CUSTOMER] = function (Container $container) {
-            return new PayoneToCustomerQueryBridge($container->getLocator()->customer()->queryContainer());
         };
 
         return $container;

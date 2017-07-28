@@ -160,6 +160,11 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
+     * Send genericpayment request to payone with action "setexpresscheckout"
+     * to start express checkout on paypal side and also to get workorderid.
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
@@ -170,6 +175,11 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
+     * Send genericpayment request to payone with action "getexpresscheckoutdetails"
+     * in order to get customer data like email and shipping data.
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer

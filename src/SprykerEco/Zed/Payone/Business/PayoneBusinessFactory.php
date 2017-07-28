@@ -108,22 +108,6 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCheckoutInterface
-     */
-    protected function createCheckoutFacade()
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_CHECKOUT);
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryInterface
-     */
-    protected function createCustomerQueryContainer()
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::QUERY_CONTAINER_CUSTOMER);
-    }
-
-    /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
      */
     protected function createExecutionAdapter()

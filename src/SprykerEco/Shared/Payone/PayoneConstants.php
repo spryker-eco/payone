@@ -51,4 +51,9 @@ interface PayoneConstants
 
     const HOST_YVES = 'HOST_YVES';
 
+    /**
+     * Project specific cart route.
+     */
+    const ROUTE_CART = 'ROUTE_CART';
+
 }

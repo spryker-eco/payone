@@ -23,6 +23,7 @@ $config[PayoneConstants::PAYONE] = [
     PayoneConstants::PAYONE_REDIRECT_BACK_URL => $config[ApplicationConstants::HOST_YVES] . '/payone/regular-redirect-payment-cancellation',
     PayoneConstants::PAYONE_MODE => 'test',
     PayoneConstants::PAYONE_EMPTY_SEQUENCE_NUMBER => 0,
+    PayoneConstants::ROUTE_CART => ''
 ];
 
 $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_SUCCESS_URL] = sprintf(
