@@ -19,7 +19,7 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -604,13 +604,13 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
-        return $this->getFactory()->createPaymentManager()->startPaypalExpressCheckout($requestTransfer);
+        return $this->getFactory()->createPaymentManager()->initPaypalExpressCheckout($requestTransfer);
     }
 
     /**

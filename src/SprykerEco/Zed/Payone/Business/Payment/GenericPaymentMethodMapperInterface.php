@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer;
 
@@ -15,13 +15,13 @@ interface GenericPaymentMethodMapperInterface
 {
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer
      */
     public function mapRequestTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
-        PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+        PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
     );
 
     /**

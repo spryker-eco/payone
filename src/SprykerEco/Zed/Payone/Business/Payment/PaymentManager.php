@@ -22,7 +22,7 @@ use Generated\Shared\Transfer\PayonePaymentLogTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
@@ -861,11 +861,11 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT

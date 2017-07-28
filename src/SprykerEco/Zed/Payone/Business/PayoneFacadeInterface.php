@@ -17,7 +17,7 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -471,11 +471,11 @@ interface PayoneFacadeInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer);
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer);
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

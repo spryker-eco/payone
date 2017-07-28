@@ -13,7 +13,7 @@ interface ExpressCheckoutHandlerInterface
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function startPaypalExpressCheckout();
+    public function initPaypalExpressCheckout();
 
     /**
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer

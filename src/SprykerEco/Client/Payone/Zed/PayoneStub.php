@@ -9,13 +9,11 @@ namespace SprykerEco\Client\Payone\Zed;
 
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
-use Generated\Shared\Transfer\PayoneExpressCheckoutTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
-use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
@@ -115,14 +113,14 @@ class PayoneStub extends ZedRequestStub
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function startPaypalExpressCheckout(PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
         return $this->zedStub->call(
-            '/payone/gateway/start-paypal-express-checkout',
+            '/payone/gateway/init-paypal-express-checkout',
             $requestTransfer
         );
     }

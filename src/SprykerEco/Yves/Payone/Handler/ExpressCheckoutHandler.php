@@ -8,8 +8,8 @@
 namespace SprykerEco\Yves\Payone\Handler;
 
 use Generated\Shared\Transfer\PaymentTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Checkout\CheckoutClientInterface;
 use Spryker\Client\Customer\CustomerClientInterface;
@@ -78,12 +78,12 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function startPaypalExpressCheckout()
+    public function initPaypalExpressCheckout()
     {
-        $startExpressCheckoutRequest = $this->prepareStartExpressCheckoutRequest();
-        $response = $this->payoneClient->startPaypalExpressCheckout($startExpressCheckoutRequest);
+        $initExpressCheckoutRequest = $this->prepareInitExpressCheckoutRequest();
+        $response = $this->payoneClient->initPaypalExpressCheckout($initExpressCheckoutRequest);
 
-        $quoteTransfer = $startExpressCheckoutRequest->getQuote();
+        $quoteTransfer = $initExpressCheckoutRequest->getQuote();
         $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->setWorkOrderId(
             $response->getWorkOrderId()
         );
@@ -114,26 +114,26 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     }
 
     /**
-     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer
+     * @return \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer
      */
-    protected function prepareStartExpressCheckoutRequest()
+    protected function prepareInitExpressCheckoutRequest()
     {
-        $startExpressCheckoutRequest = new PayoneStartPaypalExpressCheckoutRequestTransfer();
+        $initExpressCheckoutRequest = new PayoneInitPaypalExpressCheckoutRequestTransfer();
         $quoteTransfer = $this->cartClient->getQuote();
         $this->addExpressCheckoutPaymentToQuote($quoteTransfer);
 
-        $startExpressCheckoutRequest->setQuote($quoteTransfer);
-        $startExpressCheckoutRequest->setSuccessUrl(
+        $initExpressCheckoutRequest->setQuote($quoteTransfer);
+        $initExpressCheckoutRequest->setSuccessUrl(
             Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_SUCCESS_URL]
         );
-        $startExpressCheckoutRequest->setFailureUrl(
+        $initExpressCheckoutRequest->setFailureUrl(
             Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_FAILURE_URL]
         );
-        $startExpressCheckoutRequest->setBackUrl(
+        $initExpressCheckoutRequest->setBackUrl(
             Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_BACK_URL]
         );
 
-        return $startExpressCheckoutRequest;
+        return $initExpressCheckoutRequest;
     }
 
     /**

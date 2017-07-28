@@ -11,24 +11,24 @@ use Functional\SprykerEco\Zed\Payone\Business\AbstractBusinessTest;
 use Functional\SprykerEco\Zed\Payone\Business\Api\Adapter\SetExpressCheckoutAdapterMock;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
 
-class PayoneFacadeStartExpressCheckoutTest extends AbstractBusinessTest
+class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
 {
 
     /**
      * @return void
      */
-    public function testStartPaypalExpressCheckoutWithSuccessResponse()
+    public function testInitPaypalExpressCheckoutWithSuccessResponse()
     {
         $adapter = new SetExpressCheckoutAdapterMock();
         $facadeMock = $this->getFacadeMock($adapter);
         $requestTransfer = $this->createExpressCheckoutRequestTransfer();
-        $response = $facadeMock->startPaypalExpressCheckout($requestTransfer);
+        $response = $facadeMock->initPaypalExpressCheckout($requestTransfer);
 
         $this->assertInstanceOf(
             '\Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer',
@@ -48,14 +48,14 @@ class PayoneFacadeStartExpressCheckoutTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    public function testStartPaypalExpressCheckoutWithFailureResponse()
+    public function testInitPaypalExpressCheckoutWithFailureResponse()
     {
         $adapter = new SetExpressCheckoutAdapterMock();
         $adapter->setExpectSuccess(false);
         $facadeMock = $this->getFacadeMock($adapter);
 
         $requestTransfer = $this->createExpressCheckoutRequestTransfer();
-        $response = $facadeMock->startPaypalExpressCheckout($requestTransfer);
+        $response = $facadeMock->initPaypalExpressCheckout($requestTransfer);
 
         $this->assertInstanceOf(
             '\Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer',
@@ -68,11 +68,11 @@ class PayoneFacadeStartExpressCheckoutTest extends AbstractBusinessTest
     }
 
     /**
-     * @return \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer
+     * @return \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer
      */
     protected function createExpressCheckoutRequestTransfer()
     {
-        $requestTransfer = new PayoneStartPaypalExpressCheckoutRequestTransfer();
+        $requestTransfer = new PayoneInitPaypalExpressCheckoutRequestTransfer();
 
         $quote = clone $this->quoteTransfer;
 

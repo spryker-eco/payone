@@ -30,10 +30,10 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function startPaypalExpressCheckoutAction()
+    public function initPaypalExpressCheckoutAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
-        return $expressCheckoutHandler->startPaypalExpressCheckout();
+        return $expressCheckoutHandler->initPaypalExpressCheckout();
     }
 
     /**

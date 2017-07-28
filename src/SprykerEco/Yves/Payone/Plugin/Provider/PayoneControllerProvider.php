@@ -16,7 +16,7 @@ class PayoneControllerProvider extends YvesControllerProvider
     const ROUTE_LOGIN = 'login';
     const CHECKOUT_PAYMENT = 'checkout-payment';
     const EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
-    const EXPRESS_CHECKOUT_START = 'payone-paypal-express-checkout-start';
+    const EXPRESS_CHECKOUT_INIT = 'payone-paypal-express-checkout-start';
     const EXPRESS_CHECKOUT_SUCCESS = 'payone-paypal-express-checkout-success';
     const EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
     const EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
@@ -41,11 +41,11 @@ class PayoneControllerProvider extends YvesControllerProvider
         )->method('GET');
 
         $this->createController(
-            '/payone/paypal-express-checkout-start',
-            static::EXPRESS_CHECKOUT_START,
+            '/payone/paypal-express-checkout-init',
+            static::EXPRESS_CHECKOUT_INIT,
             'payone',
             'expressCheckout',
-            'startPaypalExpressCheckout'
+            'initPaypalExpressCheckout'
         )->method('GET');
 
         $this->createController(

@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -30,13 +30,13 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer $genericPayment
-     * @param \Generated\Shared\Transfer\PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer
      */
     public function mapRequestTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
-        PayoneStartPaypalExpressCheckoutRequestTransfer $requestTransfer
+        PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
     )
     {
         $quoteTransfer = $requestTransfer->getQuote();

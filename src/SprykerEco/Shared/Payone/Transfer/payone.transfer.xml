@@ -330,7 +330,7 @@
         <property name="workOrderId" type="string" />
     </transfer>
 
-    <transfer name="PayoneStartPaypalExpressCheckoutRequest">
+    <transfer name="PayoneInitPaypalExpressCheckoutRequest">
         <property name="quote" type="Quote" />
         <property name="successUrl" type="string" />
         <property name="failureUrl" type="string" />
