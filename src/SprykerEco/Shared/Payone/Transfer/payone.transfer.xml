@@ -357,4 +357,83 @@
         <property name="shippingCountry" type="string" />
     </transfer>
 
+    <!--Response container replacement related transfers start-->
+
+    <transfer name="BaseResponse">
+        <property name="status" type="string" />
+        <property name="rawResponse" type="string" />
+        <property name="errorCode" type="string" />
+        <property name="errorMessage" type="string" />
+        <property name="customerMessage" type="string" />
+    </transfer>
+
+    <transfer name="Clearing">
+        <property name="bankAccountHolder" type="string" />
+        <property name="bankAccount" type="string" />
+        <property name="bankCountry" type="string" />
+        <property name="bankCode" type="string" />
+        <property name="bankIban" type="string" />
+        <property name="bankBic" type="string" />
+        <property name="bankCity" type="string" />
+        <property name="bankName" type="string" />
+        <property name="legalNote" type="string" />
+        <!--(YYYYMMDD)-->
+        <property name="date" type="string" />
+        <property name="dueDate" type="string" />
+        <property name="amount" type="string" />
+        <property name="reference" type="string" />
+        <property name="instructionNote" type="string" />
+
+    </transfer>
+
+    <transfer name="Creditor">
+        <property name="identifier" type="string" />
+        <property name="name" type="string" />
+        <property name="street" type="string" />
+        <property name="zip" type="string" />
+        <property name="city" type="string" />
+        <property name="country" type="string" />
+        <property name="email" type="string" />
+    </transfer>
+
+    <transfer name="AuthorizationResponse">
+        <property name="txid" type="int" />
+        <property name="userId" type="int" />
+        <property name="protectResultAvs" type="string" />
+        <property name="redirectUrl" type="string" />
+        <property name="mandateIdentification" type="string" />
+        <property name="clearing" type="Clearing" />
+        <property name="creditor" type="Creditor" />
+        <property name="baseResponse" type="BaseResponse" />
+    </transfer>
+
+    <transfer name="CaptureResponse">
+        <property name="txid" type="int" />
+        <property name="settleAccount" type="string"/>
+        <property name="mandateIdentification" type="string" />
+        <property name="clearing" type="Clearing" />
+        <property name="creditor" type="Creditor" />
+        <property name="baseResponse" type="BaseResponse" />
+    </transfer>
+
+    <transfer name="DebitResponse">
+        <property name="txid" type="int" />
+        <property name="settleAccount" type="string" />
+        <property name="baseResponse" type="BaseResponse" />
+    </transfer>
+
+    <transfer name="RefundResponse">
+        <property name="txid" type="int" />
+        <property name="protectResultAvs" type="string" />
+        <property name="baseResponse" type="BaseResponse" />
+    </transfer>
+
+    <transfer name="CreditCardCheckResponse">
+        <property name="pseudoCardPan" type="string" />
+        <property name="truncatedCardPan" type="string" />
+        <property name="baseResponse" type="BaseResponse" />
+    </transfer>
+
+    <!--Response container replacement related transfers end-->
+
 </transfers>

@@ -10,13 +10,17 @@ namespace Functional\SprykerEco\Zed\Payone\Business\Order;
 use Functional\SprykerEco\Zed\Payone\Business\AbstractPayoneTest;
 use Functional\SprykerEco\Zed\Payone\Business\Api\Adapter\DummyAdapter;
 use Functional\SprykerEco\Zed\Payone\Business\PayoneFacadeMockBuilder;
+use Generated\Shared\Transfer\AuthorizationResponseTransfer;
+use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
+use Generated\Shared\Transfer\RefundResponseTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
+use Zend\Http\Header\Authorization;
 
 /**
  * @group Functional
@@ -45,9 +49,9 @@ class OmsCommandTest extends AbstractPayoneTest
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
         $this->createPayonePaymentDetail();
 
-        $authorizationResponseContainer = $this->payoneFacade
+        $authorizationResponseTransfer = $this->payoneFacade
             ->preAuthorizePayment($this->orderEntity->getIdSalesOrder());
-        $this->assertInstanceOf(AuthorizationResponseContainer::class, $authorizationResponseContainer);
+        $this->assertInstanceOf(AuthorizationResponseTransfer::class, $authorizationResponseTransfer);
     }
 
     public function testAuthorizePayment()
@@ -62,8 +66,8 @@ class OmsCommandTest extends AbstractPayoneTest
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
         $this->createPayonePaymentDetail();
 
-        $authorizationResponseContainer = $this->payoneFacade->authorizePayment($this->orderTransfer);
-        $this->assertInstanceOf(AuthorizationResponseContainer::class, $authorizationResponseContainer);
+        $authorizationResponseTransfer = $this->payoneFacade->authorizePayment($this->orderTransfer);
+        $this->assertInstanceOf(AuthorizationResponseTransfer::class, $authorizationResponseTransfer);
     }
 
     public function testCapturePayment()
@@ -83,11 +87,11 @@ class OmsCommandTest extends AbstractPayoneTest
             ->setPayment((new PayonePaymentTransfer())->fromArray($this->spyPaymentPayone->toArray()))
             ->setSettleaccount('settlement account');
 
-        $captureResponseContainer = $this->payoneFacade->capturePayment($captureTransfer);
+        $captureResponseTransfer = $this->payoneFacade->capturePayment($captureTransfer);
 
-        $this->assertInstanceOf(CaptureResponseContainer::class, $captureResponseContainer);
-        $this->assertEquals(213552995, $captureResponseContainer->getTxid());
-        $this->assertEquals('settlement account', $captureResponseContainer->getSettleaccount());
+        $this->assertInstanceOf(CaptureResponseTransfer::class, $captureResponseTransfer);
+        $this->assertEquals(213552995, $captureResponseTransfer->getTxid());
+        $this->assertEquals('settlement account', $captureResponseTransfer->getSettleaccount());
     }
 
     public function testRefundPayment()
@@ -108,10 +112,10 @@ class OmsCommandTest extends AbstractPayoneTest
             ->setAmount(10)
             ->setPayment((new PayonePaymentTransfer())->fromArray($this->spyPaymentPayone->toArray()));
 
-        $refundResponseContainer = $this->payoneFacade->refundPayment($refundTransfer);
+        $refundResponseTransfer = $this->payoneFacade->refundPayment($refundTransfer);
 
-        $this->assertInstanceOf(RefundResponseContainer::class, $refundResponseContainer);
-        $this->assertEquals(213552995, $refundResponseContainer->getTxid());
+        $this->assertInstanceOf(RefundResponseTransfer::class, $refundResponseTransfer);
+        $this->assertEquals(213552995, $refundResponseTransfer->getTxid());
     }
 
 }

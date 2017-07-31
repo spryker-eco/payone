@@ -7,8 +7,10 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
+use Elastica\Response;
 use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\DebitResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
@@ -49,6 +51,13 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContain
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\ManageMandateResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapperInterface;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
@@ -131,11 +140,11 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Payment\BasePaymentMethodMapperInterface $paymentMethodMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
      *
      * @return void
      */
-    public function registerPaymentMethodMapper(BasePaymentMethodMapperInterface $paymentMethodMapper)
+    public function registerPaymentMethodMapper(PaymentMethodMapperInterface $paymentMethodMapper)
     {
         $paymentMethodMapper->setStandardParameter($this->standardParameter);
         $paymentMethodMapper->setSequenceNumberProvider($this->sequenceNumberProvider);
@@ -146,7 +155,7 @@ class PaymentManager implements PaymentManagerInterface
     /**
      * @param string $name
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\BasePaymentMethodMapperInterface|null
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface|null
      */
     protected function findPaymentMethodMapperByName($name)
     {
@@ -162,7 +171,7 @@ class PaymentManager implements PaymentManagerInterface
      *
      * @throws \SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\BasePaymentMethodMapperInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
     protected function getRegisteredPaymentMethodMapper($paymentMethodName)
     {
@@ -179,7 +188,7 @@ class PaymentManager implements PaymentManagerInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
+     * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
     public function authorizePayment(OrderTransfer $orderTransfer)
     {
@@ -188,13 +197,16 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
 
-        return $responseContainer;
+        $responseMapper = new AuthorizationResponseMapper();
+        $responseTransfer = $responseMapper->getAuthorizationResponseTransfer($responseContainer);
+
+        return $responseTransfer;
     }
 
     /**
      * @param int $idSalesOrder
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
+     * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
     public function preAuthorizePayment($idSalesOrder)
     {
@@ -203,7 +215,10 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity);
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
 
-        return $responseContainer;
+        $responseMapper = new AuthorizationResponseMapper();
+        $responseTransfer = $responseMapper->getAuthorizationResponseTransfer($responseContainer);
+
+        return $responseTransfer;
     }
 
     /**
@@ -229,7 +244,7 @@ class PaymentManager implements PaymentManagerInterface
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\BasePaymentMethodMapperInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
     protected function getPaymentMethodMapper(SpyPaymentPayone $paymentEntity)
     {
@@ -249,7 +264,7 @@ class PaymentManager implements PaymentManagerInterface
     /**
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
     public function capturePayment($captureTransfer)
     {
@@ -274,19 +289,22 @@ class PaymentManager implements PaymentManagerInterface
 
         $this->updateApiLogAfterCapture($apiLogEntity, $responseContainer);
 
-        return $responseContainer;
+        $responseMapper = new CaptureResponseMapper();
+        $responseTransfer = $responseMapper->getCaptureResponseTransfer($responseContainer);
+
+        return $responseTransfer;
     }
 
     /**
      * @param int $idPayment
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
+     * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
     public function debitPayment($idPayment)
     {
         $paymentEntity = $this->getPaymentEntity($idPayment);
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
-        //TODO: make interface segregation properly.
+
         $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentEntity);
         $this->setStandardParameter($requestContainer);
 
@@ -298,25 +316,32 @@ class PaymentManager implements PaymentManagerInterface
 
         $this->updateApiLogAfterDebit($apiLogEntity, $responseContainer);
 
-        return $responseContainer;
+        $responseMapper = new DebitResponseMapper();
+        $responseTransfer = $responseMapper->getDebitResponseTransfer($responseContainer);
+
+        return $responseTransfer;
     }
 
     /**
      * @param \Generated\Shared\Transfer\PayoneCreditCardTransfer $creditCardData
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer
+     * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData)
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo $paymentMethodMapper */
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper($creditCardData->getPayment()->getPaymentMethod());
         $requestContainer = $paymentMethodMapper->mapCreditCardCheck($creditCardData);
+
         $this->setStandardParameter($requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new CreditCardCheckResponseContainer($rawResponse);
 
-        return $responseContainer;
+        $responseMapper = new CreditCardCheckResponseMapper();
+        $responseTransfer = $responseMapper->getCreditCardCheckResponseTransfer($responseContainer);
+
+        return $responseTransfer;
     }
 
     /**
@@ -451,7 +476,7 @@ class PaymentManager implements PaymentManagerInterface
     /**
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer
+     * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer)
     {
@@ -470,7 +495,10 @@ class PaymentManager implements PaymentManagerInterface
 
         $this->updateApiLogAfterRefund($apiLogEntity, $responseContainer);
 
-        return $responseContainer;
+        $responseMapper = new RefundResponseMapper();
+        $responseTransfer = $responseMapper->getRefundResponseTransfer($responseContainer);
+
+        return $responseTransfer;
     }
 
     /**
@@ -938,6 +966,5 @@ class PaymentManager implements PaymentManagerInterface
 
         return $responseTransfer;
     }
-
 
 }

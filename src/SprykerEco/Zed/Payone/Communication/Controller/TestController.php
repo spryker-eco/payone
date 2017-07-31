@@ -461,7 +461,7 @@ class TestController extends AbstractController
     /**
      * @return void
      */
-    public function getPaymentStatus()
+    protected function getPaymentStatus()
     {
         $order = $this->getOrder();
 
