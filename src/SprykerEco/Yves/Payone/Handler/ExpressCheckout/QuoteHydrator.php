@@ -160,6 +160,7 @@ class QuoteHydrator
         $customerTransfer->setFirstName($details->getShippingFirstName());
         $customerTransfer->setLastName($details->getShippingLastName());
         $customerTransfer->setCompany($details->getShippingCompany());
+        $customerTransfer->setEmail($customerEmail);
         $quoteTransfer->setCustomer($customerTransfer);
 
         return $quoteTransfer;
