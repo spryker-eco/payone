@@ -12,6 +12,7 @@ interface HmacGeneratorInterface
 
     /**
      * @param string $string
+     * @param string $key
      *
      * @return string
      */

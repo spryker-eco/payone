@@ -106,7 +106,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
     }
 
     /**
-     * @param $idOrderItem
+     * @param int $idOrderItem
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem
      */

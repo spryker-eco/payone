@@ -50,6 +50,7 @@ class GiropayOnlineTransferSubForm extends OnlineTransferSubForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
      *
      * @return \SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm
      */

@@ -248,7 +248,7 @@ abstract class AbstractResponseContainer
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return string
      */

@@ -69,6 +69,9 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
         return new NotBlank(['groups' => $this->getPropertyPath()]);
     }
 
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\Constraint\BankAccount
+     */
     protected function createBankAccountConstraint()
     {
         return new BankAccount([BankAccount::OPTION_PAYONE_CLIENT => $this->payoneClient]);

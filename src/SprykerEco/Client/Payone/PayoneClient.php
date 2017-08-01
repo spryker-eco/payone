@@ -88,7 +88,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $onlinetransferTransfer
+     * @param \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $bankAccountCheckTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */

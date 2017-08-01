@@ -203,6 +203,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         return $standardParameter;
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function getSequenceNumberProviderMock()
     {
         $sequenceNumberProvider = $this->getMockBuilder(SequenceNumberProvider::class)
@@ -213,6 +216,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         return $sequenceNumberProvider;
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function getUrlHmacGeneratorMock()
     {
         $urlHmacGenerator = $this->getMockBuilder(UrlHmacGenerator::class)

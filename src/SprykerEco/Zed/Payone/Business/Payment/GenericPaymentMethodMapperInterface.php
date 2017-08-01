@@ -15,6 +15,7 @@ interface GenericPaymentMethodMapperInterface
 {
 
     /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer $genericPayment
      * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer

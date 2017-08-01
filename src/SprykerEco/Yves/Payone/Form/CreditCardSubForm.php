@@ -84,6 +84,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
      *
      * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
      */

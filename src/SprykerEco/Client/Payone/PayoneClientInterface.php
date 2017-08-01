@@ -24,7 +24,7 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheck
+     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainer
      */
     public function getCreditCardCheckRequest();
 
@@ -88,7 +88,7 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $onlinetransferTransfer
+     * @param \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $bankAccountCheckTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */

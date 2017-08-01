@@ -58,7 +58,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
      * @param \Spryker\Client\Cart\CartClientInterface $cartClient
      * @param \Spryker\Client\Customer\CustomerClientInterface $customerClient
      * @param \Spryker\Client\Checkout\CheckoutClientInterface $checkoutClient
-     * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator
+     * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator $quoteHydrator
      */
     public function __construct(
         PayoneClientInterface $payoneClient,

@@ -267,7 +267,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @param string $shippingAddressaddition
+     * @param string $shippingAddressAddition
      *
      * @return void
      */
