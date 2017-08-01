@@ -1,0 +1,49 @@
+<div class="row">
+{% if paymentDetail.clearingBankAccount or paymentDetail.mandateIdentification or paymentDetail.invoiceTitle %}
+    <div class="small-12 large-6 columns">
+        <div class="callout">
+            <h3>{{ 'payone.order.payment_details' | trans }}</h3>
+{% endif %}
+{% if paymentDetail.clearingBankAccount %}
+            <table>
+                <tr>
+                    <td>{{ 'payone.order.clearing_bank_account_holder' | trans }}</td>
+                    <td>{{ paymentDetail.clearingBankAccountHolder }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'payone.order.clearing_bank_account' | trans }}</td>
+                    <td>{{ paymentDetail.clearingBankAccount }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'payone.order.clearing_bank_code' | trans }}</td>
+                    <td>{{ paymentDetail.clearingBankCode }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'payone.order.clearing_bank_iban' | trans }}</td>
+                    <td>{{ paymentDetail.clearingBankIban }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'payone.order.clearing_bank_bic' | trans }}</td>
+                    <td>{{ paymentDetail.clearingBankBic }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'payone.order.clearing_bank_city' | trans }}</td>
+                    <td>{{ paymentDetail.clearingBankCity }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'payone.order.clearing_bank_name' | trans }}</td>
+                    <td>{{ paymentDetail.clearingBankName }}</td>
+                </tr>
+            </table>
+{% endif %}
+{% if paymentDetail.mandateIdentification %}
+            <a href="{{ url('payone-getfile', {'id': paymentDetail.mandateIdentification}) }}">{{ "Your mandate as PDF" | trans }}</a>
+{% endif %}
+{% if paymentDetail.invoiceTitle %}
+            <a href="{{ url('payone-getinvoice', {'id': paymentDetail.invoiceTitle}) }}">{{ "Your Invoice as PDF" | trans }}</a>
+{% endif %}
+{% if paymentDetail.clearingBankAccount or paymentDetail.mandateIdentification or paymentDetail.invoiceTitle %}
+        </div>
+    </div>
+{% endif %}
+</div>

@@ -1,0 +1,30 @@
+<div class="payment-subform payone-form payone-instant-online-transfer-form payment-form" id="payoneInstantOnlineTransfer">
+    <h3>{{ 'payment.payone.instant-online-transfer' | trans }}</h3>
+
+    <div class="field">
+        {{ form_widget(form.payoneInstantOnlineTransfer.onlinebanktransfertype) }}
+    </div>
+
+    <div class="field">
+        {{ form_widget(form.payoneInstantOnlineTransfer.bankcountry) }}
+    </div>
+
+    {% if form.payoneInstantOnlineTransfer.iban is defined %}
+    <label>{{ 'Payone_instant_online_transfer.IBAN' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneInstantOnlineTransfer.iban, { 'attr': {'placeholder': 'Payone_instant_online_transfer.IBAN' | trans } }) }}
+        {{ form_errors(form.payoneInstantOnlineTransfer.iban) }}
+    </div>
+    {% endif %}
+
+    {% if form.payoneInstantOnlineTransfer.bic is defined %}
+    <label>{{ 'Payone_instant_online_transfer.BIC' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneInstantOnlineTransfer.bic, { 'attr': {'placeholder': 'Payone_instant_online_transfer.BIC' | trans } }) }}
+        {{ form_errors(form.payoneInstantOnlineTransfer.bic) }}
+    </div>
+    {%  endif %}
+
+    {{ form_errors(form) }}
+
+</div>

@@ -1,0 +1,7 @@
+class_name: FunctionalTester
+modules:
+    enabled:
+        - Filesystem
+        - \Payone\Module\Functional
+        - \Testify\Module\Environment
+        - \Config\Module\ConfigInit

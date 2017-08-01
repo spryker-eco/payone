@@ -1,0 +1,43 @@
+<div class="payone-form payone-direct-debit-form payment-form" id="payoneDirectDebit">
+    <h3>{{ 'payment.payone.direct-debit' | trans }}</h3>
+
+    {% if form.payoneDirectDebit.bankaccountmode is defined %}
+    <label>{{ 'Payone_direct_debit.bankaccountmode' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneDirectDebit.bankaccountmode, { 'attr': {'placeholder': 'Payone_direct_debit.bankaccountmode' | trans } }) }}
+    </div>
+    {% endif %}
+
+    {% if form.payoneDirectDebit.bankaccount is defined %}
+    <label>{{ 'Payone_direct_debit.bankaccount' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneDirectDebit.bankaccount, { 'attr': {'placeholder': 'Payone_direct_debit.bankaccount' | trans } }) }}
+    </div>
+    {% endif %}
+
+    {% if form.payoneDirectDebit.bankcode is defined %}
+    <label>{{ 'Payone_direct_debit.bankcode' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneDirectDebit.bankcode, { 'attr': {'placeholder': 'Payone_direct_debit.bankcode' | trans } }) }}
+    </div>
+    {% endif %}
+
+    {% if form.payoneDirectDebit.bankcountry is defined %}
+    <div class="field">
+        {{ form_widget(form.payoneDirectDebit.bankcountry) }}
+    </div>
+    {% endif %}
+
+    <label>{{ 'Payone_direct_debit.IBAN' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneDirectDebit.iban, { 'attr': {'placeholder': 'Payone_direct_debit.IBAN' | trans } }) }}
+    </div>
+
+    <label>{{ 'Payone_direct_debit.BIC' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneDirectDebit.bic, { 'attr': {'placeholder': 'Payone_direct_debit.BIC' | trans } }) }}
+    </div>
+
+    {{ form_errors(form.payoneDirectDebit.bic) }}
+
+</div>

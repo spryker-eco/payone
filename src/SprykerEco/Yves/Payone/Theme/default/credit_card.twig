@@ -1,0 +1,30 @@
+{% include '@Payone/remote-include.twig' %}
+
+<div class="payone-form payone-credit-card-form payment-form" id="payoneCreditCard">
+    <h3>{{ 'payment.payone.credit-card' | trans }}</h3>
+    <fieldset>
+
+        <label for="cardtypeInput">{{ 'Payone_credit_card.cardtype' | trans }}</label>
+        {{ form_widget(form.payoneCreditCard.cardtype, { 'id': 'cardtype', 'attr': {'placeholder': 'Payone_credit_card.cardtype' | trans } }) }}
+
+        <label for="cardpanInput">{{ 'Payone_credit_card.cardpan' | trans }}</label>
+        <span class="inputIframe" id="cardpan"></span>
+
+        <label for="cvcInput">{{ 'Payone_credit_card.cardcvc2' | trans }}</label>
+        <span id="cardcvc2" class="inputIframe"></span>
+
+        <label for="expireInput">{{ 'Payone_credit_card.cardexpiredate' | trans }}</label>
+        <span id="expireInput" class="inputIframe">
+            <span id="cardexpiremonth"></span>
+            <span id="cardexpireyear"></span>
+        </span>
+
+        <div class="field">
+            {{ form_widget(form.payoneCreditCard.payone_client_api_config) }}
+            {{ form_widget(form.payoneCreditCard.pseudocardpan, {'id': 'pseudocardpan'}) }}
+            <input type="hidden" id="Payone_credit_card_payone_client_lang_code" name="payone_client_lang_code" value="{{ app.locale }}">
+        </div>
+
+        <div id="errorOutput"></div>
+    </fieldset>
+</div>

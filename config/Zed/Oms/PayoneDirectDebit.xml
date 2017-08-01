@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<statemachine
+        xmlns="http://static.spryker.com"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://static.spryker.com http://static.spryker.com/oms-01.xsd">
+
+    <process name="PayoneDirectDebit" main="true">
+        <states>
+            <state name="new" reserved="true"/>
+            <state name="pre-authorization pending"/>
+            <state name="pre-authorization appointed"/>
+            <state name="invalid"/>
+            <state name="reservation cancellation pending"/>
+            <state name="cancelled" />
+            <state name="shipped" />
+            <state name="capture failed clarification" />
+            <state name="refund failed clarification" />
+            <state name="capture pending" />
+            <state name="captured" />
+            <state name="closed" />
+            <state name="returned" />
+            <state name="refund pending" />
+            <state name="refunded" />
+        </states>
+
+        <transitions>
+            <transition happy="true" condition="Payone/PreAuthorizationIsApproved">
+                <source>new</source>
+                <target>pre-authorization pending</target>
+                <event>pre-authorize</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsAppointed" happy="true">
+                <source>pre-authorization pending</source>
+                <target>pre-authorization appointed</target>
+            </transition>
+
+            <transition condition="Payone/PreAuthorizationIsError">
+                <source>new</source>
+                <target>invalid</target>
+                <event>pre-authorize</event>
+            </transition>
+
+            <transition condition="Payone/CaptureIsApproved">
+                <source>pre-authorization appointed</source>
+                <target>reservation cancellation pending</target>
+                <event>cancel reservation</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsCapture">
+                <source>reservation cancellation pending</source>
+                <target>cancelled</target>
+            </transition>
+
+            <transition happy="true">
+                <source>pre-authorization appointed</source>
+                <target>shipped</target>
+                <event>ship</event>
+            </transition>
+
+            <transition condition="Payone/CaptureIsApproved" happy="true">
+                <source>shipped</source>
+                <target>capture pending</target>
+                <event>capture</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsCapture" happy="true">
+                <source>capture pending</source>
+                <target>captured</target>
+            </transition>
+
+            <transition>
+                <source>shipped</source>
+                <target>capture failed clarification</target>
+                <event>capture</event>
+            </transition>
+
+            <transition>
+                <source>capture failed clarification</source>
+                <target>shipped</target>
+                <event>retry capture</event>
+            </transition>
+
+            <transition>
+                <source>capture failed clarification</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
+            <transition happy="true">
+                <source>captured</source>
+                <target>closed</target>
+                <event>wait for item return</event>
+            </transition>
+
+            <transition>
+                <source>captured</source>
+                <target>returned</target>
+                <event>return</event>
+            </transition>
+
+            <transition condition="Payone/RefundIsApproved">
+                <source>returned</source>
+                <target>refund pending</target>
+                <event>refund</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsRefund">
+                <source>refund pending</source>
+                <target>refunded</target>
+            </transition>
+
+            <transition>
+                <source>returned</source>
+                <target>refund failed clarification</target>
+                <event>refund</event>
+            </transition>
+
+            <transition>
+                <source>refund failed clarification</source>
+                <target>refunded</target>
+                <event>refund manually</event>
+            </transition>
+
+        </transitions>
+
+        <events>
+            <event name="pre-authorize" onEnter="true" command="Payone/PreAuthorize"/>
+            <event name="ship" manual="true" />
+            <event name="wait for item return" timeout="14days" />
+            <event name="cancel reservation" manual="true" command="Payone/Cancel"/>
+            <event name="cancel" manual="true"/>
+            <event name="capture" onEnter="true" command="Payone/Capture"/>
+            <event name="return" manual="true" />
+            <event name="refund" onEnter="true" command="Payone/Refund" />
+            <event name="retry capture" manual="true" />
+            <event name="refund manually" manual="true" />
+        </events>
+
+    </process>
+</statemachine>
