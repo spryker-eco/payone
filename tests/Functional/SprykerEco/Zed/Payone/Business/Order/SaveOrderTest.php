@@ -28,6 +28,9 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 class SaveOrderTest extends AbstractPayoneTest
 {
 
+    /**
+     * @return void
+     */
     public function testSaveOrder()
     {
         $checkoutResponseTransfer = $this->hydrateCheckoutResponseTransfer();
@@ -52,7 +55,7 @@ class SaveOrderTest extends AbstractPayoneTest
     }
 
     /**
-     * @return CheckoutResponseTransfer
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
     protected function hydrateCheckoutResponseTransfer()
     {

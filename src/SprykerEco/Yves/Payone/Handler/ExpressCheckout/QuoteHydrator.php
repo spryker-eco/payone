@@ -1,0 +1,199 @@
+<?php
+
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+namespace SprykerEco\Yves\Payone\Handler\ExpressCheckout;
+
+use Generated\Shared\Transfer\AddressTransfer;
+use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\PaymentDetailTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
+use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\ShipmentMethodTransfer;
+use Generated\Shared\Transfer\ShipmentTransfer;
+use Spryker\Client\Customer\CustomerClientInterface;
+use Spryker\Client\Shipment\ShipmentClientInterface;
+use Spryker\Shared\Kernel\Store;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
+use SprykerEco\Shared\Payone\PayoneConstants;
+use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
+
+class QuoteHydrator
+{
+
+    /**
+     * @const string CARRIER_NAME
+     */
+    const CARRIER_NAME = 'Paypal';
+
+    /**
+     * @const int DEFAULT_SHIPPING_PRICE
+     */
+    const DEFAULT_SHIPPING_PRICE = 0;
+
+    /**
+     * @var \Spryker\Client\Customer\CustomerClientInterface
+     */
+    protected $customerClient;
+
+    /**
+     * @var \Spryker\Client\Shipment\ShipmentClientInterface
+     */
+    protected $shipmentClient;
+
+    /**
+     * @param \Spryker\Client\Shipment\ShipmentClientInterface $shipmentClient
+     * @param \Spryker\Client\Customer\CustomerClientInterface $customerClient
+     */
+    public function __construct(
+        ShipmentClientInterface $shipmentClient,
+        CustomerClientInterface $customerClient
+    ) {
+
+        $this->shipmentClient = $shipmentClient;
+        $this->customerClient = $customerClient;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    public function getHydratedQuote(
+        QuoteTransfer $quoteTransfer,
+        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
+    ) {
+
+        $this->hydrateQuoteWithPayment($quoteTransfer);
+        $this->hydrateQuoteWithShipment($quoteTransfer);
+        $this->hydrateQuoteWithCustomer($quoteTransfer, $details);
+        $this->hydrateQuoteWithAddresses($quoteTransfer, $details);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    protected function hydrateQuoteWithPayment(QuoteTransfer $quoteTransfer)
+    {
+        $paymentTransfer = new PaymentTransfer();
+        $payone = new PayonePaymentTransfer();
+        $paymentDetailTransfer = new PaymentDetailTransfer();
+        $paymentDetailTransfer
+            ->setAmount($quoteTransfer->getTotals()->getGrandTotal())
+            ->setType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL)
+            ->setCurrency(Store::getInstance()->getCurrencyIsoCode())
+            ->setWorkOrderId(
+                $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->getWorkOrderId()
+            );
+        $payone->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT);
+        $payone->setPaymentDetail($paymentDetailTransfer);
+
+        $paymentTransfer->setPayone($payone);
+        $paymentTransfer->setPaymentSelection(PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE);
+        $paymentTransfer->setPaymentProvider(ExpressCheckoutHandler::PAYMENT_PROVIDER);
+        $paypalExpressCheckoutPayment = new PayonePaypalExpressCheckoutTransfer();
+        $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
+        $quoteTransfer->setPayment($paymentTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    protected function hydrateQuoteWithShipment($quoteTransfer)
+    {
+        $shipmentTransfer = new ShipmentTransfer();
+
+        $methods = $this->shipmentClient->getAvailableMethods($quoteTransfer)->getMethods();
+
+        if ($shippingMethod = reset($methods)) {
+            $shippingMethod->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE);
+            $shipmentTransfer->setMethod($shippingMethod);
+            $quoteTransfer->setShipment($shipmentTransfer);
+            return $quoteTransfer;
+        }
+
+        $shipmentTransfer->setMethod(
+            (new ShipmentMethodTransfer())
+                ->setCarrierName(static::CARRIER_NAME)
+                ->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE)
+        );
+        $quoteTransfer->setShipment($shipmentTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    protected function hydrateQuoteWithCustomer(
+        QuoteTransfer $quoteTransfer,
+        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
+    ) {
+
+        $customerEmail = $details->getEmail();
+        $customerTransfer = new CustomerTransfer();
+        $customerTransfer->setEmail($customerEmail);
+        $customerTransfer = $this->customerClient->getCustomerByEmail($customerTransfer);
+
+        if (!empty($customerTransfer->getFirstName())) {
+            $quoteTransfer->setCustomer($customerTransfer);
+            return $quoteTransfer;
+        }
+
+        $customerTransfer->setFirstName($details->getShippingFirstName());
+        $customerTransfer->setLastName($details->getShippingLastName());
+        $customerTransfer->setCompany($details->getShippingCompany());
+        $customerTransfer->setEmail($customerEmail);
+        $quoteTransfer->setCustomer($customerTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     */
+    protected function hydrateQuoteWithAddresses(
+        QuoteTransfer $quoteTransfer,
+        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
+    ) {
+
+        $shippingAddress = new AddressTransfer();
+        $shippingAddress->setFirstName($details->getShippingFirstName());
+        $shippingAddress->setLastName($details->getShippingLastName());
+        $shippingAddress->setCompany($details->getShippingCompany());
+        $shippingAddress->setEmail($details->getEmail());
+        $shippingAddress->setAddress1($details->getShippingStreet());
+        $shippingAddress->setAddress2($details->getShippingAddressAdition());
+        $shippingAddress->setCity($details->getShippingCity());
+        $shippingAddress->setState($details->getShippingState());
+        $shippingAddress->setIso2Code($details->getShippingCountry());
+        $shippingAddress->setZipCode($details->getShippingZip());
+        $quoteTransfer->setBillingAddress($shippingAddress);
+        $quoteTransfer->setShippingAddress($shippingAddress);
+        $quoteTransfer->setBillingSameAsShipping(true);
+
+        return $quoteTransfer;
+    }
+
+}

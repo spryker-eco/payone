@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Payone;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesBridge;
@@ -21,6 +22,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     const FACADE_REFUND = 'refund facade';
     const STORE_CONFIG = 'store config';
     const FACADE_SALES = 'sales facade';
+    const FACADE_GLOSSARY = 'glossary facade';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -53,6 +55,10 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container[self::STORE_CONFIG] = function (Container $container) {
             return Store::getInstance();
+        };
+
+        $container[self::FACADE_GLOSSARY] = function (Container $container) {
+            return new PayoneToGlossaryBridge($container->getLocator()->glossary()->facade());
         };
 
         return $container;

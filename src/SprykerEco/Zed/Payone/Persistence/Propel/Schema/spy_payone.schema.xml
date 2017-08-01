@@ -48,6 +48,8 @@
 
         <column name="type" type="VARCHAR" size="3"/>
 
+        <column name="work_order_id" type="VARCHAR" size="30" />
+
         <foreign-key name="spy_payment_payone_detail-id_payment_payone" foreignTable="spy_payment_payone" phpName="SpyPaymentPayone">
             <reference foreign="id_payment_payone" local="id_payment_payone"/>
         </foreign-key>

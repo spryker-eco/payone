@@ -11,10 +11,10 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Spryker\Shared\Kernel\ContainerInterface;
 use Spryker\Shared\Kernel\Dependency\Injector\DependencyInjectorInterface;
 use Spryker\Yves\Checkout\CheckoutDependencyProvider;
-use SprykerEco\Yves\Payone\Plugin\PayoneHandlerPlugin;
-use SprykerEco\Yves\Payone\Plugin\PayoneSubFormsPlugin;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
+use SprykerEco\Yves\Payone\Plugin\PayoneHandlerPlugin;
+use SprykerEco\Yves\Payone\Plugin\PayoneSubFormsPlugin;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()

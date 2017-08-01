@@ -49,6 +49,7 @@ class IdealOnlineTransferSubForm extends OnlineTransferSubForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
      *
      * @return \SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm
      */
@@ -68,6 +69,7 @@ class IdealOnlineTransferSubForm extends OnlineTransferSubForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
      *
      * @return \SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm
      */

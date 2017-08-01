@@ -24,6 +24,9 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetailQuery;
 class PaymentDetailTest extends AbstractPayoneTest
 {
 
+    /**
+     * @return void
+     */
     public function testGetPaymentDetail()
     {
         $this->createPayonePayment();
@@ -37,6 +40,9 @@ class PaymentDetailTest extends AbstractPayoneTest
         $this->assertEquals($spyPaymentDetail->getIban(), $paymentDetailTransfer->getIban());
     }
 
+    /**
+     * @return void
+     */
     public function testUpdatePaymentDetail()
     {
         $this->createPayonePayment();
@@ -50,7 +56,7 @@ class PaymentDetailTest extends AbstractPayoneTest
             ->setInvoiceTitle('new title');
 
         $this->payoneFacade->updatePaymentDetail($paymentDetailTransfer, $this->orderEntity->getIdSalesOrder());
-        $spyPaymentDetailNew =  (new SpyPaymentPayoneDetailQuery())
+        $spyPaymentDetailNew = (new SpyPaymentPayoneDetailQuery())
             ->findOneByIdPaymentPayone($this->spyPaymentPayone->getIdPaymentPayone());
 
         $this->assertInstanceOf(SpyPaymentPayoneDetail::class, $spyPaymentDetailNew);

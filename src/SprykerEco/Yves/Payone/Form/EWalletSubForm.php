@@ -9,8 +9,8 @@ namespace SprykerEco\Yves\Payone\Form;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentEWalletTransfer;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
+use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 

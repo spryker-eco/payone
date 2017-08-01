@@ -8,8 +8,8 @@
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization;
 
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer;
 
 abstract class AbstractAuthorizationContainer extends AbstractRequestContainer implements AuthorizationContainerInterface

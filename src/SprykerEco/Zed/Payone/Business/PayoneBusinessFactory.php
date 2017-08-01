@@ -8,12 +8,12 @@
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
-use SprykerEco\Shared\Payone\PayoneApiConstants;
-use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use Psr\Log\LoggerInterface as MessengerInterface;
-use SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinder;
+use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\Guzzle;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest;
+use SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinder;
 use SprykerEco\Zed\Payone\Business\Internal\Installer;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HashProvider;
@@ -23,12 +23,14 @@ use SprykerEco\Zed\Payone\Business\Order\OrderManager;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManager;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
+use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**
@@ -95,6 +97,14 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         return new ApiLogFinder(
             $this->getQueryContainer()
         );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\PayoneConfig
+     */
+    protected function createPayoneConfig()
+    {
+        return new PayoneConfig();
     }
 
     /**
@@ -182,6 +192,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             PayoneApiConstants::PAYMENT_METHOD_E_WALLET => $this->createEWallet($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT => $this->createPrepayment($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT => $this->createDirectDebit($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => $this->createGenericPayment($storeConfig),
         ];
     }
 
@@ -301,6 +312,18 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $installer->setMessenger($messenger);
 
         return $installer;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Store $storeConfig
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment
+     */
+    protected function createGenericPayment($storeConfig)
+    {
+        $genericPayment = new GenericPayment($storeConfig);
+
+        return $genericPayment;
     }
 
 }

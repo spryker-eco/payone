@@ -16,6 +16,7 @@ use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
@@ -52,7 +53,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
+     * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
     public function authorizePayment(OrderTransfer $orderTransfer)
     {
@@ -67,7 +68,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @param int $idSalesOrder
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
+     * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
     public function preAuthorizePayment($idSalesOrder)
     {
@@ -82,7 +83,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
      *
-     * @return Api\Response\Container\CaptureResponseContainer
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
     public function capturePayment(PayoneCaptureTransfer $captureTransfer)
     {
@@ -97,7 +98,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @param int $idPayment
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
+     * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
     public function debitPayment($idPayment)
     {
@@ -112,7 +113,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer
+     * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer)
     {
@@ -127,7 +128,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneCreditCardTransfer $creditCardData
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer
+     * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData)
     {
@@ -599,6 +600,26 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     public function updatePaymentDetail(PaymentDetailTransfer $paymentData, $idOrder)
     {
         $this->getFactory()->createPaymentManager()->updatePaymentDetail($paymentData, $idOrder);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    {
+        return $this->getFactory()->createPaymentManager()->initPaypalExpressCheckout($requestTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createPaymentManager()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
 
 }

@@ -189,6 +189,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
      *
      * @return \SprykerEco\Yves\Payone\Form\OnlineTransferSubForm
      */
@@ -274,6 +275,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
      *
      * @return \SprykerEco\Yves\Payone\Form\OnlineTransferSubForm
      */

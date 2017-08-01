@@ -18,7 +18,6 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Propel\Runtime\Collection\ObjectCollection;
 
 interface PaymentManagerInterface
 {
@@ -33,42 +32,42 @@ interface PaymentManagerInterface
     /**
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer
+     * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer);
 
     /**
      * @param int $idPayment
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
+     * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
     public function debitPayment($idPayment);
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
+     * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
     public function authorizePayment(OrderTransfer $orderTransfer);
 
     /**
      * @param int $idSalesOrder
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
+     * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
     public function preAuthorizePayment($idSalesOrder);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
     public function capturePayment($captureTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneCreditCardTransfer $creditCardData
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer
+     * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData);
 

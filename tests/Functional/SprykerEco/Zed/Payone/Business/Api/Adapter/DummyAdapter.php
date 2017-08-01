@@ -26,8 +26,6 @@ class DummyAdapter extends AbstractHttpAdapter implements AdapterInterface
     /**
      * @param array $params
      *
-     * @throws \SprykerEco\Zed\Payone\Business\Exception\TimeoutException
-     *
      * @return array
      */
     protected function performRequest(array $params)

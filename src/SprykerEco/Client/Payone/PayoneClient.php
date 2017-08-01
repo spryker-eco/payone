@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePersonalDataTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
@@ -31,7 +32,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @api
      *
-     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheck
+     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainer
      */
     public function getCreditCardCheckRequest()
     {
@@ -87,7 +88,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $onlinetransferTransfer
+     * @param \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $bankAccountCheckTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
@@ -156,6 +157,36 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
     {
         return $this->getFactory()->createZedStub()->getInvoice($getInvoiceTransfer);
+    }
+
+    /**
+     * Send genericpayment request to payone with action "setexpresscheckout"
+     * to start express checkout on paypal side and also to get workorderid.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    {
+        return $this->getFactory()->createZedStub()->initPaypalExpressCheckout($requestTransfer);
+    }
+
+    /**
+     * Send genericpayment request to payone with action "getexpresscheckoutdetails"
+     * in order to get customer data like email and shipping data.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
+    {
+        return $this->getFactory()->createZedStub()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
 
 }

@@ -17,8 +17,8 @@ use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\PersonalDataTransfer;
 use Generated\Shared\Transfer\RefundTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
-use SprykerEco\Shared\Payone\PayoneApiConstants;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacade getFacade()
@@ -461,7 +461,7 @@ class TestController extends AbstractController
     /**
      * @return void
      */
-    public function getPaymentStatus()
+    protected function getPaymentStatus()
     {
         $order = $this->getOrder();
 

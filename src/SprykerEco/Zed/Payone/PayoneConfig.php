@@ -11,9 +11,9 @@ use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Shared\Kernel\Store;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
+use SprykerEco\Shared\Payone\PayoneConstants;
 
 class PayoneConfig extends AbstractBundleConfig
 {
@@ -32,6 +32,7 @@ class PayoneConfig extends AbstractBundleConfig
     const PAYMENT_METHOD_PRZELEWY24_ONLINE_TRANSFER = 'payonePrzelewy24OnlineTransfer';
     const PAYMENT_METHOD_PRE_PAYMENT = 'payonePrePayment';
     const PAYMENT_METHOD_INVOICE = 'payoneInvoice';
+    const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE;
 
     /**
      * Fetches API request mode from config (could be 'live' or 'test').

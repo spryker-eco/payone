@@ -10,8 +10,8 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 
 class CreditCardDataProvider implements StepEngineFormDataProviderInterface
 {

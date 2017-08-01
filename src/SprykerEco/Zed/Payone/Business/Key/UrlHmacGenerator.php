@@ -17,6 +17,7 @@ class UrlHmacGenerator implements HmacGeneratorInterface
 
     /**
      * @param string $string
+     * @param string $key
      *
      * @return string
      */

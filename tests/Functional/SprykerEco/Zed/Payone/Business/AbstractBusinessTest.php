@@ -6,27 +6,25 @@
 
 namespace Functional\SprykerEco\Zed\Payone\Business;
 
-use Generated\Shared\Transfer\PaymentTransfer;
-use Generated\Shared\Transfer\PayonePaymentTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
-use Orm\Zed\Country\Persistence\SpyCountryQuery;
-use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
-use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
-use Orm\Zed\Payone\Persistence\Base\SpyPaymentPayone;
-use Orm\Zed\Sales\Persistence\SpySalesOrder;
-use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
-use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
-use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\PaymentTransfer;
+use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
+use Orm\Zed\Country\Persistence\SpyCountryQuery;
+use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
+use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Orm\Zed\Oms\Persistence\SpyOmsOrderItemState;
 use Orm\Zed\Oms\Persistence\SpyOmsOrderProcess;
+use Orm\Zed\Sales\Persistence\SpySalesOrder;
+use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
+use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
+use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\PayoneFacade;
-use SprykerEco\Zed\Payone\Business\PayoneFacadeInterface;
 
 /**
  * @group Functional
@@ -41,7 +39,7 @@ abstract class AbstractBusinessTest extends Test
 {
 
     /**
-     * @var SpyPaymentPayone
+     * @var \Orm\Zed\Payone\Persistence\Base\SpyPaymentPayone
      */
     protected $spyPaymentPayone;
 
@@ -61,7 +59,7 @@ abstract class AbstractBusinessTest extends Test
     protected $orderEntity;
 
     /**
-     * @var PayoneFacadeInterface
+     * @var \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface
      */
     protected $payoneFacade;
 
@@ -155,6 +153,9 @@ abstract class AbstractBusinessTest extends Test
         return $orderTransfer;
     }
 
+    /**
+     * @return \Generated\Shared\Transfer\TotalsTransfer
+     */
     protected function getTotalsTransfer()
     {
         $totalsTransfer = new TotalsTransfer();
@@ -167,6 +168,11 @@ abstract class AbstractBusinessTest extends Test
         return $totalsTransfer;
     }
 
+    /**
+     * @param string $itemPrefix
+     *
+     * @return \Generated\Shared\Transfer\AddressTransfer
+     */
     protected function getAddressTransfer($itemPrefix)
     {
         $addressTransfer = new AddressTransfer();
@@ -185,6 +191,11 @@ abstract class AbstractBusinessTest extends Test
         return $addressTransfer;
     }
 
+    /**
+     * @param string $itemPrefix
+     *
+     * @return \Generated\Shared\Transfer\ItemTransfer
+     */
     protected function getItemTransfer($itemPrefix)
     {
         $itemTransfer = new ItemTransfer();
@@ -201,6 +212,9 @@ abstract class AbstractBusinessTest extends Test
         return $itemTransfer;
     }
 
+    /**
+     * @return \Generated\Shared\Transfer\CustomerTransfer
+     */
     protected function getCustomerTransfer()
     {
         $customerTransfer = new CustomerTransfer();
@@ -257,11 +271,15 @@ abstract class AbstractBusinessTest extends Test
         return $this->quoteTransfer;
     }
 
+    /**
+     * @return \Generated\Shared\Transfer\PaymentTransfer
+     */
     protected function getPaymentTransfer()
     {
         return (new PaymentTransfer())
             ->setPayone(
-                (new PayonePaymentTransfer()));
+                (new PayonePaymentTransfer())
+            );
     }
 
 }
