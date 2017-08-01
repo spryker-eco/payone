@@ -9,5 +9,4 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Mapper;
 
 interface ResponseMapperInterface
 {
-
 }

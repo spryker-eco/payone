@@ -163,7 +163,6 @@ class PayoneHandler implements PayoneHandlerInterface
      */
     protected function getCurrency()
     {
-
         return Store::getInstance()->getCurrencyIsoCode();
     }
 

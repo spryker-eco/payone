@@ -124,6 +124,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingFirstName
+     *
+     * @return void
      */
     public function setShippingFirstname(string $shippingFirstName)
     {
@@ -140,6 +142,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingLastName
+     *
+     * @return void
      */
     public function setShippingLastName(string $shippingLastName)
     {
@@ -156,6 +160,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingCompany
+     *
+     * @return void
      */
     public function setShippingCompany(string $shippingCompany)
     {
@@ -172,6 +178,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingStreet
+     *
+     * @return void
      */
     public function setShippingStreet(string $shippingStreet)
     {
@@ -188,6 +196,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingZip
+     *
+     * @return void
      */
     public function setShippingZip(string $shippingZip)
     {
@@ -204,6 +214,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingCity
+     *
+     * @return void
      */
     public function setShippingCity(string $shippingCity)
     {
@@ -220,6 +232,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingState
+     *
+     * @return void
      */
     public function setShippingState(string $shippingState)
     {
@@ -236,6 +250,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingCountry
+     *
+     * @return void
      */
     public function setShippingCountry(string $shippingCountry)
     {
@@ -252,6 +268,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $shippingAddressaddition
+     *
+     * @return void
      */
     public function setShippingAddressAddition(string $shippingAddressAddition)
     {
@@ -268,6 +286,8 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $email
+     *
+     * @return void
      */
     public function setEmail(string $email)
     {

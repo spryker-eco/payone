@@ -25,7 +25,6 @@ class PayoneFacadeGetPaypalExpressCheckoutDetailsTest extends AbstractBusinessTe
         $facadeMock = $this->getFacadeMock($adapter);
         $response = $facadeMock->getPaypalExpressCheckoutDetails($this->getFilledQuote());
 
-
         $this->assertInstanceOf(
             '\Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer',
             $response

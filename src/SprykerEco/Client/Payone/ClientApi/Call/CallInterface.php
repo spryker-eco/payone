@@ -9,5 +9,4 @@ namespace SprykerEco\Client\Payone\ClientApi\Call;
 
 interface CallInterface
 {
-
 }

@@ -11,14 +11,14 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Client\Cart\CartClientInterface;
 use Spryker\Client\Checkout\CheckoutClientInterface;
 use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Shared\Config\Config;
-use Spryker\Client\Cart\CartClientInterface;
 use SprykerEco\Client\Payone\PayoneClientInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
 {
@@ -66,8 +66,8 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
         CustomerClientInterface $customerClient,
         CheckoutClientInterface $checkoutClient,
         QuoteHydrator $quoteHydrator
-    )
-    {
+    ) {
+
         $this->payoneClient = $payoneClient;
         $this->cartClient = $cartClient;
         $this->customerClient = $customerClient;

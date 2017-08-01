@@ -8,12 +8,12 @@
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
-use SprykerEco\Shared\Payone\PayoneApiConstants;
-use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use Psr\Log\LoggerInterface as MessengerInterface;
-use SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinder;
+use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\Guzzle;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest;
+use SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinder;
 use SprykerEco\Zed\Payone\Business\Internal\Installer;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HashProvider;
@@ -192,7 +192,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             PayoneApiConstants::PAYMENT_METHOD_E_WALLET => $this->createEWallet($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT => $this->createPrepayment($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT => $this->createDirectDebit($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => $this->createGenericPayment($storeConfig)
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => $this->createGenericPayment($storeConfig),
         ];
     }
 

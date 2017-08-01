@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Client\Payone\ClientApi\Request;
 
-use Spryker\Service\UtilEncoding\UtilEncodingService;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class CreditCardCheckContainer extends AbstractRequest

@@ -18,8 +18,6 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Propel\Runtime\Collection\ObjectCollection;
-use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\ResponseMapperInterface;
 
 interface PaymentManagerInterface
 {

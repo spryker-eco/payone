@@ -6,9 +6,9 @@
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Oms\OmsConstants;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Zed\Oms\OmsConfig;
+use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\PayoneConfig;
 
 $config[PayoneConstants::PAYONE] = [
@@ -23,7 +23,8 @@ $config[PayoneConstants::PAYONE] = [
     PayoneConstants::PAYONE_REDIRECT_BACK_URL => $config[ApplicationConstants::HOST_YVES] . '/payone/regular-redirect-payment-cancellation',
     PayoneConstants::PAYONE_MODE => 'test',
     PayoneConstants::PAYONE_EMPTY_SEQUENCE_NUMBER => 0,
-    PayoneConstants::ROUTE_CART => ''
+    // The route of cart page, where user is redirected if smth goes wrong
+    PayoneConstants::ROUTE_CART => '',
 ];
 
 $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_SUCCESS_URL] = sprintf(

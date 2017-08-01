@@ -8,8 +8,8 @@
 namespace SprykerEco\Zed\Payone\Persistence;
 
 use Propel\Runtime\ActiveQuery\Criteria;
-use SprykerEco\Shared\Payone\PayoneApiConstants;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 /**
  * @method \SprykerEco\Zed\Payone\Persistence\PayonePersistenceFactory getFactory()

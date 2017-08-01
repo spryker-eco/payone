@@ -8,9 +8,9 @@
 namespace SprykerEco\Client\Payone\ClientApi\Call;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Spryker\Service\UtilEncoding\UtilEncodingService;
 use SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface;
 use SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest;
-use Spryker\Service\UtilEncoding\UtilEncodingService;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 
 abstract class AbstractCall implements CallInterface

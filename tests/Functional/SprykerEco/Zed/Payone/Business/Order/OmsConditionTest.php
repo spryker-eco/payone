@@ -23,6 +23,9 @@ use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 class OmsConditionTest extends AbstractPayoneTest
 {
 
+    /**
+     * @return void
+     */
     public function testIsAuthorizationApproved()
     {
         $this->createPayonePayment();
@@ -31,8 +34,10 @@ class OmsConditionTest extends AbstractPayoneTest
 
         $this->assertTrue($isApproved);
     }
-    
 
+    /**
+     * @return void
+     */
     public function testIsAuthorizationRedirect()
     {
         $this->createPayonePayment();
@@ -42,6 +47,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isRedirect);
     }
 
+    /**
+     * @return void
+     */
     public function testIsAuthorizationError()
     {
         $this->createPayonePayment();
@@ -51,6 +59,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isError);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPreAuthorizationApproved()
     {
         $this->createPayonePayment();
@@ -60,6 +71,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isApproved);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPreauthorizationRedirect()
     {
         $this->createPayonePayment();
@@ -69,6 +83,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isRedirect);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPreAuthorizationError()
     {
         $this->createPayonePayment();
@@ -78,6 +95,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isError);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPreAuthorizationErrorTimeout()
     {
         $this->createPayonePayment();
@@ -87,6 +107,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isError);
     }
 
+    /**
+     * @return void
+     */
     public function testIsCaptureApproved()
     {
         $this->createPayonePayment();
@@ -97,6 +120,7 @@ class OmsConditionTest extends AbstractPayoneTest
     }
 
     /**
+     * @return void
      */
     public function testIsCaptureError()
     {
@@ -107,6 +131,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isError);
     }
 
+    /**
+     * @return void
+     */
     public function testIsRefundApproved()
     {
         $this->createPayonePayment();
@@ -116,6 +143,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isApproved);
     }
 
+    /**
+     * @return void
+     */
     public function testIsRefundError()
     {
         $this->createPayonePayment();
@@ -125,6 +155,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isError);
     }
 
+    /**
+     * @return void
+     */
     public function testIsRefundPossible()
     {
         $this->createPayonePayment();
@@ -135,6 +168,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isPossible);
     }
 
+    /**
+     * @return void
+     */
     public function testIsRefundImpossible()
     {
         $this->createPayonePayment();
@@ -145,6 +181,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertFalse($isPossible);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentDataRequiredInvoice()
     {
         $this->createPayonePayment();
@@ -155,6 +194,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isRequired);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentDataRequiredEWallet()
     {
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_E_WALLET);
@@ -165,6 +207,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertFalse($isRequired);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentDataRequiredCreditCardPseudo()
     {
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO);
@@ -177,12 +222,17 @@ class OmsConditionTest extends AbstractPayoneTest
 
     /**
      * @ignore Broken implementation.
+     *
+     * @return void
      */
     public function testIsPaymentNotificationAvailable()
     {
         /////////
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentPaid()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -193,6 +243,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isPaid);
     }
 
+    /**
+     * @return void
+     */
     public function testIsNotPaymentPaid()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -203,6 +256,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertFalse($isPaid);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentOverpaid()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -213,6 +269,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isOverPaid);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentNotOverpaid()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -223,6 +282,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertFalse($isOverPaid);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentUnderpaid()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -233,6 +295,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isUnderPaid);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentNotUnderpaid()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -244,6 +309,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertFalse($isUnderPaid);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentRefund()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -254,6 +322,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isRefund);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentNotRefund()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -265,6 +336,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertFalse($isRefund);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentAppointed()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -275,6 +349,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isAppointed);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentNotAppointed()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -286,6 +363,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertFalse($isAppointed);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentCapture()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -296,6 +376,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isCapture);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentNotCapture()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -307,6 +390,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertFalse($isCapture);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentOther()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
@@ -317,6 +403,9 @@ class OmsConditionTest extends AbstractPayoneTest
         $this->assertTrue($isOther);
     }
 
+    /**
+     * @return void
+     */
     public function testIsPaymentNotOther()
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();

@@ -23,6 +23,9 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 class HookTest extends AbstractPayoneTest
 {
 
+    /**
+     * @return void
+     */
     public function testPostSaveHook()
     {
         $this->createPayonePayment();

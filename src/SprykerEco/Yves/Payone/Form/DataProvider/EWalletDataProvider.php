@@ -9,10 +9,10 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
-use SprykerEco\Shared\Payone\PayoneApiConstants;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Yves\Payone\Form\EWalletSubForm;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
+use SprykerEco\Yves\Payone\Form\EWalletSubForm;
 
 class EWalletDataProvider implements StepEngineFormDataProviderInterface
 {

@@ -37,8 +37,8 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     public function mapRequestTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    )
-    {
+    ) {
+
         $quoteTransfer = $requestTransfer->getQuote();
 
         $genericPayment = $this->mapQuoteTransferToGenericPayment($genericPayment, $quoteTransfer);
@@ -58,8 +58,8 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     public function mapQuoteTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
         QuoteTransfer $quoteTransfer
-    )
-    {
+    ) {
+
         $genericPayment->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $genericPayment->setWorkOrderId(
             $quoteTransfer->getPayment()
@@ -217,4 +217,5 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
 
         return $refundContainer;
     }
+
 }

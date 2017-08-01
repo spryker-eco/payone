@@ -9,10 +9,10 @@ namespace Functional\SprykerEco\Zed\Payone\Business;
 
 use PHPUnit_Framework_TestCase;
 use Spryker\Zed\Kernel\Container;
+use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer;
-use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 
 class PayoneFacadeMockBuilder
 {
@@ -60,7 +60,6 @@ class PayoneFacadeMockBuilder
      */
     protected function getBusinessFactoryMock(AdapterInterface $adapter, PHPUnit_Framework_TestCase $testCase)
     {
-
         $businessFactoryMock = $testCase->getMockBuilder(
             'SprykerEco\Zed\Payone\Business\PayoneBusinessFactory'
         )->setMethods(['createExecutionAdapter'])

@@ -11,8 +11,8 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Yves\Payone\Form\DirectDebitSubForm;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use SprykerEco\Yves\Payone\Form\DirectDebitSubForm;
 
 class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
 {

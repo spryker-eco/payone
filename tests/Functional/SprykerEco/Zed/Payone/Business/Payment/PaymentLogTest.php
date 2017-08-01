@@ -9,10 +9,7 @@ namespace Functional\SprykerEco\Zed\Payone\Business\Payment;
 
 use Functional\SprykerEco\Zed\Payone\Business\AbstractPayoneTest;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
-use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetailQuery;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 /**
@@ -27,6 +24,9 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 class PaymentLogTest extends AbstractPayoneTest
 {
 
+    /**
+     * @return void
+     */
     public function testGetPaymentLogs()
     {
         $apiLogs = [];
@@ -49,6 +49,9 @@ class PaymentLogTest extends AbstractPayoneTest
         }
     }
 
+    /**
+     * @return void
+     */
     public function testGetPaymentLogsEmpty()
     {
         $this->createPayonePayment();

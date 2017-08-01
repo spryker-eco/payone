@@ -8,13 +8,11 @@
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
-use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 
 interface PaymentMethodMapperInterface extends BasePaymentMethodMapperInterface
 {
+
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

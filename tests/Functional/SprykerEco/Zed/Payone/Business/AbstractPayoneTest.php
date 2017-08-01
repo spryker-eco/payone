@@ -26,7 +26,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
 {
 
     /**
-     * @var SpyPaymentPayoneTransactionStatusLog
+     * @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog
      */
     protected $spyPayoneTransactionStatusLog;
 
@@ -49,7 +49,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
      * @param string $request
      * @param string $status
      *
-     * @return SpyPaymentPayoneApiLog
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog
      */
     protected function createPayoneApiLog(
         $request = PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
@@ -74,7 +74,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
      * @param string $iban
      * @param string $bic
      *
-     * @return SpyPaymentPayoneDetail
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
      */
     protected function createPayonePaymentDetail($iban = '', $bic = '')
     {
@@ -108,7 +108,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
     /**
      * @param $idOrderItem
      *
-     * @return SpyPaymentPayoneTransactionStatusLogOrderItem
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem
      */
     protected function createPayoneTransactionStatusLogItem($idOrderItem)
     {

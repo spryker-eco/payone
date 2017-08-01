@@ -53,7 +53,6 @@ interface PayoneApiConstants
     // online transfer methods
     const PAYMENT_METHOD_ONLINE_BANK_TRANSFER = 'payment.payone.online_bank_transfer';
 
-
     // CLEARING TYPE
 
     const CLEARING_TYPE_DIRECT_DEBIT = 'elv';

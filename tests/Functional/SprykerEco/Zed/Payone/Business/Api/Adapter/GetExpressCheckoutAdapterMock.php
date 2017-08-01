@@ -18,13 +18,12 @@ class GetExpressCheckoutAdapterMock extends AbstractAdapterMock
         $result = 'status=OK' .
             ' add_paydata[shipping_street]=sdfsfas' .
             ' add_paydata[shipping_zip]=12312' .
-            ' add_paydata[shipping_city]=sdfasdf'.
+            ' add_paydata[shipping_city]=sdfasdf' .
             ' add_paydata[shipping_firstname]=sfasdf' .
             ' add_paydata[shipping_country]=DE' .
             ' add_paydata[shipping_lastname]=sdfasd' .
             ' add_paydata[email]=sergey.sikachev-facilitator@spryker.com' .
-            ' workorderid=WX1A1SE57Y8D1XNR'
-        ;
+            ' workorderid=WX1A1SE57Y8D1XNR';
         return explode(" ", $result);
     }
 
@@ -36,9 +35,9 @@ class GetExpressCheckoutAdapterMock extends AbstractAdapterMock
         $result = 'status=ERROR' .
             ' errorcode=1011' .
             ' errormessage=Parameter {workorderid} incorrect or missing' .
-            ' customermessage=An error occured while processing this transaction (wrong parameters).'
-        ;
+            ' customermessage=An error occured while processing this transaction (wrong parameters).';
 
         return explode(" ", $result);
     }
+
 }

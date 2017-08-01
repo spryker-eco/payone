@@ -54,8 +54,8 @@ class QuoteHydrator
     public function __construct(
         ShipmentClientInterface $shipmentClient,
         CustomerClientInterface $customerClient
-    )
-    {
+    ) {
+
         $this->shipmentClient = $shipmentClient;
         $this->customerClient = $customerClient;
     }
@@ -68,8 +68,9 @@ class QuoteHydrator
      */
     public function getHydratedQuote(
         QuoteTransfer $quoteTransfer,
-        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details)
-    {
+        PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
+    ) {
+
         $this->hydrateQuoteWithPayment($quoteTransfer);
         $this->hydrateQuoteWithShipment($quoteTransfer);
         $this->hydrateQuoteWithCustomer($quoteTransfer, $details);
@@ -145,8 +146,8 @@ class QuoteHydrator
     protected function hydrateQuoteWithCustomer(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-    )
-    {
+    ) {
+
         $customerEmail = $details->getEmail();
         $customerTransfer = new CustomerTransfer();
         $customerTransfer->setEmail($customerEmail);
@@ -175,8 +176,8 @@ class QuoteHydrator
     protected function hydrateQuoteWithAddresses(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-    )
-    {
+    ) {
+
         $shippingAddress = new AddressTransfer();
         $shippingAddress->setFirstName($details->getShippingFirstName());
         $shippingAddress->setLastName($details->getShippingLastName());

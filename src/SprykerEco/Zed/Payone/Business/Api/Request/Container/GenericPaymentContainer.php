@@ -8,14 +8,15 @@
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
 
 class GenericPaymentContainer extends AbstractRequestContainer
 {
+
     /**
      * @var string
      */
     protected $request = PayoneApiConstants::REQUEST_TYPE_GENERICPAYMENT;
+
     /**
      * @var string
      */
@@ -37,7 +38,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $narrative_text;
 
     /**
-     * @var PaydataContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
      */
     protected $paydata;
 
@@ -116,6 +117,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $clearingType
+     *
+     * @return void
      */
     public function setClearingType($clearingType)
     {
@@ -132,6 +135,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param int $amount
+     *
+     * @return void
      */
     public function setAmount($amount)
     {
@@ -148,6 +153,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $currency
+     *
+     * @return void
      */
     public function setCurrency($currency)
     {
@@ -164,6 +171,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $narrativeText
+     *
+     * @return void
      */
     public function setNarrativeText($narrativeText)
     {
@@ -171,7 +180,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return PaydataContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
      */
     public function getPaydata()
     {
@@ -179,7 +188,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param PaydataContainer $paydata
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $paydata
+     *
+     * @return void
      */
     public function setPaydata($paydata)
     {
@@ -196,6 +207,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $workOrderId
+     *
+     * @return void
      */
     public function setWorkOrderId($workOrderId)
     {
@@ -212,6 +225,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $shippingFirstName
+     *
+     * @return void
      */
     public function setShippingFirstName($shippingFirstName)
     {
@@ -228,6 +243,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $shippingLastName
+     *
+     * @return void
      */
     public function setShippingLastName($shippingLastName)
     {
@@ -244,6 +261,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $shippingCompany
+     *
+     * @return void
      */
     public function setShippingCompany($shippingCompany)
     {
@@ -260,6 +279,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $shippingStreet
+     *
+     * @return void
      */
     public function setShippingStreet($shippingStreet)
     {
@@ -276,6 +297,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param int $shippingZip
+     *
+     * @return void
      */
     public function setShippingZip($shippingZip)
     {
@@ -292,6 +315,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $shippingCity
+     *
+     * @return void
      */
     public function setShippingCity($shippingCity)
     {
@@ -308,6 +333,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $shippingState
+     *
+     * @return void
      */
     public function setShippingState($shippingState)
     {
@@ -324,6 +351,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $shippingCountry
+     *
+     * @return void
      */
     public function setShippingCountry($shippingCountry)
     {
@@ -340,6 +369,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $walletType
+     *
+     * @return void
      */
     public function setWalletType($walletType)
     {
@@ -356,6 +387,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $successUrl
+     *
+     * @return void
      */
     public function setSuccessUrl($successUrl)
     {
@@ -372,6 +405,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $errorUrl
+     *
+     * @return void
      */
     public function setErrorUrl($errorUrl)
     {
@@ -388,6 +423,8 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
     /**
      * @param string $backUrl
+     *
+     * @return void
      */
     public function setBackUrl($backUrl)
     {

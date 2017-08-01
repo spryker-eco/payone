@@ -11,9 +11,9 @@ use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Shared\Kernel\Store;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
+use SprykerEco\Shared\Payone\PayoneConstants;
 
 class PayoneConfig extends AbstractBundleConfig
 {

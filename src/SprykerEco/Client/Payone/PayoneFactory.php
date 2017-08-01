@@ -9,12 +9,11 @@ namespace SprykerEco\Client\Payone;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Spryker\Client\Kernel\AbstractFactory;
+use Spryker\Shared\Config;
 use SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheck;
 use SprykerEco\Client\Payone\ClientApi\HashGenerator;
 use SprykerEco\Client\Payone\ClientApi\HashProvider;
 use SprykerEco\Client\Payone\Zed\PayoneStub;
-use Spryker\Service\UtilEncoding\UtilEncodingService;
-use Spryker\Shared\Config;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\Business\Mode\ModeDetector;

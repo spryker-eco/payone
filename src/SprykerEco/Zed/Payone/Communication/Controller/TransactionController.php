@@ -9,8 +9,8 @@ namespace SprykerEco\Zed\Payone\Communication\Controller;
 
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
+use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse;
 use Symfony\Component\HttpFoundation\Request;
 

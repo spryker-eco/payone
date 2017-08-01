@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Yves\Payone\Plugin;
 
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Spryker\Yves\Kernel\AbstractPlugin;
+use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\AtSubFormsCreator;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\ChSubFormsCreator;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\DefaultSubFormsCreator;

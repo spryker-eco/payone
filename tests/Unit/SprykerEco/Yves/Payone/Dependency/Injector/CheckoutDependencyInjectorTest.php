@@ -11,9 +11,9 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use PHPUnit_Framework_TestCase;
 use Spryker\Yves\Checkout\CheckoutDependencyProvider;
 use Spryker\Yves\Kernel\Container;
-use SprykerEco\Yves\Payone\Dependency\Injector\CheckoutDependencyInjector;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
+use SprykerEco\Yves\Payone\Dependency\Injector\CheckoutDependencyInjector;
 
 /**
  * @group Unit

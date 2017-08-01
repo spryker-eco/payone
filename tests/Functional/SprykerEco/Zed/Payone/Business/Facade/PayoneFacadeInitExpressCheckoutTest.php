@@ -10,8 +10,8 @@ namespace Functional\SprykerEco\Zed\Payone\Business\Facade;
 use Functional\SprykerEco\Zed\Payone\Business\AbstractBusinessTest;
 use Functional\SprykerEco\Zed\Payone\Business\Api\Adapter\SetExpressCheckoutAdapterMock;
 use Generated\Shared\Transfer\PaymentTransfer;
-use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
@@ -64,7 +64,6 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
 
         $this->assertNotEmpty($response->getErrorCode());
         $this->assertNotEmpty($response->getErrorMessage());
-
     }
 
     /**

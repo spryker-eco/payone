@@ -41,6 +41,4 @@ class CreditCardCheckResponseMapper implements CreditCardCheckResponseMapperInte
         return $result;
     }
 
-
-
 }

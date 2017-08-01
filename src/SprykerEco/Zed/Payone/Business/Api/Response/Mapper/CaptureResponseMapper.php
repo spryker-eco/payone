@@ -73,6 +73,4 @@ class CaptureResponseMapper implements CaptureResponseMapperInterface
         return $result;
     }
 
-
-
 }

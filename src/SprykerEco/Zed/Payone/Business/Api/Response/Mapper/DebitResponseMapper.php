@@ -41,6 +41,4 @@ class DebitResponseMapper implements DebitResponseMapperInterface
         return $result;
     }
 
-
-
 }
