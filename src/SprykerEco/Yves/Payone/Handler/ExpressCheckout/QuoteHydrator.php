@@ -101,6 +101,7 @@ class QuoteHydrator
 
         $paymentTransfer->setPayone($payone);
         $paymentTransfer->setPaymentSelection(PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE);
+        $paymentTransfer->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT);
         $paymentTransfer->setPaymentProvider(ExpressCheckoutHandler::PAYMENT_PROVIDER);
         $paypalExpressCheckoutPayment = new PayonePaypalExpressCheckoutTransfer();
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
