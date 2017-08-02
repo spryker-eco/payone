@@ -22,6 +22,9 @@
     "spryker/silex": "*",
     "spryker/testify": "*"
   },
+  "replace": {
+    "spryker/payone": "*"
+  },
   "suggest": {
     "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout."
   },
