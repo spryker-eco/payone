@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Psr\Log\LoggerInterface as MessengerInterface;
+use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\Guzzle;
@@ -30,7 +31,6 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManager;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
-use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**
@@ -97,14 +97,6 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         return new ApiLogFinder(
             $this->getQueryContainer()
         );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\PayoneConfig
-     */
-    protected function createPayoneConfig()
-    {
-        return new PayoneConfig();
     }
 
     /**
@@ -315,13 +307,13 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Store $storeConfig
+     * @param \Spryker\Shared\Kernel\Store $store
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment
      */
-    protected function createGenericPayment($storeConfig)
+    protected function createGenericPayment(Store $store)
     {
-        $genericPayment = new GenericPayment($storeConfig);
+        $genericPayment = new GenericPayment($store);
 
         return $genericPayment;
     }

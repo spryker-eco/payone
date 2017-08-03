@@ -301,7 +301,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     protected function getPreparedKey($key)
     {
-        $key = preg_replace("/add_paydata\[(.*)\]/", "$1", $key);
+        $key = preg_replace('/add_paydata\[(.*)\]/', "$1", $key);
         return ucwords(str_replace('_', ' ', $key));
     }
 

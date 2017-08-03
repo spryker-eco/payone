@@ -20,9 +20,4 @@ interface ExpressCheckoutHandlerInterface
      */
     public function placeOrder();
 
-    /**
-     * @return void
-     */
-    public function clearQuote();
-
 }

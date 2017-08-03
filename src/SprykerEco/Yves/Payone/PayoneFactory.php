@@ -88,9 +88,8 @@ class PayoneFactory extends AbstractFactory
     {
         return new ExpressCheckoutHandler(
             $this->getPayoneClient(),
-            $this->createCartClient(),
-            $this->createCustomerClient(),
-            $this->createCheckoutClient(),
+            $this->getCartClient(),
+            $this->getCheckoutClient(),
             $this->createQuoteHydrator()
         );
     }
@@ -280,9 +279,9 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Cart\CartClient
+     * @return \Spryker\Client\Cart\CartClientInterface
      */
-    public function createCartClient()
+    public function getCartClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CART);
     }
@@ -290,7 +289,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\Checkout\CheckoutClientInterface
      */
-    public function createCheckoutClient()
+    public function getCheckoutClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CHECKOUT);
     }
@@ -298,7 +297,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\Customer\CustomerClientInterface
      */
-    public function createCustomerClient()
+    public function getCustomerClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CUSTOMER);
     }
@@ -306,7 +305,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryBridge
      */
-    public function createCustomerQueryContainer()
+    public function getCustomerQueryContainer()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::QUERY_CONTAINER_CUSTOMER);
     }
@@ -314,7 +313,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \Spryker\Client\Shipment\ShipmentClientInterface
      */
-    public function createShipmentClient()
+    public function getShipmentClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_SHIPMENT);
     }
@@ -325,8 +324,8 @@ class PayoneFactory extends AbstractFactory
     public function createQuoteHydrator()
     {
         return new QuoteHydrator(
-            $this->createShipmentClient(),
-            $this->createCustomerClient()
+            $this->getShipmentClient(),
+            $this->getCustomerClient()
         );
     }
 
