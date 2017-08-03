@@ -13,7 +13,6 @@ use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Cart\CartClientInterface;
 use Spryker\Client\Checkout\CheckoutClientInterface;
-use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Client\Payone\PayoneClientInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
@@ -34,11 +33,6 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     protected $cartClient;
 
     /**
-     * @var \Spryker\Client\Customer\CustomerClientInterface
-     */
-    protected $customerClient;
-
-    /**
      * @var \Spryker\Client\Checkout\CheckoutClientInterface
      */
     protected $checkoutClient;
@@ -51,21 +45,18 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @param \SprykerEco\Client\Payone\PayoneClientInterface $payoneClient
      * @param \Spryker\Client\Cart\CartClientInterface $cartClient
-     * @param \Spryker\Client\Customer\CustomerClientInterface $customerClient
      * @param \Spryker\Client\Checkout\CheckoutClientInterface $checkoutClient
      * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator $quoteHydrator
      */
     public function __construct(
         PayoneClientInterface $payoneClient,
         CartClientInterface $cartClient,
-        CustomerClientInterface $customerClient,
         CheckoutClientInterface $checkoutClient,
         QuoteHydrator $quoteHydrator
     ) {
 
         $this->payoneClient = $payoneClient;
         $this->cartClient = $cartClient;
-        $this->customerClient = $customerClient;
         $this->checkoutClient = $checkoutClient;
         $this->quoteHydrator = $quoteHydrator;
     }

@@ -89,7 +89,6 @@ class PayoneFactory extends AbstractFactory
         return new ExpressCheckoutHandler(
             $this->getPayoneClient(),
             $this->getCartClient(),
-            $this->getCustomerClient(),
             $this->getCheckoutClient(),
             $this->createQuoteHydrator()
         );
