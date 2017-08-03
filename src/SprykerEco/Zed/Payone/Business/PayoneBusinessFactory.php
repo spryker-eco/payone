@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Psr\Log\LoggerInterface as MessengerInterface;
-use \Spryker\Shared\Kernel\Store;
+use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\Guzzle;

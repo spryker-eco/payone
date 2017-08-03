@@ -22,7 +22,6 @@ use Spryker\Client\Shipment\ShipmentClientInterface;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
-use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 
 class QuoteHydrator implements QuoteHydratorInterface
 {
