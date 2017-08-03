@@ -37,7 +37,7 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse | array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
     public function successAction()
     {
