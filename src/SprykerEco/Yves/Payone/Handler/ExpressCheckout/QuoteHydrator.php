@@ -24,7 +24,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 
-class QuoteHydrator
+class QuoteHydrator implements QuoteHydratorInterface
 {
 
     /**
@@ -102,7 +102,7 @@ class QuoteHydrator
         $paymentTransfer->setPayone($payone);
         $paymentTransfer->setPaymentSelection(PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE);
         $paymentTransfer->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT);
-        $paymentTransfer->setPaymentProvider(ExpressCheckoutHandler::PAYMENT_PROVIDER);
+        $paymentTransfer->setPaymentProvider(PayoneConstants::PROVIDER_NAME);
         $paypalExpressCheckoutPayment = new PayonePaypalExpressCheckoutTransfer();
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quoteTransfer->setPayment($paymentTransfer);

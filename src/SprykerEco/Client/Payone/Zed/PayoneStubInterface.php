@@ -16,9 +16,8 @@ use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 
-class PayoneStub extends ZedRequestStub implements PayoneStubInterface
+interface PayoneStubInterface
 {
 
     /**
@@ -26,116 +25,62 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function updateStatus(PayoneTransactionStatusUpdateTransfer $transactionStatus)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/status-update',
-            $transactionStatus
-        );
-    }
+    public function updateStatus(PayoneTransactionStatusUpdateTransfer $transactionStatus);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/bank-account-check',
-            $bankAccountCheckTransfer
-        );
-    }
+    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneManageMandateTransfer $manageMandateTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
      */
-    public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/manage-mandate',
-            $manageMandateTransfer
-        );
-    }
+    public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneGetFileTransfer $getFileTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    public function getFile(PayoneGetFileTransfer $getFileTransfer)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/get-file',
-            $getFileTransfer
-        );
-    }
+    public function getFile(PayoneGetFileTransfer $getFileTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer
      */
-    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/get-payment-detail',
-            $getPaymentDetailTransfer
-        );
-    }
+    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $getInvoiceTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/get-invoice',
-            $getInvoiceTransfer
-        );
-    }
+    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneCancelRedirectTransfer $cancelRedirectTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneCancelRedirectTransfer
      */
-    public function cancelRedirect(PayoneCancelRedirectTransfer $cancelRedirectTransfer)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/cancel-redirect',
-            $cancelRedirectTransfer
-        );
-    }
+    public function cancelRedirect(PayoneCancelRedirectTransfer $cancelRedirectTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/init-paypal-express-checkout',
-            $requestTransfer
-        );
-    }
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
-    {
-        return $this->zedStub->call(
-            '/payone/gateway/get-paypal-express-checkout-details',
-            $quoteTransfer
-        );
-    }
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
 }

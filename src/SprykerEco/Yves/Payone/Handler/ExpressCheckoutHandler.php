@@ -24,11 +24,6 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
 {
 
     /**
-     * @const PAYMENT_PROVIDER
-     */
-    const PAYMENT_PROVIDER = 'Payone';
-
-    /**
      * @var \SprykerEco\Client\Payone\PayoneClientInterface
      */
     protected $payoneClient;
@@ -105,15 +100,6 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     }
 
     /**
-     * @return void
-     */
-    public function clearQuote()
-    {
-        $this->customerClient->markCustomerAsDirty();
-        $this->cartClient->clearQuote();
-    }
-
-    /**
      * @return \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer
      */
     protected function prepareInitExpressCheckoutRequest()
@@ -144,7 +130,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     protected function addExpressCheckoutPaymentToQuote(QuoteTransfer $quoteTransfer)
     {
         $paymentTransfer = new PaymentTransfer();
-        $paymentTransfer->setPaymentProvider(static::PAYMENT_PROVIDER);
+        $paymentTransfer->setPaymentProvider(PayoneConstants::PROVIDER_NAME);
         $paypalExpressCheckoutPayment = new PayonePaypalExpressCheckoutTransfer();
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quoteTransfer->setPayment($paymentTransfer);

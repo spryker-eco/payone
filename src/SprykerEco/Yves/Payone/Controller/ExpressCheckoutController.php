@@ -37,7 +37,7 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse | array
      */
     public function successAction()
     {
@@ -47,7 +47,11 @@ class ExpressCheckoutController extends AbstractController
         if (!$checkoutResponseTransfer->getIsSuccess()) {
             return $this->redirectResponseInternal(PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE);
         }
-        $expressCheckoutHandler->clearQuote();
+
+        $this->getFactory()->getCustomerClient()->markCustomerAsDirty();
+        $this->getFactory()->getCartClient()->clearQuote();
+
+        return $this->viewResponse();
     }
 
     /**

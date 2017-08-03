@@ -11,6 +11,11 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
 {
 
     /**
+     * @const string ADD_PAYDATA_PATTERN
+     */
+    const ADD_PAYDATA_PATTERN = '/add_paydata\[(.*)\]/';
+
+    /**
      * @var string
      */
     protected $workorderid;
@@ -301,7 +306,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     protected function getPreparedKey($key)
     {
-        $key = preg_replace("/add_paydata\[(.*)\]/", "$1", $key);
+        $key = preg_replace(self::ADD_PAYDATA_PATTERN, "$1", $key);
         return ucwords(str_replace('_', ' ', $key));
     }
 
