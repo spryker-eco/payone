@@ -19,6 +19,12 @@
             <span id="cardexpireyear"></span>
         </span>
 
+        <label>{{ 'Payone_credit_card.cardholder' | trans }}</label>
+        <div class="field">
+            {{ form_widget(form.payoneCreditCard.cardholder, { 'attr': {'placeholder': 'Payone_credit_card.cardholder' | trans } }) }}
+            {{ form_errors(form.payoneCreditCard.cardholder) }}
+        </div>
+
         <div class="field">
             {{ form_widget(form.payoneCreditCard.payone_client_api_config) }}
             {{ form_widget(form.payoneCreditCard.pseudocardpan, {'id': 'pseudocardpan'}) }}
