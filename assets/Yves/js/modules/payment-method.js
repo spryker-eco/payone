@@ -40,6 +40,8 @@ function initHostedIframe(config) {
     document.paymentform = document.getElementById(config.formId);
     var $form = $(config.formSelector);
     var clientApiConfig = JSON.parse($form.find(config.clientApiConfigInput).val());
+    var language = $form.find(config.languageInput).val().substr(0,2);
+    config.hostedIframeConfig.language = Payone.ClientApi.Language[language];
 
     var iframes = new Payone.ClientApi.HostedIFrames(config.hostedIframeConfig, clientApiConfig);
     iframes.setCardType("V");
