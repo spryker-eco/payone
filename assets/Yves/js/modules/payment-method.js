@@ -52,13 +52,13 @@ function initHostedIframe(config) {
 
     $form.find('[type="submit"]').click(function() {
         if ($(config.currentPaymentMethodSelector).val() === 'payoneCreditCard') {
-            check(iframes);
+            check(iframes, config);
             return false;
         }
     });
 }
 
-function check(iframes) {
+function check(iframes, config) {
     //Fix to make payone remote script work correctly. It tries to remove some node but can't find it.
     document.getElementsByTagName("body")[0].appendChild(document.createElement("p"));
     window.PayoneGlobals.options.payoneScript = document.getElementsByTagName("body")[0].lastChild;
@@ -68,10 +68,11 @@ function check(iframes) {
     // Set it explicitly.
     window['checkCallback'] = checkCallback;
 
-    if (iframes.isComplete()) {
+    if (iframes.isComplete() && $(config.cardholderInput).val()) {
         iframes.creditCardCheck('checkCallback');
     } else {
         console.debug("The form is not complete");
+        $(config.errorDivSelector).text(config.hostedIframeConfig.language.transactionRejected);
     }
 }
 
