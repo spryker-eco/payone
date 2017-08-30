@@ -39,7 +39,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
-    public function successAction(Request $request)
+    public function successAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
         if (!$this->getFactory()->getCartClient()->getItemCount()) {
