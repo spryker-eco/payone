@@ -39,11 +39,18 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
-    public function successAction()
+    public function successAction(Request $request)
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
-
-        $checkoutResponseTransfer = $expressCheckoutHandler->placeOrder();
+        if (!$this->getFactory()->getCartClient()->getItemCount()) {
+            return $this->redirectResponseInternal($this->getCartRoute());
+        }
+        try {
+            $checkoutResponseTransfer = $expressCheckoutHandler->placeOrder();
+        } catch (\Exception $exception) {
+            $this->addErrorMessage('Saving order to the database failed.');
+            return $this->redirectResponseInternal($this->getCartRoute());
+        }
         if (!$checkoutResponseTransfer->getIsSuccess()) {
             return $this->redirectResponseInternal(PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE);
         }
