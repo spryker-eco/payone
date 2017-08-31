@@ -44,11 +44,12 @@ function initHostedIframe(config) {
     config.hostedIframeConfig.language = Payone.ClientApi.Language[language];
 
     var iframes = new Payone.ClientApi.HostedIFrames(config.hostedIframeConfig, clientApiConfig);
-    iframes.setCardType("V");
 
     document.getElementById('cardtype').onchange = function () {
         iframes.setCardType(this.value);              // on change: set new type of credit card to process
     };
+
+    document.getElementById('cardtype').onchange();
 
     $form.find('[type="submit"]').click(function() {
         if ($(config.currentPaymentMethodSelector).val() === 'payoneCreditCard') {
