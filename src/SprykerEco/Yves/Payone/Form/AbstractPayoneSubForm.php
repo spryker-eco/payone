@@ -9,13 +9,14 @@ namespace SprykerEco\Yves\Payone\Form;
 
 use Spryker\Yves\StepEngine\Dependency\Form\AbstractSubFormType;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormProviderNameInterface;
 use SprykerEco\Client\Payone\PayoneClientInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Form\Constraint\BankAccount;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubFormInterface
+abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
 
     const PAYMENT_PROVIDER = PayoneConstants::PROVIDER_NAME;
@@ -39,6 +40,14 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
     public function __construct(PayoneClientInterface $payoneClient)
     {
         $this->payoneClient = $payoneClient;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProviderName()
+    {
+        return static::PAYMENT_PROVIDER;
     }
 
     /**
