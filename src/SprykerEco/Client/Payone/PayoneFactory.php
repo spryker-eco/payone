@@ -9,7 +9,7 @@ namespace SprykerEco\Client\Payone;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Shared\Config;
+use Spryker\Shared\Config\Config;
 use SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheck;
 use SprykerEco\Client\Payone\ClientApi\HashGenerator;
 use SprykerEco\Client\Payone\ClientApi\HashProvider;
