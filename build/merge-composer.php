@@ -10,7 +10,10 @@ if (count($argv) < 4) {
 $fromComposer = json_decode(file_get_contents($argv[1]), true);
 $demoShopComposer = json_decode(file_get_contents($argv[2]), true);
 foreach ($fromComposer[PATH_REQUIRE] as $module => &$version) {
-    if (isset($demoShopComposer[PATH_REQUIRE][$module]) && $demoShopComposer[PATH_REQUIRE][$module] > $version) {
+    if (isset($demoShopComposer[PATH_REQUIRE][$module])
+        && $demoShopComposer[PATH_REQUIRE][$module] > $version
+        && strpos($demoShopComposer[PATH_REQUIRE][$module], $version) === -1)
+    {
         print sprintf("Changing %s '%s' to '%s'", $module, $version, $demoShopComposer[PATH_REQUIRE][$module]) . PHP_EOL;
         $version = $demoShopComposer[PATH_REQUIRE][$module];
     }

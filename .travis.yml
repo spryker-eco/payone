@@ -4,7 +4,6 @@ env:
   global:
     - APPLICATION_ENV=devtest
     - APPLICATION_STORE=DE
-    - APPLICATION_=DE
     - MODULE_DIR=module
     - SHOP_DIR=current
     - MODULE_NAME=payone

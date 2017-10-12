@@ -1,6 +1,6 @@
 class_name: UnitTester
 modules:
     enabled:
-        - \Payone\Module\Unit
-        - \Testify\Module\Environment
-        - \Config\Module\ConfigInit
+        - \Payone\Helper\Unit
+        - \Testify\Helper\Environment
+        - \SprykerTest\Shared\Config\Helper\ConfigInit
