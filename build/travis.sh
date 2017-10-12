@@ -8,6 +8,12 @@ buildMessage=""
 function runTests {
     echo "define('APPLICATION_ROOT_DIR', '$TRAVIS_BUILD_DIR/$SHOP_DIR');" >> "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/composer/autoload_real.php"
     echo "Running tests..."
+    echo "Copy configuration..."
+    if [ -f "vendor/spryker-eco/$MODULE_NAME/config/config.dist.php" ]; then
+     tail -n +2 "vendor/spryker-eco/$MODULE_NAME/config/config.dist.php" >> config/Shared/config_default-devtest.php
+     php "$scriptPath/fix-config.php" config/Shared/config_default-devtest.php
+    fi
+    ./setup_test -f
     cd "vendor/spryker-eco/$MODULE_NAME/"
     "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/codecept" run
     if [ "$?" = 0 ]; then
@@ -46,7 +52,7 @@ function checkModuleWithLatestVersionOfDemoShop {
         buildMessage="${buildMessage}\n${GREEN}$MODULE_NAME is compatible with the latest version of modules used in Demo Shop"
         return
     fi
-    buildMessage="${buildMessage}\nUpdated dependencies in module to match Demo Shop\n"
+    buildMessage="${buildMessage}\nUpdated dependencies in module to match Demo Shop\n$updates"
     echo "Installing module with updated dependencies..."
     composer require "spryker-eco/$MODULE_NAME @dev"
     result=$?
