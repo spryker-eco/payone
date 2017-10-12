@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Payone;
 
 use Spryker\Yves\Kernel\AbstractFactory;
+use Spryker\Yves\ProductBundle\Grouper\ProductBundleGrouper;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 use SprykerEco\Yves\Payone\Form\DataProvider\CreditCardDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\DirectDebitDataProvider;
@@ -327,6 +328,14 @@ class PayoneFactory extends AbstractFactory
             $this->getShipmentClient(),
             $this->getCustomerClient()
         );
+    }
+
+    /**
+     * @return \Spryker\Yves\ProductBundle\Grouper\ProductBundleGrouper
+     */
+    public function getProductBundleGrouper()
+    {
+        return new ProductBundleGrouper();
     }
 
 }

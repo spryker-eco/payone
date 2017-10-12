@@ -20,6 +20,7 @@ class PayoneControllerProvider extends YvesControllerProvider
     const EXPRESS_CHECKOUT_SUCCESS = 'payone-paypal-express-checkout-success';
     const EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
     const EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
+    const EXPRESS_CHECKOUT_PLACE_ORDER = 'payone-paypal-express-checkout-place-order';
 
     /**
      * @param \Silex\Application $app
@@ -70,6 +71,14 @@ class PayoneControllerProvider extends YvesControllerProvider
             'payone',
             'expressCheckout',
             'back'
+        )->method('GET');
+
+        $this->createController(
+            '/payone/expresscheckout/place-order',
+            static::EXPRESS_CHECKOUT_PLACE_ORDER,
+            'payone',
+            'expressCheckout',
+            'placeOrder'
         )->method('GET');
     }
 

@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Yves\Payone\Controller;
 
+use Pyz\Yves\Checkout\Form\Steps\SummaryForm;
+use Pyz\Yves\Shipment\Form\ShipmentForm;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Payone\PayoneConstants;
@@ -37,9 +39,27 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return array
      */
     public function successAction()
+    {
+        $quoteTransfer = $this->getFactory()->getCartClient()->getQuote();
+        $this->getFactory()
+            ->createExpressCheckoutHandler()
+            ->loadPaypalExpressCheckoutDetails();
+        return $this->viewResponse([
+            'quoteTransfer' => $quoteTransfer,
+            'cartItems' => $this->getFactory()->getProductBundleGrouper()->getGroupedBundleItems(
+                $quoteTransfer->getItems(),
+                $quoteTransfer->getBundleItems()
+            ),
+        ]);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     */
+    public function placeOrderAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
         if (!$this->getFactory()->getCartClient()->getItemCount()) {
@@ -59,6 +79,7 @@ class ExpressCheckoutController extends AbstractController
         $this->getFactory()->getCartClient()->clearQuote();
 
         return $this->viewResponse();
+
     }
 
     /**

@@ -79,14 +79,24 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     }
 
     /**
+     * @return void
+     */
+    public function loadPaypalExpressCheckoutDetails()
+    {
+        $quoteTransfer = $this->cartClient->getQuote();
+        $details = $this->payoneClient->getPaypalExpressCheckoutDetails($quoteTransfer);
+        $quoteTransfer = $this->quoteHydrator->getHydratedQuote($quoteTransfer, $details);
+        $this->cartClient->storeQuote($quoteTransfer);
+
+        return $quoteTransfer;
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
     public function placeOrder()
     {
         $quoteTransfer = $this->cartClient->getQuote();
-        $details = $this->payoneClient->getPaypalExpressCheckoutDetails($quoteTransfer);
-        $quoteTransfer = $this->quoteHydrator->getHydratedQuote($quoteTransfer, $details);
-
         return $this->checkoutClient->placeOrder($quoteTransfer);
     }
 
