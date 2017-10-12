@@ -1,0 +1,55 @@
+language: php
+
+env:
+  global:
+    - APPLICATION_ENV=devtest
+    - APPLICATION_STORE=DE
+    - APPLICATION_=DE
+    - MODULE_DIR=module
+    - SHOP_DIR=current
+    - MODULE_NAME=payone
+
+matrix:
+  fast_finish: true
+  include:
+     - php: "7.0"
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - graphviz
+  hosts:
+    - zed.de.spryker.test
+    - www.de.spryker.test
+
+before_install:
+  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+install:
+  - echo "Moving module to subfolder..."
+  - if [[ *$TRAVIS_EVENT_TYPE* = 'cron' ]]; then git checkout $(git tag | tail -n 1); fi
+  - mkdir $MODULE_DIR && ls -1 | grep -v ^$MODULE_DIR | xargs -I{} mv {} $MODULE_DIR
+  - echo "Cloning Demo Shop..."
+  - git clone https://github.com/spryker/demoshop.git $SHOP_DIR
+  - cd $SHOP_DIR
+  - composer self-update && composer --version
+  - composer install --no-interaction
+  - mkdir -p data/DE/logs
+  - chmod -R 777 data/
+  - cd ..
+
+before_script:
+  - chmod a+x ./$MODULE_DIR/build/travis.sh
+
+script:
+  - ./$MODULE_DIR/build/travis.sh
+
+notifications:
+  email: false
