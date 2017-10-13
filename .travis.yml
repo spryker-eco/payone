@@ -42,6 +42,7 @@ install:
   - composer install --no-interaction
   - mkdir -p data/DE/logs
   - chmod -R 777 data/
+  - config/Shared/ci/travis/install_elasticsearch.sh
   - cd ..
 
 before_script:
