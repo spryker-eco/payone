@@ -16,6 +16,11 @@ interface ExpressCheckoutHandlerInterface
     public function initPaypalExpressCheckout();
 
     /**
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function loadPaypalExpressCheckoutDetails();
+
+    /**
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
     public function placeOrder();

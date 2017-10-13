@@ -79,7 +79,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     }
 
     /**
-     * @return void
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function loadPaypalExpressCheckoutDetails()
     {

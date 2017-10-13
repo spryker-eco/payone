@@ -123,6 +123,7 @@ class QuoteHydrator implements QuoteHydratorInterface
         if ($shippingMethod = reset($methods)) {
             $shippingMethod->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE);
             $shipmentTransfer->setMethod($shippingMethod);
+            $shipmentTransfer->setShipmentSelection($shippingMethod->getIdShipmentMethod());
             $quoteTransfer->setShipment($shipmentTransfer);
             return $quoteTransfer;
         }

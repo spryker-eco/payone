@@ -7,8 +7,13 @@
 
 namespace SprykerEco\Yves\Payone;
 
+use Pyz\Yves\Shipment\Plugin\ShipmentFormDataProviderPlugin;
+use Pyz\Yves\Shipment\Plugin\ShipmentHandlerPlugin;
+use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
+use Spryker\Yves\Kernel\Plugin\Pimple;
+use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -23,7 +28,23 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
     const CLIENT_SHIPMENT = 'shipment client';
 
+    const CLIENT_QUOTE = 'quote client';
+
+    const CLIENT_GLOSSARY = 'client glosssary';
+
+    const CLIENT_CALCULATION = 'client calculation';
+
     const QUERY_CONTAINER_CUSTOMER = 'customer query container';
+
+    const PLUGIN_APPLICATION = 'plugin application';
+
+    const PLUGIN_SHIPMENT_FORM_DATA_PROVIDER = 'shipment data provider';
+
+    const PLUGIN_SHIPMENT_HANDLER = 'plugin shipment handler';
+
+    const PLUGIN_SHIPMENT_STEP_HANDLER = 'PLUGIN_SHIPMENT_STEP_HANDLER';
+
+    const STORE = 'store';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -54,6 +75,62 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::CLIENT_SHIPMENT] = function (Container $container) {
             return $container->getLocator()->shipment()->client();
+        };
+
+        $container[self::CLIENT_GLOSSARY] = function (Container $container) {
+            return $container->getLocator()->glossary()->client();
+        };
+
+        $container[self::CLIENT_CALCULATION] = function (Container $container) {
+            return $container->getLocator()->calculation()->client();
+        };
+
+        $container[self::STORE] = function (Container $container) {
+            return Store::getInstance();
+        };
+
+        $container[self::PLUGIN_SHIPMENT_FORM_DATA_PROVIDER] = function (Container $container) {
+            return new ShipmentFormDataProviderPlugin();
+        };
+
+        $container[static::PLUGIN_SHIPMENT_HANDLER] = function () {
+            $shipmentHandlerPlugins = new StepHandlerPluginCollection();
+            $shipmentHandlerPlugins->add(new ShipmentHandlerPlugin(), static::PLUGIN_SHIPMENT_STEP_HANDLER);
+
+            return $shipmentHandlerPlugins;
+        };
+
+        $this->addQuoteClient($container);
+        $this->addApplication($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    protected function addQuoteClient(Container $container)
+    {
+        $container[static::CLIENT_QUOTE] = function (Container $container) {
+            return $container->getLocator()->quote()->client();
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    protected function addApplication(Container $container)
+    {
+        $container[self::PLUGIN_APPLICATION] = function () {
+            $pimplePlugin = new Pimple();
+
+            return $pimplePlugin->getApplication();
         };
 
         return $container;

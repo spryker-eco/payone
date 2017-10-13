@@ -7,12 +7,12 @@
 
 namespace SprykerEco\Yves\Payone\Controller;
 
-use Pyz\Yves\Checkout\Form\Steps\SummaryForm;
 use Pyz\Yves\Shipment\Form\ShipmentForm;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \SprykerEco\Client\Payone\PayoneClientInterface getClient()
@@ -39,21 +39,18 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return array
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successAction()
+    public function summaryAction(Request $request)
     {
-        $quoteTransfer = $this->getFactory()->getCartClient()->getQuote();
-        $this->getFactory()
-            ->createExpressCheckoutHandler()
-            ->loadPaypalExpressCheckoutDetails();
-        return $this->viewResponse([
-            'quoteTransfer' => $quoteTransfer,
-            'cartItems' => $this->getFactory()->getProductBundleGrouper()->getGroupedBundleItems(
-                $quoteTransfer->getItems(),
-                $quoteTransfer->getBundleItems()
-            ),
-        ]);
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request,
+            $this->getFactory()
+                ->createCheckoutFormFactory()
+                ->createSummaryFormCollection()
+        );
     }
 
     /**
@@ -78,8 +75,27 @@ class ExpressCheckoutController extends AbstractController
         $this->getFactory()->getCustomerClient()->markCustomerAsDirty();
         $this->getFactory()->getCartClient()->clearQuote();
 
-        return $this->viewResponse();
+        return $this->redirectResponseInternal(PayoneControllerProvider::EXPRESS_CHECKOUT_SUCCESS);
+    }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function loadDetailsAction(Request $request)
+    {
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function successAction()
+    {
+        return $this->viewResponse();
     }
 
     /**
@@ -106,5 +122,12 @@ class ExpressCheckoutController extends AbstractController
     {
         return Config::get(PayoneConstants::PAYONE)[PayoneConstants::ROUTE_CART];
     }
+
+    protected function createShipmentForm()
+    {
+        $shipmentForm = new ShipmentForm();
+
+    }
+
 
 }

@@ -18,9 +18,11 @@ class PayoneControllerProvider extends YvesControllerProvider
     const EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
     const EXPRESS_CHECKOUT_INIT = 'payone-paypal-express-checkout-start';
     const EXPRESS_CHECKOUT_SUCCESS = 'payone-paypal-express-checkout-success';
+    const EXPRESS_CHECKOUT_SUMMARY = 'payone-paypal-express-checkout-summary';
     const EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
     const EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
     const EXPRESS_CHECKOUT_PLACE_ORDER = 'payone-paypal-express-checkout-place-order';
+    const EXPRESS_CHECKOUT_LOAD_DETAILS = 'payone-paypal-express-checkout-load-details';
 
     /**
      * @param \Silex\Application $app
@@ -48,6 +50,14 @@ class PayoneControllerProvider extends YvesControllerProvider
             'expressCheckout',
             'initPaypalExpressCheckout'
         )->method('GET');
+
+        $this->createController(
+            '/payone/expresscheckout/summary',
+            static::EXPRESS_CHECKOUT_SUMMARY,
+            'payone',
+            'expressCheckout',
+            'summary'
+        )->method('GET|POST');
 
         $this->createController(
             '/payone/expresscheckout/success',
@@ -79,6 +89,14 @@ class PayoneControllerProvider extends YvesControllerProvider
             'payone',
             'expressCheckout',
             'placeOrder'
+        )->method('GET');
+
+        $this->createController(
+            '/payone/expresscheckout/load-details',
+            static::EXPRESS_CHECKOUT_LOAD_DETAILS,
+            'payone',
+            'expressCheckout',
+            'loadDetails'
         )->method('GET');
     }
 
