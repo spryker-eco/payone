@@ -1,7 +1,0 @@
-class_name: FunctionalTester
-modules:
-    enabled:
-        - Filesystem
-        - \Payone\Helper\Functional
-        - \Testify\Helper\Environment
-        - \SprykerTest\Shared\Config\Helper\ConfigInit
