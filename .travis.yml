@@ -1,5 +1,30 @@
 language: php
 
+notifications:
+  email: false
+
+sudo: required
+
+matrix:
+  fast_finish: true
+  include:
+     - php: "7.0"
+
+services:
+  - postgresql
+  - redis
+
+addons:
+  postgresql: 9.4
+
+  apt:
+    packages:
+      - graphviz
+
+  hosts:
+    - zed.de.spryker.test
+    - www.de.spryker.test
+
 env:
   global:
     - APPLICATION_ENV=devtest
@@ -8,25 +33,10 @@ env:
     - SHOP_DIR=current
     - MODULE_NAME=payone
 
-matrix:
-  fast_finish: true
-  include:
-     - php: "7.0"
-
 cache:
   directories:
-    - vendor
+    - $SHOP_DIR/current/vendor
     - $HOME/.composer/cache
-
-sudo: required
-
-addons:
-  apt:
-    packages:
-      - graphviz
-  hosts:
-    - zed.de.spryker.test
-    - www.de.spryker.test
 
 before_install:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
@@ -55,6 +65,3 @@ before_script:
 
 script:
   - ./$MODULE_DIR/build/travis.sh
-
-notifications:
-  email: false
