@@ -28,6 +28,19 @@ function runTests {
     return $result
 }
 
+function checkArchRules {
+    echo "Running Architecture sniffer..."
+    errors=`vendor/bin/phpmd "vendor/spryker-eco/$MODULE_NAME/src" text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority=2`
+    errorsCount=`echo "$errors" | wc -l`
+
+    if [[ "$errorsCount" = "0" ]]; then
+        buildMessage="$buildMessage\n${GREEN}Architecture sniffer reports no errors"
+    else
+        echo -e "$errors"
+        buildMessage="$buildMessage\n${RED}Architecture sniffer reports $errorsCount error(s)"
+    fi
+}
+
 function checkWithLatestDemoShop {
     echo "Checking module with latest Demo Shop..."
     composer config repositories.ecomodule path "$TRAVIS_BUILD_DIR/$MODULE_DIR"
@@ -66,5 +79,8 @@ function checkModuleWithLatestVersionOfDemoShop {
 
 cd $SHOP_DIR
 checkWithLatestDemoShop
+if [ -d "vendor/spryker-eco/$MODULE_NAME/src" ]; then
+    checkArchRules
+fi
 echo -e "$buildMessage"
 exit $buildResult
