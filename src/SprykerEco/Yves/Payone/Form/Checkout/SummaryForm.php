@@ -9,7 +9,7 @@ namespace SprykerEco\Yves\Payone\Form\Checkout;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
-use SprykerEco\Yves\Form\Shipment\Form\ShipmentForm;
+use SprykerEco\Yves\Form\Checkout\ShipmentForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

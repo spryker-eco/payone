@@ -1,6 +1,6 @@
 <?php
 
-namespace SprykerEco\Yves\Form\Shipment\Form;
+namespace SprykerEco\Yves\Form\Checkout;
 
 use Generated\Shared\Transfer\ShipmentTransfer;
 use Symfony\Component\Form\AbstractType;
@@ -54,7 +54,7 @@ class ShipmentForm extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Form\Shipment\Form\ShipmentForm
+     * @return \SprykerEco\Yves\Form\Checkout\ShipmentForm
      */
     protected function addShipmentMethods(FormBuilderInterface $builder, array $options)
     {
