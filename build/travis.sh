@@ -16,6 +16,14 @@ function runTests {
         result=$((result+1))
     fi
 
+    "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/console" propel:model:build
+    if [ "$?" = 0 ]; then
+        buildMessage="${buildMessage}\n${GREEN}Propel models generation was successful"
+    else
+        buildMessage="${buildMessage}\n${RED}Propel models generation was not successful"
+        result=$((result+1))
+    fi
+
     echo "Running tests..."
     "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/codecept" build -c "vendor/spryker-eco/$MODULE_NAME/"
     "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/codecept" run -c "vendor/spryker-eco/$MODULE_NAME/"
