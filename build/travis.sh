@@ -4,24 +4,26 @@ RED='\033[1;31m'
 GREEN='\033[1;32m'
 buildResult=1
 buildMessage=""
+result=0
 
 function runTests {
     echo "define('APPLICATION_ROOT_DIR', '$TRAVIS_BUILD_DIR/$SHOP_DIR');" >> "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/composer/autoload_real.php"
-    echo "Running tests..."
-    echo "Copy configuration..."
-    if [ -f "vendor/spryker-eco/$MODULE_NAME/config/config.dist.php" ]; then
-     tail -n +2 "vendor/spryker-eco/$MODULE_NAME/config/config.dist.php" >> config/Shared/config_default-devtest.php
-     php "$scriptPath/fix-config.php" config/Shared/config_default-devtest.php
+    "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/console" transfer:generate
+    if [ "$?" = 0 ]; then
+        buildMessage="${buildMessage}\n${GREEN}Transfer objects generation was successful"
+    else
+        buildMessage="${buildMessage}\n${RED}Transfer objects generation was not successful"
+        result=$((result+1))
     fi
-    ./setup_test -f
-    cd "vendor/spryker-eco/$MODULE_NAME/"
-    "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/codecept" run
+
+    echo "Running tests..."
+    "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/codecept" build -c "vendor/spryker-eco/$MODULE_NAME/"
+    "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/codecept" run -c "vendor/spryker-eco/$MODULE_NAME/"
     if [ "$?" = 0 ]; then
         buildMessage="${buildMessage}\n${GREEN}Tests are passing"
-        result=0
     else
         buildMessage="${buildMessage}\n${RED}Tests are failing"
-        result=1
+        result=$((result+1))
     fi
     cd "$TRAVIS_BUILD_DIR/$SHOP_DIR"
     echo "Tests finished"
