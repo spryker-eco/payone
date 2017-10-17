@@ -7,7 +7,10 @@ buildMessage=""
 result=0
 
 function runTests {
-    echo "define('APPLICATION_ROOT_DIR', '$TRAVIS_BUILD_DIR/$SHOP_DIR');" >> "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/composer/autoload_real.php"
+    grep APPLICATION_ROOT_DIR "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/composer/autoload_real.php"
+    if [ "$?" = 0 ]; then
+        echo "define('APPLICATION_ROOT_DIR', '$TRAVIS_BUILD_DIR/$SHOP_DIR');" >> "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/composer/autoload_real.php"
+    fi
     "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/console" transfer:generate
     if [ "$?" = 0 ]; then
         buildMessage="${buildMessage}\n${GREEN}Transfer objects generation was successful"
@@ -16,7 +19,7 @@ function runTests {
         result=$((result+1))
     fi
 
-    "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/console" propel:model:build
+    "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/console" propel:install
     if [ "$?" = 0 ]; then
         buildMessage="${buildMessage}\n${GREEN}Propel models generation was successful"
     else
