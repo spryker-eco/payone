@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Yves\Payone\Form\Checkout;
 
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -27,7 +32,7 @@ class SummaryForm extends AbstractType
                 $options,
                 [
                     'data_class' => ShipmentTransfer::class,
-                    'property_path' => 'shipment'
+                    'property_path' => 'shipment',
                 ]
             )
         );

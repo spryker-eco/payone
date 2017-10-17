@@ -32,14 +32,21 @@ class LoadExpressCheckoutDetailsStep extends AbstractBaseStep
      */
     protected $quoteHydrator;
 
+    /**
+     * @param \Spryker\Client\Cart\CartClientInterface $cartClient
+     * @param \SprykerEco\Client\Payone\PayoneClientInterface $payoneClient
+     * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydratorInterface $quoteHydrator
+     * @param string $stepRoute
+     * @param string $escapeRoute
+     */
     public function __construct(
         CartClientInterface $cartClient,
         PayoneClientInterface $payoneClient,
         QuoteHydratorInterface $quoteHydrator,
         $stepRoute,
         $escapeRoute
-    )
-    {
+    ) {
+
         parent::__construct($stepRoute, $escapeRoute);
         $this->cartClient = $cartClient;
         $this->payoneClient = $payoneClient;
@@ -86,7 +93,6 @@ class LoadExpressCheckoutDetailsStep extends AbstractBaseStep
         $this->cartClient->storeQuote($quoteTransfer);
 
         return $quoteTransfer;
-
     }
 
     /**
@@ -100,4 +106,5 @@ class LoadExpressCheckoutDetailsStep extends AbstractBaseStep
     {
         return true;
     }
+
 }

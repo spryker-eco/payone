@@ -38,7 +38,6 @@ use SprykerEco\Yves\Payone\Form\PostfinanceEfinanceOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PrePaymentForm;
 use SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
-use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
 use SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
@@ -302,6 +301,9 @@ class PayoneFactory extends AbstractFactory
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_SHIPMENT);
     }
 
+    /**
+     * @return \Spryker\Shared\Kernel\Store
+     */
     public function getStore()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::STORE);
@@ -326,7 +328,9 @@ class PayoneFactory extends AbstractFactory
         return new ProductBundleGrouper();
     }
 
-
+    /**
+     * @return \SprykerEco\Yves\Payone\Checkout\Process\StepFactory
+     */
     public function createStepFactory()
     {
         return new StepFactory();
@@ -366,6 +370,9 @@ class PayoneFactory extends AbstractFactory
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_GLOSSARY);
     }
 
+    /**
+     * @return \SprykerEco\Yves\Form\Shipment\DataProvider\ShipmentFormDataProvider
+     */
     public function createShipmentDataProvider()
     {
         return new ShipmentFormDataProvider(

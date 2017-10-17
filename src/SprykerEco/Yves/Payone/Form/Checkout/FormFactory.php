@@ -1,8 +1,8 @@
 <?php
 
 /**
- * This file is part of the Spryker Demoshop.
- * For full license information, please view the LICENSE file that was distributed with this source code.
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
 namespace SprykerEco\Yves\Payone\Form\Checkout;
@@ -36,18 +36,12 @@ class FormFactory extends SprykerFormFactory
         ];
     }
 
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\Checkout\SummaryForm
+     */
     protected function createSummaryForm()
     {
         return new SummaryForm();
-    }
-
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function getVoucherForm()
-    {
-        return $this->getProvidedDependency(ApplicationConstants::FORM_FACTORY)
-            ->create($this->createVoucherFormType());
     }
 
     /**
@@ -80,18 +74,9 @@ class FormFactory extends SprykerFormFactory
     protected function createSummaryFormTypes()
     {
         return [
-            $this->createSummaryForm(),
-            //$this->createVoucherFormType(),
+            $this->createSummaryForm()
         ];
     }
-
-    /**
-     * @return \Pyz\Yves\Checkout\Form\Voucher\VoucherForm
-     */
-    /*protected function createVoucherFormType()
-    {
-        return new VoucherForm();
-    }*/
 
     /**
      * @param \Symfony\Component\Form\FormTypeInterface[] $formTypes
@@ -121,7 +106,7 @@ class FormFactory extends SprykerFormFactory
     }
 
     /**
-     * @return \Pyz\Client\Customer\CustomerClient
+     * @return \Spryker\Client\Customer\CustomerClientInterface
      */
     protected function getCustomerClient()
     {

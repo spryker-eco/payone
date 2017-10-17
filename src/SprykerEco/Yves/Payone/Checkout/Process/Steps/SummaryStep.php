@@ -29,12 +29,15 @@ class SummaryStep extends AbstractBaseStep implements StepWithBreadcrumbInterfac
      */
     protected $calculationClient;
 
+    /**
+     * @var \Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection
+     */
     protected $shipmentPlugins;
-
 
     /**
      * @param \Spryker\Yves\ProductBundle\Grouper\ProductBundleGrouperInterface $productBundleGrouper
-     * @param \Spryker\Client\Cart\CartClientInterface $cartClient
+     * @param \Spryker\Client\Calculation\CalculationClientInterface $calculationClient
+     * @param \Spryker\Client\Calculation\CalculationClientInterface $shipmentPlugins
      * @param string $stepRoute
      * @param string $escapeRoute
      */
@@ -71,7 +74,6 @@ class SummaryStep extends AbstractBaseStep implements StepWithBreadcrumbInterfac
      */
     public function execute(Request $request, AbstractTransfer $quoteTransfer)
     {
-
         $shipmentHandler = $this->shipmentPlugins->get(PayoneDependencyProvider::PLUGIN_SHIPMENT_STEP_HANDLER);
         $shipmentHandler->addToDataClass($request, $quoteTransfer);
 
@@ -151,4 +153,5 @@ class SummaryStep extends AbstractBaseStep implements StepWithBreadcrumbInterfac
     {
         return true;
     }
+
 }

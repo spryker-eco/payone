@@ -13,7 +13,6 @@ use Spryker\Client\Checkout\CheckoutClientInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\Checkout\Process\Steps\AbstractPlaceOrderStep;
 use Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface;
-use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 
 class PlaceOrderStep extends AbstractPlaceOrderStep
 {
@@ -41,7 +40,6 @@ class PlaceOrderStep extends AbstractPlaceOrderStep
 
         $this->flashMessenger = $flashMessenger;
     }
-
 
     /**
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer

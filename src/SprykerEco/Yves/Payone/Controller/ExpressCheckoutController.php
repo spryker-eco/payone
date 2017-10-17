@@ -7,11 +7,9 @@
 
 namespace SprykerEco\Yves\Payone\Controller;
 
-use Pyz\Yves\Shipment\Form\ShipmentForm;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Payone\PayoneConstants;
-use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -30,7 +28,9 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function initPaypalExpressCheckoutAction(Request $request)
     {
@@ -55,7 +55,9 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function placeOrderAction(Request $request)
     {
@@ -77,7 +79,9 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return array
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function successAction(Request $request)
     {

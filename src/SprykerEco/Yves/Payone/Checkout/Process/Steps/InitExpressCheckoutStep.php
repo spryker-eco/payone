@@ -12,13 +12,13 @@ use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Cart\CartClientInterface;
+use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Step\AbstractBaseStep;
 use Spryker\Yves\StepEngine\Dependency\Step\StepWithExternalRedirectInterface;
 use SprykerEco\Client\Payone\PayoneClientInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\HttpFoundation\Request;
-use Spryker\Shared\Config\Config;
 
 class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExternalRedirectInterface
 {
@@ -33,13 +33,18 @@ class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExtern
      */
     protected $cartClient;
 
+    /**
+     * @param \SprykerEco\Client\Payone\PayoneClientInterface $payoneClient
+     * @param \Spryker\Client\Cart\CartClientInterface $cartClient
+     * @param string $stepRoute
+     * @param string $escapeRoute
+     */
     public function __construct(
         PayoneClientInterface $payoneClient,
         CartClientInterface $cartClient,
         $stepRoute,
         $escapeRoute
-    )
-    {
+    ) {
         parent::__construct($stepRoute, $escapeRoute);
         $this->payoneClient = $payoneClient;
         $this->cartClient = $cartClient;
@@ -66,7 +71,7 @@ class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExtern
      */
     public function requireInput(AbstractTransfer $dataTransfer)
     {
-       return false;
+        return false;
     }
 
     /**
@@ -154,4 +159,5 @@ class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExtern
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quoteTransfer->setPayment($paymentTransfer);
     }
+
 }

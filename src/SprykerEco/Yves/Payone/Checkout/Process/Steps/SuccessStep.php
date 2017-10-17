@@ -8,8 +8,8 @@
 namespace SprykerEco\Yves\Payone\Checkout\Process\Steps;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Cart\CartClientInterface;
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Step\AbstractBaseStep;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +18,7 @@ class SuccessStep extends AbstractBaseStep
 {
 
     /**
-     * @var \Pyz\Client\Customer\CustomerClientInterface
+     * @var \Spryker\Client\Customer\CustomerClientInterface
      */
     protected $customerClient;
 
@@ -107,4 +107,5 @@ class SuccessStep extends AbstractBaseStep
     {
         return count($quoteTransfer->getItems()) === 0;
     }
+
 }

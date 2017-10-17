@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ShipmentForm extends AbstractType
 {
+
     const FIELD_ID_SHIPMENT_METHOD = 'idShipmentMethod';
     const OPTION_SHIPMENT_METHODS = 'shipmentMethods';
 
@@ -37,7 +38,7 @@ class ShipmentForm extends AbstractType
     {
         $resolver->setRequired(static::OPTION_SHIPMENT_METHODS);
         $resolver->setDefaults([
-            'data_class' => ShipmentTransfer::class
+            'data_class' => ShipmentTransfer::class,
         ]);
     }
 
@@ -67,7 +68,7 @@ class ShipmentForm extends AbstractType
             'constraints' => [
                 new NotBlank(),
             ],
-            'label' => false
+            'label' => false,
         ]);
 
         return $this;

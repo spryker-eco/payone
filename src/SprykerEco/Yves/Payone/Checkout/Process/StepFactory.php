@@ -7,25 +7,19 @@
 
 namespace SprykerEco\Yves\Payone\Checkout\Process;
 
-use Spryker\Client\Calculation\CalculationClientInterface;
-use Spryker\Client\Checkout\CheckoutClientInterface;
-use Spryker\Client\Customer\CustomerClientInterface;
-use Spryker\Client\Quote\QuoteClientInterface;
+use Spryker\Yves\Checkout\DataContainer\DataContainer;
 use Spryker\Yves\Checkout\Dependency\Client\CheckoutToQuoteBridge;
+use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\ProductBundle\Grouper\ProductBundleGrouper;
-use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
+use Spryker\Yves\StepEngine\Process\StepCollection;
+use Spryker\Yves\StepEngine\Process\StepCollectionInterface;
+use Spryker\Yves\StepEngine\Process\StepEngine;
 use SprykerEco\Yves\Payone\Checkout\Process\Steps\InitExpressCheckoutStep;
 use SprykerEco\Yves\Payone\Checkout\Process\Steps\LoadExpressCheckoutDetailsStep;
 use SprykerEco\Yves\Payone\Checkout\Process\Steps\PlaceOrderStep;
 use SprykerEco\Yves\Payone\Checkout\Process\Steps\SuccessStep;
 use SprykerEco\Yves\Payone\Checkout\Process\Steps\SummaryStep;
-use Spryker\Yves\Checkout\DataContainer\DataContainer;
-use Spryker\Yves\Kernel\AbstractFactory;
-use Spryker\Yves\StepEngine\Process\StepCollection;
-use Spryker\Yves\StepEngine\Process\StepCollectionInterface;
-use Spryker\Yves\StepEngine\Process\StepEngine;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
-use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 use SprykerEco\Yves\Payone\PayoneDependencyProvider;
 use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 
@@ -42,6 +36,9 @@ class StepFactory extends AbstractFactory
         return new StepEngine($stepCollection, $this->createDataContainer());
     }
 
+    /**
+     * @return \Spryker\Yves\StepEngine\Process\StepCollection
+     */
     public function createStepCollection()
     {
         $stepCollection = new StepCollection(
@@ -67,6 +64,9 @@ class StepFactory extends AbstractFactory
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_PAYONE);
     }
 
+    /**
+     * @return \Spryker\Client\Shipment\ShipmentClientInterface
+     */
     public function getShipmentClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_SHIPMENT);
@@ -100,7 +100,7 @@ class StepFactory extends AbstractFactory
     }
 
     /**
-     * @return UrlGenerator
+     * @return \Symfony\Component\Routing\Generator\UrlGeneratorInterface
      */
     protected function getUrlGenerator()
     {
