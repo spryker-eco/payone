@@ -87,19 +87,6 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler
-     */
-    public function createExpressCheckoutHandler()
-    {
-        return new ExpressCheckoutHandler(
-            $this->getPayoneClient(),
-            $this->getCartClient(),
-            $this->getCheckoutClient(),
-            $this->createQuoteHydrator()
-        );
-    }
-
-    /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin
      */
     public function createPrePaymentSubFormPlugin()
@@ -305,14 +292,6 @@ class PayoneFactory extends AbstractFactory
     public function getCustomerClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CUSTOMER);
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryBridge
-     */
-    public function getCustomerQueryContainer()
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::QUERY_CONTAINER_CUSTOMER);
     }
 
     /**

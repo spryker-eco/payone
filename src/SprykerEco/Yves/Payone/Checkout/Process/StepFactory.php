@@ -1,14 +1,19 @@
 <?php
 
 /**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
+ * MIT License
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
 namespace SprykerEco\Yves\Payone\Checkout\Process;
 
+use Spryker\Client\Calculation\CalculationClientInterface;
+use Spryker\Client\Checkout\CheckoutClientInterface;
+use Spryker\Client\Customer\CustomerClientInterface;
+use Spryker\Client\Quote\QuoteClientInterface;
 use Spryker\Yves\Checkout\Dependency\Client\CheckoutToQuoteBridge;
 use Spryker\Yves\ProductBundle\Grouper\ProductBundleGrouper;
+use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
 use SprykerEco\Yves\Payone\Checkout\Process\Steps\InitExpressCheckoutStep;
 use SprykerEco\Yves\Payone\Checkout\Process\Steps\LoadExpressCheckoutDetailsStep;
 use SprykerEco\Yves\Payone\Checkout\Process\Steps\PlaceOrderStep;
@@ -45,25 +50,13 @@ class StepFactory extends AbstractFactory
         );
 
         $stepCollection
+            ->addStep($this->createInitExpressCheckoutStep())
             ->addStep($this->createLoadExpressCheckoutDetailsStep())
             ->addStep($this->createSummaryStep())
             ->addStep($this->createPlaceOrderStep())
             ->addStep($this->createSuccessStep());
 
         return $stepCollection;
-    }
-
-    /**
-     * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler
-     */
-    public function createExpressCheckoutHandler()
-    {
-        return new ExpressCheckoutHandler(
-            $this->getPayoneClient(),
-            $this->getCartClient(),
-            $this->getCheckoutClient(),
-            $this->createQuoteHydrator()
-        );
     }
 
     /**
@@ -98,16 +91,25 @@ class StepFactory extends AbstractFactory
         return new DataContainer(new CheckoutToQuoteBridge($this->getQuoteClient()));
     }
 
+    /**
+     * @return \Spryker\Client\Quote\QuoteClientInterface
+     */
     protected function getQuoteClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_QUOTE);
     }
 
+    /**
+     * @return UrlGenerator
+     */
     protected function getUrlGenerator()
     {
         return $this->getApplication()['url_generator'];
     }
 
+    /**
+     * @return mixed
+     */
     protected function getApplication()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::PLUGIN_APPLICATION);
@@ -129,31 +131,49 @@ class StepFactory extends AbstractFactory
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CART);
     }
 
+    /**
+     * @return \Spryker\Client\Calculation\CalculationClientInterface
+     */
     protected function getCalculationClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CALCULATION);
     }
 
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection
+     */
     public function getShipmentPlugins()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::PLUGIN_SHIPMENT_HANDLER);
     }
 
+    /**
+     * @return \Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface
+     */
     public function getFlashMessanger()
     {
         return $this->getApplication()['flash_messenger'];
     }
 
+    /**
+     * @return \Spryker\Client\Checkout\CheckoutClientInterface
+     */
     protected function getCheckoutClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CHECKOUT);
     }
 
+    /**
+     * @return \Spryker\Client\Customer\CustomerClientInterface
+     */
     protected function getCustomerClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CUSTOMER);
     }
 
+    /**
+     * @return \SprykerEco\Yves\Payone\Checkout\Process\Steps\SummaryStep
+     */
     protected function createSummaryStep()
     {
         return new SummaryStep(
@@ -165,6 +185,9 @@ class StepFactory extends AbstractFactory
         );
     }
 
+    /**
+     * @return \SprykerEco\Yves\Payone\Checkout\Process\Steps\PlaceOrderStep
+     */
     protected function createPlaceOrderStep()
     {
         return new PlaceOrderStep(
@@ -175,6 +198,9 @@ class StepFactory extends AbstractFactory
         );
     }
 
+    /**
+     * @return \SprykerEco\Yves\Payone\Checkout\Process\Steps\SuccessStep
+     */
     protected function createSuccessStep()
     {
         return new SuccessStep(
@@ -185,18 +211,28 @@ class StepFactory extends AbstractFactory
         );
     }
 
+    /**
+     * @return \SprykerEco\Yves\Payone\Checkout\Process\Steps\LoadExpressCheckoutDetailsStep
+     */
     protected function createLoadExpressCheckoutDetailsStep()
     {
         return new LoadExpressCheckoutDetailsStep(
-            $this->createExpressCheckoutHandler(),
+            $this->getCartClient(),
+            $this->getPayoneClient(),
+            $this->createQuoteHydrator(),
             PayoneControllerProvider::EXPRESS_CHECKOUT_LOAD_DETAILS,
             PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE
         );
     }
 
+    /**
+     * @return \SprykerEco\Yves\Payone\Checkout\Process\Steps\InitExpressCheckoutStep
+     */
     protected function createInitExpressCheckoutStep()
     {
         return new InitExpressCheckoutStep(
+            $this->getPayoneClient(),
+            $this->getCartClient(),
             PayoneControllerProvider::EXPRESS_CHECKOUT_INIT,
             PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE
         );

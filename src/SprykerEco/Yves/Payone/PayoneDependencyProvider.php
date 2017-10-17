@@ -53,6 +53,20 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideDependencies(Container $container)
     {
+        $this->addClients($container);
+        $this->addPlugins($container);
+        $this->addStore($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addClients(Container $container)
+    {
         $container[self::CLIENT_PAYONE] = function (Container $container) {
             return $container->getLocator()->payone()->client();
         };
@@ -85,10 +99,20 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
             return $container->getLocator()->calculation()->client();
         };
 
-        $container[self::STORE] = function (Container $container) {
-            return Store::getInstance();
+        $container[static::CLIENT_QUOTE] = function (Container $container) {
+            return $container->getLocator()->quote()->client();
         };
 
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addPlugins(Container $container)
+    {
         $container[self::PLUGIN_SHIPMENT_FORM_DATA_PROVIDER] = function (Container $container) {
             return new ShipmentFormDataProviderPlugin();
         };
@@ -100,37 +124,24 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
             return $shipmentHandlerPlugins;
         };
 
-        $this->addQuoteClient($container);
-        $this->addApplication($container);
+        $container[self::PLUGIN_APPLICATION] = function () {
+            $pimplePlugin = new Pimple();
 
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
-    protected function addQuoteClient(Container $container)
-    {
-        $container[static::CLIENT_QUOTE] = function (Container $container) {
-            return $container->getLocator()->quote()->client();
+            return $pimplePlugin->getApplication();
         };
 
         return $container;
     }
 
     /**
-     * @param \Spryker\Client\Kernel\Container $container
+     * @param \Spryker\Yves\Kernel\Container $container
      *
-     * @return \Spryker\Client\Kernel\Container
+     * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addApplication(Container $container)
+    protected function addStore(Container $container)
     {
-        $container[self::PLUGIN_APPLICATION] = function () {
-            $pimplePlugin = new Pimple();
-
-            return $pimplePlugin->getApplication();
+        $container[self::STORE] = function (Container $container) {
+            return Store::getInstance();
         };
 
         return $container;

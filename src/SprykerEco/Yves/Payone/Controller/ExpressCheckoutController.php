@@ -32,10 +32,11 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function initPaypalExpressCheckoutAction()
+    public function initPaypalExpressCheckoutAction(Request $request)
     {
-        $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
-        return $expressCheckoutHandler->initPaypalExpressCheckout();
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request
+        );
     }
 
     /**
@@ -56,26 +57,11 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
-    public function placeOrderAction()
+    public function placeOrderAction(Request $request)
     {
-        $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
-        if (!$this->getFactory()->getCartClient()->getItemCount()) {
-            return $this->redirectResponseInternal($this->getCartRoute());
-        }
-        try {
-            $checkoutResponseTransfer = $expressCheckoutHandler->placeOrder();
-        } catch (\Exception $exception) {
-            $this->addErrorMessage('Saving order to the database failed.');
-            return $this->redirectResponseInternal($this->getCartRoute());
-        }
-        if (!$checkoutResponseTransfer->getIsSuccess()) {
-            return $this->redirectResponseInternal(PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE);
-        }
-
-        $this->getFactory()->getCustomerClient()->markCustomerAsDirty();
-        $this->getFactory()->getCartClient()->clearQuote();
-
-        return $this->redirectResponseInternal(PayoneControllerProvider::EXPRESS_CHECKOUT_SUCCESS);
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request
+        );
     }
 
     /**
@@ -93,9 +79,11 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return array
      */
-    public function successAction()
+    public function successAction(Request $request)
     {
-        return $this->viewResponse();
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request
+        );
     }
 
     /**
@@ -122,12 +110,5 @@ class ExpressCheckoutController extends AbstractController
     {
         return Config::get(PayoneConstants::PAYONE)[PayoneConstants::ROUTE_CART];
     }
-
-    protected function createShipmentForm()
-    {
-        $shipmentForm = new ShipmentForm();
-
-    }
-
 
 }

@@ -1,9 +1,14 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Yves\Payone\Checkout\Process\Steps;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use Pyz\Client\Customer\CustomerClientInterface;
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Cart\CartClientInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Step\AbstractBaseStep;
@@ -23,7 +28,7 @@ class SuccessStep extends AbstractBaseStep
     protected $cartClient;
 
     /**
-     * @param \Pyz\Client\Customer\CustomerClientInterface $customerClient
+     * @param \Spryker\Client\Customer\CustomerClientInterface $customerClient
      * @param \Spryker\Client\Cart\CartClientInterface $cartClient
      * @param string $stepRoute
      * @param string $escapeRoute
@@ -64,7 +69,7 @@ class SuccessStep extends AbstractBaseStep
         $this->customerClient->markCustomerAsDirty();
         $this->cartClient->clearQuote();
 
-        return new QuoteTransfer();
+        return $this->cartClient->getQuote();
     }
 
     /**

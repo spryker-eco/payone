@@ -1,8 +1,8 @@
 <?php
 
 /**
- * This file is part of the Spryker Demoshop.
- * For full license information, please view the LICENSE file that was distributed with this source code.
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
 namespace SprykerEco\Yves\Payone\Checkout\Process\Steps;
@@ -24,6 +24,9 @@ class SummaryStep extends AbstractBaseStep implements StepWithBreadcrumbInterfac
      */
     protected $productBundleGrouper;
 
+    /**
+     * @var \Spryker\Client\Calculation\CalculationClientInterface
+     */
     protected $calculationClient;
 
     protected $shipmentPlugins;

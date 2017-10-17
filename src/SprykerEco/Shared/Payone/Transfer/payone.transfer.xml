@@ -328,6 +328,7 @@
 
     <transfer name="PayonePaypalExpressCheckout">
         <property name="workOrderId" type="string" />
+        <property name="externalRedirectUrl" type="string" />
     </transfer>
 
     <transfer name="PayoneInitPaypalExpressCheckoutRequest">

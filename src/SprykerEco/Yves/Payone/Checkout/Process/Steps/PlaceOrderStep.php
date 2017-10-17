@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Yves\Payone\Checkout\Process\Steps;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
@@ -13,6 +18,9 @@ use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 class PlaceOrderStep extends AbstractPlaceOrderStep
 {
 
+    /**
+     * @var \Spryker\Yves\Messenger\FlashMessenger\FlashMessengerInterface
+     */
     protected $flashMessenger;
 
     /**
@@ -57,11 +65,6 @@ class PlaceOrderStep extends AbstractPlaceOrderStep
     public function preCondition(AbstractTransfer $dataTransfer)
     {
         if ($this->isCartEmpty($dataTransfer)) {
-            return false;
-        }
-
-        if (!$dataTransfer->getCheckoutConfirmed()) {
-            $this->escapeRoute = PayoneControllerProvider::EXPRESS_CHECKOUT_SUMMARY;
             return false;
         }
 
