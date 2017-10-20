@@ -6,11 +6,6 @@ buildResult=1
 buildMessage=""
 result=0
 
-grep APPLICATION_ROOT_DIR "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/composer/autoload_real.php"
-if [ $? = 1 ]; then
-    echo "define('APPLICATION_ROOT_DIR', '$TRAVIS_BUILD_DIR/$SHOP_DIR');" >> "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/composer/autoload_real.php"
-fi
-
 function runTests {
     "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/bin/console" transfer:generate
     if [ "$?" = 0 ]; then
@@ -59,7 +54,11 @@ function checkArchRules {
 
 function checkCodeSniffRules {
     echo "Running code sniffer..."
-    errors=`vendor/bin/console code:sniff "vendor/spryker-eco/$MODULE_NAME/src"`
+    licenseFile="$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/spryker-eco/$MODULE_NAME/.license"
+    if [ -f "$licenseFile" ]; then
+        cp "$licenseFile" "$TRAVIS_BUILD_DIR/$SHOP_DIR"
+    fi
+    errors=`vendor/bin/console code:sniff "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/spryker-eco/$MODULE_NAME/src"`
     errorsCount=$?
 
     if [[ "$errorsCount" = "0" ]]; then
@@ -123,12 +122,18 @@ function checkModuleWithLatestVersionOfDemoShop {
     fi
 }
 
-cd $SHOP_DIR
+updatedFile="$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/codeception/codeception/src/Codeception/Application.php"
+grep APPLICATION_ROOT_DIR "$updatedFile"
+if [ $? = 1 ]; then
+    echo "define('APPLICATION_ROOT_DIR', '$TRAVIS_BUILD_DIR/$SHOP_DIR');" >> "$updatedFile"
+fi
+
+cd "$SHOP_DIR"
 checkWithLatestDemoShop
 if [ -d "vendor/spryker-eco/$MODULE_NAME/src" ]; then
-    checkArchRules
     checkCodeSniffRules
-    checkPHPStan
+#    checkArchRules
+#    checkPHPStan
 fi
 echo -e "$buildMessage"
 exit $buildResult
