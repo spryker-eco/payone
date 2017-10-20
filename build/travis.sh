@@ -23,6 +23,7 @@ function runTests {
         result=$((result+1))
     fi
 
+    echo "Setup for tests..."
     ./setup_test -f
 
     echo "Running tests..."
@@ -53,12 +54,14 @@ function checkArchRules {
 }
 
 function checkCodeSniffRules {
-    echo "Running code sniffer..."
-    licenseFile="$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/spryker-eco/$MODULE_NAME/.license"
+    licenseFile="$TRAVIS_BUILD_DIR/.license"
     if [ -f "$licenseFile" ]; then
-        cp "$licenseFile" "$TRAVIS_BUILD_DIR/$SHOP_DIR"
+        echo "Preparing correct license for code sniffer..."
+        cp "$licenseFile" "$TRAVIS_BUILD_DIR/$SHOP_DIR/.license"
     fi
-    errors=`vendor/bin/console code:sniff "$TRAVIS_BUILD_DIR/$SHOP_DIR/vendor/spryker-eco/$MODULE_NAME/src"`
+
+    echo "Running code sniffer..."
+    errors=`vendor/bin/console code:sniff "vendor/spryker-eco/$MODULE_NAME/src"`
     errorsCount=$?
 
     if [[ "$errorsCount" = "0" ]]; then
@@ -128,12 +131,13 @@ if [ $? = 1 ]; then
     echo "define('APPLICATION_ROOT_DIR', '$TRAVIS_BUILD_DIR/$SHOP_DIR');" >> "$updatedFile"
 fi
 
-cd "$SHOP_DIR"
+cd $SHOP_DIR
 checkWithLatestDemoShop
 if [ -d "vendor/spryker-eco/$MODULE_NAME/src" ]; then
+    checkArchRules
     checkCodeSniffRules
-#    checkArchRules
-#    checkPHPStan
+    checkPHPStan
 fi
+
 echo -e "$buildMessage"
 exit $buildResult
