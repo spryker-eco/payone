@@ -11,7 +11,7 @@ use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
-use SprykerEco\Yves\Form\Checkout\ShipmentForm;
+use SprykerEco\Yves\Payone\Form\Checkout\ShipmentForm;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ShipmentFormDataProvider implements StepEngineFormDataProviderInterface

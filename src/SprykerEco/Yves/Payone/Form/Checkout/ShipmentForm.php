@@ -1,6 +1,6 @@
 <?php
 
-namespace SprykerEco\Yves\Form\Checkout;
+namespace SprykerEco\Yves\Payone\Form\Checkout;
 
 use Generated\Shared\Transfer\ShipmentTransfer;
 use Symfony\Component\Form\AbstractType;
