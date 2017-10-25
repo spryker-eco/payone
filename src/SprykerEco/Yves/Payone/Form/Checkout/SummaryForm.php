@@ -16,7 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SummaryForm extends AbstractType
 {
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
@@ -58,5 +57,4 @@ class SummaryForm extends AbstractType
     {
         return 'summaryForm';
     }
-
 }
