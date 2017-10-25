@@ -263,4 +263,12 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
 
         return $query;
     }
+
+    /**
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery
+     */
+    public function createApiCallLog()
+    {
+        return $this->getFactory()->createPaymentPayoneApiCallLogQuery();
+    }
 }
