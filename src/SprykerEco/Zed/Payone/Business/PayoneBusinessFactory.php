@@ -13,6 +13,7 @@ use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\Guzzle;
+use SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriter;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest;
 use SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinder;
 use SprykerEco\Zed\Payone\Business\Internal\Installer;
@@ -105,7 +106,18 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     protected function createExecutionAdapter()
     {
         return new Guzzle(
-            $this->getStandardParameter()->getPaymentGatewayUrl()
+            $this->getStandardParameter()->getPaymentGatewayUrl(),
+            $this->createApiCallLogWriter()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriter
+     */
+    protected function createApiCallLogWriter()
+    {
+        return new ApiCallLogWriter(
+            $this->getQueryContainer()
         );
     }
 

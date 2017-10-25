@@ -134,4 +134,11 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      */
     public function createTransactionStatusLogsByOrderIds($orders);
 
+    /**
+     * @api
+     *
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery
+     */
+    public function createApiCallLog();
+
 }
