@@ -117,7 +117,8 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     protected function createApiCallLogWriter()
     {
         return new ApiCallLogWriter(
-            $this->getQueryContainer()
+            $this->getQueryContainer(),
+            $this->getConfig()
         );
     }
 

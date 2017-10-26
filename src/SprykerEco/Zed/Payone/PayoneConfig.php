@@ -47,6 +47,18 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @return bool
+     */
+    public function isCallLoggingEnabled()
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return isset($settings[PayoneConstants::PAYONE_CALL_LOG_ENABLED])
+            ? $settings[PayoneConstants::PAYONE_CALL_LOG_ENABLED]
+            : false;
+    }
+
+    /**
      * Fetches default value for sequencenumber request parameter.
      *
      * @return string
