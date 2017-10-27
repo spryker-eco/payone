@@ -27,6 +27,7 @@ interface PayoneConstants
     const PAYONE_REDIRECT_SUCCESS_URL = 'PAYONE_REDIRECT_SUCCESS_URL';
     const PAYONE_REDIRECT_ERROR_URL = 'PAYONE_REDIRECT_ERROR_URL';
     const PAYONE_REDIRECT_BACK_URL = 'PAYONE_REDIRECT_BACK_URL';
+    const PAYONE_CALL_LOG_ENABLED = 'PAYONE_CALL_LOG_ENABLED';
 
     // Paypal express checkout state machine name
     const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE = 'payonePaypalExpressCheckout';

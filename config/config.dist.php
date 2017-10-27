@@ -18,7 +18,7 @@ $config[PayoneConstants::PAYONE] = [
     PayoneConstants::PAYONE_CREDENTIALS_AID => '',
     PayoneConstants::PAYONE_CREDENTIALS_PORTAL_ID => '',
     PayoneConstants::PAYONE_PAYMENT_GATEWAY_URL => 'https://api.pay1.de/post-gateway/',
-    PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL => $config[ApplicationConstants::HOST_YVES] . '/checkout/success',
+    PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL => $config[ApplicationConstants::HOST_YVES] . '/checkout/summary',
     PayoneConstants::PAYONE_REDIRECT_ERROR_URL => $config[ApplicationConstants::HOST_YVES] . '/checkout/payment',
     PayoneConstants::PAYONE_REDIRECT_BACK_URL => $config[ApplicationConstants::HOST_YVES] . '/payone/regular-redirect-payment-cancellation',
     PayoneConstants::PAYONE_MODE => 'test',
@@ -77,7 +77,7 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     PayoneConfig::PAYMENT_METHOD_PRZELEWY24_ONLINE_TRANSFER => 'PayoneOnlineTransfer',
     PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT => 'PayonePrePayment',
     PayoneConfig::PAYMENT_METHOD_INVOICE => 'PayoneInvoice',
-    PayoneConfig::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => 'PayonePaypalExpressCheckout'
+    PayoneConfig::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => 'PayonePaypalExpressCheckout',
 ];
 
 $config[OmsConstants::ACTIVE_PROCESSES] = [
@@ -87,5 +87,5 @@ $config[OmsConstants::ACTIVE_PROCESSES] = [
     'PayoneOnlineTransfer',
     'PayonePrePayment',
     'PayoneInvoice',
-    'PayonePaypalExpressCheckout'
+    'PayonePaypalExpressCheckout',
 ];

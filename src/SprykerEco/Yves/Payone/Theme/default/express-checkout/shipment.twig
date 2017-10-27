@@ -1,0 +1,23 @@
+<div class="row columns">
+
+    {% set shipmentForm = summaryForm.shipmentForm %}
+
+    <div class="callout">
+        <ul class="no-bullet">
+
+            {% for name, choices in shipmentForm.idShipmentMethod.vars.choices %}
+
+                <h4>{{ name }}</h4>
+
+                {% for key, choice in choices %}
+                    <li>
+                        <label>
+                            {{ form_widget(shipmentForm.idShipmentMethod[key], {'attr': {'class': '__toggler'}}) }}
+                            {{ shipmentForm.idShipmentMethod[key].vars.label | raw }}
+                        </label>
+                    </li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>

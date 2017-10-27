@@ -10,7 +10,7 @@ namespace SprykerEco\Yves\Payone\Controller;
 use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Shared\Payone\PayoneConstants;
-use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \SprykerEco\Client\Payone\PayoneClientInterface getClient()
@@ -28,37 +28,66 @@ class ExpressCheckoutController extends AbstractController
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function initPaypalExpressCheckoutAction()
+    public function initPaypalExpressCheckoutAction(Request $request)
     {
-        $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
-        return $expressCheckoutHandler->initPaypalExpressCheckout();
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request
+        );
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successAction()
+    public function summaryAction(Request $request)
     {
-        $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
-        if (!$this->getFactory()->getCartClient()->getItemCount()) {
-            return $this->redirectResponseInternal($this->getCartRoute());
-        }
-        try {
-            $checkoutResponseTransfer = $expressCheckoutHandler->placeOrder();
-        } catch (\Exception $exception) {
-            $this->addErrorMessage('Saving order to the database failed.');
-            return $this->redirectResponseInternal($this->getCartRoute());
-        }
-        if (!$checkoutResponseTransfer->getIsSuccess()) {
-            return $this->redirectResponseInternal(PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE);
-        }
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request,
+            $this->getFactory()
+                ->createCheckoutFormFactory()
+                ->createSummaryFormCollection()
+        );
+    }
 
-        $this->getFactory()->getCustomerClient()->markCustomerAsDirty();
-        $this->getFactory()->getCartClient()->clearQuote();
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function placeOrderAction(Request $request)
+    {
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request
+        );
+    }
 
-        return $this->viewResponse();
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function loadDetailsAction(Request $request)
+    {
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request
+        );
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function successAction(Request $request)
+    {
+        return $this->getFactory()->createCheckoutProcess()->process(
+            $request
+        );
     }
 
     /**
@@ -66,7 +95,8 @@ class ExpressCheckoutController extends AbstractController
      */
     public function failureAction()
     {
-        $this->addErrorMessage('Paypal transaction failed.');
+        $this->addErrorMessage('Checkout failed. Try again.');
+        $this->resetPayment();
         return $this->redirectResponseInternal($this->getCartRoute());
     }
 
@@ -86,4 +116,16 @@ class ExpressCheckoutController extends AbstractController
         return Config::get(PayoneConstants::PAYONE)[PayoneConstants::ROUTE_CART];
     }
 
+    /**
+     * @return void
+     */
+    protected function resetPayment()
+    {
+        $cartClient = $this->getFactory()
+            ->getCartClient();
+        $quote = $cartClient->getQuote();
+
+        $quote->setPayment(null);
+        $cartClient->storeQuote($quote);
+    }
 }

@@ -143,4 +143,13 @@
 
     </table>
 
+    <table name="spy_payment_payone_api_call_log">
+        <column name="id_payment_payone_api_call_log" type="INTEGER" primaryKey="true" autoIncrement="true" />
+        <column name="url" type="VARCHAR" />
+        <column name="request" type="LONGVARCHAR"/>
+        <column name="response" type="LONGVARCHAR"/>
+
+        <id-method-parameter value="spy_payment_payone_api_call_log_pk_seq"/>
+    </table>
+
 </database>

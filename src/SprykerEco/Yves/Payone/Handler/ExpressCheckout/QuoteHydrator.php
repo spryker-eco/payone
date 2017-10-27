@@ -85,7 +85,7 @@ class QuoteHydrator implements QuoteHydratorInterface
      */
     protected function hydrateQuoteWithPayment(QuoteTransfer $quoteTransfer)
     {
-        $paymentTransfer = new PaymentTransfer();
+        $paymentTransfer = $quoteTransfer->getPayment();
         $payone = new PayonePaymentTransfer();
         $paymentDetailTransfer = new PaymentDetailTransfer();
         $paymentDetailTransfer
@@ -102,8 +102,6 @@ class QuoteHydrator implements QuoteHydratorInterface
         $paymentTransfer->setPaymentSelection(PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE);
         $paymentTransfer->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT);
         $paymentTransfer->setPaymentProvider(PayoneConstants::PROVIDER_NAME);
-        $paypalExpressCheckoutPayment = new PayonePaypalExpressCheckoutTransfer();
-        $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quoteTransfer->setPayment($paymentTransfer);
 
         return $quoteTransfer;
@@ -121,8 +119,9 @@ class QuoteHydrator implements QuoteHydratorInterface
         $methods = $this->shipmentClient->getAvailableMethods($quoteTransfer)->getMethods();
 
         if ($shippingMethod = reset($methods)) {
-            $shippingMethod->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE);
+            $shippingMethod->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE);
             $shipmentTransfer->setMethod($shippingMethod);
+            $shipmentTransfer->setShipmentSelection($shippingMethod->getIdShipmentMethod());
             $quoteTransfer->setShipment($shipmentTransfer);
             return $quoteTransfer;
         }
@@ -130,7 +129,7 @@ class QuoteHydrator implements QuoteHydratorInterface
         $shipmentTransfer->setMethod(
             (new ShipmentMethodTransfer())
                 ->setCarrierName(static::CARRIER_NAME)
-                ->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE)
+                ->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE)
         );
         $quoteTransfer->setShipment($shipmentTransfer);
 

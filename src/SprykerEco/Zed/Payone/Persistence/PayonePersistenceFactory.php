@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Persistence;
 
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery;
@@ -19,7 +20,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
  */
 class PayonePersistenceFactory extends AbstractPersistenceFactory
 {
-
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
@@ -52,4 +52,11 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
         return SpyPaymentPayoneTransactionStatusLogOrderItemQuery::create();
     }
 
+    /**
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery
+     */
+    public function createPaymentPayoneApiCallLogQuery()
+    {
+        return SpyPaymentPayoneApiCallLogQuery::create();
+    }
 }

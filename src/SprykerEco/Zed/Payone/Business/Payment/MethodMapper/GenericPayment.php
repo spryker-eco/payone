@@ -60,11 +60,14 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         QuoteTransfer $quoteTransfer
     ) {
 
-        $genericPayment->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $genericPayment->setWorkOrderId(
-            $quoteTransfer->getPayment()
-                ->getPayonePaypalExpressCheckout()->getWorkOrderId()
-        );
+        if ($quoteTransfer->getTotals()) {
+            $genericPayment->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+            $genericPayment->setWorkOrderId(
+                $quoteTransfer->getPayment()
+                    ->getPayonePaypalExpressCheckout()->getWorkOrderId()
+            );
+        }
+
         return $genericPayment;
     }
 

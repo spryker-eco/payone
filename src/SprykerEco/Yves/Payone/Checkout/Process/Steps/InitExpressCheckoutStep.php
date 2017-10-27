@@ -5,21 +5,23 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Payone\Handler;
+namespace SprykerEco\Yves\Payone\Checkout\Process\Steps;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Cart\CartClientInterface;
-use Spryker\Client\Checkout\CheckoutClientInterface;
 use Spryker\Shared\Config\Config;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use Spryker\Yves\StepEngine\Dependency\Step\AbstractBaseStep;
+use Spryker\Yves\StepEngine\Dependency\Step\StepWithExternalRedirectInterface;
 use SprykerEco\Client\Payone\PayoneClientInterface;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
-use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
-class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
+class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExternalRedirectInterface
 {
 
     /**
@@ -33,61 +35,106 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     protected $cartClient;
 
     /**
-     * @var \Spryker\Client\Checkout\CheckoutClientInterface
-     */
-    protected $checkoutClient;
-
-    /**
-     * @var \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator
-     */
-    protected $quoteHydrator;
-
-    /**
      * @param \SprykerEco\Client\Payone\PayoneClientInterface $payoneClient
      * @param \Spryker\Client\Cart\CartClientInterface $cartClient
-     * @param \Spryker\Client\Checkout\CheckoutClientInterface $checkoutClient
-     * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator $quoteHydrator
+     * @param string $stepRoute
+     * @param string $escapeRoute
      */
     public function __construct(
         PayoneClientInterface $payoneClient,
         CartClientInterface $cartClient,
-        CheckoutClientInterface $checkoutClient,
-        QuoteHydrator $quoteHydrator
+        $stepRoute,
+        $escapeRoute
     ) {
-
+        parent::__construct($stepRoute, $escapeRoute);
         $this->payoneClient = $payoneClient;
         $this->cartClient = $cartClient;
-        $this->checkoutClient = $checkoutClient;
-        $this->quoteHydrator = $quoteHydrator;
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * Precondition here is required to exit the checkout and go to cart.
+     *
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $dataTransfer
+     *
+     * @return bool
      */
-    public function initPaypalExpressCheckout()
+    public function preCondition(AbstractTransfer $dataTransfer)
+    {
+        $payment = $dataTransfer->getPayment();
+
+        if (!$payment || $payment->getPayonePaypalExpressCheckout()->getIsSuccess() == null) {
+            return true;
+        }
+
+        return $payment->getPayonePaypalExpressCheckout()->getIsSuccess();
+    }
+
+    /**
+     * Require input, should we render view with form or just skip step after calling execute.
+     *
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $dataTransfer
+     *
+     * @return bool
+     */
+    public function requireInput(AbstractTransfer $dataTransfer)
+    {
+        return false;
+    }
+
+    /**
+     * Execute step logic, happens after form submit if provided, gets AbstractTransfer filled by form data.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $dataTransfer
+     *
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     */
+    public function execute(Request $request, AbstractTransfer $dataTransfer)
     {
         $initExpressCheckoutRequest = $this->prepareInitExpressCheckoutRequest();
         $response = $this->payoneClient->initPaypalExpressCheckout($initExpressCheckoutRequest);
 
         $quoteTransfer = $initExpressCheckoutRequest->getQuote();
-        $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->setWorkOrderId(
-            $response->getWorkOrderId()
+        $payment = $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout();
+        $payment->setWorkOrderId($response->getWorkOrderId());
+        $payment->setExternalRedirectUrl($response->getRedirectUrl());
+        $payment->setIsSuccess(
+            $response->getStatus() != PayoneApiConstants::RESPONSE_TYPE_ERROR
         );
         $this->cartClient->storeQuote($quoteTransfer);
 
-        return new RedirectResponse($response->getRedirectUrl());
+        return $quoteTransfer;
     }
 
     /**
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * Conditions that should be met for this step to be marked as completed. returns true when satisfied.
+     *
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $dataTransfer
+     *
+     * @return bool
      */
-    public function placeOrder()
+    public function postCondition(AbstractTransfer $dataTransfer)
+    {
+        $payment = $dataTransfer->getPayment();
+
+        return $payment != null
+            && $payment->getPayonePaypalExpressCheckout() != null
+            && $payment->getPayonePaypalExpressCheckout()->getIsSuccess();
+    }
+
+    /**
+     * Return external redirect url, when redirect occurs not within same application. Used after execute.
+     *
+     * @return string
+     */
+    public function getExternalRedirectUrl()
     {
         $quoteTransfer = $this->cartClient->getQuote();
-        $details = $this->payoneClient->getPaypalExpressCheckoutDetails($quoteTransfer);
-        $quoteTransfer = $this->quoteHydrator->getHydratedQuote($quoteTransfer, $details);
 
-        return $this->checkoutClient->placeOrder($quoteTransfer);
+        return $quoteTransfer
+            ->getPayment()
+            ->getPayonePaypalExpressCheckout()
+            ->getExternalRedirectUrl();
     }
 
     /**
@@ -126,5 +173,4 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quoteTransfer->setPayment($paymentTransfer);
     }
-
 }

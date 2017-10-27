@@ -8,6 +8,11 @@
 namespace SprykerEco\Yves\Payone;
 
 use Spryker\Yves\Kernel\AbstractFactory;
+use Spryker\Yves\Money\Plugin\MoneyPlugin;
+use Spryker\Yves\ProductBundle\Grouper\ProductBundleGrouper;
+use SprykerEco\Yves\Form\Shipment\DataProvider\ShipmentFormDataProvider;
+use SprykerEco\Yves\Payone\Checkout\Process\StepFactory;
+use SprykerEco\Yves\Payone\Form\Checkout\FormFactory;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 use SprykerEco\Yves\Payone\Form\DataProvider\CreditCardDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\DirectDebitDataProvider;
@@ -33,7 +38,6 @@ use SprykerEco\Yves\Payone\Form\PostfinanceEfinanceOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PrePaymentForm;
 use SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
-use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
 use SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
@@ -79,19 +83,6 @@ class PayoneFactory extends AbstractFactory
     public function createPayoneHandler()
     {
         return new PayoneHandler();
-    }
-
-    /**
-     * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler
-     */
-    public function createExpressCheckoutHandler()
-    {
-        return new ExpressCheckoutHandler(
-            $this->getPayoneClient(),
-            $this->getCartClient(),
-            $this->getCheckoutClient(),
-            $this->createQuoteHydrator()
-        );
     }
 
     /**
@@ -303,19 +294,19 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryBridge
-     */
-    public function getCustomerQueryContainer()
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::QUERY_CONTAINER_CUSTOMER);
-    }
-
-    /**
      * @return \Spryker\Client\Shipment\ShipmentClientInterface
      */
     public function getShipmentClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_SHIPMENT);
+    }
+
+    /**
+     * @return \Spryker\Shared\Kernel\Store
+     */
+    public function getStore()
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::STORE);
     }
 
     /**
@@ -326,6 +317,69 @@ class PayoneFactory extends AbstractFactory
         return new QuoteHydrator(
             $this->getShipmentClient(),
             $this->getCustomerClient()
+        );
+    }
+
+    /**
+     * @return \Spryker\Yves\ProductBundle\Grouper\ProductBundleGrouper
+     */
+    public function getProductBundleGrouper()
+    {
+        return new ProductBundleGrouper();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Checkout\Process\StepFactory
+     */
+    public function createStepFactory()
+    {
+        return new StepFactory();
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Process\StepEngineInterface
+     */
+    public function createCheckoutProcess()
+    {
+        return $this->createStepFactory()->createStepEngine(
+            $this->createStepFactory()->createStepCollection()
+        );
+    }
+
+    /**
+     * @return \Spryker\Shared\Money\Dependency\Plugin\MoneyPluginInterface
+     */
+    public function getMoneyPlugin()
+    {
+        return new MoneyPlugin();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\Checkout\FormFactory
+     */
+    public function createCheckoutFormFactory()
+    {
+        return new FormFactory();
+    }
+
+    /**
+     * @return \Spryker\Client\Glossary\GlossaryClientInterface
+     */
+    public function getGlossaryClient()
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_GLOSSARY);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Form\Shipment\DataProvider\ShipmentFormDataProvider
+     */
+    public function createShipmentDataProvider()
+    {
+        return new ShipmentFormDataProvider(
+            $this->getShipmentClient(),
+            $this->getGlossaryClient(),
+            $this->getStore(),
+            $this->getMoneyPlugin()
         );
     }
 
