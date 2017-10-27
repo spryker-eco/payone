@@ -11,12 +11,12 @@ use Spryker\Client\Cart\CartClientInterface;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Step\AbstractBaseStep;
 use SprykerEco\Client\Payone\PayoneClientInterface;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydratorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class LoadExpressCheckoutDetailsStep extends AbstractBaseStep
 {
-
     /**
      * @var \Spryker\Client\Cart\CartClientInterface
      */
@@ -89,8 +89,10 @@ class LoadExpressCheckoutDetailsStep extends AbstractBaseStep
     {
         $quoteTransfer = $this->cartClient->getQuote();
         $details = $this->payoneClient->getPaypalExpressCheckoutDetails($quoteTransfer);
-        $quoteTransfer = $this->quoteHydrator->getHydratedQuote($quoteTransfer, $details);
-        $this->cartClient->storeQuote($quoteTransfer);
+        if (!$this->isErrorResponse($details)) {
+            $quoteTransfer = $this->quoteHydrator->getHydratedQuote($quoteTransfer, $details);
+            $this->cartClient->storeQuote($quoteTransfer);
+        }
 
         return $quoteTransfer;
     }
@@ -104,7 +106,16 @@ class LoadExpressCheckoutDetailsStep extends AbstractBaseStep
      */
     public function postCondition(AbstractTransfer $dataTransfer)
     {
-        return true;
+        return $dataTransfer->getShipment() != null;
     }
 
+    /**
+     * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $response
+     *
+     * @return bool
+     */
+    protected function isErrorResponse($response)
+    {
+        return $response->getStatus() == PayoneApiConstants::RESPONSE_TYPE_ERROR;
+    }
 }

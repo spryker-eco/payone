@@ -95,7 +95,8 @@ class ExpressCheckoutController extends AbstractController
      */
     public function failureAction()
     {
-        $this->addErrorMessage('Paypal transaction failed.');
+        $this->addErrorMessage('Checkout failed. Try again.');
+        $this->resetPayment();
         return $this->redirectResponseInternal($this->getCartRoute());
     }
 
@@ -115,4 +116,16 @@ class ExpressCheckoutController extends AbstractController
         return Config::get(PayoneConstants::PAYONE)[PayoneConstants::ROUTE_CART];
     }
 
+    /**
+     * @return void
+     */
+    protected function resetPayment()
+    {
+        $cartClient = $this->getFactory()
+            ->getCartClient();
+        $quote = $cartClient->getQuote();
+
+        $quote->setPayment(null);
+        $cartClient->storeQuote($quote);
+    }
 }

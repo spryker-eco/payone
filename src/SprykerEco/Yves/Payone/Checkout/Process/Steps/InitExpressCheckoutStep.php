@@ -17,6 +17,7 @@ use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Step\AbstractBaseStep;
 use Spryker\Yves\StepEngine\Dependency\Step\StepWithExternalRedirectInterface;
 use SprykerEco\Client\Payone\PayoneClientInterface;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -51,7 +52,7 @@ class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExtern
     }
 
     /**
-     * Requirements for this step, return true when satisfied.
+     * Precondition here is required to exit the checkout and go to cart.
      *
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $dataTransfer
      *
@@ -59,7 +60,13 @@ class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExtern
      */
     public function preCondition(AbstractTransfer $dataTransfer)
     {
-        return true;
+        $payment = $dataTransfer->getPayment();
+
+        if (!$payment || $payment->getPayonePaypalExpressCheckout()->getIsSuccess() == null) {
+            return true;
+        }
+
+        return $payment->getPayonePaypalExpressCheckout()->getIsSuccess();
     }
 
     /**
@@ -91,6 +98,9 @@ class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExtern
         $payment = $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout();
         $payment->setWorkOrderId($response->getWorkOrderId());
         $payment->setExternalRedirectUrl($response->getRedirectUrl());
+        $payment->setIsSuccess(
+            $response->getStatus() != PayoneApiConstants::RESPONSE_TYPE_ERROR
+        );
         $this->cartClient->storeQuote($quoteTransfer);
 
         return $quoteTransfer;
@@ -105,7 +115,11 @@ class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExtern
      */
     public function postCondition(AbstractTransfer $dataTransfer)
     {
-        return true;
+        $payment = $dataTransfer->getPayment();
+
+        return $payment != null
+            && $payment->getPayonePaypalExpressCheckout() != null
+            && $payment->getPayonePaypalExpressCheckout()->getIsSuccess();
     }
 
     /**
@@ -159,5 +173,4 @@ class InitExpressCheckoutStep extends AbstractBaseStep implements StepWithExtern
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quoteTransfer->setPayment($paymentTransfer);
     }
-
 }
