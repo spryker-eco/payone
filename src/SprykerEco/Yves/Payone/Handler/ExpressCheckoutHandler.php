@@ -13,15 +13,14 @@ use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Cart\CartClientInterface;
 use Spryker\Client\Checkout\CheckoutClientInterface;
-use Spryker\Shared\Config\Config;
 use SprykerEco\Client\Payone\PayoneClientInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
+use SprykerEco\Yves\Payone\PayoneConfig;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
 {
-
     /**
      * @var \SprykerEco\Client\Payone\PayoneClientInterface
      */
@@ -43,22 +42,30 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     protected $quoteHydrator;
 
     /**
+     * @var \SprykerEco\Yves\Payone\PayoneConfig
+     */
+    protected $payoneConfig;
+
+    /**
      * @param \SprykerEco\Client\Payone\PayoneClientInterface $payoneClient
      * @param \Spryker\Client\Cart\CartClientInterface $cartClient
      * @param \Spryker\Client\Checkout\CheckoutClientInterface $checkoutClient
      * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator $quoteHydrator
+     * @param \SprykerEco\Yves\Payone\PayoneConfig $payoneConfig
      */
     public function __construct(
         PayoneClientInterface $payoneClient,
         CartClientInterface $cartClient,
         CheckoutClientInterface $checkoutClient,
-        QuoteHydrator $quoteHydrator
+        QuoteHydrator $quoteHydrator,
+        PayoneConfig $payoneConfig
     ) {
 
         $this->payoneClient = $payoneClient;
         $this->cartClient = $cartClient;
         $this->checkoutClient = $checkoutClient;
         $this->quoteHydrator = $quoteHydrator;
+        $this->payoneConfig = $payoneConfig;
     }
 
     /**
@@ -79,15 +86,14 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     }
 
     /**
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return void
      */
-    public function placeOrder()
+    public function loadExpressCheckoutDetails()
     {
         $quoteTransfer = $this->cartClient->getQuote();
         $details = $this->payoneClient->getPaypalExpressCheckoutDetails($quoteTransfer);
         $quoteTransfer = $this->quoteHydrator->getHydratedQuote($quoteTransfer, $details);
-
-        return $this->checkoutClient->placeOrder($quoteTransfer);
+        $this->cartClient->storeQuote($quoteTransfer);
     }
 
     /**
@@ -101,13 +107,13 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
 
         $initExpressCheckoutRequest->setQuote($quoteTransfer);
         $initExpressCheckoutRequest->setSuccessUrl(
-            Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_SUCCESS_URL]
+            $this->payoneConfig->getSuccessUrl()
         );
         $initExpressCheckoutRequest->setFailureUrl(
-            Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_FAILURE_URL]
+            $this->payoneConfig->getFailureUrl()
         );
         $initExpressCheckoutRequest->setBackUrl(
-            Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_BACK_URL]
+            $this->payoneConfig->getBackUrl()
         );
 
         return $initExpressCheckoutRequest;
@@ -126,5 +132,4 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quoteTransfer->setPayment($paymentTransfer);
     }
-
 }

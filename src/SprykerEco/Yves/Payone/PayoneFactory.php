@@ -38,9 +38,11 @@ use SprykerEco\Yves\Payone\Handler\PayoneHandler;
 use SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
 
+/**
+ * @method \SprykerEco\Yves\Payone\PayoneConfig getConfig()
+ */
 class PayoneFactory extends AbstractFactory
 {
-
     /**
      * @return \SprykerEco\Yves\Payone\Form\PrePaymentForm
      */
@@ -90,7 +92,8 @@ class PayoneFactory extends AbstractFactory
             $this->getPayoneClient(),
             $this->getCartClient(),
             $this->getCheckoutClient(),
-            $this->createQuoteHydrator()
+            $this->createQuoteHydrator(),
+            $this->getConfig()
         );
     }
 
@@ -328,5 +331,4 @@ class PayoneFactory extends AbstractFactory
             $this->getCustomerClient()
         );
     }
-
 }
