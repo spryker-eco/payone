@@ -12,7 +12,6 @@ use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 
 class PayoneControllerProvider extends YvesControllerProvider
 {
-
     const ROUTE_LOGIN = 'login';
     const CHECKOUT_PAYMENT = 'checkout-payment';
     const EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
@@ -20,6 +19,7 @@ class PayoneControllerProvider extends YvesControllerProvider
     const EXPRESS_CHECKOUT_SUCCESS = 'payone-paypal-express-checkout-success';
     const EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
     const EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
+    const EXPRESS_CHECKOUT_LOAD_DETAILS = 'payone-paypal-express-checkout-load-details';
 
     /**
      * @param \Silex\Application $app
@@ -49,11 +49,11 @@ class PayoneControllerProvider extends YvesControllerProvider
         )->method('GET');
 
         $this->createController(
-            '/payone/expresscheckout/success',
-            static::EXPRESS_CHECKOUT_SUCCESS,
+            '/payone/expresscheckout/load-details',
+            static::EXPRESS_CHECKOUT_LOAD_DETAILS,
             'payone',
             'expressCheckout',
-            'success'
+            'loadPaypalExpressCheckoutDetails'
         )->method('GET');
 
         $this->createController(
@@ -72,5 +72,4 @@ class PayoneControllerProvider extends YvesControllerProvider
             'back'
         )->method('GET');
     }
-
 }
