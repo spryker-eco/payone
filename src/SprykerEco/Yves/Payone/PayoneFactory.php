@@ -331,12 +331,4 @@ class PayoneFactory extends AbstractFactory
             $this->getCustomerClient()
         );
     }
-
-    /**
-     * @return \SprykerEco\Yves\Payone\PayoneConfig
-     */
-    public function getConfiguration()
-    {
-        return $this->getConfig();
-    }
 }

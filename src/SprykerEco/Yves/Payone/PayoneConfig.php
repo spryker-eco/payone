@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Payone;
 
 use Spryker\Yves\Kernel\AbstractBundleConfig;
 use SprykerEco\Shared\Payone\PayoneConstants;
+use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 
 class PayoneConfig extends AbstractBundleConfig
 {
@@ -19,7 +20,7 @@ class PayoneConfig extends AbstractBundleConfig
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
-        return $settings[PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY_POINT];
+        return $settings[PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL];
     }
 
     /**
@@ -27,9 +28,7 @@ class PayoneConfig extends AbstractBundleConfig
      */
     public function getSuccessUrl()
     {
-        $settings = $this->get(PayoneConstants::PAYONE);
-
-        return $settings[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_SUCCESS];
+        return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_LOAD_DETAILS_PATH;
     }
 
     /**
@@ -37,9 +36,7 @@ class PayoneConfig extends AbstractBundleConfig
      */
     public function getBackUrl()
     {
-        $settings = $this->get(PayoneConstants::PAYONE);
-
-        return $settings[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_BACK];
+        return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_BACK_PATH;
     }
 
     /**
@@ -47,28 +44,36 @@ class PayoneConfig extends AbstractBundleConfig
      */
     public function getFailureUrl()
     {
-        $settings = $this->get(PayoneConstants::PAYONE);
-
-        return $settings[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_FAILURE];
+        return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE_PATH;
     }
 
     /**
      * @return string
      */
-    public function getFailureProjectRoute()
+    public function getFailureProjectUrl()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
-        return $settings[PayoneConstants::PAYONE_EXPRESS_CHECKOUT_PROJECT_ROUTE_FAILURE];
+        return $settings[PayoneConstants::PAYONE_EXPRESS_CHECKOUT_PROJECT_FAILURE_URL];
     }
 
     /**
      * @return string
      */
-    public function getBackProjectRoute()
+    public function getBackProjectUrl()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
-        return $settings[PayoneConstants::PAYONE_EXPRESS_CHECKOUT_PROJECT_ROUTE_BACK];
+        return $settings[PayoneConstants::PAYONE_EXPRESS_CHECKOUT_PROJECT_BACK_URL];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getYvesBaseUrl()
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::HOST_YVES];
     }
 }

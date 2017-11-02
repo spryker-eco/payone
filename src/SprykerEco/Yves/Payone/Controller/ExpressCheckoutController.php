@@ -29,6 +29,7 @@ class ExpressCheckoutController extends AbstractController
     public function initPaypalExpressCheckoutAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
+
         return $expressCheckoutHandler->initPaypalExpressCheckout();
     }
 
@@ -40,11 +41,7 @@ class ExpressCheckoutController extends AbstractController
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
         $expressCheckoutHandler->loadExpressCheckoutDetails();
 
-        return $this->redirectResponseInternal(
-            $this->getFactory()
-                ->getConfiguration()
-                ->getStandardCheckoutEntryPoint()
-        );
+        return $expressCheckoutHandler->redirectToCheckoutEntryPoint();
     }
 
     /**
@@ -53,11 +50,10 @@ class ExpressCheckoutController extends AbstractController
     public function failureAction()
     {
         $this->addErrorMessage('Paypal transaction failed.');
-        return $this->redirectResponseInternal(
-            $this->getFactory()
-                ->getConfiguration()
-                ->getFailureProjectRoute()
-        );
+
+        return $this->getFactory()
+            ->createExpressCheckoutHandler()
+            ->redirectToFailureUrl();
     }
 
     /**
@@ -65,10 +61,8 @@ class ExpressCheckoutController extends AbstractController
      */
     public function backAction()
     {
-        return $this->redirectResponseInternal(
-            $this->getFactory()
-            ->getConfiguration()
-            ->getBackProjectRoute()
-        );
+        return $this->getFactory()
+            ->createExpressCheckoutHandler()
+            ->redirectToBackUrl();
     }
 }

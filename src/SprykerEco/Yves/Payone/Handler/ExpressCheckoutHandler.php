@@ -97,6 +97,36 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToCheckoutEntryPoint()
+    {
+        return new RedirectResponse(
+            $this->payoneConfig->getStandardCheckoutEntryPoint()
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToFailureUrl()
+    {
+        return new RedirectResponse(
+            $this->payoneConfig->getFailureProjectUrl()
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToBackUrl()
+    {
+        return new RedirectResponse(
+            $this->payoneConfig->getBackProjectUrl()
+        );
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer
      */
     protected function prepareInitExpressCheckoutRequest()
