@@ -9,7 +9,6 @@ namespace SprykerEco\Shared\Payone;
 
 interface PayoneConstants
 {
-
     const COUNTRY_AT = 'AT';
     const COUNTRY_DE = 'DE';
     const COUNTRY_NL = 'NL';
@@ -31,11 +30,6 @@ interface PayoneConstants
     // Paypal express checkout state machine name
     const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE = 'payonePaypalExpressCheckout';
 
-    // Express checkout redirect constants
-    const PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_SUCCESS = 'PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_SUCCESS';
-    const PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_BACK = 'PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_BACK';
-    const PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_FAILURE = 'PAYONE_REDIRECT_EXPRESS_CHECKOUT_URL_FAILURE';
-
     const PAYONE_STANDARD_CHECKOUT_ENTRY_POINT = 'PAYONE_STANDARD_CHECKOUT_ENTRY_POINT';
     const PAYONE_EXPRESS_CHECKOUT_PROJECT_ROUTE_FAILURE = 'PAYONE_EXPRESS_CHECKOUT_PROJECT_ROUTE_FAILURE';
     const PAYONE_EXPRESS_CHECKOUT_PROJECT_ROUTE_BACK = 'PAYONE_EXPRESS_CHECKOUT_PROJECT_ROUTE_BACK';
@@ -54,12 +48,4 @@ interface PayoneConstants
     const GLOSSARY_FILE_PATH = 'Business/Internal/glossary.yml';
 
     const HOST_YVES = 'HOST_YVES';
-
-    /**
-     * Project specific cart route.
-     */
-    const ROUTE_CART = 'ROUTE_CART';
-
-
-
 }
