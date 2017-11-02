@@ -9,15 +9,13 @@ namespace SprykerEco\Yves\Payone\Handler;
 
 interface ExpressCheckoutHandlerInterface
 {
-
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function initPaypalExpressCheckout();
 
     /**
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return void
      */
-    public function placeOrder();
-
+    public function loadExpressCheckoutDetails();
 }
