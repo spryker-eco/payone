@@ -1,9 +1,13 @@
 {
   "name": "spryker-eco/payone",
   "autoload": {
-    "psr-0": {
-      "SprykerEco": "src/",
-      "SprykerEcoTest": "tests/"
+    "psr-4": {
+      "SprykerEco\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SprykerEcoTest\\": "tests/"
     }
   },
   "require": {
