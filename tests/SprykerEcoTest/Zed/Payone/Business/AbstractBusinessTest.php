@@ -100,10 +100,9 @@ abstract class AbstractBusinessTest extends Test
                 PayoneConstants::PAYONE_REDIRECT_BACK_URL => '/payone/regular-redirect-payment-cancellation',
                 PayoneConstants::PAYONE_MODE => 'test',
                 PayoneConstants::PAYONE_EMPTY_SEQUENCE_NUMBER => 0,
-                PayoneConstants::ROUTE_CART => '',
-                PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_SUCCESS_URL => '',
-                PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_FAILURE_URL => '',
-                PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_BACK_URL => '',
+                PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL => '',
+                PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILURE_URL => '',
+                PayoneConstants::PAYONE_EXPRESS_CHECKOUT_BACK_URL => '',
             ]
         );
     }
