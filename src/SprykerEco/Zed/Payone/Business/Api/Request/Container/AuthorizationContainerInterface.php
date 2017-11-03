@@ -15,7 +15,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionCo
 
 interface AuthorizationContainerInterface
 {
-
     /**
      * @param string $narrative_text
      *
@@ -293,5 +292,4 @@ interface AuthorizationContainerInterface
      * @return void
      */
     public function setAmount($amount);
-
 }

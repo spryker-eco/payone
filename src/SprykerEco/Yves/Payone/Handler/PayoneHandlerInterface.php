@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface PayoneHandlerInterface
 {
-
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -20,5 +19,4 @@ interface PayoneHandlerInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function addPaymentToQuote(Request $request, QuoteTransfer $quoteTransfer);
-
 }

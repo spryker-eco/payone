@@ -24,7 +24,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 
 class OnlineBankTransfer extends AbstractMapper
 {
-
     /**
      * @return string
      */
@@ -205,5 +204,4 @@ class OnlineBankTransfer extends AbstractMapper
 
         return $bankAccountCheckContainer;
     }
-
 }

@@ -39,7 +39,6 @@ use SprykerEco\Zed\Payone\PayoneDependencyProvider;
  */
 class PayoneBusinessFactory extends AbstractBusinessFactory
 {
-
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
@@ -317,5 +316,4 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
 
         return $genericPayment;
     }
-
 }

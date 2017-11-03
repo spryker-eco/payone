@@ -7,8 +7,6 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
-use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
-use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\SetExpressCheckoutAdapterMock;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
@@ -16,10 +14,11 @@ use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
+use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
+use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\SetExpressCheckoutAdapterMock;
 
 class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
 {
-
     /**
      * @return void
      */
@@ -94,5 +93,4 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
 
         return $requestTransfer;
     }
-
 }

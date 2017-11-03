@@ -22,7 +22,6 @@ use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
  */
 class OmsConditionTest extends AbstractPayoneTest
 {
-
     /**
      * @return void
      */
@@ -415,5 +414,4 @@ class OmsConditionTest extends AbstractPayoneTest
 
         $this->assertFalse($isOther);
     }
-
 }

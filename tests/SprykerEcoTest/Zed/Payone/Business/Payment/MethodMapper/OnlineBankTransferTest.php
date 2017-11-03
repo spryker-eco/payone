@@ -21,7 +21,6 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
  */
 class OnlineBankTransferTest extends AbstractMethodMapperTest
 {
-
     const STANDARD_PARAMETER_CLEARING_TYPE = 'sb';
     const ONLINE_BANK_TRANSFER_TYPE = 'PNT';
 
@@ -162,5 +161,4 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
 
         return $paymentPayoneDetail;
     }
-
 }

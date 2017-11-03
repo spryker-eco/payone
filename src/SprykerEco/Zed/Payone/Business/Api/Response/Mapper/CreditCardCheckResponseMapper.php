@@ -13,7 +13,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckRespons
 
 class CreditCardCheckResponseMapper implements CreditCardCheckResponseMapperInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer $responseContainer
      *
@@ -40,5 +39,4 @@ class CreditCardCheckResponseMapper implements CreditCardCheckResponseMapperInte
 
         return $result;
     }
-
 }

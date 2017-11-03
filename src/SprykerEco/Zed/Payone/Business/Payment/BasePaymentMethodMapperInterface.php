@@ -13,7 +13,6 @@ use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterfac
 
 interface BasePaymentMethodMapperInterface
 {
-
     /**
      * @return string
      */
@@ -39,5 +38,4 @@ interface BasePaymentMethodMapperInterface
      * @return void
      */
     public function setStandardParameter(PayoneStandardParameterTransfer $standardParameter);
-
 }

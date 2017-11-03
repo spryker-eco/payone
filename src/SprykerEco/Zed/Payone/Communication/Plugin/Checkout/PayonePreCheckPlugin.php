@@ -18,7 +18,6 @@ use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPreCheckPluginInterfa
  */
 class PayonePreCheckPlugin extends AbstractPlugin implements CheckoutPreCheckPluginInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
@@ -29,5 +28,4 @@ class PayonePreCheckPlugin extends AbstractPlugin implements CheckoutPreCheckPlu
     {
         return $checkoutResponseTransfer;
     }
-
 }

@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PayoneHandlerTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @return void
      */
@@ -60,5 +59,4 @@ class PayoneHandlerTest extends PHPUnit_Framework_TestCase
         $result = $paymentHandler->addPaymentToQuote($request, $quoteTransfer);
         $this->assertInstanceOf(QuoteTransfer::class, $result);
     }
-
 }

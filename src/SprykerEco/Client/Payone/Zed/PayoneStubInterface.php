@@ -19,7 +19,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface PayoneStubInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $transactionStatus
      *
@@ -82,5 +81,4 @@ interface PayoneStubInterface
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
-
 }

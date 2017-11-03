@@ -18,7 +18,6 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\CommandByOrderInterface;
  */
 class PreAuthorizeCommandPlugin extends AbstractPlugin implements CommandByOrderInterface
 {
-
     /**
      * @param array $orderItems
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
@@ -33,5 +32,4 @@ class PreAuthorizeCommandPlugin extends AbstractPlugin implements CommandByOrder
 
         return [];
     }
-
 }

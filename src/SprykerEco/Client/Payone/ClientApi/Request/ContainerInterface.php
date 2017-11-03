@@ -9,7 +9,6 @@ namespace SprykerEco\Client\Payone\ClientApi\Request;
 
 interface ContainerInterface
 {
-
     /**
      * @return array
      */
@@ -24,5 +23,4 @@ interface ContainerInterface
      * @return string
      */
     public function toJson();
-
 }

@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class GenericPaymentContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -430,5 +429,4 @@ class GenericPaymentContainer extends AbstractRequestContainer
     {
         $this->backurl = $backUrl;
     }
-
 }

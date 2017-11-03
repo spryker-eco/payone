@@ -9,7 +9,6 @@ namespace SprykerEco\Shared\Payone\Dependency;
 
 interface ModeDetectorInterface
 {
-
     const MODE_TEST = 'test';
     const MODE_LIVE = 'live';
 
@@ -17,5 +16,4 @@ interface ModeDetectorInterface
      * @return string
      */
     public function getMode();
-
 }

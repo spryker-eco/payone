@@ -21,7 +21,6 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
  */
 class EWalletPayDirectTest extends AbstractMethodMapperTest
 {
-
     const STANDARD_PARAMETER_CLEARING_TYPE = 'wlt';
 
     const WALLET_TYPE = 'PDT';
@@ -163,5 +162,4 @@ class EWalletPayDirectTest extends AbstractMethodMapperTest
 
         return $paymentPayoneDetail;
     }
-
 }

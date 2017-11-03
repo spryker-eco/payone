@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class CreditCardCheckResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var string
      */
@@ -55,5 +54,4 @@ class CreditCardCheckResponseContainer extends AbstractResponseContainer
     {
         return $this->pseudocardpan;
     }
-
 }

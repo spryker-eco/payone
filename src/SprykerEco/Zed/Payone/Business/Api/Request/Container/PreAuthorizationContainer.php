@@ -12,7 +12,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractA
 
 class PreAuthorizationContainer extends AbstractAuthorizationContainer
 {
-
     /**
      * @var string
      */
@@ -40,5 +39,4 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
     {
         return $this->workorderid;
     }
-
 }

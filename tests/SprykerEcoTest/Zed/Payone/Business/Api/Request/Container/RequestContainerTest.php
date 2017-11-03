@@ -48,7 +48,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
  */
 class RequestContainerTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @var int
      */
@@ -1015,5 +1014,4 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->solutionName, $container->getSolutionName());
         $this->assertEquals($this->solutionVersion, $container->getSolutionVersion());
     }
-
 }

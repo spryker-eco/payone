@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContain
 
 interface CaptureResponseMapperInterface extends ResponseMapperInterface
 {
-
     /**
      * @const string NAME
      */
@@ -23,5 +22,4 @@ interface CaptureResponseMapperInterface extends ResponseMapperInterface
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
     public function getCaptureResponseTransfer(CaptureResponseContainer $responseContainer);
-
 }

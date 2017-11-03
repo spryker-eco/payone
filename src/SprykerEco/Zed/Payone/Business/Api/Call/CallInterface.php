@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Call;
 
 interface CallInterface
 {
-
     /**
      * @return void
      */
@@ -24,5 +23,4 @@ interface CallInterface
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CreditCardCheckContainer
      */
     public function mapCreditCardCheckData();
-
 }

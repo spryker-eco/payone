@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class ConsumerScoreResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var int
      */
@@ -308,5 +307,4 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     {
         return $this->zip;
     }
-
 }

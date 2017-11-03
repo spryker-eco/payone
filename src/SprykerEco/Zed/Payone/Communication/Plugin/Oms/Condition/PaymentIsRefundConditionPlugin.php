@@ -16,7 +16,6 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\AbstractCondition;
  */
 class PaymentIsRefundConditionPlugin extends AbstractCondition
 {
-
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
@@ -27,5 +26,4 @@ class PaymentIsRefundConditionPlugin extends AbstractCondition
         return $this->getFacade()
             ->isPaymentRefund($orderItem->getFkSalesOrder(), $orderItem->getIdSalesOrderItem());
     }
-
 }

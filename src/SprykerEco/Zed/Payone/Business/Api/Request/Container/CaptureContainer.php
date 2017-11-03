@@ -13,7 +13,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionCo
 
 class CaptureContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -156,5 +155,4 @@ class CaptureContainer extends AbstractRequestContainer
     {
         return $this->invoicing;
     }
-
 }

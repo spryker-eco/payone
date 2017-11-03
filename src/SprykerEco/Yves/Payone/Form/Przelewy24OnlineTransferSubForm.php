@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class Przelewy24OnlineTransferSubForm extends OnlineTransferSubForm
 {
-
     const PAYMENT_METHOD = 'przelewy24_online_transfer';
     const OPTION_BANK_COUNTRIES = 'przelewy24 online transfer bank countries';
 
@@ -52,5 +51,4 @@ class Przelewy24OnlineTransferSubForm extends OnlineTransferSubForm
 
         return $this;
     }
-
 }

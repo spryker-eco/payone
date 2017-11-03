@@ -12,7 +12,6 @@ use SprykerEco\Yves\Payone\Plugin\PayoneEpsOnlineTransferSubFormPlugin;
 
 class AtSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreatorInterface
 {
-
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
      */
@@ -36,5 +35,4 @@ class AtSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     {
         return new PayoneEpsOnlineTransferSubFormPlugin();
     }
-
 }

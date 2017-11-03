@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class DirectDebitSubForm extends AbstractPayoneSubForm
 {
-
     const PAYMENT_METHOD = 'direct_debit';
     const FIELD_IBAN = 'iban';
     const FIELD_BIC = 'bic';
@@ -254,5 +253,4 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     {
         return new ManageMandate(['payoneClient' => $this->payoneClient, 'groups' => $this->getPropertyPath()]);
     }
-
 }

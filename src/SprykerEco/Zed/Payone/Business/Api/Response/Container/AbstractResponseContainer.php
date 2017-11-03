@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 abstract class AbstractResponseContainer
 {
-
     /**
      * @var string
      */
@@ -256,5 +255,4 @@ abstract class AbstractResponseContainer
     {
         return ucwords(str_replace('_', ' ', $key));
     }
-
 }

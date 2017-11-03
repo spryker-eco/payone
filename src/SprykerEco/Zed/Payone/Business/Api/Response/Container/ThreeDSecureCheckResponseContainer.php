@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var string
      */
@@ -170,5 +169,4 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     {
         return $this->xid;
     }
-
 }

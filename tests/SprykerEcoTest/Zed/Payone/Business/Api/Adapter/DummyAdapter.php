@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\AbstractHttpAdapter;
 
 class DummyAdapter extends AbstractHttpAdapter
 {
-
     /**
      * @param string $response
      */
@@ -41,5 +40,4 @@ class DummyAdapter extends AbstractHttpAdapter
     {
         return $responseRaw;
     }
-
 }

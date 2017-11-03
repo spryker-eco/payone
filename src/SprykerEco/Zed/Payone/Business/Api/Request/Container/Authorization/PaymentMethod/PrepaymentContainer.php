@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\Pay
 
 class PrepaymentContainer extends AbstractPaymentMethodContainer
 {
-
     /**
      * @var string
      */
@@ -193,5 +192,4 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
     {
         return $this->clearing_bankname;
     }
-
 }

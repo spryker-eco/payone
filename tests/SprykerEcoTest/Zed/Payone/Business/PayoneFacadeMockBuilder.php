@@ -16,7 +16,6 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer;
 
 class PayoneFacadeMockBuilder
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $adapter
      * @param \PHPUnit_Framework_TestCase $testCase
@@ -77,5 +76,4 @@ class PayoneFacadeMockBuilder
 
         return $businessFactoryMock;
     }
-
 }

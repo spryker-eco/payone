@@ -26,7 +26,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
  */
 interface PayoneFacadeInterface
 {
-
     /**
      * Specification:
      * - Saves order payment method data according to quote and checkout response transfer data.
@@ -483,5 +482,4 @@ interface PayoneFacadeInterface
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
-
 }

@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class GetInvoiceContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -39,5 +38,4 @@ class GetInvoiceContainer extends AbstractRequestContainer
     {
         return $this->invoice_title;
     }
-
 }

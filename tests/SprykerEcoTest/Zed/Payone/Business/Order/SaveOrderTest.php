@@ -27,7 +27,6 @@ use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
  */
 class SaveOrderTest extends AbstractPayoneTest
 {
-
     /**
      * @return void
      */
@@ -85,5 +84,4 @@ class SaveOrderTest extends AbstractPayoneTest
                     ->setCurrency('EUR')
             );
     }
-
 }

@@ -16,7 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EWalletSubForm extends AbstractPayoneSubForm
 {
-
     const PAYMENT_METHOD = 'e_wallet';
     const FIELD_WALLET_TYPE = 'wallettype';
 
@@ -92,5 +91,4 @@ class EWalletSubForm extends AbstractPayoneSubForm
 
         return $this;
     }
-
 }

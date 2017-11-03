@@ -9,7 +9,6 @@ namespace SprykerEcoTest\Zed\Payone\Business\Api\Adapter;
 
 class SetExpressCheckoutAdapterMock extends AbstractAdapterMock
 {
-
     /**
      * @return array
      */
@@ -34,5 +33,4 @@ class SetExpressCheckoutAdapterMock extends AbstractAdapterMock
 
         return explode(" ", $result);
     }
-
 }

@@ -21,7 +21,6 @@ use SprykerEco\Zed\Payone\Business\Key\HashProvider;
  */
 class KeyHashProviderTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @return void
      */
@@ -35,5 +34,4 @@ class KeyHashProviderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedHashedKey, $systemHashedKey);
     }
-
 }

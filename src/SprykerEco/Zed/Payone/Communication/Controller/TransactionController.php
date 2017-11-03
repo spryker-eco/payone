@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class TransactionController extends AbstractController
 {
-
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -102,5 +101,4 @@ class TransactionController extends AbstractController
             $this->getFactory()->getOmsFacade()->triggerEvent('RedirectResponseAppointed', $orderItems, []);
         }
     }
-
 }

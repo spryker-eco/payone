@@ -33,7 +33,6 @@ use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
  */
 class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
 {
-
     const STANDARD_PARAMETER_AID = '12345';
     const STANDARD_PARAMETER_CURRENCY = 'EUR';
     const ADDRESS_FIRST_NAME = 'Max';
@@ -227,5 +226,4 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
 
         return $urlHmacGenerator;
     }
-
 }

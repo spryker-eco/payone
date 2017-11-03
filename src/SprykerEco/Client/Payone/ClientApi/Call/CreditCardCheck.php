@@ -12,7 +12,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class CreditCardCheck extends AbstractCall
 {
-
     /**
      * @var string
      */
@@ -48,5 +47,4 @@ class CreditCardCheck extends AbstractCall
 
         return $container;
     }
-
 }

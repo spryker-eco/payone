@@ -15,7 +15,6 @@ use Spryker\Yves\Kernel\AbstractPlugin;
  */
 class PayoneSubFormsPlugin extends AbstractPlugin
 {
-
     /**
      * @var \SprykerEco\Yves\Payone\Plugin\PluginCountryFactory
      */
@@ -37,5 +36,4 @@ class PayoneSubFormsPlugin extends AbstractPlugin
 
         return $paymentMethodsSubForms;
     }
-
 }

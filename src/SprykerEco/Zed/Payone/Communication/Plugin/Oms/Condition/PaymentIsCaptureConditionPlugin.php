@@ -16,7 +16,6 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\AbstractCondition;
  */
 class PaymentIsCaptureConditionPlugin extends AbstractCondition
 {
-
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
@@ -27,5 +26,4 @@ class PaymentIsCaptureConditionPlugin extends AbstractCondition
         return $this->getFacade()
             ->isPaymentCapture($orderItem->getFkSalesOrder(), $orderItem->getIdSalesOrderItem());
     }
-
 }

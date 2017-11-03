@@ -16,7 +16,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  */
 class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQueryContainerInterface
 {
-
     /**
      * @api
      *
@@ -264,5 +263,4 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
 
         return $query;
     }
-
 }

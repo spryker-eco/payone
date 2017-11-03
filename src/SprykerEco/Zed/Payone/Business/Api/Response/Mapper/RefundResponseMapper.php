@@ -13,7 +13,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContaine
 
 class RefundResponseMapper implements RefundResponseMapperInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer $responseContainer
      *
@@ -40,5 +39,4 @@ class RefundResponseMapper implements RefundResponseMapperInterface
 
         return $result;
     }
-
 }

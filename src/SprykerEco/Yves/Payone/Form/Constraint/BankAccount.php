@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 
 class BankAccount extends SymfonyConstraint
 {
-
     const OPTION_PAYONE_CLIENT = 'payoneClient';
 
     /**
@@ -25,5 +24,4 @@ class BankAccount extends SymfonyConstraint
     {
         return $this->payoneClient;
     }
-
 }

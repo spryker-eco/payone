@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\PaymentMeth
 
 class CreditCardContainer extends AbstractPaymentMethodContainer
 {
-
     /**
      * @var string
      */
@@ -170,5 +169,4 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     {
         return $this->pseudocardpan;
     }
-
 }

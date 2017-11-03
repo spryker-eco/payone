@@ -15,7 +15,6 @@ use SprykerEco\Yves\Payone\Form\PostfinanceCardOnlineTransferSubForm;
 
 class PostfinanceCardOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -52,5 +51,4 @@ class PostfinanceCardOnlineTransferDataProvider implements StepEngineFormDataPro
             'CH' => 'Switzerland',
         ];
     }
-
 }

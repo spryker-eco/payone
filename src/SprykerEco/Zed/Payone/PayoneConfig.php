@@ -17,7 +17,6 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 
 class PayoneConfig extends AbstractBundleConfig
 {
-
     const PROVIDER_NAME = 'Payone';
     const PAYMENT_METHOD_CREDIT_CARD = 'payoneCreditCard';
     const PAYMENT_METHOD_E_WALLET = 'payoneEWallet';
@@ -129,5 +128,4 @@ class PayoneConfig extends AbstractBundleConfig
     {
         return __DIR__ . DIRECTORY_SEPARATOR . PayoneConstants::GLOSSARY_FILE_PATH;
     }
-
 }

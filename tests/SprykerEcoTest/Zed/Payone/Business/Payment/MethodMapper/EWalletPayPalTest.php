@@ -21,7 +21,6 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
  */
 class EWalletPayPalTest extends AbstractMethodMapperTest
 {
-
     const STANDARD_PARAMETER_CLEARING_TYPE = 'wlt';
 
     const WALLET_TYPE = 'PPE';
@@ -163,5 +162,4 @@ class EWalletPayPalTest extends AbstractMethodMapperTest
 
         return $paymentPayoneDetail;
     }
-
 }

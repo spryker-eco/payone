@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Key;
 
 class UrlHmacGenerator implements HmacGeneratorInterface
 {
-
     /**
      * string
      */
@@ -25,5 +24,4 @@ class UrlHmacGenerator implements HmacGeneratorInterface
     {
         return hash_hmac(static::HASH_ALGO, $string, $key);
     }
-
 }

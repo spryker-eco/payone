@@ -22,7 +22,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 
 class Prepayment extends AbstractMapper
 {
-
     /**
      * @return string
      */
@@ -171,5 +170,4 @@ class Prepayment extends AbstractMapper
 
         return $personalContainer;
     }
-
 }

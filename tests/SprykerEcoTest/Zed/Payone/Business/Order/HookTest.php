@@ -22,7 +22,6 @@ use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
  */
 class HookTest extends AbstractPayoneTest
 {
-
     /**
      * @return void
      */
@@ -41,5 +40,4 @@ class HookTest extends AbstractPayoneTest
         $this->assertTrue($newCheckoutResponseTransfer->getIsExternalRedirect());
         $this->assertEquals('redirect url', $newCheckoutResponseTransfer->getRedirectUrl());
     }
-
 }

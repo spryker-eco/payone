@@ -16,7 +16,6 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\AbstractCondition;
  */
 class PaymentNotificationIsAvailableConditionPlugin extends AbstractCondition
 {
-
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
@@ -29,5 +28,4 @@ class PaymentNotificationIsAvailableConditionPlugin extends AbstractCondition
 
         return $result;
     }
-
 }

@@ -21,7 +21,6 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
  */
 class InvoiceTest extends AbstractMethodMapperTest
 {
-
     const STANDARD_PARAMETER_CLEARING_TYPE = 'rec';
 
     const AUTHORIZATION_INVOICE_REQUIRED_PARAMS = [
@@ -157,5 +156,4 @@ class InvoiceTest extends AbstractMethodMapperTest
 
         return $paymentPayoneDetail;
     }
-
 }

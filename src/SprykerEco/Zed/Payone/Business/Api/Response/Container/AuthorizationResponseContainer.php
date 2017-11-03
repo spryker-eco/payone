@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class AuthorizationResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var int
      */
@@ -515,5 +514,4 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     {
         return $this->clearing_date;
     }
-
 }

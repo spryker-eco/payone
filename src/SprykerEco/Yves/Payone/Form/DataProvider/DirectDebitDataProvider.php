@@ -16,7 +16,6 @@ use SprykerEco\Yves\Payone\Form\DirectDebitSubForm;
 
 class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -65,5 +64,4 @@ class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
             'IBAN/BIC' => 'IBAN/BIC',
         ];
     }
-
 }

@@ -19,7 +19,6 @@ use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterfac
 
 abstract class AbstractMapper implements PaymentMethodMapperInterface
 {
-
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
@@ -173,5 +172,4 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
         $shippingContainer->setShippingState($shippingAddressEntity->getRegion());
         $shippingContainer->setShippingCountry($shippingAddressEntity->getCountry()->getIso2Code());
     }
-
 }

@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 
 interface HashGeneratorInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $request
      * @param string $securityKey
@@ -19,5 +18,4 @@ interface HashGeneratorInterface
      * @return string
      */
     public function generateParamHash(AbstractRequestContainer $request, $securityKey);
-
 }

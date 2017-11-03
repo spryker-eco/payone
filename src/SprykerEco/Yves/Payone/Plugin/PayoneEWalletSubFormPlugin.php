@@ -15,7 +15,6 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
  */
 class PayoneEWalletSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
-
     /**
      * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
      */
@@ -31,5 +30,4 @@ class PayoneEWalletSubFormPlugin extends AbstractPlugin implements SubFormPlugin
     {
         return $this->getFactory()->createEWalletSubFormDataProvider();
     }
-
 }

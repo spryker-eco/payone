@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class GiropayOnlineTransferSubForm extends OnlineTransferSubForm
 {
-
     const PAYMENT_METHOD = 'giropay_online_transfer';
     const OPTION_BANK_COUNTRIES = 'giropay online transfer bank countries';
     const OPTION_BANK_GROUP_TYPES = 'giropay online transfer bank group types';
@@ -67,5 +66,4 @@ class GiropayOnlineTransferSubForm extends OnlineTransferSubForm
 
         return $this;
     }
-
 }

@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\PaymentTransfer;
 
 class DefaultSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreatorInterface
 {
-
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
      */
@@ -25,5 +24,4 @@ class DefaultSubFormsCreator extends AbstractSubFormsCreator implements SubForms
             PaymentTransfer::PAYONE_E_WALLET => $this->createEWalletSubFormPlugin(),
         ];
     }
-
 }

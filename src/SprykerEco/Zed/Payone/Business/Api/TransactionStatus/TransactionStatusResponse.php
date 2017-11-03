@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\TransactionStatus;
 
 class TransactionStatusResponse
 {
-
     /**
      * part of payone specification
      */
@@ -91,5 +90,4 @@ class TransactionStatusResponse
     {
         return (!$this->isSuccess());
     }
-
 }

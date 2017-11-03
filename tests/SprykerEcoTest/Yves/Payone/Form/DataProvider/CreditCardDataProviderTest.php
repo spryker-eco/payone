@@ -25,7 +25,6 @@ use SprykerEco\Yves\Payone\Form\DataProvider\CreditCardDataProvider;
  */
 class CreditCardDataProviderTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
@@ -52,5 +51,4 @@ class CreditCardDataProviderTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(PaymentTransfer::class, $paymentTransfer);
         $this->assertInstanceOf(PayonePaymentTransfer::class, $paymentTransfer->getPayone());
     }
-
 }

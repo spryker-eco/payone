@@ -12,7 +12,6 @@ use SprykerEco\Shared\Payone\Dependency\HashInterface;
 
 class HashGenerator implements HashGeneratorInterface
 {
-
     /**
      * @var \SprykerEco\Shared\Payone\Dependency\HashInterface
      */
@@ -96,5 +95,4 @@ class HashGenerator implements HashGeneratorInterface
 
         return $this->hashProvider->hash($hashString);
     }
-
 }

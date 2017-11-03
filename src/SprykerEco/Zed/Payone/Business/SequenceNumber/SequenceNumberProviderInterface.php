@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\SequenceNumber;
 
 interface SequenceNumberProviderInterface
 {
-
     /**
      * @param string $transactionId
      *
@@ -23,5 +22,4 @@ interface SequenceNumberProviderInterface
      * @return int
      */
     public function getCurrentSequenceNumber($transactionId);
-
 }

@@ -27,7 +27,6 @@ use SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface;
 
 class GenericPayment extends AbstractMapper implements GenericPaymentMethodMapperInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer $genericPayment
      * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
@@ -217,5 +216,4 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
 
         return $refundContainer;
     }
-
 }

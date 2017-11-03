@@ -17,7 +17,6 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 
 abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
 {
-
     const PAYMENT_METHOD = 'online_transfer';
     const FIELD_IBAN = 'iban';
     const FIELD_BIC = 'bic';
@@ -277,5 +276,4 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
      * @return \SprykerEco\Yves\Payone\Form\AbstractOnlineTransferSubForm
      */
     abstract public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options);
-
 }

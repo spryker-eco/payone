@@ -26,7 +26,6 @@ use SprykerEco\Yves\Payone\Dependency\Injector\CheckoutDependencyInjector;
  */
 class CheckoutDependencyInjectorTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @return void
      */
@@ -70,5 +69,4 @@ class CheckoutDependencyInjectorTest extends PHPUnit_Framework_TestCase
 
         return $container;
     }
-
 }

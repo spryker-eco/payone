@@ -16,7 +16,6 @@ use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
 
 abstract class AbstractSubFormsCreator
 {
-
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin
      */
@@ -64,5 +63,4 @@ abstract class AbstractSubFormsCreator
     {
         return new PayoneInstantOnlineTransferSubFormPlugin();
     }
-
 }

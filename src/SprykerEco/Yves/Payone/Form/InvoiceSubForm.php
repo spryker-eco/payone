@@ -16,7 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class InvoiceSubForm extends AbstractPayoneSubForm
 {
-
     const PAYMENT_METHOD = 'invoice';
 
     /**
@@ -88,5 +87,4 @@ class InvoiceSubForm extends AbstractPayoneSubForm
 
         return $this;
     }
-
 }

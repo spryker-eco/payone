@@ -28,7 +28,6 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
  */
 class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
 {
-
     /**
      * Specification:
      * - Saves order payment method data according to quote and checkout response transfer data.
@@ -621,5 +620,4 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     {
         return $this->getFactory()->createPaymentManager()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
-
 }

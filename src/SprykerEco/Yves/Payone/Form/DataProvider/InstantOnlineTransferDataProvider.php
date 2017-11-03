@@ -16,7 +16,6 @@ use SprykerEco\Yves\Payone\Form\InstantOnlineTransferSubForm;
 
 class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -53,5 +52,4 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
             Store::getInstance()->getCurrentCountry() => Store::getInstance()->getCurrentCountry(),
         ];
     }
-
 }

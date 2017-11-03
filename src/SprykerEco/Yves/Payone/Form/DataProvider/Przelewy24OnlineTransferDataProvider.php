@@ -15,7 +15,6 @@ use SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm;
 
 class Przelewy24OnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -52,5 +51,4 @@ class Przelewy24OnlineTransferDataProvider implements StepEngineFormDataProvider
             'PL' => 'Poland',
         ];
     }
-
 }

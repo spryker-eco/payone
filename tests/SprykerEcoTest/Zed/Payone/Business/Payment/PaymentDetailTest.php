@@ -7,10 +7,10 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Payment;
 
-use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetailQuery;
+use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
 
 /**
  * @group Functional
@@ -23,7 +23,6 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetailQuery;
  */
 class PaymentDetailTest extends AbstractPayoneTest
 {
-
     /**
      * @return void
      */
@@ -67,5 +66,4 @@ class PaymentDetailTest extends AbstractPayoneTest
         $this->assertEquals($paymentDetailTransfer->getIban(), $spyPaymentDetailNew->getIban());
         $this->assertEquals($paymentDetailTransfer->getInvoiceTitle(), $spyPaymentDetailNew->getInvoiceTitle());
     }
-
 }

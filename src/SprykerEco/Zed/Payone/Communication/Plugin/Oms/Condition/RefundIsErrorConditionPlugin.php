@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class RefundIsErrorConditionPlugin extends AbstractPlugin
 {
-
     const NAME = 'RefundIsErrorPlugin';
 
     /**
@@ -27,5 +26,4 @@ class RefundIsErrorConditionPlugin extends AbstractPlugin
     {
         return $this->getFacade()->isRefundError($orderTransfer);
     }
-
 }

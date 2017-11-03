@@ -21,7 +21,6 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
  */
 class DirectDebitTest extends AbstractMethodMapperTest
 {
-
     const STANDARD_PARAMETER_CLEARING_TYPE = 'elv';
 
     const AUTHORIZATION_DIRECT_DEBIT_REQUIRED_PARAMS = [
@@ -157,5 +156,4 @@ class DirectDebitTest extends AbstractMethodMapperTest
 
         return $paymentPayoneDetail;
     }
-
 }

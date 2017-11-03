@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Dependency\Facade;
 
 class PayoneToSalesBridge implements PayoneToSalesInterface
 {
-
     /**
      * @var \Spryker\Zed\Sales\Business\SalesFacadeInterface
      */
@@ -32,5 +31,4 @@ class PayoneToSalesBridge implements PayoneToSalesInterface
     {
         return $this->salesFacade->getOrderByIdSalesOrder($idSalesOrder);
     }
-
 }

@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\OrderTransfer;
 
 interface ApiLogFinderInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
@@ -81,5 +80,4 @@ interface ApiLogFinderInterface
      * @return bool
      */
     public function isRefundError(OrderTransfer $orderTransfer);
-
 }

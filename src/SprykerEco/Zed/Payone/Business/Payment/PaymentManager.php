@@ -62,7 +62,6 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PaymentManager implements PaymentManagerInterface
 {
-
     const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
     const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
     const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
@@ -961,5 +960,4 @@ class PaymentManager implements PaymentManagerInterface
 
         return $responseTransfer;
     }
-
 }

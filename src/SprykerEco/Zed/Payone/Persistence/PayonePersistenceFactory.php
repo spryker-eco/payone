@@ -19,7 +19,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
  */
 class PayonePersistenceFactory extends AbstractPersistenceFactory
 {
-
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
@@ -51,5 +50,4 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
     {
         return SpyPaymentPayoneTransactionStatusLogOrderItemQuery::create();
     }
-
 }

@@ -39,7 +39,6 @@ use SprykerTest\Shared\Testify\Helper\ConfigHelper;
  */
 abstract class AbstractBusinessTest extends Test
 {
-
     /**
      * @var \Orm\Zed\Payone\Persistence\Base\SpyPaymentPayone
      */
@@ -82,6 +81,9 @@ abstract class AbstractBusinessTest extends Test
         $this->payoneFacade = new PayoneFacade();
     }
 
+    /**
+     * @return void
+     */
     protected function setupConfig()
     {
         $this->getConfigHelper()->setConfig(
@@ -316,5 +318,4 @@ abstract class AbstractBusinessTest extends Test
                 (new PayonePaymentTransfer())
             );
     }
-
 }

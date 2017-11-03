@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class CreditCardCheckContainer extends AbstractRequest
 {
-
     /**
      * @var string
      */
@@ -85,5 +84,4 @@ class CreditCardCheckContainer extends AbstractRequest
     {
         return $this->successurl;
     }
-
 }

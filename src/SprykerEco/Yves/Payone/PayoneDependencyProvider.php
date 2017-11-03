@@ -12,7 +12,6 @@ use Spryker\Yves\Kernel\Container;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
-
     const CLIENT_PAYONE = 'payone client';
 
     const CLIENT_CUSTOMER = 'customer client';
@@ -58,5 +57,4 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
         return $container;
     }
-
 }

@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class AuthorizationIsRedirectConditionPlugin extends AbstractPlugin
 {
-
     const NAME = 'AuthorizationIsRedirectPlugin';
 
     /**
@@ -27,5 +26,4 @@ class AuthorizationIsRedirectConditionPlugin extends AbstractPlugin
     {
         return $this->getFacade()->isAuthorizationRedirect($orderTransfer);
     }
-
 }

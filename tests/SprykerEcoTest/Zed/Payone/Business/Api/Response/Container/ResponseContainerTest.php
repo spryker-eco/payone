@@ -27,7 +27,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContaine
  */
 class ResponseContainerTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @return void
      */
@@ -238,5 +237,4 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('rawresponse', $container->getRawResponse());
         $this->assertEquals('status', $container->getStatus());
     }
-
 }

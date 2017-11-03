@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckRespons
 
 interface CreditCardCheckResponseMapperInterface extends ResponseMapperInterface
 {
-
     /**
      * @const string NAME
      */
@@ -23,5 +22,4 @@ interface CreditCardCheckResponseMapperInterface extends ResponseMapperInterface
      * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
     public function getCreditCardCheckResponseTransfer(CreditCardCheckResponseContainer $responseContainer);
-
 }

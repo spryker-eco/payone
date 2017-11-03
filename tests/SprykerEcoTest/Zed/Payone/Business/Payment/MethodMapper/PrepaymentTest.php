@@ -21,7 +21,6 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
  */
 class PrepaymentTest extends AbstractMethodMapperTest
 {
-
     const STANDARD_PARAMETER_CLEARING_TYPE = 'vor';
 
     const PREAUTHORIZATION_PREPAYMENT_REQUIRED_PARAMS = [
@@ -126,5 +125,4 @@ class PrepaymentTest extends AbstractMethodMapperTest
 
         return $paymentPayoneDetail;
     }
-
 }

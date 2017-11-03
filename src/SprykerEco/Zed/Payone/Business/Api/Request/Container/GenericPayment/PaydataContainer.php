@@ -1,12 +1,16 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment;
 
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 
 class PaydataContainer extends AbstractContainer
 {
-
     /**
      * @var string
      */
@@ -41,5 +45,4 @@ class PaydataContainer extends AbstractContainer
         $template = "add_paydata[KEY]";
         return str_replace('KEY', $preparedKey, $template);
     }
-
 }

@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class ConsumerScoreContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -361,5 +360,4 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     {
         return $this->zip;
     }
-
 }

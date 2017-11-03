@@ -14,7 +14,6 @@ use SprykerEco\Zed\Payone\Business\Exception\TimeoutException;
 
 class Guzzle extends AbstractHttpAdapter
 {
-
     /**
      * @var \GuzzleHttp\Client
      */
@@ -62,5 +61,4 @@ class Guzzle extends AbstractHttpAdapter
 
         return $result;
     }
-
 }

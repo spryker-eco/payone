@@ -27,7 +27,6 @@ use SprykerEco\Shared\Payone\PayoneConstants;
  */
 class GatewayController extends AbstractGatewayController
 {
-
     /**
      * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
      *
@@ -174,5 +173,4 @@ class GatewayController extends AbstractGatewayController
         $getPaymentDetailTransfer->setPaymentDetail($response);
         return $getPaymentDetailTransfer;
     }
-
 }

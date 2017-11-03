@@ -22,7 +22,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  */
 class IndexController extends AbstractController
 {
-
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -139,5 +138,4 @@ class IndexController extends AbstractController
 
         return $streamedResponse;
     }
-
 }

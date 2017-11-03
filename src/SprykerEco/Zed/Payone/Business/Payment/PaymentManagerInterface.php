@@ -21,7 +21,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface PaymentManagerInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
      *
@@ -149,5 +148,4 @@ interface PaymentManagerInterface
      * @return void
      */
     public function updatePaymentDetail(PaymentDetailTransfer $paymentDataTransfer, $idOrder);
-
 }

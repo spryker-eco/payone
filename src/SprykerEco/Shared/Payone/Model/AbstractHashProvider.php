@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\Dependency\HashInterface;
 
 abstract class AbstractHashProvider implements HashInterface
 {
-
     /**
      * @param string $value
      *
@@ -21,5 +20,4 @@ abstract class AbstractHashProvider implements HashInterface
     {
         return hash('md5', $value);
     }
-
 }

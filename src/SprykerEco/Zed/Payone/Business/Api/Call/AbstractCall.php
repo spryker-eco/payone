@@ -14,7 +14,6 @@ use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
 
 abstract class AbstractCall
 {
-
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
@@ -101,5 +100,4 @@ abstract class AbstractCall
     {
         return $this->modeDetector;
     }
-
 }

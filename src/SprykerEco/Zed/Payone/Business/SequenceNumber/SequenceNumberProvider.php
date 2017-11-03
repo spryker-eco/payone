@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class SequenceNumberProvider implements SequenceNumberProviderInterface
 {
-
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
      */
@@ -66,5 +65,4 @@ class SequenceNumberProvider implements SequenceNumberProviderInterface
 
         return $transactionEntity->getSequenceNumber();
     }
-
 }

@@ -11,7 +11,6 @@ use Spryker\Zed\Kernel\Persistence\QueryContainer\QueryContainerInterface;
 
 interface PayoneQueryContainerInterface extends QueryContainerInterface
 {
-
     /**
      * @api
      *
@@ -133,5 +132,4 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
     public function createTransactionStatusLogsByOrderIds($orders);
-
 }

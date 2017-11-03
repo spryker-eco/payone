@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class PreAuthorizationIsApprovedConditionPlugin extends AbstractPlugin
 {
-
     const NAME = 'PreAuthorizationIsApprovedPlugin';
 
     /**
@@ -27,5 +26,4 @@ class PreAuthorizationIsApprovedConditionPlugin extends AbstractPlugin
     {
         return $this->getFacade()->isPreauthorizationApproved($orderTransfer);
     }
-
 }

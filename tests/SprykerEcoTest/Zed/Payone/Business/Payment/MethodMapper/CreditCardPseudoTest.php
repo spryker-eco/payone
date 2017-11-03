@@ -22,7 +22,6 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
  */
 class CreditCardPseudoTest extends AbstractMethodMapperTest
 {
-
     const PSEUDO_CARD_PAN = '1234567890123456';
     const CARD_TYPE = 'V';
     const CARD_EXPIRE_DATE = '1609';
@@ -192,5 +191,4 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
 
         return $paymentPayoneDetail;
     }
-
 }

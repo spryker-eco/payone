@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class IdealOnlineTransferSubForm extends OnlineTransferSubForm
 {
-
     const PAYMENT_METHOD = 'ideal_online_transfer';
     const OPTION_BANK_COUNTRIES = 'ideal online transfer bank countries';
     const OPTION_BANK_GROUP_TYPES = 'ideal online transfer bank group types';
@@ -91,5 +90,4 @@ class IdealOnlineTransferSubForm extends OnlineTransferSubForm
 
         return $this;
     }
-
 }

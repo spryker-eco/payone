@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class GenericPaymentResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var string
      */
@@ -304,5 +303,4 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
         $key = preg_replace('/add_paydata\[(.*)\]/', "$1", $key);
         return ucwords(str_replace('_', ' ', $key));
     }
-
 }

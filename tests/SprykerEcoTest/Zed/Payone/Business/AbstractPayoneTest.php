@@ -24,7 +24,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  */
 abstract class AbstractPayoneTest extends AbstractBusinessTest
 {
-
     /**
      * @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog
      */
@@ -119,5 +118,4 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
 
         return $transactionStatusLogOrderItem;
     }
-
 }

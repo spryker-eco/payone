@@ -15,7 +15,6 @@ use SprykerEco\Yves\Payone\Form\OnlineTransferSubForm;
 
 abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -72,5 +71,4 @@ abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataP
     {
         return [];
     }
-
 }

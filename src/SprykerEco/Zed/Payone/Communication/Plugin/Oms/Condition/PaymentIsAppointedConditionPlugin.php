@@ -16,7 +16,6 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\AbstractCondition;
  */
 class PaymentIsAppointedConditionPlugin extends AbstractCondition
 {
-
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
@@ -29,5 +28,4 @@ class PaymentIsAppointedConditionPlugin extends AbstractCondition
 
         return $res;
     }
-
 }

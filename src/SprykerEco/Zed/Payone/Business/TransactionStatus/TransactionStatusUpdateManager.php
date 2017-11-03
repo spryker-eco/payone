@@ -18,7 +18,6 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerInterface
 {
-
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
      */
@@ -409,5 +408,4 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
         $entity->setIdSalesOrderItem($idSalesOrderItem);
         $entity->save();
     }
-
 }

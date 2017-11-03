@@ -12,7 +12,6 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\AbstractHttpAdapter;
 
 abstract class AbstractAdapterMock extends AbstractHttpAdapter implements AdapterInterface
 {
-
     /**
      * @const DEFAULT_GETEWAY_URL
      */
@@ -64,5 +63,4 @@ abstract class AbstractAdapterMock extends AbstractHttpAdapter implements Adapte
      * @return array
      */
     abstract protected function getFailureResponse();
-
 }

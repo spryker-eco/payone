@@ -17,7 +17,6 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\ConditionInterface;
  */
 abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInterface
 {
-
     const NAME = 'AbstractPlugin';
 
     /**
@@ -61,5 +60,4 @@ abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInt
     {
         return self::NAME;
     }
-
 }

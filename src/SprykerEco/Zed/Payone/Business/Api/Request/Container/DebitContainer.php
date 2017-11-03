@@ -14,7 +14,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionCo
 
 class DebitContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -226,5 +225,4 @@ class DebitContainer extends AbstractRequestContainer
     {
         return $this->use_customerdata;
     }
-
 }

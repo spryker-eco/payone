@@ -7,10 +7,10 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Payment;
 
-use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
+use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
 
 /**
  * @group Functional
@@ -23,7 +23,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  */
 class PaymentLogTest extends AbstractPayoneTest
 {
-
     /**
      * @return void
      */
@@ -63,5 +62,4 @@ class PaymentLogTest extends AbstractPayoneTest
         $this->assertInstanceOf(PayonePaymentLogCollectionTransfer::class, $paymentLogCollectionTransfer);
         $this->assertEquals(0, $paymentLogCollectionTransfer->getPaymentLogs()->count());
     }
-
 }

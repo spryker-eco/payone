@@ -16,7 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PrePaymentForm extends AbstractPayoneSubForm
 {
-
     const PAYMENT_METHOD = 'prepayment';
 
     /**
@@ -88,5 +87,4 @@ class PrePaymentForm extends AbstractPayoneSubForm
 
         return $this;
     }
-
 }

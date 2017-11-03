@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
 
 interface TransactionStatusUpdateManagerInterface
 {
-
     /**
      * @param \SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface $request
      *
@@ -82,5 +81,4 @@ interface TransactionStatusUpdateManagerInterface
      * @return bool
      */
     public function isPaymentOther($idSalesOrder, $idSalesOrderItem);
-
 }

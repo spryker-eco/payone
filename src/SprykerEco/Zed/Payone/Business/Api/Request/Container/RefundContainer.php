@@ -13,7 +13,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Refund\PaymentMethod\Ba
 
 class RefundContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -397,5 +396,4 @@ class RefundContainer extends AbstractRequestContainer
 
         return $this;
     }
-
 }

@@ -23,7 +23,6 @@ use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
  */
 class ModeDetectorTest extends AbstractBusinessTest
 {
-
     /**
      * @return void
      */
@@ -34,5 +33,4 @@ class ModeDetectorTest extends AbstractBusinessTest
 
         $this->assertEquals(ModeDetectorInterface::MODE_TEST, $detectedMode);
     }
-
 }

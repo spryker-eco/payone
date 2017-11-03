@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Refund\PaymentMet
 
 class BankAccountContainer extends AbstractPaymentMethodContainer
 {
-
     /**
      * @var string
      */
@@ -170,5 +169,4 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     {
         return $this->bic;
     }
-
 }
