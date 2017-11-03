@@ -54,7 +54,7 @@ class PayoneConfig extends AbstractBundleConfig
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
-        return $settings[PayoneConstants::PAYONE_EXPRESS_CHECKOUT_PROJECT_FAILURE_URL];
+        return $settings[PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILURE_URL];
     }
 
     /**
@@ -64,7 +64,7 @@ class PayoneConfig extends AbstractBundleConfig
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
-        return $settings[PayoneConstants::PAYONE_EXPRESS_CHECKOUT_PROJECT_BACK_URL];
+        return $settings[PayoneConstants::PAYONE_EXPRESS_CHECKOUT_BACK_URL];
     }
 
     /**

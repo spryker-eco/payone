@@ -32,12 +32,12 @@ $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY
     $config[ApplicationConstants::BASE_URL_YVES]
 );
 
-$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_PROJECT_BACK_URL] = sprintf(
+$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_BACK_URL] = sprintf(
     '%s/cart',
     $config[ApplicationConstants::BASE_URL_YVES]
 );
 
-$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_PROJECT_FAILURE_URL] = sprintf(
+$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILURE_URL] = sprintf(
     '%s/cart',
     $config[ApplicationConstants::BASE_URL_YVES]
 );
