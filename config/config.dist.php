@@ -42,21 +42,6 @@ $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILUR
     $config[ApplicationConstants::BASE_URL_YVES]
 );
 
-$config[KernelConstants::DEPENDENCY_INJECTOR_YVES] = [
-    'Checkout' => [
-        'Payone',
-    ],
-];
-
-$config[KernelConstants::DEPENDENCY_INJECTOR_ZED] = [
-    'Payment' => [
-        'Payone',
-    ],
-    'Oms' => [
-        'Payone',
-    ],
-];
-
 $config[OmsConstants::PROCESS_LOCATION] = [
     OmsConfig::DEFAULT_PROCESS_LOCATION,
     $config[KernelConstants::SPRYKER_ROOT] . '/DummyPayment/config/Zed/Oms',
