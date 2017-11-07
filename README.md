@@ -1,6 +1,6 @@
 # Payone Module
 
-[![Build Status](https://travis-ci.org/spryker-eco/payone.svg?branch=feature/ECO-508-ci-setup)](https://travis-ci.org/spryker-eco/payone)
+[![Build Status](https://travis-ci.org/spryker-eco/payone.svg?branch=master)](https://travis-ci.org/spryker-eco/payone)
 
 ## Installation
 
