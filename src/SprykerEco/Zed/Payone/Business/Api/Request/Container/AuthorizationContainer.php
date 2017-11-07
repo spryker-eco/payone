@@ -13,7 +13,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessC
 
 class AuthorizationContainer extends AbstractAuthorizationContainer
 {
-
     /**
      * @var string
      */
@@ -43,5 +42,4 @@ class AuthorizationContainer extends AbstractAuthorizationContainer
     {
         return $this->business;
     }
-
 }

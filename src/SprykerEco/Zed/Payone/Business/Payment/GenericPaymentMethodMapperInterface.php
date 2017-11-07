@@ -13,7 +13,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer
 
 interface GenericPaymentMethodMapperInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer $genericPayment
      * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
@@ -40,5 +39,4 @@ interface GenericPaymentMethodMapperInterface
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer
      */
     public function createBaseGenericPaymentContainer();
-
 }

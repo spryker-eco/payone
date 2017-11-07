@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Key;
 
 interface HmacGeneratorInterface
 {
-
     /**
      * @param string $string
      * @param string $key
@@ -17,5 +16,4 @@ interface HmacGeneratorInterface
      * @return string
      */
     public function hash($string, $key);
-
 }

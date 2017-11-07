@@ -12,7 +12,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\CreditCardCheckContaine
 
 class CreditCardCheck extends AbstractCall implements CallInterface
 {
-
     /**
      * @var string
      */
@@ -53,5 +52,4 @@ class CreditCardCheck extends AbstractCall implements CallInterface
 
         return $container;
     }
-
 }

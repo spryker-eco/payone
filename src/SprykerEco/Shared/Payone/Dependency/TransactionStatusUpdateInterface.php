@@ -9,7 +9,6 @@ namespace SprykerEco\Shared\Payone\Dependency;
 
 interface TransactionStatusUpdateInterface
 {
-
     /**
      * @return int
      */
@@ -229,5 +228,4 @@ interface TransactionStatusUpdateInterface
      * @return string
      */
     public function getClearingReference();
-
 }

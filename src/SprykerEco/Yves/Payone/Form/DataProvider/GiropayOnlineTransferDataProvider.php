@@ -15,7 +15,6 @@ use SprykerEco\Yves\Payone\Form\GiropayOnlineTransferSubForm;
 
 class GiropayOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -52,5 +51,4 @@ class GiropayOnlineTransferDataProvider implements StepEngineFormDataProviderInt
             'DE' => 'Germany',
         ];
     }
-
 }

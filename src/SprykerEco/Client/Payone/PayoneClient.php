@@ -26,7 +26,6 @@ use Spryker\Client\Kernel\AbstractClient;
  */
 class PayoneClient extends AbstractClient implements PayoneClientInterface
 {
-
     /**
      * Prepares credit card check request to bring standard parameters and hash to front-end.
      *
@@ -188,5 +187,4 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     {
         return $this->getFactory()->createZedStub()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
-
 }

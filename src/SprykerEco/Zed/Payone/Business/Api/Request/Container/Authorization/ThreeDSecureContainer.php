@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 
 class ThreeDSecureContainer extends AbstractContainer
 {
-
     /**
      * @var string
      */
@@ -103,5 +102,4 @@ class ThreeDSecureContainer extends AbstractContainer
     {
         return $this->redirect;
     }
-
 }

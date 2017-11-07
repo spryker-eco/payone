@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\TransactionStatus;
 
 class AbstractRequest
 {
-
     /**
      * @param array $params
      */
@@ -115,5 +114,4 @@ class AbstractRequest
 
         return null;
     }
-
 }

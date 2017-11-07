@@ -9,7 +9,6 @@ namespace SprykerEco\Shared\Payone;
 
 interface PayoneTransactionStatusConstants
 {
-
     const TXACTION_APPOINTED = 'appointed';
     const TXACTION_CAPTURE = 'capture';
     const TXACTION_PAID = 'paid';
@@ -22,5 +21,4 @@ interface PayoneTransactionStatusConstants
     const TXACTION_VSETTLEMENT = 'vsettlement';
     const TXACTION_TRANSFER = 'transfer';
     const TXACTION_INVOICE = 'invoice';
-
 }

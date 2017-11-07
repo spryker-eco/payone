@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 
 class ShippingContainer extends AbstractContainer
 {
-
     /**
      * @var string
      */
@@ -200,5 +199,4 @@ class ShippingContainer extends AbstractContainer
     {
         return $this->shipping_zip;
     }
-
 }

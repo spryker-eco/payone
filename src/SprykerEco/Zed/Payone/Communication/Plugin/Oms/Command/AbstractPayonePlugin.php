@@ -16,7 +16,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class AbstractPayonePlugin extends AbstractPlugin
 {
-
     /**
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
      *
@@ -29,5 +28,4 @@ class AbstractPayonePlugin extends AbstractPlugin
             ->getSalesFacade()
             ->getOrderByIdSalesOrder($orderEntity->getIdSalesOrder());
     }
-
 }

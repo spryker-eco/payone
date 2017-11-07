@@ -20,7 +20,6 @@ use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\NlSubFormsCreator;
  */
 class PluginCountryFactory extends AbstractPlugin
 {
-
     const DEFAULT_COUNTRY = 'default';
 
     /**
@@ -64,5 +63,4 @@ class PluginCountryFactory extends AbstractPlugin
 
         return $subFormsCreator;
     }
-
 }

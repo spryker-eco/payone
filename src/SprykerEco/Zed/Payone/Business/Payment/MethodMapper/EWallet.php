@@ -23,7 +23,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 
 class EWallet extends AbstractMapper
 {
-
     /**
      * @return string
      */
@@ -170,5 +169,4 @@ class EWallet extends AbstractMapper
 
         return $personalContainer;
     }
-
 }

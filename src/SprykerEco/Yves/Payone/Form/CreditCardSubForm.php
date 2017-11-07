@@ -15,7 +15,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CreditCardSubForm extends AbstractPayoneSubForm
 {
-
     const PAYMENT_METHOD = 'credit_card';
 
     const FIELD_CARD_TYPE = 'cardtype';
@@ -240,5 +239,4 @@ class CreditCardSubForm extends AbstractPayoneSubForm
 
         return $this;
     }
-
 }

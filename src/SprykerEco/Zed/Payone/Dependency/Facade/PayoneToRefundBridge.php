@@ -11,7 +11,6 @@ use Orm\Zed\Sales\Persistence\SpySalesOrder;
 
 class PayoneToRefundBridge implements PayoneToRefundInterface
 {
-
     /**
      * @var \Spryker\Zed\Refund\Business\RefundFacadeInterface
      */
@@ -35,5 +34,4 @@ class PayoneToRefundBridge implements PayoneToRefundInterface
     {
         return $this->refundFacade->calculateRefund($orderItems, $orderEntity);
     }
-
 }

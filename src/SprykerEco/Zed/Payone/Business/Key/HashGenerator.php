@@ -12,7 +12,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 
 class HashGenerator implements HashGeneratorInterface
 {
-
     /**
      * @var \SprykerEco\Shared\Payone\Dependency\HashInterface
      */
@@ -106,5 +105,4 @@ class HashGenerator implements HashGeneratorInterface
     {
         return $this->hashProvider->hash($string);
     }
-
 }

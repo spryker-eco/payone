@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 
 class TransactionContainer extends AbstractContainer
 {
-
     /**
      * @var string
      */
@@ -183,5 +182,4 @@ class TransactionContainer extends AbstractContainer
     {
         return $this->invoiceid;
     }
-
 }

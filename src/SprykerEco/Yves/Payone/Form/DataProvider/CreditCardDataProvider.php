@@ -15,7 +15,6 @@ use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 
 class CreditCardDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @const int YEAR_CHOICES_AMOUNT
      */
@@ -102,5 +101,4 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
             'B' => 'Carte Bleue',
         ];
     }
-
 }

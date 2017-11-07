@@ -15,7 +15,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContain
 
 class CaptureResponseMapper implements CaptureResponseMapperInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer $responseContainer
      *
@@ -72,5 +71,4 @@ class CaptureResponseMapper implements CaptureResponseMapperInterface
 
         return $result;
     }
-
 }

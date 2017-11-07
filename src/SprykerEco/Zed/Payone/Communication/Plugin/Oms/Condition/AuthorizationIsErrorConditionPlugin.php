@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class AuthorizationIsErrorConditionPlugin extends AbstractPlugin
 {
-
     const NAME = 'AuthorizationIsErrorPlugin';
 
     /**
@@ -27,5 +26,4 @@ class AuthorizationIsErrorConditionPlugin extends AbstractPlugin
     {
         return $this->getFacade()->isAuthorizationError($orderTransfer);
     }
-
 }

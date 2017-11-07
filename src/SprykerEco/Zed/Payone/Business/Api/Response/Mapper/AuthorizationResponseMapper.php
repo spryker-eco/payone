@@ -15,7 +15,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseC
 
 class AuthorizationResponseMapper implements AuthorizationResponseMapperInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer $responseContainer
      *
@@ -70,5 +69,4 @@ class AuthorizationResponseMapper implements AuthorizationResponseMapperInterfac
 
         return $result;
     }
-
 }

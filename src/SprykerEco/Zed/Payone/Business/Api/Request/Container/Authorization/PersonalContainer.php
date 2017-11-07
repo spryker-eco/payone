@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 
 class PersonalContainer extends AbstractContainer
 {
-
     /**
      * Merchant's customer ID (Permitted symbols: 0-9, a-z, A-Z, .,-,_,/)
      *
@@ -504,5 +503,4 @@ class PersonalContainer extends AbstractContainer
     {
         return $this->zip;
     }
-
 }

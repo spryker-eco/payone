@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class ThreeDSecureCheckContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -269,5 +268,4 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     {
         return $this->storecarddata;
     }
-
 }

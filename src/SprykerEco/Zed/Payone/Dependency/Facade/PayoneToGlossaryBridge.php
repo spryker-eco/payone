@@ -13,7 +13,6 @@ use Spryker\Zed\Glossary\Business\GlossaryFacadeInterface;
 
 class PayoneToGlossaryBridge implements PayoneToGlossaryInterface
 {
-
     /**
      * @var \Spryker\Zed\Glossary\Business\GlossaryFacadeInterface
      */
@@ -163,5 +162,4 @@ class PayoneToGlossaryBridge implements PayoneToGlossaryInterface
     {
         return $this->glossaryFacade->updateAndTouchTranslation($keyName, $locale, $value, $isActive);
     }
-
 }

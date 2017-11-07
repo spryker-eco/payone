@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class AddressCheckResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var int
      */
@@ -170,5 +169,4 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     {
         return $this->zip;
     }
-
 }

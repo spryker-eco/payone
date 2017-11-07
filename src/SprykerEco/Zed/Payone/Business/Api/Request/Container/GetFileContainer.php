@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class GetFileContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -85,5 +84,4 @@ class GetFileContainer extends AbstractRequestContainer
     {
         $this->file_format = $file_format;
     }
-
 }

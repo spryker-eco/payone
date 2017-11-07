@@ -12,14 +12,19 @@ use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 
 class PayoneControllerProvider extends YvesControllerProvider
 {
-
     const ROUTE_LOGIN = 'login';
     const CHECKOUT_PAYMENT = 'checkout-payment';
     const EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
-    const EXPRESS_CHECKOUT_INIT = 'payone-paypal-express-checkout-start';
-    const EXPRESS_CHECKOUT_SUCCESS = 'payone-paypal-express-checkout-success';
+    const EXPRESS_CHECKOUT_INIT = 'payone-paypal-express-checkout-init';
     const EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
     const EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
+    const EXPRESS_CHECKOUT_LOAD_DETAILS = 'payone-paypal-express-checkout-load-details';
+
+    const EXPRESS_CHECKOUT_BUTTON_PATH = '/payone/checkout-with-paypal-button';
+    const EXPRESS_CHECKOUT_INIT_PATH = '/payone/paypal-express-checkout-init';
+    const EXPRESS_CHECKOUT_FAILURE_PATH = '/payone/expresscheckout/failure';
+    const EXPRESS_CHECKOUT_BACK_PATH = '/payone/expresscheckout/back';
+    const EXPRESS_CHECKOUT_LOAD_DETAILS_PATH = '/payone/expresscheckout/load-details';
 
     /**
      * @param \Silex\Application $app
@@ -33,7 +38,7 @@ class PayoneControllerProvider extends YvesControllerProvider
         $this->createController('/payone/regular-redirect-payment-cancellation', 'payone-cancel-redirect', 'Payone', 'index', 'cancelRedirect')->method('GET');
         $this->createController('/payone/getinvoice', 'payone-getinvoice', 'Payone', 'index', 'getInvoice')->method('GET');
         $this->createController(
-            '/payone/checkout-with-paypal-button',
+            static::EXPRESS_CHECKOUT_BUTTON_PATH,
             static::EXPRESS_CHECKOUT_BUTTON,
             'payone',
             'expressCheckout',
@@ -41,7 +46,7 @@ class PayoneControllerProvider extends YvesControllerProvider
         )->method('GET');
 
         $this->createController(
-            '/payone/paypal-express-checkout-init',
+            static::EXPRESS_CHECKOUT_INIT_PATH,
             static::EXPRESS_CHECKOUT_INIT,
             'payone',
             'expressCheckout',
@@ -49,15 +54,15 @@ class PayoneControllerProvider extends YvesControllerProvider
         )->method('GET');
 
         $this->createController(
-            '/payone/expresscheckout/success',
-            static::EXPRESS_CHECKOUT_SUCCESS,
+            static::EXPRESS_CHECKOUT_LOAD_DETAILS_PATH,
+            static::EXPRESS_CHECKOUT_LOAD_DETAILS,
             'payone',
             'expressCheckout',
-            'success'
+            'loadPaypalExpressCheckoutDetails'
         )->method('GET');
 
         $this->createController(
-            '/payone/expresscheckout/failure',
+            static::EXPRESS_CHECKOUT_FAILURE_PATH,
             static::EXPRESS_CHECKOUT_FAILURE,
             'payone',
             'expressCheckout',
@@ -65,12 +70,11 @@ class PayoneControllerProvider extends YvesControllerProvider
         )->method('GET');
 
         $this->createController(
-            '/payone/expresscheckout/back',
+            static::EXPRESS_CHECKOUT_BACK_PATH,
             static::EXPRESS_CHECKOUT_BACK,
             'payone',
             'expressCheckout',
             'back'
         )->method('GET');
     }
-
 }

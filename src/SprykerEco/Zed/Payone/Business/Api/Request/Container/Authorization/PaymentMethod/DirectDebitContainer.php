@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\Pay
 
 class DirectDebitContainer extends AbstractPaymentMethodContainer
 {
-
     /**
      * @var string
      */
@@ -170,5 +169,4 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     {
         return $this->mandate_identification;
     }
-
 }

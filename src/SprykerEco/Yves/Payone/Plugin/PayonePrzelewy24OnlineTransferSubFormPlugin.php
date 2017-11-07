@@ -15,7 +15,6 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
  */
 class PayonePrzelewy24OnlineTransferSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
-
     /**
      * @return \SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm
      */
@@ -31,5 +30,4 @@ class PayonePrzelewy24OnlineTransferSubFormPlugin extends AbstractPlugin impleme
     {
         return $this->getFactory()->createPrzelewy24OnlineTransferSubFormDataProvider();
     }
-
 }

@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class GetInvoiceResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var string
      */
@@ -47,5 +46,4 @@ class GetInvoiceResponseContainer extends AbstractResponseContainer
 
         return $result;
     }
-
 }

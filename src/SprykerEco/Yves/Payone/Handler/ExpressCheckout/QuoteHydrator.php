@@ -25,7 +25,6 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 
 class QuoteHydrator implements QuoteHydratorInterface
 {
-
     /**
      * @const string CARRIER_NAME
      */
@@ -121,16 +120,18 @@ class QuoteHydrator implements QuoteHydratorInterface
         $methods = $this->shipmentClient->getAvailableMethods($quoteTransfer)->getMethods();
 
         if ($shippingMethod = reset($methods)) {
-            $shippingMethod->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE);
+            $shippingMethod->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE);
             $shipmentTransfer->setMethod($shippingMethod);
+            $shipmentTransfer->setShipmentSelection($shippingMethod->getIdShipmentMethod());
             $quoteTransfer->setShipment($shipmentTransfer);
+
             return $quoteTransfer;
         }
 
         $shipmentTransfer->setMethod(
             (new ShipmentMethodTransfer())
                 ->setCarrierName(static::CARRIER_NAME)
-                ->setDefaultPrice(static::DEFAULT_SHIPPING_PRICE)
+                ->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE)
         );
         $quoteTransfer->setShipment($shipmentTransfer);
 
@@ -195,5 +196,4 @@ class QuoteHydrator implements QuoteHydratorInterface
 
         return $quoteTransfer;
     }
-
 }

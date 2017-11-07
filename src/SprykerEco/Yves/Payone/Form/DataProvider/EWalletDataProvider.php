@@ -16,7 +16,6 @@ use SprykerEco\Yves\Payone\Form\EWalletSubForm;
 
 class EWalletDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -55,5 +54,4 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
             PayoneApiConstants::E_WALLET_TYPE_PAY_DIRECT => 'Paydirekt',
         ];
     }
-
 }

@@ -19,7 +19,6 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\CommandByOrderInterface;
  */
 class CancelCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
-
     /**
      * @param array $orderItems
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
@@ -40,5 +39,4 @@ class CancelCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
 
         return [];
     }
-
 }

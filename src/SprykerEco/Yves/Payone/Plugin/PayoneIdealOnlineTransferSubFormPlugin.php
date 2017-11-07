@@ -15,7 +15,6 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
  */
 class PayoneIdealOnlineTransferSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
-
     /**
      * @return \SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm
      */
@@ -31,5 +30,4 @@ class PayoneIdealOnlineTransferSubFormPlugin extends AbstractPlugin implements S
     {
         return $this->getFactory()->createIdealOnlineTransferSubFormDataProvider();
     }
-
 }

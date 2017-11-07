@@ -15,7 +15,6 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
  */
 class PayonePrePaymentSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
-
     /**
      * @return \SprykerEco\Yves\Payone\Form\PrePaymentForm
      */
@@ -31,5 +30,4 @@ class PayonePrePaymentSubFormPlugin extends AbstractPlugin implements SubFormPlu
     {
         return $this->getFactory()->createPrePaymentFormDataProvider();
     }
-
 }

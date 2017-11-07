@@ -11,7 +11,6 @@ use Propel\Runtime\Collection\ObjectCollection;
 
 interface PaymentLogReceiverPluginInterface
 {
-
     /**
      * This plugin fetches log entries for given orders.
      *
@@ -20,5 +19,4 @@ interface PaymentLogReceiverPluginInterface
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
     public function getPaymentLogs(ObjectCollection $orders);
-
 }

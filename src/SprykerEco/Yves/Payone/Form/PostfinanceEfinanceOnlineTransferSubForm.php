@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class PostfinanceEfinanceOnlineTransferSubForm extends OnlineTransferSubForm
 {
-
     const PAYMENT_METHOD = 'postfinance_efinance_online_transfer';
     const OPTION_BANK_COUNTRIES = 'postfinance efinance online transfer bank countries';
 
@@ -52,5 +51,4 @@ class PostfinanceEfinanceOnlineTransferSubForm extends OnlineTransferSubForm
 
         return $this;
     }
-
 }

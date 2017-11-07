@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class ManageMandateContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -476,5 +475,4 @@ class ManageMandateContainer extends AbstractRequestContainer
     {
         return $this->bic;
     }
-
 }

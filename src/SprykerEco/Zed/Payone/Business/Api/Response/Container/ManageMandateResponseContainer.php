@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class ManageMandateResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var string
      */
@@ -147,5 +146,4 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     {
         return $this->iban;
     }
-
 }

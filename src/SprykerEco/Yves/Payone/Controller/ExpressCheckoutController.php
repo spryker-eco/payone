@@ -7,10 +7,7 @@
 
 namespace SprykerEco\Yves\Payone\Controller;
 
-use Spryker\Shared\Config\Config;
 use Spryker\Yves\Kernel\Controller\AbstractController;
-use SprykerEco\Shared\Payone\PayoneConstants;
-use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 
 /**
  * @method \SprykerEco\Client\Payone\PayoneClientInterface getClient()
@@ -18,7 +15,6 @@ use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
  */
 class ExpressCheckoutController extends AbstractController
 {
-
     /**
      * @return array
      */
@@ -33,32 +29,19 @@ class ExpressCheckoutController extends AbstractController
     public function initPaypalExpressCheckoutAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
+
         return $expressCheckoutHandler->initPaypalExpressCheckout();
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function successAction()
+    public function loadPaypalExpressCheckoutDetailsAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
-        if (!$this->getFactory()->getCartClient()->getItemCount()) {
-            return $this->redirectResponseInternal($this->getCartRoute());
-        }
-        try {
-            $checkoutResponseTransfer = $expressCheckoutHandler->placeOrder();
-        } catch (\Exception $exception) {
-            $this->addErrorMessage('Saving order to the database failed.');
-            return $this->redirectResponseInternal($this->getCartRoute());
-        }
-        if (!$checkoutResponseTransfer->getIsSuccess()) {
-            return $this->redirectResponseInternal(PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE);
-        }
+        $expressCheckoutHandler->loadExpressCheckoutDetails();
 
-        $this->getFactory()->getCustomerClient()->markCustomerAsDirty();
-        $this->getFactory()->getCartClient()->clearQuote();
-
-        return $this->viewResponse();
+        return $expressCheckoutHandler->redirectToCheckoutEntryPoint();
     }
 
     /**
@@ -67,7 +50,10 @@ class ExpressCheckoutController extends AbstractController
     public function failureAction()
     {
         $this->addErrorMessage('Paypal transaction failed.');
-        return $this->redirectResponseInternal($this->getCartRoute());
+
+        return $this->getFactory()
+            ->createExpressCheckoutHandler()
+            ->redirectToFailureUrl();
     }
 
     /**
@@ -75,15 +61,8 @@ class ExpressCheckoutController extends AbstractController
      */
     public function backAction()
     {
-        return $this->redirectResponseInternal($this->getCartRoute());
+        return $this->getFactory()
+            ->createExpressCheckoutHandler()
+            ->redirectToBackUrl();
     }
-
-    /**
-     * @return string
-     */
-    protected function getCartRoute()
-    {
-        return Config::get(PayoneConstants::PAYONE)[PayoneConstants::ROUTE_CART];
-    }
-
 }

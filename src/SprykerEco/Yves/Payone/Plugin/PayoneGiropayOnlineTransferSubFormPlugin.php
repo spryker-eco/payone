@@ -15,7 +15,6 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
  */
 class PayoneGiropayOnlineTransferSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
-
     /**
      * @return \SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm
      */
@@ -31,5 +30,4 @@ class PayoneGiropayOnlineTransferSubFormPlugin extends AbstractPlugin implements
     {
         return $this->getFactory()->createGiropayOnlineTransferSubFormDataProvider();
     }
-
 }

@@ -15,7 +15,6 @@ use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
  */
 class ModeDetector implements ModeDetectorInterface
 {
-
     /**
      * @deprecated Will be removed. Needs refactoring to use Zed getMode().
      *
@@ -29,5 +28,4 @@ class ModeDetector implements ModeDetectorInterface
 
         return self::MODE_LIVE;
     }
-
 }

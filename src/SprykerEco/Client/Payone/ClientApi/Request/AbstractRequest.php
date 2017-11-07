@@ -9,7 +9,6 @@ namespace SprykerEco\Client\Payone\ClientApi\Request;
 
 abstract class AbstractRequest extends AbstractContainer
 {
-
     /**
      * @var int
      */
@@ -339,5 +338,4 @@ abstract class AbstractRequest extends AbstractContainer
     {
         return $this->language;
     }
-
 }

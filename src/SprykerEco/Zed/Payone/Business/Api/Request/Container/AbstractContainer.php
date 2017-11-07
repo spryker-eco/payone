@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
 abstract class AbstractContainer implements ContainerInterface
 {
-
     /**
      * @return array
      */
@@ -54,5 +53,4 @@ abstract class AbstractContainer implements ContainerInterface
     {
         return $key;
     }
-
 }

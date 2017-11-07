@@ -20,7 +20,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  */
 class CaptureWithSettlementCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
-
     /**
      * @param array $orderItems
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
@@ -45,5 +44,4 @@ class CaptureWithSettlementCommandPlugin extends AbstractPayonePlugin implements
 
         return [];
     }
-
 }

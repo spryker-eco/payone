@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class AddressCheckContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -338,5 +337,4 @@ class AddressCheckContainer extends AbstractRequestContainer
     {
         return $this->zip;
     }
-
 }

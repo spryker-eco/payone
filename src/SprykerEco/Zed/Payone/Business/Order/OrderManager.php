@@ -18,7 +18,6 @@ use SprykerEco\Zed\Payone\PayoneConfig;
 
 class OrderManager implements OrderManagerInterface
 {
-
     /**
      * @var \SprykerEco\Zed\Payone\PayoneConfig
      */
@@ -85,5 +84,4 @@ class OrderManager implements OrderManagerInterface
         $paymentDetailEntity->fromArray($paymentDetailTransfer->toArray());
         $paymentDetailEntity->save();
     }
-
 }

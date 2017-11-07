@@ -21,7 +21,6 @@ use SprykerEco\Zed\Payone\PayoneConfig;
 
 class PayoneFactory extends AbstractFactory
 {
-
     /**
      * @param array $defaults
      *
@@ -108,5 +107,4 @@ class PayoneFactory extends AbstractFactory
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_UTIL_ENCODING);
     }
-
 }

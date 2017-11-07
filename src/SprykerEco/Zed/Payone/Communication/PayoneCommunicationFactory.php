@@ -17,7 +17,6 @@ use SprykerEco\Zed\Payone\PayoneDependencyProvider;
  */
 class PayoneCommunicationFactory extends AbstractCommunicationFactory
 {
-
     /**
      * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsInterface
      */
@@ -49,5 +48,4 @@ class PayoneCommunicationFactory extends AbstractCommunicationFactory
     {
         return new UrlHmacGenerator();
     }
-
 }

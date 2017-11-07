@@ -11,7 +11,6 @@ use Spryker\Service\UtilEncoding\UtilEncodingService;
 
 abstract class AbstractContainer implements ContainerInterface
 {
-
     /**
      * @var \Spryker\Service\UtilEncoding\UtilEncodingService
      */
@@ -69,5 +68,4 @@ abstract class AbstractContainer implements ContainerInterface
     {
         return $this->utilEncodingService->encodeJson($this->toArray());
     }
-
 }

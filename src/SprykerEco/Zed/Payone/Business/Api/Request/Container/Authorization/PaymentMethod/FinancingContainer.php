@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectC
 
 class FinancingContainer extends AbstractPaymentMethodContainer
 {
-
     /**
      * Enum FinancingType
      *
@@ -59,5 +58,4 @@ class FinancingContainer extends AbstractPaymentMethodContainer
     {
         return $this->redirect;
     }
-
 }

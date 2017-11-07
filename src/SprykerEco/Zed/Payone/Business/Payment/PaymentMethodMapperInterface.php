@@ -12,7 +12,6 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 
 interface PaymentMethodMapperInterface extends BasePaymentMethodMapperInterface
 {
-
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -48,5 +47,4 @@ interface PaymentMethodMapperInterface extends BasePaymentMethodMapperInterface
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer
      */
     public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity);
-
 }

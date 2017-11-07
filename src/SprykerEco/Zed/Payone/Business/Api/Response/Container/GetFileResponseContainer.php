@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class GetFileResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var string
      */
@@ -32,5 +31,4 @@ class GetFileResponseContainer extends AbstractResponseContainer
     {
         $this->DATA = $DATA;
     }
-
 }

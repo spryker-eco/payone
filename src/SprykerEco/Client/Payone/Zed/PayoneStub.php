@@ -20,7 +20,6 @@ use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 
 class PayoneStub extends ZedRequestStub implements PayoneStubInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $transactionStatus
      *
@@ -137,5 +136,4 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
             $quoteTransfer
         );
     }
-
 }

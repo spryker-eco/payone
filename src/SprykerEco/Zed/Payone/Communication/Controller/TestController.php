@@ -27,7 +27,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  */
 class TestController extends AbstractController
 {
-
     const TEST_TRANSACTION_ID = '165145481';
     const TEST_VISA_PAN = '4111111111111111';
     const TEST_PSEUDO_PAN = '4100000145859436';
@@ -491,5 +490,4 @@ class TestController extends AbstractController
 
         return $rawResponse;
     }
-
 }

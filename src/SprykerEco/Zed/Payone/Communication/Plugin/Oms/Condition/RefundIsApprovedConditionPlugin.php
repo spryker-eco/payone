@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class RefundIsApprovedConditionPlugin extends AbstractPlugin
 {
-
     const NAME = 'RefundIsApprovedPlugin';
 
     /**
@@ -27,5 +26,4 @@ class RefundIsApprovedConditionPlugin extends AbstractPlugin
     {
         return $this->getFacade()->isRefundApproved($orderTransfer);
     }
-
 }

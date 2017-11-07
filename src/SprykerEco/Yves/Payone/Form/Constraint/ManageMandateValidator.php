@@ -14,7 +14,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class ManageMandateValidator extends ConstraintValidator
 {
-
     /**
      * {@inheritdoc}
      * @param string $value
@@ -46,7 +45,7 @@ class ManageMandateValidator extends ConstraintValidator
      * @param \Generated\Shared\Transfer\QuoteTransfer $data
      * @param \SprykerEco\Yves\Payone\Form\Constraint\ManageMandate $constraint
      *
-     * @return array|string[]
+     * @return string[]
      */
     protected function manageMandate(QuoteTransfer $data, ManageMandate $constraint)
     {
@@ -63,5 +62,4 @@ class ManageMandateValidator extends ConstraintValidator
         $data->getPayment()->getPayoneDirectDebit()->setBic(urldecode($response->getBic()));
         return [];
     }
-
 }

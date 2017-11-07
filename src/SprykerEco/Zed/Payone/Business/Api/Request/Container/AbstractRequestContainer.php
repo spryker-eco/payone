@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
 abstract class AbstractRequestContainer extends AbstractContainer
 {
-
     /**
      * @var int merchant id
      */
@@ -400,5 +399,4 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
         return $this;
     }
-
 }

@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
 interface ContainerInterface
 {
-
     /**
      * @return array
      */
@@ -19,5 +18,4 @@ interface ContainerInterface
      * @return string
      */
     public function __toString();
-
 }

@@ -14,7 +14,6 @@ use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 
 class PrePaymentDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -40,5 +39,4 @@ class PrePaymentDataProvider implements StepEngineFormDataProviderInterface
     {
         return [];
     }
-
 }

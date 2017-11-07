@@ -14,7 +14,6 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class ApiLogFinder implements ApiLogFinderInterface
 {
-
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
      */
@@ -224,5 +223,4 @@ class ApiLogFinder implements ApiLogFinderInterface
             $authorizationType
         )->findOne();
     }
-
 }

@@ -27,7 +27,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 
 class DirectDebit extends AbstractMapper
 {
-
     /**
      * @return string
      */
@@ -222,5 +221,4 @@ class DirectDebit extends AbstractMapper
 
         return $getFileContainer;
     }
-
 }

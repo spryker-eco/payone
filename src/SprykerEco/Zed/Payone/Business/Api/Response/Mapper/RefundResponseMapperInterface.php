@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContaine
 
 interface RefundResponseMapperInterface extends ResponseMapperInterface
 {
-
     /**
      * @const string NAME
      */
@@ -23,5 +22,4 @@ interface RefundResponseMapperInterface extends ResponseMapperInterface
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
     public function getRefundResponseTransfer(RefundResponseContainer $responseContainer);
-
 }

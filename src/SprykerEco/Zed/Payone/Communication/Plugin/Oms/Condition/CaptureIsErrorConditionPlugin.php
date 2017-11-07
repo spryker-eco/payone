@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class CaptureIsErrorConditionPlugin extends AbstractPlugin
 {
-
     const NAME = 'CaptureIsErrorPlugin';
 
     /**
@@ -27,5 +26,4 @@ class CaptureIsErrorConditionPlugin extends AbstractPlugin
     {
         return $this->getFacade()->isCaptureError($orderTransfer);
     }
-
 }

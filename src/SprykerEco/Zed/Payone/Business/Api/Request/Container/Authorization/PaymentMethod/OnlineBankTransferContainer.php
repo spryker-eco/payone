@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectC
 
 class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
 {
-
     /**
      * @var string
      */
@@ -195,5 +194,4 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     {
         return $this->bic;
     }
-
 }

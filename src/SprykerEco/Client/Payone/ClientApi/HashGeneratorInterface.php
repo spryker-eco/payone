@@ -11,7 +11,6 @@ use SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest;
 
 interface HashGeneratorInterface
 {
-
     /**
      * @param \SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest $request
      * @param string $securityKey
@@ -19,5 +18,4 @@ interface HashGeneratorInterface
      * @return string
      */
     public function generateHash(AbstractRequest $request, $securityKey);
-
 }

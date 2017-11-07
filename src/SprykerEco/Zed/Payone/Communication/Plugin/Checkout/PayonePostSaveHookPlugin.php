@@ -18,7 +18,6 @@ use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPostCheckPluginInterf
  */
 class PayonePostSaveHookPlugin extends AbstractPlugin implements CheckoutPostCheckPluginInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -29,5 +28,4 @@ class PayonePostSaveHookPlugin extends AbstractPlugin implements CheckoutPostChe
     {
         $this->getFacade()->postSaveHook($quoteTransfer, $checkoutResponse);
     }
-
 }

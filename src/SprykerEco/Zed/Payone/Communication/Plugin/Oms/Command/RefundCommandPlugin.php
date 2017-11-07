@@ -21,7 +21,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  */
 class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
-
     /**
      * @param array $orderItems
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
@@ -57,5 +56,4 @@ class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
 
         return [];
     }
-
 }

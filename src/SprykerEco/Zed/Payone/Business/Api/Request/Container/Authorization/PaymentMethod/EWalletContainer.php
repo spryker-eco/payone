@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectC
 
 class EWalletContainer extends AbstractPaymentMethodContainer
 {
-
     /**
      * @var string
      */
@@ -57,5 +56,4 @@ class EWalletContainer extends AbstractPaymentMethodContainer
     {
         return $this->redirect;
     }
-
 }

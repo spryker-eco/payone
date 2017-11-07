@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PayoneHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInterface
 {
-
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -28,5 +27,4 @@ class PayoneHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInt
     {
         $this->getFactory()->createPayoneHandler()->addPaymentToQuote($request, $quoteTransfer);
     }
-
 }

@@ -15,7 +15,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class BankAccountValidator extends ConstraintValidator
 {
-
     const INVALID_STATUSES = [
         PayoneApiConstants::RESPONSE_TYPE_ERROR,
         PayoneApiConstants::RESPONSE_TYPE_INVALID,
@@ -39,10 +38,10 @@ class BankAccountValidator extends ConstraintValidator
             return;
         }
 
-        /** @var \Symfony\Component\Form\Form $root */
+    /** @var \Symfony\Component\Form\Form $root */
         $root = $this->context->getRoot();
 
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $data */
+    /** @var \Generated\Shared\Transfer\QuoteTransfer $data */
         $data = $root->getData();
 
         $validationMessages = $this->validateBankAccount($data, $constraint);
@@ -50,7 +49,7 @@ class BankAccountValidator extends ConstraintValidator
         if (count($validationMessages) > 0) {
             foreach ($validationMessages as $validationMessage) {
                 $this->buildViolation($validationMessage)
-                    ->addViolation();
+                ->addViolation();
             }
         }
     }
@@ -70,5 +69,4 @@ class BankAccountValidator extends ConstraintValidator
 
         return [];
     }
-
 }

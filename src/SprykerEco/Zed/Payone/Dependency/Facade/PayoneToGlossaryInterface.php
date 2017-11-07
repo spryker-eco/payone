@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\LocaleTransfer;
 
 interface PayoneToGlossaryInterface
 {
-
     /**
      * @param int $idKey
      * @param array $data
@@ -131,5 +130,4 @@ interface PayoneToGlossaryInterface
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
     public function updateAndTouchTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true);
-
 }

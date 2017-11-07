@@ -9,7 +9,6 @@ namespace SprykerEco\Shared\Payone;
 
 interface PayoneApiConstants
 {
-
     // GENERAL
 
     const PROVIDER_NAME = 'payone';
@@ -295,5 +294,4 @@ interface PayoneApiConstants
     // PAYPAL EXPRESS CHECKOUT ACTIONS
     const PAYONE_EXPRESS_CHECKOUT_SET_ACTION = 'setexpresscheckout';
     const PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION = 'getexpresscheckoutdetails';
-
 }

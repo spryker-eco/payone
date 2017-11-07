@@ -15,7 +15,6 @@ use SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm;
 
 class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -91,5 +90,4 @@ class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterfa
             'EPS_VRBB' => 'VR-Bank Brunau',
         ];
     }
-
 }

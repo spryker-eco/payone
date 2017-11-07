@@ -15,7 +15,6 @@ use Symfony\Component\Yaml\Yaml;
 
 class Installer extends AbstractInstaller
 {
-
     /**
      * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface
      */
@@ -111,5 +110,4 @@ class Installer extends AbstractInstaller
 
         return $translation;
     }
-
 }

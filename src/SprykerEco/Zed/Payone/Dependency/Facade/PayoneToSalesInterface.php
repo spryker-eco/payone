@@ -9,12 +9,10 @@ namespace SprykerEco\Zed\Payone\Dependency\Facade;
 
 interface PayoneToSalesInterface
 {
-
     /**
      * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
     public function getOrderByIdSalesOrder($idSalesOrder);
-
 }

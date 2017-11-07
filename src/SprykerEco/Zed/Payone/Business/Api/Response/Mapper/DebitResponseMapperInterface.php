@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
 
 interface DebitResponseMapperInterface extends ResponseMapperInterface
 {
-
     /**
      * @const string NAME
      */
@@ -23,5 +22,4 @@ interface DebitResponseMapperInterface extends ResponseMapperInterface
      * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
     public function getDebitResponseTransfer(DebitResponseContainer $responseContainer);
-
 }

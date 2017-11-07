@@ -12,7 +12,6 @@ use SprykerEco\Zed\Payone\PayoneConfig;
 
 class ModeDetector implements ModeDetectorInterface
 {
-
     /**
      * @var \SprykerEco\Zed\Payone\PayoneConfig
      */
@@ -39,5 +38,4 @@ class ModeDetector implements ModeDetectorInterface
 
         return static::MODE_TEST;
     }
-
 }

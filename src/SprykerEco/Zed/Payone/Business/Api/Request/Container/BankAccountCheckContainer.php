@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class BankAccountCheckContainer extends AbstractRequestContainer
 {
-
     /**
      * @var string
      */
@@ -200,5 +199,4 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     {
         return $this->bic;
     }
-
 }

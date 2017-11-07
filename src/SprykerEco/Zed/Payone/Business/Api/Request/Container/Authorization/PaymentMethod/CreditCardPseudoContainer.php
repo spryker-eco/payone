@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSec
 
 class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
 {
-
     /**
      * @var string
      */
@@ -57,5 +56,4 @@ class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
     {
         return $this->threedsecure;
     }
-
 }

@@ -17,7 +17,6 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
-
     const FACADE_OMS = 'oms facade';
     const FACADE_REFUND = 'refund facade';
     const STORE_CONFIG = 'store config';
@@ -63,5 +62,4 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
         return $container;
     }
-
 }

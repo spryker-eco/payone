@@ -15,7 +15,6 @@ use SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm;
 
 class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -72,5 +71,4 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
             'VAN_LANSCHOT_BANKIERS' => 'van Lanschot Bank',
         ];
     }
-
 }

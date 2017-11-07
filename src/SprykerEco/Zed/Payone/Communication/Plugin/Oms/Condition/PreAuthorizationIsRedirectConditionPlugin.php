@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class PreAuthorizationIsRedirectConditionPlugin extends AbstractPlugin
 {
-
     const NAME = 'PreAuthorizationIsRedirectPlugin';
 
     /**
@@ -27,5 +26,4 @@ class PreAuthorizationIsRedirectConditionPlugin extends AbstractPlugin
     {
         return $this->getFacade()->isPreauthorizationRedirect($orderTransfer);
     }
-
 }

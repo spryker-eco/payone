@@ -17,7 +17,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class PaymentLogReceiverPlugin extends AbstractPlugin implements PaymentLogReceiverPluginInterface
 {
-
     /**
      * @param \Propel\Runtime\Collection\ObjectCollection $orders
      *
@@ -29,5 +28,4 @@ class PaymentLogReceiverPlugin extends AbstractPlugin implements PaymentLogRecei
         $orderCollectionTransfer->setOrders($orders->getData());
         return $this->getFacade()->getPaymentLogs($orderCollectionTransfer);
     }
-
 }

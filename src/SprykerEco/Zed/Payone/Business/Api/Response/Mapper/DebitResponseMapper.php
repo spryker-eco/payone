@@ -13,7 +13,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
 
 class DebitResponseMapper implements DebitResponseMapperInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer $responseContainer
      *
@@ -40,5 +39,4 @@ class DebitResponseMapper implements DebitResponseMapperInterface
 
         return $result;
     }
-
 }

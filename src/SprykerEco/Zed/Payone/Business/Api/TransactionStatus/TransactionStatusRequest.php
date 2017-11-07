@@ -11,7 +11,6 @@ use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
 
 class TransactionStatusRequest extends AbstractRequest implements TransactionStatusUpdateInterface
 {
-
     /**
      * @var string Payment portal key as MD5 value
      */
@@ -1027,5 +1026,4 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     {
         $this->price = $price;
     }
-
 }

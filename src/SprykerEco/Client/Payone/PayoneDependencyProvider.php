@@ -12,7 +12,6 @@ use Spryker\Client\Kernel\Container;
 
 class PayoneDependencyProvider extends AbstractDependencyProvider
 {
-
     const SERVICE_ZED = 'service zed';
 
     const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
@@ -34,5 +33,4 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
 
         return $container;
     }
-
 }

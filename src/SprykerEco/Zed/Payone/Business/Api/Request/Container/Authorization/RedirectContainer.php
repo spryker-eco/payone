@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 
 class RedirectContainer extends AbstractContainer
 {
-
     /**
      * @var string
      */
@@ -80,5 +79,4 @@ class RedirectContainer extends AbstractContainer
     {
         return $this->successurl;
     }
-
 }

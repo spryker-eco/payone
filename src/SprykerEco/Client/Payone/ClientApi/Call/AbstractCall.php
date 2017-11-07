@@ -15,7 +15,6 @@ use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 
 abstract class AbstractCall implements CallInterface
 {
-
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
@@ -107,5 +106,4 @@ abstract class AbstractCall implements CallInterface
     {
         return $this->modeDetector;
     }
-
 }

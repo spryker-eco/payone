@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class DebitResponseContainer extends AbstractResponseContainer
 {
-
     /**
      * @var int
      */
@@ -55,5 +54,4 @@ class DebitResponseContainer extends AbstractResponseContainer
     {
         return $this->txid;
     }
-
 }

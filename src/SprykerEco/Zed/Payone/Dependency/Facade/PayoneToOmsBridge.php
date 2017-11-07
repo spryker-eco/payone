@@ -11,7 +11,6 @@ use Propel\Runtime\Collection\ObjectCollection;
 
 class PayoneToOmsBridge implements PayoneToOmsInterface
 {
-
     /**
      * @var \Spryker\Zed\Oms\Business\OmsFacadeInterface
      */
@@ -37,5 +36,4 @@ class PayoneToOmsBridge implements PayoneToOmsInterface
     {
         return $this->omsFacade->triggerEvent($eventId, $orderItems, $logContext, $data);
     }
-
 }

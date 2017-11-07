@@ -15,7 +15,6 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class RefundIsPossibleConditionPlugin extends AbstractPlugin
 {
-
     const NAME = 'RefundIsPossiblePlugin';
 
     /**
@@ -27,5 +26,4 @@ class RefundIsPossibleConditionPlugin extends AbstractPlugin
     {
         return $this->getFacade()->isRefundPossible($orderTransfer);
     }
-
 }

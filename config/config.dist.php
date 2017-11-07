@@ -23,40 +23,24 @@ $config[PayoneConstants::PAYONE] = [
     PayoneConstants::PAYONE_REDIRECT_BACK_URL => $config[ApplicationConstants::HOST_YVES] . '/payone/regular-redirect-payment-cancellation',
     PayoneConstants::PAYONE_MODE => 'test',
     PayoneConstants::PAYONE_EMPTY_SEQUENCE_NUMBER => 0,
-    // The route of cart page, where user is redirected if smth goes wrong
-    PayoneConstants::ROUTE_CART => '',
 ];
 
-$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_SUCCESS_URL] = sprintf(
-    '%s/payone/expresscheckout/success',
+$config[PayoneConstants::PAYONE][PayoneConstants::HOST_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
+
+$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL] = sprintf(
+    '%s/checkout/paypal-express-checkout-entry-point',
     $config[ApplicationConstants::BASE_URL_YVES]
 );
 
-$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_FAILURE_URL] = sprintf(
-    '%s/payone/expresscheckout/error',
+$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_BACK_URL] = sprintf(
+    '%s/cart',
     $config[ApplicationConstants::BASE_URL_YVES]
 );
 
-$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_BACK_URL] = sprintf(
-    '%s/payone/expresscheckout/back',
+$config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILURE_URL] = sprintf(
+    '%s/cart',
     $config[ApplicationConstants::BASE_URL_YVES]
 );
-
-$config[KernelConstants::DEPENDENCY_INJECTOR_YVES] = [
-    'Checkout' => [
-        'DummyPayment',
-        'Payone',
-    ],
-];
-
-$config[KernelConstants::DEPENDENCY_INJECTOR_ZED] = [
-    'Payment' => [
-        'Payone'
-    ],
-    'Oms' => [
-        'Payone'
-    ],
-];
 
 $config[OmsConstants::PROCESS_LOCATION] = [
     OmsConfig::DEFAULT_PROCESS_LOCATION,
@@ -77,7 +61,7 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     PayoneConfig::PAYMENT_METHOD_PRZELEWY24_ONLINE_TRANSFER => 'PayoneOnlineTransfer',
     PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT => 'PayonePrePayment',
     PayoneConfig::PAYMENT_METHOD_INVOICE => 'PayoneInvoice',
-    PayoneConfig::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => 'PayonePaypalExpressCheckout'
+    PayoneConfig::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => 'PayonePaypalExpressCheckout',
 ];
 
 $config[OmsConstants::ACTIVE_PROCESSES] = [
@@ -87,5 +71,5 @@ $config[OmsConstants::ACTIVE_PROCESSES] = [
     'PayoneOnlineTransfer',
     'PayonePrePayment',
     'PayoneInvoice',
-    'PayonePaypalExpressCheckout'
+    'PayonePaypalExpressCheckout',
 ];

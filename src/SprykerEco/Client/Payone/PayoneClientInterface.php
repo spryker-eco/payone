@@ -18,7 +18,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 interface PayoneClientInterface
 {
-
     /**
      * Prepares credit card check request to bring standard parameters and hash to front-end.
      *
@@ -122,5 +121,4 @@ interface PayoneClientInterface
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
-
 }

@@ -14,7 +14,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionCo
 
 abstract class AbstractAuthorizationContainer extends AbstractRequestContainer implements AuthorizationContainerInterface
 {
-
     /**
      * Sub account ID
      *
@@ -330,5 +329,4 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     {
         $this->onlinebanktransfertype = $onlinebanktransfertype;
     }
-
 }

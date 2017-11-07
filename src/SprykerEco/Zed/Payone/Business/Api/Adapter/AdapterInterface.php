@@ -11,7 +11,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 
 interface AdapterInterface
 {
-
     /**
      * @param array $params
      *
@@ -35,5 +34,4 @@ interface AdapterInterface
      * @return string
      */
     public function getRawResponse();
-
 }

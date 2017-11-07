@@ -25,7 +25,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 
 class CreditCardPseudo extends AbstractMapper
 {
-
     /**
      * @return string
      */
@@ -207,5 +206,4 @@ class CreditCardPseudo extends AbstractMapper
 
         return $threeDContainer;
     }
-
 }

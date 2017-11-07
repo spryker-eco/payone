@@ -13,7 +13,6 @@ use SprykerEco\Yves\Payone\Plugin\PayonePostfinanceEfinanceOnlineTransferSubForm
 
 class ChSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreatorInterface
 {
-
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
      */
@@ -46,5 +45,4 @@ class ChSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     {
         return new PayonePostfinanceCardOnlineTransferSubFormPlugin();
     }
-
 }

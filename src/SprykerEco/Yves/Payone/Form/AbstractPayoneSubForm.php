@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
-
     const PAYMENT_PROVIDER = PayoneConstants::PROVIDER_NAME;
 
     const FIELD_PAYMENT_METHOD = 'paymentMethod';
@@ -85,5 +84,4 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
     {
         return new BankAccount([BankAccount::OPTION_PAYONE_CLIENT => $this->payoneClient]);
     }
-
 }

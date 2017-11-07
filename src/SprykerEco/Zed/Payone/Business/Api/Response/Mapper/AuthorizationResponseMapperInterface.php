@@ -11,12 +11,10 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseC
 
 interface AuthorizationResponseMapperInterface extends ResponseMapperInterface
 {
-
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer $responseContainer
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
     public function getAuthorizationResponseTransfer(AuthorizationResponseContainer $responseContainer);
-
 }
