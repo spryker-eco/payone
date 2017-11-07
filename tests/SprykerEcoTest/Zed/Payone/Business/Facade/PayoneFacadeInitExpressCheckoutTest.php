@@ -7,12 +7,10 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
+use Generated\Shared\DataBuilder\PayoneInitPaypalExpressCheckoutRequestBuilder;
 use Generated\Shared\Transfer\PaymentTransfer;
-use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
-use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
 use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\SetExpressCheckoutAdapterMock;
@@ -70,7 +68,7 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
      */
     protected function createExpressCheckoutRequestTransfer()
     {
-        $requestTransfer = new PayoneInitPaypalExpressCheckoutRequestTransfer();
+        $requestTransfer = (new PayoneInitPaypalExpressCheckoutRequestBuilder())->build();
 
         $quote = clone $this->quoteTransfer;
 
@@ -81,15 +79,6 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
         $quote->setPayment($paymentTransfer);
 
         $requestTransfer->setQuote($quote);
-        $requestTransfer->setSuccessUrl(
-            Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_SUCCESS_URL]
-        );
-        $requestTransfer->setFailureUrl(
-            Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_FAILURE_URL]
-        );
-        $requestTransfer->setBackUrl(
-            Config::get(PayoneConstants::PAYONE)[PayoneConstants::PAYONE_REDIRECT_EXPRESS_CHECKOUT_BACK_URL]
-        );
 
         return $requestTransfer;
     }
