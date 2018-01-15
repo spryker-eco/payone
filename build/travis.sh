@@ -42,7 +42,7 @@ function runTests {
 
 function checkArchRules {
     echo "Running Architecture sniffer..."
-    errors=`vendor/bin/phpmd "vendor/spryker-eco/$MODULE_NAME/src" text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority=2`
+    errors=`vendor/bin/phpmd "vendor/spryker-eco/$MODULE_NAME/src" text vendor/spryker/architecture-sniffer/src/ruleset.xml --minimumpriority=2 | grep -v __construct`
 
     if [[ "$errors" = "" ]]; then
         buildMessage="$buildMessage\n${GREEN}Architecture sniffer reports no errors"
@@ -61,7 +61,7 @@ function checkCodeSniffRules {
     fi
 
     echo "Running code sniffer..."
-    errors=`vendor/bin/console code:sniff "vendor/spryker-eco/$MODULE_NAME/src"`
+    errors=`vendor/bin/console code:sniff:style "vendor/spryker-eco/$MODULE_NAME/src"`
     errorsCount=$?
 
     if [[ "$errorsCount" = "0" ]]; then
@@ -73,8 +73,6 @@ function checkCodeSniffRules {
 }
 
 function checkPHPStan {
-    echo "Installing PHPStan..."
-    composer require --dev phpstan/phpstan
     echo "Updating code-completition..."
     vendor/bin/console dev:ide:generate-auto-completion
     echo "Running PHPStan..."
