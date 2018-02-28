@@ -8,11 +8,12 @@ sudo: required
 matrix:
   fast_finish: true
   include:
-     - php: "7.0"
+     - php: 7.1
 
 services:
   - postgresql
   - redis
+  - rabbitmq
 
 addons:
   postgresql: 9.4
@@ -54,7 +55,6 @@ install:
   - chmod -R 777 data/
   - config/Shared/ci/travis/install_elasticsearch.sh
 
-  - mv config/Zed/propel.ci.yml config/Zed/propel.yml
   - cat config/Shared/ci/travis/postgresql_ci.config >> config/Shared/ci/travis/config_ci.php
   - cp config/Shared/ci/travis/config_ci.php config/Shared/config_default-devtest_DE.php
   - cp config/Shared/ci/travis/params_test_env.sh deploy/setup/params_test_env.sh
