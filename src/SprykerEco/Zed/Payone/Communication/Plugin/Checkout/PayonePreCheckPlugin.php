@@ -22,10 +22,10 @@ class PayonePreCheckPlugin extends AbstractPlugin implements CheckoutPreCheckPlu
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @return bool
      */
     public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        return $checkoutResponseTransfer;
+        return true;
     }
 }
