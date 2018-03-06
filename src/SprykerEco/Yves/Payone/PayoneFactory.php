@@ -48,7 +48,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createPrePaymentForm()
     {
-        return new PrePaymentForm($this->getPayoneClient());
+        return new PrePaymentForm();
     }
 
     /**
@@ -64,7 +64,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createInvoiceSubForm()
     {
-        return new InvoiceSubForm($this->getPayoneClient());
+        return new InvoiceSubForm();
     }
 
     /**
@@ -118,7 +118,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createCreditCardSubForm()
     {
-        return new CreditCardSubForm($this->getPayoneClient());
+        return new CreditCardSubForm();
     }
 
     /**
@@ -134,7 +134,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createEWalletSubForm()
     {
-        return new EWalletSubForm($this->getPayoneClient());
+        return new EWalletSubForm();
     }
 
     /**
@@ -150,7 +150,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createDirectDebitSubForm()
     {
-        return new DirectDebitSubForm($this->getPayoneClient());
+        return new DirectDebitSubForm();
     }
 
     /**
@@ -166,7 +166,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createEpsOnlineTransferSubForm()
     {
-        return new EpsOnlineTransferSubForm($this->getPayoneClient());
+        return new EpsOnlineTransferSubForm();
     }
 
     /**
@@ -182,7 +182,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createGiropayOnlineTransferSubForm()
     {
-        return new GiropayOnlineTransferSubForm($this->getPayoneClient());
+        return new GiropayOnlineTransferSubForm();
     }
 
     /**
@@ -198,7 +198,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createInstantOnlineTransferSubForm()
     {
-        return new InstantOnlineTransferSubForm($this->getPayoneClient());
+        return new InstantOnlineTransferSubForm();
     }
 
     /**
@@ -214,7 +214,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createIdealOnlineTransferSubForm()
     {
-        return new IdealOnlineTransferSubForm($this->getPayoneClient());
+        return new IdealOnlineTransferSubForm();
     }
 
     /**
@@ -230,7 +230,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createPostfinanceEfinanceOnlineTransferSubForm()
     {
-        return new PostfinanceEfinanceOnlineTransferSubForm($this->getPayoneClient());
+        return new PostfinanceEfinanceOnlineTransferSubForm();
     }
 
     /**
@@ -246,7 +246,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createPostfinanceCardOnlineTransferSubForm()
     {
-        return new PostfinanceCardOnlineTransferSubForm($this->getPayoneClient());
+        return new PostfinanceCardOnlineTransferSubForm();
     }
 
     /**
@@ -262,7 +262,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createPrzelewy24OnlineTransferSubForm()
     {
-        return new Przelewy24OnlineTransferSubForm($this->getPayoneClient());
+        return new Przelewy24OnlineTransferSubForm();
     }
 
     /**

@@ -31,11 +31,6 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     const OPTION_BANK_COUNTRIES = '';
 
     /**
-     * @var \SprykerEco\Client\Payone\PayoneClient
-     */
-    protected $payoneClient;
-
-    /**
      * @return string
      */
     public function getName()
@@ -266,7 +261,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
         $bankAccountCheckTransfer->setIban($data->getIban());
         $bankAccountCheckTransfer->setBic($data->getBic());
 
-        $response = $this->payoneClient->bankAccountCheck($bankAccountCheckTransfer);
+        $response = $this->getClient()->bankAccountCheck($bankAccountCheckTransfer);
         if ($response->getStatus() == 'ERROR' || $response->getStatus() == 'INVALID') {
             $context->addViolation($response->getCustomerErrorMessage());
         }

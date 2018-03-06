@@ -29,11 +29,6 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     const OPTION_BANK_ACCOUNT_MODE = 'direct debit bank account mode';
 
     /**
-     * @var \SprykerEco\Client\Payone\PayoneClient
-     */
-    protected $payoneClient;
-
-    /**
      * @return string
      */
     public function getName()
@@ -251,6 +246,6 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
      */
     protected function createManageMandateConstraint()
     {
-        return new ManageMandate(['payoneClient' => $this->payoneClient, 'groups' => $this->getPropertyPath()]);
+        return new ManageMandate(['payoneClient' => $this->getClient(), 'groups' => $this->getPropertyPath()]);
     }
 }
