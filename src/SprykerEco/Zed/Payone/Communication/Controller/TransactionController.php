@@ -83,7 +83,6 @@ class TransactionController extends AbstractController
             return;
         }
 
-        //TODO: Refactor as per CD-380
         $orderItems = SpySalesOrderItemQuery::create()
             ->useOrderQuery()
             ->useSpyPaymentPayoneQuery()
