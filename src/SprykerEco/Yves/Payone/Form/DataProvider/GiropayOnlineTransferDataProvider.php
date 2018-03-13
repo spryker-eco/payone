@@ -48,7 +48,7 @@ class GiropayOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     protected function getBankCountries()
     {
         return [
-            'DE' => 'Germany',
+            'Germany' => 'DE',
         ];
     }
 }

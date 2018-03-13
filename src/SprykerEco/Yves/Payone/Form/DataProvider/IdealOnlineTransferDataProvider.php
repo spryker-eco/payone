@@ -49,7 +49,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
     protected function getBankCountries()
     {
         return [
-            'NL' => 'Netherlands',
+            'Netherlands' => 'NL',
         ];
     }
 
@@ -59,16 +59,16 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
     protected function getBankGroupTypes()
     {
         return [
-            'ABN_AMRO_BANK' => 'ABN Amro',
-            'RABOBANK' => 'Rabobank',
-            'FRIESLAND_BANK' => 'Friesland Bank',
-            'ASN_BANK' => 'ASN Bank',
-            'SNS_BANK' => 'SNS Bank',
-            'TRIODOS_BANK' => 'Triodos',
-            'SNS_REGIO_BANK' => 'SNS Regio Bank',
-            'ING_BANK' => 'ING',
-            'KNAB_BANK' => 'Knab Bank',
-            'VAN_LANSCHOT_BANKIERS' => 'van Lanschot Bank',
+            'ABN Amro' => 'ABN_AMRO_BANK',
+            'Rabobank' => 'RABOBANK',
+            'Friesland Bank' => 'FRIESLAND_BANK',
+            'ASN Bank' => 'ASN_BANK',
+            'SNS Bank' => 'SNS_BANK',
+            'Triodos' => 'TRIODOS_BANK',
+            'SNS Regio Bank' => 'SNS_REGIO_BANK',
+            'ING' => 'ING_BANK',
+            'Knab Bank' => 'KNAB_BANK',
+            'van Lanschot Bank' => 'VAN_LANSCHOT_BANKIERS',
         ];
     }
 }
