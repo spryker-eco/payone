@@ -10,10 +10,14 @@ namespace SprykerEco\Yves\Payone\Form;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayonePaymentOnlinetransferTransfer;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
 {
@@ -47,21 +51,29 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
-
         $resolver->setDefaults([
             'data_class' => PayonePaymentOnlinetransferTransfer::class,
             'constraints' => [
                 // Add Callback constraint for bank account check in ancestor classes
                 // new Callback(['methods' => [[$this, 'checkBankAccount']]])
             ],
-        ])->setRequired(static::OPTIONS_FIELD_NAME);
+        ])->setRequired(SubFormInterface::OPTIONS_FIELD_NAME);
+    }
+
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     *
+     * @return void
+     */
+    public function setDefaultOptions(OptionsResolver $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**
@@ -85,7 +97,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             static::FIELD_BANK_ACCOUNT,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => true,
@@ -106,7 +118,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             static::FIELD_BANK_CODE,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => true,
@@ -127,7 +139,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             static::FIELD_BANK_BRANCH_CODE,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => true,
@@ -148,7 +160,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             static::FIELD_BANK_CHECK_DIGIT,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => true,
@@ -169,7 +181,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             static::FIELD_IBAN,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => true,
@@ -192,7 +204,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
         if (count($options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES]) == 1) {
             $builder->add(
                 static::FIELD_BANK_COUNTRY,
-                'hidden',
+                HiddenType::class,
                 [
                     'label' => false,
                     'data' => array_keys($options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES])[0],
@@ -201,13 +213,13 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
         } else {
             $builder->add(
                 static::FIELD_BANK_COUNTRY,
-                'choice',
+                ChoiceType::class,
                 [
                     'label' => false,
                     'required' => true,
                     'expanded' => false,
                     'multiple' => false,
-                    'empty_value' => false,
+                    'placeholder' => false,
                     'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES],
                     'constraints' => [
                     ],
@@ -227,7 +239,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             static::FIELD_BIC,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => true,
@@ -241,7 +253,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
 
     /**
      * @param \Generated\Shared\Transfer\PayonePaymentOnlinetransferTransfer $data
-     * @param \Symfony\Component\Validator\ExecutionContextInterface $context
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      *
      * @return void
      */

@@ -11,8 +11,9 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PrePaymentForm extends AbstractPayoneSubForm
 {
@@ -43,18 +44,25 @@ class PrePaymentForm extends AbstractPayoneSubForm
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
-
         $resolver->setDefaults([
             'data_class' => PayonePaymentTransfer::class,
-            SubFormInterface::OPTIONS_FIELD_NAME => [],
-        ]);
+        ])->setRequired(SubFormInterface::OPTIONS_FIELD_NAME);
+    }
+
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     *
+     * @return void
+     */
+    public function setDefaultOptions(OptionsResolver $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**
@@ -77,7 +85,7 @@ class PrePaymentForm extends AbstractPayoneSubForm
     {
         $builder->add(
             self::FIELD_PAYMENT_METHOD,
-            'hidden',
+            HiddenType::class,
             [
                 'label' => false,
                 'required' => false,

@@ -12,6 +12,7 @@ use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormProviderNameInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Form\Constraint\BankAccount;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -48,7 +49,7 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
         $formData = $this->getClient()->getCreditCardCheckRequest();
         $builder->add(
             self::FIELD_CLIENT_API_CONFIG,
-            'hidden',
+            HiddenType::class,
             [
                 'label' => false,
                 'data' => $formData->toJson(),
