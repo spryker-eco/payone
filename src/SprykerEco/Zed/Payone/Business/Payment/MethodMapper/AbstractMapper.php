@@ -149,7 +149,6 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
         $personalContainer->setAddressAddition($billingAddressEntity->getAddress3());
         $personalContainer->setZip($billingAddressEntity->getZipCode());
         $personalContainer->setCity($billingAddressEntity->getCity());
-        $personalContainer->setState($billingAddressEntity->getRegion());
         $personalContainer->setEmail($billingAddressEntity->getEmail());
         $personalContainer->setTelephoneNumber($billingAddressEntity->getPhone());
         $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
@@ -171,7 +170,6 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
         );
         $shippingContainer->setShippingZip($shippingAddressEntity->getZipCode());
         $shippingContainer->setShippingCity($shippingAddressEntity->getCity());
-        $shippingContainer->setShippingState($shippingAddressEntity->getRegion());
         $shippingContainer->setShippingCountry($shippingAddressEntity->getCountry()->getIso2Code());
     }
 }

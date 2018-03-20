@@ -322,13 +322,22 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
+     * @return \Spryker\Client\Calculation\CalculationClientInterface
+     */
+    public function getCalculationClient()
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CALCULATION);
+    }
+
+    /**
      * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator
      */
     public function createQuoteHydrator()
     {
         return new QuoteHydrator(
             $this->getShipmentClient(),
-            $this->getCustomerClient()
+            $this->getCustomerClient(),
+            $this->getCalculationClient()
         );
     }
 }

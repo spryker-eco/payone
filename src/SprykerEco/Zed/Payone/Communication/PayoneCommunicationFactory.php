@@ -42,6 +42,14 @@ class PayoneCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCalculationInterface
+     */
+    public function getCalculationFacade()
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_CALCULATION);
+    }
+
+    /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
     public function createUrlHmacGenerator()

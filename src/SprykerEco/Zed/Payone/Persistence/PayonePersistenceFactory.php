@@ -16,7 +16,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
- * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer getQueryContainer()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  */
 class PayonePersistenceFactory extends AbstractPersistenceFactory
 {

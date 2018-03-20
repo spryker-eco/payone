@@ -24,6 +24,8 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
     const QUERY_CONTAINER_CUSTOMER = 'customer query container';
 
+    const CLIENT_CALCULATION = 'calculation client';
+
     /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
@@ -53,6 +55,10 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
         $container[self::CLIENT_SHIPMENT] = function (Container $container) {
             return $container->getLocator()->shipment()->client();
+        };
+
+        $container[self::CLIENT_CALCULATION] = function (Container $container) {
+            return $container->getLocator()->calculation()->client();
         };
 
         return $container;

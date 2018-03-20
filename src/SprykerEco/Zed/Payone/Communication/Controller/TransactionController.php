@@ -14,7 +14,7 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @method \SprykerEco\Zed\Payone\Business\PayoneFacade getFacade()
+ * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  */
 class TransactionController extends AbstractController

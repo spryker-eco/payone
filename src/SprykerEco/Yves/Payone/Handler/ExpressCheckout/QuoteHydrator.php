@@ -17,6 +17,7 @@ use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
+use Spryker\Client\Calculation\CalculationClientInterface;
 use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Shipment\ShipmentClientInterface;
 use Spryker\Shared\Kernel\Store;
@@ -46,16 +47,23 @@ class QuoteHydrator implements QuoteHydratorInterface
     protected $shipmentClient;
 
     /**
+     * @var \Spryker\Client\Calculation\CalculationClientInterface
+     */
+    protected $calculationClient;
+
+    /**
      * @param \Spryker\Client\Shipment\ShipmentClientInterface $shipmentClient
      * @param \Spryker\Client\Customer\CustomerClientInterface $customerClient
+     * @param \Spryker\Client\Calculation\CalculationClientInterface $calculationClient
      */
     public function __construct(
         ShipmentClientInterface $shipmentClient,
-        CustomerClientInterface $customerClient
+        CustomerClientInterface $customerClient,
+        CalculationClientInterface $calculationClient
     ) {
-
         $this->shipmentClient = $shipmentClient;
         $this->customerClient = $customerClient;
+        $this->calculationClient = $calculationClient;
     }
 
     /**
@@ -68,13 +76,11 @@ class QuoteHydrator implements QuoteHydratorInterface
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
     ) {
-
-        $this->hydrateQuoteWithPayment($quoteTransfer);
-        $this->hydrateQuoteWithShipment($quoteTransfer);
-        $this->hydrateQuoteWithCustomer($quoteTransfer, $details);
-        $this->hydrateQuoteWithAddresses($quoteTransfer, $details);
-
-        return $quoteTransfer;
+        $quoteTransfer = $this->hydrateQuoteWithPayment($quoteTransfer);
+        $quoteTransfer = $this->hydrateQuoteWithShipment($quoteTransfer);
+        $quoteTransfer = $this->hydrateQuoteWithCustomer($quoteTransfer, $details);
+        $quoteTransfer = $this->hydrateQuoteWithAddresses($quoteTransfer, $details);
+        return $this->calculationClient->recalculate($quoteTransfer);
     }
 
     /**

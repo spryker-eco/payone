@@ -36,7 +36,7 @@ use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
- * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer getQueryContainer()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  */
 class PayoneBusinessFactory extends AbstractBusinessFactory
 {
