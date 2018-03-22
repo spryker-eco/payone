@@ -49,7 +49,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
     protected function getBankCountries()
     {
         return [
-            'Netherlands' => 'NL',
+            'NL' => 'Netherlands',
         ];
     }
 
