@@ -49,7 +49,7 @@ class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterfa
     protected function getBankCountries()
     {
         return [
-            'Austria' => 'AT',
+            'AT' => 'Austria',
         ];
     }
 
