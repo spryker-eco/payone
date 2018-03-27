@@ -60,7 +60,6 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
         QuoteHydrator $quoteHydrator,
         PayoneConfig $payoneConfig
     ) {
-
         $this->payoneClient = $payoneClient;
         $this->cartClient = $cartClient;
         $this->checkoutClient = $checkoutClient;

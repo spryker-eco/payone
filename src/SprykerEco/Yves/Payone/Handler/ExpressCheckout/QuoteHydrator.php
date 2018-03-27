@@ -162,6 +162,7 @@ class QuoteHydrator implements QuoteHydratorInterface
 
         if (!empty($customerTransfer->getFirstName())) {
             $quoteTransfer->setCustomer($customerTransfer);
+            $this->customerClient->setCustomer($customerTransfer);
             return $quoteTransfer;
         }
 
@@ -169,6 +170,7 @@ class QuoteHydrator implements QuoteHydratorInterface
         $customerTransfer->setLastName($details->getShippingLastName());
         $customerTransfer->setCompany($details->getShippingCompany());
         $customerTransfer->setEmail($customerEmail);
+        $this->customerClient->setCustomer($customerTransfer);
         $quoteTransfer->setCustomer($customerTransfer);
 
         return $quoteTransfer;
