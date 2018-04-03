@@ -159,10 +159,12 @@ class QuoteHydrator implements QuoteHydratorInterface
         $customerTransfer = new CustomerTransfer();
         $customerTransfer->setEmail($customerEmail);
         $customerTransfer = $this->customerClient->getCustomerByEmail($customerTransfer);
+        if (!$this->customerClient->isLoggedIn()) {
+            $quoteTransfer->setIsGuestExpressCheckout(true);
+        }
 
         if (!empty($customerTransfer->getFirstName())) {
             $quoteTransfer->setCustomer($customerTransfer);
-            $this->customerClient->setCustomer($customerTransfer);
             return $quoteTransfer;
         }
 
@@ -170,7 +172,6 @@ class QuoteHydrator implements QuoteHydratorInterface
         $customerTransfer->setLastName($details->getShippingLastName());
         $customerTransfer->setCompany($details->getShippingCompany());
         $customerTransfer->setEmail($customerEmail);
-        $this->customerClient->setCustomer($customerTransfer);
         $quoteTransfer->setCustomer($customerTransfer);
 
         return $quoteTransfer;
