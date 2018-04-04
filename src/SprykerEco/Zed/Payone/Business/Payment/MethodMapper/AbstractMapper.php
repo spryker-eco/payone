@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
@@ -134,12 +135,13 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer $personalContainer
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderAddress $billingAddressEntity
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
      *
      * @return void
      */
-    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpySalesOrderAddress $billingAddressEntity)
+    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpySalesOrder $orderEntity)
     {
+        $billingAddressEntity = $orderEntity->getBillingAddress();
         $personalContainer->setCountry($billingAddressEntity->getCountry()->getIso2Code());
         $personalContainer->setFirstName($billingAddressEntity->getFirstName());
         $personalContainer->setLastName($billingAddressEntity->getLastName());
@@ -152,6 +154,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
         $personalContainer->setEmail($billingAddressEntity->getEmail());
         $personalContainer->setTelephoneNumber($billingAddressEntity->getPhone());
         $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
+        $personalContainer->setPersonalid($orderEntity->getCustomerReference());
     }
 
     /**

@@ -94,10 +94,10 @@ class OnlineBankTransfer extends AbstractMapper
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
-        $billingAddressEntity = $paymentEntity->getSpySalesOrder()->getBillingAddress();
+        $orderEntity = $paymentEntity->getSpySalesOrder();
 
         $personalContainer = new PersonalContainer();
-        $this->mapBillingAddressToPersonalContainer($personalContainer, $billingAddressEntity);
+        $this->mapBillingAddressToPersonalContainer($personalContainer, $orderEntity);
         $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
 
         $authorizationContainer->setPersonalData($personalContainer);

@@ -124,9 +124,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
-        $billingAddressEntity = $paymentEntity->getSpySalesOrder()->getBillingAddress();
+        $orderEntity = $paymentEntity->getSpySalesOrder();
         $personalContainer = new PersonalContainer();
-        $this->mapBillingAddressToPersonalContainer($personalContainer, $billingAddressEntity);
+        $this->mapBillingAddressToPersonalContainer($personalContainer, $orderEntity);
         $authorizationContainer->setPersonalData($personalContainer);
 
         $shippingAddressEntity = $paymentEntity->getSpySalesOrder()->getShippingAddress();
