@@ -78,8 +78,11 @@ class QuoteHydrator implements QuoteHydratorInterface
     ) {
         $quoteTransfer = $this->hydrateQuoteWithPayment($quoteTransfer);
         $quoteTransfer = $this->hydrateQuoteWithShipment($quoteTransfer);
-        $quoteTransfer = $this->hydrateQuoteWithCustomer($quoteTransfer, $details);
         $quoteTransfer = $this->hydrateQuoteWithAddresses($quoteTransfer, $details);
+        if (!$this->customerClient->isLoggedIn()) {
+            $quoteTransfer = $this->hydrateQuoteWithCustomer($quoteTransfer, $details);
+            $quoteTransfer->setIsGuestExpressCheckout(true);
+        }
         return $this->calculationClient->recalculate($quoteTransfer);
     }
 
@@ -154,14 +157,10 @@ class QuoteHydrator implements QuoteHydratorInterface
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
     ) {
-
         $customerEmail = $details->getEmail();
         $customerTransfer = new CustomerTransfer();
         $customerTransfer->setEmail($customerEmail);
         $customerTransfer = $this->customerClient->getCustomerByEmail($customerTransfer);
-        if (!$this->customerClient->isLoggedIn()) {
-            $quoteTransfer->setIsGuestExpressCheckout(true);
-        }
 
         if (!empty($customerTransfer->getFirstName())) {
             $quoteTransfer->setCustomer($customerTransfer);
@@ -187,20 +186,25 @@ class QuoteHydrator implements QuoteHydratorInterface
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
     ) {
+        $address = new AddressTransfer();
 
-        $shippingAddress = new AddressTransfer();
-        $shippingAddress->setFirstName($details->getShippingFirstName());
-        $shippingAddress->setLastName($details->getShippingLastName());
-        $shippingAddress->setCompany($details->getShippingCompany());
-        $shippingAddress->setEmail($details->getEmail());
-        $shippingAddress->setAddress1($details->getShippingStreet());
-        $shippingAddress->setAddress2($details->getShippingAddressAdition());
-        $shippingAddress->setCity($details->getShippingCity());
-        $shippingAddress->setState($details->getShippingState());
-        $shippingAddress->setIso2Code($details->getShippingCountry());
-        $shippingAddress->setZipCode($details->getShippingZip());
-        $quoteTransfer->setBillingAddress($shippingAddress);
-        $quoteTransfer->setShippingAddress($shippingAddress);
+        if ($this->customerClient->isLoggedIn()) {
+            $address->setEmail($quoteTransfer->getCustomer()->getEmail());
+        } else {
+            $address->setEmail($details->getEmail());
+        }
+
+        $address->setFirstName($details->getShippingFirstName());
+        $address->setLastName($details->getShippingLastName());
+        $address->setCompany($details->getShippingCompany());
+        $address->setAddress1($details->getShippingStreet());
+        $address->setAddress2($details->getShippingAddressAdition());
+        $address->setCity($details->getShippingCity());
+        $address->setState($details->getShippingState());
+        $address->setIso2Code($details->getShippingCountry());
+        $address->setZipCode($details->getShippingZip());
+        $quoteTransfer->setBillingAddress($address);
+        $quoteTransfer->setShippingAddress($address);
         $quoteTransfer->setBillingSameAsShipping(true);
 
         return $quoteTransfer;
