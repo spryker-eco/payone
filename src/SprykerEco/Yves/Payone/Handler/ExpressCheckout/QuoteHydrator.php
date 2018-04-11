@@ -166,7 +166,7 @@ class QuoteHydrator implements QuoteHydratorInterface
             $quoteTransfer->setCustomer($customerTransfer);
             return $quoteTransfer;
         }
-
+        $customerTransfer->setIsGuest(true);
         $customerTransfer->setFirstName($details->getShippingFirstName());
         $customerTransfer->setLastName($details->getShippingLastName());
         $customerTransfer->setCompany($details->getShippingCompany());
