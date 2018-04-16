@@ -795,6 +795,7 @@ class PaymentManager implements PaymentManagerInterface
         $whiteList = [
             PayoneApiConstants::PAYMENT_METHOD_E_WALLET,
             PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO,
+            PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
         ];
 
         if (in_array($paymentMethod, $whiteList)) {
