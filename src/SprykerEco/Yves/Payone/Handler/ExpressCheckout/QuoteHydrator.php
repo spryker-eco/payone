@@ -124,6 +124,10 @@ class QuoteHydrator implements QuoteHydratorInterface
      */
     protected function hydrateQuoteWithShipment($quoteTransfer)
     {
+        if ($quoteTransfer->getShipment()) {
+            return $quoteTransfer;
+        }
+
         $shipmentTransfer = new ShipmentTransfer();
 
         $methods = $this->shipmentClient->getAvailableMethods($quoteTransfer)->getMethods();
