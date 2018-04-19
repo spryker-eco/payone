@@ -91,7 +91,6 @@ class PayoneFactory extends AbstractFactory
         return new ExpressCheckoutHandler(
             $this->getPayoneClient(),
             $this->getCartClient(),
-            $this->getCheckoutClient(),
             $this->createQuoteHydrator(),
             $this->getConfig()
         );
@@ -282,7 +281,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Cart\CartClientInterface
+     * @return \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartInterface
      */
     public function getCartClient()
     {
@@ -290,15 +289,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Checkout\CheckoutClientInterface
-     */
-    public function getCheckoutClient()
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CHECKOUT);
-    }
-
-    /**
-     * @return \Spryker\Client\Customer\CustomerClientInterface
+     * @return \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerInterface
      */
     public function getCustomerClient()
     {
@@ -306,15 +297,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCustomerQueryBridge
-     */
-    public function getCustomerQueryContainer()
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::QUERY_CONTAINER_CUSTOMER);
-    }
-
-    /**
-     * @return \Spryker\Client\Shipment\ShipmentClientInterface
+     * @return \SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentInterface
      */
     public function getShipmentClient()
     {
@@ -322,7 +305,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\Calculation\CalculationClientInterface
+     * @return \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationInterface
      */
     public function getCalculationClient()
     {

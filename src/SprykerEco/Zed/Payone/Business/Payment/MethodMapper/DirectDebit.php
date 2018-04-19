@@ -178,10 +178,8 @@ class DirectDebit extends AbstractMapper
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
-        $orderEntity = $paymentEntity->getSpySalesOrder();
-
         $personalContainer = new PersonalContainer();
-        $this->mapBillingAddressToPersonalContainer($personalContainer, $orderEntity);
+        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
 
         $authorizationContainer->setPersonalData($personalContainer);
 

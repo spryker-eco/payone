@@ -11,10 +11,9 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Client\Cart\CartClientInterface;
-use Spryker\Client\Checkout\CheckoutClientInterface;
 use SprykerEco\Client\Payone\PayoneClientInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartInterface;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
 use SprykerEco\Yves\Payone\PayoneConfig;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -27,14 +26,9 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     protected $payoneClient;
 
     /**
-     * @var \Spryker\Client\Cart\CartClientInterface
+     * @var \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartInterface
      */
     protected $cartClient;
-
-    /**
-     * @var \Spryker\Client\Checkout\CheckoutClientInterface
-     */
-    protected $checkoutClient;
 
     /**
      * @var \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator
@@ -48,21 +42,18 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
 
     /**
      * @param \SprykerEco\Client\Payone\PayoneClientInterface $payoneClient
-     * @param \Spryker\Client\Cart\CartClientInterface $cartClient
-     * @param \Spryker\Client\Checkout\CheckoutClientInterface $checkoutClient
+     * @param \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartInterface $cartClient
      * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator $quoteHydrator
      * @param \SprykerEco\Yves\Payone\PayoneConfig $payoneConfig
      */
     public function __construct(
         PayoneClientInterface $payoneClient,
-        CartClientInterface $cartClient,
-        CheckoutClientInterface $checkoutClient,
+        PayoneToCartInterface $cartClient,
         QuoteHydrator $quoteHydrator,
         PayoneConfig $payoneConfig
     ) {
         $this->payoneClient = $payoneClient;
         $this->cartClient = $cartClient;
-        $this->checkoutClient = $checkoutClient;
         $this->quoteHydrator = $quoteHydrator;
         $this->payoneConfig = $payoneConfig;
     }

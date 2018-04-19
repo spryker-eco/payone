@@ -17,12 +17,12 @@ use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
-use Spryker\Client\Calculation\CalculationClientInterface;
-use Spryker\Client\Customer\CustomerClientInterface;
-use Spryker\Client\Shipment\ShipmentClientInterface;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationInterface;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerInterface;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentInterface;
 
 class QuoteHydrator implements QuoteHydratorInterface
 {
@@ -37,29 +37,29 @@ class QuoteHydrator implements QuoteHydratorInterface
     const DEFAULT_SHIPPING_PRICE = 0;
 
     /**
-     * @var \Spryker\Client\Customer\CustomerClientInterface
+     * @var \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerInterface
      */
     protected $customerClient;
 
     /**
-     * @var \Spryker\Client\Shipment\ShipmentClientInterface
+     * @var \SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentInterface
      */
     protected $shipmentClient;
 
     /**
-     * @var \Spryker\Client\Calculation\CalculationClientInterface
+     * @var \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationInterface
      */
     protected $calculationClient;
 
     /**
-     * @param \Spryker\Client\Shipment\ShipmentClientInterface $shipmentClient
-     * @param \Spryker\Client\Customer\CustomerClientInterface $customerClient
-     * @param \Spryker\Client\Calculation\CalculationClientInterface $calculationClient
+     * @param \SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentInterface $shipmentClient
+     * @param \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerInterface $customerClient
+     * @param \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationInterface $calculationClient
      */
     public function __construct(
-        ShipmentClientInterface $shipmentClient,
-        CustomerClientInterface $customerClient,
-        CalculationClientInterface $calculationClient
+        PayoneToShipmentInterface $shipmentClient,
+        PayoneToCustomerInterface $customerClient,
+        PayoneToCalculationInterface $calculationClient
     ) {
         $this->shipmentClient = $shipmentClient;
         $this->customerClient = $customerClient;
