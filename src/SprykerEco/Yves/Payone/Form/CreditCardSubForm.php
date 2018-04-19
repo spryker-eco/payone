@@ -9,9 +9,13 @@ namespace SprykerEco\Yves\Payone\Form;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentCreditCardTransfer;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreditCardSubForm extends AbstractPayoneSubForm
 {
@@ -56,17 +60,25 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
-
         $resolver->setDefaults([
             'data_class' => PayonePaymentCreditCardTransfer::class,
-        ])->setRequired(self::OPTIONS_FIELD_NAME);
+        ])->setRequired(SubFormInterface::OPTIONS_FIELD_NAME);
+    }
+
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     *
+     * @return void
+     */
+    public function setDefaultOptions(OptionsResolver $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**
@@ -92,14 +104,14 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             self::FIELD_CARD_TYPE,
-            'choice',
+            ChoiceType::class,
             [
                 'choices' => $options[self::OPTIONS_FIELD_NAME][self::OPTION_CARD_TYPES],
                 'label' => false,
                 'required' => true,
                 'expanded' => false,
                 'multiple' => false,
-                'empty_value' => false,
+                'placeholder' => false,
                 'constraints' => [
                     $this->createNotBlankConstraint(),
                 ],
@@ -118,7 +130,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             self::FIELD_CARD_NUMBER,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => false,
@@ -137,7 +149,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             self::FIELD_NAME_ON_CARD,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => true,
@@ -160,7 +172,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             self::FIELD_CARD_EXPIRES_MONTH,
-            'choice',
+            ChoiceType::class,
             [
                 'label' => false,
                 'choices' => $options[self::OPTIONS_FIELD_NAME][self::OPTION_CARD_EXPIRES_CHOICES_MONTH],
@@ -184,7 +196,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             self::FIELD_CARD_EXPIRES_YEAR,
-            'choice',
+            ChoiceType::class,
             [
                 'label' => false,
                 'choices' => $options[self::OPTIONS_FIELD_NAME][self::OPTION_CARD_EXPIRES_CHOICES_YEAR],
@@ -210,7 +222,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     {
         $builder->add(
             self::FIELD_CARD_SECURITY_CODE,
-            'text',
+            TextType::class,
             [
                 'label' => false,
                 'required' => false,
@@ -231,7 +243,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
 
         $builder->add(
             self::FIELD_PSEUDO_CARD_NUMBER,
-            'hidden',
+            HiddenType::class,
             [
                 'label' => false,
             ]

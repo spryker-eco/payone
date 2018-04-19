@@ -49,13 +49,13 @@ abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataP
     protected function getOnlineBankTransferTypes()
     {
         return [
-            'PNT' => 'Sofortbanking',           // (DE, AT, CH, NL)
-            'GPY' => 'giropay',                 // (DE)
-            'EPS' => 'eps – online transfer',  // (AT)
-            'PFF' => 'PostFinance E-Finance',   // (CH)
-            'PFC' => 'PostFinance Card',        // (CH)
-            'IDL' => 'iDEAL',                   // (NL)
-            'P24' => 'Przelewy24', // (P24)
+            'Sofortbanking' => 'PNT',           // (DE, AT, CH, NL)
+            'giropay' => 'GPY',                 // (DE)
+            'eps – online transfer' => 'EPS',   // (AT)
+            'PostFinance E-Finance' => 'PFF',   // (CH)
+            'PostFinance Card' => 'PFC',        // (CH)
+            'iDEAL' => 'IDL',                   // (NL)
+            'Przelewy24' => 'P24',              // (P24)
         ];
     }
 

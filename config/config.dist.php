@@ -18,9 +18,18 @@ $config[PayoneConstants::PAYONE] = [
     PayoneConstants::PAYONE_CREDENTIALS_AID => '',
     PayoneConstants::PAYONE_CREDENTIALS_PORTAL_ID => '',
     PayoneConstants::PAYONE_PAYMENT_GATEWAY_URL => 'https://api.pay1.de/post-gateway/',
-    PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL => $config[ApplicationConstants::HOST_YVES] . '/checkout/success',
-    PayoneConstants::PAYONE_REDIRECT_ERROR_URL => $config[ApplicationConstants::HOST_YVES] . '/checkout/payment',
-    PayoneConstants::PAYONE_REDIRECT_BACK_URL => $config[ApplicationConstants::HOST_YVES] . '/payone/regular-redirect-payment-cancellation',
+    PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL => sprintf(
+        '%s/checkout/success',
+        $config[ApplicationConstants::BASE_URL_YVES]
+    ),
+    PayoneConstants::PAYONE_REDIRECT_ERROR_URL => sprintf(
+        '%s/checkout/payment',
+        $config[ApplicationConstants::BASE_URL_YVES]
+    ),
+    PayoneConstants::PAYONE_REDIRECT_BACK_URL => sprintf(
+        '%s/checkout/regular-redirect-payment-cancellation',
+        $config[ApplicationConstants::BASE_URL_YVES]
+    ),
     PayoneConstants::PAYONE_MODE => 'test',
     PayoneConstants::PAYONE_EMPTY_SEQUENCE_NUMBER => 0,
 ];

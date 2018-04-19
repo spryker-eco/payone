@@ -22,7 +22,7 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 use SprykerEco\Shared\Payone\PayoneConstants;
 
 /**
- * @method \SprykerEco\Zed\Payone\Business\PayoneFacade getFacade()
+ * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  */
 class GatewayController extends AbstractGatewayController

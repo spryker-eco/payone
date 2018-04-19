@@ -11,11 +11,10 @@ use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use SprykerEco\Shared\Payone\PayoneConstants;
-use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @method \SprykerEco\Zed\Payone\Business\PayoneFacade getFacade()
+ * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  */
 class TransactionController extends AbstractController
@@ -62,42 +61,37 @@ class TransactionController extends AbstractController
         $payoneTransactionStatusUpdateTransfer = new PayoneTransactionStatusUpdateTransfer();
         $payoneTransactionStatusUpdateTransfer->fromArray($dataArray);
 
-        $response = $this->getFacade()->processTransactionStatusUpdate($payoneTransactionStatusUpdateTransfer);
+        $payoneTransactionStatusUpdateTransfer = $this->getFacade()->processTransactionStatusUpdate($payoneTransactionStatusUpdateTransfer);
 
-        $transactionId = $payoneTransactionStatusUpdateTransfer->getTxid();
-        $this->triggerEventsOnSuccess($response, $transactionId, $dataArray);
+        $this->triggerEventsOnSuccess($payoneTransactionStatusUpdateTransfer);
 
-        $callback = function () use ($response) {
-            echo $response;
+        $callback = function () use ($payoneTransactionStatusUpdateTransfer) {
+            echo $payoneTransactionStatusUpdateTransfer->getResponse();
         };
 
         return $this->streamedResponse($callback);
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse $response
-     * @param int $transactionId
-     * @param array $dataArray
+     * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer
      *
      * @return void
      */
-    protected function triggerEventsOnSuccess(TransactionStatusResponse $response, $transactionId, array $dataArray)
+    protected function triggerEventsOnSuccess(PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer)
     {
-        if (!$response->isSuccess()) {
+        if (!$payoneTransactionStatusUpdateTransfer->getIsSuccess()) {
             return;
         }
 
-        //TODO: Refactor as per CD-380
         $orderItems = SpySalesOrderItemQuery::create()
             ->useOrderQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByTransactionId($transactionId)
-            ->endUse()
+            ->filterByTransactionId($payoneTransactionStatusUpdateTransfer->getTxid())
             ->endUse()
             ->find();
         $this->getFactory()->getOmsFacade()->triggerEvent('PaymentNotificationReceived', $orderItems, []);
 
-        if ($dataArray['txaction'] === PayoneConstants::PAYONE_TXACTION_APPOINTED) {
+        if ($payoneTransactionStatusUpdateTransfer->getTxaction() === PayoneConstants::PAYONE_TXACTION_APPOINTED) {
             $this->getFactory()->getOmsFacade()->triggerEvent('RedirectResponseAppointed', $orderItems, []);
         }
     }

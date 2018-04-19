@@ -42,26 +42,6 @@ cache:
 before_install:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
-install:
-  - echo "Moving module to subfolder..."
-  - if [[ *$TRAVIS_EVENT_TYPE* = 'cron' ]]; then git checkout $(git tag | tail -n 1); fi
-  - mkdir $MODULE_DIR && ls -1 | grep -v ^$MODULE_DIR | xargs -I{} mv {} $MODULE_DIR
-  - echo "Cloning Demo Shop..."
-  - git clone https://github.com/spryker/demoshop.git $SHOP_DIR
-  - cd $SHOP_DIR
-  - composer self-update && composer --version
-  - composer install --no-interaction
-  - mkdir -p data/DE/logs
-  - chmod -R 777 data/
-  - config/Shared/ci/travis/install_elasticsearch.sh
-
-  - cat config/Shared/ci/travis/postgresql_ci.config >> config/Shared/ci/travis/config_ci.php
-  - cp config/Shared/ci/travis/config_ci.php config/Shared/config_default-devtest_DE.php
-  - cp config/Shared/ci/travis/params_test_env.sh deploy/setup/params_test_env.sh
-  - cd ..
-
-before_script:
-  - chmod a+x ./$MODULE_DIR/build/travis.sh
-
 script:
-  - ./$MODULE_DIR/build/travis.sh
+  - git clone -b 0.1.0 https://github.com/spryker-eco/eco-ci.git ecoci
+  - ./ecoci/build/travis.sh

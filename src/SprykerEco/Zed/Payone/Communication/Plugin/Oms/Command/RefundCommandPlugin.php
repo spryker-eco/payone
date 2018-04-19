@@ -17,7 +17,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 /**
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
- * @method \SprykerEco\Zed\Payone\Business\PayoneFacade getFacade()
+ * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  */
 class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {

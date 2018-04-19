@@ -13,7 +13,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPreCheckPluginInterface;
 
 /**
- * @method \SprykerEco\Zed\Payone\Business\PayoneFacade getFacade()
+ * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  */
 class PayonePreCheckPlugin extends AbstractPlugin implements CheckoutPreCheckPluginInterface
@@ -26,6 +26,8 @@ class PayonePreCheckPlugin extends AbstractPlugin implements CheckoutPreCheckPlu
      */
     public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
+        $quoteTransfer = $this->getFactory()->getCalculationFacade()->recalculateQuote($quoteTransfer);
+        $quoteTransfer->getPayment()->getPayone()->getPaymentDetail()->setAmount($quoteTransfer->getPayment()->getAmount());
         return true;
     }
 }

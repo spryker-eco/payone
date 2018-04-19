@@ -50,8 +50,8 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
     protected function getEWalletTypes()
     {
         return [
-            PayoneApiConstants::E_WALLET_TYPE_PAYPAL => 'PayPal',
-            PayoneApiConstants::E_WALLET_TYPE_PAY_DIRECT => 'Paydirekt',
+            'PayPal' => PayoneApiConstants::E_WALLET_TYPE_PAYPAL,
+            'Paydirekt' => PayoneApiConstants::E_WALLET_TYPE_PAY_DIRECT,
         ];
     }
 }

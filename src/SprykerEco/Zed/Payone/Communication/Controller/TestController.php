@@ -21,7 +21,7 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 /**
- * @method \SprykerEco\Zed\Payone\Business\PayoneFacade getFacade()
+ * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  */

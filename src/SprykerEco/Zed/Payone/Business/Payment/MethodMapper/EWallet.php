@@ -93,9 +93,8 @@ class EWallet extends AbstractMapper
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
-        $billingAddressEntity = $paymentEntity->getSpySalesOrder()->getBillingAddress();
         $personalContainer = new PersonalContainer();
-        $this->mapBillingAddressToPersonalContainer($personalContainer, $billingAddressEntity);
+        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
         $authorizationContainer->setPersonalData($personalContainer);
 
         $shippingAddressEntity = $paymentEntity->getSpySalesOrder()->getShippingAddress();

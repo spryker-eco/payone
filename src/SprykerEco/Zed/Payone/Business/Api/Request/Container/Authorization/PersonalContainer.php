@@ -119,7 +119,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * @var string
      */
-    protected $personalid;
+    protected $personalId;
 
     /**
      * @var string
@@ -469,21 +469,21 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $personalid
+     * @param string $personalId
      *
      * @return void
      */
-    public function setPersonalid($personalid)
+    public function setPersonalId($personalId)
     {
-        $this->personalid = $personalid;
+        $this->personalId = $personalId;
     }
 
     /**
      * @return string
      */
-    public function getPersonalid()
+    public function getPersonalId()
     {
-        return $this->personalid;
+        return $this->personalId;
     }
 
     /**
