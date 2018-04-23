@@ -79,7 +79,7 @@ class IndexController extends AbstractController
      */
     public function getInvoiceAction(Request $request)
     {
-        $customerClient = $this->getFactory()->createCustomerClient();
+        $customerClient = $this->getFactory()->getCustomerClient();
         $customerTransfer = $customerClient->getCustomer();
 
         if (!$customerTransfer) {

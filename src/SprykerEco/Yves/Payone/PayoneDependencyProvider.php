@@ -9,6 +9,10 @@ namespace SprykerEco\Yves\Payone;
 
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationBridge;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartBridge;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerBridge;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -18,11 +22,9 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
     const CLIENT_CART = 'cart client';
 
-    const CLIENT_CHECKOUT = 'checkout client';
-
     const CLIENT_SHIPMENT = 'shipment client';
 
-    const QUERY_CONTAINER_CUSTOMER = 'customer query container';
+    const CLIENT_CALCULATION = 'calculation client';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -36,23 +38,19 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         };
 
         $container[self::CLIENT_CUSTOMER] = function (Container $container) {
-            return $container->getLocator()->customer()->client();
+            return new PayoneToCustomerBridge($container->getLocator()->customer()->client());
         };
 
         $container[self::CLIENT_CART] = function (Container $container) {
-            return $container->getLocator()->cart()->client();
-        };
-
-        $container[self::CLIENT_CHECKOUT] = function (Container $container) {
-            return $container->getLocator()->checkout()->client();
-        };
-
-        $container[self::CLIENT_CHECKOUT] = function (Container $container) {
-            return $container->getLocator()->checkout()->client();
+            return new PayoneToCartBridge($container->getLocator()->cart()->client());
         };
 
         $container[self::CLIENT_SHIPMENT] = function (Container $container) {
-            return $container->getLocator()->shipment()->client();
+            return new PayoneToShipmentBridge($container->getLocator()->shipment()->client());
+        };
+
+        $container[self::CLIENT_CALCULATION] = function (Container $container) {
+            return new PayoneToCalculationBridge($container->getLocator()->calculation()->client());
         };
 
         return $container;

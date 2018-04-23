@@ -25,7 +25,7 @@
 
         <column name="pseudo_card_pan" type="VARCHAR" comment="Payone generated pseudocardpan instead of actual credit card data"/>
 
-        <column name="bank_country" type="VARCHAR" size="2"/>
+        <column name="bank_country" type="VARCHAR" size="12"/>
         <column name="bank_account" type="VARCHAR" size="26"/>
         <column name="bank_code" type="VARCHAR" size="8"/>
         <column name="bank_group_type" type="VARCHAR" size="50"/>

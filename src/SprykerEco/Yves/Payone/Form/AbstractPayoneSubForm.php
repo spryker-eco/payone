@@ -10,12 +10,15 @@ namespace SprykerEco\Yves\Payone\Form;
 use Spryker\Yves\StepEngine\Dependency\Form\AbstractSubFormType;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormProviderNameInterface;
-use SprykerEco\Client\Payone\PayoneClientInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Form\Constraint\BankAccount;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @method \SprykerEco\Client\Payone\PayoneClientInterface getClient()
+ */
 abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
     const PAYMENT_PROVIDER = PayoneConstants::PROVIDER_NAME;
@@ -27,19 +30,6 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
     const FIELD_PAYONE_HASH = 'payone_hash';
     const FIELD_CLIENT_API_CONFIG = 'payone_client_api_config';
     const FIELD_CLIENT_LANG_CODE = 'payone_client_lang_code';
-
-    /**
-     * @var \Spryker\Client\Payolution\PayolutionClientInterface
-     */
-    protected $payoneClient;
-
-    /**
-     * @param \SprykerEco\Client\Payone\PayoneClientInterface $payoneClient
-     */
-    public function __construct(PayoneClientInterface $payoneClient)
-    {
-        $this->payoneClient = $payoneClient;
-    }
 
     /**
      * @return string
@@ -56,10 +46,10 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
      */
     protected function addHiddenInputs(FormBuilderInterface $builder)
     {
-        $formData = $this->payoneClient->getCreditCardCheckRequest();
+        $formData = $this->getClient()->getCreditCardCheckRequest();
         $builder->add(
             self::FIELD_CLIENT_API_CONFIG,
-            'hidden',
+            HiddenType::class,
             [
                 'label' => false,
                 'data' => $formData->toJson(),
@@ -82,6 +72,6 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
      */
     protected function createBankAccountConstraint()
     {
-        return new BankAccount([BankAccount::OPTION_PAYONE_CLIENT => $this->payoneClient]);
+        return new BankAccount([BankAccount::OPTION_PAYONE_CLIENT => $this->getClient()]);
     }
 }

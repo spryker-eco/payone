@@ -9,6 +9,8 @@ namespace SprykerEco\Yves\Payone\Form;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class IdealOnlineTransferSubForm extends OnlineTransferSubForm
@@ -56,7 +58,7 @@ class IdealOnlineTransferSubForm extends OnlineTransferSubForm
     {
         $builder->add(
             static::FIELD_ONLINE_BANK_TRANSFER_TYPE,
-            'hidden',
+            HiddenType::class,
             [
                 'label' => false,
                 'data' => PayoneApiConstants::ONLINE_BANK_TRANSFER_TYPE_IDEAL,
@@ -76,13 +78,13 @@ class IdealOnlineTransferSubForm extends OnlineTransferSubForm
     {
         $builder->add(
             static::FIELD_BANK_GROUP_TYPE,
-            'choice',
+            ChoiceType::class,
             [
                 'label' => false,
                 'required' => true,
                 'expanded' => false,
                 'multiple' => false,
-                'empty_value' => false,
+                'placeholder' => false,
                 'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_GROUP_TYPES],
                 'constraints' => [],
             ]

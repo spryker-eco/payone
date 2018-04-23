@@ -15,7 +15,7 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\CommandByOrderInterface;
 
 /**
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
- * @method \SprykerEco\Zed\Payone\Business\PayoneFacade getFacade()
+ * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  */
 class CaptureCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {

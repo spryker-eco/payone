@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
@@ -134,12 +135,14 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer $personalContainer
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderAddress $billingAddressEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return void
      */
-    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpySalesOrderAddress $billingAddressEntity)
+    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentEntity)
     {
+        $orderEntity = $paymentEntity->getSpySalesOrder();
+        $billingAddressEntity = $orderEntity->getBillingAddress();
         $personalContainer->setCountry($billingAddressEntity->getCountry()->getIso2Code());
         $personalContainer->setFirstName($billingAddressEntity->getFirstName());
         $personalContainer->setLastName($billingAddressEntity->getLastName());
@@ -149,10 +152,10 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
         $personalContainer->setAddressAddition($billingAddressEntity->getAddress3());
         $personalContainer->setZip($billingAddressEntity->getZipCode());
         $personalContainer->setCity($billingAddressEntity->getCity());
-        $personalContainer->setState($billingAddressEntity->getRegion());
         $personalContainer->setEmail($billingAddressEntity->getEmail());
         $personalContainer->setTelephoneNumber($billingAddressEntity->getPhone());
         $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
+        $personalContainer->setPersonalId($orderEntity->getCustomerReference());
     }
 
     /**
@@ -171,7 +174,6 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
         );
         $shippingContainer->setShippingZip($shippingAddressEntity->getZipCode());
         $shippingContainer->setShippingCity($shippingAddressEntity->getCity());
-        $shippingContainer->setShippingState($shippingAddressEntity->getRegion());
         $shippingContainer->setShippingCountry($shippingAddressEntity->getCountry()->getIso2Code());
     }
 }

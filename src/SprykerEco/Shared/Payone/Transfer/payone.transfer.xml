@@ -434,6 +434,10 @@
         <property name="baseResponse" type="BaseResponse" />
     </transfer>
 
+    <transfer name="Quote">
+        <property name="isGuestExpressCheckout" type="bool" />
+    </transfer>
+
     <!--Response container replacement related transfers end-->
 
 </transfers>
