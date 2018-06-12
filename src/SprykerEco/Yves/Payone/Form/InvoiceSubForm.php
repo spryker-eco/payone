@@ -60,7 +60,7 @@ class InvoiceSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $this->configureOptions($resolver);
     }
