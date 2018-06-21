@@ -14,6 +14,7 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class InvoiceSubForm extends AbstractPayoneSubForm
 {
@@ -60,7 +61,7 @@ class InvoiceSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $this->configureOptions($resolver);
     }

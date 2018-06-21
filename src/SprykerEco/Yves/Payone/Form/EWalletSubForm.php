@@ -14,6 +14,7 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EWalletSubForm extends AbstractPayoneSubForm
 {
@@ -59,11 +60,11 @@ class EWalletSubForm extends AbstractPayoneSubForm
     }
 
     /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $this->configureOptions($resolver);
     }

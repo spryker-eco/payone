@@ -90,15 +90,15 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
     protected function getCardTypes()
     {
         return [
-            'Visa' => 'V',
-            'Master Card' => 'M',
-            'American Express' => 'A',
-            'Diners' => 'D',
-            'JCB' => 'J',
-            'Maestro International' => 'O',
-            'Maestro UK' => 'U',
-            'Discover' => 'C',
-            'Carte Bleue' => 'B',
+            'V' => 'Visa',
+            'M' => 'Master Card',
+            'A' => 'American Express',
+            'D' => 'Diners',
+            'J' => 'JCB',
+            'O' => 'Maestro International',
+            'U' => 'Maestro UK',
+            'C' => 'Discover',
+            'B' => 'Carte Bleue',
         ];
     }
 }
