@@ -221,7 +221,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
                     'expanded' => false,
                     'multiple' => false,
                     'placeholder' => false,
-                    'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES],
+                    'choices' => array_flip($options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES]),
                     'constraints' => [
                     ],
                 ]
