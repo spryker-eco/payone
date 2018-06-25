@@ -20,7 +20,7 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
+    public function getData(AbstractTransfer $quoteTransfer)
     {
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
@@ -35,7 +35,7 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer): array
+    public function getOptions(AbstractTransfer $quoteTransfer)
     {
         return [
             BancontactOnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -45,7 +45,7 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
     /**
      * @return array
      */
-    protected function getBankCountries(): array
+    protected function getBankCountries()
     {
         return [
             'BE' => 'Belgium',

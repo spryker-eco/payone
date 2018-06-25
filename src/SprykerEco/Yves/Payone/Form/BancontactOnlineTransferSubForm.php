@@ -14,14 +14,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
 {
-    public const PAYMENT_METHOD = 'bancontact_online_transfer';
-
-    public const OPTION_BANK_COUNTRIES = 'bancontact online transfer bank countries';
+    const PAYMENT_METHOD = 'bancontact_online_transfer';
+    const OPTION_BANK_COUNTRIES = 'bancontact online transfer bank countries';
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER;
     }
@@ -29,7 +28,7 @@ class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
     /**
      * @return string
      */
-    public function getPropertyPath(): string
+    public function getPropertyPath()
     {
         return PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER;
     }
@@ -40,7 +39,7 @@ class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
      *
      * @return \SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm
      */
-    public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options): BancontactOnlineTransferSubForm
+    public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
             static::FIELD_ONLINE_BANK_TRANSFER_TYPE,
