@@ -5,10 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Yves\Payone\Plugin;
+namespace SprykerEco\Yves\Payone\Plugin\Form;
 
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
+use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
+use SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()
@@ -18,7 +20,7 @@ class PayoneBancontactOnlineTransferSubFormPlugin extends AbstractPlugin impleme
     /**
      * @return \SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm
      */
-    public function createSubForm()
+    public function createSubForm(): BancontactOnlineTransferSubForm
     {
         return $this->getFactory()->createBancontactOnlineTransferSubForm();
     }
@@ -26,7 +28,7 @@ class PayoneBancontactOnlineTransferSubFormPlugin extends AbstractPlugin impleme
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider
      */
-    public function createSubFormDataProvider()
+    public function createSubFormDataProvider(): BancontactOnlineTransferDataProvider
     {
         return $this->getFactory()->createBancontactOnlineTransferSubFormDataProvider();
     }
