@@ -11,30 +11,17 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
-use SprykerEco\Yves\Payone\PayoneConfig;
 
 class BancontactOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
-    /**
-     * @var \SprykerEco\Yves\Payone\PayoneConfig
-     */
-    protected $config;
-
-    /**
-     * @param \SprykerEco\Yves\Payone\PayoneConfig $config
-     */
-    public function __construct(PayoneConfig $config)
-    {
-        $this->config = $config;
-    }
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
@@ -49,7 +36,7 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         return [
             BancontactOnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -59,8 +46,8 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
     /**
      * @return array
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
-        return $this->config->getBancontactAvailableCountries();
+        return PayoneConstants::PAYONE_BANCONTACT_AVAILABLE_COUNTRIES;
     }
 }

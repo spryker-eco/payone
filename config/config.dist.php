@@ -51,10 +51,6 @@ $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILUR
     $config[ApplicationConstants::BASE_URL_YVES]
 );
 
-$config[PayoneConstants::PAYONE_BANCONTACT_AVAILABLE_COUNTRIES] = [
-    'BE' => 'Belgium',
-];
-
 $config[OmsConstants::PROCESS_LOCATION] = [
     OmsConfig::DEFAULT_PROCESS_LOCATION,
     $config[KernelConstants::SPRYKER_ROOT] . '/DummyPayment/config/Zed/Oms',

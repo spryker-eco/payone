@@ -49,5 +49,7 @@ interface PayoneConstants
 
     const HOST_YVES = 'HOST_YVES';
 
-    const PAYONE_BANCONTACT_AVAILABLE_COUNTRIES = 'PAYONE:BANCONTACT_AVAILABLE_COUNTRIES';
+    const PAYONE_BANCONTACT_AVAILABLE_COUNTRIES = [
+        'BE' => 'Belgium',
+    ];
 }

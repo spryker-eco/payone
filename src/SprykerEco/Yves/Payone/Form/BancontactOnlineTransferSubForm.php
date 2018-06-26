@@ -20,7 +20,7 @@ class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER;
     }
@@ -28,7 +28,7 @@ class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER;
     }
@@ -39,7 +39,7 @@ class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
      *
      * @return \SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm
      */
-    public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
+    public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options): BancontactOnlineTransferSubForm
     {
         $builder->add(
             static::FIELD_ONLINE_BANK_TRANSFER_TYPE,
