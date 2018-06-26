@@ -51,6 +51,10 @@ $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILUR
     $config[ApplicationConstants::BASE_URL_YVES]
 );
 
+$config[PayoneConstants::PAYONE_BANCONTACT_AVAILABLE_COUNTRIES] = [
+    'BE' => 'Belgium',
+];
+
 $config[OmsConstants::PROCESS_LOCATION] = [
     OmsConfig::DEFAULT_PROCESS_LOCATION,
     $config[KernelConstants::SPRYKER_ROOT] . '/DummyPayment/config/Zed/Oms',
@@ -68,6 +72,7 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     PayoneConfig::PAYMENT_METHOD_POSTFINANCE_CARD_ONLINE_TRANSFER => 'PayoneOnlineTransfer',
     PayoneConfig::PAYMENT_METHOD_POSTFINANCE_EFINANCE_ONLINE_TRANSFER => 'PayoneOnlineTransfer',
     PayoneConfig::PAYMENT_METHOD_PRZELEWY24_ONLINE_TRANSFER => 'PayoneOnlineTransfer',
+    PayoneConfig::PAYMENT_METHOD_BANCONTACT_ONLINE_TRANSFER => 'PayoneOnlineTransfer',
     PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT => 'PayonePrePayment',
     PayoneConfig::PAYMENT_METHOD_INVOICE => 'PayoneInvoice',
     PayoneConfig::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => 'PayonePaypalExpressCheckout',

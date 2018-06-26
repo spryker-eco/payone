@@ -68,6 +68,14 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @return array
+     */
+    public function getBancontactAvailableCountries()
+    {
+        return $this->get(PayoneConstants::PAYONE_BANCONTACT_AVAILABLE_COUNTRIES) ?? [];
+    }
+
+    /**
      * @return string
      */
     protected function getYvesBaseUrl()

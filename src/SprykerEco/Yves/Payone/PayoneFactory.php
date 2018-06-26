@@ -287,7 +287,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createBancontactOnlineTransferSubFormDataProvider()
     {
-        return new BancontactOnlineTransferDataProvider();
+        return new BancontactOnlineTransferDataProvider($this->getConfig());
     }
 
     /**

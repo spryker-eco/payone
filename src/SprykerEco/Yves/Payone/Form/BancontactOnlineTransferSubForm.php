@@ -14,8 +14,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
 {
-    const PAYMENT_METHOD = 'bancontact_online_transfer';
-    const OPTION_BANK_COUNTRIES = 'bancontact online transfer bank countries';
+    public const PAYMENT_METHOD = 'bancontact_online_transfer';
+    public const OPTION_BANK_COUNTRIES = 'bancontact online transfer bank countries';
 
     /**
      * @return string

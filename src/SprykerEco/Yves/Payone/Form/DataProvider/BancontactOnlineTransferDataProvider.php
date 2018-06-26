@@ -12,9 +12,23 @@ use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
+use SprykerEco\Yves\Payone\PayoneConfig;
 
 class BancontactOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
+    /**
+     * @var \SprykerEco\Yves\Payone\PayoneConfig
+     */
+    protected $config;
+
+    /**
+     * @param \SprykerEco\Yves\Payone\PayoneConfig $config
+     */
+    public function __construct(PayoneConfig $config)
+    {
+        $this->config = $config;
+    }
+
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -47,8 +61,6 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      */
     protected function getBankCountries()
     {
-        return [
-            'BE' => 'Belgium',
-        ];
+        return $this->config->getBancontactAvailableCountries();
     }
 }
