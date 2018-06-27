@@ -48,8 +48,4 @@ interface PayoneConstants
     const GLOSSARY_FILE_PATH = 'Business/Internal/glossary.yml';
 
     const HOST_YVES = 'HOST_YVES';
-
-    const PAYONE_BANCONTACT_AVAILABLE_COUNTRIES = [
-        'BE' => 'Belgium',
-    ];
 }

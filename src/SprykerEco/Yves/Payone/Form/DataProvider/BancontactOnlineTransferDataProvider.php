@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
+use SprykerEco\Shared\Payone\PayoneConfig;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
 
 class BancontactOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
@@ -48,6 +48,6 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      */
     protected function getBankCountries(): array
     {
-        return PayoneConstants::PAYONE_BANCONTACT_AVAILABLE_COUNTRIES;
+        return PayoneConfig::PAYONE_BANCONTACT_AVAILABLE_COUNTRIES;
     }
 }

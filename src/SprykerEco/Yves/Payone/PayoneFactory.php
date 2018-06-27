@@ -277,7 +277,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm
      */
-    public function createBancontactOnlineTransferSubForm()
+    public function createBancontactOnlineTransferSubForm(): BancontactOnlineTransferSubForm
     {
         return new BancontactOnlineTransferSubForm();
     }
@@ -285,9 +285,9 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider
      */
-    public function createBancontactOnlineTransferSubFormDataProvider()
+    public function createBancontactOnlineTransferSubFormDataProvider(): BancontactOnlineTransferDataProvider
     {
-        return new BancontactOnlineTransferDataProvider($this->getConfig());
+        return new BancontactOnlineTransferDataProvider();
     }
 
     /**
