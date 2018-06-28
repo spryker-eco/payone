@@ -36,7 +36,7 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer): AbstractTransfer
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             BancontactOnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),

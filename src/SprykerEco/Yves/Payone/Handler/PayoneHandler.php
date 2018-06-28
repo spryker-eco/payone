@@ -145,6 +145,9 @@ class PayoneHandler implements PayoneHandlerInterface
         ) {
             $paymentDetailTransfer->setType($payonePaymentTransfer->getOnlineBankTransferType());
             $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankCountry());
+            if ($paymentSelection == PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER) {
+                $paymentDetailTransfer->setBankCountry($quoteTransfer->getBillingAddress()->getIso2Code());
+            }
             $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankAccount());
             $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankCode());
             $paymentDetailTransfer->setBankBranchCode($payonePaymentTransfer->getBankBranchCode());
