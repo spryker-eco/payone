@@ -25,6 +25,8 @@
     "spryker/propel": "*",
     "spryker/silex": "*",
     "spryker/testify": "*"
+    "spryker/checkout": "*"
+    "spryker/step-engine": "*"
   },
   "replace": {
     "spryker/payone": "*"
