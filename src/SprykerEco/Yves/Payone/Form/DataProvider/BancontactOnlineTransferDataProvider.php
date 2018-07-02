@@ -64,6 +64,6 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      */
     protected function getBankCountries(): array
     {
-        return $this->config->getPayOneBancontactAvailableCountraies();
+        return $this->config->getPayOneBancontactAvailableCountries();
     }
 }
