@@ -13,6 +13,18 @@ use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 
 class PayoneConfig extends AbstractBundleConfig
 {
+    protected const PAYONE_BANCONTACT_AVAILABLE_COUNTRIES = [
+        'BE' => 'Belgium',
+    ];
+
+    /**
+     * @return array
+     */
+    public function getPayOneBancontactAvailableCountraies(): array
+    {
+        return static::PAYONE_BANCONTACT_AVAILABLE_COUNTRIES;
+    }
+
     /**
      * @return string
      */
