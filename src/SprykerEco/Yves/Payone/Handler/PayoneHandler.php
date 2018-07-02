@@ -35,6 +35,7 @@ class PayoneHandler implements PayoneHandlerInterface
         PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER => 'postfinance_efinance_online_transfer',
         PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER => 'postfinance_card_online_transfer',
         PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER => 'przelewy24_online_transfer',
+        PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER => 'bancontact_online_transfer',
         PaymentTransfer::PAYONE_PRE_PAYMENT => 'prepayment',
         PaymentTransfer::PAYONE_INVOICE => 'invoice',
     ];
@@ -52,6 +53,7 @@ class PayoneHandler implements PayoneHandlerInterface
         PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER => PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
         PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER => PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
         PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER => PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
+        PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER => PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
         PaymentTransfer::PAYONE_PRE_PAYMENT => PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT,
         PaymentTransfer::PAYONE_INVOICE => PayoneApiConstants::PAYMENT_METHOD_INVOICE,
     ];
@@ -120,11 +122,11 @@ class PayoneHandler implements PayoneHandlerInterface
         // get it from quotaTransfer
         $paymentDetailTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $paymentDetailTransfer->setCurrency($this->getCurrency());
-        if ($paymentSelection == PaymentTransfer::PAYONE_CREDIT_CARD) {
+        if ($paymentSelection === PaymentTransfer::PAYONE_CREDIT_CARD) {
             $paymentDetailTransfer->setPseudoCardPan($payonePaymentTransfer->getPseudocardpan());
-        } elseif ($paymentSelection == PaymentTransfer::PAYONE_E_WALLET) {
+        } elseif ($paymentSelection === PaymentTransfer::PAYONE_E_WALLET) {
             $paymentDetailTransfer->setType($payonePaymentTransfer->getWallettype());
-        } elseif ($paymentSelection == PaymentTransfer::PAYONE_DIRECT_DEBIT) {
+        } elseif ($paymentSelection === PaymentTransfer::PAYONE_DIRECT_DEBIT) {
             $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankcountry());
             $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankaccount());
             $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankcode());
@@ -132,16 +134,20 @@ class PayoneHandler implements PayoneHandlerInterface
             $paymentDetailTransfer->setIban($payonePaymentTransfer->getIban());
             $paymentDetailTransfer->setMandateIdentification($payonePaymentTransfer->getMandateIdentification());
             $paymentDetailTransfer->setMandateText($payonePaymentTransfer->getMandateText());
-        } elseif ($paymentSelection == PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER
-            || $paymentSelection == PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER
-            || $paymentSelection == PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER
-            || $paymentSelection == PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER
-            || $paymentSelection == PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER
-            || $paymentSelection == PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER
-            || $paymentSelection == PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER
+        } elseif ($paymentSelection === PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER
+            || $paymentSelection === PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER
+            || $paymentSelection === PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER
+            || $paymentSelection === PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER
+            || $paymentSelection === PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER
+            || $paymentSelection === PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER
+            || $paymentSelection === PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER
+            || $paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER
         ) {
             $paymentDetailTransfer->setType($payonePaymentTransfer->getOnlineBankTransferType());
             $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankCountry());
+            if ($paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER) {
+                $paymentDetailTransfer->setBankCountry($quoteTransfer->getBillingAddress()->getIso2Code());
+            }
             $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankAccount());
             $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankCode());
             $paymentDetailTransfer->setBankBranchCode($payonePaymentTransfer->getBankBranchCode());

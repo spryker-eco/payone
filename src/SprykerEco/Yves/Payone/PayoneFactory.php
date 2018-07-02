@@ -8,7 +8,9 @@
 namespace SprykerEco\Yves\Payone;
 
 use Spryker\Yves\Kernel\AbstractFactory;
+use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
+use SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\CreditCardDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\DirectDebitDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\EpsOnlineTransferDataProvider;
@@ -270,6 +272,22 @@ class PayoneFactory extends AbstractFactory
     public function createPrzelewy24OnlineTransferSubFormDataProvider()
     {
         return new Przelewy24OnlineTransferDataProvider();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm
+     */
+    public function createBancontactOnlineTransferSubForm(): BancontactOnlineTransferSubForm
+    {
+        return new BancontactOnlineTransferSubForm();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider
+     */
+    public function createBancontactOnlineTransferSubFormDataProvider(): BancontactOnlineTransferDataProvider
+    {
+        return new BancontactOnlineTransferDataProvider($this->getConfig());
     }
 
     /**

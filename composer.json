@@ -16,7 +16,6 @@
     "spryker/kernel": "^3.0.0",
     "spryker/oms": "^6.0.0 || ^7.0.0 || ^8.0.0",
     "spryker/propel-orm": "^1.0.0",
-    "spryker/step-engine": "^3.0.0",
     "spryker/refund": "^4.0.0 || ^5.0.0",
     "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",
     "spryker/symfony": "^3.0.0"
@@ -25,13 +24,16 @@
     "spryker/code-sniffer": "*",
     "spryker/propel": "*",
     "spryker/silex": "*",
-    "spryker/testify": "*"
+    "spryker/testify": "*",
+    "spryker/checkout": "*",
+    "spryker/step-engine": "*"
   },
   "replace": {
     "spryker/payone": "*"
   },
   "suggest": {
-    "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout."
+    "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout.",
+    "spryker/step-engine": "If you want to use StepEngine plugins you need to install spryker/step-engine."
   },
   "description": "Payone module",
   "license": "proprietary",

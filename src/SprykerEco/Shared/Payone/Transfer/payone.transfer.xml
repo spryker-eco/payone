@@ -310,14 +310,15 @@
         <property name="payone" type="PayonePayment"/>
         <property name="payoneCreditCard" type="PayonePaymentCreditCard"/>
         <property name="payoneDirectDebit" type="PayonePaymentDirectDebit"/>
-        <property name="payoneOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
-        <property name="payoneEpsOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
-        <property name="payoneGiropayOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
-        <property name="payoneInstantOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
-        <property name="payoneIdealOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
-        <property name="payonePostfinanceEfinanceOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
-        <property name="payonePostfinanceCardOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
-        <property name="payonePrzelewy24OnlineTransfer" type="PayonePaymentOnlinetransfer"/>
+        <property name="payoneOnlineTransfer" type="PayonePaymentOnlineTransfer"/>
+        <property name="payoneEpsOnlineTransfer" type="PayonePaymentOnlineTransfer"/>
+        <property name="payoneGiropayOnlineTransfer" type="PayonePaymentOnlineTransfer"/>
+        <property name="payoneInstantOnlineTransfer" type="PayonePaymentOnlineTransfer"/>
+        <property name="payoneIdealOnlineTransfer" type="PayonePaymentOnlineTransfer"/>
+        <property name="payonePostfinanceEfinanceOnlineTransfer" type="PayonePaymentOnlineTransfer"/>
+        <property name="payonePostfinanceCardOnlineTransfer" type="PayonePaymentOnlineTransfer"/>
+        <property name="payonePrzelewy24OnlineTransfer" type="PayonePaymentOnlineTransfer"/>
+        <property name="payoneBancontactOnlineTransfer" type="PayonePaymentOnlineTransfer"/>
         <property name="payoneEWallet" type="PayonePaymentEWallet"/>
         <property name="payonePrePayment" type="PayonePayment"/>
         <property name="payoneInvoice" type="PayonePayment"/>
