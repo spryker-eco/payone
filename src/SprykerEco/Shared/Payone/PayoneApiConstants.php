@@ -46,6 +46,7 @@ interface PayoneApiConstants
     // bank account based methods
     const PAYMENT_METHOD_DIRECT_DEBIT = 'payment.payone.direct_debit';
     const PAYMENT_METHOD_INVOICE = 'payment.payone.invoice';
+    const PAYMENT_METHOD_SECURITY_INVOICE = 'payment.payone.security_invoice';
     const PAYMENT_METHOD_PREPAYMENT = 'payment.payone.prepayment';
     const PAYMENT_METHOD_CASH_ON_DELIVERY = 'payment.payone.cash_on_delivery';
 
@@ -58,6 +59,7 @@ interface PayoneApiConstants
     const CLEARING_TYPE_CREDIT_CARD = 'cc';
     const CLEARING_TYPE_PREPAYMENT = 'vor';
     const CLEARING_TYPE_INVOICE = 'rec';
+    const CLEARING_TYPE_SECURITY_INVOICE = 'rec';
     const CLEARING_TYPE_ONLINE_BANK_TRANSFER = 'sb';
     const CLEARING_TYPE_CASH_ON_DELIVERY = 'cod';
     const CLEARING_TYPE_E_WALLET = 'wlt';
@@ -122,6 +124,7 @@ interface PayoneApiConstants
     const REQUEST_TYPE_BANKACCOUNTCHECK = 'bankaccountcheck';
     const REQUEST_TYPE_CREDITCARDCHECK = 'creditcardcheck';
     const REQUEST_TYPE_GETINVOICE = 'getinvoice';
+    const REQUEST_TYPE_GETSECURITYINVOICE = 'getsecurityinvoice';
     const REQUEST_TYPE_MANAGEMANDATE = 'managemandate';
     const REQUEST_TYPE_GETFILE = 'getfile';
     const REQUEST_TYPE_GENERICPAYMENT = 'genericpayment';
@@ -290,6 +293,7 @@ interface PayoneApiConstants
     // INVOICE TITLE PREFIX
 
     const INVOICE_TITLE_PREFIX_INVOICE = 'RG';
+    const INVOICE_TITLE_PREFIX_SECURITY_INVOICE = 'RG';
     const INVOICE_TITLE_PREFIX_CREDIT_NOTE = 'GT';
 
     // PAYPAL EXPRESS CHECKOUT ACTIONS
