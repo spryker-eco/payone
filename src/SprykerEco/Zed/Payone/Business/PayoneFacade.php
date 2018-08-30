@@ -16,6 +16,7 @@ use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
+use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
@@ -189,6 +190,21 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
     {
         return $this->getFactory()->createPaymentManager()->getInvoice($getInvoiceTransfer);
+    }
+
+    /**
+     * Specification:
+     * - Performs GetInvoice request to Payone API for PDF file download.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
+     */
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
+    {
+        return $this->getFactory()->createPaymentManager()->getSecurityInvoice($getSecurityInvoiceTransfer);
     }
 
     /**
