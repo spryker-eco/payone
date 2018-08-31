@@ -25,6 +25,6 @@ class PayoneHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInt
      */
     public function addToDataClass(Request $request, AbstractTransfer $quoteTransfer)
     {
-       return $this->getFactory()->createPayoneHandler()->addPaymentToQuote($request, $quoteTransfer);
+        return $this->getFactory()->createPayoneHandler()->addPaymentToQuote($request, $quoteTransfer);
     }
 }

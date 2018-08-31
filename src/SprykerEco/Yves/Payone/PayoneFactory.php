@@ -79,7 +79,6 @@ class PayoneFactory extends AbstractFactory
         return new SecurityInvoiceSubForm();
     }
 
-
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider
      */
@@ -95,7 +94,6 @@ class PayoneFactory extends AbstractFactory
     {
         return new SecurityInvoiceDataProvider();
     }
-
 
     /**
      * @return \SprykerEco\Yves\Payone\Handler\PayoneHandler

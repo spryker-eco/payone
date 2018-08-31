@@ -345,6 +345,8 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
 
     /**
      * @param string $clearingsubtype
+     *
+     * @return void
      */
     public function setClearingsubtype(string $clearingsubtype): void
     {

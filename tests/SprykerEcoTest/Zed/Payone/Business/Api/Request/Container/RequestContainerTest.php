@@ -29,6 +29,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\BusinessContainer
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\PaymentMethod\BankAccountContainer as DebitBankAccountContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GetInvoiceContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\GetSecurityInvoiceContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
@@ -381,6 +382,31 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     {
         $container = new GetInvoiceContainer();
         $this->assertCount(1, $container->toArray()); // request set in container
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetSecurityInvoiceContainer(): void
+    {
+        $container = new GetSecurityInvoiceContainer();
+        $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
+
+        $this->setStandardParams($container);
+        $container->setInvoiceTitle('invoicetitle');
+        $this->assertEquals('invoicetitle', $container->getInvoiceTitle());
+
+        $this->assertEquals(PayoneApiConstants::REQUEST_TYPE_GETSECURITYINVOICE, $container->getRequest());
+        $this->assertStandardParams($container);
+    }
+
+    /**
+     * @return void
+     */
+    public function testEmptyGetSecurityInvoiceContainer(): void
+    {
+        $container = new GetSecurityInvoiceContainer();
+        $this->assertCount(1, $container->toArray());
     }
 
     /**
