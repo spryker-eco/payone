@@ -65,6 +65,9 @@ interface PayoneApiConstants
     const CLEARING_TYPE_E_WALLET = 'wlt';
     const CLEARING_TYPE_FINANCING = 'fnc';
 
+    //CLEARING SUBTYPE
+    public const CLEARING_SUBTYPE_SECURITY_INVOICE = 'POV';
+
     // TXACTION
 
     // Defined in TransactionStatusConstants

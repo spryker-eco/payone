@@ -21,6 +21,7 @@ class DefaultSubFormsCreator extends AbstractSubFormsCreator implements SubForms
             PaymentTransfer::PAYONE_DIRECT_DEBIT => $this->createPayoneDirectDebitSubFormPlugin(),
             PaymentTransfer::PAYONE_PRE_PAYMENT => $this->createPayonePrePaymentSubFormPlugin(),
             PaymentTransfer::PAYONE_INVOICE => $this->createPayoneInvoiceSubFormPlugin(),
+            PaymentTransfer::PAYONE_SECURITY_INVOICE => $this->createPayoneSecurityInvoiceSubFormPlugin(),
             PaymentTransfer::PAYONE_E_WALLET => $this->createEWalletSubFormPlugin(),
         ];
     }

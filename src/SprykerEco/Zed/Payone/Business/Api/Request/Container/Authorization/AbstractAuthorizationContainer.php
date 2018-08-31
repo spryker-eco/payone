@@ -27,6 +27,11 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     protected $clearingtype;
 
     /**
+     * @var string
+     */
+    protected $clearingsubtype;
+
+    /**
      * Merchant reference number for the payment process. (Permitted symbols: 0-9, a-z, A-Z, .,-,_,/)
      *
      * @var string
@@ -328,5 +333,21 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     public function setOnlinebanktransfertype($onlinebanktransfertype)
     {
         $this->onlinebanktransfertype = $onlinebanktransfertype;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClearingsubtype(): string
+    {
+        return $this->clearingsubtype;
+    }
+
+    /**
+     * @param string $clearingsubtype
+     */
+    public function setClearingsubtype(string $clearingsubtype): void
+    {
+        $this->clearingsubtype = $clearingsubtype;
     }
 }

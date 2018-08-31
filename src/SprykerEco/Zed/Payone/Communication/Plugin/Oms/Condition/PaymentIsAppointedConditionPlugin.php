@@ -23,9 +23,11 @@ class PaymentIsAppointedConditionPlugin extends AbstractCondition
      */
     public function check(SpySalesOrderItem $orderItem)
     {
-        $res = $this->getFacade()
-            ->isPaymentAppointed($orderItem->getFkSalesOrder(), $orderItem->getIdSalesOrderItem());
+        return true;
 
-        return $res;
+//        $res = $this->getFacade()
+//            ->isPaymentAppointed($orderItem->getFkSalesOrder(), $orderItem->getIdSalesOrderItem());
+
+//        return $res;
     }
 }

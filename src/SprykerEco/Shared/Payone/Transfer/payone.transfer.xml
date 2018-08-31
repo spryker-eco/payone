@@ -332,6 +332,7 @@
         <property name="payoneEWallet" type="PayonePaymentEWallet"/>
         <property name="payonePrePayment" type="PayonePayment"/>
         <property name="payoneInvoice" type="PayonePayment"/>
+        <property name="payoneSecurityInvoice" type="PayonePayment"/>
         <property name="payonePaypalExpressCheckout" type="PayonePaypalExpressCheckout" />
         <property name="summaryIncludePath" type="string"/>
         <property name="successIncludePath" type="string"/>
