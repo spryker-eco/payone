@@ -1,0 +1,61 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'credit-card',
+    tag: 'credit-card'
+} %}
+
+{% define data = {
+    form: required,
+    scriptSrc: required,
+    scriptId: required
+} %}
+
+{% define attributes = {
+    'form-selector': '[name="paymentForm"]',
+    'form-id': 'payment-form',
+    'client-api-config-selector': '#paymentForm_payoneCreditCard_payone_client_api_config',
+    'language-input-selector': '#Payone_credit_card_payone_client_lang_code',
+    'card-type-input-selector': '#cardtype',
+    'script-id': data.scriptId
+} %}
+
+{% block body %}
+    {% include molecule('script-loader') with {
+        attributes: {
+            src: data.scriptSrc,
+            id: data.scriptId
+        }
+    } only %}
+
+    <div id="payoneCreditCard">
+        <label for="cardtypeInput">{{ 'Payone_credit_card.cardtype' | trans }}</label>
+        {{ form_widget(data.form.payoneCreditCard.cardtype, { 'id': 'cardtype', 'attr': {'placeholder': 'Payone_credit_card.cardtype' | trans } }) }}
+
+        <label for="cardpanInput">{{ 'Payone_credit_card.cardpan' | trans }}</label>
+        <div id="cardpan"></div>
+
+        <label for="cvcInput">{{ 'Payone_credit_card.cardcvc2' | trans }}</label>
+        <div id="cardcvc2"></div>
+
+        <label for="expireInput">{{ 'Payone_credit_card.cardexpiredate' | trans }}</label>
+        <div id="expireInput">
+            <span id="cardexpiremonth"></span>
+            <span id="cardexpireyear"></span>
+        </div>
+
+        <label>{{ 'Payone_credit_card.cardholder' | trans }}</label>
+        <div>
+            {{ form_widget(data.form.payoneCreditCard.cardholder) }}
+            {{ form_errors(data.form.payoneCreditCard.cardholder) }}
+        </div>
+
+        <div>
+            {{ form_widget(data.form.payoneCreditCard.payone_client_api_config) }}
+            {{ form_widget(data.form.payoneCreditCard.pseudocardpan, {'id': 'pseudocardpan'}) }}
+            <input type="hidden" id="Payone_credit_card_payone_client_lang_code" name="payone_client_lang_code" value="{{ app.locale }}">
+        </div>
+
+        <div id="errorOutput"></div>
+    </div>
+{% endblock %}
