@@ -45,26 +45,47 @@ class SecurityInvoice extends AbstractMapper
     {
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
+        $authorizationContainer = $this->mapOrderItems($orderTransfer, $authorizationContainer);
 
         return $authorizationContainer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $orderItem
+     * @param OrderTransfer $orderTransfer
+     * @param AbstractAuthorizationContainer $authorizationContainer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer
+     * @return AbstractAuthorizationContainer
      */
-    public function mapOrderItemToItemContainer(ItemTransfer $orderItem)
+    public function mapOrderItems( OrderTransfer $orderTransfer, AbstractAuthorizationContainer $authorizationContainer): AbstractAuthorizationContainer
     {
-        $itemContainer = new ItemContainer();
-        $itemContainer->setIt(PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS);
-        $itemContainer->setId($orderItem->getSku());
-        $itemContainer->setPr($orderItem->getUnitGrossPrice());
-        $itemContainer->setNo($orderItem->getQuantity());
-        $itemContainer->setDe($orderItem->getName());
-        $itemContainer->setVa($orderItem->getTaxRate());
+        $arrayIt = [];
+        $arrayId = [];
+        $arrayPr = [];
+        $arrayNo = [];
+        $arrayDe = [];
+        $arrayVa = [];
 
-        return $itemContainer;
+        $key = 1;
+
+        foreach ($orderTransfer->getItems() as $itemTransfer) {
+            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
+            $arrayId[$key] = $itemTransfer->getSku();
+            $arrayPr[$key] = $itemTransfer->getSumPrice();
+            $arrayNo[$key] = $itemTransfer->getQuantity();
+            $arrayDe[$key] = $itemTransfer->getName();
+            $arrayVa[$key] = $itemTransfer->getTaxRate();
+            $key++;
+        }
+
+        $authorizationContainer->setIt($arrayIt);
+        $authorizationContainer->setId($arrayId);
+        $authorizationContainer->setPr($arrayPr);
+        $authorizationContainer->setNo($arrayNo);
+        $authorizationContainer->setDe($arrayDe);
+        $authorizationContainer->setVa($arrayVa);
+        $authorizationContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
+
+        return $authorizationContainer;
     }
 
     /**
@@ -127,9 +148,8 @@ class SecurityInvoice extends AbstractMapper
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_SECURITY_INVOICE);
-//        $authorizationContainer->setClearingsubtype(PayoneApiConstants::CLEARING_SUBTYPE_SECURITY_INVOICE);
+        $authorizationContainer->setClearingsubtype(PayoneApiConstants::CLEARING_SUBTYPE_SECURITY_INVOICE);
         $authorizationContainer->setReference($paymentEntity->getReference());
-        $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
@@ -163,12 +183,12 @@ class SecurityInvoice extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GetSecurityInvoiceContainer
      */
-    public function mapGetInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
+    public function mapGetSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
     {
-        $getSecurityInvoiceContainer = new GetSecurityInvoiceContainer();
-        $getSecurityInvoiceContainer->setInvoiceTitle($getSecurityInvoiceTransfer->getReference());
+        $getInvoiceContainer = new GetSecurityInvoiceContainer();
+        $getInvoiceContainer->setInvoiceTitle($getSecurityInvoiceTransfer->getReference());
 
-        return $getSecurityInvoiceContainer;
+        return $getInvoiceContainer;
     }
 
     /**

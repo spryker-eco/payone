@@ -173,19 +173,6 @@ class Invoice extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GetSecurityInvoiceContainer
-     */
-    public function mapGetSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
-    {
-        $getInvoiceContainer = new GetSecurityInvoiceContainer();
-        $getInvoiceContainer->setInvoiceTitle($getSecurityInvoiceTransfer->getReference());
-
-        return $getInvoiceContainer;
-    }
-
-    /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer
