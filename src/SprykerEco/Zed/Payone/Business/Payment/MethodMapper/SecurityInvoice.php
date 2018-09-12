@@ -11,62 +11,81 @@ use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
-use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\InvoiceContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\SecurityInvoiceContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\GetInvoiceContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GetSecurityInvoiceContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 
-class Invoice extends AbstractMapper
+class SecurityInvoice extends AbstractMapper
 {
     /**
      * @return string
      */
     public function getName()
     {
-        return PayoneApiConstants::PAYMENT_METHOD_INVOICE;
+        return PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE;
     }
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
     public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer)
     {
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
+        $authorizationContainer = $this->mapOrderItems($orderTransfer, $authorizationContainer);
 
         return $authorizationContainer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $orderItem
+     * @param OrderTransfer $orderTransfer
+     * @param AbstractAuthorizationContainer $authorizationContainer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer
+     * @return AbstractAuthorizationContainer
      */
-    public function mapOrderItemToItemContainer(ItemTransfer $orderItem)
+    public function mapOrderItems( OrderTransfer $orderTransfer, AbstractAuthorizationContainer $authorizationContainer): AbstractAuthorizationContainer
     {
-        $itemContainer = new ItemContainer();
-        $itemContainer->setIt(PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS);
-        $itemContainer->setId($orderItem->getSku());
-        $itemContainer->setPr($orderItem->getUnitGrossPrice());
-        $itemContainer->setNo($orderItem->getQuantity());
-        $itemContainer->setDe($orderItem->getName());
-        $itemContainer->setVa($orderItem->getTaxRate());
+        $arrayIt = [];
+        $arrayId = [];
+        $arrayPr = [];
+        $arrayNo = [];
+        $arrayDe = [];
+        $arrayVa = [];
 
-        return $itemContainer;
+        $key = 1;
+
+        foreach ($orderTransfer->getItems() as $itemTransfer) {
+            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
+            $arrayId[$key] = $itemTransfer->getSku();
+            $arrayPr[$key] = $itemTransfer->getSumPrice();
+            $arrayNo[$key] = $itemTransfer->getQuantity();
+            $arrayDe[$key] = $itemTransfer->getName();
+            $arrayVa[$key] = $itemTransfer->getTaxRate();
+            $key++;
+        }
+
+        $authorizationContainer->setIt($arrayIt);
+        $authorizationContainer->setId($arrayId);
+        $authorizationContainer->setPr($arrayPr);
+        $authorizationContainer->setNo($arrayNo);
+        $authorizationContainer->setDe($arrayDe);
+        $authorizationContainer->setVa($arrayVa);
+        $authorizationContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
+
+        return $authorizationContainer;
     }
 
     /**
@@ -107,7 +126,7 @@ class Invoice extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
     public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
     {
@@ -128,9 +147,9 @@ class Invoice extends AbstractMapper
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
-        $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_INVOICE);
+        $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_SECURITY_INVOICE);
+        $authorizationContainer->setClearingsubtype(PayoneApiConstants::CLEARING_SUBTYPE_SECURITY_INVOICE);
         $authorizationContainer->setReference($paymentEntity->getReference());
-        $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
@@ -160,14 +179,14 @@ class Invoice extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $getInvoiceTransfer
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GetInvoiceContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GetSecurityInvoiceContainer
      */
-    public function mapGetInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
+    public function mapGetSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
     {
-        $getInvoiceContainer = new GetInvoiceContainer();
-        $getInvoiceContainer->setInvoiceTitle($getInvoiceTransfer->getReference());
+        $getInvoiceContainer = new GetSecurityInvoiceContainer();
+        $getInvoiceContainer->setInvoiceTitle($getSecurityInvoiceTransfer->getReference());
 
         return $getInvoiceContainer;
     }
@@ -199,11 +218,11 @@ class Invoice extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\CreditCardPseudoContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\SecurityInvoiceContainer
      */
     protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
     {
-        $paymentMethodContainer = new InvoiceContainer();
+        $paymentMethodContainer = new SecurityInvoiceContainer();
 
         return $paymentMethodContainer;
     }

@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
+use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
@@ -468,6 +469,18 @@ interface PayoneFacadeInterface
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer);
+
+    /**
+     * Specification:
+     * - Performs GetSecurityInvoice request to Payone API for PDF file download.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
+     */
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer

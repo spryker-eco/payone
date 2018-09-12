@@ -71,7 +71,7 @@ class Simulator extends AbstractHttpAdapter
     }
 
     /**
-     * @return string
+     * @return void
      */
     public function getUrl()
     {

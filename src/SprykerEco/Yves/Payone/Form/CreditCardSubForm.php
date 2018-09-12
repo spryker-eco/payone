@@ -98,7 +98,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     public function addCardType(FormBuilderInterface $builder, array $options)
     {
@@ -124,7 +124,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addCardNumber(FormBuilderInterface $builder)
     {
@@ -143,7 +143,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addNameOnCard(FormBuilderInterface $builder)
     {
@@ -166,7 +166,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addCardExpiresMonth(FormBuilderInterface $builder, array $options)
     {
@@ -190,7 +190,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addCardExpiresYear(FormBuilderInterface $builder, array $options)
     {
@@ -216,7 +216,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addCardSecurityCode(FormBuilderInterface $builder)
     {

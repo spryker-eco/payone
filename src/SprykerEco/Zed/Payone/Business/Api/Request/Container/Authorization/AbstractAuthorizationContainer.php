@@ -27,6 +27,11 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     protected $clearingtype;
 
     /**
+     * @var string
+     */
+    protected $clearingsubtype;
+
+    /**
      * Merchant reference number for the payment process. (Permitted symbols: 0-9, a-z, A-Z, .,-,_,/)
      *
      * @var string
@@ -95,6 +100,36 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      * @var string
      */
     protected $bankcountry;
+
+    /**
+     * @var array
+     */
+    protected $it;
+
+    /**
+     * @var array
+     */
+    protected $id;
+
+    /**
+     * @var array
+     */
+    protected $pr;
+
+    /**
+     * @var array
+     */
+    protected $no;
+
+    /**
+     * @var array
+     */
+    protected $de;
+
+    /**
+     * @var array
+     */
+    protected $va;
 
     /**
      * @param int $aid
@@ -328,5 +363,119 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     public function setOnlinebanktransfertype($onlinebanktransfertype)
     {
         $this->onlinebanktransfertype = $onlinebanktransfertype;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClearingsubtype(): string
+    {
+        return $this->clearingsubtype;
+    }
+
+    /**
+     * @param string $clearingsubtype
+     *
+     * @return void
+     */
+    public function setClearingsubtype(string $clearingsubtype): void
+    {
+        $this->clearingsubtype = $clearingsubtype;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIt(): array
+    {
+        return $this->it;
+    }
+
+    /**
+     * @param array $it
+     */
+    public function setIt(array $it): void
+    {
+        $this->it = $it;
+    }
+
+    /**
+     * @return array
+     */
+    public function getId(): array
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param array $id
+     */
+    public function setId(array $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPr(): array
+    {
+        return $this->pr;
+    }
+
+    /**
+     * @param array $pr
+     */
+    public function setPr(array $pr): void
+    {
+        $this->pr = $pr;
+    }
+
+    /**
+     * @return array
+     */
+    public function getNo(): array
+    {
+        return $this->no;
+    }
+
+    /**
+     * @param array $no
+     */
+    public function setNo(array $no): void
+    {
+        $this->no = $no;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDe(): array
+    {
+        return $this->de;
+    }
+
+    /**
+     * @param array $de
+     */
+    public function setDe(array $de): void
+    {
+        $this->de = $de;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVa(): array
+    {
+        return $this->va;
+    }
+
+    /**
+     * @param array $va
+     */
+    public function setVa(array $va): void
+    {
+        $this->va = $va;
     }
 }

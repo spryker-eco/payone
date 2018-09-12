@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\PayoneCreditCardCheckRequestDataTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
+use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -97,6 +98,13 @@ interface PaymentManagerInterface
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
+     */
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer);
 
     /**
      * @param \Propel\Runtime\Collection\ObjectCollection|\ArrayObject $orders

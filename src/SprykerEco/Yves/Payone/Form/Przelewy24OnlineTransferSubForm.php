@@ -37,7 +37,7 @@ class Przelewy24OnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm
+     * @return $this
      */
     public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {
