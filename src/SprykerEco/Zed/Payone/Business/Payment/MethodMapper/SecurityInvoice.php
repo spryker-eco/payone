@@ -46,6 +46,7 @@ class SecurityInvoice extends AbstractMapper
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
         $authorizationContainer = $this->mapOrderItems($orderTransfer, $authorizationContainer);
+        $authorizationContainer->setEmail($orderTransfer->getEmail());
 
         return $authorizationContainer;
     }

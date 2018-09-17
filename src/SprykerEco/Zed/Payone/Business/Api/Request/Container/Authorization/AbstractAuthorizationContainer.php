@@ -132,6 +132,11 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     protected $va;
 
     /**
+     * @var string
+     */
+    protected $email;
+
+    /**
      * @param int $aid
      *
      * @return void
@@ -477,5 +482,21 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     public function setVa(array $va): void
     {
         $this->va = $va;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
     }
 }
