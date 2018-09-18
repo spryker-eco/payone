@@ -266,7 +266,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     protected function createSecurityInvoice($storeConfig)
     {
-        $invoice = new SecurityInvoice($storeConfig);
+        $invoice = new SecurityInvoice($storeConfig, $this->getConfig());
 
         return $invoice;
     }

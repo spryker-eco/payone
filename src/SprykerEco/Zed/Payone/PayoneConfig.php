@@ -130,4 +130,14 @@ class PayoneConfig extends AbstractBundleConfig
     {
         return __DIR__ . DIRECTORY_SEPARATOR . PayoneConstants::GLOSSARY_FILE_PATH;
     }
+
+    /**
+     * @return string
+     */
+    public function getBusinessRelation(): string
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_BUSINESS_RELATION];
+    }
 }

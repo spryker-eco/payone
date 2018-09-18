@@ -102,6 +102,27 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     protected $bankcountry;
 
     /**
+     * @var string
+     */
+    protected $businessrelation;
+
+    /**
+     * @return string|null
+     */
+    public function getBusinessrelation(): ?string
+    {
+        return $this->businessrelation;
+    }
+
+    /**
+     * @param string $businessrelation
+     */
+    public function setBusinessrelation(string $businessrelation): void
+    {
+        $this->businessrelation = $businessrelation;
+    }
+
+    /**
      * @var array
      */
     protected $it;

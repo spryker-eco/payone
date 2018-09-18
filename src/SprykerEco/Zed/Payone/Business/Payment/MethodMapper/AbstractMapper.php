@@ -17,6 +17,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingC
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
+use SprykerEco\Zed\Payone\PayoneConfig;
 
 abstract class AbstractMapper implements PaymentMethodMapperInterface
 {

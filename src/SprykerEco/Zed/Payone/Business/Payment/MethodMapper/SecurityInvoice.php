@@ -8,11 +8,11 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\ExpenseTransfer;
-use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
+use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\SecurityInvoiceContainer;
@@ -24,9 +24,23 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\GetSecurityInvoiceConta
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
+use SprykerEco\Zed\Payone\PayoneConfig;
 
 class SecurityInvoice extends AbstractMapper
 {
+    /**
+     * @var PayoneConfig
+     */
+    protected $payoneConfig;
+    /**
+     * @param \Spryker\Shared\Kernel\Store $storeConfig
+     */
+    public function __construct(Store $storeConfig, PayoneConfig $payoneConfig)
+    {
+        parent::__construct($storeConfig);
+        $this->payoneConfig = $payoneConfig;
+    }
+
     /**
      * @return string
      */
@@ -46,7 +60,8 @@ class SecurityInvoice extends AbstractMapper
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
         $authorizationContainer = $this->mapOrderItems($orderTransfer, $authorizationContainer);
-        $authorizationContainer->setEmail($orderTransfer->getEmail());
+        $authorizationContainer = $this->mapEmail($paymentEntity, $authorizationContainer);
+        $authorizationContainer = $this->mapBusinessRelation($authorizationContainer);
 
         return $authorizationContainer;
     }
@@ -57,7 +72,7 @@ class SecurityInvoice extends AbstractMapper
      *
      * @return AbstractAuthorizationContainer
      */
-    public function mapOrderItems( OrderTransfer $orderTransfer, AbstractAuthorizationContainer $authorizationContainer): AbstractAuthorizationContainer
+    public function mapOrderItems(OrderTransfer $orderTransfer, AbstractAuthorizationContainer $authorizationContainer): AbstractAuthorizationContainer
     {
         $arrayIt = [];
         $arrayId = [];
@@ -87,6 +102,42 @@ class SecurityInvoice extends AbstractMapper
         $authorizationContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
 
         return $authorizationContainer;
+    }
+
+    /**
+     * @param SpyPaymentPayone $paymentEntity
+     * @param AbstractAuthorizationContainer $container
+     * @return AbstractAuthorizationContainer
+     */
+    public function mapEmail(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $container): AbstractAuthorizationContainer
+    {
+        $container->setEmail($paymentEntity->getSpySalesOrder()->getEmail());
+
+        return $container;
+    }
+
+    /**
+     * @param SpyPaymentPayone $paymentEntity
+     * @param AbstractAuthorizationContainer $container
+     * @return AbstractAuthorizationContainer
+     * @throws \Propel\Runtime\Exception\PropelException
+     */
+    public function mapAmount(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $container): AbstractAuthorizationContainer
+    {
+        $container->setAmount($paymentEntity->getSpySalesOrder()->getOrderTotals()->get(0)->getSubTotal());
+
+        return $container;
+    }
+
+    /**
+     * @param AbstractAuthorizationContainer $container
+     * @return AbstractAuthorizationContainer
+     */
+    public function mapBusinessRelation(AbstractAuthorizationContainer $container): AbstractAuthorizationContainer
+    {
+        $container->setBusinessrelation($this->payoneConfig->getBusinessRelation());
+
+        return $container;
     }
 
     /**
@@ -133,6 +184,9 @@ class SecurityInvoice extends AbstractMapper
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
+        $preAuthorizationContainer = $this->mapEmail($paymentEntity, $preAuthorizationContainer);
+        $preAuthorizationContainer = $this->mapAmount($paymentEntity, $preAuthorizationContainer);
+        $preAuthorizationContainer = $this->mapBusinessRelation($preAuthorizationContainer);
 
         return $preAuthorizationContainer;
     }
