@@ -2,6 +2,7 @@ import Component from 'ShopUi/models/component';
 import ScriptLoader from 'ShopUi/components/molecules/script-loader/script-loader';
 
 declare var Payone;
+declare var PayoneGlobals;
 
 export default class CreditCard extends Component {
     form: HTMLFormElement
@@ -11,9 +12,13 @@ export default class CreditCard extends Component {
     iframes: any
     cardTypeInput: any
     scriptLoader: ScriptLoader
+    cardHolderInput: HTMLInputElement
+    errorElement: HTMLElement
+    isPaymentStatusValid: boolean
 
     constructor() {
         super();
+        this.isPaymentStatusValid = false;
     }
 
     protected readyCallback(): void {
@@ -21,21 +26,21 @@ export default class CreditCard extends Component {
         this.paymentForm = <HTMLFormElement> document.getElementById(this.formId);
         this.cardTypeInput = document.querySelector(this.cardTypeInputSelector);
         this.scriptLoader = <ScriptLoader> document.querySelector('script-loader');
+        this.cardHolderInput = <HTMLInputElement> document.getElementById(this.cardHolderId);
+        this.errorElement = document.querySelector(this.errorContainer);
 
         this.mapEvents();
     }
 
     protected mapEvents(): void {
-        this.scriptLoader.addEventListener('loaded', (event: Event) => this.onLoad(event));
-
+        this.scriptLoader.addEventListener('loaded', (event: Event) => this.onScriptLoad(event));
         this.cardTypeInput.addEventListener('change', (event: Event) => this.onCardTypeChange(event));
+        this.form.addEventListener('submit', (event: Event) => this.onSubmit(event));
     }
 
-    protected onLoad(event: Event): void {
-
+    protected onScriptLoad(event: Event): void {
         // Configuration for Hosted Iframe.
         // https://github.com/fjbender/simple-php-integration#build-the-form
-
         this.config = {
             fields: {
                 cardpan: {
@@ -54,33 +59,67 @@ export default class CreditCard extends Component {
                     size: "2",
                     maxlength: "2",
                     iframe: {
-                        width: "50px",
+                        width: "100%",
                     }
                 },
                 cardexpireyear: {
                     selector: "cardexpireyear",
                     type: "select",
                     iframe: {
-                        width: "80px",
+                        width: "100%",
                     }
                 }
             },
             defaultStyle: {
-                input: "font-size: 0.875em; height: 2rem; border-radius: 0; border: 1px solid #dadada;",
-                select: "font-size: 0.875em; height: 2rem; border-radius: 0; border: 1px solid #dadada; background-color: #fefefe;",
+                input: "font-size: 0.875em; height: 2rem; width: 100%; border-radius: 0; border: 1px solid #dadada;",
+                select: "font-size: 0.875em; height: 2rem; width: 100%; border-radius: 0; border: 1px solid #dadada; background-color: #fefefe;",
                 iframe: {
                     height: "35px",
-                    width: "180px"
+                    width: "100%"
                 }
             },
             error: "errorOutput",
             language: Payone.ClientApi.Language.de
         };
 
-        this.createIframe();
+        this.addCheckCallback();
+        this.createPayoneIframe();
     }
 
-    protected createIframe(): void {
+    protected addCheckCallback(): void {
+        // Payone script works with such global array member.
+        // Since our function checkCallback is inside the module, it is absent in "window".
+        // Set it explicitly.
+        let _self = this;
+        window['checkCallback'] = function(response) {
+            if (response.status === "VALID") {
+                _self.isPaymentStatusValid = true;
+                document.getElementById('pseudocardpan').value = response.pseudocardpan;
+                document.getElementById('payment-form').submit();
+            }
+        };
+    }
+
+    protected onSubmit(event: Event): void {
+        let currentPaymentMethodRadio = <HTMLInputElement> document.querySelector(this.currentPaymentMethodSelector);
+
+        if (currentPaymentMethodRadio.value === 'payoneCreditCard') {
+            if (!this.isPaymentStatusValid) {
+                event.preventDefault();
+                this.checkCreditCard();
+            }
+        }
+    }
+
+    protected checkCreditCard() {
+        if (this.iframes.isComplete() && this.cardHolderInput.value) {
+            this.iframes.creditCardCheck('checkCallback');
+        } else {
+            this.errorElement.innerHTML = this.hostedIframeConfig.language.transactionRejected;
+        }
+    }
+
+    protected createPayoneIframe(): void {
         const input = <HTMLInputElement>this.form.querySelector(this.clientApiConfig);
         const clientApiConfig = JSON.parse(input.value);
         const languageInput = <HTMLInputElement> this.paymentForm.querySelector(this.languageInputSelector);
@@ -92,10 +131,10 @@ export default class CreditCard extends Component {
 
         this.iframes = new Payone.ClientApi.HostedIFrames(this.hostedIframeConfig, clientApiConfig);
 
-        //this.onCardTypeChange.call(this.cardTypeInput);
+        this.iframes.setCardType(this.cardTypeInput.value);
     }
 
-    onCardTypeChange(event: Event): void {
+    protected onCardTypeChange(event: Event): void {
         const inputType = <HTMLInputElement> event.currentTarget;
         this.iframes.setCardType(inputType.value);
     }
@@ -123,4 +162,18 @@ export default class CreditCard extends Component {
     get scriptId(): string {
         return this.getAttribute('script-id');
     }
+
+    get cardHolderId(): string {
+        return this.getAttribute('card-holder-id');
+    }
+
+    get errorContainer(): string {
+        return this.getAttribute('error-container-selector');
+    }
+
+    get currentPaymentMethodSelector(): string {
+        return this.getAttribute('current-payment-method-selector');
+    }
+
+
 }

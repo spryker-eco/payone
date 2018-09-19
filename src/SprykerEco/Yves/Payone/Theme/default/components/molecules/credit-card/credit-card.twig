@@ -17,7 +17,10 @@
     'client-api-config-selector': '#paymentForm_payoneCreditCard_payone_client_api_config',
     'language-input-selector': '#Payone_credit_card_payone_client_lang_code',
     'card-type-input-selector': '#cardtype',
-    'script-id': data.scriptId
+    'script-id': data.scriptId,
+    'card-holder-id': 'paymentForm_payoneCreditCard_cardholder',
+    'error-container-selector': '#errorOutput',
+    'current-payment-method-selector': 'input[type="radio"][name="paymentForm[paymentSelection]"]:checked'
 } %}
 
 {% block body %}
@@ -29,33 +32,46 @@
     } only %}
 
     <div id="payoneCreditCard">
-        <label for="cardtypeInput">{{ 'Payone_credit_card.cardtype' | trans }}</label>
-        {{ form_widget(data.form.payoneCreditCard.cardtype, { 'id': 'cardtype', 'attr': {'placeholder': 'Payone_credit_card.cardtype' | trans } }) }}
-
-        <label for="cardpanInput">{{ 'Payone_credit_card.cardpan' | trans }}</label>
-        <div id="cardpan"></div>
-
-        <label for="cvcInput">{{ 'Payone_credit_card.cardcvc2' | trans }}</label>
-        <div id="cardcvc2"></div>
-
-        <label for="expireInput">{{ 'Payone_credit_card.cardexpiredate' | trans }}</label>
-        <div id="expireInput">
-            <span id="cardexpiremonth"></span>
-            <span id="cardexpireyear"></span>
+        <div class="form__field col col--sm-12">
+            <label for="cardtypeInput">{{ 'Payone_credit_card.cardtype' | trans }}</label>
+            {{ form_widget(data.form.payoneCreditCard.cardtype, { 'id': 'cardtype', 'attr': {'placeholder': 'Payone_credit_card.cardtype' | trans } }) }}
         </div>
 
-        <label>{{ 'Payone_credit_card.cardholder' | trans }}</label>
-        <div>
-            {{ form_widget(data.form.payoneCreditCard.cardholder) }}
-            {{ form_errors(data.form.payoneCreditCard.cardholder) }}
+        <div class="form__field col col--sm-12">
+            <label for="cardpanInput">{{ 'Payone_credit_card.cardpan' | trans }}</label>
+            <div id="cardpan"></div>
         </div>
 
-        <div>
-            {{ form_widget(data.form.payoneCreditCard.payone_client_api_config) }}
-            {{ form_widget(data.form.payoneCreditCard.pseudocardpan, {'id': 'pseudocardpan'}) }}
-            <input type="hidden" id="Payone_credit_card_payone_client_lang_code" name="payone_client_lang_code" value="{{ app.locale }}">
+        <div class="form__field col col--sm-12">
+            <label for="cvcInput">{{ 'Payone_credit_card.cardcvc2' | trans }}</label>
+            <div id="cardcvc2"></div>
         </div>
 
-        <div id="errorOutput"></div>
+        <div class="form__field col col--sm-12">
+            <label for="expireInput">{{ 'Payone_credit_card.cardexpiredate' | trans }}</label>
+            <div id="expireInput" class="grid">
+                <span id="cardexpiremonth" class="form__field col col--md-4"></span>
+                <span id="cardexpireyear" class="form__field col col--md-8"></span>
+            </div>
+        </div>
+
+        <div class="form__field col col--sm-12">
+            <label>{{ 'Payone_credit_card.cardholder' | trans }}</label>
+            <div>
+                {{ form_widget(data.form.payoneCreditCard.cardholder) }}
+                {{ form_errors(data.form.payoneCreditCard.cardholder) }}
+            </div>
+        </div>
+
+        <div class="form__field col col--sm-12">
+            <div>
+                {{ form_widget(data.form.payoneCreditCard.payone_client_api_config) }}
+                {{ form_widget(data.form.payoneCreditCard.pseudocardpan, {'id': 'pseudocardpan'}) }}
+
+                <input type="hidden" id="Payone_credit_card_payone_client_lang_code" name="payone_client_lang_code" value="{{ app.locale }}">
+            </div>
+        </div>
+
+        <div id="errorOutput" class="text-alert"></div>
     </div>
 {% endblock %}
