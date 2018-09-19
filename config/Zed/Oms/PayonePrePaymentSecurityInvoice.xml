@@ -10,11 +10,9 @@
             <state name="invalid"/>
             <state name="pre-authorization pending"/>
             <state name="pre-authorization appointed"/>
-            <state name="pre-authorization captured"/>
             <state name="paid" />
             <state name="cancelled" />
             <state name="shipped" />
-            <state name="capture failed clarification" />
             <state name="refund failed clarification" />
             <state name="capture pending" />
             <state name="captured" />
@@ -36,15 +34,19 @@
                 <target>pre-authorization appointed</target>
             </transition>
 
-            <transition condition="Payone/PaymentIsCapture" happy="true">
+            <transition happy="true">
                 <source>pre-authorization appointed</source>
-                <target>pre-authorization captured</target>
+                <target>capture pending</target>
                 <event>capture</event>
             </transition>
 
+            <transition condition="Payone/PaymentIsCapture" happy="true">
+                <source>capture pending</source>
+                <target>captured</target>
+            </transition>
 
             <transition condition="Payone/PaymentIsPaid" happy="true">
-                <source>pre-authorization captured</source>
+                <source>captured</source>
                 <target>paid</target>
             </transition>
 
@@ -68,41 +70,18 @@
 
             <transition condition="Payone/CaptureIsApproved" happy="true">
                 <source>shipped</source>
-                <target>capture pending</target>
-                <event>capture with settlement</event>
-            </transition>
-
-            <transition condition="Payone/PaymentIsCapture" happy="true">
-                <source>capture pending</source>
-                <target>captured</target>
-            </transition>
-
-            <transition>
-                <source>shipped</source>
-                <target>capture failed clarification</target>
-                <event>capture with settlement</event>
-            </transition>
-
-            <transition>
-                <source>capture failed clarification</source>
-                <target>shipped</target>
-                <event>retry capture</event>
-            </transition>
-
-            <transition>
-                <source>capture failed clarification</source>
-                <target>cancelled</target>
-                <event>cancel</event>
-            </transition>
-
-            <transition happy="true">
-                <source>captured</source>
                 <target>closed</target>
                 <event>wait for item return</event>
             </transition>
 
+            <!--<transition>-->
+                <!--<source>capture failed clarification</source>-->
+                <!--<target>shipped</target>-->
+                <!--<event>retry capture</event>-->
+            <!--</transition>-->
+
             <transition>
-                <source>captured</source>
+                <source>shipped</source>
                 <target>returned</target>
                 <event>return</event>
             </transition>
@@ -134,7 +113,7 @@
 
         <events>
             <event name="pre-authorize" onEnter="true" command="Payone/PreAuthorize"/>
-            <event name="capture" onEnter="true" command="Payone/Capture"/>
+            <event name="capture" onEnter="true" manual="true" command="Payone/Capture"/>
             <event name="ship" manual="true" />
             <event name="wait for item return" timeout="14days" />
             <event name="cancel" manual="true" />
