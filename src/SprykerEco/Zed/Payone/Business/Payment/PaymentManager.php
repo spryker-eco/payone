@@ -16,6 +16,7 @@ use Generated\Shared\Transfer\PayoneCreditCardCheckRequestDataTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
+use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
@@ -47,6 +48,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GenericPaymentResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetSecurityInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\ManageMandateResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
@@ -452,6 +454,38 @@ class PaymentManager implements PaymentManagerInterface
         $getInvoiceTransfer->setInternalErrorMessage($responseContainer->getErrormessage());
 
         return $getInvoiceTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
+     */
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
+    {
+        $responseContainer = new GetSecurityInvoiceResponseContainer();
+        $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
+            $getSecurityInvoiceTransfer->getReference(),
+            $getSecurityInvoiceTransfer->getCustomerId()
+        );
+
+        if ($paymentEntity) {
+            /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice $paymentMethodMapper */
+            $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE);
+            $requestContainer = $paymentMethodMapper->mapGetSecurityInvoice($getSecurityInvoiceTransfer);
+            $this->setStandardParameter($requestContainer);
+            $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+            $responseContainer->init($rawResponse);
+        } else {
+            $this->setAccessDeniedError($responseContainer);
+        }
+
+        $getSecurityInvoiceTransfer->setRawResponse($responseContainer->getRawResponse());
+        $getSecurityInvoiceTransfer->setStatus($responseContainer->getStatus());
+        $getSecurityInvoiceTransfer->setErrorCode($responseContainer->getErrorcode());
+        $getSecurityInvoiceTransfer->setInternalErrorMessage($responseContainer->getErrormessage());
+
+        return $getSecurityInvoiceTransfer;
     }
 
     /**

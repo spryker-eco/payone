@@ -7,6 +7,9 @@
 
 namespace SprykerEco\Shared\Payone;
 
+/**
+ * Declares global environment configuration keys. Do not use it for other class constants.
+ */
 interface PayoneConstants
 {
     const COUNTRY_AT = 'AT';

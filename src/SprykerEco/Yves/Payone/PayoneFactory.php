@@ -23,6 +23,7 @@ use SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceCardOnlineTransferDataPr
 use SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceEfinanceOnlineTransferDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\PrePaymentDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\Przelewy24OnlineTransferDataProvider;
+use SprykerEco\Yves\Payone\Form\DataProvider\SecurityInvoiceDataProvider;
 use SprykerEco\Yves\Payone\Form\DirectDebitSubForm;
 use SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\EWalletSubForm;
@@ -34,6 +35,7 @@ use SprykerEco\Yves\Payone\Form\PostfinanceCardOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PostfinanceEfinanceOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PrePaymentForm;
 use SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm;
+use SprykerEco\Yves\Payone\Form\SecurityInvoiceSubForm;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
@@ -70,11 +72,27 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
+     */
+    public function createSecurityInvoiceSubForm()
+    {
+        return new SecurityInvoiceSubForm();
+    }
+
+    /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider
      */
     public function createInvoiceSubFormDataProvider()
     {
         return new InvoiceDataProvider();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\DataProvider\SecurityInvoiceDataProvider
+     */
+    public function createSecurityInvoiceSubFormDataProvider()
+    {
+        return new SecurityInvoiceDataProvider();
     }
 
     /**

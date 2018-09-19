@@ -52,7 +52,7 @@ class EpsOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm
+     * @return $this
      */
     public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {
@@ -72,7 +72,7 @@ class EpsOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm
+     * @return $this
      */
     protected function addBankGroupType(FormBuilderInterface $builder, array $options)
     {

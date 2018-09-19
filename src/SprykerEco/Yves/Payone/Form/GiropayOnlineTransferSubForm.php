@@ -52,7 +52,7 @@ class GiropayOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\GiropayOnlineTransferSubForm
+     * @return $this
      */
     public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {

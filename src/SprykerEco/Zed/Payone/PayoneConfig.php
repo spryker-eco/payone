@@ -32,6 +32,7 @@ class PayoneConfig extends AbstractBundleConfig
     const PAYMENT_METHOD_BANCONTACT_ONLINE_TRANSFER = 'payoneBancontactOnlineTransfer';
     const PAYMENT_METHOD_PRE_PAYMENT = 'payonePrePayment';
     const PAYMENT_METHOD_INVOICE = 'payoneInvoice';
+    const PAYMENT_METHOD_SECURITY_INVOICE = 'payoneSecurityInvoice';
     const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE;
 
     /**
