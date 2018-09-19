@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
+use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardCheckRequestDataTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
@@ -263,12 +264,12 @@ class PaymentManager implements PaymentManagerInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment($captureTransfer)
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer, OrderTransfer $orderTransfer)
     {
         $paymentEntity = $this->getPaymentEntity($captureTransfer->getPayment()->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
-        $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
+        $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity, $orderTransfer);
         $requestContainer->setAmount($captureTransfer->getAmount());
 
         if (!empty($captureTransfer->getSettleaccount())) {
