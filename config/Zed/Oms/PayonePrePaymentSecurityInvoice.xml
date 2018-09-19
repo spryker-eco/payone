@@ -134,7 +134,7 @@
 
         <events>
             <event name="pre-authorize" onEnter="true" command="Payone/PreAuthorize"/>
-            <event name="capture" onEnter="true" command="Payone/CaptureWithSettlement"/>
+            <event name="capture" onEnter="true" command="Payone/Capture"/>
             <event name="ship" manual="true" />
             <event name="wait for item return" timeout="14days" />
             <event name="cancel" manual="true" />
