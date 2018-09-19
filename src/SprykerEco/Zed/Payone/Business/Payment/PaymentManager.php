@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
+use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
@@ -261,10 +262,11 @@ class PaymentManager implements PaymentManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer, OrderTransfer $orderTransfer)
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer, OrderTransfer $orderTransfer): CaptureResponseTransfer
     {
         $paymentEntity = $this->getPaymentEntity($captureTransfer->getPayment()->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
@@ -462,7 +464,7 @@ class PaymentManager implements PaymentManagerInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
      */
-    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer): PayoneGetSecurityInvoiceTransfer
     {
         $responseContainer = new GetSecurityInvoiceResponseContainer();
         $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(

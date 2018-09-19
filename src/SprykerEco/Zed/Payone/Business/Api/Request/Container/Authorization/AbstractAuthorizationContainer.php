@@ -116,6 +116,8 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
 
     /**
      * @param string $businessrelation
+     *
+     * @return void
      */
     public function setBusinessrelation(string $businessrelation): void
     {

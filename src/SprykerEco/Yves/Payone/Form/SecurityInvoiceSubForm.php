@@ -17,12 +17,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SecurityInvoiceSubForm extends AbstractPayoneSubForm
 {
-    const PAYMENT_METHOD = 'security_invoice';
+    public const PAYMENT_METHOD = 'security_invoice';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_SECURITY_INVOICE;
     }
@@ -30,7 +30,7 @@ class SecurityInvoiceSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_SECURITY_INVOICE;
     }
@@ -38,7 +38,7 @@ class SecurityInvoiceSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
         return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
     }
@@ -48,7 +48,7 @@ class SecurityInvoiceSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => PayonePaymentTransfer::class,
@@ -60,7 +60,7 @@ class SecurityInvoiceSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): void
     {
         $this->configureOptions($resolver);
     }
@@ -71,7 +71,7 @@ class SecurityInvoiceSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->addLabel($builder);
     }
@@ -79,9 +79,9 @@ class SecurityInvoiceSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return $this
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    protected function addLabel(FormBuilderInterface $builder)
+    protected function addLabel(FormBuilderInterface $builder): SubFormInterface
     {
         $builder->add(
             self::FIELD_PAYMENT_METHOD,

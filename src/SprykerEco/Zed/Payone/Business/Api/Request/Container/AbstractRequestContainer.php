@@ -445,6 +445,8 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
     /**
      * @param array $it
+     *
+     * @return void
      */
     public function setIt(array $it): void
     {
@@ -461,6 +463,8 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
     /**
      * @param array $id
+     *
+     * @return void
      */
     public function setId(array $id): void
     {
@@ -477,6 +481,8 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
     /**
      * @param array $pr
+     *
+     * @return void
      */
     public function setPr(array $pr): void
     {
@@ -493,6 +499,8 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
     /**
      * @param array $no
+     *
+     * @return void
      */
     public function setNo(array $no): void
     {
@@ -509,6 +517,8 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
     /**
      * @param array $de
+     *
+     * @return void
      */
     public function setDe(array $de): void
     {
@@ -525,6 +535,8 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
     /**
      * @param array $va
+     *
+     * @return void
      */
     public function setVa(array $va): void
     {
@@ -541,6 +553,8 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
     /**
      * @param string $email
+     *
+     * @return void
      */
     public function setEmail(string $email): void
     {
