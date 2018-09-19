@@ -270,7 +270,7 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity, $orderTransfer);
-        $requestContainer->setAmount($captureTransfer->getAmount());
+        $requestContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
 
         if (!empty($captureTransfer->getSettleaccount())) {
             $businnessContainer = new BusinessContainer();
