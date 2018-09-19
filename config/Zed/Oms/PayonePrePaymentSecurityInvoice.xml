@@ -7,14 +7,17 @@
     <process name="PayonePrePaymentSecurityInvoice" main="true">
         <states>
             <state name="new" reserved="true"/>
-            <state name="authorization pending"/>
-            <state name="authorization appointed"/>
-            <state name="underpaid" />
+            <state name="invalid"/>
+            <state name="pre-authorization pending"/>
+            <state name="pre-authorization appointed"/>
+            <state name="pre-authorization captured"/>
             <state name="paid" />
-            <state name="reservation cancellation pending"/>
             <state name="cancelled" />
             <state name="shipped" />
+            <state name="capture failed clarification" />
             <state name="refund failed clarification" />
+            <state name="capture pending" />
+            <state name="captured" />
             <state name="closed" />
             <state name="returned" />
             <state name="refund pending" />
@@ -24,39 +27,31 @@
         <transitions>
             <transition condition="Payone/PreAuthorizationIsApproved" happy="true">
                 <source>new</source>
-                <target>authorization pending</target>
-                <event>authorize</event>
+                <target>pre-authorization pending</target>
+                <event>pre-authorize</event>
             </transition>
 
             <transition condition="Payone/PaymentIsAppointed" happy="true">
-                <source>authorization pending</source>
-                <target>authorization appointed</target>
+                <source>pre-authorization pending</source>
+                <target>pre-authorization appointed</target>
             </transition>
 
-            <transition condition="Payone/CaptureIsApproved">
-                <source>authorization appointed</source>
-                <target>reservation cancellation pending</target>
-                <event>cancel reservation</event>
+            <transition condition="Payone/PaymentIsCapture" happy="true">
+                <source>pre-authorization appointed</source>
+                <target>pre-authorization captured</target>
+                <event>capture</event>
             </transition>
 
-            <transition condition="Payone/PaymentIsCapture">
-                <source>reservation cancellation pending</source>
-                <target>cancelled</target>
-            </transition>
-
-            <transition condition="Payone/PaymentIsUnderPaid">
-                <source>authorization appointed</source>
-                <target>underpaid</target>
-            </transition>
 
             <transition condition="Payone/PaymentIsPaid" happy="true">
-                <source>authorization appointed</source>
+                <source>pre-authorization captured</source>
                 <target>paid</target>
             </transition>
 
-            <transition condition="Payone/PaymentIsPaid">
-                <source>underpaid</source>
-                <target>paid</target>
+            <transition>
+                <source>new</source>
+                <target>invalid</target>
+                <event>pre-authorize</event>
             </transition>
 
             <transition>
@@ -71,14 +66,43 @@
                 <event>ship</event>
             </transition>
 
-            <transition happy="true">
+            <transition condition="Payone/CaptureIsApproved" happy="true">
                 <source>shipped</source>
+                <target>capture pending</target>
+                <event>capture with settlement</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsCapture" happy="true">
+                <source>capture pending</source>
+                <target>captured</target>
+            </transition>
+
+            <transition>
+                <source>shipped</source>
+                <target>capture failed clarification</target>
+                <event>capture with settlement</event>
+            </transition>
+
+            <transition>
+                <source>capture failed clarification</source>
+                <target>shipped</target>
+                <event>retry capture</event>
+            </transition>
+
+            <transition>
+                <source>capture failed clarification</source>
+                <target>cancelled</target>
+                <event>cancel</event>
+            </transition>
+
+            <transition happy="true">
+                <source>captured</source>
                 <target>closed</target>
                 <event>wait for item return</event>
             </transition>
 
             <transition>
-                <source>shipped</source>
+                <source>captured</source>
                 <target>returned</target>
                 <event>return</event>
             </transition>
@@ -109,11 +133,12 @@
         </transitions>
 
         <events>
-            <event name="authorize" onEnter="true" command="Payone/PreAuthorize"/>
+            <event name="pre-authorize" onEnter="true" command="Payone/PreAuthorize"/>
+            <event name="capture" onEnter="true" command="Payone/CaptureWithSettlement"/>
             <event name="ship" manual="true" />
             <event name="wait for item return" timeout="14days" />
-            <event name="cancel reservation" manual="true" />
             <event name="cancel" manual="true" />
+            <event name="capture with settlement" onEnter="true" command="Payone/CaptureWithSettlement"/>
             <event name="return" manual="true" />
             <event name="refund" onEnter="true" command="Payone/Refund" />
             <event name="retry capture" manual="true" />

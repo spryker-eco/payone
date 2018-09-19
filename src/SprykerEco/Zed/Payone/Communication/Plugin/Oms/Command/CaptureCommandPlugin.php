@@ -38,7 +38,7 @@ class CaptureCommandPlugin extends AbstractPayonePlugin implements CommandByOrde
 
         $captureTransfer->setAmount($orderTransfer->getTotals()->getGrandTotal());
 
-        $this->getFacade()->capturePayment($captureTransfer);
+        $this->getFacade()->capturePayment($captureTransfer, $orderTransfer);
 
         return [];
     }

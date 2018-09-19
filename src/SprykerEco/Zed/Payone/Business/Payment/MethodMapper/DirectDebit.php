@@ -83,7 +83,7 @@ class DirectDebit extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer)
     {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 

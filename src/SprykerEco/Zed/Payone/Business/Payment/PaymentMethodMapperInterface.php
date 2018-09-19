@@ -32,7 +32,7 @@ interface PaymentMethodMapperInterface extends BasePaymentMethodMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity);
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer);
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity

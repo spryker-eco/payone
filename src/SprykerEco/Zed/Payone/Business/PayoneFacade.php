@@ -85,9 +85,9 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer)
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer, OrderTransfer $orderTransfer)
     {
-        return $this->getFactory()->createPaymentManager()->capturePayment($captureTransfer);
+        return $this->getFactory()->createPaymentManager()->capturePayment($captureTransfer, $orderTransfer);
     }
 
     /**

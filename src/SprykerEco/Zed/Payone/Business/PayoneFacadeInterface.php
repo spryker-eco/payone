@@ -74,7 +74,7 @@ interface PayoneFacadeInterface
      *
      * @return Api\Response\Container\CaptureResponseContainer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer);
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer, OrderTransfer $orderTransfer);
 
     /**
      * Specification:
