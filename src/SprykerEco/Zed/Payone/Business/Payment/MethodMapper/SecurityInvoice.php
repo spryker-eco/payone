@@ -106,7 +106,7 @@ class SecurityInvoice extends AbstractMapper
             $arrayPr[$key] = $itemTransfer->getSumPrice();
             $arrayNo[$key] = $itemTransfer->getQuantity();
             $arrayDe[$key] = $itemTransfer->getName();
-            $arrayVa[$key] = $itemTransfer->getTaxRate();
+            $arrayVa[$key] = (int) $itemTransfer->getTaxRate();
             $key++;
         }
 
