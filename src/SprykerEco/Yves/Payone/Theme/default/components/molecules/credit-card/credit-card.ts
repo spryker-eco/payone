@@ -87,9 +87,6 @@ export default class CreditCard extends Component {
     }
 
     protected addCheckCallback(): void {
-        // Payone script works with such global array member.
-        // Since our function checkCallback is inside the module, it is absent in "window".
-        // Set it explicitly.
         let _self = this;
         window['checkCallback'] = function(response) {
             if (response.status === "VALID") {
