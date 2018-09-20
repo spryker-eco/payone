@@ -71,8 +71,8 @@ export default class CreditCard extends Component {
                 }
             },
             defaultStyle: {
-                input: "font-size: 0.875em; height: 2rem; width: 100%; border-radius: 0; border: 1px solid #dadada;",
-                select: "font-size: 0.875em; height: 2rem; width: 100%; border-radius: 0; border: 1px solid #dadada; background-color: #fefefe;",
+                input: "font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px;",
+                select: "font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px; background-color: #fefefe;",
                 iframe: {
                     height: "35px",
                     width: "100%"
@@ -117,8 +117,8 @@ export default class CreditCard extends Component {
     }
 
     protected createPayoneIframe(): void {
-        const input = <HTMLInputElement>this.form.querySelector(this.clientApiConfig);
-        const clientApiConfig = JSON.parse(input.value);
+        const inputWithConfig = <HTMLInputElement>this.form.querySelector(this.clientApiConfig);
+        const clientApiConfig = JSON.parse(inputWithConfig.value);
         const languageInput = <HTMLInputElement> this.paymentForm.querySelector(this.languageInputSelector);
         const language = languageInput.value.substr(0, 2);
 
