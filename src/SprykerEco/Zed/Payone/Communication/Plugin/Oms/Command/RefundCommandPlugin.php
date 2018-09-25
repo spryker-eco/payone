@@ -52,7 +52,7 @@ class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
         $narrativeText = $this->getFactory()->getConfig()->getNarrativeText($orderItems, $orderEntity, $data);
         $payoneRefundTransfer->setNarrativeText($narrativeText);
 
-        $this->getFacade()->refundPayment($payoneRefundTransfer);
+        $this->getFacade()->refundPayment($payoneRefundTransfer, $this->getOrderTransfer($orderEntity));
 
         return [];
     }

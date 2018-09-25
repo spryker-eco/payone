@@ -114,12 +114,13 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      * @api
      *
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer)
+    public function refundPayment(PayoneRefundTransfer $refundTransfer, OrderTransfer $orderTransfer)
     {
-        return $this->getFactory()->createPaymentManager()->refundPayment($refundTransfer);
+        return $this->getFactory()->createPaymentManager()->refundPayment($refundTransfer, $orderTransfer);
     }
 
     /**

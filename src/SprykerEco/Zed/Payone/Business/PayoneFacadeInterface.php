@@ -98,10 +98,11 @@ interface PayoneFacadeInterface
      * @api
      *
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer);
+    public function refundPayment(PayoneRefundTransfer $refundTransfer, OrderTransfer $orderTransfer);
 
     /**
      * Specification:

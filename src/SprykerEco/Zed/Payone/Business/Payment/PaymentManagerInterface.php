@@ -32,10 +32,11 @@ interface PaymentManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer);
+    public function refundPayment(PayoneRefundTransfer $refundTransfer, OrderTransfer $orderTransfer);
 
     /**
      * @param int $idPayment

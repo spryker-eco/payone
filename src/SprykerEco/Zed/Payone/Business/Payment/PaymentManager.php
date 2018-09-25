@@ -507,16 +507,17 @@ class PaymentManager implements PaymentManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer)
+    public function refundPayment(PayoneRefundTransfer $refundTransfer, OrderTransfer $orderTransfer)
     {
         $payonePaymentTransfer = $refundTransfer->getPayment();
 
         $paymentEntity = $this->getPaymentEntity($payonePaymentTransfer->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
-        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
+        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity, $orderTransfer);
         $requestContainer->setAmount($refundTransfer->getAmount());
         $this->setStandardParameter($requestContainer);
 

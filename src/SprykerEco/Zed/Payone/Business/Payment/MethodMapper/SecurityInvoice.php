@@ -257,17 +257,18 @@ class SecurityInvoice extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity): ContainerInterface
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): AbstractRequestContainer
     {
         $refundContainer = new RefundContainer();
 
+        $refundContainer = $this->mapOrderItems($orderTransfer, $refundContainer);
         $refundContainer->setTxid($paymentEntity->getTransactionId());
         $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
-
         $refundContainer->setBankcountry($paymentEntity->getSpyPaymentPayoneDetail()->getBankCountry());
         $refundContainer->setBankaccount($paymentEntity->getSpyPaymentPayoneDetail()->getBankAccount());
         $refundContainer->setBankcode($paymentEntity->getSpyPaymentPayoneDetail()->getBankCode());

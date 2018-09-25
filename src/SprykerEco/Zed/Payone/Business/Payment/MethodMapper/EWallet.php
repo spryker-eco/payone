@@ -125,10 +125,11 @@ class EWallet extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer)
     {
         $refundContainer = new RefundContainer();
 
