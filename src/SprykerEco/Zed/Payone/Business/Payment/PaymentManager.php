@@ -272,7 +272,9 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity, $orderTransfer);
-        $requestContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
+        if (!$requestContainer->getAmount()) {
+            $requestContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
+        }
 
         if (!empty($captureTransfer->getSettleaccount())) {
             $businnessContainer = new BusinessContainer();
@@ -518,7 +520,9 @@ class PaymentManager implements PaymentManagerInterface
         $paymentEntity = $this->getPaymentEntity($payonePaymentTransfer->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity, $orderTransfer);
-        $requestContainer->setAmount($refundTransfer->getAmount());
+        if (!$requestContainer->getAmount()) {
+            $requestContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
+        }
         $this->setStandardParameter($requestContainer);
 
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
