@@ -64,9 +64,9 @@ class SecurityInvoice extends AbstractMapper
     {
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
-        $authorizationContainer = $this->mapOrderItems($orderTransfer, $authorizationContainer);
         $authorizationContainer = $this->mapEmail($paymentEntity, $authorizationContainer);
         $authorizationContainer = $this->mapBusinessRelation($authorizationContainer);
+        $authorizationContainer->setAmount($orderTransfer->getTotals()->getGrandTotal());
 
         return $authorizationContainer;
     }
@@ -85,88 +85,6 @@ class SecurityInvoice extends AbstractMapper
         $preAuthorizationContainer = $this->mapBusinessRelation($preAuthorizationContainer);
 
         return $preAuthorizationContainer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $authorizationContainer
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
-     */
-    public function mapOrderItems(OrderTransfer $orderTransfer, AbstractRequestContainer $authorizationContainer): ContainerInterface
-    {
-        $arrayIt = [];
-        $arrayId = [];
-        $arrayPr = [];
-        $arrayNo = [];
-        $arrayDe = [];
-        $arrayVa = [];
-
-        $key = 1;
-
-        $amount = 0;
-
-        foreach ($orderTransfer->getItems() as $itemTransfer) {
-            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
-            $arrayId[$key] = $itemTransfer->getSku();
-            $arrayPr[$key] = $itemTransfer->getSumPrice();
-            $arrayNo[$key] = $itemTransfer->getQuantity();
-            $arrayDe[$key] = $itemTransfer->getName();
-            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
-            $key++;
-            $amount += $itemTransfer->getSumPrice();
-        }
-
-        $authorizationContainer->setIt($arrayIt);
-        $authorizationContainer->setId($arrayId);
-        $authorizationContainer->setPr($arrayPr);
-        $authorizationContainer->setNo($arrayNo);
-        $authorizationContainer->setDe($arrayDe);
-        $authorizationContainer->setVa($arrayVa);
-        $authorizationContainer->setAmount($amount);
-
-        return $authorizationContainer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $authorizationContainer
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
-     */
-    public function mapRefundOrderItems(OrderTransfer $orderTransfer, AbstractRequestContainer $authorizationContainer): ContainerInterface
-    {
-        $arrayIt = [];
-        $arrayId = [];
-        $arrayPr = [];
-        $arrayNo = [];
-        $arrayDe = [];
-        $arrayVa = [];
-
-        $key = 1;
-
-        $amount = 0;
-
-        foreach ($orderTransfer->getItems() as $itemTransfer) {
-            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
-            $arrayId[$key] = $itemTransfer->getSku();
-            $arrayPr[$key] = $itemTransfer->getSumPrice();
-            $arrayNo[$key] = $itemTransfer->getQuantity();
-            $arrayDe[$key] = $itemTransfer->getName();
-            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
-            $amount += $itemTransfer->getSumPrice();
-            $key++;
-        }
-
-        $authorizationContainer->setIt($arrayIt);
-        $authorizationContainer->setId($arrayId);
-        $authorizationContainer->setPr($arrayPr);
-        $authorizationContainer->setNo($arrayNo);
-        $authorizationContainer->setDe($arrayDe);
-        $authorizationContainer->setVa($arrayVa);
-        $authorizationContainer->setAmount(0 - $amount);
-
-        return $authorizationContainer;
     }
 
     /**
@@ -227,16 +145,15 @@ class SecurityInvoice extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): AbstractRequestContainer
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): AbstractRequestContainer
     {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $captureContainer = new CaptureContainer();
-        $captureContainer = $this->mapOrderItems($orderTransfer, $captureContainer);
+        $captureContainer->setAmount($paymentDetailEntity->getAmount());
         $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
 
@@ -300,15 +217,13 @@ class SecurityInvoice extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): AbstractRequestContainer
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity): AbstractRequestContainer
     {
         $refundContainer = new RefundContainer();
 
-        $refundContainer = $this->mapRefundOrderItems($orderTransfer, $refundContainer);
         $refundContainer->setTxid($paymentEntity->getTransactionId());
         $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());

@@ -83,13 +83,12 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      * @api
      *
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer, OrderTransfer $orderTransfer): CaptureResponseTransfer
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
-        return $this->getFactory()->createPaymentManager()->capturePayment($captureTransfer, $orderTransfer);
+        return $this->getFactory()->createPaymentManager()->capturePayment($captureTransfer);
     }
 
     /**
@@ -114,13 +113,12 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      * @api
      *
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer, OrderTransfer $orderTransfer)
+    public function refundPayment(PayoneRefundTransfer $refundTransfer)
     {
-        return $this->getFactory()->createPaymentManager()->refundPayment($refundTransfer, $orderTransfer);
+        return $this->getFactory()->createPaymentManager()->refundPayment($refundTransfer);
     }
 
     /**

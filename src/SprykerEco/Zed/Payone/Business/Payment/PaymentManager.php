@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
+use ArrayObject;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
@@ -30,6 +31,7 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
+use Spryker\Shared\Shipment\ShipmentConstants;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
@@ -194,6 +196,7 @@ class PaymentManager implements PaymentManagerInterface
         $paymentEntity = $this->getPaymentEntity($orderTransfer->getIdSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
+        $requestContainer = $this->prepareOrderItems($orderTransfer, $requestContainer);
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
 
         $responseMapper = new AuthorizationResponseMapper();
@@ -262,19 +265,16 @@ class PaymentManager implements PaymentManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer, OrderTransfer $orderTransfer): CaptureResponseTransfer
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
         $paymentEntity = $this->getPaymentEntity($captureTransfer->getPayment()->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
-        $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity, $orderTransfer);
-        if (!$requestContainer->getAmount()) {
-            $requestContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
-        }
+        $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
+        $requestContainer = $this->prepareOrderItems($captureTransfer->getOrder(), $requestContainer);
 
         if (!empty($captureTransfer->getSettleaccount())) {
             $businnessContainer = new BusinessContainer();
@@ -509,20 +509,18 @@ class PaymentManager implements PaymentManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer, OrderTransfer $orderTransfer)
+    public function refundPayment(PayoneRefundTransfer $refundTransfer)
     {
         $payonePaymentTransfer = $refundTransfer->getPayment();
 
         $paymentEntity = $this->getPaymentEntity($payonePaymentTransfer->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
-        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity, $orderTransfer);
-        if (!$requestContainer->getAmount()) {
-            $requestContainer->setAmount($orderTransfer->getTotals()->getSubtotal());
-        }
+        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
+        $requestContainer = $this->prepareOrderItems($refundTransfer->getOrder(), $requestContainer);
+
         $this->setStandardParameter($requestContainer);
 
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
@@ -1002,5 +1000,73 @@ class PaymentManager implements PaymentManagerInterface
         $responseTransfer->setShippingZip($responseContainer->getShippingZip());
 
         return $responseTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    public function prepareOrderItems(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    {
+        $arrayIt = [];
+        $arrayId = [];
+        $arrayPr = [];
+        $arrayNo = [];
+        $arrayDe = [];
+        $arrayVa = [];
+
+        $key = 1;
+        $expenses = $orderTransfer->getExpenses();
+
+        foreach ($orderTransfer->getItems() as $itemTransfer) {
+            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
+            $arrayId[$key] = $itemTransfer->getSku();
+            $arrayPr[$key] = $itemTransfer->getSumPrice();
+            $arrayNo[$key] = $itemTransfer->getQuantity();
+            $arrayDe[$key] = $itemTransfer->getName();
+            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
+            $key++;
+        }
+
+        //Set shipment values
+        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
+        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
+        $arrayPr[$key] = $this->getDeliveryCosts($expenses);
+        $arrayNo[$key] = 1;
+        $arrayDe[$key] = 'Shipment';
+        $key++;
+
+        //set discount values
+        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
+        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
+        $arrayPr[$key] = - $orderTransfer->getTotals()->getDiscountTotal();
+        $arrayNo[$key] = 1;
+        $arrayDe[$key] = 'Discount';
+
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
+     * @param \ArrayObject $expenses
+     *
+     * @return string
+     */
+    protected function getDeliveryCosts(ArrayObject $expenses): string
+    {
+        foreach ($expenses as $expense) {
+            if ($expense->getType() === ShipmentConstants::SHIPMENT_EXPENSE_TYPE) {
+                return $expense->getSumGrossPrice();
+            }
+        }
+        return 0;
     }
 }

@@ -73,11 +73,10 @@ interface PayoneFacadeInterface
      * @api
      *
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer, OrderTransfer $orderTransfer): CaptureResponseTransfer;
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer;
 
     /**
      * Specification:
@@ -98,11 +97,10 @@ interface PayoneFacadeInterface
      * @api
      *
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer, OrderTransfer $orderTransfer);
+    public function refundPayment(PayoneRefundTransfer $refundTransfer);
 
     /**
      * Specification:

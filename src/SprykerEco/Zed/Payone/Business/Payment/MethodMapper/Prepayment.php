@@ -46,11 +46,10 @@ class Prepayment extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer)
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity)
     {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
@@ -120,11 +119,10 @@ class Prepayment extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer)
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity)
     {
         $refundContainer = new RefundContainer();
 
