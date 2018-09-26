@@ -33,6 +33,7 @@ class CaptureCommandPlugin extends AbstractPayonePlugin implements CommandByOrde
         $paymentTransfer = new PayonePaymentTransfer();
         $paymentTransfer->setFkSalesOrder($orderEntity->getSpyPaymentPayones()->getFirst()->getFkSalesOrder());
         $captureTransfer->setPayment($paymentTransfer);
+        $captureTransfer->setAmount($this->getOrderTransfer($orderEntity)->getTotals()->getGrandTotal());
         $captureTransfer->setOrder($this->getOrderTransfer($orderEntity));
 
         $this->getFacade()->capturePayment($captureTransfer);
