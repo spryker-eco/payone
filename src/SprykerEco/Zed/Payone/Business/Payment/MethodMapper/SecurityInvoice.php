@@ -222,8 +222,11 @@ class SecurityInvoice extends AbstractMapper
      */
     public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity): AbstractRequestContainer
     {
+        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+
         $refundContainer = new RefundContainer();
 
+        $refundContainer->setAmount($paymentDetailEntity->getAmount());
         $refundContainer->setTxid($paymentEntity->getTransactionId());
         $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
