@@ -226,7 +226,7 @@ class SecurityInvoice extends AbstractMapper
 
         $refundContainer = new RefundContainer();
 
-        $refundContainer->setAmount($paymentDetailEntity->getAmount());
+        $refundContainer->setAmount(0 - $paymentDetailEntity->getAmount());
         $refundContainer->setTxid($paymentEntity->getTransactionId());
         $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
