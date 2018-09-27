@@ -1019,12 +1019,12 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected function prepareOrderItems(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = $container->getIt();
-        $arrayId = $container->getId();
-        $arrayPr = $container->getPr();
-        $arrayNo = $container->getNo();
-        $arrayDe = $container->getDe();
-        $arrayVa = $container->getVa();
+        $arrayIt = $container->getIt() ?? [];
+        $arrayId = $container->getId() ?? [];
+        $arrayPr = $container->getPr() ?? [];
+        $arrayNo = $container->getNo() ?? [];
+        $arrayDe = $container->getDe() ?? [];
+        $arrayVa = $container->getVa() ?? [];
 
         $key = count($arrayId);
 
@@ -1056,12 +1056,12 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected function prepareOrderShipment(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = $container->getIt();
-        $arrayId = $container->getId();
-        $arrayPr = $container->getPr();
-        $arrayNo = $container->getNo();
-        $arrayDe = $container->getDe();
-        $arrayVa = $container->getVa();
+        $arrayIt = $container->getIt() ?? [];
+        $arrayId = $container->getId() ?? [];
+        $arrayPr = $container->getPr() ?? [];
+        $arrayNo = $container->getNo() ?? [];
+        $arrayDe = $container->getDe() ?? [];
+        $arrayVa = $container->getVa() ?? [];
 
         $key = count($arrayId);
         $expenses = $orderTransfer->getExpenses();
@@ -1090,12 +1090,12 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected function prepareOrderDiscount(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = $container->getIt();
-        $arrayId = $container->getId();
-        $arrayPr = $container->getPr();
-        $arrayNo = $container->getNo();
-        $arrayDe = $container->getDe();
-        $arrayVa = $container->getVa();
+        $arrayIt = $container->getIt() ?? [];
+        $arrayId = $container->getId() ?? [];
+        $arrayPr = $container->getPr() ?? [];
+        $arrayNo = $container->getNo() ?? [];
+        $arrayDe = $container->getDe() ?? [];
+        $arrayVa = $container->getVa() ?? [];
 
         $key = count($arrayId);
 
