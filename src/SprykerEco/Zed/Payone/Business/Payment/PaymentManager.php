@@ -413,18 +413,16 @@ class PaymentManager implements PaymentManagerInterface
             $getFileTransfer->getCustomerId()
         );
 
-        if (!$paymentEntity) {
+        if ($paymentEntity) {
+            /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
+            $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
+            $requestContainer = $paymentMethodMapper->mapGetFile($getFileTransfer);
+            $this->setStandardParameter($requestContainer);
+            $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+            $responseContainer->init($rawResponse);
+        } else {
             $this->setAccessDeniedError($responseContainer);
-
-            return $getFileTransfer;
         }
-
-        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
-        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
-        $requestContainer = $paymentMethodMapper->mapGetFile($getFileTransfer);
-        $this->setStandardParameter($requestContainer);
-        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
-        $responseContainer->init($rawResponse);
 
         $getFileTransfer->setRawResponse($responseContainer->getRawResponse());
         $getFileTransfer->setStatus($responseContainer->getStatus());
@@ -480,16 +478,18 @@ class PaymentManager implements PaymentManagerInterface
             $getSecurityInvoiceTransfer->getCustomerId()
         );
 
-        if ($paymentEntity) {
-            /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice $paymentMethodMapper */
-            $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE);
-            $requestContainer = $paymentMethodMapper->mapGetSecurityInvoice($getSecurityInvoiceTransfer);
-            $this->setStandardParameter($requestContainer);
-            $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
-            $responseContainer->init($rawResponse);
-        } else {
+        if (!$paymentEntity) {
             $this->setAccessDeniedError($responseContainer);
+
+            return $getSecurityInvoiceTransfer;
         }
+
+        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice $paymentMethodMapper */
+        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE);
+        $requestContainer = $paymentMethodMapper->mapGetSecurityInvoice($getSecurityInvoiceTransfer);
+        $this->setStandardParameter($requestContainer);
+        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+        $responseContainer->init($rawResponse);
 
         $getSecurityInvoiceTransfer->setRawResponse($responseContainer->getRawResponse());
         $getSecurityInvoiceTransfer->setStatus($responseContainer->getStatus());
