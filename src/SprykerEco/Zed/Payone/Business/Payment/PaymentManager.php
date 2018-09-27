@@ -1019,12 +1019,12 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected function prepareOrderItems(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
+        $arrayIt = [];
+        $arrayId = [];
+        $arrayPr = [];
+        $arrayNo = [];
+        $arrayDe = [];
+        $arrayVa = [];
 
         $key = count($arrayId);
 
