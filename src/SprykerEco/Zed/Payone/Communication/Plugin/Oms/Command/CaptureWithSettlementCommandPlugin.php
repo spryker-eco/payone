@@ -39,6 +39,7 @@ class CaptureWithSettlementCommandPlugin extends AbstractPayonePlugin implements
 
         $captureTransfer->setAmount($orderTransfer->getTotals()->getGrandTotal());
         $captureTransfer->setSettleaccount(PayoneApiConstants::SETTLE_ACCOUNT_YES);
+        $captureTransfer->setOrder($orderTransfer);
 
         $this->getFacade()->capturePayment($captureTransfer);
 
