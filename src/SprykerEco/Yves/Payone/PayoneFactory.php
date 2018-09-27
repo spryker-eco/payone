@@ -8,6 +8,8 @@
 namespace SprykerEco\Yves\Payone;
 
 use Spryker\Yves\Kernel\AbstractFactory;
+use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 use SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider;
@@ -23,6 +25,7 @@ use SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceCardOnlineTransferDataPr
 use SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceEfinanceOnlineTransferDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\PrePaymentDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\Przelewy24OnlineTransferDataProvider;
+use SprykerEco\Yves\Payone\Form\DataProvider\SecurityInvoiceDataProvider;
 use SprykerEco\Yves\Payone\Form\DirectDebitSubForm;
 use SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\EWalletSubForm;
@@ -34,6 +37,7 @@ use SprykerEco\Yves\Payone\Form\PostfinanceCardOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PostfinanceEfinanceOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PrePaymentForm;
 use SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm;
+use SprykerEco\Yves\Payone\Form\SecurityInvoiceSubForm;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
@@ -70,11 +74,27 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     */
+    public function createSecurityInvoiceSubForm(): SubFormInterface
+    {
+        return new SecurityInvoiceSubForm();
+    }
+
+    /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider
      */
     public function createInvoiceSubFormDataProvider()
     {
         return new InvoiceDataProvider();
+    }
+
+    /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
+     */
+    public function createSecurityInvoiceSubFormDataProvider(): StepEngineFormDataProviderInterface
+    {
+        return new SecurityInvoiceDataProvider();
     }
 
     /**

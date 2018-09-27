@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
+
+use SprykerEco\Shared\Payone\PayoneApiConstants;
+
+class GetSecurityInvoiceContainer extends AbstractRequestContainer
+{
+    /**
+     * @var string
+     */
+    protected $request = PayoneApiConstants::REQUEST_TYPE_GETSECURITYINVOICE;
+
+    /**
+     * @var string
+     */
+    protected $invoice_title;
+
+    /**
+     * @param string $invoice_title
+     *
+     * @return void
+     */
+    public function setInvoiceTitle($invoice_title): void
+    {
+        $this->invoice_title = $invoice_title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInvoiceTitle(): string
+    {
+        return $this->invoice_title;
+    }
+}

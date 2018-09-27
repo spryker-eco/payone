@@ -29,7 +29,9 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
@@ -191,6 +193,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         return [
             PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO => $this->createCreditCardPseudo($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_INVOICE => $this->createInvoice($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE => $this->createSecurityInvoice($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER => $this->createOnlineBankTransfer($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_E_WALLET => $this->createEWallet($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT => $this->createPrepayment($storeConfig),
@@ -253,6 +256,18 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     protected function createInvoice($storeConfig)
     {
         $invoice = new Invoice($storeConfig);
+
+        return $invoice;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Store $storeConfig
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
+     */
+    protected function createSecurityInvoice($storeConfig): PaymentMethodMapperInterface
+    {
+        $invoice = new SecurityInvoice($storeConfig, $this->getConfig());
 
         return $invoice;
     }

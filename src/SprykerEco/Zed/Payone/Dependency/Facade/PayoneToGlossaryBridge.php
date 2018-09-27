@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Dependency\Facade;
 
 use Generated\Shared\Transfer\KeyTranslationTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
-use Spryker\Zed\Glossary\Business\GlossaryFacadeInterface;
 
 class PayoneToGlossaryBridge implements PayoneToGlossaryInterface
 {
@@ -21,7 +20,7 @@ class PayoneToGlossaryBridge implements PayoneToGlossaryInterface
     /**
      * @param \Spryker\Zed\Glossary\Business\GlossaryFacadeInterface $glossaryFacade
      */
-    public function __construct(GlossaryFacadeInterface $glossaryFacade)
+    public function __construct($glossaryFacade)
     {
         $this->glossaryFacade = $glossaryFacade;
     }
@@ -103,7 +102,7 @@ class PayoneToGlossaryBridge implements PayoneToGlossaryInterface
      *
      * @return bool
      */
-    public function hasTranslation($keyName, LocaleTransfer $locale = null)
+    public function hasTranslation($keyName, ?LocaleTransfer $locale = null)
     {
         return $this->glossaryFacade->hasTranslation($keyName, $locale);
     }

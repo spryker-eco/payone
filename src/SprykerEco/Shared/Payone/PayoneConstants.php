@@ -7,6 +7,9 @@
 
 namespace SprykerEco\Shared\Payone;
 
+/**
+ * Declares global environment configuration keys. Do not use it for other class constants.
+ */
 interface PayoneConstants
 {
     const COUNTRY_AT = 'AT';
@@ -26,6 +29,7 @@ interface PayoneConstants
     const PAYONE_REDIRECT_SUCCESS_URL = 'PAYONE_REDIRECT_SUCCESS_URL';
     const PAYONE_REDIRECT_ERROR_URL = 'PAYONE_REDIRECT_ERROR_URL';
     const PAYONE_REDIRECT_BACK_URL = 'PAYONE_REDIRECT_BACK_URL';
+    const PAYONE_BUSINESS_RELATION = 'PAYONE:PAYONE_BUSINESS_RELATION';
 
     // Paypal express checkout state machine name
     const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE = 'payonePaypalExpressCheckout';

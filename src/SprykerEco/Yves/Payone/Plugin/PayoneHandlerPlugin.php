@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Payone\Plugin;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
@@ -23,8 +24,8 @@ class PayoneHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInt
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addToDataClass(Request $request, AbstractTransfer $quoteTransfer)
+    public function addToDataClass(Request $request, AbstractTransfer $quoteTransfer): QuoteTransfer
     {
-        $this->getFactory()->createPayoneHandler()->addPaymentToQuote($request, $quoteTransfer);
+        return $this->getFactory()->createPayoneHandler()->addPaymentToQuote($request, $quoteTransfer);
     }
 }

@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business;
 
+use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
@@ -16,6 +17,7 @@ use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
+use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
@@ -84,7 +86,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer)
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
         return $this->getFactory()->createPaymentManager()->capturePayment($captureTransfer);
     }
@@ -189,6 +191,21 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
     {
         return $this->getFactory()->createPaymentManager()->getInvoice($getInvoiceTransfer);
+    }
+
+    /**
+     * Specification:
+     * - Performs GetInvoice request to Payone API for PDF file download.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
+     */
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer): PayoneGetSecurityInvoiceTransfer
+    {
+        return $this->getFactory()->createPaymentManager()->getSecurityInvoice($getSecurityInvoiceTransfer);
     }
 
     /**
