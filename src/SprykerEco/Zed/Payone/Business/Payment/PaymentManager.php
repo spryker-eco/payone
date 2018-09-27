@@ -197,6 +197,8 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
         $requestContainer = $this->prepareOrderItems($orderTransfer, $requestContainer);
+        $requestContainer = $this->prepareOrderShipment($orderTransfer, $requestContainer);
+        $requestContainer = $this->prepareOrderDiscount($orderTransfer, $requestContainer);
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
 
         $responseMapper = new AuthorizationResponseMapper();
@@ -275,6 +277,8 @@ class PaymentManager implements PaymentManagerInterface
 
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
         $requestContainer = $this->prepareOrderItems($captureTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->prepareOrderShipment($captureTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->prepareOrderDiscount($captureTransfer->getOrder(), $requestContainer);
 
         if (!empty($captureTransfer->getSettleaccount())) {
             $businnessContainer = new BusinessContainer();
@@ -409,16 +413,18 @@ class PaymentManager implements PaymentManagerInterface
             $getFileTransfer->getCustomerId()
         );
 
-        if ($paymentEntity) {
-            /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
-            $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
-            $requestContainer = $paymentMethodMapper->mapGetFile($getFileTransfer);
-            $this->setStandardParameter($requestContainer);
-            $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
-            $responseContainer->init($rawResponse);
-        } else {
+        if (!$paymentEntity) {
             $this->setAccessDeniedError($responseContainer);
+
+            return $getFileTransfer;
         }
+
+        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
+        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
+        $requestContainer = $paymentMethodMapper->mapGetFile($getFileTransfer);
+        $this->setStandardParameter($requestContainer);
+        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+        $responseContainer->init($rawResponse);
 
         $getFileTransfer->setRawResponse($responseContainer->getRawResponse());
         $getFileTransfer->setStatus($responseContainer->getStatus());
@@ -521,6 +527,8 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
         $requestContainer->setAmount(0 - $paymentEntity->getSpyPaymentPayoneDetail()->getAmount());
         $requestContainer = $this->prepareOrderItems($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->prepareOrderShipment($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->prepareOrderDiscount($refundTransfer->getOrder(), $requestContainer);
 
         $this->setStandardParameter($requestContainer);
 
@@ -1009,17 +1017,16 @@ class PaymentManager implements PaymentManagerInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function prepareOrderItems(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    protected function prepareOrderItems(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = [];
-        $arrayId = [];
-        $arrayPr = [];
-        $arrayNo = [];
-        $arrayDe = [];
-        $arrayVa = [];
+        $arrayIt = $container->getIt();
+        $arrayId = $container->getId();
+        $arrayPr = $container->getPr();
+        $arrayNo = $container->getNo();
+        $arrayDe = $container->getDe();
+        $arrayVa = $container->getVa();
 
-        $key = 1;
-        $expenses = $orderTransfer->getExpenses();
+        $key = count($arrayId);
 
         foreach ($orderTransfer->getItems() as $itemTransfer) {
             $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
@@ -1031,15 +1038,67 @@ class PaymentManager implements PaymentManagerInterface
             $key++;
         }
 
-        //Set shipment values
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function prepareOrderShipment(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    {
+        $arrayIt = $container->getIt();
+        $arrayId = $container->getId();
+        $arrayPr = $container->getPr();
+        $arrayNo = $container->getNo();
+        $arrayDe = $container->getDe();
+        $arrayVa = $container->getVa();
+
+        $key = count($arrayId);
+        $expenses = $orderTransfer->getExpenses();
+
         $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
         $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
         $arrayPr[$key] = $this->getDeliveryCosts($expenses);
         $arrayNo[$key] = 1;
         $arrayDe[$key] = 'Shipment';
-        $key++;
 
-        //set discount values
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function prepareOrderDiscount(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    {
+        $arrayIt = $container->getIt();
+        $arrayId = $container->getId();
+        $arrayPr = $container->getPr();
+        $arrayNo = $container->getNo();
+        $arrayDe = $container->getDe();
+        $arrayVa = $container->getVa();
+
+        $key = count($arrayId);
+
         $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
         $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
         $arrayPr[$key] = - $orderTransfer->getTotals()->getDiscountTotal();
