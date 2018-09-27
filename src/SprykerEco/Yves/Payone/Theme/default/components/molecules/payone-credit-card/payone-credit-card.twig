@@ -1,37 +1,34 @@
 {% extends model('component') %}
 
 {% define config = {
-    name: 'credit-card',
-    tag: 'credit-card'
+    name: 'payone-credit-card',
+    tag: 'payone-credit-card'
 } %}
 
 {% define data = {
     form: required,
-    scriptSrc: required,
-    scriptId: required
+    scriptSrc: 'https://secure.pay1.de/client-api/js/v1/payone_hosted_min.js'
 } %}
 
 {% define attributes = {
     'form-selector': '[name="paymentForm"]',
-    'form-id': 'payment-form',
+    'current-payment-method-selector': 'input[type="radio"][name="paymentForm[paymentSelection]"]:checked',
+    'card-type-selector': '#cardtype',
+    'card-holder-selector': '#paymentForm_payoneCreditCard_cardholder',
     'client-api-config-selector': '#paymentForm_payoneCreditCard_payone_client_api_config',
-    'language-input-selector': '#Payone_credit_card_payone_client_lang_code',
-    'card-type-input-selector': '#cardtype',
-    'script-id': data.scriptId,
-    'card-holder-id': 'paymentForm_payoneCreditCard_cardholder',
-    'error-container-selector': '#errorOutput',
-    'current-payment-method-selector': 'input[type="radio"][name="paymentForm[paymentSelection]"]:checked'
+    'language-selector': '#Payone_credit_card_payone_client_lang_code',
+    'pseudo-card-pan-selector': '#pseudocardpan',
+    'error-container-selector': '#errorOutput'
 } %}
 
 {% block body %}
     {% include molecule('script-loader') with {
         attributes: {
-            src: data.scriptSrc,
-            id: data.scriptId
+            src: data.scriptSrc
         }
     } only %}
 
-    <div id="payoneCreditCard">
+    <div id="payoneCreditCard" class="grid">
         <div class="form__field col col--sm-12">
             <label for="cardtypeInput">{{ 'Payone_credit_card.cardtype' | trans }}</label>
             {{ form_widget(data.form.payoneCreditCard.cardtype, { 'id': 'cardtype', 'attr': {'placeholder': 'Payone_credit_card.cardtype' | trans } }) }}

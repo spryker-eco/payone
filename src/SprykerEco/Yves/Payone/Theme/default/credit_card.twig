@@ -1,18 +1,1 @@
-{% extends model('template') %}
-
-{% define data = {
-    scriptSrc: 'https://secure.pay1.de/client-api/js/v1/payone_hosted_min.js',
-    scriptId: 'payone-script'
-} %}
-
-{% block body %}
-
-    {% include molecule('credit-card', 'Payone') with {
-        data: {
-            form: form,
-            scriptSrc: data.scriptSrc,
-            scriptId: data.scriptId
-        }
-    } only %}
-
-{% endblock %}
+{% extends view('credit-card', 'Payone') %}
