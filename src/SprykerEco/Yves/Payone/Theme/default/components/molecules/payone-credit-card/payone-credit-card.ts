@@ -48,7 +48,7 @@ const defaultHostedIFramesConfig = {
         }
     },
 
-    error: "#errorOutput"
+    error: "errorOutput"
 };
 
 export default class PayoneCreditCard extends Component {

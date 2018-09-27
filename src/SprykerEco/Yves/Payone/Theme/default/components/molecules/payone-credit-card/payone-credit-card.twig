@@ -12,7 +12,7 @@
 
 {% define attributes = {
     'form-selector': '[name="paymentForm"]',
-    'current-payment-method-selector': 'input[type="radio"][name="paymentForm[paymentSelection]"]:checked',
+    'current-payment-method-selector': '[name="paymentForm[paymentSelection]"]:checked',
     'card-type-selector': '#cardtype',
     'card-holder-selector': '#paymentForm_payoneCreditCard_cardholder',
     'client-api-config-selector': '#paymentForm_payoneCreditCard_payone_client_api_config',
