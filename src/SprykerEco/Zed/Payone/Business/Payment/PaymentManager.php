@@ -1063,7 +1063,7 @@ class PaymentManager implements PaymentManagerInterface
         $arrayDe = $container->getDe() ?? [];
         $arrayVa = $container->getVa() ?? [];
 
-        $key = count($arrayId);
+        $key = count($arrayId) + 1;
         $expenses = $orderTransfer->getExpenses();
 
         $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
@@ -1097,7 +1097,7 @@ class PaymentManager implements PaymentManagerInterface
         $arrayDe = $container->getDe() ?? [];
         $arrayVa = $container->getVa() ?? [];
 
-        $key = count($arrayId);
+        $key = count($arrayId) + 1;
 
         $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
         $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
