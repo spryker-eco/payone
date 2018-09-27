@@ -1026,7 +1026,7 @@ class PaymentManager implements PaymentManagerInterface
         $arrayDe = [];
         $arrayVa = [];
 
-        $key = count($arrayId);
+        $key = 1;
 
         foreach ($orderTransfer->getItems() as $itemTransfer) {
             $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
