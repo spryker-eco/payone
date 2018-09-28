@@ -26,44 +26,63 @@
         }
     } only %}
 
-    <div class="payone-form payone-direct-debit-form payment-form" id="payoneDirectDebit">
+    <div class="payone-form payone-direct-debit-form payment-form grid" id="payoneDirectDebit">
         {% if data.form.payoneDirectDebit.bankaccountmode is defined %}
-            <label>{{ 'Payone_direct_debit.bankaccountmode' | trans }}</label>
-            <div class="field">
-                {{ form_widget(data.form.payoneDirectDebit.bankaccountmode, { 'attr': {'placeholder': 'Payone_direct_debit.bankaccountmode' | trans} }) }}
+            <div class="form__field col col--sm-12">
+                {{ form_row(data.form.payoneDirectDebit.bankaccountmode, {
+                    label: 'Payone_direct_debit.bankaccountmode'
+                }) }}
             </div>
         {% endif %}
 
         {% if data.form.payoneDirectDebit.bankaccount is defined %}
-            <label>{{ 'Payone_direct_debit.bankaccount' | trans }}</label>
-            <div class="field">
-                {{ form_widget(data.form.payoneDirectDebit.bankaccount, { disabled: true, 'attr': {'placeholder': 'Payone_direct_debit.bankaccount' | trans } }) }}
+            <div class="form__field col col--sm-12 col--lg-6">
+                {{ form_row(data.form.payoneDirectDebit.bankaccount, {
+                    disabled: true,
+                    label: 'payone_direct_debit.bankaccount',
+                    attr: {
+                        placeholder: 'Payone_direct_debit.bankaccount'
+                    }
+                }) }}
             </div>
         {% endif %}
 
         {% if data.form.payoneDirectDebit.bankcode is defined %}
-            <label>{{ 'Payone_direct_debit.bankcode' | trans }}</label>
-            <div class="field">
-                {{ form_widget(data.form.payoneDirectDebit.bankcode, { disabled: true, 'attr': {'placeholder': 'Payone_direct_debit.bankcode' | trans } }) }}
+            <div class="form__field col col--sm-12 col--lg-6">
+                {{ form_row(data.form.payoneDirectDebit.bankcode, {
+                    disabled: true,
+                    label: 'Payone_direct_debit.bankcode',
+                    attr: {
+                        placeholder: 'Payone_direct_debit.bankcode'
+                    }
+                }) }}
             </div>
         {% endif %}
 
         {% if data.form.payoneDirectDebit.bankcountry is defined %}
-            <div class="field">
-                {{ form_widget(data.form.payoneDirectDebit.bankcountry) }}
+            <div class="form__field col col--sm-12">
+                {{ form_row(data.form.payoneDirectDebit.bankcountry) }}
             </div>
         {% endif %}
 
-        <label>{{ 'Payone_direct_debit.IBAN' | trans }}</label>
-        <div class="field">
-            {{ form_widget(data.form.payoneDirectDebit.iban, { disabled: true, 'attr': {'placeholder': 'Payone_direct_debit.IBAN' | trans } }) }}
+        <div class="form__field col col--sm-12 col--lg-6">
+            {{ form_row(data.form.payoneDirectDebit.iban, {
+                disabled: true,
+                label: 'Payone_direct_debit.IBAN',
+                attr: {
+                    placeholder: 'Payone_direct_debit.IBAN'
+                }
+            }) }}
         </div>
 
-        <label>{{ 'Payone_direct_debit.BIC' | trans }}</label>
-        <div class="field">
-            {{ form_widget(data.form.payoneDirectDebit.bic, { disabled: true, 'attr': {'placeholder': 'Payone_direct_debit.BIC' | trans } }) }}
+        <div class="form__field col col--sm-12 col--lg-6">
+            {{ form_row(data.form.payoneDirectDebit.bic, {
+                disabled: true,
+                label: 'Payone_direct_debit.BIC',
+                attr: {
+                    placeholder: 'Payone_direct_debit.BIC'
+                }
+            }) }}
         </div>
-
-        {{ form_errors(data.form.payoneDirectDebit.bic) }}
     </div>
 {% endblock %}

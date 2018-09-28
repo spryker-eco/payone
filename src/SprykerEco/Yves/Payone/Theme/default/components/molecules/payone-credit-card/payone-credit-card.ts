@@ -13,13 +13,13 @@ const defaultHostedIFramesConfig = {
     fields: {
         cardpan: {
             selector: "cardpan",
-            type: "text",
+            type: "text"
         },
         cardcvc2: {
             selector: "cardcvc2",
             type: "password",
             size: "4",
-            maxlength: "4",
+            maxlength: "4"
         },
         cardexpiremonth: {
             selector: "cardexpiremonth",
@@ -27,23 +27,23 @@ const defaultHostedIFramesConfig = {
             size: "2",
             maxlength: "2",
             iframe: {
-                width: "100%",
+                width: "100%"
             }
         },
         cardexpireyear: {
             selector: "cardexpireyear",
             type: "select",
             iframe: {
-                width: "100%",
+                width: "100%"
             }
         }
     },
 
     defaultStyle: {
-        input: "font-size: 0.875em; height: 2.5rem; width: 100%; border: 0; outline: 1px solid #cacaca; outline-offset: -1px;",
-        select: "font-size: 0.875em; height: 2.5rem; width: 100%; border: 0; outline: 1px solid #cacaca; outline-offset: -1px; background-color: #fefefe;",
+        input: "font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px;",
+        select: "font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px; background-color: #fefefe;",
         iframe: {
-            height: "50px",
+            height: "35px",
             width: "100%"
         }
     },
@@ -55,7 +55,6 @@ export default class PayoneCreditCard extends Component {
     scriptLoader: ScriptLoader
     form: HTMLFormElement
     hostedIFramesApi: any
-    currentPaymentMethodInput: HTMLInputElement
     cardTypeInput: HTMLInputElement
     cardHolderInput: HTMLInputElement
     clientApiConfigInput: HTMLInputElement
@@ -67,7 +66,6 @@ export default class PayoneCreditCard extends Component {
     protected readyCallback(): void {
         this.scriptLoader = <ScriptLoader>this.querySelector('script-loader');
         this.form = <HTMLFormElement>document.querySelector(this.formSelector);
-        this.currentPaymentMethodInput = <HTMLInputElement>document.querySelector(this.currentPaymentMethodSelector);
         this.cardTypeInput = <HTMLInputElement>this.querySelector(this.cardTypeSelector);
         this.cardHolderInput = <HTMLInputElement>this.querySelector(this.cardHolderSelector);
         this.clientApiConfigInput = <HTMLInputElement>this.querySelector(this.clientApiConfigSelector);
@@ -140,7 +138,8 @@ export default class PayoneCreditCard extends Component {
     }
 
     get isCurrentPaymentMethod(): boolean {
-        return this.currentPaymentMethodInput.value === CURRENT_PAYMENT_METHOD;
+        const currentPaymentMethodInput = <HTMLInputElement>document.querySelector(this.currentPaymentMethodSelector);
+        return currentPaymentMethodInput.value === CURRENT_PAYMENT_METHOD;
     }
 
     get language(): string {
