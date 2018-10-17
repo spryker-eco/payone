@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
+use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardCheckRequestDataTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
@@ -62,7 +63,7 @@ interface PaymentManagerInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment($captureTransfer);
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer);
 
     /**
      * @param \Generated\Shared\Transfer\PayoneCreditCardTransfer $creditCardData

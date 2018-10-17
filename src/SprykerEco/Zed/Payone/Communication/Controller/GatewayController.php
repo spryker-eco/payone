@@ -162,7 +162,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
      */
-    public function getSecurityInvoiceAction(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
+    public function getSecurityInvoiceAction(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer): PayoneGetSecurityInvoiceTransfer
     {
         return $this->getFacade()->getSecurityInvoice($getSecurityInvoiceTransfer);
     }

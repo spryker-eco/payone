@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Payone\Plugin\SubFormsCreator;
 
+use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 use SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayoneDirectDebitSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayoneEWalletSubFormPlugin;
@@ -50,9 +51,9 @@ abstract class AbstractSubFormsCreator
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneSecurityInvoiceSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
-    protected function createPayoneSecurityInvoiceSubFormPlugin()
+    protected function createPayoneSecurityInvoiceSubFormPlugin(): SubFormPluginInterface
     {
         return new PayoneSecurityInvoiceSubFormPlugin();
     }

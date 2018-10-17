@@ -101,7 +101,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return $this
+     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
      */
     protected function addModeSwitch(FormBuilderInterface $builder, array $options)
     {
@@ -126,7 +126,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return $this
+     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
      */
     protected function addBankAccount(FormBuilderInterface $builder)
     {
@@ -147,7 +147,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return $this
+     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
      */
     protected function addBankCode(FormBuilderInterface $builder)
     {
@@ -169,7 +169,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return $this
+     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
      */
     protected function addBankCountry(FormBuilderInterface $builder, array $options)
     {
@@ -205,7 +205,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return $this
+     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
      */
     protected function addIBAN(FormBuilderInterface $builder)
     {
@@ -226,7 +226,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return $this
+     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
      */
     protected function addBIC(FormBuilderInterface $builder)
     {

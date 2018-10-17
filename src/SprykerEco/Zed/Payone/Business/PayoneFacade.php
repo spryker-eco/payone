@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business;
 
+use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
@@ -85,7 +86,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer)
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
         return $this->getFactory()->createPaymentManager()->capturePayment($captureTransfer);
     }
@@ -202,7 +203,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
      */
-    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer): PayoneGetSecurityInvoiceTransfer
     {
         return $this->getFactory()->createPaymentManager()->getSecurityInvoice($getSecurityInvoiceTransfer);
     }

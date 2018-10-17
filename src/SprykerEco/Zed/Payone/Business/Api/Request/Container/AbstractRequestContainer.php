@@ -93,6 +93,41 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $responsetype;
 
     /**
+     * @var array
+     */
+    protected $it;
+
+    /**
+     * @var array
+     */
+    protected $id;
+
+    /**
+     * @var array
+     */
+    protected $pr;
+
+    /**
+     * @var array
+     */
+    protected $no;
+
+    /**
+     * @var array
+     */
+    protected $de;
+
+    /**
+     * @var array
+     */
+    protected $va;
+
+    /**
+     * @var string
+     */
+    protected $email;
+
+    /**
      * @param string $encoding
      *
      * @return $this
@@ -398,5 +433,131 @@ abstract class AbstractRequestContainer extends AbstractContainer
         $this->responsetype = $responsetype;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIt(): array
+    {
+        return $this->it;
+    }
+
+    /**
+     * @param array $it
+     *
+     * @return void
+     */
+    public function setIt(array $it): void
+    {
+        $this->it = $it;
+    }
+
+    /**
+     * @return array
+     */
+    public function getId(): array
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param array $id
+     *
+     * @return void
+     */
+    public function setId(array $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPr(): array
+    {
+        return $this->pr;
+    }
+
+    /**
+     * @param array $pr
+     *
+     * @return void
+     */
+    public function setPr(array $pr): void
+    {
+        $this->pr = $pr;
+    }
+
+    /**
+     * @return array
+     */
+    public function getNo(): array
+    {
+        return $this->no;
+    }
+
+    /**
+     * @param array $no
+     *
+     * @return void
+     */
+    public function setNo(array $no): void
+    {
+        $this->no = $no;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDe(): array
+    {
+        return $this->de;
+    }
+
+    /**
+     * @param array $de
+     *
+     * @return void
+     */
+    public function setDe(array $de): void
+    {
+        $this->de = $de;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVa(): array
+    {
+        return $this->va;
+    }
+
+    /**
+     * @param array $va
+     *
+     * @return void
+     */
+    public function setVa(array $va): void
+    {
+        $this->va = $va;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return void
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
     }
 }

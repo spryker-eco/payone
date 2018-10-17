@@ -8,6 +8,8 @@
 namespace SprykerEco\Yves\Payone;
 
 use Spryker\Yves\Kernel\AbstractFactory;
+use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 use SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider;
@@ -72,9 +74,9 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
-    public function createSecurityInvoiceSubForm()
+    public function createSecurityInvoiceSubForm(): SubFormInterface
     {
         return new SecurityInvoiceSubForm();
     }
@@ -88,9 +90,9 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\SecurityInvoiceDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSecurityInvoiceSubFormDataProvider()
+    public function createSecurityInvoiceSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
         return new SecurityInvoiceDataProvider();
     }

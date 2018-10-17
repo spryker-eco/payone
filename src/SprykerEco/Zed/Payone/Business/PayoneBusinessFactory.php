@@ -31,6 +31,7 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
@@ -262,11 +263,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    protected function createSecurityInvoice($storeConfig)
+    protected function createSecurityInvoice($storeConfig): PaymentMethodMapperInterface
     {
-        $invoice = new SecurityInvoice($storeConfig);
+        $invoice = new SecurityInvoice($storeConfig, $this->getConfig());
 
         return $invoice;
     }
