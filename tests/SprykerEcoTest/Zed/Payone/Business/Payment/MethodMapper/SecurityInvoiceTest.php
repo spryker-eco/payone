@@ -54,7 +54,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToPreauthorization()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfig()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $requestData = $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity)->toArray();
 
@@ -80,7 +80,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToAuthorization()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfig()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $orderTransfer = $this->getSalesOrderTransfer();
 
@@ -108,7 +108,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToCapture()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfig()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $requestData = $paymentMethodMapper->mapPaymentToCapture($paymentEntity)->toArray();
 
@@ -124,7 +124,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToRefund()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfig()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $requestData = $paymentMethodMapper->mapPaymentToRefund($paymentEntity)->toArray();
 
@@ -140,7 +140,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToDebit()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfig()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $requestData = $paymentMethodMapper->mapPaymentToDebit($paymentEntity)->toArray();
 
@@ -161,10 +161,17 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\PayoneConfig
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getPayoneZedConfig()
+    protected function getPayoneZedConfigMock()
     {
-        return new PayoneConfig();
+        $mock = $this->getMockBuilder(PayoneConfig::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getBusinessRelation'])
+            ->getMock();
+
+        $mock->method('getBusinessRelation')->willReturn('b2b');
+
+        return $mock;
     }
 }
