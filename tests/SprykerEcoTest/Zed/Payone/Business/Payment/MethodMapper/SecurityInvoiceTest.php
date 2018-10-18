@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Payone\Business\Payment\MethodMapper;
 
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
+use SprykerEco\Zed\Payone\PayoneConfig;
 
 /**
  * @group Unit
@@ -35,6 +36,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
         'reference' => self::PAYMENT_REFERENCE,
         'amount' => self::AMOUNT_FULL,
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
+        'email' => self::DEFAULT_EMAIL,
     ];
 
     protected const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
@@ -43,6 +45,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
         'reference' => self::PAYMENT_REFERENCE,
         'amount' => self::AMOUNT_FULL,
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
+        'email' => self::DEFAULT_EMAIL,
     ];
 
     /**
@@ -51,7 +54,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToPreauthorization()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $requestData = $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity)->toArray();
 
@@ -77,7 +80,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToAuthorization()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $orderTransfer = $this->getSalesOrderTransfer();
 
@@ -105,7 +108,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToCapture()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $requestData = $paymentMethodMapper->mapPaymentToCapture($paymentEntity)->toArray();
 
@@ -121,7 +124,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToRefund()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $requestData = $paymentMethodMapper->mapPaymentToRefund($paymentEntity)->toArray();
 
@@ -137,7 +140,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     public function testMapPaymentToDebit()
     {
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
 
         $requestData = $paymentMethodMapper->mapPaymentToDebit($paymentEntity)->toArray();
 
@@ -155,5 +158,20 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
         $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
 
         return $paymentPayoneDetail;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getPayoneZedConfigMock()
+    {
+        $mock = $this->getMockBuilder(PayoneConfig::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getBusinessRelation'])
+            ->getMock();
+
+        $mock->method('getBusinessRelation')->willReturn('b2b');
+
+        return $mock;
     }
 }

@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Exception\TimeoutException;
 
 abstract class AbstractHttpAdapter implements AdapterInterface
 {
-    const DEFAULT_TIMEOUT = 45;
+    public const DEFAULT_TIMEOUT = 45;
 
     /**
      * @var int

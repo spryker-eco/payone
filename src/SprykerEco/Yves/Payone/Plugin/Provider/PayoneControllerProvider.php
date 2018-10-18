@@ -12,19 +12,19 @@ use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 
 class PayoneControllerProvider extends YvesControllerProvider
 {
-    const ROUTE_LOGIN = 'login';
-    const CHECKOUT_PAYMENT = 'checkout-payment';
-    const EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
-    const EXPRESS_CHECKOUT_INIT = 'payone-paypal-express-checkout-init';
-    const EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
-    const EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
-    const EXPRESS_CHECKOUT_LOAD_DETAILS = 'payone-paypal-express-checkout-load-details';
+    public const ROUTE_LOGIN = 'login';
+    public const CHECKOUT_PAYMENT = 'checkout-payment';
+    public const EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
+    public const EXPRESS_CHECKOUT_INIT = 'payone-paypal-express-checkout-init';
+    public const EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
+    public const EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
+    public const EXPRESS_CHECKOUT_LOAD_DETAILS = 'payone-paypal-express-checkout-load-details';
 
-    const EXPRESS_CHECKOUT_BUTTON_PATH = '/payone/checkout-with-paypal-button';
-    const EXPRESS_CHECKOUT_INIT_PATH = '/payone/paypal-express-checkout-init';
-    const EXPRESS_CHECKOUT_FAILURE_PATH = '/payone/expresscheckout/failure';
-    const EXPRESS_CHECKOUT_BACK_PATH = '/payone/expresscheckout/back';
-    const EXPRESS_CHECKOUT_LOAD_DETAILS_PATH = '/payone/expresscheckout/load-details';
+    public const EXPRESS_CHECKOUT_BUTTON_PATH = '/payone/checkout-with-paypal-button';
+    public const EXPRESS_CHECKOUT_INIT_PATH = '/payone/paypal-express-checkout-init';
+    public const EXPRESS_CHECKOUT_FAILURE_PATH = '/payone/expresscheckout/failure';
+    public const EXPRESS_CHECKOUT_BACK_PATH = '/payone/expresscheckout/back';
+    public const EXPRESS_CHECKOUT_LOAD_DETAILS_PATH = '/payone/expresscheckout/load-details';
 
     /**
      * @param \Silex\Application $app

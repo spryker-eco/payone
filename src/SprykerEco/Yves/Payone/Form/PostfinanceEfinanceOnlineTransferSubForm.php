@@ -14,8 +14,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class PostfinanceEfinanceOnlineTransferSubForm extends OnlineTransferSubForm
 {
-    const PAYMENT_METHOD = 'postfinance_efinance_online_transfer';
-    const OPTION_BANK_COUNTRIES = 'postfinance efinance online transfer bank countries';
+    public const PAYMENT_METHOD = 'postfinance_efinance_online_transfer';
+    public const OPTION_BANK_COUNTRIES = 'postfinance efinance online transfer bank countries';
 
     /**
      * @return string
@@ -37,7 +37,7 @@ class PostfinanceEfinanceOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\PostfinanceEfinanceOnlineTransferSubForm
+     * @return $this
      */
     public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {

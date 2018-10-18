@@ -12,7 +12,7 @@ class UrlHmacGenerator implements HmacGeneratorInterface
     /**
      * string
      */
-    const HASH_ALGO = 'sha256';
+    public const HASH_ALGO = 'sha256';
 
     /**
      * @param string $string

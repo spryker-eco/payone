@@ -14,7 +14,7 @@ interface CaptureResponseMapperInterface extends ResponseMapperInterface
     /**
      * @const string NAME
      */
-    const NAME = 'CAPTURE';
+    public const NAME = 'CAPTURE';
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer $responseContainer

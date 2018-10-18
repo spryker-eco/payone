@@ -18,7 +18,7 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @const int YEAR_CHOICES_AMOUNT
      */
-    const YEAR_CHOICES_AMOUNT = 20;
+    public const YEAR_CHOICES_AMOUNT = 20;
 
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

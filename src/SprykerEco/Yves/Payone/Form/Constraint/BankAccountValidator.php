@@ -15,7 +15,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class BankAccountValidator extends ConstraintValidator
 {
-    const INVALID_STATUSES = [
+    public const INVALID_STATUSES = [
         PayoneApiConstants::RESPONSE_TYPE_ERROR,
         PayoneApiConstants::RESPONSE_TYPE_INVALID,
     ];

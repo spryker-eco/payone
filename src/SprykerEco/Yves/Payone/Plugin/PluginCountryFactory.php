@@ -20,7 +20,7 @@ use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\NlSubFormsCreator;
  */
 class PluginCountryFactory extends AbstractPlugin
 {
-    const DEFAULT_COUNTRY = 'default';
+    public const DEFAULT_COUNTRY = 'default';
 
     /**
      * @var \SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface[]

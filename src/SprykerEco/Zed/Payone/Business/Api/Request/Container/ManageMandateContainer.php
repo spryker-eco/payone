@@ -409,7 +409,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -417,7 +417,7 @@ class ManageMandateContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }

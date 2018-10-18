@@ -22,15 +22,15 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class DirectDebitSubForm extends AbstractPayoneSubForm
 {
-    const PAYMENT_METHOD = 'direct_debit';
-    const FIELD_IBAN = 'iban';
-    const FIELD_BIC = 'bic';
-    const FIELD_BANK_COUNTRY = 'bankcountry';
-    const FIELD_BANK_ACCOUNT = 'bankaccount';
-    const FIELD_BANK_ACCOUNT_MODE = 'bankaccountmode';
-    const FIELD_BANK_CODE = 'bankcode';
-    const OPTION_BANK_COUNTRIES = 'direct debit bank countries';
-    const OPTION_BANK_ACCOUNT_MODE = 'direct debit bank account mode';
+    public const PAYMENT_METHOD = 'direct_debit';
+    public const FIELD_IBAN = 'iban';
+    public const FIELD_BIC = 'bic';
+    public const FIELD_BANK_COUNTRY = 'bankcountry';
+    public const FIELD_BANK_ACCOUNT = 'bankaccount';
+    public const FIELD_BANK_ACCOUNT_MODE = 'bankaccountmode';
+    public const FIELD_BANK_CODE = 'bankcode';
+    public const OPTION_BANK_COUNTRIES = 'direct debit bank countries';
+    public const OPTION_BANK_ACCOUNT_MODE = 'direct debit bank account mode';
 
     /**
      * @return string
@@ -101,7 +101,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
+     * @return $this
      */
     protected function addModeSwitch(FormBuilderInterface $builder, array $options)
     {
@@ -126,7 +126,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
+     * @return $this
      */
     protected function addBankAccount(FormBuilderInterface $builder)
     {
@@ -147,7 +147,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
+     * @return $this
      */
     protected function addBankCode(FormBuilderInterface $builder)
     {
@@ -169,7 +169,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
+     * @return $this
      */
     protected function addBankCountry(FormBuilderInterface $builder, array $options)
     {
@@ -205,7 +205,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
+     * @return $this
      */
     protected function addIBAN(FormBuilderInterface $builder)
     {
@@ -226,7 +226,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
+     * @return $this
      */
     protected function addBIC(FormBuilderInterface $builder)
     {

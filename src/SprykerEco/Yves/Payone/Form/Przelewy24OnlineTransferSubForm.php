@@ -14,8 +14,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class Przelewy24OnlineTransferSubForm extends OnlineTransferSubForm
 {
-    const PAYMENT_METHOD = 'przelewy24_online_transfer';
-    const OPTION_BANK_COUNTRIES = 'przelewy24 online transfer bank countries';
+    public const PAYMENT_METHOD = 'przelewy24_online_transfer';
+    public const OPTION_BANK_COUNTRIES = 'przelewy24 online transfer bank countries';
 
     /**
      * @return string
@@ -37,7 +37,7 @@ class Przelewy24OnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm
+     * @return $this
      */
     public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {

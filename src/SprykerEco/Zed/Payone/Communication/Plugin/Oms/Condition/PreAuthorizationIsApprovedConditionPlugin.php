@@ -15,7 +15,7 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class PreAuthorizationIsApprovedConditionPlugin extends AbstractPlugin
 {
-    const NAME = 'PreAuthorizationIsApprovedPlugin';
+    public const NAME = 'PreAuthorizationIsApprovedPlugin';
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

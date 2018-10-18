@@ -15,7 +15,7 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class CaptureIsApprovedConditionPlugin extends AbstractPlugin
 {
-    const NAME = 'CaptureIsApprovedPlugin';
+    public const NAME = 'CaptureIsApprovedPlugin';
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

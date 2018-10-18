@@ -15,7 +15,7 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class AuthorizationIsRedirectConditionPlugin extends AbstractPlugin
 {
-    const NAME = 'AuthorizationIsRedirectPlugin';
+    public const NAME = 'AuthorizationIsRedirectPlugin';
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

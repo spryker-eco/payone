@@ -17,10 +17,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EWalletSubForm extends AbstractPayoneSubForm
 {
-    const PAYMENT_METHOD = 'e_wallet';
-    const FIELD_WALLET_TYPE = 'wallettype';
+    public const PAYMENT_METHOD = 'e_wallet';
+    public const FIELD_WALLET_TYPE = 'wallettype';
 
-    const OPTION_WALLET_CHOICES = 'wallet_types';
+    public const OPTION_WALLET_CHOICES = 'wallet_types';
 
     /**
      * @return string
