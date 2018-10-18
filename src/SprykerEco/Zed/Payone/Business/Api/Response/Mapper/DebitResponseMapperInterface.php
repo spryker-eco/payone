@@ -14,7 +14,7 @@ interface DebitResponseMapperInterface extends ResponseMapperInterface
     /**
      * @const string NAME
      */
-    const NAME = 'DEBIT';
+    public const NAME = 'DEBIT';
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer $responseContainer

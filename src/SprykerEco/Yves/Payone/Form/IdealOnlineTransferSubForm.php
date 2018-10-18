@@ -15,9 +15,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class IdealOnlineTransferSubForm extends OnlineTransferSubForm
 {
-    const PAYMENT_METHOD = 'ideal_online_transfer';
-    const OPTION_BANK_COUNTRIES = 'ideal online transfer bank countries';
-    const OPTION_BANK_GROUP_TYPES = 'ideal online transfer bank group types';
+    public const PAYMENT_METHOD = 'ideal_online_transfer';
+    public const OPTION_BANK_COUNTRIES = 'ideal online transfer bank countries';
+    public const OPTION_BANK_GROUP_TYPES = 'ideal online transfer bank group types';
 
     /**
      * @return string
@@ -52,7 +52,7 @@ class IdealOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm
+     * @return $this
      */
     public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {
@@ -72,7 +72,7 @@ class IdealOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm
+     * @return $this
      */
     protected function addBankGroupType(FormBuilderInterface $builder, array $options)
     {

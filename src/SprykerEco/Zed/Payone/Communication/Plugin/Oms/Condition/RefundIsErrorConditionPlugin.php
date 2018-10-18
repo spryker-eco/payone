@@ -15,7 +15,7 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class RefundIsErrorConditionPlugin extends AbstractPlugin
 {
-    const NAME = 'RefundIsErrorPlugin';
+    public const NAME = 'RefundIsErrorPlugin';
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

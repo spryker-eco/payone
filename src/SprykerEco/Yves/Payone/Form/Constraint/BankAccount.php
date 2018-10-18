@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MIT License
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -10,7 +11,7 @@ use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 
 class BankAccount extends SymfonyConstraint
 {
-    const OPTION_PAYONE_CLIENT = 'payoneClient';
+    public const OPTION_PAYONE_CLIENT = 'payoneClient';
 
     /**
      * @var \SprykerEco\Client\Payone\PayoneClient

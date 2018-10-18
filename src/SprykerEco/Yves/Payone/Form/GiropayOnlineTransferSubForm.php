@@ -14,9 +14,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class GiropayOnlineTransferSubForm extends OnlineTransferSubForm
 {
-    const PAYMENT_METHOD = 'giropay_online_transfer';
-    const OPTION_BANK_COUNTRIES = 'giropay online transfer bank countries';
-    const OPTION_BANK_GROUP_TYPES = 'giropay online transfer bank group types';
+    public const PAYMENT_METHOD = 'giropay_online_transfer';
+    public const OPTION_BANK_COUNTRIES = 'giropay online transfer bank countries';
+    public const OPTION_BANK_GROUP_TYPES = 'giropay online transfer bank group types';
 
     /**
      * @return string
@@ -52,7 +52,7 @@ class GiropayOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\GiropayOnlineTransferSubForm
+     * @return $this
      */
     public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {

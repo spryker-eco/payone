@@ -14,7 +14,7 @@ interface RefundResponseMapperInterface extends ResponseMapperInterface
     /**
      * @const string NAME
      */
-    const NAME = 'REFUND';
+    public const NAME = 'REFUND';
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer $responseContainer

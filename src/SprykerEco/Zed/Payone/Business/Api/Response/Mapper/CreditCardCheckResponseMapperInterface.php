@@ -14,7 +14,7 @@ interface CreditCardCheckResponseMapperInterface extends ResponseMapperInterface
     /**
      * @const string NAME
      */
-    const NAME = 'CREDIT_CARD_CHECK';
+    public const NAME = 'CREDIT_CARD_CHECK';
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer $responseContainer

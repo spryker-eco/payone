@@ -17,7 +17,7 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\ConditionInterface;
  */
 abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInterface
 {
-    const NAME = 'AbstractPlugin';
+    public const NAME = 'AbstractPlugin';
 
     /**
      * @var array
@@ -25,6 +25,8 @@ abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInt
     private static $resultCache = [];
 
     /**
+     * @api
+     *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
      * @return bool

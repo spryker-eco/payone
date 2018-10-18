@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PayoneHandler implements PayoneHandlerInterface
 {
-    const PAYMENT_PROVIDER = 'Payone';
-    const CHECKOUT_INCLUDE_SUMMARY_PATH = 'Payone/partial/summary';
-    const CHECKOUT_INCLUDE_SUCCESS_PATH = 'Payone/partial/success';
+    public const PAYMENT_PROVIDER = 'Payone';
+    public const CHECKOUT_INCLUDE_SUMMARY_PATH = 'Payone/partial/summary';
+    public const CHECKOUT_INCLUDE_SUCCESS_PATH = 'Payone/partial/success';
 
     /**
      * @var array

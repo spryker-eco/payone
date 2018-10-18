@@ -68,9 +68,9 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PaymentManager implements PaymentManagerInterface
 {
-    const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
-    const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
-    const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
+    public const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
+    public const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
+    public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface

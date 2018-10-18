@@ -17,8 +17,6 @@ abstract class AbstractContainer implements ContainerInterface
     protected $utilEncodingService;
 
     /**
-     * AbstractContainer constructor.
-     *
      * @param \Spryker\Service\UtilEncoding\UtilEncodingService $utilEncodingService
      */
     public function __construct(UtilEncodingService $utilEncodingService)

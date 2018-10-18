@@ -12,16 +12,16 @@ namespace SprykerEco\Shared\Payone;
  */
 interface PayoneTransactionStatusConstants
 {
-    const TXACTION_APPOINTED = 'appointed';
-    const TXACTION_CAPTURE = 'capture';
-    const TXACTION_PAID = 'paid';
-    const TXACTION_UNDERPAID = 'underpaid';
-    const TXACTION_CANCELATION = 'cancelation';
-    const TXACTION_REFUND = 'refund';
-    const TXACTION_DEBIT = 'debit';
-    const TXACTION_REMINDER = 'reminder';
-    const TXACTION_VAUTHORIZATION = 'vauthorization';
-    const TXACTION_VSETTLEMENT = 'vsettlement';
-    const TXACTION_TRANSFER = 'transfer';
-    const TXACTION_INVOICE = 'invoice';
+    public const TXACTION_APPOINTED = 'appointed';
+    public const TXACTION_CAPTURE = 'capture';
+    public const TXACTION_PAID = 'paid';
+    public const TXACTION_UNDERPAID = 'underpaid';
+    public const TXACTION_CANCELATION = 'cancelation';
+    public const TXACTION_REFUND = 'refund';
+    public const TXACTION_DEBIT = 'debit';
+    public const TXACTION_REMINDER = 'reminder';
+    public const TXACTION_VAUTHORIZATION = 'vauthorization';
+    public const TXACTION_VSETTLEMENT = 'vsettlement';
+    public const TXACTION_TRANSFER = 'transfer';
+    public const TXACTION_INVOICE = 'invoice';
 }

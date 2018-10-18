@@ -18,6 +18,8 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class PaymentLogReceiverPlugin extends AbstractPlugin implements PaymentLogReceiverPluginInterface
 {
     /**
+     * @api
+     *
      * @param \Propel\Runtime\Collection\ObjectCollection $orders
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
