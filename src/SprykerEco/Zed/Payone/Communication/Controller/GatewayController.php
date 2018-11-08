@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Controller;
 
+use Generated\Shared\Transfer\AddressCheckResponseTransfer;
+use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
@@ -183,5 +185,25 @@ class GatewayController extends AbstractGatewayController
         $response = $this->getFacade()->getPaymentDetail($getPaymentDetailTransfer->getOrderId());
         $getPaymentDetailTransfer->setPaymentDetail($response);
         return $getPaymentDetailTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
+     */
+    public function sendAddressCheckRequestAction(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer
+    {
+        return $this->getFacade()->sendAddressCheckRequest($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
+     */
+    public function sendConsumerScoreRequestAction(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer
+    {
+        return $this->getFacade()->sendConsumerScoreRequest($quoteTransfer);
     }
 }

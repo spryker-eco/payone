@@ -140,4 +140,45 @@ class PayoneConfig extends AbstractBundleConfig
 
         return $settings[PayoneConstants::PAYONE_BUSINESS_RELATION];
     }
+
+    /**
+     * @return array
+     */
+    public function getGreenScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_GREEN_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getYellowScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return array
+     */
+    public function getRedScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return array
+     */
+    public function getUnknownScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_UNKNOWN_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
 }

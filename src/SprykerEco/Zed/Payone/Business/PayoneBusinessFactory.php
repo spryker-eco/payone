@@ -31,7 +31,15 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
+use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactory;
+use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface;
+use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapper;
+use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapperInterface;
+use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManager;
+use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
@@ -342,5 +350,37 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $genericPayment = new GenericPayment($store);
 
         return $genericPayment;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface
+     */
+    public function createRiskCheckManager(): RiskCheckManagerInterface
+    {
+        return new RiskCheckManager($this->createRiskCheckMapper(), $this->createExecutionAdapter(), $this->createRiskCheckFactory());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapperInterface
+     */
+    protected function createRiskCheckMapper(): RiskCheckMapperInterface
+    {
+        return new RiskCheckMapper($this->createRiskCheckFactory(), $this->getStandardParameter(), $this->createModeDetector());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface
+     */
+    protected function createRiskCheckFactory(): RiskCheckFactoryInterface
+    {
+        return new RiskCheckFactory();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface
+     */
+    public function createPaymentMethodFilter(): PaymentMethodFilterInterface
+    {
+        return new PaymentMethodFilter($this->getConfig());
     }
 }
