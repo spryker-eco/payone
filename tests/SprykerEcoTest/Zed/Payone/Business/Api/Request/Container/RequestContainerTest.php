@@ -10,6 +10,7 @@ namespace SprykerEcoTest\Zed\Payone\Business\Api\Request\Container;
 use PHPUnit_Framework_TestCase;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AddressCheckContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer as AuthorizationBusinessContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\CashOnDeliveryContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\DirectDebitContainer;
@@ -25,6 +26,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\BankAccountCheckContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer as CaptureBusinessContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\ConsumerScoreContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\BusinessContainer as DebitBusinessContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\PaymentMethod\BankAccountContainer as DebitBankAccountContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
@@ -135,6 +137,41 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     protected $narrativeText = 'some-text';
 
     /**
+     * @var string
+     */
+    protected $country = 'DE';
+
+    /**
+     * @var string
+     */
+    protected $city = 'Berlin';
+
+    /**
+     * @var string
+     */
+    protected $firstName = 'Spencor';
+
+    /**
+     * @var string
+     */
+    protected $lastName = 'Hopkin';
+
+    /**
+     * @var string
+     */
+    protected $street = 'street';
+
+    /**
+     * @var string
+     */
+    protected $streetNumber = '21';
+
+    /**
+     * @var string
+     */
+    protected $zip = '21212';
+
+    /**
      * @return void
      */
     public function testRefundContainer()
@@ -186,6 +223,65 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\BusinessContainer', $container->getBusiness());
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer', $container->getInvoicing());
     }
+
+    /**
+     * @return void
+     */
+    public function testAddressCheckContainer(): void
+    {
+        $container = new AddressCheckContainer();
+        $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
+
+        $this->setStandardParams($container);
+
+        $container->setCountry($this->country);
+        $container->setCity($this->city);
+        $container->setFirstName($this->firstName);
+        $container->setLastName($this->lastName);
+        $container->setStreetName($this->street);
+        $container->setStreetNumber($this->streetNumber);
+        $container->setZip($this->zip);
+
+        $this->assertStandardParams($container);
+
+        $this->assertEquals($this->country, $container->getCountry());
+        $this->assertEquals($this->city, $container->getCity());
+        $this->assertEquals($this->firstName, $container->getFirstName());
+        $this->assertEquals($this->lastName, $container->getLastName());
+        $this->assertEquals($this->street, $container->getStreetName());
+        $this->assertEquals($this->streetNumber, $container->getStreetNumber());
+        $this->assertEquals($this->zip, $container->getZip());
+    }
+
+    /**
+     * @return void
+     */
+    public function testConsumerScoreContainer(): void
+    {
+        $container = new ConsumerScoreContainer();
+        $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
+
+        $this->setStandardParams($container);
+
+        $container->setCountry($this->country);
+        $container->setCity($this->city);
+        $container->setFirstName($this->firstName);
+        $container->setLastName($this->lastName);
+        $container->setStreetName($this->street);
+        $container->setStreetNumber($this->streetNumber);
+        $container->setZip($this->zip);
+
+        $this->assertStandardParams($container);
+
+        $this->assertEquals($this->country, $container->getCountry());
+        $this->assertEquals($this->city, $container->getCity());
+        $this->assertEquals($this->firstName, $container->getFirstName());
+        $this->assertEquals($this->lastName, $container->getLastName());
+        $this->assertEquals($this->street, $container->getStreetName());
+        $this->assertEquals($this->streetNumber, $container->getStreetNumber());
+        $this->assertEquals($this->zip, $container->getZip());
+    }
+
 
     /**
      * @return void

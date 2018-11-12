@@ -9,8 +9,10 @@ namespace SprykerEcoTest\Zed\Payone\Business\Api\Response\Container;
 
 use PHPUnit_Framework_TestCase;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\AddressCheckResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\ConsumerScoreResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
 
@@ -27,6 +29,41 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContaine
  */
 class ResponseContainerTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var string
+     */
+    protected $city = 'Berlin';
+
+    /**
+     * @var string
+     */
+    protected $street = 'street';
+
+    /**
+     * @var string
+     */
+    protected $streetNumber = '21';
+
+    /**
+     * @var string
+     */
+    protected $zip = '21212';
+
+    /**
+     * @var string
+     */
+    protected $score = 'G';
+
+    /**
+     * @var string
+     */
+    protected $status = 'valid';
+
+    /**
+     * @var string
+     */
+    protected $customerMessage = 'customermessage';
+
     /**
      * @return void
      */
@@ -236,5 +273,55 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('errormessage', $container->getErrormessage());
         $this->assertEquals('rawresponse', $container->getRawResponse());
         $this->assertEquals('status', $container->getStatus());
+    }
+
+    /**
+     * @return void
+     */
+    public function testAddressCheckResponseContainer(): void
+    {
+        $container = new AddressCheckResponseContainer();
+        $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Response\Container\AddressCheckResponseContainer', $container);
+
+        $container->setCity($this->city);
+        $container->setStreetName($this->street);
+        $container->setStreetNumber($this->streetNumber);
+        $container->setZip($this->zip);
+        $container->setStatus($this->status);
+        $container->setCustomermessage($this->customerMessage);
+        $container->setErrorcode(500);
+
+        $this->assertEquals($this->city, $container->getCity());
+        $this->assertEquals($this->street, $container->getStreetName());
+        $this->assertEquals($this->streetNumber, $container->getStreetNumber());
+        $this->assertEquals($this->zip, $container->getZip());
+        $this->assertEquals($this->status, $container->getStatus());
+        $this->assertEquals($this->customerMessage, $container->getCustomermessage());
+        $this->assertEquals(500, $container->getErrorcode());
+    }
+
+    /**
+     * @return void
+     */
+    public function testConsumerScoreResponseContainer(): void
+    {
+        $container = new ConsumerScoreResponseContainer();
+        $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Response\Container\ConsumerScoreResponseContainer', $container);
+
+        $container->setCity($this->city);
+        $container->setStreetName($this->street);
+        $container->setStreetNumber($this->streetNumber);
+        $container->setZip($this->zip);
+        $container->setScore($this->score);
+        $container->setStatus($this->status);
+        $container->setCustomermessage($this->customerMessage);
+
+        $this->assertEquals($this->city, $container->getCity());
+        $this->assertEquals($this->street, $container->getStreetName());
+        $this->assertEquals($this->streetNumber, $container->getStreetNumber());
+        $this->assertEquals($this->zip, $container->getZip());
+        $this->assertEquals($this->score, $container->getScore());
+        $this->assertEquals($this->status, $container->getStatus());
+        $this->assertEquals($this->customerMessage, $container->getCustomermessage());
     }
 }
