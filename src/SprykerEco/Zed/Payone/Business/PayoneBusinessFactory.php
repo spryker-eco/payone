@@ -357,7 +357,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     public function createRiskCheckManager(): RiskCheckManagerInterface
     {
-        return new RiskCheckManager($this->createRiskCheckMapper(), $this->createExecutionAdapter(), $this->createRiskCheckFactory());
+        return new RiskCheckManager(
+            $this->createRiskCheckMapper(),
+            $this->createExecutionAdapter(),
+            $this->createRiskCheckFactory()
+        );
     }
 
     /**
@@ -365,7 +369,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     protected function createRiskCheckMapper(): RiskCheckMapperInterface
     {
-        return new RiskCheckMapper($this->createRiskCheckFactory(), $this->getStandardParameter(), $this->createModeDetector());
+        return new RiskCheckMapper(
+            $this->createRiskCheckFactory(),
+            $this->getStandardParameter(),
+            $this->createModeDetector()
+        );
     }
 
     /**

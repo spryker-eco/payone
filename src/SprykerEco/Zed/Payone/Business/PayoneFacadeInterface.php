@@ -505,6 +505,8 @@ interface PayoneFacadeInterface
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
     /**
+     * Send request to Payone to get address check result based on customer billing address.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -514,6 +516,8 @@ interface PayoneFacadeInterface
     public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
 
     /**
+     * Send request to Payone to get consumer score result based on customer billing info.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -523,6 +527,8 @@ interface PayoneFacadeInterface
     public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
 
     /**
+     * Filter Payone's payment methods based on consumer score result.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer

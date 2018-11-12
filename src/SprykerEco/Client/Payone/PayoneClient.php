@@ -191,7 +191,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Send request to Payone to get address validation result.
+     * {@inheritdoc}
      *
      * @api
      *
@@ -205,6 +205,8 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

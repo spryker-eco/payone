@@ -127,6 +127,8 @@ interface PayoneClientInterface
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
     /**
+     * Send request to Payone to get address validation result.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -136,6 +138,8 @@ interface PayoneClientInterface
     public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
 
     /**
+     * Send request to Payone to get consumer score result.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
