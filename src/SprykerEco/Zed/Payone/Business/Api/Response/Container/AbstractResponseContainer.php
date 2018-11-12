@@ -52,9 +52,6 @@ abstract class AbstractResponseContainer
     public function init(array $data = [])
     {
         foreach ($data as $key => $value) {
-            if (!$value) {
-                continue;
-            }
             $key = $this->getPreparedKey($key);
             $method = 'set' . str_replace(' ', '', $key);
 
