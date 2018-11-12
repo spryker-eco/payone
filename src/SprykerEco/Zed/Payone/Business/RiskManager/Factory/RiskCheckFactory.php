@@ -25,7 +25,7 @@ class RiskCheckFactory implements RiskCheckFactoryInterface
     }
 
     /**
-     * @return ContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
      */
     public function createConsumerScoreContainer(): ContainerInterface
     {

@@ -13,10 +13,16 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface;
 interface RiskCheckMapperInterface
 {
     /**
-     * @param QuoteTransfer $quoteTransfer
-     * @return ContainerInterface
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
      */
     public function mapAddressCheck(QuoteTransfer $quoteTransfer): ContainerInterface;
 
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
+     */
     public function mapConsumerScoreCheck(QuoteTransfer $quoteTransfer): ContainerInterface;
 }

@@ -11,9 +11,6 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\AddressCheckContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\ConsumerScoreContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface;
 
@@ -37,6 +34,11 @@ class RiskCheckMapper implements RiskCheckMapperInterface
      */
     protected $modeDetector;
 
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface $riskCheckFactory
+     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameters
+     * @param \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface $modeDetector
+     */
     public function __construct(
         RiskCheckFactoryInterface $riskCheckFactory,
         PayoneStandardParameterTransfer $standardParameters,
@@ -48,13 +50,13 @@ class RiskCheckMapper implements RiskCheckMapperInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return ContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
      */
     public function mapAddressCheck(QuoteTransfer $quoteTransfer): ContainerInterface
     {
-        /** @var AddressCheckContainer $container */
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AddressCheckContainer $container */
         $container = $this->riskCheckFactory->createAddressCheckContainer();
         $container = $this->mapDefaultContainerParams($container);
 
@@ -71,9 +73,14 @@ class RiskCheckMapper implements RiskCheckMapperInterface
         return $container;
     }
 
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
+     */
     public function mapConsumerScoreCheck(QuoteTransfer $quoteTransfer): ContainerInterface
     {
-        /** @var ConsumerScoreContainer $container */
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\ConsumerScoreContainer $container */
         $container = $this->riskCheckFactory->createConsumerScoreContainer();
         $container = $this->mapDefaultContainerParams($container);
 
@@ -98,7 +105,7 @@ class RiskCheckMapper implements RiskCheckMapperInterface
      */
     protected function mapDefaultContainerParams(ContainerInterface $container): ContainerInterface
     {
-        /** @var AbstractRequestContainer $container */
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container */
         $container->setMid($this->standardParameters->getMid());
         $container->setAid($this->standardParameters->getAid());
         $container->setPortalid($this->standardParameters->getPortalId());

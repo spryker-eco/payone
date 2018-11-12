@@ -505,6 +505,8 @@ interface PayoneFacadeInterface
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
     /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
@@ -512,6 +514,8 @@ interface PayoneFacadeInterface
     public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
 
     /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
@@ -519,6 +523,8 @@ interface PayoneFacadeInterface
     public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
 
     /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

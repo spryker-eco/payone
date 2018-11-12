@@ -34,7 +34,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
     /**
      * @param \SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapperInterface $riskCheckMapper
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface
+     * @param \SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface $riskCheckFactory
      */
     public function __construct(RiskCheckMapperInterface $riskCheckMapper, AdapterInterface $executionAdapter, RiskCheckFactoryInterface $riskCheckFactory)
     {

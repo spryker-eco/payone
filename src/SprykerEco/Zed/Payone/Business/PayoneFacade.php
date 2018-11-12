@@ -646,6 +646,8 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
@@ -658,6 +660,8 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
@@ -670,6 +674,8 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

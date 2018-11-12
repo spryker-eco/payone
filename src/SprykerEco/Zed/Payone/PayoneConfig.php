@@ -151,7 +151,6 @@ class PayoneConfig extends AbstractBundleConfig
         return $settings[PayoneConstants::PAYONE_GREEN_SCORE_AVAILABLE_PAYMENT_METHODS];
     }
 
-
     /**
      * @return array
      */

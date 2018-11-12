@@ -190,7 +190,6 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
         return $this->getFactory()->createZedStub()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
 
-
     /**
      * Send request to Payone to get address validation result.
      *
