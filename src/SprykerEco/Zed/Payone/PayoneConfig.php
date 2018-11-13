@@ -144,7 +144,7 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * @return string[]
      */
-    public function getGreenScoreAvailablePaymentMethods(): array
+    public function getGScoreAvailablePaymentMethods(): array
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -154,7 +154,7 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * @return string[]
      */
-    public function getYellowScoreAvailablePaymentMethods(): array
+    public function getYScoreAvailablePaymentMethods(): array
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -164,7 +164,7 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * @return string[]
      */
-    public function getRedScoreAvailablePaymentMethods(): array
+    public function getRScoreAvailablePaymentMethods(): array
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -174,7 +174,7 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * @return string[]
      */
-    public function getUnknownScoreAvailablePaymentMethods(): array
+    public function getUScoreAvailablePaymentMethods(): array
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 

@@ -20,6 +20,8 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
     protected const PAYONE_SCORE_YELLOW = 'Y';
     protected const PAYONE_SCORE_RED = 'R';
     protected const PAYONE_SCORE_UNKNOWN = 'U';
+    protected const CONFIG_METHOD_PART_GET = 'get';
+    protected const CONFIG_METHOD_PART_AVAIlABLE_PAYMENT_METHODS = 'ScoreAvailablePaymentMethods';
 
     /**
      * @var \SprykerEco\Zed\Payone\PayoneConfig
@@ -66,18 +68,15 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
     {
         $score = $quoteTransfer->getConsumerScore();
 
-        switch ($score) {
-            case $score == static::PAYONE_SCORE_GREEN:
-                return $this->config->getGreenScoreAvailablePaymentMethods();
-            case $score == static::PAYONE_SCORE_YELLOW:
-                return $this->config->getYellowScoreAvailablePaymentMethods();
-            case $score == static::PAYONE_SCORE_RED:
-                return $this->config->getRedScoreAvailablePaymentMethods();
-            case $score == static::PAYONE_SCORE_UNKNOWN:
-                return $this->config->getUnknownScoreAvailablePaymentMethods();
-            default:
-                return [];
+        $method = static::CONFIG_METHOD_PART_GET .
+            ucfirst($score) .
+            static::CONFIG_METHOD_PART_AVAIlABLE_PAYMENT_METHODS;
+
+        if (method_exists($this->config, $method)) {
+            return $this->config->$method();
         }
+
+        return $this->config->getUScoreAvailablePaymentMethods();
     }
 
     /**
