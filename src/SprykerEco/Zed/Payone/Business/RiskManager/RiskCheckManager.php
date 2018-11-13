@@ -82,7 +82,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
         $consumerScoreResponseTransfer = new ConsumerScoreResponseTransfer();
         $consumerScoreResponseTransfer->setStatus($responseContainer->getStatus());
 
-        if ($responseContainer->isError()) {
+        if (!$responseContainer->isError()) {
             $consumerScoreResponseTransfer->setScore($responseContainer->getScore());
 
             return $consumerScoreResponseTransfer;
