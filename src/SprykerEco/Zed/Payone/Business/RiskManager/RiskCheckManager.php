@@ -76,6 +76,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
         $requestContainer = $this->riskCheckMapper->mapConsumerScoreCheck($quoteTransfer);
 
         $response = $this->executionAdapter->sendRequest($requestContainer);
+
         $responseContainer = $this->riskCheckFactory->createConsumerScoreResponseContainer();
         $responseContainer->init($response);
 
