@@ -142,7 +142,7 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getGreenScoreAvailablePaymentMethods(): array
     {
@@ -152,7 +152,7 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getYellowScoreAvailablePaymentMethods(): array
     {
@@ -162,7 +162,7 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getRedScoreAvailablePaymentMethods(): array
     {
@@ -172,7 +172,7 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getUnknownScoreAvailablePaymentMethods(): array
     {

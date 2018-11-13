@@ -48,7 +48,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
      */
-    public function addressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer
+    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer
     {
         $requestContainer = $this->riskCheckMapper->mapAddressCheck($quoteTransfer);
         $response = $this->executionAdapter->sendRequest($requestContainer);
@@ -58,7 +58,8 @@ class RiskCheckManager implements RiskCheckManagerInterface
 
         $addressCheckResponseTransfer = new AddressCheckResponseTransfer();
         $addressCheckResponseTransfer->setStatus($responseContainer->getStatus());
-        if ($responseContainer->getCustomermessage()) {
+
+        if (!is_null($responseContainer->getCustomermessage())) {
             $addressCheckResponseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
         }
 
@@ -81,7 +82,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
         $consumerScoreResponseTransfer = new ConsumerScoreResponseTransfer();
         $consumerScoreResponseTransfer->setStatus($responseContainer->getStatus());
 
-        if (!$responseContainer->isError()) {
+        if ($responseContainer->isError()) {
             $consumerScoreResponseTransfer->setScore($responseContainer->getScore());
 
             return $consumerScoreResponseTransfer;

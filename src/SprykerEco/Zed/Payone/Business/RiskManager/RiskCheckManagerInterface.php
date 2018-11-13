@@ -18,7 +18,7 @@ interface RiskCheckManagerInterface
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
      */
-    public function addressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
+    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

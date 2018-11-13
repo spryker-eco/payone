@@ -658,7 +658,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     {
         return $this->getFactory()
             ->createRiskCheckManager()
-            ->addressCheckRequest($quoteTransfer);
+            ->sendAddressCheckRequest($quoteTransfer);
     }
 
     /**
