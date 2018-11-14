@@ -372,7 +372,8 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         return new RiskCheckMapper(
             $this->createRiskCheckFactory(),
             $this->getStandardParameter(),
-            $this->createModeDetector()
+            $this->createModeDetector(),
+            $this->getConfig()
         );
     }
 
