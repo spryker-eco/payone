@@ -58,6 +58,11 @@ class RiskCheckManager implements RiskCheckManagerInterface
 
         $addressCheckResponseTransfer = new AddressCheckResponseTransfer();
         $addressCheckResponseTransfer->setStatus($responseContainer->getStatus());
+        $addressCheckResponseTransfer->setStreetName($responseContainer->getStreetName());
+        $addressCheckResponseTransfer->setStreetNumber($responseContainer->getStreetNumber());
+        $addressCheckResponseTransfer->setZip($responseContainer->getZip());
+        $addressCheckResponseTransfer->setCity($responseContainer->getCity());
+        $addressCheckResponseTransfer->setSecstatus($responseContainer->getSecstatus());
 
         if (!is_null($responseContainer->getCustomermessage())) {
             $addressCheckResponseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
