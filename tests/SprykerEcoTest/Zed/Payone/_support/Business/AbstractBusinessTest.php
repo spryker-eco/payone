@@ -103,6 +103,8 @@ abstract class AbstractBusinessTest extends Test
                 PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL => '',
                 PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILURE_URL => '',
                 PayoneConstants::PAYONE_EXPRESS_CHECKOUT_BACK_URL => '',
+                PayoneConstants::PAYONE_ADDRESS_CHECK_TYPE => 'BA',
+                PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE => 'IH',
             ]
         );
     }
