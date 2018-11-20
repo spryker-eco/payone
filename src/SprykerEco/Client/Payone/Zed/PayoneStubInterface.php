@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Client\Payone\Zed;
 
+use Generated\Shared\Transfer\AddressCheckResponseTransfer;
+use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
@@ -81,4 +83,18 @@ interface PayoneStubInterface
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
+     */
+    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
+     */
+    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
 }

@@ -28,6 +28,41 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContaine
 class ResponseContainerTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * @var string
+     */
+    protected $city = 'Berlin';
+
+    /**
+     * @var string
+     */
+    protected $street = 'street';
+
+    /**
+     * @var string
+     */
+    protected $streetNumber = '21';
+
+    /**
+     * @var string
+     */
+    protected $zip = '21212';
+
+    /**
+     * @var string
+     */
+    protected $score = 'G';
+
+    /**
+     * @var string
+     */
+    protected $status = 'valid';
+
+    /**
+     * @var string
+     */
+    protected $customerMessage = 'customermessage';
+
+    /**
      * @return void
      */
     public function testAuthorizationResponseContainer()

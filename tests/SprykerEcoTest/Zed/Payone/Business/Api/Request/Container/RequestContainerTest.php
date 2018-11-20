@@ -135,6 +135,41 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     protected $narrativeText = 'some-text';
 
     /**
+     * @var string
+     */
+    protected $country = 'DE';
+
+    /**
+     * @var string
+     */
+    protected $city = 'Berlin';
+
+    /**
+     * @var string
+     */
+    protected $firstName = 'Spencor';
+
+    /**
+     * @var string
+     */
+    protected $lastName = 'Hopkin';
+
+    /**
+     * @var string
+     */
+    protected $street = 'street';
+
+    /**
+     * @var string
+     */
+    protected $streetNumber = '21';
+
+    /**
+     * @var string
+     */
+    protected $zip = '21212';
+
+    /**
      * @return void
      */
     public function testRefundContainer()

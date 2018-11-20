@@ -450,8 +450,24 @@
 
     <transfer name="Quote">
         <property name="isGuestExpressCheckout" type="bool" />
+        <property name="consumerScore" type="string" />
+        <property name="isAddressValid" type="bool" />
     </transfer>
 
-    <!--Response container replacement related transfers end-->
+    <transfer name="AddressCheckResponse">
+        <property name="status" type="string" />
+        <property name="secstatus" type="string" />
+        <property name="customerMessage" type="string" />
+        <property name="streetName" type="string" />
+        <property name="streetNumber" type="string" />
+        <property name="zip" type="string" />
+        <property name="city" type="string" />
+    </transfer>
 
+    <transfer name="ConsumerScoreResponse">
+        <property name="status" type="string" />
+        <property name="score" type="string" />
+        <property name="customerMessage" type="string" />
+    </transfer>
+    <!--Response container replacement related transfers end-->
 </transfers>

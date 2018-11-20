@@ -140,4 +140,64 @@ class PayoneConfig extends AbstractBundleConfig
 
         return $settings[PayoneConstants::PAYONE_BUSINESS_RELATION];
     }
+
+    /**
+     * @return string[]
+     */
+    public function getGScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_GREEN_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getYScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getUScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_UNKNOWN_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressCheckType(): string
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_ADDRESS_CHECK_TYPE];
+    }
+
+    /**
+     * @return string
+     */
+    public function getConsumerScoreType(): string
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE];
+    }
 }
