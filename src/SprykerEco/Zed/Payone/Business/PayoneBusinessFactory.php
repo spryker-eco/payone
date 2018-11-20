@@ -29,7 +29,17 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
+use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactory;
+use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface;
+use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapper;
+use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapperInterface;
+use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManager;
+use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
@@ -191,6 +201,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         return [
             PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO => $this->createCreditCardPseudo($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_INVOICE => $this->createInvoice($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE => $this->createSecurityInvoice($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER => $this->createOnlineBankTransfer($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_E_WALLET => $this->createEWallet($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT => $this->createPrepayment($storeConfig),
@@ -253,6 +264,18 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     protected function createInvoice($storeConfig)
     {
         $invoice = new Invoice($storeConfig);
+
+        return $invoice;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Store $storeConfig
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
+     */
+    protected function createSecurityInvoice($storeConfig): PaymentMethodMapperInterface
+    {
+        $invoice = new SecurityInvoice($storeConfig, $this->getConfig());
 
         return $invoice;
     }
@@ -327,5 +350,46 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $genericPayment = new GenericPayment($store);
 
         return $genericPayment;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface
+     */
+    public function createRiskCheckManager(): RiskCheckManagerInterface
+    {
+        return new RiskCheckManager(
+            $this->createRiskCheckMapper(),
+            $this->createExecutionAdapter(),
+            $this->createRiskCheckFactory()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapperInterface
+     */
+    protected function createRiskCheckMapper(): RiskCheckMapperInterface
+    {
+        return new RiskCheckMapper(
+            $this->createRiskCheckFactory(),
+            $this->getStandardParameter(),
+            $this->createModeDetector(),
+            $this->getConfig()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface
+     */
+    protected function createRiskCheckFactory(): RiskCheckFactoryInterface
+    {
+        return new RiskCheckFactory();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface
+     */
+    public function createPaymentMethodFilter(): PaymentMethodFilterInterface
+    {
+        return new PaymentMethodFilter($this->getConfig());
     }
 }

@@ -16,15 +16,15 @@ use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const CLIENT_PAYONE = 'payone client';
+    public const CLIENT_PAYONE = 'payone client';
 
-    const CLIENT_CUSTOMER = 'customer client';
+    public const CLIENT_CUSTOMER = 'customer client';
 
-    const CLIENT_CART = 'cart client';
+    public const CLIENT_CART = 'cart client';
 
-    const CLIENT_SHIPMENT = 'shipment client';
+    public const CLIENT_SHIPMENT = 'shipment client';
 
-    const CLIENT_CALCULATION = 'calculation client';
+    public const CLIENT_CALCULATION = 'calculation client';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container

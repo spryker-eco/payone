@@ -29,12 +29,12 @@ class QuoteHydrator implements QuoteHydratorInterface
     /**
      * @const string CARRIER_NAME
      */
-    const CARRIER_NAME = 'Paypal';
+    public const CARRIER_NAME = 'Paypal';
 
     /**
      * @const int DEFAULT_SHIPPING_PRICE
      */
-    const DEFAULT_SHIPPING_PRICE = 0;
+    public const DEFAULT_SHIPPING_PRICE = 0;
 
     /**
      * @var \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerInterface

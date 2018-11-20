@@ -89,7 +89,8 @@ class OmsCommandTest extends AbstractPayoneTest
         $captureTransfer = (new PayoneCaptureTransfer())
             ->setAmount(10)
             ->setPayment((new PayonePaymentTransfer())->fromArray($this->spyPaymentPayone->toArray()))
-            ->setSettleaccount('settlement account');
+            ->setSettleaccount('settlement account')
+            ->setOrder($this->orderTransfer);
 
         $captureResponseTransfer = $this->payoneFacade->capturePayment($captureTransfer);
 
@@ -117,7 +118,8 @@ class OmsCommandTest extends AbstractPayoneTest
             ->setNarrativeText('Narrative Text')
             ->setUseCustomerdata('Use Customer data')
             ->setAmount(10)
-            ->setPayment((new PayonePaymentTransfer())->fromArray($this->spyPaymentPayone->toArray()));
+            ->setPayment((new PayonePaymentTransfer())->fromArray($this->spyPaymentPayone->toArray()))
+            ->setOrder($this->orderTransfer);
 
         $refundResponseTransfer = $this->payoneFacade->refundPayment($refundTransfer);
 

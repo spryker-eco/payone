@@ -15,7 +15,7 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class CaptureIsErrorConditionPlugin extends AbstractPlugin
 {
-    const NAME = 'CaptureIsErrorPlugin';
+    public const NAME = 'CaptureIsErrorPlugin';
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

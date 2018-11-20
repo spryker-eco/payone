@@ -7,11 +7,14 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Controller;
 
+use Generated\Shared\Transfer\AddressCheckResponseTransfer;
+use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
+use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
@@ -157,6 +160,16 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
+     */
+    public function getSecurityInvoiceAction(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer): PayoneGetSecurityInvoiceTransfer
+    {
+        return $this->getFacade()->getSecurityInvoice($getSecurityInvoiceTransfer);
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer
@@ -172,5 +185,25 @@ class GatewayController extends AbstractGatewayController
         $response = $this->getFacade()->getPaymentDetail($getPaymentDetailTransfer->getOrderId());
         $getPaymentDetailTransfer->setPaymentDetail($response);
         return $getPaymentDetailTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
+     */
+    public function sendAddressCheckRequestAction(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer
+    {
+        return $this->getFacade()->sendAddressCheckRequest($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
+     */
+    public function sendConsumerScoreRequestAction(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer
+    {
+        return $this->getFacade()->sendConsumerScoreRequest($quoteTransfer);
     }
 }

@@ -17,22 +17,23 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 
 class PayoneConfig extends AbstractBundleConfig
 {
-    const PROVIDER_NAME = 'Payone';
-    const PAYMENT_METHOD_CREDIT_CARD = 'payoneCreditCard';
-    const PAYMENT_METHOD_E_WALLET = 'payoneEWallet';
-    const PAYMENT_METHOD_DIRECT_DEBIT = 'payoneDirectDebit';
-    const PAYMENT_METHOD_ONLINE_TRANSFER = 'payoneOnlineTransfer';
-    const PAYMENT_METHOD_EPS_ONLINE_TRANSFER = 'payoneEpsOnlineTransfer';
-    const PAYMENT_METHOD_INSTANT_ONLINE_TRANSFER = 'payoneInstantOnlineTransfer';
-    const PAYMENT_METHOD_GIROPAY_ONLINE_TRANSFER = 'payoneGiropayOnlineTransfer';
-    const PAYMENT_METHOD_IDEAL_ONLINE_TRANSFER = 'payoneIdealOnlineTransfer';
-    const PAYMENT_METHOD_POSTFINANCE_EFINANCE_ONLINE_TRANSFER = 'payonePostfinanceEfinanceOnlineTransfer';
-    const PAYMENT_METHOD_POSTFINANCE_CARD_ONLINE_TRANSFER = 'payonePostfinanceCardOnlineTransfer';
-    const PAYMENT_METHOD_PRZELEWY24_ONLINE_TRANSFER = 'payonePrzelewy24OnlineTransfer';
-    const PAYMENT_METHOD_BANCONTACT_ONLINE_TRANSFER = 'payoneBancontactOnlineTransfer';
-    const PAYMENT_METHOD_PRE_PAYMENT = 'payonePrePayment';
-    const PAYMENT_METHOD_INVOICE = 'payoneInvoice';
-    const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE;
+    public const PROVIDER_NAME = 'Payone';
+    public const PAYMENT_METHOD_CREDIT_CARD = 'payoneCreditCard';
+    public const PAYMENT_METHOD_E_WALLET = 'payoneEWallet';
+    public const PAYMENT_METHOD_DIRECT_DEBIT = 'payoneDirectDebit';
+    public const PAYMENT_METHOD_ONLINE_TRANSFER = 'payoneOnlineTransfer';
+    public const PAYMENT_METHOD_EPS_ONLINE_TRANSFER = 'payoneEpsOnlineTransfer';
+    public const PAYMENT_METHOD_INSTANT_ONLINE_TRANSFER = 'payoneInstantOnlineTransfer';
+    public const PAYMENT_METHOD_GIROPAY_ONLINE_TRANSFER = 'payoneGiropayOnlineTransfer';
+    public const PAYMENT_METHOD_IDEAL_ONLINE_TRANSFER = 'payoneIdealOnlineTransfer';
+    public const PAYMENT_METHOD_POSTFINANCE_EFINANCE_ONLINE_TRANSFER = 'payonePostfinanceEfinanceOnlineTransfer';
+    public const PAYMENT_METHOD_POSTFINANCE_CARD_ONLINE_TRANSFER = 'payonePostfinanceCardOnlineTransfer';
+    public const PAYMENT_METHOD_PRZELEWY24_ONLINE_TRANSFER = 'payonePrzelewy24OnlineTransfer';
+    public const PAYMENT_METHOD_BANCONTACT_ONLINE_TRANSFER = 'payoneBancontactOnlineTransfer';
+    public const PAYMENT_METHOD_PRE_PAYMENT = 'payonePrePayment';
+    public const PAYMENT_METHOD_INVOICE = 'payoneInvoice';
+    public const PAYMENT_METHOD_SECURITY_INVOICE = 'payoneSecurityInvoice';
+    public const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE;
 
     /**
      * Fetches API request mode from config (could be 'live' or 'test').
@@ -128,5 +129,75 @@ class PayoneConfig extends AbstractBundleConfig
     public function getTranslationFilePath()
     {
         return __DIR__ . DIRECTORY_SEPARATOR . PayoneConstants::GLOSSARY_FILE_PATH;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBusinessRelation(): string
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_BUSINESS_RELATION];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getGScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_GREEN_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getYScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getUScoreAvailablePaymentMethods(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_UNKNOWN_SCORE_AVAILABLE_PAYMENT_METHODS];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressCheckType(): string
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_ADDRESS_CHECK_TYPE];
+    }
+
+    /**
+     * @return string
+     */
+    public function getConsumerScoreType(): string
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE];
     }
 }

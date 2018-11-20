@@ -20,6 +20,8 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\CommandByOrderInterface;
 class CaptureCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
     /**
+     * @api
+     *
      * @param array $orderItems
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
      * @param \Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject $data
@@ -33,10 +35,8 @@ class CaptureCommandPlugin extends AbstractPayonePlugin implements CommandByOrde
         $paymentTransfer = new PayonePaymentTransfer();
         $paymentTransfer->setFkSalesOrder($orderEntity->getSpyPaymentPayones()->getFirst()->getFkSalesOrder());
         $captureTransfer->setPayment($paymentTransfer);
-
-        $orderTransfer = $this->getOrderTransfer($orderEntity);
-
-        $captureTransfer->setAmount($orderTransfer->getTotals()->getGrandTotal());
+        $captureTransfer->setAmount($this->getOrderTransfer($orderEntity)->getTotals()->getGrandTotal());
+        $captureTransfer->setOrder($this->getOrderTransfer($orderEntity));
 
         $this->getFacade()->capturePayment($captureTransfer);
 

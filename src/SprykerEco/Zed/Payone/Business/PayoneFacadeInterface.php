@@ -6,15 +6,20 @@
  */
 namespace SprykerEco\Zed\Payone\Business;
 
+use Generated\Shared\Transfer\AddressCheckResponseTransfer;
+use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
+use Generated\Shared\Transfer\PaymentMethodsTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
+use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
@@ -71,9 +76,9 @@ interface PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
      *
-     * @return Api\Response\Container\CaptureResponseContainer
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer);
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer;
 
     /**
      * Specification:
@@ -470,6 +475,20 @@ interface PayoneFacadeInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer);
 
     /**
+     * Specification:
+     * - Performs GetSecurityInvoice request to Payone API for PDF file download.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
+     */
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer);
+
+    /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
@@ -477,9 +496,45 @@ interface PayoneFacadeInterface
     public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
+
+    /**
+     * Send request to Payone to get address check result based on customer billing address.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
+     */
+    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
+
+    /**
+     * Send request to Payone to get consumer score result based on customer billing info.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
+     */
+    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
+
+    /**
+     * Filter Payone's payment methods based on consumer score result.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PaymentMethodsTransfer $paymentMethodsTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
+     */
+    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer;
 }

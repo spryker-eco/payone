@@ -21,18 +21,18 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
 {
-    const PAYMENT_METHOD = 'online_transfer';
-    const FIELD_IBAN = 'iban';
-    const FIELD_BIC = 'bic';
-    const FIELD_BANK_COUNTRY = 'bankcountry';
-    const FIELD_BANK_ACCOUNT = 'bankaccount';
-    const FIELD_BANK_CODE = 'bankcode';
-    const FIELD_BANK_BRANCH_CODE = 'bankbranchcode';
-    const FIELD_BANK_CHECK_DIGIT = 'bankcheckdigit';
-    const FIELD_ONLINE_BANK_TRANSFER_TYPE = 'onlinebanktransfertype';
-    const FIELD_BANK_GROUP_TYPE = 'bankgrouptype';
-    const OPTION_ONLINE_BANK_TRANSFER_TYPES = 'online bank transfer types';
-    const OPTION_BANK_COUNTRIES = '';
+    public const PAYMENT_METHOD = 'online_transfer';
+    public const FIELD_IBAN = 'iban';
+    public const FIELD_BIC = 'bic';
+    public const FIELD_BANK_COUNTRY = 'bankcountry';
+    public const FIELD_BANK_ACCOUNT = 'bankaccount';
+    public const FIELD_BANK_CODE = 'bankcode';
+    public const FIELD_BANK_BRANCH_CODE = 'bankbranchcode';
+    public const FIELD_BANK_CHECK_DIGIT = 'bankcheckdigit';
+    public const FIELD_ONLINE_BANK_TRANSFER_TYPE = 'onlinebanktransfertype';
+    public const FIELD_BANK_GROUP_TYPE = 'bankgrouptype';
+    public const OPTION_ONLINE_BANK_TRANSFER_TYPES = 'online bank transfer types';
+    public const OPTION_BANK_COUNTRIES = '';
 
     /**
      * @return string
@@ -87,7 +87,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\AbstractOnlineTransferSubForm
+     * @return $this
      */
     protected function addBankAccount(FormBuilderInterface $builder)
     {
@@ -108,7 +108,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\AbstractOnlineTransferSubForm
+     * @return $this
      */
     protected function addBankCode(FormBuilderInterface $builder)
     {
@@ -129,7 +129,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\AbstractOnlineTransferSubForm
+     * @return $this
      */
     protected function addBankBranchCode(FormBuilderInterface $builder)
     {
@@ -150,7 +150,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\AbstractOnlineTransferSubForm
+     * @return $this
      */
     protected function addBankCheckDigit(FormBuilderInterface $builder)
     {
@@ -171,7 +171,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\AbstractOnlineTransferSubForm
+     * @return $this
      */
     protected function addIBAN(FormBuilderInterface $builder)
     {
@@ -193,7 +193,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\AbstractOnlineTransferSubForm
+     * @return $this
      */
     protected function addBankCountry(FormBuilderInterface $builder, array $options)
     {
@@ -229,7 +229,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\AbstractOnlineTransferSubForm
+     * @return $this
      */
     protected function addBIC(FormBuilderInterface $builder)
     {

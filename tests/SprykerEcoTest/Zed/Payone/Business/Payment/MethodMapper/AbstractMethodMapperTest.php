@@ -11,11 +11,13 @@ use ArrayObject;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Generated\Shared\Transfer\TotalsTransfer;
 use Orm\Zed\Country\Persistence\SpyCountry;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
+use Orm\Zed\Sales\Persistence\SpySalesOrderTotals;
 use PHPUnit_Framework_TestCase;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
@@ -42,6 +44,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     const AMOUNT_FULL = 100;
     const PAYMENT_REFERENCE = 'TX1234567890abcd';
     const DEFAULT_SEQUENCE_NUMBER = 0;
+    public const DEFAULT_EMAIL = 'default@email.com';
 
     const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
@@ -131,6 +134,8 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
             ->getMock();
         $salesOrder->method('getBillingAddress')->willReturn($this->getAddressMock());
         $salesOrder->method('getShippingAddress')->willReturn($this->getAddressMock());
+        $salesOrder->method('getEmail')->willReturn(static::DEFAULT_EMAIL);
+        $salesOrder->method('getOrderTotals')->willReturn($this->getTotals());
 
         return $salesOrder;
     }
@@ -144,6 +149,12 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
 
         $item = new ItemTransfer();
         $orderTransfer->setItems(new ArrayObject([$item]));
+
+        $totalsTransfer = new TotalsTransfer();
+        $totalsTransfer->setGrandTotal(100);
+        $totalsTransfer->getSubtotal(100);
+
+        $orderTransfer->setTotals($totalsTransfer);
 
         return $orderTransfer;
     }
@@ -225,5 +236,20 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         return $urlHmacGenerator;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getTotals()
+    {
+        $totals = $this->getMockBuilder(SpySalesOrderTotals::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['get'])
+            ->getMock();
+
+        $totals->method('get')->willReturn((new TotalsTransfer())->setSubtotal(100));
+
+        return $totals;
     }
 }

@@ -15,9 +15,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class EpsOnlineTransferSubForm extends OnlineTransferSubForm
 {
-    const PAYMENT_METHOD = 'eps_online_transfer';
-    const OPTION_BANK_COUNTRIES = 'eps online transfer bank countries';
-    const OPTION_BANK_GROUP_TYPES = 'eps online transfer bank group types';
+    public const PAYMENT_METHOD = 'eps_online_transfer';
+    public const OPTION_BANK_COUNTRIES = 'eps online transfer bank countries';
+    public const OPTION_BANK_GROUP_TYPES = 'eps online transfer bank group types';
 
     /**
      * @return string
@@ -52,7 +52,7 @@ class EpsOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm
+     * @return $this
      */
     public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {
@@ -72,7 +72,7 @@ class EpsOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm
+     * @return $this
      */
     protected function addBankGroupType(FormBuilderInterface $builder, array $options)
     {

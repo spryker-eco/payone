@@ -88,7 +88,9 @@ class TransactionController extends AbstractController
             ->useSpyPaymentPayoneQuery()
             ->filterByTransactionId($payoneTransactionStatusUpdateTransfer->getTxid())
             ->endUse()
+            ->endUse()
             ->find();
+
         $this->getFactory()->getOmsFacade()->triggerEvent('PaymentNotificationReceived', $orderItems, []);
 
         if ($payoneTransactionStatusUpdateTransfer->getTxaction() === PayoneConstants::PAYONE_TXACTION_APPOINTED) {

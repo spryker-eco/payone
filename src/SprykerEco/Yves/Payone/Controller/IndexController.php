@@ -108,6 +108,37 @@ class IndexController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
+    public function getSecurityInvoiceAction(Request $request)
+    {
+        $customerClient = $this->getFactory()->getCustomerClient();
+        $customerTransfer = $customerClient->getCustomer();
+
+        if (!$customerTransfer) {
+            return $this->redirectResponseInternal(PayoneControllerProvider::ROUTE_LOGIN);
+        }
+
+        $getInvoiceTransfer = new PayoneGetInvoiceTransfer();
+        $getInvoiceTransfer->setReference($request->query->get('id'));
+        $getInvoiceTransfer->setCustomerId($customerTransfer->getIdCustomer());
+
+        $response = $this->getClient()->getInvoice($getInvoiceTransfer);
+
+        if ($response->getStatus() === 'ERROR') {
+            return $this->viewResponse(['errormessage' => $response->getInternalErrorMessage()]);
+        }
+
+        $callback = function () use ($response) {
+            echo base64_decode($response->getRawResponse());
+        };
+
+        return $this->streamedResponse($callback, 200, ["Content-type" => "application/pdf"]);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
     public function cancelRedirectAction(Request $request)
     {
         $orderReference = $request->query->get('orderReference');

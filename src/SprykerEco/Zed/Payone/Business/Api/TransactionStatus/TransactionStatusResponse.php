@@ -12,11 +12,11 @@ class TransactionStatusResponse
     /**
      * part of payone specification
      */
-    const STATUS_OK = 'TSOK';
+    public const STATUS_OK = 'TSOK';
     /**
      * not in payone specification, for the purpose if payone should queue transaction status and resend again
      */
-    const STATUS_ERROR = 'TSERROR';
+    public const STATUS_ERROR = 'TSERROR';
 
     /**
      * @var string

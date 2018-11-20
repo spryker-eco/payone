@@ -19,21 +19,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreditCardSubForm extends AbstractPayoneSubForm
 {
-    const PAYMENT_METHOD = 'credit_card';
+    public const PAYMENT_METHOD = 'credit_card';
 
-    const FIELD_CARD_TYPE = 'cardtype';
-    const FIELD_CARD_NUMBER = 'cardpan';
-    const FIELD_NAME_ON_CARD = 'cardholder';
-    const FIELD_CARD_EXPIRES_MONTH = 'cardexpiredate_month';
-    const FIELD_CARD_EXPIRES_YEAR = 'cardexpiredate_year';
-    const FIELD_CARD_SECURITY_CODE = 'cardcvc2';
-    const FIELD_PSEUDO_CARD_NUMBER = 'pseudocardpan';
+    public const FIELD_CARD_TYPE = 'cardtype';
+    public const FIELD_CARD_NUMBER = 'cardpan';
+    public const FIELD_NAME_ON_CARD = 'cardholder';
+    public const FIELD_CARD_EXPIRES_MONTH = 'cardexpiredate_month';
+    public const FIELD_CARD_EXPIRES_YEAR = 'cardexpiredate_year';
+    public const FIELD_CARD_SECURITY_CODE = 'cardcvc2';
+    public const FIELD_PSEUDO_CARD_NUMBER = 'pseudocardpan';
 
-    const OPTION_CARD_EXPIRES_CHOICES_MONTH = 'month choices';
-    const OPTION_CARD_EXPIRES_CHOICES_YEAR = 'year choices';
-    const OPTION_CARD_TYPES = 'card types';
+    public const OPTION_CARD_EXPIRES_CHOICES_MONTH = 'month choices';
+    public const OPTION_CARD_EXPIRES_CHOICES_YEAR = 'year choices';
+    public const OPTION_CARD_TYPES = 'card types';
 
-    const OPTION_PAYONE_SETTINGS = 'payone settings';
+    public const OPTION_PAYONE_SETTINGS = 'payone settings';
 
     /**
      * @return string
@@ -98,7 +98,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     public function addCardType(FormBuilderInterface $builder, array $options)
     {
@@ -124,7 +124,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addCardNumber(FormBuilderInterface $builder)
     {
@@ -143,7 +143,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addNameOnCard(FormBuilderInterface $builder)
     {
@@ -166,7 +166,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addCardExpiresMonth(FormBuilderInterface $builder, array $options)
     {
@@ -190,7 +190,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addCardExpiresYear(FormBuilderInterface $builder, array $options)
     {
@@ -216,7 +216,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      *
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return $this
      */
     protected function addCardSecurityCode(FormBuilderInterface $builder)
     {

@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PayoneHandler implements PayoneHandlerInterface
 {
-    const PAYMENT_PROVIDER = 'Payone';
-    const CHECKOUT_INCLUDE_SUMMARY_PATH = 'Payone/partial/summary';
-    const CHECKOUT_INCLUDE_SUCCESS_PATH = 'Payone/partial/success';
+    public const PAYMENT_PROVIDER = 'Payone';
+    public const CHECKOUT_INCLUDE_SUMMARY_PATH = 'Payone/partial/summary';
+    public const CHECKOUT_INCLUDE_SUCCESS_PATH = 'Payone/partial/success';
 
     /**
      * @var array
@@ -38,6 +38,7 @@ class PayoneHandler implements PayoneHandlerInterface
         PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER => 'bancontact_online_transfer',
         PaymentTransfer::PAYONE_PRE_PAYMENT => 'prepayment',
         PaymentTransfer::PAYONE_INVOICE => 'invoice',
+        PaymentTransfer::PAYONE_SECURITY_INVOICE => 'securityInvoice',
     ];
 
     /**
@@ -56,6 +57,7 @@ class PayoneHandler implements PayoneHandlerInterface
         PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER => PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
         PaymentTransfer::PAYONE_PRE_PAYMENT => PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT,
         PaymentTransfer::PAYONE_INVOICE => PayoneApiConstants::PAYMENT_METHOD_INVOICE,
+        PaymentTransfer::PAYONE_SECURITY_INVOICE => PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE,
     ];
 
     /**

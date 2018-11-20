@@ -15,6 +15,7 @@
         <property name="amount" type="int" />
         <property name="payment" type="PayonePayment" />
         <property name="settleaccount" type="string" />
+        <property name="order" type="Order" />
     </transfer>
 
     <transfer name="PayoneDebit">
@@ -56,6 +57,7 @@
         <property name="payment" type="PayonePayment" />
         <property name="useCustomerdata" type="string" />
         <property name="narrativeText" type="string" />
+        <property name="order" type="Order" />
     </transfer>
 
     <transfer name="PayonePayment">
@@ -295,6 +297,16 @@
         <property name="errorCode" type="string" />
     </transfer>
 
+    <transfer name="PayoneGetSecurityInvoice">
+        <property name="reference" type="string" />
+        <property name="customerId" type="int" />
+        <property name="rawResponse" type="string" />
+        <property name="status" type="string" />
+        <property name="internalErrorMessage" type="string" />
+        <property name="customerErrorMessage" type="string" />
+        <property name="errorCode" type="string" />
+    </transfer>
+
     <transfer name="PayoneGetPaymentDetail">
         <property name="orderId" type="string" />
         <property name="orderReference" type="string" />
@@ -322,6 +334,7 @@
         <property name="payoneEWallet" type="PayonePaymentEWallet"/>
         <property name="payonePrePayment" type="PayonePayment"/>
         <property name="payoneInvoice" type="PayonePayment"/>
+        <property name="payoneSecurityInvoice" type="PayonePayment"/>
         <property name="payonePaypalExpressCheckout" type="PayonePaypalExpressCheckout" />
         <property name="summaryIncludePath" type="string"/>
         <property name="successIncludePath" type="string"/>
@@ -437,8 +450,24 @@
 
     <transfer name="Quote">
         <property name="isGuestExpressCheckout" type="bool" />
+        <property name="consumerScore" type="string" />
+        <property name="isAddressValid" type="bool" />
     </transfer>
 
-    <!--Response container replacement related transfers end-->
+    <transfer name="AddressCheckResponse">
+        <property name="status" type="string" />
+        <property name="secstatus" type="string" />
+        <property name="customerMessage" type="string" />
+        <property name="streetName" type="string" />
+        <property name="streetNumber" type="string" />
+        <property name="zip" type="string" />
+        <property name="city" type="string" />
+    </transfer>
 
+    <transfer name="ConsumerScoreResponse">
+        <property name="status" type="string" />
+        <property name="score" type="string" />
+        <property name="customerMessage" type="string" />
+    </transfer>
+    <!--Response container replacement related transfers end-->
 </transfers>

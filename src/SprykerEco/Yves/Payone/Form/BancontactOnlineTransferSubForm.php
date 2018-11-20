@@ -37,9 +37,9 @@ class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm
+     * @return $this
      */
-    public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options): BancontactOnlineTransferSubForm
+    public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options): self
     {
         $builder->add(
             static::FIELD_ONLINE_BANK_TRANSFER_TYPE,

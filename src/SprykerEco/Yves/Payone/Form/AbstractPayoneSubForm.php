@@ -21,15 +21,15 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
-    const PAYMENT_PROVIDER = PayoneConstants::PROVIDER_NAME;
+    public const PAYMENT_PROVIDER = PayoneConstants::PROVIDER_NAME;
 
-    const FIELD_PAYMENT_METHOD = 'paymentMethod';
-    const FIELD_PAYONE_CREDENTIALS_MID = 'payone_mid';
-    const FIELD_PAYONE_CREDENTIALS_AID = 'payone_aid';
-    const FIELD_PAYONE_CREDENTIALS_PORTAL_ID = 'payone_portal_id';
-    const FIELD_PAYONE_HASH = 'payone_hash';
-    const FIELD_CLIENT_API_CONFIG = 'payone_client_api_config';
-    const FIELD_CLIENT_LANG_CODE = 'payone_client_lang_code';
+    public const FIELD_PAYMENT_METHOD = 'paymentMethod';
+    public const FIELD_PAYONE_CREDENTIALS_MID = 'payone_mid';
+    public const FIELD_PAYONE_CREDENTIALS_AID = 'payone_aid';
+    public const FIELD_PAYONE_CREDENTIALS_PORTAL_ID = 'payone_portal_id';
+    public const FIELD_PAYONE_HASH = 'payone_hash';
+    public const FIELD_CLIENT_API_CONFIG = 'payone_client_api_config';
+    public const FIELD_CLIENT_LANG_CODE = 'payone_client_lang_code';
 
     /**
      * @return string

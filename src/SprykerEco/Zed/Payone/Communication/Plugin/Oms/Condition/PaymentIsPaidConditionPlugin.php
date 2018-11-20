@@ -17,6 +17,8 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\AbstractCondition;
 class PaymentIsPaidConditionPlugin extends AbstractCondition
 {
     /**
+     * @api
+     *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
      *
      * @return bool

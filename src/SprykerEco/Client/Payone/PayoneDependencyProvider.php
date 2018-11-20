@@ -12,9 +12,9 @@ use Spryker\Client\Kernel\Container;
 
 class PayoneDependencyProvider extends AbstractDependencyProvider
 {
-    const SERVICE_ZED = 'service zed';
+    public const SERVICE_ZED = 'service zed';
 
-    const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
+    public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container

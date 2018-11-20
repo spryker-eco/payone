@@ -18,12 +18,12 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const FACADE_OMS = 'oms facade';
-    const FACADE_REFUND = 'refund facade';
-    const STORE_CONFIG = 'store config';
-    const FACADE_SALES = 'sales facade';
-    const FACADE_GLOSSARY = 'glossary facade';
-    const FACADE_CALCULATION = 'calculation facade';
+    public const FACADE_OMS = 'oms facade';
+    public const FACADE_REFUND = 'refund facade';
+    public const STORE_CONFIG = 'store config';
+    public const FACADE_SALES = 'sales facade';
+    public const FACADE_GLOSSARY = 'glossary facade';
+    public const FACADE_CALCULATION = 'calculation facade';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
