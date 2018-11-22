@@ -353,7 +353,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBirthday(string $birthday)
+    public function setBirthday(string $birthday): void
     {
         $this->birthday = $birthday;
     }
