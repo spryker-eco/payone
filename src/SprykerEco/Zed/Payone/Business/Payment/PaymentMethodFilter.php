@@ -21,7 +21,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
     protected const PAYONE_SCORE_RED = 'R';
     protected const PAYONE_SCORE_UNKNOWN = 'U';
     protected const CONFIG_METHOD_PART_GET = 'get';
-    protected const CONFIG_METHOD_PART_AVAIlABLE_PAYMENT_METHODS = 'ScoreAvailablePaymentMethods';
+    protected const CONFIG_METHOD_PART_AVAILABLE_PAYMENT_METHODS = 'ScoreAvailablePaymentMethods';
 
     /**
      * @var \SprykerEco\Zed\Payone\PayoneConfig
@@ -70,7 +70,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
 
         $method = static::CONFIG_METHOD_PART_GET .
             ucfirst($score) .
-            static::CONFIG_METHOD_PART_AVAIlABLE_PAYMENT_METHODS;
+            static::CONFIG_METHOD_PART_AVAILABLE_PAYMENT_METHODS;
 
         if (method_exists($this->config, $method)) {
             return $this->config->$method();

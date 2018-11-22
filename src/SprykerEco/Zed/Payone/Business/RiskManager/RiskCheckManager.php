@@ -65,7 +65,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
         $addressCheckResponseTransfer->setSecStatus($responseContainer->getSecstatus());
         $addressCheckResponseTransfer->setPersonStatus($responseContainer->getPersonstatus());
 
-        if (!is_null($responseContainer->getCustomermessage())) {
+        if ($responseContainer->getCustomermessage() !== null) {
             $addressCheckResponseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
         }
 

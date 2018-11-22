@@ -366,7 +366,6 @@ class AddressCheckContainer extends AbstractRequestContainer
         return $this->birthday;
     }
 
-
     /**
      * @return string|null
      */
@@ -377,6 +376,8 @@ class AddressCheckContainer extends AbstractRequestContainer
 
     /**
      * @param string $gender
+     *
+     * @return void
      */
     public function setGender(string $gender): void
     {
