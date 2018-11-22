@@ -376,6 +376,8 @@ class ConsumerScoreContainer extends AbstractRequestContainer
 
     /**
      * @param string $gender
+     *
+     * @return void
      */
     public function setGender(string $gender): void
     {
