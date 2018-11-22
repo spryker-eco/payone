@@ -75,6 +75,11 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     protected $city;
 
     /**
+     * @var string
+     */
+    protected $gender;
+
+    /**
      * @param string $city
      *
      * @return void
@@ -306,5 +311,23 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     public function getZip()
     {
         return $this->zip;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     *
+     * @return void
+     */
+    public function setGender(string $gender): void
+    {
+        $this->gender = $gender;
     }
 }

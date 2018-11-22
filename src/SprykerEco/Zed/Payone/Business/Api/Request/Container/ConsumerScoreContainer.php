@@ -92,6 +92,11 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     protected $language;
 
     /**
+     * @var string
+     */
+    protected $gender;
+
+    /**
      * @param string $addresschecktype
      *
      * @return void
@@ -359,5 +364,23 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     public function getZip()
     {
         return $this->zip;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     *
+     * @return void
+     */
+    public function setGender(string $gender): void
+    {
+        $this->gender = $gender;
     }
 }

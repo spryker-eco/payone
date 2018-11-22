@@ -87,6 +87,16 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $language;
 
     /**
+     * @var string
+     */
+    protected $birthday;
+
+    /**
+     * @var string
+     */
+    protected $gender;
+
+    /**
      * @param string $addresschecktype
      *
      * @return void
@@ -336,5 +346,41 @@ class AddressCheckContainer extends AbstractRequestContainer
     public function getZip()
     {
         return $this->zip;
+    }
+
+    /**
+     * @param string $birthday
+     *
+     * @return void
+     */
+    public function setBirthday(string $birthday): void
+    {
+        $this->birthday = $birthday;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBirthday(): ?string
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     *
+     * @return void
+     */
+    public function setGender(string $gender): void
+    {
+        $this->gender = $gender;
     }
 }

@@ -35,6 +35,25 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYMENT_METHOD_SECURITY_INVOICE = 'payoneSecurityInvoice';
     public const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE;
 
+    public const PAYONE_ADDRESS_CHECK_BASIC = 'BA';
+    public const PAYONE_ADDRESS_CHECK_PERSON = 'PE';
+    public const PAYONE_ADDRESS_CHECK_NOT_CARRY_OUT_ADDRESS_CHECK = 'NO';
+
+    public const PAYONE_BONIVERSUM_ADDRESS_CHECK_BASIC = 'BB';
+    public const PAYONE_BONIVERSUM_ADDRESS_CHECK_PERSON = 'PB';
+
+    public const PAYONE_SCHUFA_ADDRESS_CHECK_BASIC_SHORT = 'BS';
+
+    public const PAYONE_ARVATO_CONSUMER_SCORE_HARD_CRITERIA = 'IH';
+    public const PAYONE_ARVATO_CONSUMER_SCORE_ALL_CRITERIA = 'IA';
+    public const PAYONE_ARVATO_CONSUMER_SCORE_ALL_CRITERIA_BONUS = 'IB';
+    public const PAYONE_ARVATO_CONSUMER_SCORE_ALL_CRITERIA_BONUS_INFORMATION = 'IF';
+
+    public const PAYONE_BONIVERSUM_CONSUMER_SCORE = 'CE';
+
+    public const PAYONE_SCHUFA_CONSUMER_SCORE_SHORT = 'SFS';
+    public const PAYONE_SCHUFA_CONSUMER_SCORE_MIDDLE = 'SFM';
+
     /**
      * Fetches API request mode from config (could be 'live' or 'test').
      *
