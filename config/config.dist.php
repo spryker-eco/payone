@@ -32,6 +32,23 @@ $config[PayoneConstants::PAYONE] = [
     ),
     PayoneConstants::PAYONE_MODE => 'test',
     PayoneConstants::PAYONE_EMPTY_SEQUENCE_NUMBER => 0,
+    PayoneConstants::PAYONE_GREEN_SCORE_AVAILABLE_PAYMENT_METHODS => [
+        PayoneConfig::PAYMENT_METHOD_INVOICE,
+        PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
+    ],
+    PayoneConstants::PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS => [
+        PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER
+    ],
+    PayoneConstants::PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS => [
+        PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT
+    ],
+    PayoneConstants::PAYONE_UNKNOWN_SCORE_AVAILABLE_PAYMENT_METHODS => [
+        PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
+        PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
+        PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
+    ],
+    PayoneConstants::PAYONE_ADDRESS_CHECK_TYPE => PayoneConstants::PAYONE_ADDRESS_CHECK_BASIC,
+    PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE => PayoneConstants::PAYONE_ARVATO_CONSUMER_SCORE_HARD_CRITERIA,
 ];
 
 $config[PayoneConstants::PAYONE][PayoneConstants::HOST_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
