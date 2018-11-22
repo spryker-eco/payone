@@ -26,6 +26,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\PayoneFacade;
+use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 /**
@@ -103,6 +104,23 @@ abstract class AbstractBusinessTest extends Test
                 PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL => '',
                 PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILURE_URL => '',
                 PayoneConstants::PAYONE_EXPRESS_CHECKOUT_BACK_URL => '',
+                PayoneConstants::PAYONE_ADDRESS_CHECK_TYPE => 'BA',
+                PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE => 'IH',
+                PayoneConstants::PAYONE_GREEN_SCORE_AVAILABLE_PAYMENT_METHODS => [
+                    PayoneConfig::PAYMENT_METHOD_INVOICE,
+                    PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
+                ],
+                PayoneConstants::PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS => [
+                    PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER
+                ],
+                PayoneConstants::PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS => [
+                    PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT
+                ],
+                PayoneConstants::PAYONE_UNKNOWN_SCORE_AVAILABLE_PAYMENT_METHODS => [
+                    PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
+                    PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
+                    PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
+                ],
             ]
         );
     }

@@ -1,7 +1,16 @@
 build:
     environment:
-        php:
-            version: 7.1
+        php: '7.1'
+
+    tests:
+        override:
+            - true # disable test execution on scrutinizer
+
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
 
 checks:
     php:
