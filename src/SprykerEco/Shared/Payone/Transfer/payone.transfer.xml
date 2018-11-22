@@ -462,12 +462,15 @@
         <property name="streetNumber" type="string" />
         <property name="zip" type="string" />
         <property name="city" type="string" />
+        <property name="personstatus" type="string" />
     </transfer>
 
     <transfer name="ConsumerScoreResponse">
         <property name="status" type="string" />
         <property name="score" type="string" />
+        <property name="scorevalue" type="string" />
         <property name="customerMessage" type="string" />
+        <property name="gender" type="string" />
     </transfer>
     <!--Response container replacement related transfers end-->
 </transfers>
