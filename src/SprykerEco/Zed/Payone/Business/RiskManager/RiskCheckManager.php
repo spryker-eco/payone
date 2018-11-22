@@ -62,8 +62,8 @@ class RiskCheckManager implements RiskCheckManagerInterface
         $addressCheckResponseTransfer->setStreetNumber($responseContainer->getStreetNumber());
         $addressCheckResponseTransfer->setZip($responseContainer->getZip());
         $addressCheckResponseTransfer->setCity($responseContainer->getCity());
-        $addressCheckResponseTransfer->setSecstatus($responseContainer->getSecstatus());
-        $addressCheckResponseTransfer->setPersonstatus($responseContainer->getPersonstatus());
+        $addressCheckResponseTransfer->setSecStatus($responseContainer->getSecstatus());
+        $addressCheckResponseTransfer->setPersonStatus($responseContainer->getPersonstatus());
 
         if (!is_null($responseContainer->getCustomermessage())) {
             $addressCheckResponseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
@@ -91,7 +91,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
 
         if (!$responseContainer->isError()) {
             $consumerScoreResponseTransfer->setScore($responseContainer->getScore());
-            $consumerScoreResponseTransfer->setScorevalue($responseContainer->getScorevalue());
+            $consumerScoreResponseTransfer->setScoreValue($responseContainer->getScorevalue());
 
             return $consumerScoreResponseTransfer;
         }
