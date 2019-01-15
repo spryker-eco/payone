@@ -126,7 +126,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
         $personalData->setCity($billingAddress->getCity());
         $personalData->setStreet($billingAddress->getAddress1());
         $personalData->setZip($billingAddress->getZipCode());
-        $personalData->setEmail($billingAddress->getEmail());
+        $personalData->setEmail($billingAddress->getEmail() ?? $customer->getEmail());
         $manageMandateTransfer->setPersonalData($personalData);
 
         return $this->getFactory()->createZedStub()->manageMandate($manageMandateTransfer);

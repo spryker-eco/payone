@@ -1,0 +1,32 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'payone-eps-online-transfer',
+    tag: 'payone-eps-online-transfer'
+} %}
+
+{% define data = {
+    form: required,
+} %}
+
+{% block body %}
+    <div class="payment-subform payone-form payone-eps-online-transfer-form payment-form" id="payoneEpsOnlineTransfer">
+        <div class="field">
+            {{ form_widget(data.form.payoneEpsOnlineTransfer.onlinebanktransfertype) }}
+        </div>
+
+        <div class="field">
+            {{ form_widget(data.form.payoneEpsOnlineTransfer.bankcountry) }}
+        </div>
+
+        {% if data.form.payoneEpsOnlineTransfer.bankgrouptype is defined %}
+            <label>{{ 'Payone_eps_online_transfer.BankGroupType' | trans }}</label>
+            <div class="field">
+                {{ form_widget(data.form.payoneEpsOnlineTransfer.bankgrouptype, { 'attr': {'placeholder': 'Payone_eps_online_transfer.bankgrouptype' | trans } }) }}
+                {{ form_errors(data.form.payoneEpsOnlineTransfer.bankgrouptype) }}
+            </div>
+        {% endif %}
+
+        {{ form_errors(data.form) }}
+    </div>
+{% endblock %}

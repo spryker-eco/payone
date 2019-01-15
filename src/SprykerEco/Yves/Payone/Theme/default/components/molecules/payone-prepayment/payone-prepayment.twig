@@ -1,0 +1,18 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'payone-prepayment',
+    tag: 'payone-prepayment'
+} %}
+
+{% define data = {
+    form: required,
+} %}
+
+{% block body %}
+    <div class="payment-subform payone-form payone-prepayment-form payment-form" id="payonePrePayment">
+        <div class="field">
+            {{ form_widget(data.form.payonePrePayment.paymentMethod) }}
+        </div>
+    </div>
+{% endblock %}
