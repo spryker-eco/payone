@@ -1,4 +1,4 @@
-# PayoneModule
+# Payone Module
 
 [![Build Status](https://travis-ci.org/spryker-eco/payone.svg?branch=master)](https://travis-ci.org/spryker-eco/payone)
 [![License](https://img.shields.io/github/license/spryker-eco/payone.svg?b=master)](https://github.com/spryker-eco/payone)
