@@ -1031,7 +1031,7 @@ class PaymentManager implements PaymentManagerInterface
         foreach ($orderTransfer->getItems() as $itemTransfer) {
             $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
             $arrayId[$key] = $itemTransfer->getSku();
-            $arrayPr[$key] = $itemTransfer->getSumPrice();
+            $arrayPr[$key] = $itemTransfer->getUnitGrossPrice();
             $arrayNo[$key] = $itemTransfer->getQuantity();
             $arrayDe[$key] = $itemTransfer->getName();
             $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
