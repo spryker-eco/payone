@@ -1,0 +1,23 @@
+<div class="payment-subform payone-form payone-giropay-online-transfer-form payment-form" id="payoneGiropayOnlineTransfer">
+    <div class="field">
+        {{ form_widget(form.payoneGiropayOnlineTransfer.onlinebanktransfertype) }}
+    </div>
+
+    <div class="field">
+        {{ form_widget(form.payoneGiropayOnlineTransfer.bankcountry) }}
+    </div>
+
+    <label>{{ 'Payone_giropay_online_transfer.IBAN' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneGiropayOnlineTransfer.iban, { 'attr': {'placeholder': 'Payone_giropay_online_transfer.IBAN' | trans } }) }}
+        {{ form_errors(form.payoneGiropayOnlineTransfer.iban) }}
+    </div>
+
+    <label>{{ 'Payone_giropay_online_transfer.BIC' | trans }}</label>
+    <div class="field">
+        {{ form_widget(form.payoneGiropayOnlineTransfer.bic, { 'attr': {'placeholder': 'Payone_giropay_online_transfer.BIC' | trans } }) }}
+        {{ form_errors(form.payoneGiropayOnlineTransfer.bic) }}
+    </div>
+
+    {{ form_errors(form) }}
+</div>
