@@ -9,6 +9,16 @@ matrix:
   fast_finish: true
   include:
     - php: 7.1
+      env:
+        - PRODUCT_NAME=suite
+      
+    - php: 7.1
+      env:
+        - PRODUCT_NAME=b2c-demo-shop
+      
+    - php: 7.1
+      env:
+        - PRODUCT_NAME=b2b-demo-shop
 
 services:
   - postgresql
@@ -44,5 +54,5 @@ before_install:
   - phpenv config-rm xdebug.ini
 
 script:
-  - git clone -b 0.2.1 https://github.com/spryker-eco/eco-ci.git ecoci
+  - git clone -b 0.3.0 https://github.com/spryker-eco/eco-ci.git ecoci
   - ./ecoci/build/travis.sh
