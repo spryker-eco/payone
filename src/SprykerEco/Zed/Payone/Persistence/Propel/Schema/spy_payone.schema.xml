@@ -9,6 +9,9 @@
         <column name="reference" required="true" type="VARCHAR"/>
         <column name="transaction_id" type="INTEGER"/>
 
+        <column name="customer_reference" type="VARCHAR"/>
+        <column name="order_reference" required="true" type="VARCHAR"/>
+
         <foreign-key name="spy_payment_payone-fk_sales_order" foreignTable="spy_sales_order" phpName="SpySalesOrder">
             <reference foreign="id_sales_order" local="fk_sales_order"/>
         </foreign-key>
@@ -47,6 +50,8 @@
         <column name="clearing_bank_name" type="VARCHAR" size="50"/>
 
         <column name="type" type="VARCHAR" size="3"/>
+
+        <column name="shipping_provider" size="64" type="VARCHAR"/>
 
         <column name="work_order_id" type="VARCHAR" size="30" />
 

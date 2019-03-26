@@ -11,8 +11,10 @@ use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
+use SprykerEco\Yves\Payone\Form\CashOnDeliverySubForm;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 use SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider;
+use SprykerEco\Yves\Payone\Form\DataProvider\CashOnDeliveryDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\CreditCardDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\DirectDebitDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\EpsOnlineTransferDataProvider;
@@ -87,6 +89,22 @@ class PayoneFactory extends AbstractFactory
     public function createInvoiceSubFormDataProvider()
     {
         return new InvoiceDataProvider();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\CashOnDeliverySubForm
+     */
+    public function createCashOnDeliverySubForm(): SubFormInterface
+    {
+        return new CashOnDeliverySubForm();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\DataProvider\CashOnDeliveryDataProvider
+     */
+    public function createCashOnDeliverySubFormDataProvider(): StepEngineFormDataProviderInterface
+    {
+        return new CashOnDeliveryDataProvider();
     }
 
     /**

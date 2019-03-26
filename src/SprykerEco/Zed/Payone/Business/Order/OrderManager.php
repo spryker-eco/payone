@@ -43,6 +43,8 @@ class OrderManager implements OrderManagerInterface
 
         $paymentTransfer = $quoteTransfer->getPayment()->getPayone();
         $paymentTransfer->setFkSalesOrder($checkoutResponse->getSaveOrder()->getIdSalesOrder());
+        $paymentTransfer->setCustomerReference($quoteTransfer->getCustomer()->getCustomerReference());
+        $paymentTransfer->setOrderReference($checkoutResponse->getSaveOrder()->getOrderReference());
         $payment = $this->savePayment($paymentTransfer);
 
         $paymentDetailTransfer = $paymentTransfer->getPaymentDetail();

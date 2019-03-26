@@ -305,4 +305,6 @@ interface PayoneApiConstants
     // PAYPAL EXPRESS CHECKOUT ACTIONS
     public const PAYONE_EXPRESS_CHECKOUT_SET_ACTION = 'setexpresscheckout';
     public const PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION = 'getexpresscheckoutdetails';
+
+    public const PAYMENT_METHOD_CASH_ON_DELIVERY_OMS = 'payoneCashOnDelivery';
 }

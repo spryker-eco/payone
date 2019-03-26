@@ -37,6 +37,19 @@ class PayoneToGlossaryBridge implements PayoneToGlossaryInterface
     }
 
     /**
+     * @param $keyName
+     * @param array $data
+     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
+     *
+     * @return string
+     * @throws \Spryker\Zed\Glossary\Business\Exception\MissingTranslationException
+     */
+    public function translate($keyName, array $data = [], ?LocaleTransfer $localeTransfer = null)
+    {
+        return $this->glossaryFacade->translate($keyName, $data ,$localeTransfer);
+    }
+
+    /**
      * @param string $keyName
      * @param string $value
      * @param bool $isActive

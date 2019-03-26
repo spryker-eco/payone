@@ -22,6 +22,7 @@ use SprykerEco\Zed\Payone\Business\Key\HashProvider;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Mode\ModeDetector;
 use SprykerEco\Zed\Payone\Business\Order\OrderManager;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
@@ -42,6 +43,7 @@ use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManager;
 use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**
@@ -207,6 +209,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT => $this->createPrepayment($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT => $this->createDirectDebit($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => $this->createGenericPayment($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_CASH_ON_DELIVERY => $this->createCashOnDelivery($storeConfig, $this->getGlossaryFacade()),
         ];
     }
 
@@ -302,6 +305,16 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $EWallet = new EWallet($storeConfig);
 
         return $EWallet;
+    }
+
+    /**
+     * @param $storeConfig
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery
+     */
+    protected function createCashOnDelivery(Store $storeConfig, PayoneToGlossaryInterface $glossary): CashOnDelivery
+    {
+        return new CashOnDelivery($storeConfig, $glossary);
     }
 
     /**

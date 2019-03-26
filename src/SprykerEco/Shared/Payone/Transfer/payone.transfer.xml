@@ -70,6 +70,9 @@
         <property name="reference" type="string" />
         <property name="transactionId" type="string" />
         <property name="paymentDetail" type="PaymentDetail" />
+        <property name="customerReference" type="string"/>
+        <property name="orderReference" type="string"/>
+        <property name="state" type="string"/>
     </transfer>
 
     <transfer name="PayonePaymentCreditCard">
@@ -111,6 +114,10 @@
         <property name="bic" type="string" />
     </transfer>
 
+    <transfer name="PayonePaymentCashOnDelivery">
+        <property name="shippingProvider" type="string" />
+    </transfer>
+
     <transfer name="PaymentDetail">
         <property name="amount" type="int" />
         <property name="currency" type="string" />
@@ -138,6 +145,7 @@
         <property name="clearingBankCity" type="string"/>
         <property name="clearingBankName" type="string"/>
         <property name="workOrderId" type="string" />
+        <property name="shippingProvider" type="string" />
     </transfer>
 
     <transfer name="PayoneBankAccountCheck">
@@ -331,6 +339,7 @@
         <property name="payonePostfinanceCardOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
         <property name="payonePrzelewy24OnlineTransfer" type="PayonePaymentOnlinetransfer"/>
         <property name="payoneBancontactOnlineTransfer" type="PayonePaymentOnlinetransfer"/>
+        <property name="payoneCashOnDelivery" type="PayonePaymentCashOnDelivery"/>
         <property name="payoneEWallet" type="PayonePaymentEWallet"/>
         <property name="payonePrePayment" type="PayonePayment"/>
         <property name="payoneInvoice" type="PayonePayment"/>

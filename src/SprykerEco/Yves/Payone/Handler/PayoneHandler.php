@@ -39,6 +39,7 @@ class PayoneHandler implements PayoneHandlerInterface
         PaymentTransfer::PAYONE_PRE_PAYMENT => 'prepayment',
         PaymentTransfer::PAYONE_INVOICE => 'invoice',
         PaymentTransfer::PAYONE_SECURITY_INVOICE => 'securityInvoice',
+        PaymentTransfer::PAYONE_CASH_ON_DELIVERY => 'cashOnDelivery',
     ];
 
     /**
@@ -58,6 +59,7 @@ class PayoneHandler implements PayoneHandlerInterface
         PaymentTransfer::PAYONE_PRE_PAYMENT => PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT,
         PaymentTransfer::PAYONE_INVOICE => PayoneApiConstants::PAYMENT_METHOD_INVOICE,
         PaymentTransfer::PAYONE_SECURITY_INVOICE => PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE,
+        PaymentTransfer::PAYONE_CASH_ON_DELIVERY => PayoneApiConstants::PAYMENT_METHOD_CASH_ON_DELIVERY,
     ];
 
     /**
@@ -157,6 +159,12 @@ class PayoneHandler implements PayoneHandlerInterface
             $paymentDetailTransfer->setBankGroupType($payonePaymentTransfer->getBankGroupType());
             $paymentDetailTransfer->setIban($payonePaymentTransfer->getIban());
             $paymentDetailTransfer->setBic($payonePaymentTransfer->getBic());
+        } elseif ($paymentSelection == PaymentTransfer::PAYONE_CASH_ON_DELIVERY) {
+            $shippingProvider = $quoteTransfer->getShipment()->getMethod()->getCarrierName();
+            $payonePaymentTransfer = $this->getPayonePaymentTransfer($quoteTransfer, $paymentSelection);
+
+            $payonePaymentTransfer->setShippingProvider($shippingProvider);
+            $paymentDetailTransfer->setShippingProvider($shippingProvider);
         }
 
         $quoteTransfer->getPayment()->setPayone(new PayonePaymentTransfer());
