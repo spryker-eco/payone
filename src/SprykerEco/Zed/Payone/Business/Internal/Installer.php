@@ -9,14 +9,14 @@ namespace SprykerEco\Zed\Payone\Business\Internal;
 
 use Generated\Shared\Transfer\LocaleTransfer;
 use Spryker\Zed\Installer\Business\Model\AbstractInstaller;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use Symfony\Component\Yaml\Yaml;
 
 class Installer extends AbstractInstaller
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface
+     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface
      */
     protected $glossary;
 
@@ -26,10 +26,10 @@ class Installer extends AbstractInstaller
     protected $config;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface $glossary
+     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface $glossary
      * @param \SprykerEco\Zed\Payone\PayoneConfig $config
      */
-    public function __construct(PayoneToGlossaryInterface $glossary, PayoneConfig $config)
+    public function __construct(PayoneToGlossaryFacadeInterface $glossary, PayoneConfig $config)
     {
         $this->glossary = $glossary;
         $this->config = $config;

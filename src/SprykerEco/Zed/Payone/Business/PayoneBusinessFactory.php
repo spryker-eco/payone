@@ -43,7 +43,7 @@ use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManager;
 use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**
@@ -308,11 +308,12 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @param $storeConfig
+     * @param \Spryker\Shared\Kernel\Store $storeConfig
+     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface $glossary
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    protected function createCashOnDelivery(Store $storeConfig, PayoneToGlossaryInterface $glossary): CashOnDelivery
+    protected function createCashOnDelivery(Store $storeConfig, PayoneToGlossaryFacadeInterface $glossary): PaymentMethodMapperInterface
     {
         return new CashOnDelivery($storeConfig, $glossary);
     }
@@ -330,7 +331,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface
+     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface
      */
     protected function getGlossaryFacade()
     {

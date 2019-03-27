@@ -92,7 +92,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\CashOnDeliverySubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createCashOnDeliverySubForm(): SubFormInterface
     {
@@ -100,7 +100,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\CashOnDeliveryDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createCashOnDeliverySubFormDataProvider(): StepEngineFormDataProviderInterface
     {

@@ -161,9 +161,6 @@ class PayoneHandler implements PayoneHandlerInterface
             $paymentDetailTransfer->setBic($payonePaymentTransfer->getBic());
         } elseif ($paymentSelection == PaymentTransfer::PAYONE_CASH_ON_DELIVERY) {
             $shippingProvider = $quoteTransfer->getShipment()->getMethod()->getCarrierName();
-            $payonePaymentTransfer = $this->getPayonePaymentTransfer($quoteTransfer, $paymentSelection);
-
-            $payonePaymentTransfer->setShippingProvider($shippingProvider);
             $paymentDetailTransfer->setShippingProvider($shippingProvider);
         }
 

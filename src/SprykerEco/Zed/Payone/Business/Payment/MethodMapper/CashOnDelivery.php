@@ -22,23 +22,23 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 
 class CashOnDelivery extends AbstractMapper
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface
+     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface
      */
-    protected $glossary;
+    protected $glossaryFacade;
 
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
-     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface $glossary
+     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface $glossaryFacade
      */
-    public function __construct(Store $storeConfig, PayoneToGlossaryInterface $glossary)
+    public function __construct(Store $storeConfig, PayoneToGlossaryFacadeInterface $glossaryFacade)
     {
         parent::__construct($storeConfig);
-        $this->glossary = $glossary;
+        $this->glossaryFacade = $glossaryFacade;
     }
 
     /**
@@ -174,13 +174,26 @@ class CashOnDelivery extends AbstractMapper
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
-        $personalContainer = new PersonalContainer();
-        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
-        $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
-
+        $personalContainer = $this->buildPersonalContainer($paymentEntity);
         $authorizationContainer->setPersonalData($personalContainer);
 
         return $authorizationContainer;
+    }
+
+    /**
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
+     */
+    protected function buildPersonalContainer(SpyPaymentPayone $paymentEntity): PersonalContainer
+    {
+        $personalContainer = new PersonalContainer();
+
+        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
+
+        $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
+
+        return $personalContainer;
     }
 
     /**
@@ -223,6 +236,6 @@ class CashOnDelivery extends AbstractMapper
      */
     protected function translate(string $glossaryKey): string
     {
-        return $this->glossary->translate($glossaryKey, []);
+        return $this->glossaryFacade->translate($glossaryKey, []);
     }
 }

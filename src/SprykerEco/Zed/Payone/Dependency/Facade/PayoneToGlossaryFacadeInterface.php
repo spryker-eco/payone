@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Dependency\Facade;
 use Generated\Shared\Transfer\KeyTranslationTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
 
-interface PayoneToGlossaryInterface
+interface PayoneToGlossaryFacadeInterface
 {
     /**
      * @param int $idKey
@@ -28,7 +28,6 @@ interface PayoneToGlossaryInterface
      * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
      *
      * @return string
-     * @throws \Spryker\Zed\Glossary\Business\Exception\MissingTranslationException
      */
     public function translate($keyName, array $data = [], ?LocaleTransfer $localeTransfer = null);
 

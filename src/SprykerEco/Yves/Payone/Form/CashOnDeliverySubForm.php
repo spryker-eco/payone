@@ -18,12 +18,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CashOnDeliverySubForm extends AbstractPayoneSubForm
 {
-    const PAYMENT_METHOD = 'cash_on_delivery';
+    public const PAYMENT_METHOD = 'cash_on_delivery';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_CASH_ON_DELIVERY;
     }
@@ -31,7 +31,7 @@ class CashOnDeliverySubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_CASH_ON_DELIVERY;
     }
@@ -39,7 +39,7 @@ class CashOnDeliverySubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
         return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
     }

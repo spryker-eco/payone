@@ -7,8 +7,9 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Payment\MethodMapper;
 
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 
 /**
  * @group Unit
@@ -22,15 +23,15 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface;
  */
 class CashOnDeliveryTest extends AbstractMethodMapperTest
 {
-    const STANDARD_PARAMETER_CLEARING_TYPE = 'cod';
+    protected const STANDARD_PARAMETER_CLEARING_TYPE = 'cod';
 
-    const AUTHORIZATION_CASH_ON_DELIVERY_REQUIRED_PARAMS = [
+    protected const AUTHORIZATION_CASH_ON_DELIVERY_REQUIRED_PARAMS = [
     ];
 
-    const PREAUTHORIZATION_CASH_ON_DELIVERY_REQUIRED_PARAMS = [
+    protected const PREAUTHORIZATION_CASH_ON_DELIVERY_REQUIRED_PARAMS = [
     ];
 
-    const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    protected const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,
@@ -38,7 +39,7 @@ class CashOnDeliveryTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    protected const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,
@@ -49,7 +50,7 @@ class CashOnDeliveryTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToPreauthorization()
+    public function testMapPaymentToPreauthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CashOnDelivery($this->getStoreConfigMock(), $this->createGlossaryFacadeMock()));
@@ -75,7 +76,7 @@ class CashOnDeliveryTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToAuthorization()
+    public function testMapPaymentToAuthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CashOnDelivery($this->getStoreConfigMock(), $this->createGlossaryFacadeMock()));
@@ -103,7 +104,7 @@ class CashOnDeliveryTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToCapture()
+    public function testMapPaymentToCapture(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CashOnDelivery($this->getStoreConfigMock(), $this->createGlossaryFacadeMock()));
@@ -119,7 +120,7 @@ class CashOnDeliveryTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToRefund()
+    public function testMapPaymentToRefund(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CashOnDelivery($this->getStoreConfigMock(), $this->createGlossaryFacadeMock()));
@@ -135,7 +136,7 @@ class CashOnDeliveryTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToDebit()
+    public function testMapPaymentToDebit(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CashOnDelivery($this->getStoreConfigMock(), $this->createGlossaryFacadeMock()));
@@ -149,20 +150,10 @@ class CashOnDeliveryTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
+     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getPaymentPayoneDetailMock()
+    protected function createGlossaryFacadeMock(): PayoneToGlossaryFacadeInterface
     {
-        $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
-
-        return $paymentPayoneDetail;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function createGlossaryFacadeMock()
-    {
-        return $this->getMockBuilder(PayoneToGlossaryInterface::class)->getMock();
+        return $this->getMockBuilder(PayoneToGlossaryFacadeInterface::class)->getMock();
     }
 }
