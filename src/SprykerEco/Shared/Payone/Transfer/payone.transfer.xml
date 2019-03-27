@@ -70,9 +70,6 @@
         <property name="reference" type="string" />
         <property name="transactionId" type="string" />
         <property name="paymentDetail" type="PaymentDetail" />
-        <property name="customerReference" type="string"/>
-        <property name="orderReference" type="string"/>
-        <property name="state" type="string"/>
     </transfer>
 
     <transfer name="PayonePaymentCreditCard">

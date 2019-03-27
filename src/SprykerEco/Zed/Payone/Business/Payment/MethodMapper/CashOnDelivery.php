@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
-use Generated\Shared\Transfer\LocaleTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
@@ -97,34 +96,6 @@ class CashOnDelivery extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $authorizationContainer
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
-     */
-    protected function mapPaymentToAbstractAuthorization(
-        SpyPaymentPayone $paymentEntity,
-        AbstractAuthorizationContainer $authorizationContainer
-    ): AbstractAuthorizationContainer {
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
-
-        $authorizationContainer->setAid($this->getStandardParameter()->getAid());
-        $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_CASH_ON_DELIVERY);
-        $authorizationContainer->setReference($paymentEntity->getReference());
-        $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
-        $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
-
-        $personalContainer = new PersonalContainer();
-        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
-        $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
-
-        $authorizationContainer->setPersonalData($personalContainer);
-
-        return $authorizationContainer;
-    }
-
-    /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer
      */
@@ -165,6 +136,54 @@ class CashOnDelivery extends AbstractMapper
     }
 
     /**
+     * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\BankAccountCheckContainer
+     */
+    public function mapBankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer): BankAccountCheckContainer
+    {
+        $bankAccountCheckContainer = new BankAccountCheckContainer();
+
+        $bankAccountCheckContainer->setAid($this->getStandardParameter()->getAid());
+        $bankAccountCheckContainer->setBankCountry($bankAccountCheckTransfer->getBankCountry());
+        $bankAccountCheckContainer->setBankAccount($bankAccountCheckTransfer->getBankAccount());
+        $bankAccountCheckContainer->setBankCode($bankAccountCheckTransfer->getBankCode());
+        $bankAccountCheckContainer->setIban($bankAccountCheckTransfer->getIban());
+        $bankAccountCheckContainer->setBic($bankAccountCheckTransfer->getBic());
+        $bankAccountCheckContainer->setLanguage($this->getStandardParameter()->getLanguage());
+
+        return $bankAccountCheckContainer;
+    }
+
+    /**
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $authorizationContainer
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
+     */
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): AbstractAuthorizationContainer {
+        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+
+        $authorizationContainer->setAid($this->getStandardParameter()->getAid());
+        $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_CASH_ON_DELIVERY);
+        $authorizationContainer->setReference($paymentEntity->getReference());
+        $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
+        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
+
+        $personalContainer = new PersonalContainer();
+        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
+        $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
+
+        $authorizationContainer->setPersonalData($personalContainer);
+
+        return $authorizationContainer;
+    }
+
+    /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\CashOnDeliveryContainer
@@ -195,26 +214,6 @@ class CashOnDelivery extends AbstractMapper
         $personalContainer->setCountry($this->storeConfig->getCurrentCountry());
 
         return $personalContainer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\BankAccountCheckContainer
-     */
-    public function mapBankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer): BankAccountCheckContainer
-    {
-        $bankAccountCheckContainer = new BankAccountCheckContainer();
-
-        $bankAccountCheckContainer->setAid($this->getStandardParameter()->getAid());
-        $bankAccountCheckContainer->setBankCountry($bankAccountCheckTransfer->getBankCountry());
-        $bankAccountCheckContainer->setBankAccount($bankAccountCheckTransfer->getBankAccount());
-        $bankAccountCheckContainer->setBankCode($bankAccountCheckTransfer->getBankCode());
-        $bankAccountCheckContainer->setIban($bankAccountCheckTransfer->getIban());
-        $bankAccountCheckContainer->setBic($bankAccountCheckTransfer->getBic());
-        $bankAccountCheckContainer->setLanguage($this->getStandardParameter()->getLanguage());
-
-        return $bankAccountCheckContainer;
     }
 
     /**
