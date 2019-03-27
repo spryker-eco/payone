@@ -171,12 +171,12 @@ class CashOnDelivery extends AbstractMapper
      */
     protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity): CashOnDeliveryContainer
     {
-        $translatedShippingProvider = $this->translate(
-            $paymentEntity->getSpyPaymentPayoneDetail()->getShippingProvider()
-        );
+        $shippingProviderName = $paymentEntity->getSpyPaymentPayoneDetail()->getShippingProvider();
+
+        $translatedShippingProviderName = $shippingProviderName ? $this->translate($shippingProviderName) : $shippingProviderName;
 
         $paymentMethodContainer = new CashOnDeliveryContainer();
-        $paymentMethodContainer->setShippingProvider($translatedShippingProvider);
+        $paymentMethodContainer->setShippingProvider($translatedShippingProviderName);
 
         return $paymentMethodContainer;
     }
