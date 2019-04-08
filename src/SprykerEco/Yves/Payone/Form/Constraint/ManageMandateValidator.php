@@ -36,7 +36,7 @@ class ManageMandateValidator extends ConstraintValidator
         }
 
         foreach ($validationMessages as $validationMessage) {
-            $this->buildViolation($validationMessage)
+            $this->context->buildViolation($validationMessage)
                 ->addViolation();
         }
     }
