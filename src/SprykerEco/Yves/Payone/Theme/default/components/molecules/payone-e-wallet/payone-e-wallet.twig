@@ -1,0 +1,18 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'payone-e-wallet',
+    tag: 'payone-e-wallet'
+} %}
+
+{% define data = {
+    form: required,
+} %}
+
+{% block body %}
+    <div class="payone-form payone-e-wallet-form payment-form" id="payoneEWallet">
+        <div class="field">
+            {{ form_widget(data.form.payoneEWallet.wallettype) }}
+        </div>
+    </div>
+{% endblock %}

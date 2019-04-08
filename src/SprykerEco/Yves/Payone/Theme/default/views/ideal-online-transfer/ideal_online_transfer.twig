@@ -1,0 +1,20 @@
+<div class="payment-subform payone-form payone-ideal-online-transfer-form payment-form" id="payoneIdealOnlineTransfer">
+    <div class="field">
+        {{ form_widget(form.payoneIdealOnlineTransfer.onlinebanktransfertype) }}
+    </div>
+
+    <div class="field">
+        {{ form_widget(form.payoneIdealOnlineTransfer.bankcountry) }}
+    </div>
+
+    {% if form.payoneIdealOnlineTransfer.bankgrouptype is defined %}
+        <label>{{ 'Payone_ideal_online_transfer.BankGroupType' | trans }}</label>
+        <div class="field">
+            {{ form_widget(form.payoneIdealOnlineTransfer.bankgrouptype, { 'attr': {'placeholder': 'Payone_ideal_online_transfer.bankgrouptype' | trans } }) }}
+            {{ form_errors(form.payoneIdealOnlineTransfer.bankgrouptype) }}
+        </div>
+    {% endif %}
+
+    {{ form_errors(form) }}
+
+</div>

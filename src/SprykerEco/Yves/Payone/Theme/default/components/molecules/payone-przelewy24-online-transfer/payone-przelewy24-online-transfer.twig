@@ -1,0 +1,16 @@
+{% extends model('component') %}
+
+{% block body %}
+    <div class="payment-subform payone-form payone-przelewy24-online-transfer-form payment-form" id="payonePrzelewy24OnlineTransfer">
+        <div class="field">
+            {{ form_widget(form.payonePrzelewy24OnlineTransfer.onlinebanktransfertype) }}
+        </div>
+
+        <div class="field">
+            {{ form_widget(form.payonePrzelewy24OnlineTransfer.bankcountry) }}
+        </div>
+
+        {{ form_errors(form) }}
+
+    </div>
+{% endblock %}

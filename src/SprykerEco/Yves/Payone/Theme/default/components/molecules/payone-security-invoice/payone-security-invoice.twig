@@ -1,0 +1,9 @@
+{% extends model('component') %}
+
+{% block body %}
+<div class="payment-subform payone-form payone-security-invoice-form payment-form" id="payoneSecurityInvoice">
+    <div class="field">
+        {{ form_widget(form.payoneSecurityInvoice.paymentMethod) }}
+    </div>
+</div>
+{% endblock %}
