@@ -11,7 +11,7 @@ use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCalculationBridge;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryBridge;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesBridge;
@@ -62,7 +62,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         };
 
         $container[self::FACADE_GLOSSARY] = function (Container $container) {
-            return new PayoneToGlossaryBridge($container->getLocator()->glossary()->facade());
+            return new PayoneToGlossaryFacadeBridge($container->getLocator()->glossary()->facade());
         };
 
         return $container;

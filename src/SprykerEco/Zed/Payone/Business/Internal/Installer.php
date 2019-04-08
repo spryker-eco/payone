@@ -9,16 +9,16 @@ namespace SprykerEco\Zed\Payone\Business\Internal;
 
 use Generated\Shared\Transfer\LocaleTransfer;
 use Spryker\Zed\Installer\Business\Model\AbstractInstaller;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use Symfony\Component\Yaml\Yaml;
 
 class Installer extends AbstractInstaller
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface
+     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface
      */
-    protected $glossary;
+    protected $glossaryFacade;
 
     /**
      * @var \SprykerEco\Zed\Payone\PayoneConfig
@@ -26,12 +26,12 @@ class Installer extends AbstractInstaller
     protected $config;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryInterface $glossary
+     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface $glossaryFacade
      * @param \SprykerEco\Zed\Payone\PayoneConfig $config
      */
-    public function __construct(PayoneToGlossaryInterface $glossary, PayoneConfig $config)
+    public function __construct(PayoneToGlossaryFacadeInterface $glossaryFacade, PayoneConfig $config)
     {
-        $this->glossary = $glossary;
+        $this->glossaryFacade = $glossaryFacade;
         $this->config = $config;
     }
 
@@ -68,8 +68,8 @@ class Installer extends AbstractInstaller
         $results = [];
         foreach ($translations as $keyName => $data) {
             $results[$keyName]['created'] = false;
-            if (!$this->glossary->hasKey($keyName)) {
-                $this->glossary->createKey($keyName);
+            if (!$this->glossaryFacade->hasKey($keyName)) {
+                $this->glossaryFacade->createKey($keyName);
                 $results[$keyName]['created'] = true;
             }
 
@@ -98,14 +98,14 @@ class Installer extends AbstractInstaller
         $translation['created'] = false;
         $translation['updated'] = false;
 
-        if (!$this->glossary->hasTranslation($keyName, $locale)) {
-            $this->glossary->createAndTouchTranslation($keyName, $locale, $text, true);
+        if (!$this->glossaryFacade->hasTranslation($keyName, $locale)) {
+            $this->glossaryFacade->createAndTouchTranslation($keyName, $locale, $text, true);
             $translation['created'] = true;
 
             return $translation;
         }
 
-        $this->glossary->updateAndTouchTranslation($keyName, $locale, $text, true);
+        $this->glossaryFacade->updateAndTouchTranslation($keyName, $locale, $text, true);
         $translation['updated'] = true;
 
         return $translation;

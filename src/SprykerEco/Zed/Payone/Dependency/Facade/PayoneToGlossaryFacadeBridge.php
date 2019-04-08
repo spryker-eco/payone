@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Dependency\Facade;
 use Generated\Shared\Transfer\KeyTranslationTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
 
-class PayoneToGlossaryBridge implements PayoneToGlossaryInterface
+class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
 {
     /**
      * @var \Spryker\Zed\Glossary\Business\GlossaryFacadeInterface
@@ -34,6 +34,18 @@ class PayoneToGlossaryBridge implements PayoneToGlossaryInterface
     public function translateByKeyId($idKey, array $data = [])
     {
         return $this->glossaryFacade->translateByKeyId($idKey, $data);
+    }
+
+    /**
+     * @param $keyName
+     * @param array $data
+     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
+     *
+     * @return string
+     */
+    public function translate($keyName, array $data = [], ?LocaleTransfer $localeTransfer = null)
+    {
+        return $this->glossaryFacade->translate($keyName, $data ,$localeTransfer);
     }
 
     /**
