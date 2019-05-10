@@ -23,11 +23,11 @@ $config[PayoneConstants::PAYONE] = [
         $config[ApplicationConstants::BASE_URL_YVES]
     ),
     PayoneConstants::PAYONE_REDIRECT_ERROR_URL => sprintf(
-        '%s/checkout/payment',
+        '%s/payone/payment',
         $config[ApplicationConstants::BASE_URL_YVES]
     ),
     PayoneConstants::PAYONE_REDIRECT_BACK_URL => sprintf(
-        '%s/checkout/regular-redirect-payment-cancellation',
+        '%s/payone/regular-redirect-payment-cancellation',
         $config[ApplicationConstants::BASE_URL_YVES]
     ),
     PayoneConstants::PAYONE_MODE => 'test',
