@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
+use Generated\Shared\Transfer\PayonePaymentEWalletTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
@@ -26,7 +27,7 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
-            $paymentTransfer->setPayoneEWallet(new PayonePaymentTransfer());
+            $paymentTransfer->setPayoneEWallet(new PayonePaymentEWalletTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
         return $quoteTransfer;
