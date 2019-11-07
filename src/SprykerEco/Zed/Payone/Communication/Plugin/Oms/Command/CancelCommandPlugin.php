@@ -36,6 +36,7 @@ class CancelCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
         $paymentTransfer->setFkSalesOrder($orderEntity->getSpyPaymentPayones()->getFirst()->getFkSalesOrder());
         $captureTransfer->setPayment($paymentTransfer);
         $captureTransfer->setAmount(0);
+        $captureTransfer->setOrder($this->getOrderTransfer($orderEntity));
 
         $this->getFacade()->capturePayment($captureTransfer);
 
