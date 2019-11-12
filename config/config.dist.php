@@ -54,7 +54,7 @@ $config[PayoneConstants::PAYONE] = [
 $config[PayoneConstants::PAYONE][PayoneConstants::HOST_YVES] = $config[ApplicationConstants::BASE_URL_YVES];
 
 $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL] = sprintf(
-    '%s/checkout/paypal-express-checkout-entry-point',
+    '%s/cart',
     $config[ApplicationConstants::BASE_URL_YVES]
 );
 

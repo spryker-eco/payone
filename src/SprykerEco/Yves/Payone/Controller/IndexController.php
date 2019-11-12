@@ -48,7 +48,7 @@ class IndexController extends AbstractController
      */
     public function getFileAction(Request $request)
     {
-        $customerClient = $this->getFactory()->createCustomerClient();
+        $customerClient = $this->getFactory()->getCustomerClient();
         $customerTransfer = $customerClient->getCustomer();
 
         if (!$customerTransfer) {

@@ -81,6 +81,11 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     public function loadExpressCheckoutDetails()
     {
         $quoteTransfer = $this->cartClient->getQuote();
+
+        if ($quoteTransfer->getItems()->count() === 0) {
+            return;
+        }
+
         $details = $this->payoneClient->getPaypalExpressCheckoutDetails($quoteTransfer);
         $quoteTransfer = $this->quoteHydrator->getHydratedQuote($quoteTransfer, $details);
         $this->cartClient->storeQuote($quoteTransfer);
