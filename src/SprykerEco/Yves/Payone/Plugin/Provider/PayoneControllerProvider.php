@@ -10,6 +10,9 @@ namespace SprykerEco\Yves\Payone\Plugin\Provider;
 use Silex\Application;
 use Spryker\Yves\Application\Plugin\Provider\YvesControllerProvider;
 
+/**
+ * @deprecated Use `\SprykerEco\Yves\Payone\Plugin\Router\PayoneRouteProviderPlugin` instead.
+ */
 class PayoneControllerProvider extends YvesControllerProvider
 {
     public const ROUTE_LOGIN = 'login';
