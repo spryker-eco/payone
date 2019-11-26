@@ -24,4 +24,8 @@ interface PayoneTransactionStatusConstants
     public const TXACTION_VSETTLEMENT = 'vsettlement';
     public const TXACTION_TRANSFER = 'transfer';
     public const TXACTION_INVOICE = 'invoice';
+
+    public const STATUS_NEW = 'new';
+    public const STATUS_REFUND_APPROVED = 'refund approved';
+    public const STATUS_REFUND_FAILED = 'refund failed';
 }

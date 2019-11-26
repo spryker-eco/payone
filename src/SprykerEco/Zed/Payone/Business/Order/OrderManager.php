@@ -9,12 +9,15 @@ namespace SprykerEco\Zed\Payone\Business\Order;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
+use Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Propel\Runtime\Propel;
+use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 use SprykerEco\Zed\Payone\PayoneConfig;
+use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 
 class OrderManager implements OrderManagerInterface
 {
@@ -24,11 +27,20 @@ class OrderManager implements OrderManagerInterface
     private $config;
 
     /**
-     * @param \SprykerEco\Zed\Payone\PayoneConfig $config
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface
      */
-    public function __construct(PayoneConfig $config)
-    {
+    protected $payoneEntityManager;
+
+    /**
+     * @param \SprykerEco\Zed\Payone\PayoneConfig $config
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
+     */
+    public function __construct(
+        PayoneConfig $config,
+        PayoneEntityManagerInterface $payoneEntityManager
+    ) {
         $this->config = $config;
+        $this->payoneEntityManager = $payoneEntityManager;
     }
 
     /**
@@ -47,6 +59,7 @@ class OrderManager implements OrderManagerInterface
 
         $paymentDetailTransfer = $paymentTransfer->getPaymentDetail();
         $this->savePaymentDetail($payment, $paymentDetailTransfer);
+        $this->savePaymentPayoneOrderItems($checkoutResponse, $payment->getIdPaymentPayone());
 
         Propel::getConnection()->commit();
     }
@@ -83,5 +96,23 @@ class OrderManager implements OrderManagerInterface
         $paymentDetailEntity->setSpyPaymentPayone($payment);
         $paymentDetailEntity->fromArray($paymentDetailTransfer->toArray());
         $paymentDetailEntity->save();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param int $idSalesOrderItem
+     *
+     * @return void
+     */
+    protected function savePaymentPayoneOrderItems(CheckoutResponseTransfer $checkoutResponse, int $idSalesOrderItem): void
+    {
+        foreach ($checkoutResponse->getSaveOrder()->getOrderItems() as $itemTransfer) {
+            $paymentPayoneOrderItemTransfer = (new PaymentPayoneOrderItemTransfer())
+                ->setIdPaymentPayone($idSalesOrderItem)
+                ->setIdSalesOrderItem($itemTransfer->getIdSalesOrderItem())
+                ->setStatus(PayoneTransactionStatusConstants::STATUS_NEW);
+
+            $this->payoneEntityManager->createPaymentPayoneOrderItem($paymentPayoneOrderItemTransfer);
+        }
     }
 }

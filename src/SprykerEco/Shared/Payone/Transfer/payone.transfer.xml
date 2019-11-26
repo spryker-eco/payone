@@ -60,6 +60,12 @@
         <property name="order" type="Order" />
     </transfer>
 
+    <transfer name="PayonePartialOperationRequest">
+        <property name="order" type="Order"/>
+        <property name="salesOrderItemIds" type="int[]" singular="salesOrderItemId"/>
+        <property name="refund" type="Refund"/>
+    </transfer>
+
     <transfer name="PayonePayment">
         <property name="idPaymentPayone" type="int" />
         <property name="fkSalesOrder" type="int" />
@@ -70,6 +76,18 @@
         <property name="reference" type="string" />
         <property name="transactionId" type="string" />
         <property name="paymentDetail" type="PaymentDetail" />
+    </transfer>
+
+    <transfer name="PaymentPayoneOrderItem">
+        <property name="idPaymentPayoneOrderItem" type="int"/>
+        <property name="idPaymentPayone" type="int"/>
+        <property name="idSalesOrderItem" type="int"/>
+        <property name="status" type="string"/>
+    </transfer>
+
+    <transfer name="PayoneOrderItemFilter">
+        <property name="idSalesOrder" type="int"/>
+        <property name="salesOrderItemIds" type="int[]" singular="salesOrderItemId"/>
     </transfer>
 
     <transfer name="PayonePaymentCreditCard">

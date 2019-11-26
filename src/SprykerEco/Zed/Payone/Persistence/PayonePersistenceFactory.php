@@ -9,10 +9,12 @@ namespace SprykerEco\Zed\Payone\Persistence;
 
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItemQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
+use SprykerEco\Zed\Payone\Persistence\Propel\Mapper\PayonePersistenceMapper;
 
 /**
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
@@ -23,7 +25,7 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
-    public function createPaymentPayoneTransactionStatusLogQuery()
+    public function createPaymentPayoneTransactionStatusLogQuery(): SpyPaymentPayoneTransactionStatusLogQuery
     {
         return SpyPaymentPayoneTransactionStatusLogQuery::create();
     }
@@ -31,7 +33,7 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentPayoneQuery()
+    public function createPaymentPayoneQuery(): SpyPaymentPayoneQuery
     {
         return SpyPaymentPayoneQuery::create();
     }
@@ -39,7 +41,7 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createPaymentPayoneApiLogQuery()
+    public function createPaymentPayoneApiLogQuery(): SpyPaymentPayoneApiLogQuery
     {
         return SpyPaymentPayoneApiLogQuery::create();
     }
@@ -47,7 +49,7 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery
      */
-    public function createPaymentPayoneTransactionStatusLogOrderItemQuery()
+    public function createPaymentPayoneTransactionStatusLogOrderItemQuery(): SpyPaymentPayoneTransactionStatusLogOrderItemQuery
     {
         return SpyPaymentPayoneTransactionStatusLogOrderItemQuery::create();
     }
@@ -55,8 +57,24 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery
      */
-    public function createPaymentPayoneApiCallLogQuery()
+    public function createPaymentPayoneApiCallLogQuery(): SpyPaymentPayoneApiCallLogQuery
     {
         return SpyPaymentPayoneApiCallLogQuery::create();
+    }
+
+    /**
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItemQuery
+     */
+    public function createPaymentPayoneOrderItemQuery(): SpyPaymentPayoneOrderItemQuery
+    {
+        return SpyPaymentPayoneOrderItemQuery::create();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Persistence\Propel\Mapper\PayonePersistenceMapper
+     */
+    public function createPayonePersistenceMapper(): PayonePersistenceMapper
+    {
+        return new PayonePersistenceMapper();
     }
 }

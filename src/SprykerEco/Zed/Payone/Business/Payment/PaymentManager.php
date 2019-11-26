@@ -22,6 +22,8 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
+use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
@@ -29,11 +31,13 @@ use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseT
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\RefundResponseTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use Spryker\Shared\Shipment\ShipmentConstants;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
+use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Call\CreditCardCheck;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
@@ -64,7 +68,9 @@ use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PaymentManager implements PaymentManagerInterface
 {
@@ -113,6 +119,16 @@ class PaymentManager implements PaymentManagerInterface
     protected $registeredMethodMappers;
 
     /**
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
+     */
+    protected $payoneRepository;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface
+     */
+    protected $payoneEntityManager;
+
+    /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
@@ -120,6 +136,8 @@ class PaymentManager implements PaymentManagerInterface
      * @param \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface $sequenceNumberProvider
      * @param \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface $modeDetector
      * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      */
     public function __construct(
         AdapterInterface $executionAdapter,
@@ -128,9 +146,10 @@ class PaymentManager implements PaymentManagerInterface
         HashGenerator $hashGenerator,
         SequenceNumberProviderInterface $sequenceNumberProvider,
         ModeDetectorInterface $modeDetector,
-        HmacGeneratorInterface $urlHmacGenerator
+        HmacGeneratorInterface $urlHmacGenerator,
+        PayoneRepositoryInterface $payoneRepository,
+        PayoneEntityManagerInterface $payoneEntityManager
     ) {
-
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
@@ -138,6 +157,8 @@ class PaymentManager implements PaymentManagerInterface
         $this->sequenceNumberProvider = $sequenceNumberProvider;
         $this->modeDetector = $modeDetector;
         $this->urlHmacGenerator = $urlHmacGenerator;
+        $this->payoneRepository = $payoneRepository;
+        $this->payoneEntityManager = $payoneEntityManager;
     }
 
     /**
@@ -543,6 +564,48 @@ class PaymentManager implements PaymentManagerInterface
         $responseTransfer = $responseMapper->getRefundResponseTransfer($responseContainer);
 
         return $responseTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\RefundResponseTransfer
+     */
+    public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): RefundResponseTransfer
+    {
+        $paymentEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
+        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
+
+        $requestContainer->setAmount($payonePartialOperationRequestTransfer->getRefund()->getAmount() * -1);
+        $requestContainer = $this->preparePartialRefundOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
+        $this->setStandardParameter($requestContainer);
+
+        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+        $responseContainer = new RefundResponseContainer($rawResponse);
+
+        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
+        $this->updateApiLogAfterRefund($apiLogEntity, $responseContainer);
+
+        $payoneOrderItemFilterTransfer = (new PayoneOrderItemFilterTransfer())
+            ->setIdSalesOrder($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder())
+            ->setSalesOrderItemIds($payonePartialOperationRequestTransfer->getSalesOrderItemIds());
+
+        $refundStatus = PayoneTransactionStatusConstants::STATUS_REFUND_FAILED;
+        if ($responseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_APPROVED) {
+            $refundStatus = PayoneTransactionStatusConstants::STATUS_REFUND_APPROVED;
+        }
+
+        $payoneOrderItemTransfers = $this->payoneRepository->findPaymentPayoneOrderItemByFilter($payoneOrderItemFilterTransfer);
+
+        foreach ($payoneOrderItemTransfers as $payoneOrderItemTransfer) {
+            $payoneOrderItemTransfer->setStatus($refundStatus);
+            $this->payoneEntityManager->updatePaymentPayoneOrderItem($payoneOrderItemTransfer);
+        }
+
+        $responseMapper = new RefundResponseMapper();
+
+        return $responseMapper->getRefundResponseTransfer($responseContainer);
     }
 
     /**
@@ -1049,6 +1112,49 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function preparePartialRefundOrderItems(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer,
+        AbstractRequestContainer $container
+    ): AbstractRequestContainer {
+        $arrayIt = [];
+        $arrayId = [];
+        $arrayPr = [];
+        $arrayNo = [];
+        $arrayDe = [];
+        $arrayVa = [];
+
+        $key = 1;
+
+        foreach ($payonePartialOperationRequestTransfer->getOrder()->getItems() as $itemTransfer) {
+            if (!in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds())) {
+                continue;
+            }
+
+            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
+            $arrayId[$key] = $itemTransfer->getSku();
+            $arrayPr[$key] = $itemTransfer->getRefundableAmount();
+            $arrayNo[$key] = $itemTransfer->getQuantity();
+            $arrayDe[$key] = $itemTransfer->getName();
+            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
+            $key++;
+        }
+
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
@@ -1127,6 +1233,7 @@ class PaymentManager implements PaymentManagerInterface
                 return $expense->getSumGrossPrice();
             }
         }
+
         return 0;
     }
 }

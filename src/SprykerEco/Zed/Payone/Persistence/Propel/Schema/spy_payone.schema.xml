@@ -17,6 +17,31 @@
         <id-method-parameter value="spy_payment_payone_pk_seq"/>
     </table>
 
+    <table name="spy_payment_payone_order_item">
+        <column name="id_payment_payone_order_item" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="fk_payment_payone" required="true" type="INTEGER"/>
+        <column name="fk_sales_order_item" required="true" type="INTEGER"/>
+
+        <column name="status" type="VARCHAR" size="50"/>
+
+        <behavior name="timestampable"/>
+
+        <foreign-key name="spy_payment_payone_order_item-fk_payment_payone" foreignTable="spy_payment_payone">
+            <reference foreign="id_payment_payone" local="fk_payment_payone"/>
+        </foreign-key>
+
+        <foreign-key name="spy_payment_payone_order_item-fk_sales_order_item" foreignTable="spy_sales_order_item">
+            <reference foreign="id_sales_order_item" local="fk_sales_order_item"/>
+        </foreign-key>
+
+        <unique name="spy_payment_payone_order_item-unique-payment_payone-order_item">
+            <unique-column name="fk_payment_payone"/>
+            <unique-column name="fk_sales_order_item"/>
+        </unique>
+
+        <id-method-parameter value="spy_payment_payone_order_item_pk_seq"/>
+    </table>
+
     <table name="spy_payment_payone_detail" phpName="SpyPaymentPayoneDetail">
         <column name="id_payment_payone" type="INTEGER" primaryKey="true" />
 
