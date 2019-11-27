@@ -587,14 +587,31 @@ class PaymentManager implements PaymentManagerInterface
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
         $this->updateApiLogAfterRefund($apiLogEntity, $responseContainer);
 
-        $payoneOrderItemFilterTransfer = (new PayoneOrderItemFilterTransfer())
-            ->setIdSalesOrder($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder())
-            ->setSalesOrderItemIds($payonePartialOperationRequestTransfer->getSalesOrderItemIds());
-
         $refundStatus = PayoneTransactionStatusConstants::STATUS_REFUND_FAILED;
         if ($responseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_APPROVED) {
             $refundStatus = PayoneTransactionStatusConstants::STATUS_REFUND_APPROVED;
         }
+
+        $this->updatePaymentPayoneOrderItemsWithStatus($payonePartialOperationRequestTransfer, $refundStatus);
+
+        $responseMapper = new RefundResponseMapper();
+
+        return $responseMapper->getRefundResponseTransfer($responseContainer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     * @param string $refundStatus
+     *
+     * @return void
+     */
+    protected function updatePaymentPayoneOrderItemsWithStatus(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer,
+        string $refundStatus
+    ): void {
+        $payoneOrderItemFilterTransfer = (new PayoneOrderItemFilterTransfer())
+            ->setIdSalesOrder($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder())
+            ->setSalesOrderItemIds($payonePartialOperationRequestTransfer->getSalesOrderItemIds());
 
         $payoneOrderItemTransfers = $this->payoneRepository->findPaymentPayoneOrderItemByFilter($payoneOrderItemFilterTransfer);
 
@@ -602,10 +619,6 @@ class PaymentManager implements PaymentManagerInterface
             $payoneOrderItemTransfer->setStatus($refundStatus);
             $this->payoneEntityManager->updatePaymentPayoneOrderItem($payoneOrderItemTransfer);
         }
-
-        $responseMapper = new RefundResponseMapper();
-
-        return $responseMapper->getRefundResponseTransfer($responseContainer);
     }
 
     /**
