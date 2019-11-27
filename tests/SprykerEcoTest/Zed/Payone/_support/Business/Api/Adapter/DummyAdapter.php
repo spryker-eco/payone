@@ -38,6 +38,6 @@ class DummyAdapter extends AbstractHttpAdapter
      */
     protected function parseResponse(array $responseRaw = [])
     {
-        return $responseRaw;
+        return json_decode($this->rawResponse, true);
     }
 }

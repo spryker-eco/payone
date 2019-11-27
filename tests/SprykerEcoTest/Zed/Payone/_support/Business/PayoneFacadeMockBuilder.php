@@ -12,7 +12,9 @@ use Spryker\Zed\Kernel\Container;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
+use SprykerEco\Zed\Payone\Persistence\PayoneEntityManager;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepository;
 
 class PayoneFacadeMockBuilder
 {
@@ -20,7 +22,7 @@ class PayoneFacadeMockBuilder
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $adapter
      * @param \PHPUnit_Framework_TestCase $testCase
      *
-     * @return \Spryker\Zed\Ratepay\Business\RatepayFacade
+     * @return \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface
      */
     public function build(AdapterInterface $adapter, PHPUnit_Framework_TestCase $testCase)
     {
@@ -32,6 +34,12 @@ class PayoneFacadeMockBuilder
         // functional/integration tests there's no need to mock the database layer.
         $queryContainer = new PayoneQueryContainer();
         $businessFactoryMock->setQueryContainer($queryContainer);
+
+        $repository = new PayoneRepository();
+        $businessFactoryMock->setRepository($repository);
+
+        $entityManager = new PayoneEntityManager();
+        $businessFactoryMock->setEntityManager($entityManager);
 
         $container = new Container();
         $payoneDependencyProvider = new PayoneDependencyProvider();
