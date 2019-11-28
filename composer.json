@@ -4,7 +4,7 @@
   "description": "Payone module",
   "license": "proprietary",
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.2",
     "spryker/calculation": "^4.0.0",
     "spryker/cart": "^5.0.0 || ^7.0.0",
     "spryker/config": "^3.0.0",
