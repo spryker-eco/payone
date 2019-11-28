@@ -580,19 +580,16 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer->setAmount($payonePartialOperationRequestTransfer->getRefund()->getAmount() * -1);
         $requestContainer = $this->preparePartialRefundOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
         $this->setStandardParameter($requestContainer);
+        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new RefundResponseContainer($rawResponse);
 
-        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
         $this->updateApiLogAfterRefund($apiLogEntity, $responseContainer);
-
-        $refundStatus = PayoneTransactionStatusConstants::STATUS_REFUND_FAILED;
-        if ($responseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_APPROVED) {
-            $refundStatus = PayoneTransactionStatusConstants::STATUS_REFUND_APPROVED;
-        }
-
-        $this->updatePaymentPayoneOrderItemsWithStatus($payonePartialOperationRequestTransfer, $refundStatus);
+        $this->updatePaymentPayoneOrderItemsWithStatus(
+            $payonePartialOperationRequestTransfer,
+            $this->getPartialRefundStatus($responseContainer)
+        );
 
         $responseMapper = new RefundResponseMapper();
 
@@ -619,6 +616,20 @@ class PaymentManager implements PaymentManagerInterface
             $payoneOrderItemTransfer->setStatus($refundStatus);
             $this->payoneEntityManager->updatePaymentPayoneOrderItem($payoneOrderItemTransfer);
         }
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer $responseContainer
+     *
+     * @return string
+     */
+    protected function getPartialRefundStatus(RefundResponseContainer $responseContainer): string
+    {
+        if ($responseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_APPROVED) {
+            return PayoneTransactionStatusConstants::STATUS_REFUND_APPROVED;
+        }
+
+        return PayoneTransactionStatusConstants::STATUS_REFUND_FAILED;
     }
 
     /**
