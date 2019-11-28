@@ -2,7 +2,7 @@
   "name": "spryker-eco/payone",
   "type": "library",
   "description": "Payone module",
-  "license": "proprietary",
+  "license": "MIT",
   "require": {
     "php": ">=7.2",
     "spryker/calculation": "^4.0.0",
