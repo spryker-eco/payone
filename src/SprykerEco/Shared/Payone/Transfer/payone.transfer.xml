@@ -291,11 +291,11 @@
     </transfer>
 
     <transfer name="PayonePaymentLogCollection">
-        <property name="paymentLogs" type="PayonePaymentLog[]"/>
+        <property name="paymentLogs" type="PayonePaymentLog[]" singular="paymentLog"/>
     </transfer>
 
     <transfer name="OrderCollection">
-        <property name="orders" type="Order[]"/>
+        <property name="orders" type="Order[]" singular="order"/>
     </transfer>
 
     <transfer name="PayoneGetFile">
