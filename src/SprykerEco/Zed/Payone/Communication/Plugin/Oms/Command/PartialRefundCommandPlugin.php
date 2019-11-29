@@ -42,6 +42,7 @@ class PartialRefundCommandPlugin extends AbstractPlugin implements CommandByOrde
         }
 
         $this->getFacade()->executePartialRefund($payonePartialOperationTransfer);
+        $this->getFactory()->getRefundFacade()->saveRefund($refundTransfer);
 
         return [];
     }

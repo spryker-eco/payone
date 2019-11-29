@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Dependency\Facade;
 
+use Generated\Shared\Transfer\RefundTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 
 interface PayoneToRefundInterface
@@ -18,4 +19,11 @@ interface PayoneToRefundInterface
      * @return \Generated\Shared\Transfer\RefundTransfer
      */
     public function calculateRefund(array $orderItems, SpySalesOrder $orderEntity);
+
+    /**
+     * @param \Generated\Shared\Transfer\RefundTransfer $refundTransfer
+     *
+     * @return bool
+     */
+    public function saveRefund(RefundTransfer $refundTransfer);
 }

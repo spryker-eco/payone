@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Dependency\Facade;
 
+use Generated\Shared\Transfer\RefundTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 
 class PayoneToRefundBridge implements PayoneToRefundInterface
@@ -33,5 +34,15 @@ class PayoneToRefundBridge implements PayoneToRefundInterface
     public function calculateRefund(array $orderItems, SpySalesOrder $orderEntity)
     {
         return $this->refundFacade->calculateRefund($orderItems, $orderEntity);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\RefundTransfer $refundTransfer
+     *
+     * @return bool
+     */
+    public function saveRefund(RefundTransfer $refundTransfer)
+    {
+        return $this->refundFacade->saveRefund($refundTransfer);
     }
 }
