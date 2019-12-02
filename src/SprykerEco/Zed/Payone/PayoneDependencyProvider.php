@@ -32,20 +32,11 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideCommunicationLayerDependencies(Container $container)
     {
-        $container[self::FACADE_OMS] = function (Container $container) {
-            return new PayoneToOmsBridge($container->getLocator()->oms()->facade());
-        };
-
-        $container[self::FACADE_REFUND] = function (Container $container) {
-            return new PayoneToRefundBridge($container->getLocator()->refund()->facade());
-        };
-
-        $container[self::FACADE_SALES] = function (Container $container) {
-            return new PayoneToSalesBridge($container->getLocator()->sales()->facade());
-        };
-        $container[self::FACADE_CALCULATION] = function (Container $container) {
-            return new PayoneToCalculationBridge($container->getLocator()->calculation()->facade());
-        };
+        $container = parent::provideCommunicationLayerDependencies($container);
+        $container = $this->addOmsFacade($container);
+        $container = $this->addRefundFacade($container);
+        $container = $this->addSalesFacade($container);
+        $container = $this->addCalculationFacade($container);
 
         return $container;
     }
@@ -57,13 +48,93 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideBusinessLayerDependencies(Container $container)
     {
-        $container[self::STORE_CONFIG] = function (Container $container) {
-            return Store::getInstance();
-        };
+        $container = parent::provideBusinessLayerDependencies($container);
+        $container = $this->addGlossaryFacade($container);
+        $container = $this->addStore($container);
 
-        $container[self::FACADE_GLOSSARY] = function (Container $container) {
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addOmsFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_OMS, function (Container $container) {
+            return new PayoneToOmsBridge($container->getLocator()->oms()->facade());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addRefundFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_REFUND, function (Container $container) {
+            return new PayoneToRefundBridge($container->getLocator()->refund()->facade());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addSalesFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_SALES, function (Container $container) {
+            return new PayoneToSalesBridge($container->getLocator()->sales()->facade());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addCalculationFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_CALCULATION, function (Container $container) {
+            return new PayoneToCalculationBridge($container->getLocator()->calculation()->facade());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addGlossaryFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_GLOSSARY, function (Container $container) {
             return new PayoneToGlossaryFacadeBridge($container->getLocator()->glossary()->facade());
-        };
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addStore(Container $container): Container
+    {
+        $container->set(static::STORE_CONFIG, function () {
+            return Store::getInstance();
+        });
 
         return $container;
     }

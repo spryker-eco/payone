@@ -22,6 +22,9 @@ use SprykerEco\Zed\Payone\Business\Key\HashProvider;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Mode\ModeDetector;
 use SprykerEco\Zed\Payone\Business\Order\OrderManager;
+use SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface;
+use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinder;
+use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
@@ -32,6 +35,7 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentManagerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
@@ -44,11 +48,14 @@ use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
  * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface getRepository()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface getEntityManager()
  */
 class PayoneBusinessFactory extends AbstractBusinessFactory
 {
@@ -60,7 +67,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentManagerInterface
      */
-    public function createPaymentManager()
+    public function createPaymentManager(): PaymentManagerInterface
     {
         $paymentManager = new PaymentManager(
             $this->createExecutionAdapter(),
@@ -69,7 +76,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createKeyHashGenerator(),
             $this->createSequenceNumberProvider(),
             $this->createModeDetector(),
-            $this->createUrlHmacGenerator()
+            $this->createUrlHmacGenerator(),
+            $this->getRepository(),
+            $this->getEntityManager()
         );
 
         foreach ($this->getAvailablePaymentMethods() as $paymentMethod) {
@@ -82,11 +91,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface
      */
-    public function createOrderManager()
+    public function createOrderManager(): OrderManagerInterface
     {
-        $orderManager = new OrderManager($this->getConfig());
-
-        return $orderManager;
+        return new OrderManager($this->getConfig(), $this->getEntityManager());
     }
 
     /**
@@ -405,5 +412,13 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createPaymentMethodFilter(): PaymentMethodFilterInterface
     {
         return new PaymentMethodFilter($this->getConfig());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinderInterface
+     */
+    public function createPayoneOrderItemStatusFinder(): PayoneOrderItemStatusFinderInterface
+    {
+        return new PayoneOrderItemStatusFinder($this->getRepository());
     }
 }

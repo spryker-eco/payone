@@ -4,124 +4,142 @@
     xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
     <transfer name="PayoneAuthorization">
-        <property name="amount" type="int" />
-        <property name="referenceId" type="string" />
-        <property name="paymentMethod" type="string" />
-        <property name="personalData" type="PersonalData" />
-        <property name="order" type="Order" />
+        <property name="amount" type="int"/>
+        <property name="referenceId" type="string"/>
+        <property name="paymentMethod" type="string"/>
+        <property name="personalData" type="PersonalData"/>
+        <property name="order" type="Order"/>
     </transfer>
 
     <transfer name="PayoneCapture">
-        <property name="amount" type="int" />
-        <property name="payment" type="PayonePayment" />
-        <property name="settleaccount" type="string" />
-        <property name="order" type="Order" />
+        <property name="amount" type="int"/>
+        <property name="payment" type="PayonePayment"/>
+        <property name="settleaccount" type="string"/>
+        <property name="order" type="Order"/>
     </transfer>
 
     <transfer name="PayoneDebit">
-        <property name="amount" type="int" />
-        <property name="payment" type="PayonePayment" />
+        <property name="amount" type="int"/>
+        <property name="payment" type="PayonePayment"/>
     </transfer>
 
     <transfer name="PayoneCreditCard">
-        <property name="aid" type="string" />
-        <property name="cardPan" type="string" />
-        <property name="cardType" type="string" />
-        <property name="cardExpireDate" type="string" />
-        <property name="cardCvc2" type="string" />
-        <property name="cardIssueNumber" type="string" />
-        <property name="storeCardData" type="string" />
-        <property name="language" type="string" />
-        <property name="payment" type="PayonePayment" />
+        <property name="aid" type="string"/>
+        <property name="cardPan" type="string"/>
+        <property name="cardType" type="string"/>
+        <property name="cardExpireDate" type="string"/>
+        <property name="cardCvc2" type="string"/>
+        <property name="cardIssueNumber" type="string"/>
+        <property name="storeCardData" type="string"/>
+        <property name="language" type="string"/>
+        <property name="payment" type="PayonePayment"/>
     </transfer>
 
     <transfer name="PayoneManageMandate">
-        <property name="aid" type="string" />
-        <property name="language" type="string" />
+        <property name="aid" type="string"/>
+        <property name="language" type="string"/>
         <property name="bankCountry" type="string"/>
         <property name="bankAccount" type="string"/>
         <property name="bankCode" type="string"/>
-        <property name="iban" type="string" />
-        <property name="bic" type="string" />
-        <property name="personalData" type="PayonePersonalData" />
-        <property name="status" type="string" />
-        <property name="internalErrorMessage" type="string" />
-        <property name="customerErrorMessage" type="string" />
-        <property name="errorCode" type="string" />
-        <property name="mandateIdentification" type="string" />
-        <property name="mandateText" type="string" />
+        <property name="iban" type="string"/>
+        <property name="bic" type="string"/>
+        <property name="personalData" type="PayonePersonalData"/>
+        <property name="status" type="string"/>
+        <property name="internalErrorMessage" type="string"/>
+        <property name="customerErrorMessage" type="string"/>
+        <property name="errorCode" type="string"/>
+        <property name="mandateIdentification" type="string"/>
+        <property name="mandateText" type="string"/>
     </transfer>
 
     <transfer name="PayoneRefund">
-        <property name="amount" type="int" />
-        <property name="payment" type="PayonePayment" />
-        <property name="useCustomerdata" type="string" />
-        <property name="narrativeText" type="string" />
-        <property name="order" type="Order" />
+        <property name="amount" type="int"/>
+        <property name="payment" type="PayonePayment"/>
+        <property name="useCustomerdata" type="string"/>
+        <property name="narrativeText" type="string"/>
+        <property name="order" type="Order"/>
+    </transfer>
+
+    <transfer name="PayonePartialOperationRequest">
+        <property name="order" type="Order"/>
+        <property name="salesOrderItemIds" type="int[]" singular="salesOrderItemId"/>
+        <property name="refund" type="Refund"/>
     </transfer>
 
     <transfer name="PayonePayment">
-        <property name="idPaymentPayone" type="int" />
-        <property name="fkSalesOrder" type="int" />
-        <property name="createdAt" type="string" />
-        <property name="updatedAt" type="string" />
-        <property name="paymentMethod" type="string" />
-        <property name="authorizationType" type="string" />
-        <property name="reference" type="string" />
-        <property name="transactionId" type="string" />
-        <property name="paymentDetail" type="PaymentDetail" />
+        <property name="idPaymentPayone" type="int"/>
+        <property name="fkSalesOrder" type="int"/>
+        <property name="createdAt" type="string"/>
+        <property name="updatedAt" type="string"/>
+        <property name="paymentMethod" type="string"/>
+        <property name="authorizationType" type="string"/>
+        <property name="reference" type="string"/>
+        <property name="transactionId" type="string"/>
+        <property name="paymentDetail" type="PaymentDetail"/>
+    </transfer>
+
+    <transfer name="PaymentPayoneOrderItem">
+        <property name="idPaymentPayoneOrderItem" type="int"/>
+        <property name="idPaymentPayone" type="int"/>
+        <property name="idSalesOrderItem" type="int"/>
+        <property name="status" type="string"/>
+    </transfer>
+
+    <transfer name="PayoneOrderItemFilter">
+        <property name="idSalesOrder" type="int"/>
+        <property name="salesOrderItemIds" type="int[]" singular="salesOrderItemId"/>
     </transfer>
 
     <transfer name="PayonePaymentCreditCard">
-        <property name="reference" type="string" />
+        <property name="reference" type="string"/>
 
-        <property name="cardtype" type="string" />
-        <property name="cardholder" type="string" />
-        <property name="cardexpiredateMonth" type="string" />
-        <property name="cardexpiredateYear" type="string" />
-        <property name="pseudocardpan" type="string" />
-        <property name="payoneClientApiConfig" type="string" />
-        <property name="payoneClientLangCode" type="string" />
+        <property name="cardtype" type="string"/>
+        <property name="cardholder" type="string"/>
+        <property name="cardexpiredateMonth" type="string"/>
+        <property name="cardexpiredateYear" type="string"/>
+        <property name="pseudocardpan" type="string"/>
+        <property name="payoneClientApiConfig" type="string"/>
+        <property name="payoneClientLangCode" type="string"/>
     </transfer>
 
     <transfer name="PayonePaymentEWallet">
-        <property name="wallettype" type="string" />
+        <property name="wallettype" type="string"/>
     </transfer>
 
     <transfer name="PayonePaymentDirectDebit">
         <property name="bankaccountmode" type="string"/>
-        <property name="bankcountry" type="string" />
-        <property name="bankaccount" type="string" />
-        <property name="bankcode" type="string" />
-        <property name="iban" type="string" />
-        <property name="bic" type="string" />
-        <property name="mandateIdentification" type="string" />
-        <property name="mandateText" type="string" />
+        <property name="bankcountry" type="string"/>
+        <property name="bankaccount" type="string"/>
+        <property name="bankcode" type="string"/>
+        <property name="iban" type="string"/>
+        <property name="bic" type="string"/>
+        <property name="mandateIdentification" type="string"/>
+        <property name="mandateText" type="string"/>
     </transfer>
 
     <transfer name="PayonePaymentOnlinetransfer">
-        <property name="onlinebanktransfertype" type="string" />
-        <property name="bankcountry" type="string" />
-        <property name="bankaccount" type="string" />
-        <property name="bankcode" type="string" />
-        <property name="bankbranchcode" type="string" />
-        <property name="bankcheckdigit" type="string" />
-        <property name="bankgrouptype" type="string" />
-        <property name="iban" type="string" />
-        <property name="bic" type="string" />
+        <property name="onlinebanktransfertype" type="string"/>
+        <property name="bankcountry" type="string"/>
+        <property name="bankaccount" type="string"/>
+        <property name="bankcode" type="string"/>
+        <property name="bankbranchcode" type="string"/>
+        <property name="bankcheckdigit" type="string"/>
+        <property name="bankgrouptype" type="string"/>
+        <property name="iban" type="string"/>
+        <property name="bic" type="string"/>
     </transfer>
 
     <transfer name="PayonePaymentCashOnDelivery">
-        <property name="shippingProvider" type="string" />
+        <property name="shippingProvider" type="string"/>
     </transfer>
 
     <transfer name="PaymentDetail">
-        <property name="amount" type="int" />
-        <property name="currency" type="string" />
-        <property name="pseudoCardPan" type="string" />
-        <property name="lastName" type="string" />
-        <property name="country" type="string" />
-        <property name="type" type="string" />
+        <property name="amount" type="int"/>
+        <property name="currency" type="string"/>
+        <property name="pseudoCardPan" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="country" type="string"/>
+        <property name="type" type="string"/>
         <property name="bankCountry" type="string"/>
         <property name="bankAccount" type="string"/>
         <property name="bankCode" type="string"/>
@@ -130,8 +148,8 @@
         <property name="bankCheckDigit" type="string"/>
         <property name="iban" type="string"/>
         <property name="bic" type="string"/>
-        <property name="mandateIdentification" type="string" />
-        <property name="mandateText" type="string" />
+        <property name="mandateIdentification" type="string"/>
+        <property name="mandateText" type="string"/>
         <property name="invoiceTitle" type="string"/>
         <property name="clearingBankAccountHolder" type="string"/>
         <property name="clearingBankCountry" type="string"/>
@@ -141,12 +159,12 @@
         <property name="clearingBankBic" type="string"/>
         <property name="clearingBankCity" type="string"/>
         <property name="clearingBankName" type="string"/>
-        <property name="workOrderId" type="string" />
-        <property name="shippingProvider" type="string" />
+        <property name="workOrderId" type="string"/>
+        <property name="shippingProvider" type="string"/>
     </transfer>
 
     <transfer name="PayoneBankAccountCheck">
-        <property name="language" type="string" />
+        <property name="language" type="string"/>
         <property name="bankCountry" type="string"/>
         <property name="bankAccount" type="string"/>
         <property name="bankCode" type="string"/>
@@ -154,173 +172,173 @@
         <property name="bankCheckDigit" type="string"/>
         <property name="iban" type="string"/>
         <property name="bic" type="string"/>
-        <property name="status" type="string" />
-        <property name="internalErrorMessage" type="string" />
-        <property name="customerErrorMessage" type="string" />
-        <property name="errorCode" type="string" />
+        <property name="status" type="string"/>
+        <property name="internalErrorMessage" type="string"/>
+        <property name="customerErrorMessage" type="string"/>
+        <property name="errorCode" type="string"/>
     </transfer>
 
     <transfer name="PaymentStatus">
-        <property name="isSuccess" type="bool" />
-        <property name="redirectUrl" type="string" />
+        <property name="isSuccess" type="bool"/>
+        <property name="redirectUrl" type="string"/>
     </transfer>
 
     <transfer name="PayoneStandardParameter">
-        <property name="encoding" type="string" />
-        <property name="mid" type="string" />
-        <property name="aid" type="string" />
-        <property name="portalId" type="string" />
-        <property name="key" type="string" />
-        <property name="apiVersion" type="string" />
-        <property name="paymentGatewayUrl" type="string" />
-        <property name="currency" type="string" />
-        <property name="language" type="string" />
-        <property name="redirectSuccessUrl" type="string" />
-        <property name="redirectBackUrl" type="string" />
-        <property name="redirectErrorUrl" type="string" />
-        <property name="storeCardData" type="string" />
-        <property name="responseType" type="string" />
+        <property name="encoding" type="string"/>
+        <property name="mid" type="string"/>
+        <property name="aid" type="string"/>
+        <property name="portalId" type="string"/>
+        <property name="key" type="string"/>
+        <property name="apiVersion" type="string"/>
+        <property name="paymentGatewayUrl" type="string"/>
+        <property name="currency" type="string"/>
+        <property name="language" type="string"/>
+        <property name="redirectSuccessUrl" type="string"/>
+        <property name="redirectBackUrl" type="string"/>
+        <property name="redirectErrorUrl" type="string"/>
+        <property name="storeCardData" type="string"/>
+        <property name="responseType" type="string"/>
     </transfer>
 
     <transfer name="PayoneCreditCardCheckRequestData">
-        <property name="storeCardData" type="string" />
-        <property name="responseType" type="string" />
+        <property name="storeCardData" type="string"/>
+        <property name="responseType" type="string"/>
     </transfer>
 
     <transfer name="PayoneApiCallResponseCheck">
-        <property name="requestType" type="string" />
-        <property name="payment" type="Payment" />
+        <property name="requestType" type="string"/>
+        <property name="payment" type="Payment"/>
     </transfer>
 
     <transfer name="PayoneAuthorizationCheckResponse">
-        <property name="isSuccess" type="bool" />
-        <property name="request" type="string" />
-        <property name="status" type="string" />
-        <property name="redirectUrl" type="string" />
-        <property name="isRedirect" type="string" />
-        <property name="internalErrorMessage" type="string" />
-        <property name="customerErrorMessage" type="string" />
-        <property name="errorCode" type="string" />
+        <property name="isSuccess" type="bool"/>
+        <property name="request" type="string"/>
+        <property name="status" type="string"/>
+        <property name="redirectUrl" type="string"/>
+        <property name="isRedirect" type="string"/>
+        <property name="internalErrorMessage" type="string"/>
+        <property name="customerErrorMessage" type="string"/>
+        <property name="errorCode" type="string"/>
     </transfer>
 
     <transfer name="PayonePersonalData">
-        <property name="customerId" type="string" />
-        <property name="userId" type="string" />
-        <property name="salutation" type="string" />
-        <property name="title" type="string" />
-        <property name="firstName" type="string" />
-        <property name="lastName" type="string" />
-        <property name="company" type="string" />
-        <property name="street" type="string" />
-        <property name="addressAddition" type="string" />
-        <property name="zip" type="string" />
-        <property name="city" type="string" />
-        <property name="country" type="string" />
-        <property name="state" type="string" />
-        <property name="email" type="string" />
-        <property name="telephoneNumber" type="string" />
-        <property name="birthday" type="string" />
-        <property name="language" type="string" />
-        <property name="vatId" type="string" />
-        <property name="gender" type="string" />
-        <property name="personalId" type="string" />
-        <property name="ip" type="string" />
-        <property name="pseudoCardPan" type="string" />
+        <property name="customerId" type="string"/>
+        <property name="userId" type="string"/>
+        <property name="salutation" type="string"/>
+        <property name="title" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="company" type="string"/>
+        <property name="street" type="string"/>
+        <property name="addressAddition" type="string"/>
+        <property name="zip" type="string"/>
+        <property name="city" type="string"/>
+        <property name="country" type="string"/>
+        <property name="state" type="string"/>
+        <property name="email" type="string"/>
+        <property name="telephoneNumber" type="string"/>
+        <property name="birthday" type="string"/>
+        <property name="language" type="string"/>
+        <property name="vatId" type="string"/>
+        <property name="gender" type="string"/>
+        <property name="personalId" type="string"/>
+        <property name="ip" type="string"/>
+        <property name="pseudoCardPan" type="string"/>
     </transfer>
 
     <transfer name="Order">
-        <property name="idSalesOrder" type="int" />
+        <property name="idSalesOrder" type="int"/>
         <property name="payonePayment" type="PayonePayment"/>
     </transfer>
 
     <transfer name="CheckoutRequest">
-        <property name="payonePayment" type="PayonePayment" />
+        <property name="payonePayment" type="PayonePayment"/>
     </transfer>
 
     <transfer name="PayoneTransactionStatusUpdate">
-        <property name="key" type="string" />
-        <property name="aid" type="string" />
-        <property name="mode" type="string" />
-        <property name="customerid" type="string" />
-        <property name="portalid" type="string" />
-        <property name="sequencenumber" type="string" />
-        <property name="txaction" type="string" />
-        <property name="price" type="string" />
-        <property name="receivable" type="string" />
-        <property name="balance" type="string" />
-        <property name="currency" type="string" />
-        <property name="txid" type="string" />
-        <property name="userid" type="string" />
-        <property name="txtime" type="string" />
-        <property name="clearingtype" type="string" />
-        <property name="reference" type="string" />
-        <property name="reminderlevel" type="string" />
-        <property name="response" type="string" />
-        <property name="isSuccess" type="bool" />
+        <property name="key" type="string"/>
+        <property name="aid" type="string"/>
+        <property name="mode" type="string"/>
+        <property name="customerid" type="string"/>
+        <property name="portalid" type="string"/>
+        <property name="sequencenumber" type="string"/>
+        <property name="txaction" type="string"/>
+        <property name="price" type="string"/>
+        <property name="receivable" type="string"/>
+        <property name="balance" type="string"/>
+        <property name="currency" type="string"/>
+        <property name="txid" type="string"/>
+        <property name="userid" type="string"/>
+        <property name="txtime" type="string"/>
+        <property name="clearingtype" type="string"/>
+        <property name="reference" type="string"/>
+        <property name="reminderlevel" type="string"/>
+        <property name="response" type="string"/>
+        <property name="isSuccess" type="bool"/>
     </transfer>
 
     <transfer name="PayonePaymentLog">
-        <property name="transactionId" type="string" />
-        <property name="logType" type="string" />
-        <property name="request" type="string" />
-        <property name="status" type="string" />
+        <property name="transactionId" type="string"/>
+        <property name="logType" type="string"/>
+        <property name="request" type="string"/>
+        <property name="status" type="string"/>
 
-        <property name="receivable" type="string" />
-        <property name="balance" type="string" />
-        <property name="price" type="string" />
+        <property name="receivable" type="string"/>
+        <property name="balance" type="string"/>
+        <property name="price" type="string"/>
 
-        <property name="createdAt" type="string" />
+        <property name="createdAt" type="string"/>
     </transfer>
 
     <transfer name="PayonePaymentLogCollection">
-        <property name="paymentLogs" type="PayonePaymentLog[]" />
+        <property name="paymentLogs" type="PayonePaymentLog[]" singular="paymentLog"/>
     </transfer>
 
     <transfer name="OrderCollection">
-        <property name="orders" type="Order[]" />
+        <property name="orders" type="Order[]" singular="order"/>
     </transfer>
 
     <transfer name="PayoneGetFile">
-        <property name="reference" type="string" />
-        <property name="type" type="string" />
-        <property name="format" type="string" />
-        <property name="customerId" type="int" />
-        <property name="rawResponse" type="string" />
-        <property name="status" type="string" />
-        <property name="internalErrorMessage" type="string" />
-        <property name="customerErrorMessage" type="string" />
-        <property name="errorCode" type="string" />
+        <property name="reference" type="string"/>
+        <property name="type" type="string"/>
+        <property name="format" type="string"/>
+        <property name="customerId" type="int"/>
+        <property name="rawResponse" type="string"/>
+        <property name="status" type="string"/>
+        <property name="internalErrorMessage" type="string"/>
+        <property name="customerErrorMessage" type="string"/>
+        <property name="errorCode" type="string"/>
     </transfer>
 
     <transfer name="PayoneGetInvoice">
-        <property name="reference" type="string" />
-        <property name="customerId" type="int" />
-        <property name="rawResponse" type="string" />
-        <property name="status" type="string" />
-        <property name="internalErrorMessage" type="string" />
-        <property name="customerErrorMessage" type="string" />
-        <property name="errorCode" type="string" />
+        <property name="reference" type="string"/>
+        <property name="customerId" type="int"/>
+        <property name="rawResponse" type="string"/>
+        <property name="status" type="string"/>
+        <property name="internalErrorMessage" type="string"/>
+        <property name="customerErrorMessage" type="string"/>
+        <property name="errorCode" type="string"/>
     </transfer>
 
     <transfer name="PayoneGetSecurityInvoice">
-        <property name="reference" type="string" />
-        <property name="customerId" type="int" />
-        <property name="rawResponse" type="string" />
-        <property name="status" type="string" />
-        <property name="internalErrorMessage" type="string" />
-        <property name="customerErrorMessage" type="string" />
-        <property name="errorCode" type="string" />
+        <property name="reference" type="string"/>
+        <property name="customerId" type="int"/>
+        <property name="rawResponse" type="string"/>
+        <property name="status" type="string"/>
+        <property name="internalErrorMessage" type="string"/>
+        <property name="customerErrorMessage" type="string"/>
+        <property name="errorCode" type="string"/>
     </transfer>
 
     <transfer name="PayoneGetPaymentDetail">
-        <property name="orderId" type="string" />
-        <property name="orderReference" type="string" />
-        <property name="paymentDetail" type="PaymentDetail" />
+        <property name="orderId" type="string"/>
+        <property name="orderReference" type="string"/>
+        <property name="paymentDetail" type="PaymentDetail"/>
     </transfer>
 
     <transfer name="PayoneCancelRedirect">
-        <property name="orderReference" type="string" />
-        <property name="urlHmac" type="string" />
+        <property name="orderReference" type="string"/>
+        <property name="urlHmac" type="string"/>
     </transfer>
 
     <transfer name="Payment">
@@ -341,142 +359,142 @@
         <property name="payonePrePayment" type="PayonePayment"/>
         <property name="payoneInvoice" type="PayonePayment"/>
         <property name="payoneSecurityInvoice" type="PayonePayment"/>
-        <property name="payonePaypalExpressCheckout" type="PayonePaypalExpressCheckout" />
+        <property name="payonePaypalExpressCheckout" type="PayonePaypalExpressCheckout"/>
         <property name="summaryIncludePath" type="string"/>
         <property name="successIncludePath" type="string"/>
     </transfer>
 
     <transfer name="PayonePaypalExpressCheckout">
-        <property name="workOrderId" type="string" />
+        <property name="workOrderId" type="string"/>
     </transfer>
 
     <transfer name="PayoneInitPaypalExpressCheckoutRequest">
-        <property name="quote" type="Quote" />
-        <property name="successUrl" type="string" />
-        <property name="failureUrl" type="string" />
-        <property name="backUrl" type="string" />
+        <property name="quote" type="Quote"/>
+        <property name="successUrl" type="string"/>
+        <property name="failureUrl" type="string"/>
+        <property name="backUrl" type="string"/>
     </transfer>
 
     <transfer name="PayonePaypalExpressCheckoutGenericPaymentResponse">
-        <property name="workOrderId" type="string" />
-        <property name="redirectUrl" type="string" />
-        <property name="rawResponse" type="string" />
-        <property name="status" type="string" />
-        <property name="errorCode" type="int" />
-        <property name="errorMessage" type="string" />
-        <property name="customerMessage" type="string" />
-        <property name="email" type="string" />
-        <property name="shippingFirstName" type="string" />
-        <property name="shippingLastName" type="string" />
-        <property name="shippingCompany" type="string" />
-        <property name="shippingStreet" type="string" />
-        <property name="shippingAddressAdition" type="string" />
-        <property name="shippingZip" type="string" />
-        <property name="shippingCity" type="string" />
-        <property name="shippingState" type="string" />
-        <property name="shippingCountry" type="string" />
+        <property name="workOrderId" type="string"/>
+        <property name="redirectUrl" type="string"/>
+        <property name="rawResponse" type="string"/>
+        <property name="status" type="string"/>
+        <property name="errorCode" type="int"/>
+        <property name="errorMessage" type="string"/>
+        <property name="customerMessage" type="string"/>
+        <property name="email" type="string"/>
+        <property name="shippingFirstName" type="string"/>
+        <property name="shippingLastName" type="string"/>
+        <property name="shippingCompany" type="string"/>
+        <property name="shippingStreet" type="string"/>
+        <property name="shippingAddressAdition" type="string"/>
+        <property name="shippingZip" type="string"/>
+        <property name="shippingCity" type="string"/>
+        <property name="shippingState" type="string"/>
+        <property name="shippingCountry" type="string"/>
     </transfer>
 
     <!--Response container replacement related transfers start-->
 
     <transfer name="BaseResponse">
-        <property name="status" type="string" />
-        <property name="rawResponse" type="string" />
-        <property name="errorCode" type="string" />
-        <property name="errorMessage" type="string" />
-        <property name="customerMessage" type="string" />
+        <property name="status" type="string"/>
+        <property name="rawResponse" type="string"/>
+        <property name="errorCode" type="string"/>
+        <property name="errorMessage" type="string"/>
+        <property name="customerMessage" type="string"/>
     </transfer>
 
     <transfer name="Clearing">
-        <property name="bankAccountHolder" type="string" />
-        <property name="bankAccount" type="string" />
-        <property name="bankCountry" type="string" />
-        <property name="bankCode" type="string" />
-        <property name="bankIban" type="string" />
-        <property name="bankBic" type="string" />
-        <property name="bankCity" type="string" />
-        <property name="bankName" type="string" />
-        <property name="legalNote" type="string" />
+        <property name="bankAccountHolder" type="string"/>
+        <property name="bankAccount" type="string"/>
+        <property name="bankCountry" type="string"/>
+        <property name="bankCode" type="string"/>
+        <property name="bankIban" type="string"/>
+        <property name="bankBic" type="string"/>
+        <property name="bankCity" type="string"/>
+        <property name="bankName" type="string"/>
+        <property name="legalNote" type="string"/>
         <!--(YYYYMMDD)-->
-        <property name="date" type="string" />
-        <property name="dueDate" type="string" />
-        <property name="amount" type="string" />
-        <property name="reference" type="string" />
-        <property name="instructionNote" type="string" />
+        <property name="date" type="string"/>
+        <property name="dueDate" type="string"/>
+        <property name="amount" type="string"/>
+        <property name="reference" type="string"/>
+        <property name="instructionNote" type="string"/>
 
     </transfer>
 
     <transfer name="Creditor">
-        <property name="identifier" type="string" />
-        <property name="name" type="string" />
-        <property name="street" type="string" />
-        <property name="zip" type="string" />
-        <property name="city" type="string" />
-        <property name="country" type="string" />
-        <property name="email" type="string" />
+        <property name="identifier" type="string"/>
+        <property name="name" type="string"/>
+        <property name="street" type="string"/>
+        <property name="zip" type="string"/>
+        <property name="city" type="string"/>
+        <property name="country" type="string"/>
+        <property name="email" type="string"/>
     </transfer>
 
     <transfer name="AuthorizationResponse">
-        <property name="txid" type="int" />
-        <property name="userId" type="int" />
-        <property name="protectResultAvs" type="string" />
-        <property name="redirectUrl" type="string" />
-        <property name="mandateIdentification" type="string" />
-        <property name="clearing" type="Clearing" />
-        <property name="creditor" type="Creditor" />
-        <property name="baseResponse" type="BaseResponse" />
+        <property name="txid" type="int"/>
+        <property name="userId" type="int"/>
+        <property name="protectResultAvs" type="string"/>
+        <property name="redirectUrl" type="string"/>
+        <property name="mandateIdentification" type="string"/>
+        <property name="clearing" type="Clearing"/>
+        <property name="creditor" type="Creditor"/>
+        <property name="baseResponse" type="BaseResponse"/>
     </transfer>
 
     <transfer name="CaptureResponse">
-        <property name="txid" type="int" />
+        <property name="txid" type="int"/>
         <property name="settleAccount" type="string"/>
-        <property name="mandateIdentification" type="string" />
-        <property name="clearing" type="Clearing" />
-        <property name="creditor" type="Creditor" />
-        <property name="baseResponse" type="BaseResponse" />
+        <property name="mandateIdentification" type="string"/>
+        <property name="clearing" type="Clearing"/>
+        <property name="creditor" type="Creditor"/>
+        <property name="baseResponse" type="BaseResponse"/>
     </transfer>
 
     <transfer name="DebitResponse">
-        <property name="txid" type="int" />
-        <property name="settleAccount" type="string" />
-        <property name="baseResponse" type="BaseResponse" />
+        <property name="txid" type="int"/>
+        <property name="settleAccount" type="string"/>
+        <property name="baseResponse" type="BaseResponse"/>
     </transfer>
 
     <transfer name="RefundResponse">
-        <property name="txid" type="int" />
-        <property name="protectResultAvs" type="string" />
-        <property name="baseResponse" type="BaseResponse" />
+        <property name="txid" type="int"/>
+        <property name="protectResultAvs" type="string"/>
+        <property name="baseResponse" type="BaseResponse"/>
     </transfer>
 
     <transfer name="CreditCardCheckResponse">
-        <property name="pseudoCardPan" type="string" />
-        <property name="truncatedCardPan" type="string" />
-        <property name="baseResponse" type="BaseResponse" />
+        <property name="pseudoCardPan" type="string"/>
+        <property name="truncatedCardPan" type="string"/>
+        <property name="baseResponse" type="BaseResponse"/>
     </transfer>
 
     <transfer name="Quote">
-        <property name="isGuestExpressCheckout" type="bool" />
-        <property name="consumerScore" type="string" />
-        <property name="isAddressValid" type="bool" />
+        <property name="isGuestExpressCheckout" type="bool"/>
+        <property name="consumerScore" type="string"/>
+        <property name="isAddressValid" type="bool"/>
     </transfer>
 
     <transfer name="AddressCheckResponse">
-        <property name="status" type="string" />
-        <property name="secStatus" type="string" />
-        <property name="customerMessage" type="string" />
-        <property name="streetName" type="string" />
-        <property name="streetNumber" type="string" />
-        <property name="zip" type="string" />
-        <property name="city" type="string" />
-        <property name="personStatus" type="string" />
+        <property name="status" type="string"/>
+        <property name="secStatus" type="string"/>
+        <property name="customerMessage" type="string"/>
+        <property name="streetName" type="string"/>
+        <property name="streetNumber" type="string"/>
+        <property name="zip" type="string"/>
+        <property name="city" type="string"/>
+        <property name="personStatus" type="string"/>
     </transfer>
 
     <transfer name="ConsumerScoreResponse">
-        <property name="status" type="string" />
-        <property name="score" type="string" />
-        <property name="scoreValue" type="string" />
-        <property name="customerMessage" type="string" />
-        <property name="gender" type="string" />
+        <property name="status" type="string"/>
+        <property name="score" type="string"/>
+        <property name="scoreValue" type="string"/>
+        <property name="customerMessage" type="string"/>
+        <property name="gender" type="string"/>
     </transfer>
     <!--Response container replacement related transfers end-->
 </transfers>

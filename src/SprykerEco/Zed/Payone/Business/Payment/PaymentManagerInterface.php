@@ -18,8 +18,10 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\RefundResponseTransfer;
 
 interface PaymentManagerInterface
 {
@@ -36,6 +38,13 @@ interface PaymentManagerInterface
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\RefundResponseTransfer
+     */
+    public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): RefundResponseTransfer;
 
     /**
      * @param int $idPayment

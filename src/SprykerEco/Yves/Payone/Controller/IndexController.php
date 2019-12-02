@@ -29,10 +29,10 @@ class IndexController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        $statusUpdateTranfer = new PayoneTransactionStatusUpdateTransfer();
-        $statusUpdateTranfer->fromArray($request->request->all(), true);
+        $statusUpdateTransfer = new PayoneTransactionStatusUpdateTransfer();
+        $statusUpdateTransfer->fromArray($request->request->all(), true);
 
-        $response = $this->getClient()->updateStatus($statusUpdateTranfer)->getResponse();
+        $response = $this->getClient()->updateStatus($statusUpdateTransfer)->getResponse();
 
         $callback = function () use ($response) {
             echo $response;

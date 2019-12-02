@@ -22,9 +22,11 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\RefundResponseTransfer;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneBusinessFactory getFactory()
@@ -103,6 +105,18 @@ interface PayoneFacadeInterface
      * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer);
+
+    /**
+     * Specification:
+     * - Performs partial refund request to Payone API.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\RefundResponseTransfer
+     */
+    public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): RefundResponseTransfer;
 
     /**
      * Specification:
@@ -487,6 +501,9 @@ interface PayoneFacadeInterface
     public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer);
 
     /**
+     * Specification:
+     * - Performs init express checkout request to Payone API.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
@@ -496,6 +513,9 @@ interface PayoneFacadeInterface
     public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
+     * Specification:
+     * - Retrieves express checkout details.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -505,7 +525,8 @@ interface PayoneFacadeInterface
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
     /**
-     * Send request to Payone to get address check result based on customer billing address.
+     * Specification:
+     * - Sends request to Payone to get address check result based on customer billing address.
      *
      * @api
      *
@@ -516,7 +537,8 @@ interface PayoneFacadeInterface
     public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
 
     /**
-     * Send request to Payone to get consumer score result based on customer billing info.
+     * Specification:
+     * - Sends request to Payone to get consumer score result based on customer billing info.
      *
      * @api
      *
@@ -527,7 +549,8 @@ interface PayoneFacadeInterface
     public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
 
     /**
-     * Filter Payone's payment methods based on consumer score result.
+     * Specification:
+     * - Filters Payone's payment methods based on consumer score result.
      *
      * @api
      *
@@ -537,4 +560,18 @@ interface PayoneFacadeInterface
      * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
      */
     public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer;
+
+    /**
+     * Specification:
+     * - Finds Payone order item status.
+     * - Returns null in case payone order item was not found.
+     *
+     * @api
+     *
+     * @param int $idSalesOrder
+     * @param int $idSalesOrderItem
+     *
+     * @return string|null
+     */
+    public function findPayoneOrderItemStatus(int $idSalesOrder, int $idSalesOrderItem): ?string;
 }
