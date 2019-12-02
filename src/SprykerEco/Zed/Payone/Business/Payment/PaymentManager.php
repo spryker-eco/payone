@@ -279,6 +279,7 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $this->prepareOrderItems($captureTransfer->getOrder(), $requestContainer);
         $requestContainer = $this->prepareOrderShipment($captureTransfer->getOrder(), $requestContainer);
         $requestContainer = $this->prepareOrderDiscount($captureTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->prepareOrderHandling($captureTransfer->getOrder(), $requestContainer);
 
         if (!empty($captureTransfer->getSettleaccount())) {
             $businnessContainer = new BusinessContainer();
@@ -1128,5 +1129,43 @@ class PaymentManager implements PaymentManagerInterface
             }
         }
         return 0;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function prepareOrderHandling(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    {
+        $arrayIt = $container->getIt() ?? [];
+        $arrayId = $container->getId() ?? [];
+        $arrayPr = $container->getPr() ?? [];
+        $arrayNo = $container->getNo() ?? [];
+        $arrayDe = $container->getDe() ?? [];
+        $arrayVa = $container->getVa() ?? [];
+
+        $key = count($arrayId) + 1;
+
+        foreach ($orderTransfer->getExpenses() as $expense) {
+            if ($expense->getType() !== ShipmentConstants::SHIPMENT_EXPENSE_TYPE) {
+                $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
+                $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
+                $arrayPr[$key] = $expense->getSumGrossPrice();
+                $arrayNo[$key] = 1;
+                $arrayDe[$key] = 'Handling';
+                $key++;
+            }
+        }
+
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
     }
 }
