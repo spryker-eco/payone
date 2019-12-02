@@ -9,15 +9,15 @@ sudo: required
 matrix:
   fast_finish: true
   include:
-    - php: 7.1
+    - php: 7.2
       env:
         - PRODUCT_NAME=suite
       
-    - php: 7.1
+    - php: 7.2
       env:
         - PRODUCT_NAME=b2c-demo-shop
       
-    - php: 7.1
+    - php: 7.2
       env:
         - PRODUCT_NAME=b2b-demo-shop
 
