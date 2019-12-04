@@ -35,7 +35,7 @@ class PaymentLogTest extends AbstractPayoneTest
         $apiLogs[] = $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_CAPTURE, PayoneApiConstants::RESPONSE_TYPE_TIMEOUT);
 
         $orderCollection = (new OrderCollectionTransfer())
-            ->addOrders($this->orderTransfer);
+            ->addOrder($this->orderTransfer);
         $paymentLogCollectionTransfer = $this->payoneFacade->getPaymentLogs($orderCollection);
 
         $this->assertInstanceOf(PayonePaymentLogCollectionTransfer::class, $paymentLogCollectionTransfer);
@@ -56,7 +56,7 @@ class PaymentLogTest extends AbstractPayoneTest
         $this->createPayonePayment();
 
         $orderCollection = (new OrderCollectionTransfer())
-            ->addOrders($this->orderTransfer);
+            ->addOrder($this->orderTransfer);
         $paymentLogCollectionTransfer = $this->payoneFacade->getPaymentLogs($orderCollection);
 
         $this->assertInstanceOf(PayonePaymentLogCollectionTransfer::class, $paymentLogCollectionTransfer);
