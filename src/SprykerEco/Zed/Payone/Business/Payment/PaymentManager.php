@@ -34,7 +34,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
-use Spryker\Shared\Shipment\ShipmentConstants;
+use Spryker\Shared\Shipment\ShipmentConfig;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
@@ -1254,7 +1254,7 @@ class PaymentManager implements PaymentManagerInterface
     protected function getDeliveryCosts(ArrayObject $expenses): string
     {
         foreach ($expenses as $expense) {
-            if ($expense->getType() === ShipmentConstants::SHIPMENT_EXPENSE_TYPE) {
+            if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
                 return $expense->getSumGrossPrice();
             }
         }
@@ -1280,7 +1280,7 @@ class PaymentManager implements PaymentManagerInterface
         $key = count($arrayId) + 1;
 
         foreach ($orderTransfer->getExpenses() as $expense) {
-            if ($expense->getType() !== ShipmentConstants::SHIPMENT_EXPENSE_TYPE) {
+            if ($expense->getType() !== ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
                 $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
                 $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
                 $arrayPr[$key] = $expense->getSumGrossPrice();

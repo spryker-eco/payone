@@ -8,13 +8,14 @@
 namespace SprykerEco\Yves\Payone\Dependency\Client;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\ShipmentMethodsCollectionTransfer;
 
 interface PayoneToShipmentInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ShipmentMethodsTransfer
+     * @return \Generated\Shared\Transfer\ShipmentMethodsCollectionTransfer
      */
-    public function getAvailableMethods(QuoteTransfer $quoteTransfer);
+    public function getAvailableMethodsByShipment(QuoteTransfer $quoteTransfer): ShipmentMethodsCollectionTransfer;
 }

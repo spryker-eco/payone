@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\ShipmentMethodsTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
 use Spryker\Shared\Kernel\Store;
@@ -130,25 +131,52 @@ class QuoteHydrator implements QuoteHydratorInterface
 
         $shipmentTransfer = new ShipmentTransfer();
 
-        $methods = $this->shipmentClient->getAvailableMethods($quoteTransfer)->getMethods();
-
-        if ($shippingMethod = reset($methods)) {
-            $shippingMethod->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE);
-            $shipmentTransfer->setMethod($shippingMethod);
-            $shipmentTransfer->setShipmentSelection($shippingMethod->getIdShipmentMethod());
-            $quoteTransfer->setShipment($shipmentTransfer);
-
-            return $quoteTransfer;
-        }
-
         $shipmentTransfer->setMethod(
             (new ShipmentMethodTransfer())
                 ->setCarrierName(static::CARRIER_NAME)
                 ->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE)
         );
+
+        $quoteTransfer->setShipment($shipmentTransfer);
+
+        $shippingMethod = $this->getShipmentMethod($quoteTransfer);
+
+        if ($shippingMethod === null) {
+            return $quoteTransfer;
+        }
+
+        $shippingMethod->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE);
+        $shipmentTransfer->setMethod($shippingMethod);
+        $shipmentTransfer->setShipmentSelection($shippingMethod->getIdShipmentMethod());
         $quoteTransfer->setShipment($shipmentTransfer);
 
         return $quoteTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \ArrayObject|\Generated\Shared\Transfer\ShipmentMethodTransfer|null
+     */
+    protected function getShipmentMethod(QuoteTransfer $quoteTransfer): ?ShipmentMethodTransfer
+    {
+        $shipmentMethodsCollection = $this->shipmentClient->getAvailableMethodsByShipment($quoteTransfer)
+            ->getShipmentMethods();
+
+        if ($shipmentMethodsCollection->count() === 0) {
+            return null;
+        }
+
+        /** @var ShipmentMethodsTransfer $shipmentMethods */
+        $shipmentMethods = $shipmentMethodsCollection->getIterator()->current();
+
+        $methods = $shipmentMethods->getMethods();
+
+        if ($methods->count() === 0) {
+            return null;
+        }
+
+        return $methods->getIterator()->current();
     }
 
     /**
