@@ -878,7 +878,7 @@ class PaymentManager implements PaymentManagerInterface
         $payonePaymentLogCollectionTransfer = new PayonePaymentLogCollectionTransfer();
 
         foreach ($logs as $log) {
-            $payonePaymentLogCollectionTransfer->addPaymentLogs($log);
+            $payonePaymentLogCollectionTransfer->addPaymentLog($log);
         }
 
         return $payonePaymentLogCollectionTransfer;
