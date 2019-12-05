@@ -129,25 +129,18 @@ class QuoteHydrator implements QuoteHydratorInterface
             return $quoteTransfer;
         }
 
-        $shipmentTransfer = new ShipmentTransfer();
+        $shipmentMethodTransfer = $this->findFirstAvailableShipmentMethod($quoteTransfer);
 
-        $shipmentTransfer->setMethod(
-            (new ShipmentMethodTransfer())
-                ->setCarrierName(static::CARRIER_NAME)
-                ->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE)
-        );
-
-        $quoteTransfer->setShipment($shipmentTransfer);
-
-        $shippingMethod = $this->getShipmentMethod($quoteTransfer);
-
-        if ($shippingMethod === null) {
-            return $quoteTransfer;
+        if ($shipmentMethodTransfer === null) {
+            $shipmentMethodTransfer = (new ShipmentMethodTransfer())->setCarrierName(static::CARRIER_NAME);
         }
 
-        $shippingMethod->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE);
-        $shipmentTransfer->setMethod($shippingMethod);
-        $shipmentTransfer->setShipmentSelection($shippingMethod->getIdShipmentMethod());
+        $shipmentMethodTransfer->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE);
+
+        $shipmentTransfer = (new ShipmentTransfer())
+            ->setMethod($shipmentMethodTransfer)
+            ->setShipmentSelection($shipmentMethodTransfer->getIdShipmentMethod());
+
         $quoteTransfer->setShipment($shipmentTransfer);
 
         return $quoteTransfer;
@@ -158,25 +151,25 @@ class QuoteHydrator implements QuoteHydratorInterface
      *
      * @return \ArrayObject|\Generated\Shared\Transfer\ShipmentMethodTransfer|null
      */
-    protected function getShipmentMethod(QuoteTransfer $quoteTransfer): ?ShipmentMethodTransfer
+    protected function findFirstAvailableShipmentMethod(QuoteTransfer $quoteTransfer): ?ShipmentMethodTransfer
     {
-        $shipmentMethodsCollection = $this->shipmentClient->getAvailableMethodsByShipment($quoteTransfer)
+        $shipmentMethodsTransfer = $this->shipmentClient->getAvailableMethodsByShipment($quoteTransfer)
             ->getShipmentMethods();
 
-        if ($shipmentMethodsCollection->count() === 0) {
+        if ($shipmentMethodsTransfer->count() === 0) {
             return null;
         }
 
-        /** @var ShipmentMethodsTransfer $shipmentMethods */
-        $shipmentMethods = $shipmentMethodsCollection->getIterator()->current();
+        /** @var ShipmentMethodsTransfer $firstShipmentMethodsTransfer */
+        $firstShipmentMethodsTransfer = $shipmentMethodsTransfer->getIterator()->current();
 
-        $methods = $shipmentMethods->getMethods();
+        $shipmentMethodTransfer = $firstShipmentMethodsTransfer->getMethods();
 
-        if ($methods->count() === 0) {
+        if ($shipmentMethodTransfer->count() === 0) {
             return null;
         }
 
-        return $methods->getIterator()->current();
+        return $shipmentMethodTransfer->getIterator()->current();
     }
 
     /**
