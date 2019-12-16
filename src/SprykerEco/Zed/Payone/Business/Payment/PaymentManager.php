@@ -79,6 +79,15 @@ class PaymentManager implements PaymentManagerInterface
     public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
+     * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE | \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
+     *
+     * @deprecated Necessary in order to save compatibility with  spryker/shipping version less than "^8.0.0".
+     * use \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE instead if shipping version is higher
+     *
+     */
+    protected const SHIPMENT_EXPENSE_TYPE = 'SHIPMENT_EXPENSE_TYPE';
+
+    /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
      */
     protected $executionAdapter;
@@ -878,7 +887,7 @@ class PaymentManager implements PaymentManagerInterface
         $payonePaymentLogCollectionTransfer = new PayonePaymentLogCollectionTransfer();
 
         foreach ($logs as $log) {
-            $payonePaymentLogCollectionTransfer->addPaymentLogs($log);
+            $payonePaymentLogCollectionTransfer->addPaymentLog($log);
         }
 
         return $payonePaymentLogCollectionTransfer;
@@ -1254,7 +1263,7 @@ class PaymentManager implements PaymentManagerInterface
     protected function getDeliveryCosts(ArrayObject $expenses): string
     {
         foreach ($expenses as $expense) {
-            if ($expense->getType() === ShipmentConstants::SHIPMENT_EXPENSE_TYPE) {
+            if ($expense->getType() === static::SHIPMENT_EXPENSE_TYPE) {
                 return $expense->getSumGrossPrice();
             }
         }
@@ -1280,7 +1289,7 @@ class PaymentManager implements PaymentManagerInterface
         $key = count($arrayId) + 1;
 
         foreach ($orderTransfer->getExpenses() as $expense) {
-            if ($expense->getType() !== ShipmentConstants::SHIPMENT_EXPENSE_TYPE) {
+            if ($expense->getType() !== static::SHIPMENT_EXPENSE_TYPE) {
                 $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
                 $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
                 $arrayPr[$key] = $expense->getSumGrossPrice();
