@@ -45,6 +45,10 @@
       "SprykerEco\\": "src/SprykerEco/"
     }
   },
+  "scripts": {
+    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml -p src/ tests/",
+    "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml -p src/ tests/"
+  },
   "autoload-dev": {
     "psr-4": {
       "SprykerEcoTest\\": "tests/SprykerEcoTest/"
