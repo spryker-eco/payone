@@ -79,7 +79,8 @@ class PaymentManager implements PaymentManagerInterface
     public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
-     * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE | \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
+     * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE
+     * @see \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
      *
      * @deprecated Necessary in order to save compatibility with  spryker/shipping version less than "^8.0.0".
      * use \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE instead if shipping version is higher
