@@ -1205,13 +1205,13 @@ class PaymentManager implements PaymentManagerInterface
         $arrayVa = $container->getVa() ?? [];
 
         $key = count($arrayId) + 1;
-        $expenses = $orderTransfer->getExpenses();
 
         $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
         $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
-        $arrayPr[$key] = $this->getDeliveryCosts($expenses);
+        $arrayPr[$key] = $this->getDeliveryCosts($orderTransfer);
         $arrayNo[$key] = 1;
         $arrayDe[$key] = 'Shipment';
+        $arrayVa[$key] = 0;
 
         $container->setIt($arrayIt);
         $container->setId($arrayId);
@@ -1245,6 +1245,7 @@ class PaymentManager implements PaymentManagerInterface
         $arrayPr[$key] = - $orderTransfer->getTotals()->getDiscountTotal();
         $arrayNo[$key] = 1;
         $arrayDe[$key] = 'Discount';
+        $arrayVa[$key] = 0;
 
         $container->setIt($arrayIt);
         $container->setId($arrayId);
@@ -1257,15 +1258,15 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \ArrayObject $expenses
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return string
+     * @return int
      */
-    protected function getDeliveryCosts(ArrayObject $expenses): string
+    protected function getDeliveryCosts(OrderTransfer $orderTransfer): int
     {
-        foreach ($expenses as $expense) {
+        foreach ($orderTransfer->getExpenses() as $expense) {
             if ($expense->getType() === static::SHIPMENT_EXPENSE_TYPE) {
-                return $expense->getSumGrossPrice();
+                return $expense->getSumPriceToPayAggregation();
             }
         }
 
@@ -1293,9 +1294,10 @@ class PaymentManager implements PaymentManagerInterface
             if ($expense->getType() !== static::SHIPMENT_EXPENSE_TYPE) {
                 $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
                 $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
-                $arrayPr[$key] = $expense->getSumGrossPrice();
+                $arrayPr[$key] = $expense->getSumPriceToPayAggregation();
                 $arrayNo[$key] = 1;
                 $arrayDe[$key] = 'Handling';
+                $arrayVa[$key] = 0;
                 $key++;
             }
         }
