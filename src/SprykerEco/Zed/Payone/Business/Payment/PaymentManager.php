@@ -1294,7 +1294,7 @@ class PaymentManager implements PaymentManagerInterface
             if ($expense->getType() !== static::SHIPMENT_EXPENSE_TYPE) {
                 $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
                 $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
-                $arrayPr[$key] = $expense->getSumPriceToPayAggregation();
+                $arrayPr[$key] = $expense->getSumGrossPrice();
                 $arrayNo[$key] = 1;
                 $arrayDe[$key] = 'Handling';
                 $arrayVa[$key] = 0;
