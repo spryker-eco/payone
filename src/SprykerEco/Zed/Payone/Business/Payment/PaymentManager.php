@@ -79,6 +79,16 @@ class PaymentManager implements PaymentManagerInterface
     public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
+     * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE
+     * @see \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
+     *
+     * @deprecated Necessary in order to save compatibility with  spryker/shipping version less than "^8.0.0".
+     * use \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE instead if shipping version is higher
+     *
+     */
+    protected const SHIPMENT_EXPENSE_TYPE = 'SHIPMENT_EXPENSE_TYPE';
+
+    /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
      */
     protected $executionAdapter;
@@ -878,7 +888,7 @@ class PaymentManager implements PaymentManagerInterface
         $payonePaymentLogCollectionTransfer = new PayonePaymentLogCollectionTransfer();
 
         foreach ($logs as $log) {
-            $payonePaymentLogCollectionTransfer->addPaymentLogs($log);
+            $payonePaymentLogCollectionTransfer->addPaymentLog($log);
         }
 
         return $payonePaymentLogCollectionTransfer;
@@ -1195,13 +1205,13 @@ class PaymentManager implements PaymentManagerInterface
         $arrayVa = $container->getVa() ?? [];
 
         $key = count($arrayId) + 1;
-        $expenses = $orderTransfer->getExpenses();
 
         $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
         $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
-        $arrayPr[$key] = $this->getDeliveryCosts($expenses);
+        $arrayPr[$key] = $this->getDeliveryCosts($orderTransfer);
         $arrayNo[$key] = 1;
         $arrayDe[$key] = 'Shipment';
+        $arrayVa[$key] = 0;
 
         $container->setIt($arrayIt);
         $container->setId($arrayId);
@@ -1235,6 +1245,7 @@ class PaymentManager implements PaymentManagerInterface
         $arrayPr[$key] = - $orderTransfer->getTotals()->getDiscountTotal();
         $arrayNo[$key] = 1;
         $arrayDe[$key] = 'Discount';
+        $arrayVa[$key] = 0;
 
         $container->setIt($arrayIt);
         $container->setId($arrayId);
@@ -1247,14 +1258,14 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \ArrayObject $expenses
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return string
+     * @return int
      */
-    protected function getDeliveryCosts(ArrayObject $expenses): string
+    protected function getDeliveryCosts(OrderTransfer $orderTransfer): int
     {
-        foreach ($expenses as $expense) {
-            if ($expense->getType() === ShipmentConstants::SHIPMENT_EXPENSE_TYPE) {
+        foreach ($orderTransfer->getExpenses() as $expense) {
+            if ($expense->getType() === static::SHIPMENT_EXPENSE_TYPE) {
                 return $expense->getSumGrossPrice();
             }
         }
@@ -1280,12 +1291,13 @@ class PaymentManager implements PaymentManagerInterface
         $key = count($arrayId) + 1;
 
         foreach ($orderTransfer->getExpenses() as $expense) {
-            if ($expense->getType() !== ShipmentConstants::SHIPMENT_EXPENSE_TYPE) {
+            if ($expense->getType() !== static::SHIPMENT_EXPENSE_TYPE) {
                 $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
                 $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
                 $arrayPr[$key] = $expense->getSumGrossPrice();
                 $arrayNo[$key] = 1;
                 $arrayDe[$key] = 'Handling';
+                $arrayVa[$key] = 0;
                 $key++;
             }
         }
