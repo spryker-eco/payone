@@ -1266,7 +1266,7 @@ class PaymentManager implements PaymentManagerInterface
     {
         foreach ($orderTransfer->getExpenses() as $expense) {
             if ($expense->getType() === static::SHIPMENT_EXPENSE_TYPE) {
-                return $expense->getSumPriceToPayAggregation();
+                return $expense->getSumGrossPrice();
             }
         }
 
