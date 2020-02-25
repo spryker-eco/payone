@@ -27,6 +27,7 @@ class PrePaymentDataProvider implements StepEngineFormDataProviderInterface
             $paymentTransfer->setPayonePrePayment(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

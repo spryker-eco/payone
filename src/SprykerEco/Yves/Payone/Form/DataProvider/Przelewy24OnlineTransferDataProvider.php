@@ -27,6 +27,7 @@ class Przelewy24OnlineTransferDataProvider implements StepEngineFormDataProvider
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

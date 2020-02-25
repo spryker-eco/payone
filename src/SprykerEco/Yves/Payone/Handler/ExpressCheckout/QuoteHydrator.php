@@ -70,7 +70,7 @@ class QuoteHydrator implements QuoteHydratorInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function getHydratedQuote(
         QuoteTransfer $quoteTransfer,
@@ -83,13 +83,14 @@ class QuoteHydrator implements QuoteHydratorInterface
             $quoteTransfer = $this->hydrateQuoteWithCustomer($quoteTransfer, $details);
             $quoteTransfer->setIsGuestExpressCheckout(true);
         }
+
         return $this->calculationClient->recalculate($quoteTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function hydrateQuoteWithPayment(QuoteTransfer $quoteTransfer)
     {
@@ -120,7 +121,7 @@ class QuoteHydrator implements QuoteHydratorInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function hydrateQuoteWithShipment($quoteTransfer)
     {
@@ -155,7 +156,7 @@ class QuoteHydrator implements QuoteHydratorInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function hydrateQuoteWithCustomer(
         QuoteTransfer $quoteTransfer,
@@ -168,6 +169,7 @@ class QuoteHydrator implements QuoteHydratorInterface
 
         if (!empty($customerTransfer->getFirstName())) {
             $quoteTransfer->setCustomer($customerTransfer);
+
             return $quoteTransfer;
         }
         $customerTransfer->setIsGuest(true);
@@ -184,7 +186,7 @@ class QuoteHydrator implements QuoteHydratorInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function hydrateQuoteWithAddresses(
         QuoteTransfer $quoteTransfer,

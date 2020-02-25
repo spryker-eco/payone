@@ -32,6 +32,8 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneBusinessFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface getRepository()
  */
 class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
 {
@@ -571,6 +573,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     public function getPaymentLogs(OrderCollectionTransfer $orderCollectionTransfer)
     {
         $orders = $orderCollectionTransfer->getOrders();
+
         return $this->getFactory()->createPaymentManager()->getPaymentLogs($orders);
     }
 
@@ -632,7 +635,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -648,7 +651,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -664,7 +667,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

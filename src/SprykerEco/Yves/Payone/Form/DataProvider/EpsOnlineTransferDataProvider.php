@@ -27,6 +27,7 @@ class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterfa
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

@@ -48,7 +48,6 @@ use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**

@@ -30,6 +30,7 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
             $paymentTransfer->setPayoneEWallet(new PayonePaymentEWalletTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

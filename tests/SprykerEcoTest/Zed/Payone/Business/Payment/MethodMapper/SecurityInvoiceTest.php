@@ -161,9 +161,9 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerEco\Zed\Payone\PayoneConfig
      */
-    protected function getPayoneZedConfigMock()
+    protected function getPayoneZedConfigMock(): PayoneConfig
     {
         $mock = $this->getMockBuilder(PayoneConfig::class)
             ->disableOriginalConstructor()

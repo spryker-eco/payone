@@ -28,6 +28,7 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

@@ -27,6 +27,7 @@ abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataP
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

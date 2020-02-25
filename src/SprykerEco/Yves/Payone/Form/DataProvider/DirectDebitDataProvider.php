@@ -28,6 +28,7 @@ class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

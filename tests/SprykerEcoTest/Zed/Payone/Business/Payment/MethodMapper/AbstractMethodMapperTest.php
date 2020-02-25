@@ -35,34 +35,34 @@ use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
  */
 class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
 {
-    const STANDARD_PARAMETER_AID = '12345';
-    const STANDARD_PARAMETER_CURRENCY = 'EUR';
-    const ADDRESS_FIRST_NAME = 'Max';
-    const ADDRESS_LAST_NAME = 'Mustermann';
-    const COUNTRY_ISO2CODE = 'de';
-    const TRANSACTION_ID = '1234567890';
-    const AMOUNT_FULL = 100;
-    const PAYMENT_REFERENCE = 'TX1234567890abcd';
-    const DEFAULT_SEQUENCE_NUMBER = 0;
+    public const STANDARD_PARAMETER_AID = '12345';
+    public const STANDARD_PARAMETER_CURRENCY = 'EUR';
+    public const ADDRESS_FIRST_NAME = 'Max';
+    public const ADDRESS_LAST_NAME = 'Mustermann';
+    public const COUNTRY_ISO2CODE = 'de';
+    public const TRANSACTION_ID = '1234567890';
+    public const AMOUNT_FULL = 100;
+    public const PAYMENT_REFERENCE = 'TX1234567890abcd';
+    public const DEFAULT_SEQUENCE_NUMBER = 0;
     public const DEFAULT_EMAIL = 'default@email.com';
 
-    const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
         'country' => self::COUNTRY_ISO2CODE,
     ];
 
-    const AUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
         'country' => self::COUNTRY_ISO2CODE,
     ];
 
-    const CAPTURE_COMMON_REQUIRED_PARAMS = [
+    public const CAPTURE_COMMON_REQUIRED_PARAMS = [
         'txid' => self::TRANSACTION_ID,
         'amount' => self::AMOUNT_FULL,
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    const REFUND_COMMON_REQUIRED_PARAMS = [
+    public const REFUND_COMMON_REQUIRED_PARAMS = [
         'txid' => self::TRANSACTION_ID,
         'sequencenumber' => self::DEFAULT_SEQUENCE_NUMBER,
         // Amount is added outside of the mapper
@@ -70,7 +70,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    const DEBIT_COMMON_REQUIRED_PARAMS = [
+    public const DEBIT_COMMON_REQUIRED_PARAMS = [
         'txid' => self::TRANSACTION_ID,
         'sequencenumber' => self::DEFAULT_SEQUENCE_NUMBER,
         'amount' => self::AMOUNT_FULL,
@@ -92,7 +92,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
+     * @return \Orm\Zed\Payone\Persistence|\Orm\Zed\Sales\Persistence\SpySalesOrder
      */
     protected function getPaymentEntityMock()
     {
@@ -125,9 +125,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Orm\Zed\Sales\Persistence\SpySalesOrder
      */
-    protected function getSalesOrderMock()
+    protected function getSalesOrderMock(): SpySalesOrder
     {
         $salesOrder = $this->getMockBuilder(SpySalesOrder::class)
             ->disableOriginalConstructor()
@@ -160,9 +160,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Orm\Zed\Sales\Persistence\SpySalesOrderAddress
      */
-    protected function getAddressMock()
+    protected function getAddressMock(): SpySalesOrderAddress
     {
         $address = $this->getMockBuilder(SpySalesOrderAddress::class)
             ->disableOriginalConstructor()
@@ -175,9 +175,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Orm\Zed\Country\Persistence\SpyCountry
      */
-    protected function getCountryMock()
+    protected function getCountryMock(): SpyCountry
     {
         $country = $this->getMockBuilder(SpyCountry::class)
             ->disableOriginalConstructor()
@@ -214,9 +214,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider
      */
-    protected function getSequenceNumberProviderMock()
+    protected function getSequenceNumberProviderMock(): SequenceNumberProvider
     {
         $sequenceNumberProvider = $this->getMockBuilder(SequenceNumberProvider::class)
             ->disableOriginalConstructor()
@@ -227,9 +227,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject|\SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator
      */
-    protected function getUrlHmacGeneratorMock()
+    protected function getUrlHmacGeneratorMock(): UrlHmacGenerator
     {
         $urlHmacGenerator = $this->getMockBuilder(UrlHmacGenerator::class)
             ->disableOriginalConstructor()
@@ -239,9 +239,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Orm\Zed\Sales\Persistence\SpySalesOrderTotals
      */
-    protected function getTotals()
+    protected function getTotals(): SpySalesOrderTotals
     {
         $totals = $this->getMockBuilder(SpySalesOrderTotals::class)
             ->disableOriginalConstructor()

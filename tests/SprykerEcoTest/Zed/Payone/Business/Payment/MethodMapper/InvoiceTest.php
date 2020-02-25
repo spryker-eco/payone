@@ -21,15 +21,15 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
  */
 class InvoiceTest extends AbstractMethodMapperTest
 {
-    const STANDARD_PARAMETER_CLEARING_TYPE = 'rec';
+    public const STANDARD_PARAMETER_CLEARING_TYPE = 'rec';
 
-    const AUTHORIZATION_INVOICE_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_INVOICE_REQUIRED_PARAMS = [
     ];
 
-    const PREAUTHORIZATION_INVOICE_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_INVOICE_REQUIRED_PARAMS = [
     ];
 
-    const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,
@@ -37,7 +37,7 @@ class InvoiceTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,

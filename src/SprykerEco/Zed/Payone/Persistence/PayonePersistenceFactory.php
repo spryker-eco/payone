@@ -19,6 +19,8 @@ use SprykerEco\Zed\Payone\Persistence\Propel\Mapper\PayonePersistenceMapper;
 /**
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
  * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface getRepository()
  */
 class PayonePersistenceFactory extends AbstractPersistenceFactory
 {

@@ -23,6 +23,7 @@ class GetExpressCheckoutAdapterMock extends AbstractAdapterMock
             ' add_paydata[shipping_lastname]=sdfasd' .
             ' add_paydata[email]=sergey.sikachev-facilitator@spryker.com' .
             ' workorderid=WX1A1SE57Y8D1XNR';
+
         return explode(" ", $result);
     }
 

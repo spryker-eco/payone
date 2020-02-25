@@ -21,18 +21,18 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
  */
 class OnlineBankTransferTest extends AbstractMethodMapperTest
 {
-    const STANDARD_PARAMETER_CLEARING_TYPE = 'sb';
-    const ONLINE_BANK_TRANSFER_TYPE = 'PNT';
+    public const STANDARD_PARAMETER_CLEARING_TYPE = 'sb';
+    public const ONLINE_BANK_TRANSFER_TYPE = 'PNT';
 
-    const AUTHORIZATION_ONLINE_BANK_TRANSFER_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_ONLINE_BANK_TRANSFER_REQUIRED_PARAMS = [
         'onlinebanktransfertype' => self::ONLINE_BANK_TRANSFER_TYPE,
     ];
 
-    const PREAUTHORIZATION_ONLINE_BANK_TRANSFER_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_ONLINE_BANK_TRANSFER_REQUIRED_PARAMS = [
         'onlinebanktransfertype' => self::ONLINE_BANK_TRANSFER_TYPE,
     ];
 
-    const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,
@@ -40,7 +40,7 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,

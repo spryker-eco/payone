@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
-use ArrayObject;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
@@ -34,7 +33,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
-use Spryker\Shared\Shipment\ShipmentConstants;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
@@ -82,9 +80,8 @@ class PaymentManager implements PaymentManagerInterface
      * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE
      * @see \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
      *
-     * @deprecated Necessary in order to save compatibility with  spryker/shipping version less than "^8.0.0".
+     * @deprecated Necessary in order to save compatibility with spryker/shipping version less than "^8.0.0".
      * use \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE instead if shipping version is higher
-     *
      */
     protected const SHIPMENT_EXPENSE_TYPE = 'SHIPMENT_EXPENSE_TYPE';
 

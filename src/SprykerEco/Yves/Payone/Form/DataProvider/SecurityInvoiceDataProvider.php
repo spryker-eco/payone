@@ -27,6 +27,7 @@ class SecurityInvoiceDataProvider implements StepEngineFormDataProviderInterface
             $paymentTransfer->setPayoneSecurityInvoice(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

@@ -27,6 +27,7 @@ class PostfinanceCardOnlineTransferDataProvider implements StepEngineFormDataPro
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

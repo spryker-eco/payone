@@ -38,6 +38,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     public function getCreditCardCheckRequest()
     {
         $defaults = [];
+
         return $this->getFactory()->createCreditCardCheckCall($defaults)->mapCreditCardCheckData();
     }
 
@@ -191,7 +192,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -205,7 +206,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

@@ -15,7 +15,7 @@ class AddressCheckAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getSuccessResponse() :array
+    protected function getSuccessResponse(): array
     {
         $result = 'status=' . PayoneApiConstants::RESPONSE_TYPE_VALID .
             ' street_name=' . RiskCheckManagerTest::RESPONSE_VALUE_STREET_NAME .

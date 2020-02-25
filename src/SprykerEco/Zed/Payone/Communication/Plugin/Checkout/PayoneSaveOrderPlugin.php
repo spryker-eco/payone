@@ -15,6 +15,8 @@ use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutSaveOrderPluginInterf
 /**
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  */
 class PayoneSaveOrderPlugin extends AbstractPlugin implements CheckoutSaveOrderPluginInterface
 {

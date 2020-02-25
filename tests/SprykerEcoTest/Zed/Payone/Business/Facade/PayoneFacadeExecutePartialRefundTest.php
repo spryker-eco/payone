@@ -10,8 +10,6 @@ namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItem;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\Business\PayoneFacadeInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
@@ -114,10 +112,10 @@ class PayoneFacadeExecutePartialRefundTest extends Unit
                     PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
                 ],
                 PayoneConstants::PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS => [
-                    PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER
+                    PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
                 ],
                 PayoneConstants::PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS => [
-                    PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT
+                    PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
                 ],
                 PayoneConstants::PAYONE_UNKNOWN_SCORE_AVAILABLE_PAYMENT_METHODS => [
                     PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,

@@ -4,6 +4,7 @@
  * MIT License
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
+
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\AddressCheckResponseTransfer;

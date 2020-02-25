@@ -11,7 +11,6 @@ use Generated\Shared\DataBuilder\PayoneInitPaypalExpressCheckoutRequestBuilder;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Yves\Payone\Handler\PayoneHandler;
 use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\SetExpressCheckoutAdapterMock;
 
@@ -73,7 +72,7 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
         $quote = clone $this->quoteTransfer;
 
         $paymentTransfer = new PaymentTransfer();
-        $paymentTransfer->setPaymentProvider(PayoneHandler::PAYMENT_PROVIDER);
+        $paymentTransfer->setPaymentProvider('Payone');
         $paypalExpressCheckoutPayment = new PayonePaypalExpressCheckoutTransfer();
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quote->setPayment($paymentTransfer);

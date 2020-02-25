@@ -27,6 +27,7 @@ class InvoiceDataProvider implements StepEngineFormDataProviderInterface
             $paymentTransfer->setPayoneInvoice(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

@@ -27,6 +27,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 

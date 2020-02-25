@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MIT License
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -111,10 +112,10 @@ abstract class AbstractBusinessTest extends Test
                     PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
                 ],
                 PayoneConstants::PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS => [
-                    PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER
+                    PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
                 ],
                 PayoneConstants::PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS => [
-                    PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT
+                    PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
                 ],
                 PayoneConstants::PAYONE_UNKNOWN_SCORE_AVAILABLE_PAYMENT_METHODS => [
                     PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,

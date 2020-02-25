@@ -38,10 +38,14 @@ class BankAccountValidator extends ConstraintValidator
             return;
         }
 
-    /** @var \Symfony\Component\Form\Form $root */
+    /**
+         * @var \Symfony\Component\Form\Form $root
+                 */
         $root = $this->context->getRoot();
 
-    /** @var \Generated\Shared\Transfer\QuoteTransfer $data */
+    /**
+         * @var \Generated\Shared\Transfer\QuoteTransfer $data
+                 */
         $data = $root->getData();
 
         $validationMessages = $this->validateBankAccount($data, $constraint);

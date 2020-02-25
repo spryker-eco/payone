@@ -24,6 +24,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface getRepository()
  */
 class TestController extends AbstractController
 {

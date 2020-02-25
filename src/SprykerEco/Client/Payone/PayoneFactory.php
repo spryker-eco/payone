@@ -97,6 +97,7 @@ class PayoneFactory extends AbstractFactory
     public function createZedStub()
     {
         $zedStub = $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_ZED);
+
         return new PayoneStub($zedStub);
     }
 

@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
-use Generated\Shared\Transfer\PayonePaymentCashOnDeliveryTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;

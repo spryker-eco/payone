@@ -64,6 +64,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
             $quoteTransfer->getPayment()
                 ->getPayonePaypalExpressCheckout()->getWorkOrderId()
         );
+
         return $genericPayment;
     }
 

@@ -15,7 +15,7 @@ class CreditCardCheck extends AbstractCall
     /**
      * @var string
      */
-    private $storeCardData = PayoneApiConstants::STORE_CARD_DATA_YES;
+    protected $storeCardData = PayoneApiConstants::STORE_CARD_DATA_YES;
 
     /**
      * @return void
