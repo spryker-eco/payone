@@ -145,6 +145,7 @@ class PaymentManager implements PaymentManagerInterface
      * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
+     * @param array $availablePaymentMethods
      */
     public function __construct(
         AdapterInterface $executionAdapter,
@@ -155,7 +156,8 @@ class PaymentManager implements PaymentManagerInterface
         ModeDetectorInterface $modeDetector,
         HmacGeneratorInterface $urlHmacGenerator,
         PayoneRepositoryInterface $payoneRepository,
-        PayoneEntityManagerInterface $payoneEntityManager
+        PayoneEntityManagerInterface $payoneEntityManager,
+        array $availablePaymentMethods
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
@@ -166,6 +168,10 @@ class PaymentManager implements PaymentManagerInterface
         $this->urlHmacGenerator = $urlHmacGenerator;
         $this->payoneRepository = $payoneRepository;
         $this->payoneEntityManager = $payoneEntityManager;
+
+        foreach ($availablePaymentMethods as $paymentMethod) {
+            $this->registerPaymentMethodMapper($paymentMethod);
+        }
     }
 
     /**

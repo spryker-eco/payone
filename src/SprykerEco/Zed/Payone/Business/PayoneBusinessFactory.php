@@ -77,12 +77,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createModeDetector(),
             $this->createUrlHmacGenerator(),
             $this->getRepository(),
-            $this->getEntityManager()
+            $this->getEntityManager(),
+            $this->getAvailablePaymentMethods()
         );
-
-        foreach ($this->getAvailablePaymentMethods() as $paymentMethod) {
-            $paymentManager->registerPaymentMethodMapper($paymentMethod);
-        }
 
         return $paymentManager;
     }

@@ -7,16 +7,26 @@
 
 namespace SprykerEco\Zed\Payone\Business\TransactionStatus;
 
+use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
 
 interface TransactionStatusUpdateManagerInterface
 {
     /**
+     * @deprecated use processTransactionStatusUpdateTransfer() instead
+     *
      * @param \SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface $request
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse
      */
     public function processTransactionStatusUpdate(TransactionStatusUpdateInterface $request);
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
+     */
+    public function processTransactionStatusUpdateTransfer(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer);
 
     /**
      * @param int $idSalesOrder

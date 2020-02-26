@@ -231,13 +231,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      */
     public function processTransactionStatusUpdate(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer)
     {
-        $transactionManager = $this->getFactory()->createTransactionStatusManager();
-        $transactionTransfer = $this->getFactory()->createTransactionStatusUpdateRequest($transactionStatusUpdateTransfer);
-        $response = $transactionManager->processTransactionStatusUpdate($transactionTransfer);
-        $transactionStatusUpdateTransfer->setIsSuccess($response->isSuccess());
-        $transactionStatusUpdateTransfer->setResponse($response->getStatus() . ($response->getErrorMessage() ? ': ' . $response->getErrorMessage() : ''));
-
-        return $transactionStatusUpdateTransfer;
+        return $this->getFactory()->createTransactionStatusManager()->processTransactionStatusUpdateTransfer($transactionStatusUpdateTransfer);
     }
 
     /**

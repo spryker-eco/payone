@@ -118,6 +118,8 @@ interface PayoneClientInterface
     public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
+     * Retrieves paypal express checkout details
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

@@ -8,10 +8,12 @@
 namespace SprykerEco\Zed\Payone\Business\TransactionStatus;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem;
 use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
+use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
@@ -50,6 +52,8 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     }
 
     /**
+     * @deprecated use processTransactionStatusUpdateTransfer() instead
+     *
      * @param \SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface $request
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse
@@ -57,13 +61,49 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     public function processTransactionStatusUpdate(TransactionStatusUpdateInterface $request)
     {
         $validationResult = $this->validate($request);
+
         if ($validationResult instanceof TransactionStatusResponse) {
             return $validationResult;
         }
+
         $this->transformCurrency($request);
         $this->persistRequest($request);
 
         return $this->createSuccessResponse();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
+     */
+    public function processTransactionStatusUpdateTransfer(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer)
+    {
+        $transactionStatusRequest = new TransactionStatusRequest($transactionStatusUpdateTransfer->toArray());
+
+        $validationResult = $this->validate($transactionStatusRequest);
+
+        if ($validationResult instanceof TransactionStatusResponse) {
+            return $this->assignResponseToTransactionStatusUpdateTransfer($transactionStatusUpdateTransfer, $validationResult);
+        }
+
+        $this->transformCurrency($transactionStatusRequest);
+        $this->persistRequest($transactionStatusRequest);
+
+        return $this->assignResponseToTransactionStatusUpdateTransfer($transactionStatusUpdateTransfer, $this->createSuccessResponse());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
+     *
+     * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
+     */
+    protected function assignResponseToTransactionStatusUpdateTransfer(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer, TransactionStatusResponse $response)
+    {
+        $transactionStatusUpdateTransfer->setIsSuccess($response->isSuccess());
+        $transactionStatusUpdateTransfer->setResponse($response->getStatus() . ($response->getErrorMessage() ? ': ' . $response->getErrorMessage() : ''));
+
+        return $transactionStatusUpdateTransfer;
     }
 
     /**

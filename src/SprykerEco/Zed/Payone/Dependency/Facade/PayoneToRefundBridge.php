@@ -26,14 +26,14 @@ class PayoneToRefundBridge implements PayoneToRefundInterface
     }
 
     /**
-     * @param array $orderItems
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem[] $salesOrderItems
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $salesOrderEntity
      *
      * @return \Generated\Shared\Transfer\RefundTransfer
      */
-    public function calculateRefund(array $orderItems, SpySalesOrder $orderEntity)
+    public function calculateRefund(array $salesOrderItems, SpySalesOrder $salesOrderEntity)
     {
-        return $this->refundFacade->calculateRefund($orderItems, $orderEntity);
+        return $this->refundFacade->calculateRefund($salesOrderItems, $salesOrderEntity);
     }
 
     /**
