@@ -28,4 +28,6 @@ interface PayoneTransactionStatusConstants
     public const STATUS_NEW = 'new';
     public const STATUS_REFUND_APPROVED = 'refund approved';
     public const STATUS_REFUND_FAILED = 'refund failed';
+    public const STATUS_CAPTURE_APPROVED = 'capture approved';
+    public const STATUS_CAPTURE_FAILED = 'capture failed';
 }

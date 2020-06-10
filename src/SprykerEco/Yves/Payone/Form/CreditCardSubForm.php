@@ -89,12 +89,13 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->addCardType($builder, $options)
-            ->addNameOnCard($builder)
+        $this->addNameOnCard($builder)
             ->addHiddenInputs($builder);
     }
 
     /**
+     * @deprecated Card types from iFrame should be used instead.
+     *
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *

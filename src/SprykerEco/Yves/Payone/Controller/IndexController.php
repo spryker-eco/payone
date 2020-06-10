@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -22,6 +23,21 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  */
 class IndexController extends AbstractController
 {
+    /**
+     * @uses \SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin::CHECKOUT_SUCCESS
+     */
+    protected const ROUTE_CHECKOUT_SUCCESS = 'checkout-success';
+
+    /**
+     * @uses \SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin::CHECKOUT_ERROR
+     */
+    protected const ROUTE_CHECKOUT_ERROR = 'checkout-error';
+
+    protected const REQUEST_PARAM_ORDER_REFERENCE = 'orderReference';
+
+    protected const GLOSSARY_KEY_CHECKOUT_ERROR = 'checkout.step.error.text';
+    protected const GLOSSARY_KEY_PAYMENT_ERROR = 'payone.payment.error';
+
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -39,6 +55,44 @@ class IndexController extends AbstractController
         };
 
         return $this->streamedResponse($callback);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function paymentSuccessAction(Request $request): RedirectResponse
+    {
+        $orderReference = $request->query->get(static::REQUEST_PARAM_ORDER_REFERENCE);
+        $quoteTransfer = $this->getFactory()->getCartClient()->getQuote();
+
+        if (!$quoteTransfer->getOrderReference() || $quoteTransfer->getOrderReference() !== $orderReference) {
+            $this->addErrorMessage(static::GLOSSARY_KEY_CHECKOUT_ERROR);
+
+            return $this->redirectResponseInternal(static::ROUTE_CHECKOUT_ERROR);
+        }
+
+        return $this->redirectResponseInternal(static::ROUTE_CHECKOUT_SUCCESS);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function paymentFailureAction(Request $request): RedirectResponse
+    {
+        $orderReference = $request->query->get(static::REQUEST_PARAM_ORDER_REFERENCE);
+        $quoteTransfer = $this->getFactory()->getCartClient()->getQuote();
+
+        if (!$quoteTransfer->getOrderReference() || $quoteTransfer->getOrderReference() !== $orderReference) {
+            $this->addErrorMessage(static::GLOSSARY_KEY_CHECKOUT_ERROR);
+        }
+
+        $this->addErrorMessage(static::GLOSSARY_KEY_PAYMENT_ERROR);
+
+        return $this->redirectResponseInternal(static::ROUTE_CHECKOUT_ERROR);
     }
 
     /**

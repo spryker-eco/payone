@@ -11,6 +11,10 @@ const CHECK_CALLBACK_VALID_RESPONSE_STATUS = 'VALID';
 // https://github.com/fjbender/simple-php-integration#build-the-form
 const defaultHostedIFramesConfig = {
     fields: {
+        cardtype: {
+            selector: 'cardtype',
+            cardtypes: ['V', 'M', 'A']
+        },
         cardpan: {
             selector: "cardpan",
             type: "text"
@@ -19,7 +23,8 @@ const defaultHostedIFramesConfig = {
             selector: "cardcvc2",
             type: "password",
             size: "4",
-            maxlength: "4"
+            maxlength: '4',
+            length: { 'A': 4, 'V': 3, 'M': 3 }
         },
         cardexpiremonth: {
             selector: "cardexpiremonth",
@@ -63,10 +68,11 @@ export default class PayoneCreditCard extends Component {
     errorElement: HTMLElement
     protected isPaymentValid: boolean = false
 
+    protected submitButton: HTMLButtonElement[];
+
     protected readyCallback(): void {
         this.scriptLoader = <ScriptLoader>this.querySelector('script-loader');
         this.form = <HTMLFormElement>document.querySelector(this.formSelector);
-        this.cardTypeInput = <HTMLInputElement>this.querySelector(this.cardTypeSelector);
         this.cardHolderInput = <HTMLInputElement>this.querySelector(this.cardHolderSelector);
         this.clientApiConfigInput = <HTMLInputElement>this.querySelector(this.clientApiConfigSelector);
         this.languageInput = <HTMLInputElement>this.querySelector(this.languageSelector);
@@ -74,11 +80,18 @@ export default class PayoneCreditCard extends Component {
         this.errorElement = this.querySelector(this.errorContainer);
 
         this.mapEvents();
+
+        this.submitButton = <HTMLButtonElement[]>Array.from(
+            document.getElementsByClassName(`${this.jsName}__submit`)
+        );
+
+        this.submitButton.forEach(button => {
+            button.addEventListener('click', (event: Event) => this.onSubmit(event));
+        });
     }
 
     protected mapEvents(): void {
         this.scriptLoader.addEventListener('scriptload', (event: Event) => this.onScriptLoad(event));
-        this.cardTypeInput.addEventListener('change', (event: Event) => this.onCardTypeChange(event));
         this.form.addEventListener('submit', (event: Event) => this.onSubmit(event));
     }
 
@@ -87,17 +100,19 @@ export default class PayoneCreditCard extends Component {
         this.loadPayoneIFrame();
     }
 
-    protected onCardTypeChange(event: Event): void {
-        const inputType = <HTMLInputElement>event.currentTarget;
-        this.setCardType(inputType.value);
-    }
-
     protected onSubmit(event: Event): void {
-        if (!this.isCurrentPaymentMethod || this.isPaymentValid) {
+        event.preventDefault();
+
+        if (typeof this.isCurrentPaymentMethod === 'undefined') {
+            this.enableSubmit();
+
             return;
         }
 
-        event.preventDefault();
+        if (!this.isCurrentPaymentMethod || this.isPaymentValid) {
+            this.form.submit();
+        }
+
         this.checkCreditCard();
     }
 
@@ -107,30 +122,38 @@ export default class PayoneCreditCard extends Component {
 
     protected checkCallback(response: any): void {
         if (response.status !== CHECK_CALLBACK_VALID_RESPONSE_STATUS) {
+            this.enableSubmit();
+
             return;
         }
 
+        this.pseudoCardPanInput.value = await Promise.resolve(response.pseudocardpan);
         this.setPaymentToValid();
-        this.pseudoCardPanInput.value = response.pseudocardpan;
         this.form.submit();
     }
 
     protected checkCreditCard(): void {
         if (this.hostedIFramesApi.isComplete() && this.cardHolderInput.value) {
             this.hostedIFramesApi.creditCardCheck(CHECK_CALLBACK_ID);
+
             return;
         }
 
         this.errorElement.innerHTML = this.hostedIFramesConfig.language.transactionRejected;
+        this.enableSubmit();
+    }
+
+    protected enableSubmit(): void {
+        this.submitButton.forEach(button => {
+            button.removeAttribute('disabled');
+        });
     }
 
     protected loadPayoneIFrame(): void {
         this.hostedIFramesApi = new Payone.ClientApi.HostedIFrames(this.hostedIFramesConfig, this.clientApiConfig);
-        this.setCardType(this.cardTypeInput.value);
-    }
 
-    protected setCardType(type: string): void {
-        this.hostedIFramesApi.setCardType(type);
+        Payone.ClientApi.Language.de.placeholders.cardpan = '_ _ _ _  _ _ _ _  _ _ _ _  _ _ _ _';
+        Payone.ClientApi.Language.de.placeholders.cvc = '• • •';
     }
 
     protected setPaymentToValid(): void {
@@ -139,7 +162,10 @@ export default class PayoneCreditCard extends Component {
 
     get isCurrentPaymentMethod(): boolean {
         const currentPaymentMethodInput = <HTMLInputElement>document.querySelector(this.currentPaymentMethodSelector);
-        return currentPaymentMethodInput.value === CURRENT_PAYMENT_METHOD;
+
+        return currentPaymentMethodInput?.value
+            ? currentPaymentMethodInput.value === CURRENT_PAYMENT_METHOD
+            : undefined;
     }
 
     get language(): string {
