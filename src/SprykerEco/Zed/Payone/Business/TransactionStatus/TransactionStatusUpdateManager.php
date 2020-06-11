@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\TransactionStatus;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem;
 use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
@@ -61,37 +62,47 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
             return $validationResult;
         }
         $this->transformCurrency($request);
-        $this->persistRequest($request);
+
+        $paymentPayoneEntity = $this->findPaymentByTransactionId($request->getTxid());
+
+        if (!$paymentPayoneEntity) {
+            return $this->createErrorResponse('Payone transaction status update: Payment was not found!');
+        }
+
+        $this->persistRequest($request, $paymentPayoneEntity);
 
         return $this->createSuccessResponse();
     }
 
     /**
      * @param \SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface $request
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null $paymentPayoneEntity
      *
      * @return void
      */
-    protected function persistRequest(TransactionStatusUpdateInterface $request)
+    protected function persistRequest(TransactionStatusUpdateInterface $request, ?SpyPaymentPayone $paymentPayoneEntity = null)
     {
-        $entity = new SpyPaymentPayoneTransactionStatusLog();
+        if (!$paymentPayoneEntity) {
+            return;
+        }
 
-        $entity->setSpyPaymentPayone($this->findPaymentByTransactionId($request->getTxid()));
-        $entity->setTransactionId($request->getTxid());
-        $entity->setReferenceId($request->getReference());
-        $entity->setMode($request->getMode());
-        $entity->setStatus($request->getTxaction());
-        $entity->setTransactionTime($request->getTxtime());
-        $entity->setSequenceNumber($request->getSequencenumber());
-        $entity->setClearingType($request->getClearingtype());
-        $entity->setPortalId($request->getPortalid());
-        $entity->setPrice($request->getPrice());
-        $entity->setBalance($request->getBalance());
-        $entity->setReceivable($request->getReceivable());
-        $entity->setReminderLevel($request->getReminderlevel());
+        $paymentPayoneTransactionStatusLogEntity = new SpyPaymentPayoneTransactionStatusLog();
+        $paymentPayoneTransactionStatusLogEntity->setFkPaymentPayone($paymentPayoneEntity->getIdPaymentPayone());
+        $paymentPayoneTransactionStatusLogEntity->setTransactionId($request->getTxid());
+        $paymentPayoneTransactionStatusLogEntity->setReferenceId($request->getReference());
+        $paymentPayoneTransactionStatusLogEntity->setMode($request->getMode());
+        $paymentPayoneTransactionStatusLogEntity->setStatus($request->getTxaction());
+        $paymentPayoneTransactionStatusLogEntity->setTransactionTime($request->getTxtime());
+        $paymentPayoneTransactionStatusLogEntity->setSequenceNumber($request->getSequencenumber());
+        $paymentPayoneTransactionStatusLogEntity->setClearingType($request->getClearingtype());
+        $paymentPayoneTransactionStatusLogEntity->setPortalId($request->getPortalid());
+        $paymentPayoneTransactionStatusLogEntity->setPrice($request->getPrice());
+        $paymentPayoneTransactionStatusLogEntity->setBalance($request->getBalance());
+        $paymentPayoneTransactionStatusLogEntity->setReceivable($request->getReceivable());
+        $paymentPayoneTransactionStatusLogEntity->setReminderLevel($request->getReminderlevel());
+        $paymentPayoneTransactionStatusLogEntity->setRawRequest($request);
 
-        $entity->setRawRequest($request);
-
-        $entity->save();
+        $paymentPayoneTransactionStatusLogEntity->save();
     }
 
     /**
@@ -174,9 +185,9 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     /**
      * @param string $transactionId
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByTransactionId($transactionId)
+    protected function findPaymentByTransactionId($transactionId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
     }

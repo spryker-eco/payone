@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
+use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
@@ -166,4 +167,13 @@ interface PaymentManagerInterface
      * @return void
      */
     public function updatePaymentDetail(PaymentDetailTransfer $paymentDataTransfer, $idOrder);
+
+    /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     */
+    public function executePartialCapture(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+    ): CaptureResponseTransfer;
 }

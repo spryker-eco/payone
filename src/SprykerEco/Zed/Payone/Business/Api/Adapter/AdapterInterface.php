@@ -20,10 +20,11 @@ interface AdapterInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     * @param array $additionalParams
      *
      * @return array
      */
-    public function sendRequest(AbstractRequestContainer $container);
+    public function sendRequest(AbstractRequestContainer $container, array $additionalParams = []);
 
     /**
      * @return string

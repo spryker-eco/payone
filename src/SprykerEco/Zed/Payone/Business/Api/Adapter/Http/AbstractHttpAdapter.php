@@ -76,19 +76,21 @@ abstract class AbstractHttpAdapter implements AdapterInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     * @param array $additionalParams
      *
      * @return array
      */
-    public function sendRequest(AbstractRequestContainer $container)
+    public function sendRequest(AbstractRequestContainer $container, array $additionalParams = [])
     {
         try {
-            return $this->sendRawRequest($container->toArray());
-        } catch (TimeoutException $e) {
-            $fakeArray = [
+            $requestParams = array_merge($container->toArray(), $additionalParams);
+            ksort($requestParams);
+
+            return $this->sendRawRequest($requestParams);
+        } catch (TimeoutException $exception) {
+            return [
                 'status' => 'TIMEOUT',
             ];
-
-            return $fakeArray;
         }
     }
 
