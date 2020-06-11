@@ -30,13 +30,12 @@ class CancelCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
      */
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
-        $captureTransfer = new PayoneCaptureTransfer();
-
-        $paymentTransfer = new PayonePaymentTransfer();
-        $paymentTransfer->setFkSalesOrder($orderEntity->getSpyPaymentPayones()->getFirst()->getFkSalesOrder());
-        $captureTransfer->setPayment($paymentTransfer);
-        $captureTransfer->setAmount(0);
-        $captureTransfer->setOrder($this->getOrderTransfer($orderEntity));
+        $captureTransfer = (new PayoneCaptureTransfer())
+            ->setAmount(0)
+            ->setOrder($this->getOrderTransfer($orderEntity))
+            ->setPayment(
+                (new PayonePaymentTransfer())->setFkSalesOrder($orderEntity->getIdSalesOrder())
+            );
 
         $this->getFacade()->capturePayment($captureTransfer);
 

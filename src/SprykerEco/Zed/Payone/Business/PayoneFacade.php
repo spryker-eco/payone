@@ -696,4 +696,21 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
             ->createPayoneOrderItemStatusFinder()
             ->findPayoneOrderItemStatus($idSalesOrder, $idSalesOrderItem);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     */
+    public function executePartialCapture(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+    ): CaptureResponseTransfer {
+        return $this->getFactory()
+            ->createPaymentManager()
+            ->executePartialCapture($payonePartialOperationRequestTransfer);
+    }
 }

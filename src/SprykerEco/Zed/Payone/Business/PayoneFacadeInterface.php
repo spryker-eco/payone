@@ -574,4 +574,18 @@ interface PayoneFacadeInterface
      * @return string|null
      */
     public function findPayoneOrderItemStatus(int $idSalesOrder, int $idSalesOrderItem): ?string;
+
+    /**
+     * Specification:
+     * - Performs partial capture call to Payone API.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     */
+    public function executePartialCapture(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+    ): CaptureResponseTransfer;
 }
