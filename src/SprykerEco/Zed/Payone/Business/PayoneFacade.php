@@ -564,6 +564,25 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @api
      *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function executeCheckoutPostSaveHook(
+        QuoteTransfer $quoteTransfer,
+        CheckoutResponseTransfer $checkoutResponse
+    ): CheckoutResponseTransfer {
+        return $this->getFactory()
+            ->createPaymentManager()
+            ->executeCheckoutPostSaveHook($quoteTransfer, $checkoutResponse);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\OrderCollectionTransfer $orderCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
