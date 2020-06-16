@@ -4,12 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://static.spryker.com http://static.spryker.com/oms-01.xsd">
 
-    <process name="PayoneOnlineTransfer02" main="true">
+    <process name="PayoneCreditCardPartialOperations" main="true">
         <states>
             <state name="new"/>
             <state name="reserved" reserved="true"/>
-            <state name="authorization appointed"/>
-            <state name="authorization appointing next try"/>
+            <state name="pre-authorization appointed"/>
+            <state name="pre-authorization appointing next try"/>
             <state name="invalid"/>
             <state name="cancellation process">
                 <flag>cancelled</flag>
@@ -35,9 +35,11 @@
             <state name="cancelled">
                 <flag>cancelled</flag>
             </state>
-            <state name="underpaid"/>
-            <state name="paid"/>
             <state name="shipped"/>
+            <state name="capture failed clarification"/>
+            <state name="capture pending"/>
+            <state name="capture pending next try"/>
+            <state name="captured"/>
             <state name="closed"/>
             <state name="returned"/>
             <state name="refund items group"/>
@@ -58,24 +60,24 @@
 
             <transition condition="Payone/PaymentIsAppointed" happy="true">
                 <source>reserved</source>
-                <target>authorization appointed</target>
+                <target>pre-authorization appointed</target>
                 <event>pass 6 minute</event>
             </transition>
 
             <transition>
                 <source>reserved</source>
-                <target>authorization appointing next try</target>
+                <target>pre-authorization appointing next try</target>
                 <event>pass 6 minute</event>
             </transition>
 
             <transition condition="Payone/Is1HourPassed">
-                <source>authorization appointing next try</source>
+                <source>pre-authorization appointing next try</source>
                 <target>invalid</target>
                 <event>pass</event>
             </transition>
 
             <transition happy="true">
-                <source>authorization appointing next try</source>
+                <source>pre-authorization appointing next try</source>
                 <target>reserved</target>
                 <event>pass</event>
             </transition>
@@ -87,7 +89,7 @@
             </transition>
 
             <transition>
-                <source>authorization appointed</source>
+                <source>pre-authorization appointed</source>
                 <target>cancellation process</target>
                 <event>cancel</event>
             </transition>
@@ -152,38 +154,62 @@
                 <event>pass</event>
             </transition>
 
-            <transition condition="Payone/PaymentIsPaid" happy="true">
-                <source>authorization appointed</source>
-                <target>paid</target>
-                <event>pass 15 minute</event>
-            </transition>
-
-            <transition>
-                <source>authorization appointed</source>
-                <target>underpaid</target>
-                <event>pass 15 minute</event>
-            </transition>
-
-            <transition>
-                <source>underpaid</source>
-                <target>authorization appointed</target>
-                <event>pass</event>
-            </transition>
-
             <transition happy="true">
-                <source>paid</source>
+                <source>pre-authorization appointed</source>
                 <target>shipped</target>
                 <event>ship</event>
             </transition>
 
             <transition condition="Payone/CaptureIsApproved" happy="true">
                 <source>shipped</source>
+                <target>capture pending</target>
+                <event>capture</event>
+            </transition>
+
+            <transition condition="Payone/PaymentIsCapture" happy="true">
+                <source>capture pending</source>
+                <target>captured</target>
+                <event>pass 15 minute</event>
+            </transition>
+
+            <transition>
+                <source>capture pending</source>
+                <target>capture pending next try</target>
+                <event>pass 15 minute</event>
+            </transition>
+
+            <transition>
+                <source>capture pending next try</source>
+                <target>capture pending</target>
+                <event>pass</event>
+            </transition>
+
+            <transition>
+                <source>shipped</source>
+                <target>capture failed clarification</target>
+                <event>capture</event>
+            </transition>
+
+            <transition>
+                <source>capture failed clarification</source>
+                <target>shipped</target>
+                <event>retry capture</event>
+            </transition>
+
+            <transition>
+                <source>capture failed clarification</source>
+                <target>cancellation process</target>
+                <event>cancel</event>
+            </transition>
+
+            <transition happy="true">
+                <source>captured</source>
                 <target>closed</target>
                 <event>wait for item return</event>
             </transition>
 
             <transition>
-                <source>shipped</source>
+                <source>captured</source>
                 <target>returned</target>
                 <event>return</event>
             </transition>
@@ -268,13 +294,13 @@
             <event name="cancel reservation manually" manual="true"/>
             <event name="cancel" manual="true"/>
             <event name="recalculate order cancellation" onEnter="true" command="Payone/CancelAndRecalculate"/>
-            <event name="capture" onEnter="true" command="Payone/Capture"/>
+            <event name="capture" onEnter="true" command="Payone/PartialCapture"/>
             <event name="return" manual="true"/>
             <event name="refund" manual="true"/>
             <event name="save refund" onEnter="true" command="Payone/SavePartialRefund"/>
             <event name="retry refund" manual="true"/>
             <event name="check if refund allowed" onEnter="true"/>
-            <event name="request refund" onEnter="true" command="Payone/Refund"/>
+            <event name="request refund" onEnter="true" command="Payone/PartialRefund"/>
             <event name="retry capture" manual="true"/>
             <event name="refund manually" manual="true"/>
             <event name="pass" onEnter="true"/>
