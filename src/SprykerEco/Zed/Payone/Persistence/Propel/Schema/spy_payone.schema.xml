@@ -110,6 +110,7 @@
 
         <column name="raw_request" type="LONGVARCHAR"/>
         <column name="raw_response" type="LONGVARCHAR"/>
+        <column name="created_at" type="TIMESTAMP"/>
 
         <foreign-key name="spy_payment_payone_api_log-fk_payment_payone" foreignTable="spy_payment_payone">
             <reference foreign="id_payment_payone" local="fk_payment_payone"/>
