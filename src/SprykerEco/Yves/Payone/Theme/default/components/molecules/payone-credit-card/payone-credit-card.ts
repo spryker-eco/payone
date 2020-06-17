@@ -13,18 +13,18 @@ const defaultHostedIFramesConfig = {
     fields: {
         cardtype: {
             selector: 'cardtype',
-            cardtypes: ['V', 'M', 'A']
+            cardtypes: ['V', 'M', 'A'],
         },
         cardpan: {
             selector: "cardpan",
-            type: "text"
+            type: "text",
         },
         cardcvc2: {
             selector: "cardcvc2",
             type: "password",
             size: "4",
             maxlength: '4',
-            length: { 'A': 4, 'V': 3, 'M': 3 }
+            length: { 'A': 4, 'V': 3, 'M': 3 },
         },
         cardexpiremonth: {
             selector: "cardexpiremonth",
@@ -32,16 +32,16 @@ const defaultHostedIFramesConfig = {
             size: "2",
             maxlength: "2",
             iframe: {
-                width: "100%"
-            }
+                width: "100%",
+            },
         },
         cardexpireyear: {
             selector: "cardexpireyear",
             type: "select",
             iframe: {
-                width: "100%"
-            }
-        }
+                width: "100%",
+            },
+        },
     },
 
     defaultStyle: {
@@ -49,11 +49,11 @@ const defaultHostedIFramesConfig = {
         select: "font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px; background-color: #fefefe;",
         iframe: {
             height: "35px",
-            width: "100%"
-        }
+            width: "100%",
+        },
     },
 
-    error: "errorOutput"
+    error: "errorOutput",
 };
 
 export default class PayoneCreditCard extends Component {
@@ -70,7 +70,9 @@ export default class PayoneCreditCard extends Component {
 
     protected submitButton: HTMLButtonElement[];
 
-    protected readyCallback(): void {
+    protected readyCallback(): void {}
+
+    protected init(): void {
         this.scriptLoader = <ScriptLoader>this.querySelector('script-loader');
         this.form = <HTMLFormElement>document.querySelector(this.formSelector);
         this.cardHolderInput = <HTMLInputElement>this.querySelector(this.cardHolderSelector);
@@ -78,16 +80,11 @@ export default class PayoneCreditCard extends Component {
         this.languageInput = <HTMLInputElement>this.querySelector(this.languageSelector);
         this.pseudoCardPanInput = <HTMLInputElement>this.querySelector(this.pseudoCardPanSelector);
         this.errorElement = this.querySelector(this.errorContainer);
-
-        this.mapEvents();
-
         this.submitButton = <HTMLButtonElement[]>Array.from(
             document.getElementsByClassName(`${this.jsName}__submit`)
         );
 
-        this.submitButton.forEach(button => {
-            button.addEventListener('click', (event: Event) => this.onSubmit(event));
-        });
+        this.mapEvents();
     }
 
     protected mapEvents(): void {
@@ -120,7 +117,7 @@ export default class PayoneCreditCard extends Component {
         window[CHECK_CALLBACK_ID] = this.checkCallback.bind(this);
     }
 
-    protected checkCallback(response: any): void {
+    protected async checkCallback(response: any): Promise<void> {
         if (response.status !== CHECK_CALLBACK_VALID_RESPONSE_STATUS) {
             this.enableSubmit();
 
