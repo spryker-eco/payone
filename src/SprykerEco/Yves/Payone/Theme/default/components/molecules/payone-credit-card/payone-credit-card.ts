@@ -1,3 +1,5 @@
+/* tslint:disable: no-any */
+/* tslint:disable: max-file-line-count */
 declare var Payone: any;
 
 import Component from 'ShopUi/models/component';
@@ -7,7 +9,7 @@ const CURRENT_PAYMENT_METHOD = 'payoneCreditCard';
 const CHECK_CALLBACK_ID = 'checkCallback';
 const CHECK_CALLBACK_VALID_RESPONSE_STATUS = 'VALID';
 
-// Configuration for Hosted Iframe.
+// configuration for Hosted Iframe.
 // https://github.com/fjbender/simple-php-integration#build-the-form
 const defaultHostedIFramesConfig = {
     fields: {
@@ -16,57 +18,57 @@ const defaultHostedIFramesConfig = {
             cardtypes: ['V', 'M', 'A'],
         },
         cardpan: {
-            selector: "cardpan",
-            type: "text",
+            selector: 'cardpan',
+            type: 'text',
         },
         cardcvc2: {
-            selector: "cardcvc2",
-            type: "password",
-            size: "4",
+            selector: 'cardcvc2',
+            type: 'password',
+            size: '4',
             maxlength: '4',
-            length: { 'A': 4, 'V': 3, 'M': 3 },
+            length: { A: 4, V: 3, M: 3 },
         },
         cardexpiremonth: {
-            selector: "cardexpiremonth",
-            type: "select",
-            size: "2",
-            maxlength: "2",
+            selector: 'cardexpiremonth',
+            type: 'select',
+            size: '2',
+            maxlength: '2',
             iframe: {
-                width: "100%",
+                width: '100%',
             },
         },
         cardexpireyear: {
-            selector: "cardexpireyear",
-            type: "select",
+            selector: 'cardexpireyear',
+            type: 'select',
             iframe: {
-                width: "100%",
+                width: '100%',
             },
         },
     },
 
     defaultStyle: {
-        input: "font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px;",
-        select: "font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px; background-color: #fefefe;",
+        input: `font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px;`,
+        select: `font-size: 0.875em; height: 2rem; width: 100%; border: 0; outline: 1px solid #dadada; outline-offset: -1px; background-color: #fefefe;`,
         iframe: {
-            height: "35px",
-            width: "100%",
+            height: '35px',
+            width: '100%',
         },
     },
 
-    error: "errorOutput",
+    error: 'errorOutput',
 };
 
 export default class PayoneCreditCard extends Component {
-    scriptLoader: ScriptLoader
-    form: HTMLFormElement
-    hostedIFramesApi: any
-    cardTypeInput: HTMLInputElement
-    cardHolderInput: HTMLInputElement
-    clientApiConfigInput: HTMLInputElement
-    languageInput: HTMLInputElement
-    pseudoCardPanInput: HTMLInputElement
-    errorElement: HTMLElement
-    protected isPaymentValid: boolean = false
+    scriptLoader: ScriptLoader;
+    form: HTMLFormElement;
+    hostedIFramesApi: any;
+    cardTypeInput: HTMLInputElement;
+    cardHolderInput: HTMLInputElement;
+    clientApiConfigInput: HTMLInputElement;
+    languageInput: HTMLInputElement;
+    pseudoCardPanInput: HTMLInputElement;
+    errorElement: HTMLElement;
+    protected isPaymentValid: boolean = false;
 
     protected submitButton: HTMLButtonElement[];
 
@@ -100,7 +102,7 @@ export default class PayoneCreditCard extends Component {
     protected onSubmit(event: Event): void {
         event.preventDefault();
 
-        if (typeof this.isCurrentPaymentMethod === 'undefined') {
+        if (typeof this.isCurrentPaymentMethod === null) {
             this.enableSubmit();
 
             return;
@@ -157,16 +159,18 @@ export default class PayoneCreditCard extends Component {
         this.isPaymentValid = true;
     }
 
-    get isCurrentPaymentMethod(): boolean {
+    get isCurrentPaymentMethod(): boolean | null {
         const currentPaymentMethodInput = <HTMLInputElement>document.querySelector(this.currentPaymentMethodSelector);
 
         return currentPaymentMethodInput?.value
             ? currentPaymentMethodInput.value === CURRENT_PAYMENT_METHOD
-            : undefined;
+            : null;
     }
 
     get language(): string {
-        const languageCode = !!this.languageInput.value ? this.languageInput.value.substr(0, 2) : 'de';
+        const languageCodeLenght = 2;
+        const languageCode = !!this.languageInput.value ? this.languageInput.value.substr(0, languageCodeLenght) : 'de';
+
         return Payone.ClientApi.Language[languageCode] || Payone.ClientApi.Language.de;
     }
 
@@ -174,7 +178,7 @@ export default class PayoneCreditCard extends Component {
         return {
             ...defaultHostedIFramesConfig,
             language: this.language
-        }
+        };
     }
 
     get clientApiConfig(): any {

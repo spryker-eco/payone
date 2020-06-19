@@ -3,15 +3,17 @@ import Component from 'ShopUi/models/component';
 const BANK_ACCOUNT_MODE_BBAN = 'BBAN';
 
 export default class PayoneDirectDebit extends Component {
-    form: HTMLFormElement
-    bankAccountModeInputs: HTMLInputElement[]
-    bankAccountInput: HTMLInputElement
-    bankCodeInput: HTMLInputElement
-    ibanInput: HTMLInputElement
-    bicInput: HTMLInputElement
+    form: HTMLFormElement;
+    bankAccountModeInputs: HTMLInputElement[];
+    bankAccountInput: HTMLInputElement;
+    bankCodeInput: HTMLInputElement;
+    ibanInput: HTMLInputElement;
+    bicInput: HTMLInputElement;
 
     protected readyCallback(): void {
-        this.bankAccountModeInputs = <HTMLInputElement[]>Array.from(this.querySelectorAll(this.bankAccountModeSelector));
+        this.bankAccountModeInputs = <HTMLInputElement[]>Array.from(
+            this.querySelectorAll(this.bankAccountModeSelector)
+        );
         this.bankAccountInput = <HTMLInputElement>this.querySelector(this.bankAccountSelector);
         this.bankCodeInput = <HTMLInputElement>this.querySelector(this.bankCodeSelector);
         this.ibanInput = <HTMLInputElement>this.querySelector(this.ibanSelector);
@@ -34,6 +36,7 @@ export default class PayoneDirectDebit extends Component {
     protected toggleInputStatus(input: HTMLInputElement, enable: boolean): void {
         if (enable) {
             input.removeAttribute('disabled');
+
             return;
         }
 
@@ -57,6 +60,7 @@ export default class PayoneDirectDebit extends Component {
 
     get bankAccountMode(): string {
         const selectedInput = this.bankAccountModeInputs.find((input: HTMLInputElement) => input.checked);
+
         return !!selectedInput ? selectedInput.value : '';
     }
 
