@@ -12,6 +12,7 @@ use Spryker\Yves\Kernel\Container;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerBridge;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
@@ -67,7 +68,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     protected function addQuoteClient(Container $container): Container
     {
         $container->set(static::CLIENT_QUOTE, function (Container $container) {
-            return $container->getLocator()->quote()->client();
+            return new PayoneToQuoteClientBridge($container->getLocator()->quote()->client());
         });
 
         return $container;
