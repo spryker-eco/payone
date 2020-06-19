@@ -43,7 +43,7 @@ class CancelAndRecalculateCommandByOrderPlugin extends AbstractPlugin implements
         }
 
         foreach ($orderTransfer->getItems() as $itemTransfer) {
-            if (!in_array($itemTransfer->getIdSalesOrderItem(), $orderItemIds)) {
+            if (in_array($itemTransfer->getIdSalesOrderItem(), $orderItemIds)) {
                 $itemTransfer->setCanceledAmount($itemTransfer->getSumPriceToPayAggregation());
             }
         }

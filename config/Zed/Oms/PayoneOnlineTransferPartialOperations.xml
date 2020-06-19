@@ -264,7 +264,7 @@
         <events>
             <event name="ship" manual="true"/>
             <event name="wait for item return" timeout="14days"/>
-            <event name="cancel reservation" manual="true" command="Payone/Cancel"/>
+            <event name="cancel reservation" onEnter="true" command="Payone/Cancel"/>
             <event name="cancel reservation manually" manual="true"/>
             <event name="cancel" manual="true"/>
             <event name="recalculate order cancellation" onEnter="true" command="Payone/CancelAndRecalculate"/>
