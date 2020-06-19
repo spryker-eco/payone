@@ -15,7 +15,7 @@ const defaultHostedIFramesConfig = {
     fields: {
         cardtype: {
             selector: 'cardtype',
-            cardtypes: ['V', 'M', 'A'],
+            cardtypes: ['V', 'M'],
         },
         cardpan: {
             selector: 'cardpan',
@@ -24,9 +24,9 @@ const defaultHostedIFramesConfig = {
         cardcvc2: {
             selector: 'cardcvc2',
             type: 'password',
-            size: '4',
-            maxlength: '4',
-            length: { A: 4, V: 3, M: 3 },
+            size: '3',
+            maxlength: '3',
+            length: { V: 3, M: 3 },
         },
         cardexpiremonth: {
             selector: 'cardexpiremonth',
