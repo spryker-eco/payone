@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Payone;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientInterface;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\CashOnDeliverySubForm;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
@@ -366,6 +367,14 @@ class PayoneFactory extends AbstractFactory
     public function getCalculationClient()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_CALCULATION);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientInterface
+     */
+    public function getQuoteClient(): PayoneToQuoteClientInterface
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_QUOTE);
     }
 
     /**

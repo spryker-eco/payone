@@ -25,6 +25,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     public const CLIENT_SHIPMENT = 'shipment client';
 
     public const CLIENT_CALCULATION = 'calculation client';
+    public const CLIENT_QUOTE = 'CLIENT_QUOTE';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -52,6 +53,22 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         $container[self::CLIENT_CALCULATION] = function (Container $container) {
             return new PayoneToCalculationBridge($container->getLocator()->calculation()->client());
         };
+
+        $container = $this->addQuoteClient($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addQuoteClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_QUOTE, function (Container $container) {
+            return $container->getLocator()->quote()->client();
+        });
 
         return $container;
     }

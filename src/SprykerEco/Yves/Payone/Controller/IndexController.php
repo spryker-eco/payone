@@ -206,6 +206,10 @@ class IndexController extends AbstractController
             $response = $this->getClient()->cancelRedirect($cancelRedirectTransfer);
         }
 
+        $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
+        $quoteTransfer->setOrderReference(null);
+        $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
+
         return $this->redirectResponseInternal(PayoneControllerProvider::CHECKOUT_PAYMENT);
     }
 
