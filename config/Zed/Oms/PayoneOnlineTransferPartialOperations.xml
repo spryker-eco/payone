@@ -176,7 +176,7 @@
                 <event>ship</event>
             </transition>
 
-            <transition condition="Payone/CaptureIsApproved" happy="true">
+            <transition happy="true">
                 <source>shipped</source>
                 <target>closed</target>
                 <event>wait for item return</event>
