@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Dependency\Facade;
 
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface PayoneToCalculationInterface
@@ -17,4 +18,11 @@ interface PayoneToCalculationInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function recalculateQuote(QuoteTransfer $quoteTransfer);
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\OrderTransfer
+     */
+    public function recalculateOrder(OrderTransfer $orderTransfer);
 }

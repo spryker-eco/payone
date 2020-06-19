@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\Payone\Dependency\Facade;
 
+use Generated\Shared\Transfer\OrderTransfer;
+
 class PayoneToSalesBridge implements PayoneToSalesInterface
 {
     /**
@@ -30,5 +32,16 @@ class PayoneToSalesBridge implements PayoneToSalesInterface
     public function getOrderByIdSalesOrder($idSalesOrder)
     {
         return $this->salesFacade->getOrderByIdSalesOrder($idSalesOrder);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param int $idSalesOrder
+     *
+     * @return bool
+     */
+    public function updateOrder(OrderTransfer $orderTransfer, $idSalesOrder)
+    {
+        return $this->salesFacade->updateOrder($orderTransfer, $idSalesOrder);
     }
 }

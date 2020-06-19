@@ -14,8 +14,8 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
- * @method \Pyz\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
- * @method \Pyz\Zed\Payone\PayoneConfig getConfig()
+ * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
  */
 class CancelAndRecalculateCommandByOrderPlugin extends AbstractPlugin implements CommandByOrderInterface
 {
