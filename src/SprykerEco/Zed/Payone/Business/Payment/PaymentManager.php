@@ -69,6 +69,7 @@ use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
+use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
@@ -1049,6 +1050,10 @@ class PaymentManager implements PaymentManagerInterface
         QuoteTransfer $quoteTransfer,
         CheckoutResponseTransfer $checkoutResponse
     ): CheckoutResponseTransfer {
+        if ($quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
+            return $checkoutResponse;
+        }
+
         $paymentEntity = $this->getPaymentEntity($checkoutResponse->getSaveOrder()->getIdSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
