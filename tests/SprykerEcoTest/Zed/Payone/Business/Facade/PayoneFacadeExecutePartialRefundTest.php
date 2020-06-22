@@ -8,7 +8,6 @@
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
 use Codeception\Test\Unit;
-use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
@@ -52,9 +51,7 @@ class PayoneFacadeExecutePartialRefundTest extends Unit
         $paymentPayoneEntity = $this->tester->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
         $this->tester->createPaymentPayoneOrderItem($paymentPayoneEntity->getIdPaymentPayone(), $itemTransfer->getIdSalesOrderItem());
         $refundTransfer = $this->tester->createRefund($saveOrderTransfer->getIdSalesOrder());
-        $orderTransfer = (new OrderTransfer())
-            ->setIdSalesOrder($saveOrderTransfer->getIdSalesOrder())
-            ->setItems($saveOrderTransfer->getOrderItems());
+        $orderTransfer = $this->tester->getOrderTransfer($saveOrderTransfer->getIdSalesOrder());
 
         $payonePartialOperationTransfer = (new PayonePartialOperationRequestTransfer())
             ->setOrder($orderTransfer)
