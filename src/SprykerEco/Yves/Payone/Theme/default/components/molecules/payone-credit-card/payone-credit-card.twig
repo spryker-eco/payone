@@ -28,39 +28,41 @@
         }
     } only %}
 
-    <div class="grid">
-        <div class="form__field col col--sm-12">
-            {{ form_row(data.form.payoneCreditCard.cardtype, {
-                label: 'Payone_credit_card.cardtype'
-            }) }}
+    <div class="payment-form-inner grid">
+        <div class="form__field col col--sm-12 col--lg-6">
+            <label class="label label--required" for="cardtypeInput">{{ 'Payone_credit_card.cardtype' | trans }}</label>
+            <span id="cardtype"></span>
         </div>
 
-        <div class="form__field col col--sm-12">
+        <div class="form__field col col--sm-12 col--lg-6">
             {{ form_row(data.form.payoneCreditCard.cardholder, {
-                label: 'Payone_credit_card.cardholder'
+                label: 'Payone_credit_card.cardholder',
+                attr: {
+                    placeholder: 'checkout.step.payment.cardholder_name' | trans,
+                },
             }) }}
         </div>
 
-        <div class="form__field col col--sm-12">
+        <div class="form__field col col--sm-12 col--lg-6">
             <label class="label label--required" for="cardpanInput">{{ 'Payone_credit_card.cardpan' | trans }}</label>
             <span id="cardpan"></span>
         </div>
 
-        <div class="form__field col col--sm-12">
-            <label class="label label--required" for="cvcInput">{{ 'Payone_credit_card.cardcvc2' | trans }}</label>
-            <span id="cardcvc2"></span>
-        </div>
-
-        <div class="form__field col col--sm-12">
+        <div class="form__field col col--sm-12 col--lg-6">
             <label class="label label--required" for="expireInput">{{ 'Payone_credit_card.cardexpiredate' | trans }}</label>
             <div id="expireInput" class="grid">
-                <div class="col col--md-4 spacing-right--inner">
+                <div class="col col--sm-6 spacing-right--inner">
                     <span id="cardexpiremonth"></span>
                 </div>
-                <div class="col col--md-8 spacing-left--inner">
+                <div class="col col--sm-6 spacing-left--inner">
                     <span id="cardexpireyear"></span>
                 </div>
             </div>
+        </div>
+
+        <div class="payment-form-inner__top-indent-negative form__field col col--sm-12 col--lg-6">
+            <label class="label label--required" for="cvcInput">{{ 'Payone_credit_card.cardcvc2' | trans }}</label>
+            <span id="cardcvc2"></span>
         </div>
 
         <div class="form__field col col--sm-12 text-alert" id="errorOutput"></div>

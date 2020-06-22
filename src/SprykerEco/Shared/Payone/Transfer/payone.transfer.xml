@@ -161,6 +161,7 @@
         <property name="clearingBankName" type="string"/>
         <property name="workOrderId" type="string"/>
         <property name="shippingProvider" type="string"/>
+        <property name="capturedAmount" type="int"/>
     </transfer>
 
     <transfer name="PayoneBankAccountCheck">

@@ -405,6 +405,23 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Executes `authorization` or `pre-authorization` API call depends on payment method.
+     * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function executeCheckoutPostSaveHook(
+        QuoteTransfer $quoteTransfer,
+        CheckoutResponseTransfer $checkoutResponse
+    ): CheckoutResponseTransfer;
+
+    /**
+     * Specification:
      * - Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
      * @api
@@ -574,4 +591,18 @@ interface PayoneFacadeInterface
      * @return string|null
      */
     public function findPayoneOrderItemStatus(int $idSalesOrder, int $idSalesOrderItem): ?string;
+
+    /**
+     * Specification:
+     * - Performs partial capture call to Payone API.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     */
+    public function executePartialCapture(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+    ): CaptureResponseTransfer;
 }

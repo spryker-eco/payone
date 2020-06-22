@@ -36,4 +36,15 @@ class PayoneToOmsBridge implements PayoneToOmsInterface
     {
         return $this->omsFacade->triggerEvent($eventId, $orderItems, $logContext, $data);
     }
+
+    /**
+     * @param int $idOrder
+     * @param string $flag
+     *
+     * @return bool
+     */
+    public function isOrderFlaggedAll($idOrder, $flag)
+    {
+        return $this->omsFacade->isOrderFlaggedAll($idOrder, $flag);
+    }
 }

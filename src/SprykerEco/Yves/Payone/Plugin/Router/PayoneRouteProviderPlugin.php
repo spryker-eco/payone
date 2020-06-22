@@ -16,6 +16,8 @@ class PayoneRouteProviderPlugin extends AbstractRouteProviderPlugin
     protected const ROUTE_PAYONE_GET_FILE = 'payone-getfile';
     protected const ROUTE_PAYONE_CANCEL_REDIRECT = 'payone-cancel-redirect';
     protected const ROUTE_PAYONE_GET_INVOICE = 'payone-getinvoice';
+    protected const ROUTE_PAYONE_PAYMENT_SUCCESS = 'payone-payment-success';
+    protected const ROUTE_PAYONE_PAYMENT_FAILURE = 'payone-payment-failure';
 
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_INIT = 'payone-paypal-express-checkout-init';
@@ -39,6 +41,8 @@ class PayoneRouteProviderPlugin extends AbstractRouteProviderPlugin
         $routeCollection = $this->addPayoneGetFileRoute($routeCollection);
         $routeCollection = $this->addPayoneCancelRedirectRoute($routeCollection);
         $routeCollection = $this->addPayoneGetInvoiceRoute($routeCollection);
+        $routeCollection = $this->addPayonePaymentSuccessRoute($routeCollection);
+        $routeCollection = $this->addPayonePaymentFailureRoute($routeCollection);
         $routeCollection = $this->addPayoneExpressCheckoutButtonRoute($routeCollection);
         $routeCollection = $this->addPayoneExpressCheckoutInitRoute($routeCollection);
         $routeCollection = $this->addPayoneExpressCheckoutFailureRoute($routeCollection);
@@ -170,6 +174,34 @@ class PayoneRouteProviderPlugin extends AbstractRouteProviderPlugin
         $route = $this->buildRoute('/payone/expresscheckout/load-details', 'Payone', 'ExpressCheckout', 'loadPaypalExpressCheckoutDetailsAction');
         $route = $route->setMethods(['GET']);
         $routeCollection->add(static::ROUTE_PAYONE_EXPRESS_CHECKOUT_LOAD_DETAILS, $route);
+
+        return $routeCollection;
+    }
+
+    /**
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return \Spryker\Yves\Router\Route\RouteCollection
+     */
+    protected function addPayonePaymentSuccessRoute(RouteCollection $routeCollection): RouteCollection
+    {
+        $route = $this->buildRoute('/payone/payment-success', 'Payone', 'Index', 'paymentSuccessAction');
+        $route = $route->setMethods(['GET']);
+        $routeCollection->add(static::ROUTE_PAYONE_PAYMENT_SUCCESS, $route);
+
+        return $routeCollection;
+    }
+
+    /**
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return \Spryker\Yves\Router\Route\RouteCollection
+     */
+    protected function addPayonePaymentFailureRoute(RouteCollection $routeCollection): RouteCollection
+    {
+        $route = $this->buildRoute('/payone/payment-failure', 'Payone', 'Index', 'paymentFailureAction');
+        $route = $route->setMethods(['GET']);
+        $routeCollection->add(static::ROUTE_PAYONE_PAYMENT_FAILURE, $route);
 
         return $routeCollection;
     }

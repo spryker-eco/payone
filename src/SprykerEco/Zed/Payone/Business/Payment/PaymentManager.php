@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
-use ArrayObject;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
@@ -32,8 +31,10 @@ use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
+use Generated\Shared\Transfer\TotalsTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
+use Spryker\Shared\Shipment\ShipmentConfig;
 use Spryker\Shared\Shipment\ShipmentConstants;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -68,6 +69,7 @@ use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
+use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
@@ -77,6 +79,9 @@ class PaymentManager implements PaymentManagerInterface
     public const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
     public const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
     public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
+
+    protected const PARAMETER_KEY_CAPTURE_MODE = 'capturemode';
+    protected const PARAMETER_VALUE_CAPTURE_COMPLETED = 'completed';
 
     /**
      * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE
@@ -307,10 +312,13 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
-        $requestContainer = $this->prepareOrderItems($captureTransfer->getOrder(), $requestContainer);
-        $requestContainer = $this->prepareOrderShipment($captureTransfer->getOrder(), $requestContainer);
-        $requestContainer = $this->prepareOrderDiscount($captureTransfer->getOrder(), $requestContainer);
-        $requestContainer = $this->prepareOrderHandling($captureTransfer->getOrder(), $requestContainer);
+
+        if ($captureTransfer->getAmount()) {
+            $requestContainer = $this->prepareOrderItems($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->prepareOrderShipment($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->prepareOrderDiscount($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->prepareOrderHandling($captureTransfer->getOrder(), $requestContainer);
+        }
 
         if (!empty($captureTransfer->getSettleaccount())) {
             $businnessContainer = new BusinessContainer();
@@ -318,6 +326,49 @@ class PaymentManager implements PaymentManagerInterface
             $requestContainer->setBusiness($businnessContainer);
         }
 
+        if ($captureTransfer->getAmount() !== null) {
+            $requestContainer->setAmount($captureTransfer->getAmount());
+        }
+
+        $this->setStandardParameter($requestContainer);
+
+        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+
+        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
+        $responseContainer = new CaptureResponseContainer($rawResponse);
+        $this->updateApiLogAfterCapture($apiLogEntity, $responseContainer);
+
+        $responseMapper = new CaptureResponseMapper();
+
+        return $responseMapper->getCaptureResponseTransfer($responseContainer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     */
+    public function executePartialCapture(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+    ): CaptureResponseTransfer {
+        $paymentEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
+
+        $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
+        $requestContainer = $this->preparePartialCaptureOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
+        $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
+
+        $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
+        $requestContainer = $this->prepareOrderShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
+
+        $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
+        $requestContainer = $this->prepareOrderHandling($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
+
+        $businessContainer = new BusinessContainer();
+        $businessContainer->setSettleAccount(PayoneApiConstants::SETTLE_ACCOUNT_YES);
+        $requestContainer->setBusiness($businessContainer);
+
+        $requestContainer->setAmount($captureAmount);
         $this->setStandardParameter($requestContainer);
 
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
@@ -326,11 +377,14 @@ class PaymentManager implements PaymentManagerInterface
         $responseContainer = new CaptureResponseContainer($rawResponse);
 
         $this->updateApiLogAfterCapture($apiLogEntity, $responseContainer);
+        $this->updatePaymentPayoneOrderItemsWithStatus(
+            $payonePartialOperationRequestTransfer,
+            $this->getPartialCaptureStatus($responseContainer)
+        );
 
         $responseMapper = new CaptureResponseMapper();
-        $responseTransfer = $responseMapper->getCaptureResponseTransfer($responseContainer);
 
-        return $responseTransfer;
+        return $responseMapper->getCaptureResponseTransfer($responseContainer);
     }
 
     /**
@@ -590,6 +644,7 @@ class PaymentManager implements PaymentManagerInterface
 
         $requestContainer->setAmount($payonePartialOperationRequestTransfer->getRefund()->getAmount() * -1);
         $requestContainer = $this->preparePartialRefundOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
+        $requestContainer = $this->preparePartialRefundExpenses($payonePartialOperationRequestTransfer, $requestContainer);
         $this->setStandardParameter($requestContainer);
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
 
@@ -689,7 +744,7 @@ class PaymentManager implements PaymentManagerInterface
      * @param string $invoiceTitle
      * @param int $customerId
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
     protected function findPaymentByInvoiceTitleAndCustomerId($invoiceTitle, $customerId)
     {
@@ -700,7 +755,7 @@ class PaymentManager implements PaymentManagerInterface
      * @param string $fileReference
      * @param int $customerId
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
     protected function findPaymentByFileReferenceAndCustomerId($fileReference, $customerId)
     {
@@ -986,6 +1041,45 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function executeCheckoutPostSaveHook(
+        QuoteTransfer $quoteTransfer,
+        CheckoutResponseTransfer $checkoutResponse
+    ): CheckoutResponseTransfer {
+        if ($quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
+            return $checkoutResponse;
+        }
+
+        $paymentEntity = $this->getPaymentEntity($checkoutResponse->getSaveOrder()->getIdSalesOrder());
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
+        $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
+        $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
+
+        if ($responseContainer->getErrorcode()) {
+            $checkoutErrorTransfer = new CheckoutErrorTransfer();
+            $checkoutErrorTransfer->setMessage($responseContainer->getCustomermessage());
+            $checkoutErrorTransfer->setErrorCode($responseContainer->getErrorcode());
+            $checkoutResponse->addError($checkoutErrorTransfer);
+            $checkoutResponse->setIsSuccess(false);
+
+            return $checkoutResponse;
+        }
+
+        if (!$responseContainer->getRedirecturl()) {
+            return $checkoutResponse;
+        }
+
+        $checkoutResponse->setIsExternalRedirect(true);
+        $checkoutResponse->setRedirectUrl($responseContainer->getRedirecturl());
+
+        return $checkoutResponse;
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\PaymentDetailTransfer $paymentDataTransfer
      * @param int $idOrder
      *
@@ -1190,6 +1284,50 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function preparePartialRefundExpenses(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer,
+        AbstractRequestContainer $container
+    ): AbstractRequestContainer {
+        $arrayIt = $container->getIt() ?? [];
+        $arrayId = $container->getId() ?? [];
+        $arrayPr = $container->getPr() ?? [];
+        $arrayNo = $container->getNo() ?? [];
+        $arrayDe = $container->getDe() ?? [];
+        $arrayVa = $container->getVa() ?? [];
+
+        $key = count($arrayId) + 1;
+
+        foreach ($payonePartialOperationRequestTransfer->getRefund()->getExpenses() as $expenseTransfer) {
+            $expenseType = PayoneApiConstants::INVOICING_ITEM_TYPE_HANDLING;
+            if ($expenseTransfer->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
+                $expenseType = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
+            }
+
+            $arrayIt[$key] = $expenseType;
+            $arrayId[$key] = $expenseType;
+            $arrayPr[$key] = $expenseTransfer->getRefundableAmount();
+            $arrayNo[$key] = $expenseTransfer->getQuantity();
+            $arrayDe[$key] = $expenseTransfer->getName();
+            $arrayVa[$key] = (int)$expenseTransfer->getTaxRate();
+            $key++;
+        }
+
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
@@ -1310,5 +1448,122 @@ class PaymentManager implements PaymentManagerInterface
         $container->setVa($arrayVa);
 
         return $container;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return int
+     */
+    protected function calculatePartialCaptureItemsAmount(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): int
+    {
+        $itemsAmount = 0;
+        foreach ($payonePartialOperationRequestTransfer->getOrder()->getItems() as $itemTransfer) {
+            if (in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds())) {
+                $itemsAmount += $itemTransfer->getSumPriceToPayAggregation();
+            }
+        }
+
+        return $itemsAmount;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function preparePartialCaptureOrderItems(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer,
+        AbstractRequestContainer $container
+    ): AbstractRequestContainer {
+        $arrayIt = [];
+        $arrayId = [];
+        $arrayPr = [];
+        $arrayNo = [];
+        $arrayDe = [];
+        $arrayVa = [];
+
+        $key = 1;
+
+        foreach ($payonePartialOperationRequestTransfer->getOrder()->getItems() as $itemTransfer) {
+            if (!in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds())) {
+                continue;
+            }
+
+            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
+            $arrayId[$key] = substr($itemTransfer->getSku(), 0, 32);
+            $arrayPr[$key] = $itemTransfer->getUnitPriceToPayAggregation();
+            $arrayNo[$key] = $itemTransfer->getQuantity();
+            $arrayDe[$key] = $itemTransfer->getName();
+            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
+            $key++;
+        }
+
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return int
+     */
+    protected function calculateExpensesCost(OrderTransfer $orderTransfer): int
+    {
+        $expensesCostAmount = 0;
+
+        foreach ($orderTransfer->getExpenses() as $expense) {
+            if ($expense->getType() !== static::SHIPMENT_EXPENSE_TYPE) {
+                $expensesCostAmount += $expense->getSumGrossPrice();
+            }
+        }
+
+        return $expensesCostAmount;
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer $responseContainer
+     *
+     * @return string
+     */
+    protected function getPartialCaptureStatus(CaptureResponseContainer $responseContainer): string
+    {
+        if ($responseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_APPROVED) {
+            return PayoneTransactionStatusConstants::STATUS_CAPTURE_APPROVED;
+        }
+
+        return PayoneTransactionStatusConstants::STATUS_CAPTURE_FAILED;
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
+     */
+    protected function getPostSaveHookRequestContainer(
+        PaymentMethodMapperInterface $paymentMethodMapper,
+        SpyPaymentPayone $paymentEntity,
+        QuoteTransfer $quoteTransfer
+    ): AuthorizationContainerInterface {
+        if (method_exists($paymentMethodMapper, 'mapPaymentToPreAuthorization')) {
+            return $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity);
+        }
+
+        $orderTransfer = (new OrderTransfer())
+            ->setTotals(
+                (new TotalsTransfer())
+                    ->setGrandTotal($quoteTransfer->getTotals()->getGrandTotal())
+            );
+
+        return $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
     }
 }

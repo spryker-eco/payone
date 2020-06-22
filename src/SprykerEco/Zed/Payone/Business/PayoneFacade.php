@@ -564,6 +564,25 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @api
      *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function executeCheckoutPostSaveHook(
+        QuoteTransfer $quoteTransfer,
+        CheckoutResponseTransfer $checkoutResponse
+    ): CheckoutResponseTransfer {
+        return $this->getFactory()
+            ->createPaymentManager()
+            ->executeCheckoutPostSaveHook($quoteTransfer, $checkoutResponse);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\OrderCollectionTransfer $orderCollectionTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
@@ -695,5 +714,22 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
         return $this->getFactory()
             ->createPayoneOrderItemStatusFinder()
             ->findPayoneOrderItemStatus($idSalesOrder, $idSalesOrderItem);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     */
+    public function executePartialCapture(
+        PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+    ): CaptureResponseTransfer {
+        return $this->getFactory()
+            ->createPaymentManager()
+            ->executePartialCapture($payonePartialOperationRequestTransfer);
     }
 }
