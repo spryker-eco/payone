@@ -44,6 +44,7 @@ env:
     - MODULE_DIR=module
     - SHOP_DIR=current
     - MODULE_NAME=payone
+    - POSTGRES_PORT=5432
 
 cache:
   directories:
