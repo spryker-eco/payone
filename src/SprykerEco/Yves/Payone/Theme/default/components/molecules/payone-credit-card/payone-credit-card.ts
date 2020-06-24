@@ -102,7 +102,7 @@ export default class PayoneCreditCard extends Component {
     protected onSubmit(event: Event): void {
         event.preventDefault();
 
-        if (typeof this.isCurrentPaymentMethod === null) {
+        if (typeof this.isCurrentPaymentMethod === undefined) {
             this.enableSubmit();
 
             return;
@@ -159,12 +159,12 @@ export default class PayoneCreditCard extends Component {
         this.isPaymentValid = true;
     }
 
-    get isCurrentPaymentMethod(): boolean | null {
+    get isCurrentPaymentMethod(): boolean | undefined {
         const currentPaymentMethodInput = <HTMLInputElement>document.querySelector(this.currentPaymentMethodSelector);
 
         return currentPaymentMethodInput?.value
             ? currentPaymentMethodInput.value === CURRENT_PAYMENT_METHOD
-            : null;
+            : undefined;
     }
 
     get language(): string {
