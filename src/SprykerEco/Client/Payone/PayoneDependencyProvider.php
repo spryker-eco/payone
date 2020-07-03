@@ -23,13 +23,13 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
      */
     public function provideServiceLayerDependencies(Container $container)
     {
-        $container[self::SERVICE_ZED] = function (Container $container) {
+        $container->set(static::SERVICE_ZED, function (Container $container) {
             return $container->getLocator()->zedRequest()->client();
-        };
+        });
 
-        $container[self::SERVICE_UTIL_ENCODING] = function (Container $container) {
+        $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
             return $container->getLocator()->utilEncoding()->service();
-        };
+        });
 
         return $container;
     }
