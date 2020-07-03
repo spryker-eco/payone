@@ -31,10 +31,8 @@
     "spryker/code-sniffer": "*",
     "spryker/country": "^3.2.0",
     "spryker/payment": "^4.0.0 || ^5.0.0 ",
-    "spryker/propel": "*",
     "spryker/router": "*",
-    "spryker/silex": "*",
-    "spryker/testify": "*"
+    "spryker/silex": "*"
   },
   "suggest": {
     "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout.",
