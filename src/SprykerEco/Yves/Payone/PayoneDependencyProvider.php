@@ -35,25 +35,25 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideDependencies(Container $container)
     {
-        $container[self::CLIENT_PAYONE] = function (Container $container) {
+        $container->set(static::CLIENT_PAYONE, function (Container $container) {
             return $container->getLocator()->payone()->client();
-        };
+        });
 
-        $container[self::CLIENT_CUSTOMER] = function (Container $container) {
+        $container->set(static::CLIENT_CUSTOMER, function (Container $container) {
             return new PayoneToCustomerBridge($container->getLocator()->customer()->client());
-        };
+        });
 
-        $container[self::CLIENT_CART] = function (Container $container) {
+        $container->set(static::CLIENT_CART, function (Container $container) {
             return new PayoneToCartBridge($container->getLocator()->cart()->client());
-        };
+        });
 
-        $container[self::CLIENT_SHIPMENT] = function (Container $container) {
+        $container->set(static::CLIENT_SHIPMENT, function (Container $container) {
             return new PayoneToShipmentBridge($container->getLocator()->shipment()->client());
-        };
+        });
 
-        $container[self::CLIENT_CALCULATION] = function (Container $container) {
+        $container->set(static::CLIENT_CALCULATION, function (Container $container) {
             return new PayoneToCalculationBridge($container->getLocator()->calculation()->client());
-        };
+        });
 
         $container = $this->addQuoteClient($container);
 

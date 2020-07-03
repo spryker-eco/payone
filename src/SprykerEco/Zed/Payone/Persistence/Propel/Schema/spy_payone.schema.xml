@@ -121,7 +121,7 @@
             <index-column name="sequence_number"/>
         </index>
 
-        <index name="index-spy_payment_payone_api_log-request-created_at-id_payment_payone_api_log">
+        <index name="index-spy_payment_payone_api_log-request-created_at-id">
             <index-column name="request" size="1"/>
             <index-column name="created_at"/>
             <index-column name="id_payment_payone_api_log"/>
