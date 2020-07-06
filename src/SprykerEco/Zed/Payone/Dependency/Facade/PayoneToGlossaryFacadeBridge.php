@@ -37,7 +37,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
     }
 
     /**
-     * @param $keyName
+     * @param string $keyName
      * @param array $data
      * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
      *
