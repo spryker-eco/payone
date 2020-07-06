@@ -23,7 +23,7 @@ interface PayoneToGlossaryFacadeInterface
     public function translateByKeyId($idKey, array $data = []);
 
     /**
-     * @param $keyName
+     * @param string $keyName
      * @param array $data
      * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
      *
