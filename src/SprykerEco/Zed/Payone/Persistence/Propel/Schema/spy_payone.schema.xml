@@ -5,8 +5,8 @@
         <column name="id_payment_payone" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
         <column name="fk_sales_order" required="true" type="INTEGER"/>
 
-        <column name="payment_method" required="true" type="VARCHAR"/>
-        <column name="reference" required="true" type="VARCHAR"/>
+        <column name="payment_method" required="true" type="VARCHAR" size="255"/>
+        <column name="reference" required="true" type="VARCHAR" size="64"/>
         <column name="transaction_id" type="INTEGER"/>
 
         <foreign-key name="spy_payment_payone-fk_sales_order" foreignTable="spy_sales_order" phpName="SpySalesOrder">
@@ -50,9 +50,9 @@
         <column name="id_payment_payone" type="INTEGER" primaryKey="true"/>
 
         <column name="amount" required="true" type="INTEGER"/>
-        <column name="currency" required="true" type="VARCHAR"/>
+        <column name="currency" required="true" type="VARCHAR" size="5"/>
 
-        <column name="pseudo_card_pan" type="VARCHAR" comment="Payone generated pseudocardpan instead of actual credit card data"/>
+        <column name="pseudo_card_pan" type="VARCHAR" size="32" comment="Payone generated pseudocardpan instead of actual credit card data"/>
 
         <column name="bank_country" type="VARCHAR" size="12"/>
         <column name="bank_account" type="VARCHAR" size="26"/>
@@ -77,7 +77,7 @@
 
         <column name="type" type="VARCHAR" size="3"/>
 
-        <column name="shipping_provider" size="64" type="VARCHAR"/>
+        <column name="shipping_provider" type="VARCHAR" size="64"/>
 
         <column name="work_order_id" type="VARCHAR" size="30" />
 
@@ -93,16 +93,16 @@
         <column name="id_payment_payone_api_log" required="true" type="INTEGER" primaryKey="true" autoIncrement="true"/>
         <column name="fk_payment_payone" required="true" type="INTEGER"/>
 
-        <column name="request" required="true" type="VARCHAR"/>
-        <column name="mode" required="true" type="VARCHAR"/>
-        <column name="status" type="VARCHAR"/>
+        <column name="request" required="true" type="VARCHAR" size="32"/>
+        <column name="mode" required="true" type="VARCHAR" size="10"/>
+        <column name="status" type="VARCHAR" size="20"/>
         <column name="transaction_id" type="INTEGER"/>
         <column name="sequence_number" type="INTEGER"/>
-        <column name="user_id" type="VARCHAR"/>
-        <column name="merchant_id" required="true" type="VARCHAR"/>
-        <column name="portal_id" required="true" type="VARCHAR"/>
+        <column name="user_id" type="VARCHAR" size="20"/>
+        <column name="merchant_id" required="true" type="VARCHAR" size="20"/>
+        <column name="portal_id" required="true" type="VARCHAR" size="20"/>
 
-        <column name="error_code" type="VARCHAR"/>
+        <column name="error_code" type="VARCHAR" size="10"/>
         <column name="error_message_internal" type="LONGVARCHAR"/>
         <column name="error_message_user" type="LONGVARCHAR"/>
 
@@ -138,20 +138,20 @@
         <column name="transaction_id" type="INTEGER"/>
         <column name="reference_id" type="INTEGER"/>
 
-        <column name="mode" type="VARCHAR"/>
+        <column name="mode" type="VARCHAR" size="10"/>
 
-        <column name="status" required="true" type="VARCHAR"/>
+        <column name="status" required="true" type="VARCHAR" size="20"/>
         <column name="transaction_time" type="TIMESTAMP"/>
         <column name="sequence_number" type="INTEGER"/>
 
-        <column name="clearing_type" type="VARCHAR"/>
-        <column name="portal_id" type="VARCHAR"/>
+        <column name="clearing_type" type="VARCHAR" size="20"/>
+        <column name="portal_id" type="VARCHAR" size="20"/>
 
         <column name="price" type="INTEGER"/>
         <column name="balance" type="INTEGER"/>
         <column name="receivable" type="INTEGER"/>
 
-        <column name="reminder_level" type="VARCHAR"/>
+        <column name="reminder_level" type="VARCHAR" size="20"/>
 
         <index name="spy_payment_payone_transaction_status_log-transaction_id">
             <index-column name="transaction_id"/>
