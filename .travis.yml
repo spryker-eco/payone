@@ -71,5 +71,5 @@ before_install:
   - phpenv config-rm xdebug.ini
 
 script:
-  - git clone -b misc/fix-suite-build https://github.com/spryker-eco/eco-ci.git ecoci
+  - git clone -b 0.3.0 https://github.com/spryker-eco/eco-ci.git ecoci
   - ./ecoci/build/travis.sh
