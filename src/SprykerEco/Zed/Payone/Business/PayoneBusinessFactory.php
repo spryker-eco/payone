@@ -39,6 +39,8 @@ use SprykerEco\Zed\Payone\Business\Payment\PaymentManagerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
+use SprykerEco\Zed\Payone\Business\Distributor\PriceDistributor;
+use SprykerEco\Zed\Payone\Business\Distributor\PriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactory;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapper;
@@ -420,5 +422,13 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createPayoneOrderItemStatusFinder(): PayoneOrderItemStatusFinderInterface
     {
         return new PayoneOrderItemStatusFinder($this->getRepository());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\PriceDistributor\PriceDistributorInterface
+     */
+    public function createPriceDistributor(): PriceDistributorInterface
+    {
+        return new PriceDistributor();
     }
 }

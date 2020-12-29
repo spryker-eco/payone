@@ -50,7 +50,10 @@ class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
 
         $payoneRefundTransfer->setPayment($payonePaymentTransfer);
         $payoneRefundTransfer->setUseCustomerdata(PayoneApiConstants::USE_CUSTOMER_DATA_YES);
-        $payoneRefundTransfer->setOrder($this->getOrderTransfer($orderEntity));
+
+        $orderTransfer = $this->getOrderTransfer($orderEntity);
+        $orderTransfer = $this->getFacade()->distributePrices($orderTransfer);
+        $payoneRefundTransfer->setOrder($orderTransfer);
 
         $narrativeText = $this->getFactory()->getConfig()->getNarrativeText($orderItems, $orderEntity, $data);
         $payoneRefundTransfer->setNarrativeText($narrativeText);

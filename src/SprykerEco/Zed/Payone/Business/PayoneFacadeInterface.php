@@ -605,4 +605,17 @@ interface PayoneFacadeInterface
     public function executePartialCapture(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
     ): CaptureResponseTransfer;
+
+    /**
+     * Specification:
+     * - Checks if orderTransfer has more than one payment.
+     * - Distributes prices for order items and expenses based on Payone payment amount.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\OrderTransfer
+     */
+    public function distributePrices(OrderTransfer $orderTransfer): OrderTransfer;
 }

@@ -732,4 +732,20 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
             ->createPaymentManager()
             ->executePartialCapture($payonePartialOperationRequestTransfer);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\OrderTransfer
+     */
+    public function distributePrices(OrderTransfer $orderTransfer): OrderTransfer
+    {
+        return $this->getFactory()
+            ->createPriceDistributor()
+            ->distribute($orderTransfer);
+    }
 }

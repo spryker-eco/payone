@@ -38,6 +38,8 @@ class PartialCaptureCommandByOrderPlugin extends AbstractPlugin implements Comma
             ->getSalesFacade()
             ->getOrderByIdSalesOrder($orderEntity->getIdSalesOrder());
 
+        $orderTransfer = $this->getFacade()->distributePrices($orderTransfer);
+
         $payonePartialOperationTransfer = (new PayonePartialOperationRequestTransfer())
             ->setOrder($orderTransfer);
 
