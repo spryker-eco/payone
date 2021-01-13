@@ -29,7 +29,7 @@ use Spryker\Client\Kernel\AbstractClient;
 class PayoneClient extends AbstractClient implements PayoneClientInterface
 {
     /**
-     * Prepares credit card check request to bring standard parameters and hash to front-end.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -38,11 +38,12 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     public function getCreditCardCheckRequest()
     {
         $defaults = [];
+
         return $this->getFactory()->createCreditCardCheckCall($defaults)->mapCreditCardCheckData();
     }
 
     /**
-     * Processes and saves transaction status update received from Payone.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -56,7 +57,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Performs GetFile request to Payone API for PDF file download.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -70,7 +71,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Verifies url HMAC signature and fires 'cancel redirect' event.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -84,8 +85,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Specification:
-     * - Performs BankAccountCheck request to Payone API.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -99,7 +99,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Performs ManageMandate request to Payone API.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -133,7 +133,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Fetches payment details for given order.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -147,7 +147,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Performs GetInvoice request to Payone API for PDF file download.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -161,8 +161,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Send genericpayment request to payone with action "setexpresscheckout"
-     * to start express checkout on paypal side and also to get workorderid.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -176,8 +175,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * Send genericpayment request to payone with action "getexpresscheckoutdetails"
-     * in order to get customer data like email and shipping data.
+     * {@inheritDoc}
      *
      * @api
      *
@@ -191,7 +189,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -205,7 +203,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

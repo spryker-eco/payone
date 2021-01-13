@@ -84,7 +84,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
      */
-    protected $_3dsecure;
+    protected $threeDSecure;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer
@@ -297,7 +297,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return PaymentMethod\AbstractPaymentMethodContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer
      */
     public function getPaymentMethod()
     {
@@ -311,7 +311,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      */
     public function set3dsecure(ThreeDSecureContainer $secure)
     {
-        $this->_3dsecure = $secure;
+        $this->threeDSecure = $secure;
     }
 
     /**
@@ -319,7 +319,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      */
     public function get3dsecure()
     {
-        return $this->_3dsecure;
+        return $this->threeDSecure;
     }
 
     /**

@@ -15,10 +15,14 @@ use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPreCheckPluginInterfa
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
  */
 class PayonePreCheckPlugin extends AbstractPlugin implements CheckoutPreCheckPluginInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -30,6 +34,7 @@ class PayonePreCheckPlugin extends AbstractPlugin implements CheckoutPreCheckPlu
     {
         $quoteTransfer = $this->getFactory()->getCalculationFacade()->recalculateQuote($quoteTransfer);
         $quoteTransfer->getPayment()->getPayone()->getPaymentDetail()->setAmount($quoteTransfer->getPayment()->getAmount());
+
         return true;
     }
 }

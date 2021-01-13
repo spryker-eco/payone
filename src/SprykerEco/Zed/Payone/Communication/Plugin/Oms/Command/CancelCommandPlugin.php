@@ -20,6 +20,8 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\CommandByOrderInterface;
 class CancelCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param array $orderItems

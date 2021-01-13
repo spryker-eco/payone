@@ -25,6 +25,8 @@ abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInt
     private static $resultCache = [];
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem

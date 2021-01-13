@@ -22,6 +22,8 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param array $orderItems
@@ -50,10 +52,7 @@ class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
 
         $payoneRefundTransfer->setPayment($payonePaymentTransfer);
         $payoneRefundTransfer->setUseCustomerdata(PayoneApiConstants::USE_CUSTOMER_DATA_YES);
-
-        $orderTransfer = $this->getOrderTransfer($orderEntity);
-        $orderTransfer = $this->getFacade()->distributePrices($orderTransfer);
-        $payoneRefundTransfer->setOrder($orderTransfer);
+        $payoneRefundTransfer->setOrder($this->getOrderTransfer($orderEntity));
 
         $narrativeText = $this->getFactory()->getConfig()->getNarrativeText($orderItems, $orderEntity, $data);
         $payoneRefundTransfer->setNarrativeText($narrativeText);

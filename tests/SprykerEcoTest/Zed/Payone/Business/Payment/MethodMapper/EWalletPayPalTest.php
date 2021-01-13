@@ -21,19 +21,19 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
  */
 class EWalletPayPalTest extends AbstractMethodMapperTest
 {
-    const STANDARD_PARAMETER_CLEARING_TYPE = 'wlt';
+    public const STANDARD_PARAMETER_CLEARING_TYPE = 'wlt';
 
-    const WALLET_TYPE = 'PPE';
+    public const WALLET_TYPE = 'PPE';
 
-    const AUTHORIZATION_E_WALLET_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_E_WALLET_REQUIRED_PARAMS = [
         'wallettype' => self::WALLET_TYPE,
     ];
 
-    const PREAUTHORIZATION_E_WALLET_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_E_WALLET_REQUIRED_PARAMS = [
         'wallettype' => self::WALLET_TYPE,
     ];
 
-    const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,
@@ -41,7 +41,7 @@ class EWalletPayPalTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,

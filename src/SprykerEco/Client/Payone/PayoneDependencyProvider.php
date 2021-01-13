@@ -17,9 +17,9 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
     /**
-     * @param \Spryker\Yves\Kernel\Container $container
+     * @param \Spryker\Client\Kernel\Container $container
      *
-     * @return \Spryker\Yves\Kernel\Container
+     * @return \Spryker\Client\Kernel\Container
      */
     public function provideServiceLayerDependencies(Container $container)
     {

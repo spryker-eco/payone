@@ -314,7 +314,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getGender(): ?string
     {

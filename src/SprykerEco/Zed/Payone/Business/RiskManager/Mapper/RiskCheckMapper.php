@@ -62,8 +62,8 @@ class RiskCheckMapper implements RiskCheckMapperInterface
      */
     public function mapAddressCheck(QuoteTransfer $quoteTransfer): ContainerInterface
     {
-        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AddressCheckContainer $container */
         $container = $this->riskCheckFactory->createAddressCheckContainer();
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AddressCheckContainer $container */
         $container = $this->mapDefaultContainerParams($container);
 
         $container->setFirstName($quoteTransfer->getBillingAddress()->getFirstName());
@@ -86,8 +86,8 @@ class RiskCheckMapper implements RiskCheckMapperInterface
      */
     public function mapConsumerScoreCheck(QuoteTransfer $quoteTransfer): ContainerInterface
     {
-        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\ConsumerScoreContainer $container */
         $container = $this->riskCheckFactory->createConsumerScoreContainer();
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\ConsumerScoreContainer $container */
         $container = $this->mapDefaultContainerParams($container);
 
         $container->setFirstName($quoteTransfer->getBillingAddress()->getFirstName());

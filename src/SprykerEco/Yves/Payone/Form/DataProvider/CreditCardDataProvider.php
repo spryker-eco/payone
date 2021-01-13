@@ -27,11 +27,13 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
      */
     public function getData(AbstractTransfer $quoteTransfer)
     {
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
+
         return $quoteTransfer;
     }
 
@@ -81,6 +83,7 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
         for ($i = 0; $i < self::YEAR_CHOICES_AMOUNT; $i++) {
             $result[$currentYear] = $currentYear++;
         }
+
         return $result;
     }
 

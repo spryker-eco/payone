@@ -39,7 +39,7 @@ class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
      *
      * @return $this
      */
-    public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options): self
+    public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
             static::FIELD_ONLINE_BANK_TRANSFER_TYPE,

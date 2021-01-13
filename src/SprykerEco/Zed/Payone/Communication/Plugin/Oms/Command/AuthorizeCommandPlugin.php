@@ -18,6 +18,8 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\CommandByOrderInterface;
 class AuthorizeCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param array $orderItems

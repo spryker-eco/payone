@@ -43,7 +43,7 @@ class PluginCountryFactory extends AbstractPlugin
                 return new ChSubFormsCreator();
             },
             self::DEFAULT_COUNTRY => function () {
-                return new DefaultSubFormsCreator($this->getFactory()->getPayoneClient());
+                return new DefaultSubFormsCreator();
             },
         ];
     }

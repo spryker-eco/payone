@@ -17,6 +17,8 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\AbstractCondition;
 class PaymentIsAppointedConditionPlugin extends AbstractCondition
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem
@@ -25,9 +27,9 @@ class PaymentIsAppointedConditionPlugin extends AbstractCondition
      */
     public function check(SpySalesOrderItem $orderItem)
     {
-        $res = $this->getFacade()
-            ->isPaymentAppointed($orderItem->getFkSalesOrder(), $orderItem->getIdSalesOrderItem());
-
-        return $res;
+        return $this->getFacade()->isPaymentAppointed(
+            $orderItem->getFkSalesOrder(),
+            $orderItem->getIdSalesOrderItem()
+        );
     }
 }

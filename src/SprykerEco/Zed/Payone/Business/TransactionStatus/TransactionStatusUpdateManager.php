@@ -44,7 +44,6 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
         PayoneStandardParameterTransfer $standardParameter,
         HashGenerator $hashGenerator
     ) {
-
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
         $this->hashGenerator = $hashGenerator;
@@ -123,16 +122,17 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      */
     protected function transformCurrency(TransactionStatusUpdateInterface $request)
     {
+        /** @var \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest $request */
         $balance = $request->getBalance();
-        $balanceAmountInCents = round($balance * 100);
+        $balanceAmountInCents = round((float)$balance * 100);
         $request->setBalance($balanceAmountInCents);
 
         $receivable = $request->getReceivable();
-        $receivableAmountInCents = round($receivable * 100);
+        $receivableAmountInCents = round((float)$receivable * 100);
         $request->setReceivable($receivableAmountInCents);
 
         $price = $request->getPrice();
-        $priceAmountInCents = round($price * 100);
+        $priceAmountInCents = round((float)$price * 100);
         $request->setPrice($priceAmountInCents);
     }
 

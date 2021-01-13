@@ -53,6 +53,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
         $requestContainer = $this->riskCheckMapper->mapAddressCheck($quoteTransfer);
         $response = $this->executionAdapter->sendRequest($requestContainer);
 
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Response\Container\AddressCheckResponseContainer $responseContainer */
         $responseContainer = $this->riskCheckFactory->createAddressCheckResponseContainer();
         $responseContainer->init($response);
 
@@ -83,6 +84,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
 
         $response = $this->executionAdapter->sendRequest($requestContainer);
 
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Response\Container\ConsumerScoreResponseContainer $responseContainer */
         $responseContainer = $this->riskCheckFactory->createConsumerScoreResponseContainer();
         $responseContainer->init($response);
 

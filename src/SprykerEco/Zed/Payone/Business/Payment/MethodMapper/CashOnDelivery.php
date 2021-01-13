@@ -230,7 +230,7 @@ class CashOnDelivery extends AbstractMapper
     }
 
     /**
-     * @param string $shippingProviderName
+     * @param string $glossaryKey
      *
      * @return string
      */

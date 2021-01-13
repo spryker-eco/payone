@@ -17,6 +17,8 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQueryContainerInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $transactionId
@@ -33,6 +35,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $transactionId
@@ -48,6 +52,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param string $invoiceTitle
@@ -72,6 +78,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param string $fileReference
@@ -96,6 +104,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $fkPayment
@@ -113,6 +123,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $idOrder
@@ -128,6 +140,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $idOrder
@@ -149,6 +163,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $orderId
@@ -164,11 +180,13 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $idIdSalesOrder
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog[]
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
     public function createTransactionStatusLogsBySalesOrder($idIdSalesOrder)
     {
@@ -182,12 +200,14 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $idSalesOrderItem
      * @param array $ids
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem[]
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery
      */
     public function createTransactionStatusLogOrderItemsByLogIds($idSalesOrderItem, $ids)
     {
@@ -199,6 +219,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param int $idSalesOrder
@@ -218,6 +240,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Propel\Runtime\Collection\ObjectCollection $orders
@@ -242,6 +266,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder[] $orders
@@ -265,6 +291,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery

@@ -123,7 +123,7 @@ class IndexController extends AbstractController
             echo base64_decode($response->getRawResponse());
         };
 
-        return $this->streamedResponse($callback, 200, ["Content-type" => "application/pdf"]);
+        return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);
     }
 
     /**
@@ -154,7 +154,7 @@ class IndexController extends AbstractController
             echo base64_decode($response->getRawResponse());
         };
 
-        return $this->streamedResponse($callback, 200, ["Content-type" => "application/pdf"]);
+        return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);
     }
 
     /**
@@ -185,7 +185,7 @@ class IndexController extends AbstractController
             echo base64_decode($response->getRawResponse());
         };
 
-        return $this->streamedResponse($callback, 200, ["Content-type" => "application/pdf"]);
+        return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);
     }
 
     /**

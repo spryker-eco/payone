@@ -9,11 +9,8 @@ namespace SprykerEco\Yves\Payone\Form;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentCashOnDeliveryTransfer;
-use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CashOnDeliverySubForm extends AbstractPayoneSubForm

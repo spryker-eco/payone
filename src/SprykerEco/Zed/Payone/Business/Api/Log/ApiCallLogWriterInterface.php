@@ -31,7 +31,7 @@ interface ApiCallLogWriterInterface
     public function logResponse($response);
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
+     * @return $this
      */
     public function flush();
 }

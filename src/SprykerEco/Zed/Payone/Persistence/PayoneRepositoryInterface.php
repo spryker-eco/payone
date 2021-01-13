@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Payone\Persistence;
 
-use Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 
 interface PayoneRepositoryInterface

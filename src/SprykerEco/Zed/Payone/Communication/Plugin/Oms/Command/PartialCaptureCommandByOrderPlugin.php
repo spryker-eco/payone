@@ -17,6 +17,7 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  */
 class PartialCaptureCommandByOrderPlugin extends AbstractPlugin implements CommandByOrderInterface
 {
@@ -37,8 +38,6 @@ class PartialCaptureCommandByOrderPlugin extends AbstractPlugin implements Comma
         $orderTransfer = $this->getFactory()
             ->getSalesFacade()
             ->getOrderByIdSalesOrder($orderEntity->getIdSalesOrder());
-
-        $orderTransfer = $this->getFacade()->distributePrices($orderTransfer);
 
         $payonePartialOperationTransfer = (new PayonePartialOperationRequestTransfer())
             ->setOrder($orderTransfer);
