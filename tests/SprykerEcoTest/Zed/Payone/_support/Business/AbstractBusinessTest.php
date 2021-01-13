@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MIT License
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -23,10 +24,17 @@ use Orm\Zed\Oms\Persistence\SpyOmsOrderProcess;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
+use Spryker\Zed\Kernel\Container;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Payone\Business\PayoneBusinessFactory;
 use SprykerEco\Zed\Payone\Business\PayoneFacade;
+use SprykerEco\Zed\Payone\Business\PayoneFacadeInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
+use SprykerEco\Zed\Payone\PayoneDependencyProvider;
+use SprykerEco\Zed\Payone\Persistence\PayoneEntityManager;
+use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepository;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 /**
@@ -83,6 +91,77 @@ abstract class AbstractBusinessTest extends Test
     }
 
     /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $adapter
+     * @param \SprykerEco\Zed\Payone\Business\PayoneBusinessFactory|null $payoneBusinessFactory
+     *
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Payone\Business\PayoneFacadeInterface
+     */
+    public function createFacadeMock(
+        AdapterInterface $adapter,
+        ?PayoneBusinessFactory $payoneBusinessFactory = null
+    ): PayoneFacadeInterface {
+        // Mock business factory to override return value of createExecutionAdapter to
+        // place a mocked adapter that doesn't establish an actual connection.
+        if (!$payoneBusinessFactory) {
+            $payoneBusinessFactory = $this->createBusinessFactoryMock($adapter);
+
+            // Business factory always requires a valid query container. Since we're creating
+            // functional/integration tests there's no need to mock the database layer.
+        }
+
+        // Mock the facade to override getFactory() and have it return out
+        // previously created mock.
+        $facade = $this
+            ->getMockBuilder(PayoneFacade::class)
+            ->onlyMethods(['getFactory'])->getMock();
+        $facade->expects($this->any())
+            ->method('getFactory')
+            ->willReturn($payoneBusinessFactory);
+
+        return $facade;
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $adapter
+     * @param string[]|null $onlyMethods
+     *
+     * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Payone\Business\PayoneBusinessFactory
+     */
+    public function createBusinessFactoryMock(
+        AdapterInterface $adapter,
+        ?array $onlyMethods = []
+    ): PayoneBusinessFactory {
+        $onlyMethods[] = 'createExecutionAdapter';
+
+        /** @var \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Payone\Business\PayoneBusinessFactory $businessFactoryMock */
+        $businessFactoryMock = $this
+            ->getMockBuilder(PayoneBusinessFactory::class)
+            ->onlyMethods($onlyMethods)
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->getMock();
+
+        $businessFactoryMock->setConfig(new PayoneConfig());
+        $businessFactoryMock->setQueryContainer(new PayoneQueryContainer());
+        $businessFactoryMock->setRepository(new PayoneRepository());
+        $businessFactoryMock->setEntityManager(new PayoneEntityManager());
+
+        $container = new Container();
+        $payoneDependencyProvider = new PayoneDependencyProvider();
+        $payoneDependencyProvider->provideBusinessLayerDependencies($container);
+        $businessFactoryMock->setContainer($container);
+
+        $businessFactoryMock
+            ->expects($this->any())
+            ->method('createExecutionAdapter')
+            ->willReturn($adapter);
+
+        return $businessFactoryMock;
+    }
+
+    /**
      * @return void
      */
     protected function setupConfig()
@@ -111,10 +190,10 @@ abstract class AbstractBusinessTest extends Test
                     PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
                 ],
                 PayoneConstants::PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS => [
-                    PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER
+                    PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
                 ],
                 PayoneConstants::PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS => [
-                    PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT
+                    PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
                 ],
                 PayoneConstants::PAYONE_UNKNOWN_SCORE_AVAILABLE_PAYMENT_METHODS => [
                     PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
@@ -131,16 +210,6 @@ abstract class AbstractBusinessTest extends Test
     protected function getConfigHelper()
     {
         return $this->getModule('\\' . ConfigHelper::class);
-    }
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $adapter
-     *
-     * @return \SprykerEco\Zed\Payone\Business\PayoneFacade
-     */
-    protected function getFacadeMock(AdapterInterface $adapter)
-    {
-        return (new PayoneFacadeMockBuilder())->build($adapter, $this);
     }
 
     /**

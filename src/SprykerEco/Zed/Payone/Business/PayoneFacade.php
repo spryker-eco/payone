@@ -32,6 +32,8 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneBusinessFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface getEntityManager()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface getRepository()
  */
 class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
 {
@@ -590,6 +592,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     public function getPaymentLogs(OrderCollectionTransfer $orderCollectionTransfer)
     {
         $orders = $orderCollectionTransfer->getOrders();
+
         return $this->getFactory()->createPaymentManager()->getPaymentLogs($orders);
     }
 
@@ -651,7 +654,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -667,7 +670,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -683,7 +686,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -731,21 +734,5 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
         return $this->getFactory()
             ->createPaymentManager()
             ->executePartialCapture($payonePartialOperationRequestTransfer);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return \Generated\Shared\Transfer\OrderTransfer
-     */
-    public function distributePrices(OrderTransfer $orderTransfer): OrderTransfer
-    {
-        return $this->getFactory()
-            ->createPriceDistributor()
-            ->distribute($orderTransfer);
     }
 }

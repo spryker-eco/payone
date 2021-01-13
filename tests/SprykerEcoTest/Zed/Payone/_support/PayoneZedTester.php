@@ -9,10 +9,7 @@ namespace SprykerEcoTest\Zed\Payone;
 
 use ArrayObject;
 use Codeception\Actor;
-use Generated\Shared\Transfer\ExpenseTransfer;
-use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\RefundTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
@@ -110,27 +107,6 @@ class PayoneZedTester extends Actor
     public function getOrderTransfer(int $idSalesOrder): OrderTransfer
     {
         return $this->getLocator()->sales()->facade()->findOrderByIdSalesOrder($idSalesOrder);
-    }
-
-    /**
-     * @param array $itemsData
-     * @param array $expensesData
-     * @param array $paymentsData
-     * @param array $totalData
-     *
-     * @return \Generated\Shared\Transfer\OrderTransfer
-     */
-    public function createOrderTransfer(
-        array $itemsData,
-        array $expensesData,
-        array $paymentsData,
-        array $totalData
-    ): OrderTransfer {
-        return (new OrderTransfer())
-            ->setItems($this->createTransfersCollection($itemsData, ItemTransfer::class))
-            ->setExpenses($this->createTransfersCollection($expensesData, ExpenseTransfer::class))
-            ->setPayments($this->createTransfersCollection($paymentsData, PaymentTransfer::class))
-            ->setTotals($this->createTotals($totalData));
     }
 
     /**
