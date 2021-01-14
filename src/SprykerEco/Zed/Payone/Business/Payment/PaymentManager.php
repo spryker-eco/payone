@@ -319,6 +319,7 @@ class PaymentManager implements PaymentManagerInterface
             $captureTransfer->getOrder()
         );
         $captureTransfer->setOrder($distributedPriceOrderTransfer);
+        $captureTransfer->setAmount($distributedPriceOrderTransfer->getTotals()->getGrandTotal());
 
         $paymentEntity = $this->getPaymentEntity($captureTransfer->getPayment()->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
