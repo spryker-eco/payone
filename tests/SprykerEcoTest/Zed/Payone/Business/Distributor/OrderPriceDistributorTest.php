@@ -40,7 +40,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     protected $tester;
 
     /**
-     * @dataProvider provideOrdersData
+     * @dataProvider orderPriceForDistributionDataProvider
      *
      * @param \Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
      * @param \Generated\Shared\Transfer\ExpenseTransfer[] $expenseTransfers
@@ -179,20 +179,20 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     /**
      * @return mixed[]
      */
-    public function provideOrdersData(): array
+    public function orderPriceForDistributionDataProvider(): array
     {
         return [
-            $this->provideOrdersDataWithoutExpenses(),
-            $this->provideOrdersDataWithoutItems(),
-            $this->provideOrdersDataWithItemsAndExpenses(),
-            $this->provideOrdersDataWithOnlyPayonePayment(),
+            $this->provideOrderDataWithoutExpenses(),
+            $this->provideOrderDataWithoutItems(),
+            $this->provideOrderDataWithItemsAndExpenses(),
+            $this->provideOrderDataWithOnlyPayonePayment(),
         ];
     }
 
     /**
      * @return mixed[]
      */
-    protected function provideOrdersDataWithoutExpenses()
+    protected function provideOrderDataWithoutExpenses(): array
     {
         return [
             [
@@ -230,7 +230,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     /**
      * @return mixed[]
      */
-    protected function provideOrdersDataWithoutItems()
+    protected function provideOrderDataWithoutItems(): array
     {
         return [
             [],
@@ -265,7 +265,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     /**
      * @return mixed[]
      */
-    protected function provideOrdersDataWithItemsAndExpenses()
+    protected function provideOrderDataWithItemsAndExpenses(): array
     {
         return [
             [
@@ -313,7 +313,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     /**
      * @return mixed[]
      */
-    protected function provideOrdersDataWithOnlyPayonePayment()
+    protected function provideOrderDataWithOnlyPayonePayment(): array
     {
         return [
             [

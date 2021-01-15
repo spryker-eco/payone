@@ -86,8 +86,6 @@ class OmsCommandTest extends AbstractPayoneTest
         $orderPriceDistributorMock = $this->createOrderPriceDistributorMock();
         $payoneFacade = $this->createPayoneFacadeWithOrderPriceDistributorMocked($orderPriceDistributorMock);
 
-        $orderTransfer = $this->orderTransfer;
-
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_CAPTURE, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
         $this->createPayonePaymentDetail();
@@ -96,12 +94,12 @@ class OmsCommandTest extends AbstractPayoneTest
             ->setAmount(10)
             ->setPayment((new PayonePaymentTransfer())->fromArray($this->spyPaymentPayone->toArray()))
             ->setSettleaccount('settlement account')
-            ->setOrder($orderTransfer);
+            ->setOrder($this->orderTransfer);
         $orderPriceDistributorMock
             ->expects($this->once())
             ->method('distributeOrderPrice')
-            ->with($this->equalTo($orderTransfer))
-            ->willReturn($orderTransfer);
+            ->with($this->equalTo($this->orderTransfer))
+            ->willReturn($this->orderTransfer);
 
         $captureResponseTransfer = $payoneFacade->capturePayment($captureTransfer);
 
@@ -122,19 +120,17 @@ class OmsCommandTest extends AbstractPayoneTest
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
         $this->createPayonePaymentDetail();
 
-        $orderTransfer = $this->orderTransfer;
-
         $refundTransfer = (new PayoneRefundTransfer())
             ->setNarrativeText('Narrative Text')
             ->setUseCustomerdata('Use Customer data')
             ->setAmount(10)
             ->setPayment((new PayonePaymentTransfer())->fromArray($this->spyPaymentPayone->toArray()))
-            ->setOrder($orderTransfer);
+            ->setOrder($this->orderTransfer);
         $orderPriceDistributorMock
             ->expects($this->once())
             ->method('distributeOrderPrice')
-            ->with($this->equalTo($orderTransfer))
-            ->willReturn($orderTransfer);
+            ->with($this->equalTo($this->orderTransfer))
+            ->willReturn($this->orderTransfer);
 
         $refundResponseTransfer = $payoneFacade->refundPayment($refundTransfer);
 
@@ -154,15 +150,13 @@ class OmsCommandTest extends AbstractPayoneTest
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
         $this->createPayonePaymentDetail();
 
-        $orderTransfer = $this->orderTransfer;
-
         $payonePartialOperationTransfer = (new PayonePartialOperationRequestTransfer())
-            ->setOrder($orderTransfer);
+            ->setOrder($this->orderTransfer);
         $orderPriceDistributorMock
             ->expects($this->once())
             ->method('distributeOrderPrice')
-            ->with($this->equalTo($orderTransfer))
-            ->willReturn($orderTransfer);
+            ->with($this->equalTo($this->orderTransfer))
+            ->willReturn($this->orderTransfer);
 
         $captureResponseTransfer = $payoneFacade->executePartialCapture($payonePartialOperationTransfer);
 
