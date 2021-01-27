@@ -18,7 +18,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  * @group Functional
  * @group SprykerEco
  * @group Zed
- * @group Ratepay
+ * @group Payone
  * @group Business
  * @group Request
  * @group AbstractPayoneTest

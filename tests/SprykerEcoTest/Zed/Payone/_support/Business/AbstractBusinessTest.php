@@ -41,7 +41,7 @@ use SprykerTest\Shared\Testify\Helper\ConfigHelper;
  * @group Functional
  * @group SprykerEco
  * @group Zed
- * @group Ratepay
+ * @group Payone
  * @group Business
  * @group Request
  * @group AbstractFacadeTest
@@ -100,17 +100,10 @@ abstract class AbstractBusinessTest extends Test
         AdapterInterface $adapter,
         ?PayoneBusinessFactory $payoneBusinessFactory = null
     ): PayoneFacadeInterface {
-        // Mock business factory to override return value of createExecutionAdapter to
-        // place a mocked adapter that doesn't establish an actual connection.
         if (!$payoneBusinessFactory) {
             $payoneBusinessFactory = $this->createBusinessFactoryMock($adapter);
-
-            // Business factory always requires a valid query container. Since we're creating
-            // functional/integration tests there's no need to mock the database layer.
         }
 
-        // Mock the facade to override getFactory() and have it return out
-        // previously created mock.
         $facade = $this
             ->getMockBuilder(PayoneFacade::class)
             ->onlyMethods(['getFactory'])->getMock();
@@ -232,7 +225,7 @@ abstract class AbstractBusinessTest extends Test
             ->filterByEmail('john@doe.com')
             ->filterByDateOfBirth('1970-01-01')
             ->filterByGender(SpyCustomerTableMap::COL_GENDER_MALE)
-            ->filterByCustomerReference('ratepay-pre-authorization-test')
+            ->filterByCustomerReference('payone-pre-authorization-test')
             ->findOneOrCreate();
         $customer->save();
 
@@ -346,7 +339,7 @@ abstract class AbstractBusinessTest extends Test
             ->setFirstName('John')
             ->setPhone('123-123-123')
             ->setCompany('company test')
-            ->setCustomerReference('ratepay-pre-authorization-test')
+            ->setCustomerReference('payone-pre-authorization-test')
             ->setDateOfBirth('1991-11-11')
             ->setLastName('Doe');
 

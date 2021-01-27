@@ -82,19 +82,19 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
 
         $this->assertSame(
             $expectedTotalPrice,
-            (int)$itemsPrices[ItemTransfer::SUM_PRICE_TO_PAY_AGGREGATION] + $expensesPrices,
+            $itemsPrices[ItemTransfer::SUM_PRICE_TO_PAY_AGGREGATION] + $expensesPrices,
             'Items and expenses total price should be equal to the expected price.'
         );
 
         $this->assertSame(
             $expectedTotalPrice,
-            (int)$itemsPrices[ItemTransfer::UNIT_PRICE_TO_PAY_AGGREGATION] + $expensesPrices,
+            $itemsPrices[ItemTransfer::UNIT_PRICE_TO_PAY_AGGREGATION] + $expensesPrices,
             'Items unit to aggregation and expenses total price should be equals to the expected price.'
         );
 
         $this->assertSame(
             $expectedTotalPrice,
-            (int)$itemsPrices[ItemTransfer::UNIT_GROSS_PRICE] + $expensesPrices,
+            $itemsPrices[ItemTransfer::UNIT_GROSS_PRICE] + $expensesPrices,
             'Items unit gross and expenses total price should be equals to the expected price.'
         );
     }
@@ -182,10 +182,10 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     public function orderPriceForDistributionDataProvider(): array
     {
         return [
-            $this->provideOrderDataWithoutExpenses(),
-            $this->provideOrderDataWithoutItems(),
-            $this->provideOrderDataWithItemsAndExpenses(),
-            $this->provideOrderDataWithOnlyPayonePayment(),
+            'order data without expenses' => $this->provideOrderDataWithoutExpenses(),
+            'order data without items' => $this->provideOrderDataWithoutItems(),
+            'order data with items and expenses' => $this->provideOrderDataWithItemsAndExpenses(),
+            'order data with only payone payment' => $this->provideOrderDataWithOnlyPayonePayment(),
         ];
     }
 
@@ -195,7 +195,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     protected function provideOrderDataWithoutExpenses(): array
     {
         return [
-            [
+            'itemTransfers' => [
                 $this->buildItemTransfer([
                     ItemTransfer::SUM_PRICE_TO_PAY_AGGREGATION => 100,
                     ItemTransfer::UNIT_PRICE_TO_PAY_AGGREGATION => 100,
@@ -209,8 +209,8 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
                     ItemTransfer::QUANTITY => 1,
                 ]),
             ],
-            [],
-            [
+            'expenseTransfers' => [],
+            'paymentTransfers' => [
                 $this->buildPaymentTransfer([
                     PaymentTransfer::PAYMENT_PROVIDER => static::PAYMENT_PROVIDER_PAYONE,
                     PaymentTransfer::AMOUNT => 100,
@@ -220,10 +220,10 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
                     PaymentTransfer::AMOUNT => 150,
                 ]),
             ],
-            $this->buildTotalsTransfer([
+            'totalsTransfer' => $this->buildTotalsTransfer([
                 TotalsTransfer::GRAND_TOTAL => 250,
             ]),
-            100,
+            'expectedTotalPrice' => 100,
         ];
     }
 
@@ -233,8 +233,8 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     protected function provideOrderDataWithoutItems(): array
     {
         return [
-            [],
-            [
+            'itemTransfers' => [],
+            'expenseTransfers' => [
                 $this->buildExpenseTransfer([
                     ExpenseTransfer::SUM_GROSS_PRICE => 450,
                 ]),
@@ -245,7 +245,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
                     ExpenseTransfer::SUM_GROSS_PRICE => 300,
                 ]),
             ],
-            [
+            'paymentTransfers' => [
                 $this->buildPaymentTransfer([
                     PaymentTransfer::PAYMENT_PROVIDER => static::PAYMENT_PROVIDER_PAYONE,
                     PaymentTransfer::AMOUNT => 170,
@@ -255,10 +255,10 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
                     PaymentTransfer::AMOUNT => 700,
                 ]),
             ],
-            $this->buildTotalsTransfer([
+            'totalsTransfer' => $this->buildTotalsTransfer([
                 TotalsTransfer::GRAND_TOTAL => 870,
             ]),
-            170,
+            'expectedTotalPrice' => 170,
         ];
     }
 
@@ -268,12 +268,12 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     protected function provideOrderDataWithItemsAndExpenses(): array
     {
         return [
-            [
+            'itemTransfers' => [
                 $this->buildItemTransfer([
                     ItemTransfer::SUM_PRICE_TO_PAY_AGGREGATION => 200,
-                    ItemTransfer::UNIT_PRICE_TO_PAY_AGGREGATION => 100,
-                    ItemTransfer::UNIT_GROSS_PRICE => 100,
-                    ItemTransfer::QUANTITY => 2,
+                    ItemTransfer::UNIT_PRICE_TO_PAY_AGGREGATION => 200,
+                    ItemTransfer::UNIT_GROSS_PRICE => 200,
+                    ItemTransfer::QUANTITY => 1,
                 ]),
                 $this->buildItemTransfer([
                     ItemTransfer::SUM_PRICE_TO_PAY_AGGREGATION => 300,
@@ -282,7 +282,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
                     ItemTransfer::QUANTITY => 1,
                 ]),
             ],
-            [
+            'expenseTransfers' => [
                 $this->buildExpenseTransfer([
                     ExpenseTransfer::SUM_GROSS_PRICE => 100,
                 ]),
@@ -293,20 +293,20 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
                     ExpenseTransfer::SUM_GROSS_PRICE => 90,
                 ]),
             ],
-            [
+            'paymentTransfers' => [
                 $this->buildPaymentTransfer([
                     PaymentTransfer::PAYMENT_PROVIDER => static::PAYMENT_PROVIDER_PAYONE,
-                    PaymentTransfer::AMOUNT => 160,
+                    PaymentTransfer::AMOUNT => 260,
                 ]),
                 $this->buildPaymentTransfer([
                     PaymentTransfer::PAYMENT_PROVIDER => static::PAYMENT_PROVIDER_DUMMY,
                     PaymentTransfer::AMOUNT => 1000,
                 ]),
             ],
-            $this->buildTotalsTransfer([
+            'totalsTransfer' => $this->buildTotalsTransfer([
                 TotalsTransfer::GRAND_TOTAL => 1260,
             ]),
-            160,
+            'expectedTotalPrice' => 260,
         ];
     }
 
@@ -316,7 +316,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     protected function provideOrderDataWithOnlyPayonePayment(): array
     {
         return [
-            [
+            'itemTransfers' => [
                 $this->buildItemTransfer([
                     ItemTransfer::SUM_PRICE_TO_PAY_AGGREGATION => 500,
                     ItemTransfer::UNIT_PRICE_TO_PAY_AGGREGATION => 500,
@@ -324,21 +324,21 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
                     ItemTransfer::QUANTITY => 1,
                 ]),
             ],
-            [
+            'expenseTransfers' => [
                 $this->buildExpenseTransfer([
                     ExpenseTransfer::SUM_GROSS_PRICE => 100,
                 ]),
             ],
-            [
+            'paymentTransfers' => [
                 $this->buildPaymentTransfer([
                     PaymentTransfer::PAYMENT_PROVIDER => static::PAYMENT_PROVIDER_PAYONE,
                     PaymentTransfer::AMOUNT => 600,
                 ]),
             ],
-            $this->buildTotalsTransfer([
+            'totalsTransfer' => $this->buildTotalsTransfer([
                 TotalsTransfer::GRAND_TOTAL => 600,
             ]),
-            600,
+            'expectedTotalPrice' => 600,
         ];
     }
 }

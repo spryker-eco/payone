@@ -29,15 +29,13 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
             return $orderTransfer;
         }
 
-        $totals = $orderTransfer->getTotals();
+        $totalsTransfer = $orderTransfer->getTotals();
+        $priceRatio = $this->calculatePriceRatio($payonePayment->getAmount(), $totalsTransfer->getGrandTotal());
 
-        $roundingError = 0;
-        $priceRatio = $this->calculatePriceRatio($payonePayment->getAmount(), $totals->getGrandTotal());
+        $this->distributeOrderItemsPrices($orderTransfer, $priceRatio);
+        $this->distributeOrderExpensesPrices($orderTransfer, $priceRatio);
 
-        $this->distributeOrderItemsPrices($orderTransfer, $priceRatio, $roundingError);
-        $this->distributeOrderExpensesPrices($orderTransfer, $priceRatio, $roundingError);
-
-        $orderTransfer->setTotals($totals->setGrandTotal($payonePayment->getAmount()));
+        $orderTransfer->setTotals($totalsTransfer->setGrandTotal($payonePayment->getAmount()));
 
         return $orderTransfer;
     }
@@ -90,50 +88,60 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param float $priceRatio
-     * @param float $roundingError
      *
      * @return void
      */
-    protected function distributeOrderItemsPrices(
-        OrderTransfer $orderTransfer,
-        float $priceRatio,
-        float &$roundingError
-    ): void {
+    protected function distributeOrderItemsPrices(OrderTransfer $orderTransfer, float $priceRatio): void
+    {
+        $lastItemTransfer = null;
+        $roundingError = 0;
+
         foreach ($orderTransfer->getItems() as $itemTransfer) {
-            $priceRounded = $this->calculateRoundedPrice(
-                $itemTransfer->getSumPriceToPayAggregation(),
+            $unitPrice = $this->calculateRoundedPrice(
+                $itemTransfer->getUnitGrossPrice(),
                 $priceRatio,
-                $roundingError,
+                $roundingError
             );
 
-            $itemTransfer->setSumPriceToPayAggregation($priceRounded);
+            $itemTransfer->setSumPriceToPayAggregation($unitPrice)
+                ->setUnitPriceToPayAggregation($unitPrice)
+                ->setUnitGrossPrice($unitPrice);
+            $lastItemTransfer = $itemTransfer;
+        }
 
-            $unitPrice = $priceRounded / $itemTransfer->getQuantity();
-            $itemTransfer->setUnitPriceToPayAggregation($unitPrice);
-            $itemTransfer->setUnitGrossPrice($unitPrice);
+        if ($lastItemTransfer && $roundingError) {
+            $lastItemUnitPrice = (int)round($lastItemTransfer->getUnitGrossPrice() + $roundingError);
+            $lastItemTransfer->setSumPriceToPayAggregation($lastItemUnitPrice)
+                ->setUnitPriceToPayAggregation($lastItemUnitPrice)
+                ->setUnitGrossPrice($lastItemUnitPrice);
         }
     }
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param float $priceRatio
-     * @param float $roundingError
      *
      * @return void
      */
-    protected function distributeOrderExpensesPrices(
-        OrderTransfer $orderTransfer,
-        float $priceRatio,
-        float &$roundingError
-    ): void {
+    protected function distributeOrderExpensesPrices(OrderTransfer $orderTransfer, float $priceRatio): void
+    {
+        $lastExpenseTransfer = null;
+        $roundingError = 0;
+
         foreach ($orderTransfer->getExpenses() as $expenseTransfer) {
-            $expenseTransfer->setSumGrossPrice(
-                $this->calculateRoundedPrice(
-                    $expenseTransfer->getSumGrossPrice(),
-                    $priceRatio,
-                    $roundingError,
-                ),
+            $roundedPrice = $this->calculateRoundedPrice(
+                $expenseTransfer->getSumGrossPrice(),
+                $priceRatio,
+                $roundingError
             );
+
+            $expenseTransfer->setSumGrossPrice($roundedPrice);
+            $lastExpenseTransfer = $expenseTransfer;
+        }
+
+        if ($lastExpenseTransfer && $roundingError) {
+            $lastExpenseSumGrossPrice = (int)round($lastExpenseTransfer->getSumGrossPrice() + $roundingError);
+            $lastExpenseTransfer->setSumGrossPrice($lastExpenseSumGrossPrice);
         }
     }
 }

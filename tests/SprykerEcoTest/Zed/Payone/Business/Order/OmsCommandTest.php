@@ -187,7 +187,7 @@ class OmsCommandTest extends AbstractPayoneTest
         $businessFactoryMock->method('createOrderPriceDistributor')->willReturn($orderPriceDistributorMock);
 
         return $this->createFacadeMock(
-            new DummyAdapter(static::AUTHORIZE_RESPONSE),
+            $adapter,
             $businessFactoryMock
         );
     }
