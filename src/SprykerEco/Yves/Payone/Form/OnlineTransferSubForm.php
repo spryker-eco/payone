@@ -283,7 +283,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return \SprykerEco\Yves\Payone\Form\OnlineTransferSubForm
+     * @return $this
      */
     abstract public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options);
 }

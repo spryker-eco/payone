@@ -17,6 +17,8 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\AbstractCondition;
 class PaymentIsUnderPaidConditionPlugin extends AbstractCondition
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem

@@ -92,7 +92,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @param int $idSalesOrder
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog[]
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
     public function createTransactionStatusLogsBySalesOrder($idSalesOrder);
 
@@ -102,7 +102,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      * @param int $idSalesOrderItem
      * @param array $ids
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem[]
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery
      */
     public function createTransactionStatusLogOrderItemsByLogIds($idSalesOrderItem, $ids);
 

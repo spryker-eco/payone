@@ -4,6 +4,7 @@
  * MIT License
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
+
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\AddressCheckResponseTransfer;
@@ -72,6 +73,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Distributes the prices for PayoneCaptureTransfer.order items and expenses depending on the payment method.
      * - Performs payment capture request to Payone API.
      *
      * @api
@@ -96,6 +98,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Distributes the prices for PayoneRefundTransfer.order items and expenses depending on the payment method.
      * - Performs payment refund request to Payone API.
      *
      * @api
@@ -594,6 +597,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Distributes the prices for PayonePartialOperationRequestTransfer.order items and expenses depending on the payment method.
      * - Performs partial capture call to Payone API.
      *
      * @api

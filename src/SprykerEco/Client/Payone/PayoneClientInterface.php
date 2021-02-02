@@ -21,7 +21,8 @@ use Generated\Shared\Transfer\QuoteTransfer;
 interface PayoneClientInterface
 {
     /**
-     * Prepares credit card check request to bring standard parameters and hash to front-end.
+     * Specification:
+     * - Prepares credit card check request to bring standard parameters and hash to front-end.
      *
      * @api
      *
@@ -30,7 +31,8 @@ interface PayoneClientInterface
     public function getCreditCardCheckRequest();
 
     /**
-     * Processes and saves transaction status update received from Payone.
+     * Specification:
+     * - Processes and saves transaction status update received from Payone.
      *
      * @api
      *
@@ -41,7 +43,8 @@ interface PayoneClientInterface
     public function updateStatus(PayoneTransactionStatusUpdateTransfer $statusUpdateTransfer);
 
     /**
-     * Performs GetFile request to Payone API for PDF file download.
+     * Specification:
+     * - Performs GetFile request to Payone API for PDF file download.
      *
      * @api
      *
@@ -52,7 +55,9 @@ interface PayoneClientInterface
     public function getFile(PayoneGetFileTransfer $getFileTransfer);
 
     /**
-     * Performs GetInvoice request to Payone API for PDF file download.
+     * Specification:
+     * - Performs GetInvoice request to Payone API for PDF file download.
+     * - Sends GenericPayment request to Payone with action "setexpresscheckout" to start express checkout on Paypal side and also to get work order ID.
      *
      * @api
      *
@@ -63,7 +68,8 @@ interface PayoneClientInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer);
 
     /**
-     * Fetches payment details for given order.
+     * Specification:
+     * - Fetches payment details for given order.
      *
      * @api
      *
@@ -74,7 +80,8 @@ interface PayoneClientInterface
     public function getPaymentDetail(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer);
 
     /**
-     * Verifies url HMAC signature and fires 'cancel redirect' event.
+     * Specification:
+     * - Verifies url HMAC signature and fires 'cancel redirect' event.
      *
      * @api
      *
@@ -85,18 +92,20 @@ interface PayoneClientInterface
     public function cancelRedirect(PayoneCancelRedirectTransfer $cancelRedirectTransfer);
 
     /**
-     * Performs BankAccountCheck request to Payone API.
+     * Specification:
+     * - Performs BankAccountCheck request to Payone API.
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $bankAccountCheckTransfer
+     * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
     public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer);
 
     /**
-     * Performs ManageMandate request to Payone API.
+     * Specification:
+     * - Performs ManageMandate request to Payone API.
      *
      * @api
      *
@@ -107,7 +116,9 @@ interface PayoneClientInterface
     public function manageMandate(QuoteTransfer $quoteTransfer);
 
     /**
-     * Send start paypal express checkout to payone.
+     * Specification:
+     * - Starts Paypal express checkout to Payone.
+     * - Sends GenericPayment request to Payone with action "getexpresscheckoutdetails" in order to get customer data like email and shipping data.
      *
      * @api
      *
@@ -118,6 +129,9 @@ interface PayoneClientInterface
     public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
+     * Specification:
+     * - Retrieves express checkout details.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -127,7 +141,8 @@ interface PayoneClientInterface
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
     /**
-     * Send request to Payone to get address validation result.
+     * Specification:
+     * - Send request to Payone to get address validation result.
      *
      * @api
      *
@@ -138,7 +153,8 @@ interface PayoneClientInterface
     public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
 
     /**
-     * Send request to Payone to get consumer score result.
+     * Specification:
+     * - Send request to Payone to get consumer score result.
      *
      * @api
      *

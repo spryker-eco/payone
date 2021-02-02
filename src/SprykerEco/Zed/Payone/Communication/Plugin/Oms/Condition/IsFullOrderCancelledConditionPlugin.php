@@ -7,8 +7,6 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Plugin\Oms\Condition;
 
-use DateInterval;
-use DateTime;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin as SprykerAbstractPlugin;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;

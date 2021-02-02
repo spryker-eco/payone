@@ -22,27 +22,27 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
  */
 class CreditCardPseudoTest extends AbstractMethodMapperTest
 {
-    const PSEUDO_CARD_PAN = '1234567890123456';
-    const CARD_TYPE = 'V';
-    const CARD_EXPIRE_DATE = '1609';
-    const STANDARD_PARAMETER_CLEARING_TYPE = 'cc';
+    public const PSEUDO_CARD_PAN = '1234567890123456';
+    public const CARD_TYPE = 'V';
+    public const CARD_EXPIRE_DATE = '1609';
+    public const STANDARD_PARAMETER_CLEARING_TYPE = 'cc';
 
-    const AUTHORIZATION_CREDIT_CARD_PSEUDO_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_CREDIT_CARD_PSEUDO_REQUIRED_PARAMS = [
         'pseudocardpan' => self::PSEUDO_CARD_PAN,
     ];
 
-    const PREAUTHORIZATION_CREDIT_CARD_PSEUDO_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_CREDIT_CARD_PSEUDO_REQUIRED_PARAMS = [
         'pseudocardpan' => self::PSEUDO_CARD_PAN,
     ];
 
-    const CREDIT_CARD_CHECK_REQUIRED_PARAMS = [
+    public const CREDIT_CARD_CHECK_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'cardpan' => self::PSEUDO_CARD_PAN,
         'cardtype' => self::CARD_TYPE,
         'cardexpiredate' => self::CARD_EXPIRE_DATE,
     ];
 
-    const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,
@@ -50,7 +50,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,

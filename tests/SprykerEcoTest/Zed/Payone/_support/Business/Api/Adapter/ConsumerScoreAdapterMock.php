@@ -15,12 +15,12 @@ class ConsumerScoreAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getSuccessResponse() :array
+    protected function getSuccessResponse(): array
     {
         $result = 'status=' . PayoneApiConstants::RESPONSE_TYPE_VALID .
             ' score=' . PayoneApiConstants::CONSUMER_SCORE_GREEN;
 
-        return explode(" ", $result);
+        return explode(' ', $result);
     }
 
     /**
@@ -32,6 +32,6 @@ class ConsumerScoreAdapterMock extends AbstractAdapterMock
             ' errorcode=500' .
             ' customer_message=' . RiskCheckManagerTest::RESPONSE_VALUE_CUSTOMER_MESSAGE;
 
-        return explode(" ", $result);
+        return explode(' ', $result);
     }
 }

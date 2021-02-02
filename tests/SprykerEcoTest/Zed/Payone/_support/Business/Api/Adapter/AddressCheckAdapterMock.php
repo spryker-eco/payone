@@ -15,7 +15,7 @@ class AddressCheckAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getSuccessResponse() :array
+    protected function getSuccessResponse(): array
     {
         $result = 'status=' . PayoneApiConstants::RESPONSE_TYPE_VALID .
             ' street_name=' . RiskCheckManagerTest::RESPONSE_VALUE_STREET_NAME .
@@ -24,7 +24,7 @@ class AddressCheckAdapterMock extends AbstractAdapterMock
             ' city=' . RiskCheckManagerTest::RESPONSE_VALUE_CITY .
             ' secstatus=' . PayoneApiConstants::ADDRESS_CHECK_SECSTATUS_CORRECT;
 
-        return explode(" ", $result);
+        return explode(' ', $result);
     }
 
     /**
@@ -39,6 +39,6 @@ class AddressCheckAdapterMock extends AbstractAdapterMock
             ' city=' . RiskCheckManagerTest::RESPONSE_VALUE_CITY .
             ' secstatus=' . PayoneApiConstants::ADDRESS_CHECK_SECSTATUS_NONE_CORRECTABLE;
 
-        return explode(" ", $result);
+        return explode(' ', $result);
     }
 }

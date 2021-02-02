@@ -201,14 +201,14 @@ interface AuthorizationContainerInterface
     public function getIntegratorVersion();
 
     /**
-     * @param PaymentMethod\AbstractPaymentMethodContainer $paymentMethod
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer $paymentMethod
      *
      * @return void
      */
     public function setPaymentMethod(AbstractPaymentMethodContainer $paymentMethod);
 
     /**
-     * @return PaymentMethod\AbstractPaymentMethodContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer
      */
     public function getPaymentMethod();
 

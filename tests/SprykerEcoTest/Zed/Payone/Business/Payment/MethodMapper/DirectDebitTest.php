@@ -21,15 +21,15 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
  */
 class DirectDebitTest extends AbstractMethodMapperTest
 {
-    const STANDARD_PARAMETER_CLEARING_TYPE = 'elv';
+    public const STANDARD_PARAMETER_CLEARING_TYPE = 'elv';
 
-    const AUTHORIZATION_DIRECT_DEBIT_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_DIRECT_DEBIT_REQUIRED_PARAMS = [
     ];
 
-    const PREAUTHORIZATION_DIRECT_DEBIT_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_DIRECT_DEBIT_REQUIRED_PARAMS = [
     ];
 
-    const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,
@@ -37,7 +37,7 @@ class DirectDebitTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
+    public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'reference' => self::PAYMENT_REFERENCE,

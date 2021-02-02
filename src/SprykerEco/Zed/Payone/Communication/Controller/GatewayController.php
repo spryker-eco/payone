@@ -184,6 +184,7 @@ class GatewayController extends AbstractGatewayController
         }
         $response = $this->getFacade()->getPaymentDetail($getPaymentDetailTransfer->getOrderId());
         $getPaymentDetailTransfer->setPaymentDetail($response);
+
         return $getPaymentDetailTransfer;
     }
 

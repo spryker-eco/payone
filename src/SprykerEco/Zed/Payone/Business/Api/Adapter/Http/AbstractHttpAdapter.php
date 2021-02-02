@@ -136,6 +136,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
                 if (strlen($line) > 0) {
                     $result[$key] = $line;
                 }
+
                 continue;
             }
 

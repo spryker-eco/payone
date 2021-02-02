@@ -17,7 +17,8 @@ class SetExpressCheckoutAdapterMock extends AbstractAdapterMock
         $result = 'status=REDIRECT' .
             ' redirecturl=https://www.sandbox.paypal.com/webscr?useraction=continue&cmd=_express-checkout&token=EC-1XL23256WD360340A' .
             ' workorderid=WX1A1SE572GTG4FF';
-        return explode(" ", $result);
+
+        return explode(' ', $result);
     }
 
     /**
@@ -31,6 +32,6 @@ class SetExpressCheckoutAdapterMock extends AbstractAdapterMock
             ' errormessage=Amount error' .
             ' customermessage=An error occured while processing this transaction (wrong parameters).';
 
-        return explode(" ", $result);
+        return explode(' ', $result);
     }
 }

@@ -16,6 +16,7 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItem;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -40,33 +41,29 @@ class PayoneZedTester extends Actor
     protected const FAKE_REFERENCE = 'reference';
     protected const FAKE_PAYONE_ORDER_ITEM_STATUS = 'new';
 
-   /**
-    * Define custom actions here
-    */
-
     /**
      * @return \Generated\Shared\Transfer\SaveOrderTransfer
      */
-   public function createOrder(): SaveOrderTransfer
-   {
-       return $this->haveOrder([], static::TEST_STATE_MACHINE_NAME);
-   }
+    public function createOrder(): SaveOrderTransfer
+    {
+        return $this->haveOrder([], static::TEST_STATE_MACHINE_NAME);
+    }
 
     /**
      * @param int $idSalesOrder
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-   public function createPaymentPayone(int $idSalesOrder): SpyPaymentPayone
-   {
-       $paymentPayoneEntity = (new SpyPaymentPayone())
+    public function createPaymentPayone(int $idSalesOrder): SpyPaymentPayone
+    {
+        $paymentPayoneEntity = (new SpyPaymentPayone())
            ->setFkSalesOrder($idSalesOrder)
            ->setPaymentMethod(static::FAKE_PAYMENT_METHOD)
            ->setReference(static::FAKE_REFERENCE);
-       $paymentPayoneEntity->save();
+        $paymentPayoneEntity->save();
 
-       return $paymentPayoneEntity;
-   }
+        return $paymentPayoneEntity;
+    }
 
     /**
      * @param int $idPaymentPayone
@@ -74,39 +71,39 @@ class PayoneZedTester extends Actor
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItem
      */
-   public function createPaymentPayoneOrderItem(int $idPaymentPayone, int $idSalesOrderItem): SpyPaymentPayoneOrderItem
-   {
-       $paymentPayoneOrderItemEntity = (new SpyPaymentPayoneOrderItem())
+    public function createPaymentPayoneOrderItem(int $idPaymentPayone, int $idSalesOrderItem): SpyPaymentPayoneOrderItem
+    {
+        $paymentPayoneOrderItemEntity = (new SpyPaymentPayoneOrderItem())
            ->setFkPaymentPayone($idPaymentPayone)
            ->setFkSalesOrderItem($idSalesOrderItem)
            ->setStatus(static::FAKE_PAYONE_ORDER_ITEM_STATUS);
 
-       $paymentPayoneOrderItemEntity->save();
+        $paymentPayoneOrderItemEntity->save();
 
-       return $paymentPayoneOrderItemEntity;
-   }
+        return $paymentPayoneOrderItemEntity;
+    }
 
     /**
      * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\RefundTransfer
      */
-   public function createRefund(int $idSalesOrder): RefundTransfer
-   {
-       $salesQueryContainer = $this->getLocator()->sales()->queryContainer();
-       $orderEntity = $salesQueryContainer->querySalesOrderById($idSalesOrder)->findOne();
-       $orderItem = $orderEntity->getItems()->getFirst();
+    public function createRefund(int $idSalesOrder): RefundTransfer
+    {
+        $salesQueryContainer = $this->getLocator()->sales()->queryContainer();
+        $orderEntity = $salesQueryContainer->querySalesOrderById($idSalesOrder)->findOne();
+        $orderItem = $orderEntity->getItems()->getFirst();
 
-       return $this->getLocator()->refund()->facade()->calculateRefund([$orderItem], $orderEntity);
-   }
+        return $this->getLocator()->refund()->facade()->calculateRefund([$orderItem], $orderEntity);
+    }
 
     /**
      * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-   public function getOrderTransfer(int $idSalesOrder): OrderTransfer
-   {
-       return $this->getLocator()->sales()->facade()->findOrderByIdSalesOrder($idSalesOrder);
-   }
+    public function getOrderTransfer(int $idSalesOrder): OrderTransfer
+    {
+        return $this->getLocator()->sales()->facade()->findOrderByIdSalesOrder($idSalesOrder);
+    }
 }

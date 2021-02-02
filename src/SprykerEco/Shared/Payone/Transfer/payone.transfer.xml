@@ -250,6 +250,25 @@
     <transfer name="Order">
         <property name="idSalesOrder" type="int"/>
         <property name="payonePayment" type="PayonePayment"/>
+        <property name="totals" type="Totals"/>
+        <property name="payments" type="Payment[]" singular="payment"/>
+        <property name="items" type="Item[]" singular="item"/>
+        <property name="expenses" type="Expense[]" singular="expense"/>
+    </transfer>
+
+    <transfer name="Item">
+        <property name="quantity" type="int"/>
+        <property name="sumPriceToPayAggregation" type="int"/>
+        <property name="unitPriceToPayAggregation" type="int"/>
+        <property name="unitGrossPrice" type="int"/>
+    </transfer>
+
+    <transfer name="Expense">
+        <property name="sumGrossPrice" type="int"/>
+    </transfer>
+
+    <transfer name="Totals">
+        <property name="grandTotal" type="int"/>
     </transfer>
 
     <transfer name="CheckoutRequest">
@@ -363,6 +382,8 @@
         <property name="payonePaypalExpressCheckout" type="PayonePaypalExpressCheckout"/>
         <property name="summaryIncludePath" type="string"/>
         <property name="successIncludePath" type="string"/>
+        <property name="paymentProvider" type="string"/>
+        <property name="amount" type="int"/>
     </transfer>
 
     <transfer name="PayonePaypalExpressCheckout">

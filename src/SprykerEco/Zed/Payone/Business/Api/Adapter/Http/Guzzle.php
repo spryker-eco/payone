@@ -63,6 +63,7 @@ class Guzzle extends AbstractHttpAdapter
             $response = $this->client->post($url, ['form_params' => $params]);
         } catch (ConnectException $e) {
             $this->logger->flush();
+
             throw new TimeoutException('Timeout - Payone Communication: ' . $e->getMessage());
         } catch (ClientException $e) {
             $response = $e->getResponse();

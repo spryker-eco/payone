@@ -22,6 +22,8 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param array $orderItems

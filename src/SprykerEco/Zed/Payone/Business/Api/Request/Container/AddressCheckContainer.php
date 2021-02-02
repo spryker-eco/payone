@@ -359,7 +359,7 @@ class AddressCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getBirthday(): ?string
     {

@@ -37,7 +37,6 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         GenericPaymentContainer $genericPayment,
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
     ) {
-
         $quoteTransfer = $requestTransfer->getQuote();
 
         $genericPayment = $this->mapQuoteTransferToGenericPayment($genericPayment, $quoteTransfer);
@@ -58,12 +57,12 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         GenericPaymentContainer $genericPayment,
         QuoteTransfer $quoteTransfer
     ) {
-
         $genericPayment->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $genericPayment->setWorkOrderId(
             $quoteTransfer->getPayment()
                 ->getPayonePaypalExpressCheckout()->getWorkOrderId()
         );
+
         return $genericPayment;
     }
 
@@ -100,6 +99,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     public function mapPaymentToPreauthorization(SpyPaymentPayone $paymentEntity)
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer $preAuthorizationContainer */
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
 
         $preAuthorizationContainer->setWorkOrderId($paymentEntity->getSpyPaymentPayoneDetail()->getWorkOrderId());

@@ -15,7 +15,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 class ManageMandateValidator extends ConstraintValidator
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
+     *
      * @param string $value
      * @param \Symfony\Component\Validator\Constraint|\Spryker\Zed\Discount\Communication\Form\Constraint\QueryString $constraint
      *
@@ -60,6 +61,7 @@ class ManageMandateValidator extends ConstraintValidator
         $data->getPayment()->getPayoneDirectDebit()->setBankcode(urldecode($response->getBankCode()));
         $data->getPayment()->getPayoneDirectDebit()->setIban(urldecode($response->getIban()));
         $data->getPayment()->getPayoneDirectDebit()->setBic(urldecode($response->getBic()));
+
         return [];
     }
 }

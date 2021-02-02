@@ -35,7 +35,6 @@ use Generated\Shared\Transfer\TotalsTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use Spryker\Shared\Shipment\ShipmentConfig;
-use Spryker\Shared\Shipment\ShipmentConstants;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
@@ -65,6 +64,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapper;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapper;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapper;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapper;
+use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
@@ -87,9 +87,8 @@ class PaymentManager implements PaymentManagerInterface
      * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE
      * @see \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
      *
-     * @deprecated Necessary in order to save compatibility with  spryker/shipping version less than "^8.0.0".
+     * @deprecated Necessary in order to save compatibility with spryker/shipping version less than "^8.0.0".
      * use \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE instead if shipping version is higher
-     *
      */
     protected const SHIPMENT_EXPENSE_TYPE = 'SHIPMENT_EXPENSE_TYPE';
 
@@ -119,7 +118,7 @@ class PaymentManager implements PaymentManagerInterface
     protected $modeDetector;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
+     * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface|\SprykerEco\Zed\Payone\Business\Key\HashGenerator
      */
     protected $hashGenerator;
 
@@ -144,6 +143,11 @@ class PaymentManager implements PaymentManagerInterface
     protected $payoneEntityManager;
 
     /**
+     * @var \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface
+     */
+    protected $orderPriceDistributor;
+
+    /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
@@ -153,6 +157,7 @@ class PaymentManager implements PaymentManagerInterface
      * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
+     * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
      */
     public function __construct(
         AdapterInterface $executionAdapter,
@@ -163,7 +168,8 @@ class PaymentManager implements PaymentManagerInterface
         ModeDetectorInterface $modeDetector,
         HmacGeneratorInterface $urlHmacGenerator,
         PayoneRepositoryInterface $payoneRepository,
-        PayoneEntityManagerInterface $payoneEntityManager
+        PayoneEntityManagerInterface $payoneEntityManager,
+        OrderPriceDistributorInterface $orderPriceDistributor
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
@@ -174,6 +180,7 @@ class PaymentManager implements PaymentManagerInterface
         $this->urlHmacGenerator = $urlHmacGenerator;
         $this->payoneRepository = $payoneRepository;
         $this->payoneEntityManager = $payoneEntityManager;
+        $this->orderPriceDistributor = $orderPriceDistributor;
     }
 
     /**
@@ -308,6 +315,12 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
+        $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
+            $captureTransfer->getOrder()
+        );
+        $captureTransfer->setOrder($distributedPriceOrderTransfer);
+        $captureTransfer->setAmount($distributedPriceOrderTransfer->getTotals()->getGrandTotal());
+
         $paymentEntity = $this->getPaymentEntity($captureTransfer->getPayment()->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
@@ -320,6 +333,7 @@ class PaymentManager implements PaymentManagerInterface
             $requestContainer = $this->prepareOrderHandling($captureTransfer->getOrder(), $requestContainer);
         }
 
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
         if (!empty($captureTransfer->getSettleaccount())) {
             $businnessContainer = new BusinessContainer();
             $businnessContainer->setSettleAccount($captureTransfer->getSettleaccount());
@@ -351,6 +365,11 @@ class PaymentManager implements PaymentManagerInterface
     public function executePartialCapture(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
     ): CaptureResponseTransfer {
+        $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
+            $payonePartialOperationRequestTransfer->getOrder()
+        );
+        $payonePartialOperationRequestTransfer->setOrder($distributedPriceOrderTransfer);
+
         $paymentEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
@@ -362,6 +381,7 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $this->prepareOrderShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
 
         $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
         $requestContainer = $this->prepareOrderHandling($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
 
         $businessContainer = new BusinessContainer();
@@ -572,6 +592,7 @@ class PaymentManager implements PaymentManagerInterface
 
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice $paymentMethodMapper */
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE);
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer */
         $requestContainer = $paymentMethodMapper->mapGetSecurityInvoice($getSecurityInvoiceTransfer);
         $this->setStandardParameter($requestContainer);
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
@@ -588,7 +609,7 @@ class PaymentManager implements PaymentManagerInterface
     /**
      * @param int $transactionId
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer
+     * @return string
      */
     public function getInvoiceTitle($transactionId)
     {
@@ -606,6 +627,11 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer)
     {
+        $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
+            $refundTransfer->getOrder()
+        );
+        $refundTransfer->setOrder($distributedPriceOrderTransfer);
+
         $payonePaymentTransfer = $refundTransfer->getPayment();
 
         $paymentEntity = $this->getPaymentEntity($payonePaymentTransfer->getFkSalesOrder());
@@ -1132,6 +1158,7 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
+        /** @var \SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface $paymentMethodMapper */
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
         );
@@ -1153,6 +1180,7 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
     {
+        /** @var \SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface $paymentMethodMapper */
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
         );

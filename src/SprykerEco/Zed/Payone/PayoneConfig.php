@@ -58,6 +58,8 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * Fetches API request mode from config (could be 'live' or 'test').
      *
+     * @api
+     *
      * @return string
      */
     public function getMode()
@@ -70,6 +72,8 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * Fetches default value for sequencenumber request parameter.
      *
+     * @api
+     *
      * @return string
      */
     public function getEmptySequenceNumber()
@@ -81,6 +85,8 @@ class PayoneConfig extends AbstractBundleConfig
 
     /**
      * Fetches parameters that are common for all requests to Payone API.
+     *
+     * @api
      *
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
@@ -109,6 +115,8 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * Fetches reference string to identify Payone payment.
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\PayonePaymentTransfer $paymentTransfer
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
      *
@@ -121,6 +129,8 @@ class PayoneConfig extends AbstractBundleConfig
 
     /**
      * Fetches text for account statements.
+     *
+     * @api
      *
      * @param array $orderItems
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrder $orderEntity
@@ -144,6 +154,8 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * Returns path to glossary translations file.
      *
+     * @api
+     *
      * @return string
      */
     public function getTranslationFilePath()
@@ -152,6 +164,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getBusinessRelation(): string
@@ -162,6 +176,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getGScoreAvailablePaymentMethods(): array
@@ -172,6 +188,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getYScoreAvailablePaymentMethods(): array
@@ -182,6 +200,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getRScoreAvailablePaymentMethods(): array
@@ -192,6 +212,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string[]
      */
     public function getUScoreAvailablePaymentMethods(): array
@@ -202,6 +224,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getAddressCheckType(): string
@@ -212,6 +236,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getConsumerScoreType(): string

@@ -45,7 +45,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      */
     public function translate($keyName, array $data = [], ?LocaleTransfer $localeTransfer = null)
     {
-        return $this->glossaryFacade->translate($keyName, $data ,$localeTransfer);
+        return $this->glossaryFacade->translate($keyName, $data, $localeTransfer);
     }
 
     /**

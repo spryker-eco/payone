@@ -15,7 +15,7 @@ abstract class AbstractAdapterMock extends AbstractHttpAdapter implements Adapte
     /**
      * @const DEFAULT_GETEWAY_URL
      */
-    const DEFAULT_GETEWAY_URL = '';
+    public const DEFAULT_GETEWAY_URL = '';
 
     /**
      * @var bool

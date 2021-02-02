@@ -18,6 +18,8 @@ class PayoneConfig extends AbstractBundleConfig
     ];
 
     /**
+     * @api
+     *
      * @return array Countries
      */
     public function getPayOneBancontactAvailableCountries(): array
@@ -26,6 +28,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getStandardCheckoutEntryPoint()
@@ -36,6 +40,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getSuccessUrl()
@@ -44,6 +50,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getBackUrl()
@@ -52,6 +60,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getFailureUrl()
@@ -60,6 +70,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getFailureProjectUrl()
@@ -70,6 +82,8 @@ class PayoneConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public function getBackProjectUrl()

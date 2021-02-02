@@ -21,6 +21,8 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 class CaptureWithSettlementCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param array $orderItems
@@ -38,7 +40,6 @@ class CaptureWithSettlementCommandPlugin extends AbstractPayonePlugin implements
         $captureTransfer->setPayment($paymentTransfer);
 
         $orderTransfer = $this->getOrderTransfer($orderEntity);
-
         $captureTransfer->setAmount($orderTransfer->getTotals()->getGrandTotal());
         $captureTransfer->setSettleaccount(PayoneApiConstants::SETTLE_ACCOUNT_YES);
         $captureTransfer->setOrder($orderTransfer);

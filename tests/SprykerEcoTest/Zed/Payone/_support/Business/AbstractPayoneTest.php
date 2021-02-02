@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MIT License
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -17,7 +18,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  * @group Functional
  * @group SprykerEco
  * @group Zed
- * @group Ratepay
+ * @group Payone
  * @group Business
  * @group Request
  * @group AbstractPayoneTest

@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
-use Psr\Log\LoggerInterface as MessengerInterface;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -16,7 +15,8 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\Guzzle;
 use SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriter;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest;
 use SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinder;
-use SprykerEco\Zed\Payone\Business\Internal\Installer;
+use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributor;
+use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HashProvider;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
@@ -48,7 +48,6 @@ use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
-use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**
@@ -78,7 +77,8 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createModeDetector(),
             $this->createUrlHmacGenerator(),
             $this->getRepository(),
-            $this->getEntityManager()
+            $this->getEntityManager(),
+            $this->createOrderPriceDistributor()
         );
 
         foreach ($this->getAvailablePaymentMethods() as $paymentMethod) {
@@ -346,22 +346,6 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @param \Psr\Log\LoggerInterface $messenger
-     *
-     * @return \Spryker\Zed\Ratepay\Business\Internal\Install
-     */
-    public function createInstaller(MessengerInterface $messenger)
-    {
-        $installer = new Installer(
-            $this->getGlossaryFacade(),
-            $this->getConfig()
-        );
-        $installer->setMessenger($messenger);
-
-        return $installer;
-    }
-
-    /**
      * @param \Spryker\Shared\Kernel\Store $store
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment
@@ -420,5 +404,13 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createPayoneOrderItemStatusFinder(): PayoneOrderItemStatusFinderInterface
     {
         return new PayoneOrderItemStatusFinder($this->getRepository());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface
+     */
+    public function createOrderPriceDistributor(): OrderPriceDistributorInterface
+    {
+        return new OrderPriceDistributor();
     }
 }

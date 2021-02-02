@@ -36,7 +36,7 @@ class RiskCheckManagerTest extends AbstractPayoneTest
     {
         $adapter = new AddressCheckAdapterMock();
 
-        $facade = $this->getFacadeMock($adapter);
+        $facade = $this->createFacadeMock($adapter);
         $responseTransfer = $facade->sendAddressCheckRequest($this->quoteTransfer);
 
         $this->assertEquals(PayoneApiConstants::ADDRESS_CHECK_SECSTATUS_CORRECT, $responseTransfer->getSecstatus());
@@ -55,7 +55,7 @@ class RiskCheckManagerTest extends AbstractPayoneTest
         $adapter = new AddressCheckAdapterMock();
         $adapter->setExpectSuccess(false);
 
-        $facade = $this->getFacadeMock($adapter);
+        $facade = $this->createFacadeMock($adapter);
         $responseTransfer = $facade->sendAddressCheckRequest($this->quoteTransfer);
 
         $this->assertEquals(PayoneApiConstants::ADDRESS_CHECK_SECSTATUS_NONE_CORRECTABLE, $responseTransfer->getSecstatus());
@@ -73,7 +73,7 @@ class RiskCheckManagerTest extends AbstractPayoneTest
     {
         $adapter = new ConsumerScoreAdapterMock();
 
-        $facade = $this->getFacadeMock($adapter);
+        $facade = $this->createFacadeMock($adapter);
         $responseTransfer = $facade->sendConsumerScoreRequest($this->quoteTransfer);
 
         $this->assertEquals(PayoneApiConstants::RESPONSE_TYPE_VALID, $responseTransfer->getStatus());
@@ -89,7 +89,7 @@ class RiskCheckManagerTest extends AbstractPayoneTest
         $adapter = new ConsumerScoreAdapterMock();
         $adapter->setExpectSuccess(false);
 
-        $facade = $this->getFacadeMock($adapter);
+        $facade = $this->createFacadeMock($adapter);
         $responseTransfer = $facade->sendConsumerScoreRequest($this->quoteTransfer);
 
         $this->assertEquals(PayoneApiConstants::RESPONSE_TYPE_INVALID, $responseTransfer->getStatus());

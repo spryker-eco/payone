@@ -14,10 +14,14 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
  */
 class PaymentLogReceiverPlugin extends AbstractPlugin implements PaymentLogReceiverPluginInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @api
      *
      * @param \Propel\Runtime\Collection\ObjectCollection $orders
@@ -28,6 +32,7 @@ class PaymentLogReceiverPlugin extends AbstractPlugin implements PaymentLogRecei
     {
         $orderCollectionTransfer = new OrderCollectionTransfer();
         $orderCollectionTransfer->setOrders($orders->getData());
+
         return $this->getFacade()->getPaymentLogs($orderCollectionTransfer);
     }
 }
