@@ -31,6 +31,7 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
@@ -217,6 +218,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT => $this->createDirectDebit($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => $this->createGenericPayment($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_CASH_ON_DELIVERY => $this->createCashOnDelivery($storeConfig, $this->getGlossaryFacade()),
+            PayoneApiConstants::PAYMENT_METHOD_KLARNA => $this->createKlarna($storeConfig),
         ];
     }
 
@@ -355,6 +357,18 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $genericPayment = new GenericPayment($store);
 
         return $genericPayment;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Store $store
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna
+     */
+    protected function createKlarna(Store $store)
+    {
+        $klarna = new Klarna($store);
+
+        return $klarna;
     }
 
     /**

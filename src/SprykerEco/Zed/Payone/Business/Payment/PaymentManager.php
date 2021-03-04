@@ -20,6 +20,7 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
@@ -68,6 +69,7 @@ use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
@@ -1593,5 +1595,24 @@ class PaymentManager implements PaymentManagerInterface
             );
 
         return $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return PayoneKlarnaSessionResponseTransfer
+     */
+    public function startKlarnaSession(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer
+    {
+        /** @var Klarna $paymentMethodMapper */
+        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
+            PayoneApiConstants::PAYMENT_METHOD_KLARNA
+        );
+
+        $klarnaContainer = $paymentMethodMapper->mapPaymentToStartSession($quoteTransfer);
+        $this->setStandardParameter($klarnaContainer);
+        $rawResponse = $this->executionAdapter->sendRequest($klarnaContainer);
+
+        return new PayoneKlarnaSessionResponseTransfer(); // TODO: setup response
     }
 }

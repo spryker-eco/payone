@@ -17,6 +17,7 @@ use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Sales\Persistence\Base\SpySalesOrderQuery;
@@ -206,5 +207,15 @@ class GatewayController extends AbstractGatewayController
     public function sendConsumerScoreRequestAction(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer
     {
         return $this->getFacade()->sendConsumerScoreRequest($quoteTransfer);
+    }
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return PayoneKlarnaSessionResponseTransfer
+     */
+    public function startKlarnaSessionAction(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer
+    {
+        return $this->getFacade()->startKlarnaSession($quoteTransfer);
     }
 }

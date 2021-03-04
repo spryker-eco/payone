@@ -26,6 +26,7 @@ class DeSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
             PaymentTransfer::PAYONE_E_WALLET => $this->createEWalletSubFormPlugin(),
             PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER => $this->createPayoneGiropayOnlineTransferSubFormPlugin(),
             PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER => $this->createPayoneInstantOnlineTransferSubFormPlugin(),
+            PaymentTransfer::PAYONE_KLARNA => $this->createPayoneInstantOnlineTransferSubFormPlugin(),
         ];
     }
 

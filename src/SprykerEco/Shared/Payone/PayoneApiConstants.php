@@ -56,6 +56,9 @@ interface PayoneApiConstants
     // online transfer methods
     public const PAYMENT_METHOD_ONLINE_BANK_TRANSFER = 'payment.payone.online_bank_transfer';
 
+    // klarna payments
+    public const PAYMENT_METHOD_KLARNA = 'payment.payone.klarna';
+
     // CLEARING TYPE
 
     public const CLEARING_TYPE_DIRECT_DEBIT = 'elv';

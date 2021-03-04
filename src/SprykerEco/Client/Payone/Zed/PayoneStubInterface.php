@@ -16,6 +16,7 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -97,4 +98,11 @@ interface PayoneStubInterface
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
      */
     public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
+     */
+    public function startKlarnaSession(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer;
 }

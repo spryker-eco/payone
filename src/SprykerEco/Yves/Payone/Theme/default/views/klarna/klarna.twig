@@ -1,0 +1,16 @@
+{% extends model('template') %}
+
+{% define data = {
+    form: form
+} %}
+
+{% block body %}
+    {% include molecule('payone-klarna', 'Payone') with {
+        data: {
+            form: data.form,
+            token: vars.token
+        }
+    } only %}
+{% endblock %}
+
+

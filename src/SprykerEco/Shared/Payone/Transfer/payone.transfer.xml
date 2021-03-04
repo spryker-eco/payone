@@ -380,6 +380,7 @@
         <property name="payoneInvoice" type="PayonePayment"/>
         <property name="payoneSecurityInvoice" type="PayonePayment"/>
         <property name="payonePaypalExpressCheckout" type="PayonePaypalExpressCheckout"/>
+        <property name="payoneKlarna" type="PayoneKlarna"/>
         <property name="summaryIncludePath" type="string"/>
         <property name="successIncludePath" type="string"/>
         <property name="paymentProvider" type="string"/>
@@ -415,6 +416,10 @@
         <property name="shippingCity" type="string"/>
         <property name="shippingState" type="string"/>
         <property name="shippingCountry" type="string"/>
+    </transfer>
+
+    <transfer name="PayoneKlarna">
+        <property name="token" type="string"/>
     </transfer>
 
     <!--Response container replacement related transfers start-->
@@ -517,6 +522,10 @@
         <property name="scoreValue" type="string"/>
         <property name="customerMessage" type="string"/>
         <property name="gender" type="string"/>
+    </transfer>
+
+    <transfer name="PayoneKlarnaSessionResponse">
+
     </transfer>
     <!--Response container replacement related transfers end-->
 </transfers>

@@ -24,6 +24,7 @@ use SprykerEco\Yves\Payone\Form\DataProvider\GiropayOnlineTransferDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\IdealOnlineTransferDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\InstantOnlineTransferDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider;
+use SprykerEco\Yves\Payone\Form\DataProvider\KlarnaDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceCardOnlineTransferDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceEfinanceOnlineTransferDataProvider;
 use SprykerEco\Yves\Payone\Form\DataProvider\PrePaymentDataProvider;
@@ -36,6 +37,7 @@ use SprykerEco\Yves\Payone\Form\GiropayOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\InstantOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\InvoiceSubForm;
+use SprykerEco\Yves\Payone\Form\KlarnaSubForm;
 use SprykerEco\Yves\Payone\Form\PostfinanceCardOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PostfinanceEfinanceOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\PrePaymentForm;
@@ -85,6 +87,14 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     */
+    public function createKlarnaSubForm(): SubFormInterface
+    {
+        return new KlarnaSubForm();
+    }
+
+    /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider
      */
     public function createInvoiceSubFormDataProvider()
@@ -114,6 +124,14 @@ class PayoneFactory extends AbstractFactory
     public function createSecurityInvoiceSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
         return new SecurityInvoiceDataProvider();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Form\DataProvider\KlarnaDataProvider
+     */
+    public function createKlarnaSubFormDataProvider()
+    {
+        return new KlarnaDataProvider($this->getClient());
     }
 
     /**

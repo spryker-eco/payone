@@ -13,6 +13,7 @@ use SprykerEco\Yves\Payone\Plugin\PayoneDirectDebitSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayoneEWalletSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayoneInstantOnlineTransferSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayoneInvoiceSubFormPlugin;
+use SprykerEco\Yves\Payone\Plugin\PayoneKlarnaSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayoneSecurityInvoiceSubFormPlugin;
 
@@ -72,5 +73,13 @@ abstract class AbstractSubFormsCreator
     protected function createPayoneInstantOnlineTransferSubFormPlugin()
     {
         return new PayoneInstantOnlineTransferSubFormPlugin();
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Plugin\PayoneKlarnaSubFormPlugin
+     */
+    protected function createPayoneKlarnaSubFormPlugin()
+    {
+        return new PayoneKlarnaSubFormPlugin();
     }
 }

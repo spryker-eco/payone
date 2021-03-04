@@ -1,0 +1,41 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'payone-klarna',
+    tag: 'payone-klarna'
+} %}
+
+{% define data = {
+    scriptSrc: 'https://x.klarnacdn.net/kp/lib/v1/api.js',
+    token: data.token
+} %}
+
+{% block body %}
+    {% include molecule('script-loader') with {
+        attributes: {
+            src: data.scriptSrc,
+            async: true
+        }
+    } only %}
+
+    <div id="klarna_container"></div>
+
+    <script>
+        window.klarnaAsyncCallback = function () {
+            Klarna.Payments.init({
+                client_token: data.token
+            })
+        };
+
+        window.onload = function () {
+            Klarna.Payments.load({
+                container: '#klarna_container',
+                payment_method_category: 'pay_later'
+            }, function (res) {
+                // console.debug(res);
+
+            })
+        }
+    </script>
+
+{% endblock %}

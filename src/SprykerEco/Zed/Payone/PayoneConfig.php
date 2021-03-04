@@ -35,6 +35,7 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYMENT_METHOD_SECURITY_INVOICE = 'payoneSecurityInvoice';
     public const PAYMENT_METHOD_CASH_ON_DELIVERY = 'payoneCashOnDelivery';
     public const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE;
+    public const PAYMENT_METHOD_KLARNA = 'payoneKlarna';
 
     public const PAYONE_ADDRESS_CHECK_BASIC = 'BA';
     public const PAYONE_ADDRESS_CHECK_PERSON = 'PE';

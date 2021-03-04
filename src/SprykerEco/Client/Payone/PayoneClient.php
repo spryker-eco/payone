@@ -17,6 +17,7 @@ use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePersonalDataTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
@@ -24,7 +25,7 @@ use Spryker\Client\Kernel\AbstractClient;
 /**
  * @api
  *
- * @method \SprykerEco\Client\Payone\PayoneFactory getFactory()
+ * @method PayoneFactory getFactory()
  */
 class PayoneClient extends AbstractClient implements PayoneClientInterface
 {
@@ -214,5 +215,19 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer
     {
         return $this->getFactory()->createZedStub()->sendConsumerScoreRequest($quoteTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
+     */
+    public function startKlarnaSessionRequest(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer
+    {
+        return $this->getFactory()->createZedStub()->startKlarnaSession($quoteTransfer);
     }
 }

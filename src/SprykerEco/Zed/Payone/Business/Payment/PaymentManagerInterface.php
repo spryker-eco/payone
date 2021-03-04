@@ -22,6 +22,7 @@ use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
 
@@ -202,4 +203,12 @@ interface PaymentManagerInterface
     public function executePartialCapture(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
     ): CaptureResponseTransfer;
+
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return PayoneKlarnaSessionResponseTransfer
+     */
+    public function startKlarnaSession(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer;
+
 }
