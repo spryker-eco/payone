@@ -16,7 +16,9 @@ use SprykerEco\Client\Payone\PayoneClientInterface;
 
 class KlarnaDataProvider implements StepEngineFormDataProviderInterface
 {
-    /** @var PayoneClientInterface */
+    /**
+     * @var \SprykerEco\Client\Payone\PayoneClientInterface
+     */
     private $client;
 
     public function __construct(PayoneClientInterface $client)
@@ -29,7 +31,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
@@ -47,7 +49,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return ['token' => 'ddddddddddd']; // TODO: get token $this->client->startKlarnaSessionRequest($quoteTransfer);
     }

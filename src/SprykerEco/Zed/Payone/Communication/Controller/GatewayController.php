@@ -210,9 +210,9 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return PayoneKlarnaSessionResponseTransfer
+     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
      */
     public function startKlarnaSessionAction(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer
     {

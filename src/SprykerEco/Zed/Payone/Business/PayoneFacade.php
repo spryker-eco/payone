@@ -742,9 +742,9 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @api
      *
-     * @param PayoneKlarnaSessionResponseTransfer $payoneSessionTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $payoneSessionTransfer
      *
-     * @return PayoneKlarnaSessionResponseTransfer
+     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
      */
     public function startKlarnaSession(
         QuoteTransfer $quoteTransfer

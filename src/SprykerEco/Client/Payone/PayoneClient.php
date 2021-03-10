@@ -25,7 +25,7 @@ use Spryker\Client\Kernel\AbstractClient;
 /**
  * @api
  *
- * @method PayoneFactory getFactory()
+ * @method \SprykerEco\Client\Payone\PayoneFactory getFactory()
  */
 class PayoneClient extends AbstractClient implements PayoneClientInterface
 {

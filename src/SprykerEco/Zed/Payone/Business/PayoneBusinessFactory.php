@@ -364,11 +364,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna
      */
-    protected function createKlarna(Store $store)
+    protected function createKlarna(Store $store): Klarna
     {
-        $klarna = new Klarna($store);
-
-        return $klarna;
+        return new Klarna($store);
     }
 
     /**
