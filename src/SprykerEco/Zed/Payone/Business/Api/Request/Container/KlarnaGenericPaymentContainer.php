@@ -253,4 +253,20 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
     {
         $this->financingtype = $financingtype;
     }
+
+    /**
+     * @return GenericPayment\PaydataContainer
+     */
+    public function getPaydata(): GenericPayment\PaydataContainer
+    {
+        return $this->paydata;
+    }
+
+    /**
+     * @param GenericPayment\PaydataContainer $paydata
+     */
+    public function setPaydata(GenericPayment\PaydataContainer $paydata): void
+    {
+        $this->paydata = $paydata;
+    }
 }

@@ -128,6 +128,21 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $email;
 
     /**
+     * @var string|null
+     */
+    protected $backurl;
+
+    /**
+     * @var string|null
+     */
+    protected $successurl;
+
+    /**
+     * @var string|null
+     */
+    protected $errorurl;
+
+    /**
      * @param string $encoding
      *
      * @return $this
@@ -138,7 +153,6 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
         return $this;
     }
-
     /**
      * @return string
      */
@@ -559,5 +573,59 @@ abstract class AbstractRequestContainer extends AbstractContainer
     public function setEmail(string $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackUrl(): string
+    {
+        return $this->backurl;
+    }
+
+    /**
+     * @param string $backurl
+     *
+     * @return void
+     */
+    public function setBackUrl(string $backurl): void
+    {
+        $this->backurl = $backurl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSuccessUrl(): string
+    {
+        return $this->successurl;
+    }
+
+    /**
+     * @param string $successurl
+     *
+     * @return void
+     */
+    public function setSuccessUrl(string $successurl): void
+    {
+        $this->successurl = $successurl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getErrorUrl(): string
+    {
+        return $this->errorurl;
+    }
+
+    /**
+     * @param string $errorurl
+     *
+     * @return void
+     */
+    public function setErrorUrl(string $errorurl): void
+    {
+        $this->errorurl = $errorurl;
     }
 }

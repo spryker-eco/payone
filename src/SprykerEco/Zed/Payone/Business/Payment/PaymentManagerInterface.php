@@ -210,5 +210,4 @@ interface PaymentManagerInterface
      * @return PayoneKlarnaSessionResponseTransfer
      */
     public function startKlarnaSession(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer;
-
 }

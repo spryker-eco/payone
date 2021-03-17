@@ -420,6 +420,7 @@
 
     <transfer name="PayoneKlarna">
         <property name="token" type="string"/>
+        <property name="paymentMethod" type="string"/>
     </transfer>
 
     <!--Response container replacement related transfers start-->
@@ -525,7 +526,7 @@
     </transfer>
 
     <transfer name="PayoneKlarnaSessionResponse">
-
+        <property name="token" type="string"/>
     </transfer>
     <!--Response container replacement related transfers end-->
 </transfers>

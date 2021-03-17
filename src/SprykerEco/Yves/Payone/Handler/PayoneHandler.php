@@ -60,6 +60,7 @@ class PayoneHandler implements PayoneHandlerInterface
         PaymentTransfer::PAYONE_INVOICE => PayoneApiConstants::PAYMENT_METHOD_INVOICE,
         PaymentTransfer::PAYONE_SECURITY_INVOICE => PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE,
         PaymentTransfer::PAYONE_CASH_ON_DELIVERY => PayoneApiConstants::PAYMENT_METHOD_CASH_ON_DELIVERY,
+        PaymentTransfer::PAYONE_KLARNA => PayoneApiConstants::PAYMENT_METHOD_KLARNA,
     ];
 
     /**

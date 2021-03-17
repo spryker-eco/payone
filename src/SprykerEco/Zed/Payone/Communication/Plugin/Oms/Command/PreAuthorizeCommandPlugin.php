@@ -34,6 +34,7 @@ class PreAuthorizeCommandPlugin extends AbstractPlugin implements CommandByOrder
     public function run(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
         $paymentEntity = $orderEntity->getSpyPaymentPayones()->getFirst();
+
         $this->getFacade()->preAuthorizePayment($paymentEntity->getFkSalesOrder());
 
         return [];

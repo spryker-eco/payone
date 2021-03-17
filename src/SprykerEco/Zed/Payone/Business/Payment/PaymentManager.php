@@ -58,6 +58,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\GenericPaymentResponse
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetSecurityInvoiceResponseContainer;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\KlarnaGenericPaymentResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\ManageMandateResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
@@ -1078,7 +1079,7 @@ class PaymentManager implements PaymentManagerInterface
         QuoteTransfer $quoteTransfer,
         CheckoutResponseTransfer $checkoutResponse
     ): CheckoutResponseTransfer {
-        if ($quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
+        if (1 || $quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
             return $checkoutResponse;
         }
 
@@ -1611,8 +1612,18 @@ class PaymentManager implements PaymentManagerInterface
 
         $klarnaContainer = $paymentMethodMapper->mapPaymentToStartSession($quoteTransfer);
         $this->setStandardParameter($klarnaContainer);
+//        $this->prepareOrderItems($quoteTransfer->$klarnaContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaContainer);
 
-        return new PayoneKlarnaSessionResponseTransfer(); // TODO: setup response
+        $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);
+
+        $payoneKlarnaSessionResponseTransfer = new PayoneKlarnaSessionResponseTransfer();
+
+        if ($klarnaGenericPaymentResponseContainer->getClientToken()) {
+            $payoneKlarnaSessionResponseTransfer->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
+
+        }
+
+        return $payoneKlarnaSessionResponseTransfer; // TODO: setup response
     }
 }

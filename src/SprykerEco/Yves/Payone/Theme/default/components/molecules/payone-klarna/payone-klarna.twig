@@ -23,17 +23,37 @@
     <script>
         window.klarnaAsyncCallback = function () {
             Klarna.Payments.init({
-                client_token: data.token
+                client_token: "{{data.token}}"
             })
         };
 
         window.onload = function () {
+
             Klarna.Payments.load({
                 container: '#klarna_container',
-                payment_method_category: 'pay_later'
+                payment_method_category: 'pay_later',
             }, function (res) {
-                // console.debug(res);
-
+                console.debug(res);
+                Klarna.Payments.authorize({
+                    payment_method_category: "pay_later"
+                }, {
+                    billing_address: {
+                        given_name: "Sonia",
+                        family_name: "Wagner",
+                        email: "sonia@spryker.com",
+                        title: "Ms",
+                        street_address: "Kirncher Str. 7",
+                        postal_code: "10247",
+                        city: "Berlin",
+                        phone: "4902890031",
+                        country: "DE"
+                    },
+                    customer: {
+                        date_of_birth: "1960-07-07",
+                    }
+                }, function(res) {
+                    console.debug(res);
+                })
             })
         }
     </script>

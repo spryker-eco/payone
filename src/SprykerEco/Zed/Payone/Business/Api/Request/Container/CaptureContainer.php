@@ -49,6 +49,11 @@ class CaptureContainer extends AbstractRequestContainer
     protected $invoicing;
 
     /**
+     * @var string
+     */
+    protected $capturemode;
+
+    /**
      * @param int $amount
      *
      * @return void
@@ -154,5 +159,21 @@ class CaptureContainer extends AbstractRequestContainer
     public function getInvoicing()
     {
         return $this->invoicing;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCapturemode(): string
+    {
+        return $this->capturemode;
+    }
+
+    /**
+     * @param string $capturemode
+     */
+    public function setCapturemode($capturemode): void
+    {
+        $this->capturemode = $capturemode;
     }
 }

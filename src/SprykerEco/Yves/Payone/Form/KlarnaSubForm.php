@@ -38,6 +38,17 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     }
 
     /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     *
+     * @return void
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $this->addLabel($builder);
+    }
+
+    /**
      * @return string
      */
     public function getTemplatePath()
@@ -65,17 +76,6 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     public function setDefaultOptions(OptionsResolver $resolver)
     {
         $this->configureOptions($resolver);
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return void
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $this->addLabel($builder);
     }
 
     /**

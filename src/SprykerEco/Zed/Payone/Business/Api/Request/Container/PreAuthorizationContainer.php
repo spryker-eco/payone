@@ -23,6 +23,11 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
     protected $workorderid;
 
     /**
+     * @var string
+     */
+    protected $financingtype;
+
+    /**
      * @param string $workorderid
      *
      * @return void
@@ -38,5 +43,21 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
     public function getWorkOrderId()
     {
         return $this->workorderid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFinancingtype(): string
+    {
+        return $this->financingtype;
+    }
+
+    /**
+     * @param string $financingtype
+     */
+    public function setFinancingtype(string $financingtype): void
+    {
+        $this->financingtype = $financingtype;
     }
 }
