@@ -9,10 +9,9 @@ namespace SprykerEco\Yves\Payone\Plugin;
 
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
-use SprykerEco\Yves\Payone\PayoneFactory;
 
 /**
- * @method PayoneFactory getFactory()
+ * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()
  */
 class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {

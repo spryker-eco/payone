@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
+use GenericPayment\PaydataContainer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer;
@@ -62,15 +63,17 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     /**
      * @return GenericPayment\PaydataContainer
      */
-    public function getPaydata(): GenericPayment\PaydataContainer
+    public function getPaydata(): PaydataContainer
     {
         return $this->paydata;
     }
 
     /**
      * @param GenericPayment\PaydataContainer $paydata
+     *
+     * @return void
      */
-    public function setPaydata(GenericPayment\PaydataContainer $paydata): void
+    public function setPaydata(PaydataContainer $paydata): void
     {
         $this->paydata = $paydata;
     }
@@ -103,6 +106,8 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
 
     /**
      * @param string $financingtype
+     *
+     * @return void
      */
     public function setFinancingtype(string $financingtype): void
     {

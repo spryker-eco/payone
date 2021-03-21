@@ -55,6 +55,8 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
 
     /**
      * @param string $financingtype
+     *
+     * @return void
      */
     public function setFinancingtype(string $financingtype): void
     {

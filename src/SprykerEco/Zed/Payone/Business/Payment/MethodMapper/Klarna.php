@@ -7,9 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
-use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
@@ -20,23 +18,19 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaGenericPaymentContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaPreAuthorizationContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class Klarna extends AbstractMapper
 {
     /**
-     * @var RequestStack
+     * @var \Symfony\Component\HttpFoundation\RequestStack
      */
     protected $requestStack;
 
@@ -65,8 +59,6 @@ class Klarna extends AbstractMapper
         $preAuthorizationContainer = new KlarnaPreAuthorizationContainer();
 
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
-
-
 
         return $preAuthorizationContainer;
     }
@@ -202,7 +194,6 @@ class Klarna extends AbstractMapper
         $authorizationContainer->setFinancingtype($paymentDetailEntity->getPayMethod());
         $authorizationContainer->setLanguage($this->getStandardParameter()->getLanguage());
 
-
         $authorizationContainer->setReference($paymentEntity->getReference());
 
         $paydataContainer = new PaydataContainer();
@@ -256,7 +247,7 @@ class Klarna extends AbstractMapper
             $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
             $arrayId[$key] = $itemTransfer->getSku();
             $arrayPr[$key] = $itemTransfer->getSumGrossPrice();
-            $arrayNo[$key] = (int) $itemTransfer->getQuantity();
+            $arrayNo[$key] = (int)$itemTransfer->getQuantity();
             $arrayDe[$key] = $itemTransfer->getName();
             $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
             $key++;
@@ -295,4 +286,3 @@ class Klarna extends AbstractMapper
         return 0;
     }
 }
-

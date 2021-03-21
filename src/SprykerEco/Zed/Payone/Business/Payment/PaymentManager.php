@@ -71,7 +71,6 @@ use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
@@ -1600,13 +1599,13 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return PayoneKlarnaSessionResponseTransfer
+     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
      */
     public function startKlarnaSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaSessionResponseTransfer
     {
-        /** @var Klarna $paymentMethodMapper */
+        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna $paymentMethodMapper */
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_KLARNA
         );

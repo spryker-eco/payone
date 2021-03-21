@@ -153,6 +153,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
 
         return $this;
     }
+
     /**
      * @return string
      */

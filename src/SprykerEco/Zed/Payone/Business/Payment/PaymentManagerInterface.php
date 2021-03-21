@@ -19,11 +19,11 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
 
@@ -206,9 +206,9 @@ interface PaymentManagerInterface
     ): CaptureResponseTransfer;
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return PayoneKlarnaSessionResponseTransfer
+     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
      */
     public function startKlarnaSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaSessionResponseTransfer;
 }

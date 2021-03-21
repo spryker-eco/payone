@@ -171,6 +171,8 @@ class CaptureContainer extends AbstractRequestContainer
 
     /**
      * @param string $capturemode
+     *
+     * @return void
      */
     public function setCapturemode($capturemode): void
     {

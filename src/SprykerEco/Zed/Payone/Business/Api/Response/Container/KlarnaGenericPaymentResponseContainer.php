@@ -55,6 +55,8 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
 
     /**
      * @param string $client_token
+     *
+     * @return void
      */
     public function setClientToken(string $client_token): void
     {

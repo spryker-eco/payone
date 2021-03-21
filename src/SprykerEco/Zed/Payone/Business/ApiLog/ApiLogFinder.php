@@ -62,7 +62,6 @@ class ApiLogFinder implements ApiLogFinderInterface
      */
     public function isPreAuthorizationError(OrderTransfer $orderTransfer)
     {
-
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION,

@@ -15,9 +15,9 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
