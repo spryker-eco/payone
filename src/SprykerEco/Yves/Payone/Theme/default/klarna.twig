@@ -1,1 +1,6 @@
-{% extends view('klarna', 'Payone') %}
+<div class="payment-subform payone-form payone-invoice-form payment-form" id="payoneInvoice">
+    <div class="field">
+        {{ form_widget(form.payoneKlarna.pay_methods) }}
+        {{ form_widget(form.payoneKlarna.payMethodTokens) }}
+    </div>
+</div>

@@ -8,7 +8,7 @@
         <states>
             <state name="new" reserved="true"/>
             <state name="external checkout"/>
-            <state name="pre-authorization appointed"/>
+            <state name="authorization appointed"/>
             <state name="invalid"/>
             <state name="reservation cancellation pending"/>
             <state name="cancelled" />
@@ -24,21 +24,21 @@
         </states>
 
         <transitions>
-            <transition condition="Payone/PreAuthorizationIsError">
+            <transition condition="Payone/AuthorizationIsError">
                 <source>new</source>
                 <target>invalid</target>
-                <event>pre-authorize</event>
+                <event>authorize</event>
             </transition>
 
-            <transition condition="Payone/PreAuthorizationIsRedirect">
+            <transition condition="Payone/AuthorizationIsRedirect">
                 <source>new</source>
                 <target>external checkout</target>
-                <event>pre-authorize</event>
+                <event>authorize</event>
             </transition>
 
             <transition condition="Payone/PaymentIsAppointed" happy="true">
                 <source>external checkout</source>
-                <target>pre-authorization appointed</target>
+                <target>authorization appointed</target>
             </transition>
 
             <transition>
@@ -48,7 +48,7 @@
             </transition>
 
             <transition condition="Payone/CaptureIsApproved">
-                <source>pre-authorization appointed</source>
+                <source>authorization appointed</source>
                 <target>reservation cancellation pending</target>
                 <event>cancel reservation</event>
             </transition>
@@ -59,7 +59,7 @@
             </transition>
 
             <transition happy="true">
-                <source>pre-authorization appointed</source>
+                <source>authorization appointed</source>
                 <target>shipped</target>
                 <event>ship</event>
             </transition>
@@ -131,7 +131,7 @@
         </transitions>
 
         <events>
-            <event name="pre-authorize" onEnter="true" command="Payone/PreAuthorize"/>
+            <event name="authorize" onEnter="true" command="Payone/Authorize"/>
             <event name="redirect timeout" timeout="1hour" />
             <event name="ship" manual="true" />
             <event name="wait for item return" timeout="14days" />

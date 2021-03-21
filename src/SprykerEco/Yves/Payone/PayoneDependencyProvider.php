@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Payone;
 
+use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationBridge;
@@ -27,6 +28,8 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
     public const CLIENT_CALCULATION = 'calculation client';
     public const CLIENT_QUOTE = 'CLIENT_QUOTE';
+
+    public const STORE_CONFIG = 'store config';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -56,6 +59,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         });
 
         $container = $this->addQuoteClient($container);
+        $container = $this->addStore($container);
 
         return $container;
     }
@@ -69,6 +73,20 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::CLIENT_QUOTE, function (Container $container) {
             return new PayoneToQuoteClientBridge($container->getLocator()->quote()->client());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addStore(Container $container): Container
+    {
+        $container->set(static::STORE_CONFIG, function () {
+            return Store::getInstance();
         });
 
         return $container;

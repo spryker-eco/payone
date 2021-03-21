@@ -26,6 +26,11 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     public const FACADE_CALCULATION = 'calculation facade';
 
     /**
+     * @uses \Spryker\Yves\Http\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
+     */
+    public const SERVICE_REQUEST_STACK = 'request_stack';
+
+    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
@@ -51,6 +56,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::provideBusinessLayerDependencies($container);
         $container = $this->addGlossaryFacade($container);
         $container = $this->addStore($container);
+        $container = $this->addRequestStack($container);
 
         return $container;
     }
@@ -134,6 +140,20 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::STORE_CONFIG, function () {
             return Store::getInstance();
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addRequestStack(Container $container): Container
+    {
+        $container->set(static::SERVICE_REQUEST_STACK, function (Container $container) {
+            return $container->getApplicationService(static::SERVICE_REQUEST_STACK);
         });
 
         return $container;

@@ -16,6 +16,7 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -165,8 +166,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return PayoneKlarnaSessionResponseTransfer
      */
-    public function startKlarnaSession(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer
+    public function startKlarnaSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaSessionResponseTransfer
     {
-        return $this->zedStub->call('/payone/gateway/start-klarna-session', $quoteTransfer);
+        return $this->zedStub->call('/payone/gateway/start-klarna-session', $klarnaStartSessionRequestTransfer);
     }
 }

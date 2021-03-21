@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Payone;
 
+use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
@@ -131,7 +132,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createKlarnaSubFormDataProvider()
     {
-        return new KlarnaDataProvider($this->getClient());
+        return new KlarnaDataProvider($this->getQuoteClient()->getQuote(), $this->getStoreConfig());
     }
 
     /**
@@ -393,6 +394,14 @@ class PayoneFactory extends AbstractFactory
     public function getQuoteClient(): PayoneToQuoteClientInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_QUOTE);
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientInterface
+     */
+    public function getStoreConfig(): Store
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
     }
 
     /**

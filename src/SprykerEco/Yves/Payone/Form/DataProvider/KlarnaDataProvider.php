@@ -7,24 +7,34 @@
 
 namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Client\Quote\QuoteClient;
+use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Client\Payone\PayoneClientInterface;
+use SprykerEco\Yves\Payone\Form\KlarnaSubForm;
 
 class KlarnaDataProvider implements StepEngineFormDataProviderInterface
 {
     /**
-     * @var \SprykerEco\Client\Payone\PayoneClientInterface
+     * @var QuoteClient
      */
-    private $client;
+    protected $quoteTransfer;
 
-    public function __construct(PayoneClientInterface $client)
+    /**
+     * @var Store
+     */
+    protected $store;
+
+    public function __construct(QuoteTransfer $quoteTransfer, Store $store)
     {
-        $this->client = $client;
+        $this->quoteTransfer = $quoteTransfer;
+        $this->store = $store;
     }
 
     /**
@@ -38,7 +48,6 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
-            $paymentTransfer->setPayonePrePayment(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
         }
 
@@ -52,8 +61,52 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
-        $payoneKlarnaSessionResponseTransfer = $this->client->startKlarnaSessionRequest($quoteTransfer);
+        $billingAddress = $this->quoteTransfer->getBillingAddress();
+        $itemTransfers = $this->quoteTransfer->getItems();
 
-        return ['token' => $payoneKlarnaSessionResponseTransfer->getToken()]; // TODO: get token $this->client->startKlarnaSessionRequest($quoteTransfer);
+        /** @var ItemTransfer $firstItem */
+        $firstItem = $itemTransfers->getIterator()->current();
+        $firstItemShipment = $firstItem->getShipment();
+
+        $shippingAddress = $firstItemShipment->getShippingAddress();
+        return [
+            KlarnaSubForm::PAY_METHOD_CHOICES => $this->getPayMethods(),
+            KlarnaSubForm::BILLING_ADDRESS_DATA => [
+                'given_name' => $billingAddress->getFirstName(),
+                'family_name' => $billingAddress->getLastName(),
+                'email' => $quoteTransfer->getCustomer()->getEmail(),
+                'street_address' => implode(' ', [$billingAddress->getAddress1(), $billingAddress->getAddress2()]),
+                'postal_code' => $billingAddress->getZipCode(),
+                'city' => $billingAddress->getCity(),
+                'country' => $this->store->getCurrentCountry(),
+                'phone' => $billingAddress->getPhone(),
+            ],
+            KlarnaSubForm::SHIPPING_ADDRESS_DATA => [
+                'given_name' => $shippingAddress->getFirstName(),
+                'family_name' => $shippingAddress->getLastName(),
+                'email' => $quoteTransfer->getCustomer()->getEmail(),
+                'street_address' => implode(' ', [$shippingAddress->getAddress1(), $shippingAddress->getAddress2()]),
+                'postal_code' => $billingAddress->getZipCode(),
+                'city' => $shippingAddress->getCity(),
+                'country' => $this->store->getCurrentCountry(),
+                'phone' => $shippingAddress->getPhone(),
+
+            ],
+            KlarnaSubForm::CUSTOMER_DATA => [
+                'date_of_birth' => $quoteTransfer->getCustomer()->getDateOfBirth(),
+            ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getPayMethods(): array
+    {
+        return [
+            'Slice it' => 'KIS',
+            'Pay later' => 'KIV',
+            'Pay now' => 'KDD',
+        ];
     }
 }

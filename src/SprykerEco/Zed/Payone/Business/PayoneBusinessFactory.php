@@ -366,7 +366,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     protected function createKlarna(Store $store): Klarna
     {
-        return new Klarna($store);
+        return new Klarna($store, $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_REQUEST_STACK));
     }
 
     /**

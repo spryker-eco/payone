@@ -162,6 +162,8 @@
         <property name="workOrderId" type="string"/>
         <property name="shippingProvider" type="string"/>
         <property name="capturedAmount" type="int"/>
+        <property name="payMethod" type="int"/>
+        <property name="tokenList" type="int"/>
     </transfer>
 
     <transfer name="PayoneBankAccountCheck">
@@ -421,8 +423,14 @@
     <transfer name="PayoneKlarna">
         <property name="token" type="string"/>
         <property name="paymentMethod" type="string"/>
+        <property name="payMethod" type="string"/>
+        <property name="payMethodTokens" type="string"/>
     </transfer>
 
+    <transfer name="PayoneKlarnaStartSessionRequest">
+        <property name="payMethod" type="string"/>
+        <property name="quote" type="Quote"/>
+    </transfer>
     <!--Response container replacement related transfers start-->
 
     <transfer name="BaseResponse">
@@ -527,6 +535,7 @@
 
     <transfer name="PayoneKlarnaSessionResponse">
         <property name="token" type="string"/>
+        <property name="isValid" type="bool"/>
     </transfer>
     <!--Response container replacement related transfers end-->
 </transfers>

@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -20,6 +21,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class KlarnaSubForm extends AbstractPayoneSubForm
 {
     public const PAYMENT_METHOD = 'klarna';
+    public const FIELD_PAY_METHOD_TYPE = 'payMethod';
+    public const PAY_METHOD_CHOICES = 'pay_methods';
+    public const FIELD_PAY_METHOD_TOKENS = 'payMethodTokens';
+    public const BILLING_ADDRESS_DATA = 'billing_address_data';
+    public const SHIPPING_ADDRESS_DATA = 'shipping_address_data';
+    public const CUSTOMER_DATA = 'customer_data';
 
     /**
      * @return string
@@ -45,7 +52,8 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->addLabel($builder);
+        $this->addPayMethods($builder, $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES]);
+        $this->addPayMethodTokens($builder);
     }
 
     /**
@@ -83,14 +91,34 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      *
      * @return $this
      */
-    protected function addLabel(FormBuilderInterface $builder)
+    protected function addPayMethods(FormBuilderInterface $builder, $choices)
     {
         $builder->add(
-            self::FIELD_PAYMENT_METHOD,
+            static::FIELD_PAY_METHOD_TYPE,
+            ChoiceType::class,
+            [
+                'label' => false,
+                'required' => true,
+                'choices' => $choices,
+            ]
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addPayMethodTokens(FormBuilderInterface $builder)
+    {
+        $builder->add(
+            static::FIELD_PAY_METHOD_TOKENS,
             HiddenType::class,
             [
                 'label' => false,
-                'required' => false,
+                'required' => true,
                 'data' => [],
             ]
         );
@@ -102,6 +130,8 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     {
         parent::buildView($view, $form, $options);
 
-        $view->vars['token'] = $options[SubFormInterface::OPTIONS_FIELD_NAME]['token'];
+        $view->vars[static::BILLING_ADDRESS_DATA] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::BILLING_ADDRESS_DATA];
+        $view->vars[static::SHIPPING_ADDRESS_DATA] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::SHIPPING_ADDRESS_DATA];
+        $view->vars[static::CUSTOMER_DATA] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::CUSTOMER_DATA];
     }
 }

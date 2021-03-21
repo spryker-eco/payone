@@ -168,12 +168,17 @@ class PayoneHandler implements PayoneHandlerInterface
         } elseif ($paymentSelection == PaymentTransfer::PAYONE_CASH_ON_DELIVERY) {
             $shippingProvider = $quoteTransfer->getShipment()->getMethod()->getCarrierName();
             $paymentDetailTransfer->setShippingProvider($shippingProvider);
+        } elseif ($paymentSelection == PaymentTransfer::PAYONE_KLARNA) {
+            /** @var \Generated\Shared\Transfer\PayoneKlarnaTransfer $payonePaymentTransfer */
+            $paymentDetailTransfer->setPayMethod($payonePaymentTransfer->getPayMethod());
+            $paymentDetailTransfer->setTokenList($payonePaymentTransfer->getPayMethodTokens());
         }
 
-        $quoteTransfer->getPayment()->setPayone(new PayonePaymentTransfer());
-        $quoteTransfer->getPayment()->getPayone()->setReference(uniqid('TX1'));
-        $quoteTransfer->getPayment()->getPayone()->setPaymentDetail($paymentDetailTransfer);
-        $quoteTransfer->getPayment()->getPayone()->setPaymentMethod($quoteTransfer->getPayment()->getPaymentMethod());
+        $paymentTransfer = $quoteTransfer->getPayment();
+        $paymentTransfer->setPayone(new PayonePaymentTransfer());
+        $paymentTransfer->getPayone()->setReference(uniqid('TX1'));
+        $paymentTransfer->getPayone()->setPaymentDetail($paymentDetailTransfer);
+        $paymentTransfer->getPayone()->setPaymentMethod($paymentTransfer->getPaymentMethod());
     }
 
     /**

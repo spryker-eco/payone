@@ -58,6 +58,7 @@ interface PayoneApiConstants
 
     // klarna payments
     public const PAYMENT_METHOD_KLARNA = 'payment.payone.klarna';
+    public const PAYMENT_KLARNA_START_SESSION_ACTION = 'start_session';
 
     // CLEARING TYPE
 

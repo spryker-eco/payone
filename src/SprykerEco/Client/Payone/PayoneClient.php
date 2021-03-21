@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePersonalDataTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
@@ -226,8 +227,8 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
      */
-    public function startKlarnaSessionRequest(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer
+    public function startKlarnaSessionRequest(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaSessionResponseTransfer
     {
-        return $this->getFactory()->createZedStub()->startKlarnaSession($quoteTransfer);
+        return $this->getFactory()->createZedStub()->startKlarnaSession($klarnaStartSessionRequestTransfer);
     }
 }

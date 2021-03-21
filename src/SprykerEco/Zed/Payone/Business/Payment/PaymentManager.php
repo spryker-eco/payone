@@ -21,6 +21,7 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
@@ -1603,27 +1604,29 @@ class PaymentManager implements PaymentManagerInterface
      *
      * @return PayoneKlarnaSessionResponseTransfer
      */
-    public function startKlarnaSession(QuoteTransfer $quoteTransfer): PayoneKlarnaSessionResponseTransfer
+    public function startKlarnaSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaSessionResponseTransfer
     {
         /** @var Klarna $paymentMethodMapper */
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_KLARNA
         );
 
-        $klarnaContainer = $paymentMethodMapper->mapPaymentToStartSession($quoteTransfer);
+        $klarnaContainer = $paymentMethodMapper->mapPaymentToStartSession($klarnaStartSessionRequestTransfer);
         $this->setStandardParameter($klarnaContainer);
-//        $this->prepareOrderItems($quoteTransfer->$klarnaContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaContainer);
 
         $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);
 
         $payoneKlarnaSessionResponseTransfer = new PayoneKlarnaSessionResponseTransfer();
 
-        if ($klarnaGenericPaymentResponseContainer->getClientToken()) {
-            $payoneKlarnaSessionResponseTransfer->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
+        if ($klarnaGenericPaymentResponseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_ERROR) {
+            $payoneKlarnaSessionResponseTransfer->setIsValid(false);
 
+            return $payoneKlarnaSessionResponseTransfer;
         }
 
-        return $payoneKlarnaSessionResponseTransfer; // TODO: setup response
+        $payoneKlarnaSessionResponseTransfer->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
+
+        return $payoneKlarnaSessionResponseTransfer;
     }
 }

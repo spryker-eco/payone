@@ -7,10 +7,20 @@
 
 {% define data = {
     scriptSrc: 'https://x.klarnacdn.net/kp/lib/v1/api.js',
-    token: data.token
+    form: data.form,
+    billingAddressData: data.billingAddressData,
+    shippingAddressData: data.shippingAddressData,
+    customerData: data.customerData
 } %}
 
 {% block body %}
+    <div class="payment-subform payone-form payone-klarna-form payment-form" id="payoneKlarna">
+        <div class="field">
+            {{ form_widget(data.form.payoneKlarna.payMethod) }}
+            {{ form_widget(data.form.payoneKlarna.payMethodTokens) }}
+        </div>
+    </div>
+
     {% include molecule('script-loader') with {
         attributes: {
             src: data.scriptSrc,
@@ -21,41 +31,66 @@
     <div id="klarna_container"></div>
 
     <script>
+
         window.klarnaAsyncCallback = function () {
-            Klarna.Payments.init({
-                client_token: "{{data.token}}"
-            })
+            var formData = new FormData();
+            formData.append('pay_method', 'KIV');
+
+            fetch('/payone/get-token', { method: 'POST', body: formData})
+                .then((response) => response.json())
+                .then((parsedResponse) => {
+
+                    // if (!parsedResponse.is_valid)
+                    //     return;
+
+                    Klarna.Payments.init({
+                        client_token: parsedResponse.client_token
+                    })
+
+                    Klarna.Payments.load({
+                        container: '#klarna_container',
+                        payment_method_category: 'pay_later',
+                    }, function (res) {
+                        Klarna.Payments.authorize({
+                            payment_method_category: "pay_later"
+                        }, {
+                            billing_address: {
+                                given_name: "{{ data.billingAddressData['given_name'] }}",
+                                family_name: "{{ data.billingAddressData['family_name'] }}",
+                                email: "{{ data.billingAddressData['email'] }}",
+                                street_address: "{{ data.billingAddressData['street_address'] }}",
+                                postal_code: "{{ data.billingAddressData['postal_code'] }}",
+                                city: "{{ data.billingAddressData['city'] }}",
+                                country: "{{ data.billingAddressData['country'] }}",
+                                phone: "{{ data.billingAddressData['phone'] }}",
+                            },
+                            {#shipping_address: {#}
+                            {#    given_name: "{{ data.shippingAddressData['given_name'] }}",#}
+                            {#    family_name: "{{ data.shippingAddressData['family_name'] }}",#}
+                            {#    email: "{{ data.shippingAddressData['email'] }}",#}
+                            {#    street_address: "{{ data.shippingAddressData['street_address'] }}",#}
+                            {#    postal_code: "{{ data.shippingAddressData['postal_code'] }}",#}
+                            {#    city: "{{ data.shippingAddressData['city'] }}",#}
+                            {#    country: "{{ data.shippingAddressData['country'] }}",#}
+                            {#    phone: "{{ data.shippingAddressData['phone'] }}"#}
+                            {#},#}
+
+                            customer: {
+                                date_of_birth: "{{ data.customerData['date_of_birth'] }}",
+                            }
+                        }, function(res) {
+                            var tokenContainer = document.getElementById('paymentForm_payoneKlarna_payMethodTokens');
+                            tokenContainer.value = res.authorization_token
+                        })
+                    })
+                })
+                .catch((e) => {
+                    error(e); // TODO: handle error
+                });
         };
 
-        window.onload = function () {
-
-            Klarna.Payments.load({
-                container: '#klarna_container',
-                payment_method_category: 'pay_later',
-            }, function (res) {
-                console.debug(res);
-                Klarna.Payments.authorize({
-                    payment_method_category: "pay_later"
-                }, {
-                    billing_address: {
-                        given_name: "Sonia",
-                        family_name: "Wagner",
-                        email: "sonia@spryker.com",
-                        title: "Ms",
-                        street_address: "Kirncher Str. 7",
-                        postal_code: "10247",
-                        city: "Berlin",
-                        phone: "4902890031",
-                        country: "DE"
-                    },
-                    customer: {
-                        date_of_birth: "1960-07-07",
-                    }
-                }, function(res) {
-                    console.debug(res);
-                })
-            })
-        }
     </script>
 
 {% endblock %}
+
+

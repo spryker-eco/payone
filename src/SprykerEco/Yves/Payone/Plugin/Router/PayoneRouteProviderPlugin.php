@@ -25,6 +25,8 @@ class PayoneRouteProviderPlugin extends AbstractRouteProviderPlugin
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_LOAD_DETAILS = 'payone-paypal-express-checkout-load-details';
 
+    protected const ROUTE_PAYONE_KLARNA_GET_TOKEN = 'payone-klarna-get-token';
+
     /**
      * {@inheritDoc}
      * - Adds Payone specific Routes to the RouteCollection.
@@ -48,6 +50,7 @@ class PayoneRouteProviderPlugin extends AbstractRouteProviderPlugin
         $routeCollection = $this->addPayoneExpressCheckoutFailureRoute($routeCollection);
         $routeCollection = $this->addPayoneExpressCheckoutBackRoute($routeCollection);
         $routeCollection = $this->addPayoneExpressCheckoutLoadDetailsRoute($routeCollection);
+        $routeCollection = $this->addPayoneKlarnaGetTokenRoute($routeCollection);
 
         return $routeCollection;
     }
@@ -174,6 +177,20 @@ class PayoneRouteProviderPlugin extends AbstractRouteProviderPlugin
         $route = $this->buildRoute('/payone/expresscheckout/load-details', 'Payone', 'ExpressCheckout', 'loadPaypalExpressCheckoutDetailsAction');
         $route = $route->setMethods(['GET']);
         $routeCollection->add(static::ROUTE_PAYONE_EXPRESS_CHECKOUT_LOAD_DETAILS, $route);
+
+        return $routeCollection;
+    }
+
+    /**
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     *
+     * @return \Spryker\Yves\Router\Route\RouteCollection
+     */
+    protected function addPayoneKlarnaGetTokenRoute(RouteCollection $routeCollection): RouteCollection
+    {
+        $route = $this->buildRoute('/payone/get-token', 'Payone', 'Klarna', 'getTokenAction');
+        $route = $route->setMethods(['POST']);
+        $routeCollection->add(static::ROUTE_PAYONE_KLARNA_GET_TOKEN, $route);
 
         return $routeCollection;
     }

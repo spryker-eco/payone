@@ -8,9 +8,9 @@
     {% include molecule('payone-klarna', 'Payone') with {
         data: {
             form: data.form,
-            token: vars.token
+            billingAddressData: vars.billing_address_data,
+            shippingAddressData: vars.shipping_address_data,
+            customerData: vars.customer_data
         }
     } only %}
 {% endblock %}
-
-
