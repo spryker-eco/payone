@@ -27,13 +27,11 @@
             <transition condition="Payone/AuthorizationIsError">
                 <source>new</source>
                 <target>invalid</target>
-                <event>authorize</event>
             </transition>
 
-            <transition condition="Payone/AuthorizationIsRedirect">
+            <transition condition="Payone/PreAuthorizationIsRedirect">
                 <source>new</source>
                 <target>external checkout</target>
-                <event>authorize</event>
             </transition>
 
             <transition condition="Payone/PaymentIsAppointed" happy="true">
@@ -131,7 +129,6 @@
         </transitions>
 
         <events>
-            <event name="authorize" onEnter="true" command="Payone/Authorize"/>
             <event name="redirect timeout" timeout="1hour" />
             <event name="ship" manual="true" />
             <event name="wait for item return" timeout="14days" />

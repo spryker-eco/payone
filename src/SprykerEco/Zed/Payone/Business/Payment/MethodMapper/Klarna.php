@@ -146,8 +146,6 @@ class Klarna extends AbstractMapper
         $klarnaGenericPaymentContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
         $klarnaGenericPaymentContainer->setFinancingtype($klarnaStartSessionRequestTransfer->getPayMethod());
 
-        $this->prepareOrderItems($quoteTransfer, $klarnaGenericPaymentContainer);
-
         $paydataContainer = new PaydataContainer();
         $paydataContainer->setAction(PayoneApiConstants::PAYMENT_KLARNA_START_SESSION_ACTION);
         $klarnaGenericPaymentContainer->setPaydata($paydataContainer);
@@ -209,8 +207,6 @@ class Klarna extends AbstractMapper
         $shippingContainer = new ShippingContainer();
         $this->mapShippingAddressToShippingContainer($shippingContainer, $shippingAddressEntity);
 
-//        $authorizationContainer->setShippingData($shippingContainer); // TODO
-
         return $authorizationContainer;
     }
 
@@ -230,59 +226,5 @@ class Klarna extends AbstractMapper
         $personalContainer->setIp($currentRequest->getClientIp());
 
         return $personalContainer;
-    }
-
-    protected function prepareOrderItems(QuoteTransfer $quoteTransfer, AbstractRequestContainer $container): AbstractRequestContainer
-    {
-        $arrayIt = [];
-        $arrayId = [];
-        $arrayPr = [];
-        $arrayNo = [];
-        $arrayDe = [];
-        $arrayVa = [];
-
-        $key = 1;
-
-        foreach ($quoteTransfer->getItems() as $itemTransfer) {
-            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
-            $arrayId[$key] = $itemTransfer->getSku();
-            $arrayPr[$key] = $itemTransfer->getSumGrossPrice();
-            $arrayNo[$key] = (int)$itemTransfer->getQuantity();
-            $arrayDe[$key] = $itemTransfer->getName();
-            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
-            $key++;
-        }
-
-        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
-        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
-        $arrayPr[$key] = $this->getDeliveryCosts($quoteTransfer);
-        $arrayNo[$key] = 1;
-        $arrayDe[$key] = 'Shipment';
-        $arrayVa[$key] = 0;
-
-        $container->setIt($arrayIt);
-        $container->setId($arrayId);
-        $container->setPr($arrayPr);
-        $container->setNo($arrayNo);
-        $container->setDe($arrayDe);
-        $container->setVa($arrayVa);
-
-        return $container;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return int
-     */
-    protected function getDeliveryCosts(QuoteTransfer $quoteTransfer): int
-    {
-        foreach ($quoteTransfer->getExpenses() as $expense) {
-            if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                return $expense->getSumGrossPrice();
-            }
-        }
-
-        return 0;
     }
 }

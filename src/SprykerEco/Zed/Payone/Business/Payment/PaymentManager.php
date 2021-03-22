@@ -1079,13 +1079,19 @@ class PaymentManager implements PaymentManagerInterface
         QuoteTransfer $quoteTransfer,
         CheckoutResponseTransfer $checkoutResponse
     ): CheckoutResponseTransfer {
-        if (1 || $quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
+        if ($quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
             return $checkoutResponse;
         }
 
         $paymentEntity = $this->getPaymentEntity($checkoutResponse->getSaveOrder()->getIdSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
+
+        if ($quoteTransfer->getPayment()->getPayoneKlarna()) {
+            $this->prepareOrderItemsFromQuote($quoteTransfer, $requestContainer);
+            $this->prepareOrderShipmentFromQuote($quoteTransfer, $requestContainer);
+        }
+
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
 
         if ($responseContainer->getErrorcode()) {
@@ -1272,6 +1278,43 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function prepareOrderItemsFromQuote(QuoteTransfer $quoteTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    {
+        $arrayIt = [];
+        $arrayId = [];
+        $arrayPr = [];
+        $arrayNo = [];
+        $arrayDe = [];
+        $arrayVa = [];
+
+        $key = 1;
+
+        foreach ($quoteTransfer->getItems() as $itemTransfer) {
+            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
+            $arrayId[$key] = $itemTransfer->getSku();
+            $arrayPr[$key] = $itemTransfer->getUnitGrossPrice();
+            $arrayNo[$key] = $itemTransfer->getQuantity();
+            $arrayDe[$key] = $itemTransfer->getName();
+            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
+            $key++;
+        }
+
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
@@ -1393,6 +1436,40 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function prepareOrderShipmentFromQuote(QuoteTransfer $quoteTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    {
+        $arrayIt = $container->getIt() ?? [];
+        $arrayId = $container->getId() ?? [];
+        $arrayPr = $container->getPr() ?? [];
+        $arrayNo = $container->getNo() ?? [];
+        $arrayDe = $container->getDe() ?? [];
+        $arrayVa = $container->getVa() ?? [];
+
+        $key = count($arrayId) + 1;
+
+        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
+        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
+        $arrayPr[$key] = $this->getDeliveryCostsFromQuote($quoteTransfer);
+        $arrayNo[$key] = 1;
+        $arrayDe[$key] = 'Shipment';
+        $arrayVa[$key] = 0;
+
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
@@ -1434,6 +1511,22 @@ class PaymentManager implements PaymentManagerInterface
     protected function getDeliveryCosts(OrderTransfer $orderTransfer): int
     {
         foreach ($orderTransfer->getExpenses() as $expense) {
+            if ($expense->getType() === static::SHIPMENT_EXPENSE_TYPE) {
+                return $expense->getSumGrossPrice();
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return int
+     */
+    protected function getDeliveryCostsFromQuote(QuoteTransfer $quoteTransfer): int
+    {
+        foreach ($quoteTransfer->getExpenses() as $expense) {
             if ($expense->getType() === static::SHIPMENT_EXPENSE_TYPE) {
                 return $expense->getSumGrossPrice();
             }
@@ -1612,6 +1705,8 @@ class PaymentManager implements PaymentManagerInterface
 
         $klarnaContainer = $paymentMethodMapper->mapPaymentToStartSession($klarnaStartSessionRequestTransfer);
         $this->setStandardParameter($klarnaContainer);
+        $this->prepareOrderItemsFromQuote($klarnaStartSessionRequestTransfer->getQuote(), $klarnaContainer);
+        $this->prepareOrderShipmentFromQuote($klarnaStartSessionRequestTransfer->getQuote(), $klarnaContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaContainer);
 
         $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);

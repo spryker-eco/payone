@@ -7,11 +7,11 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
-use GenericPayment\PaydataContainer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
 
 class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
 {
