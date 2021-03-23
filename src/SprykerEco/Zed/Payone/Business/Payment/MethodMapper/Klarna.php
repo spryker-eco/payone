@@ -32,6 +32,12 @@ class Klarna extends AbstractMapper
      */
     protected $requestStack;
 
+    /**
+     * Klarna constructor.
+     *
+     * @param Store $storeConfig
+     * @param RequestStack $requestStack
+     */
     public function __construct(Store $storeConfig, RequestStack $requestStack)
     {
         parent::__construct($storeConfig);
@@ -181,7 +187,7 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
+    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer): AbstractAuthorizationContainer
     {
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
 

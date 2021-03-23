@@ -1719,6 +1719,7 @@ class PaymentManager implements PaymentManagerInterface
             return $payoneKlarnaSessionResponseTransfer;
         }
 
+        $payoneKlarnaSessionResponseTransfer->setIsValid(true);
         $payoneKlarnaSessionResponseTransfer->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
 
         return $payoneKlarnaSessionResponseTransfer;

@@ -19,7 +19,7 @@ class SessionResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setResponse($response)
+    public function setResponse($response): void
     {
         $this->response = $response;
     }
@@ -27,7 +27,7 @@ class SessionResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getResponse()
+    public function getResponse(): string
     {
         return $this->response;
     }

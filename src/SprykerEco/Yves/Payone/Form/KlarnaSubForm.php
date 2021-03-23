@@ -92,7 +92,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      *
      * @return $this
      */
-    protected function addPayMethods(FormBuilderInterface $builder, $choices)
+    protected function addPayMethods(FormBuilderInterface $builder, $choices): KlarnaSubForm
     {
         $builder->add(
             static::FIELD_PAY_METHOD_TYPE,
@@ -112,7 +112,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      *
      * @return $this
      */
-    protected function addPayMethodTokens(FormBuilderInterface $builder)
+    protected function addPayMethodTokens(FormBuilderInterface $builder): KlarnaSubForm
     {
         $builder->add(
             static::FIELD_PAY_METHOD_TOKENS,

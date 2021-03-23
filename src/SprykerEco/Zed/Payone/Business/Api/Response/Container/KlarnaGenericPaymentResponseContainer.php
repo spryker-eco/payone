@@ -30,7 +30,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getWorkOrderId()
+    public function getWorkOrderId(): string
     {
         return $this->workorderid;
     }
@@ -40,7 +40,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setWorkOrderId(string $workOrderId)
+    public function setWorkOrderId(string $workOrderId): void
     {
         $this->workorderid = $workOrderId;
     }
@@ -68,7 +68,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return string
      */
-    protected function getPreparedKey($key)
+    protected function getPreparedKey($key): string
     {
         $key = preg_replace('/add_paydata\[(.*)\]/', '$1', $key);
 
