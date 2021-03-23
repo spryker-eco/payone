@@ -18,7 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class KlarnaController extends AbstractController
 {
-    public function getTokenAction(Request $request)
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getTokenAction(Request $request): JsonResponse
     {
         $payMethod = $request->request->get('pay_method');
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();

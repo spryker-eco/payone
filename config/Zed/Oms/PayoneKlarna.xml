@@ -8,7 +8,7 @@
         <states>
             <state name="new" reserved="true"/>
             <state name="external checkout"/>
-            <state name="authorization appointed"/>
+            <state name="pre-authorization appointed"/>
             <state name="invalid"/>
             <state name="reservation cancellation pending"/>
             <state name="cancelled" />
@@ -24,7 +24,7 @@
         </states>
 
         <transitions>
-            <transition condition="Payone/AuthorizationIsError">
+            <transition condition="Payone/PreAuthorizationIsError">
                 <source>new</source>
                 <target>invalid</target>
             </transition>
@@ -36,7 +36,7 @@
 
             <transition condition="Payone/PaymentIsAppointed" happy="true">
                 <source>external checkout</source>
-                <target>authorization appointed</target>
+                <target>pre-authorization appointed</target>
             </transition>
 
             <transition>
@@ -46,7 +46,7 @@
             </transition>
 
             <transition condition="Payone/CaptureIsApproved">
-                <source>authorization appointed</source>
+                <source>pre-authorization appointed</source>
                 <target>reservation cancellation pending</target>
                 <event>cancel reservation</event>
             </transition>
@@ -57,7 +57,7 @@
             </transition>
 
             <transition happy="true">
-                <source>authorization appointed</source>
+                <source>pre-authorization appointed</source>
                 <target>shipped</target>
                 <event>ship</event>
             </transition>

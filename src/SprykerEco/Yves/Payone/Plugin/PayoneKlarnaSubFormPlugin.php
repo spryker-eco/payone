@@ -16,7 +16,12 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * @return \SprykerEco\Yves\Payone\Form\PrePaymentForm
+     * {@inheritDoc}
+     * - Creates KlarnaSubForm
+     *
+     * @api
+     *
+     * @return \SprykerEco\Yves\Payone\Form\KlarnaSubForm
      */
     public function createSubForm()
     {
@@ -24,6 +29,11 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
     }
 
     /**
+     * {@inheritDoc}
+     * - Creates KlarnaSubFormDataProvider
+     *
+     * @api
+     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider()

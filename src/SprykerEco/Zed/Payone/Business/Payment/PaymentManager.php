@@ -1087,7 +1087,7 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 
-        if ($quoteTransfer->getPayment()->getPayoneKlarna()) {
+        if ($paymentEntity->getPaymentMethod() == PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
             $this->prepareOrderItemsFromQuote($quoteTransfer, $requestContainer);
             $this->prepareOrderShipmentFromQuote($quoteTransfer, $requestContainer);
         }

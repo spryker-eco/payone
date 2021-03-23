@@ -58,7 +58,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\PrePaymentForm
      */
-    public function createPrePaymentForm()
+    public function createPrePaymentForm(): PrePaymentForm
     {
         return new PrePaymentForm();
     }
@@ -66,7 +66,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\PrePaymentDataProvider
      */
-    public function createPrePaymentFormDataProvider()
+    public function createPrePaymentFormDataProvider(): PrePaymentDataProvider
     {
         return new PrePaymentDataProvider();
     }
@@ -74,7 +74,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\InvoiceSubForm
      */
-    public function createInvoiceSubForm()
+    public function createInvoiceSubForm(): InvoiceSubForm
     {
         return new InvoiceSubForm();
     }
@@ -88,7 +88,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     * @return \SprykerEco\Yves\Payone\FormKlarnaSubForm
      */
     public function createKlarnaSubForm(): SubFormInterface
     {
@@ -98,7 +98,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider
      */
-    public function createInvoiceSubFormDataProvider()
+    public function createInvoiceSubFormDataProvider(): InvoiceDataProvider
     {
         return new InvoiceDataProvider();
     }
@@ -130,9 +130,11 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\KlarnaDataProvider
      */
-    public function createKlarnaSubFormDataProvider()
+    public function createKlarnaSubFormDataProvider(): KlarnaDataProvider
     {
-        return new KlarnaDataProvider($this->getQuoteClient()->getQuote(), $this->getStoreConfig());
+        $quoteTransfer = $this->getQuoteClient()->getQuote();
+
+        return new KlarnaDataProvider($quoteTransfer, $this->getStoreConfig());
     }
 
     /**
@@ -397,7 +399,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientInterface
+     * @return \Spryker\Shared\Kernel\Store
      */
     public function getStoreConfig(): Store
     {

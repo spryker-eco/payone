@@ -78,7 +78,7 @@ abstract class AbstractSubFormsCreator
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayoneKlarnaSubFormPlugin
      */
-    protected function createPayoneKlarnaSubFormPlugin()
+    protected function createPayoneKlarnaSubFormPlugin(): PayoneKlarnaSubFormPlugin
     {
         return new PayoneKlarnaSubFormPlugin();
     }

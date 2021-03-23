@@ -20,18 +20,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class KlarnaSubForm extends AbstractPayoneSubForm
 {
-    public const PAYMENT_METHOD = 'klarna';
+    protected const PAYMENT_METHOD = 'klarna';
     public const FIELD_PAY_METHOD_TYPE = 'payMethod';
     public const PAY_METHOD_CHOICES = 'pay_methods';
     public const FIELD_PAY_METHOD_TOKENS = 'payMethodTokens';
     public const BILLING_ADDRESS_DATA = 'billing_address_data';
-    public const SHIPPING_ADDRESS_DATA = 'shipping_address_data';
     public const CUSTOMER_DATA = 'customer_data';
+    protected const FORM_TEMPLATE_PATH = '%s/%s';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_KLARNA;
     }
@@ -39,7 +39,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_KLARNA;
     }
@@ -50,7 +50,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->addPayMethods($builder, $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES]);
         $this->addPayMethodTokens($builder);
@@ -59,9 +59,9 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
-        return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return sprintf(self::FORM_TEMPLATE_PATH, PayoneConstants::PROVIDER_NAME, self::PAYMENT_METHOD);
     }
 
     /**
@@ -69,7 +69,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => PayoneKlarnaTransfer::class,
@@ -81,13 +81,14 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): void
     {
         $this->configureOptions($resolver);
     }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param $choices
      *
      * @return $this
      */
@@ -129,12 +130,11 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     /**
      * @return void
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);
 
         $view->vars[static::BILLING_ADDRESS_DATA] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::BILLING_ADDRESS_DATA];
-        $view->vars[static::SHIPPING_ADDRESS_DATA] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::SHIPPING_ADDRESS_DATA];
         $view->vars[static::CUSTOMER_DATA] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::CUSTOMER_DATA];
     }
 }

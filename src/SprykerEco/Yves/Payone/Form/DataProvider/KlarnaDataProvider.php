@@ -18,7 +18,7 @@ use SprykerEco\Yves\Payone\Form\KlarnaSubForm;
 class KlarnaDataProvider implements StepEngineFormDataProviderInterface
 {
     /**
-     * @var \Spryker\Client\Quote\QuoteClient
+     * @var \Generated\Shared\Transfer\QuoteTransfer
      */
     protected $quoteTransfer;
 
@@ -27,6 +27,10 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
      */
     protected $store;
 
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Spryker\Shared\Kernel\Store $store
+     */
     public function __construct(QuoteTransfer $quoteTransfer, Store $store)
     {
         $this->quoteTransfer = $quoteTransfer;
@@ -36,16 +40,17 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() === null) {
-            $paymentTransfer = new PaymentTransfer();
-            $paymentTransfer->setPayone(new PayonePaymentTransfer());
-            $quoteTransfer->setPayment($paymentTransfer);
+        if ($quoteTransfer->getPayment() !== null) {
+            return $quoteTransfer;
         }
+
+        $paymentTransfer = new PaymentTransfer();
+        $paymentTransfer->setPayone(new PayonePaymentTransfer());
+        $quoteTransfer->setPayment($paymentTransfer);
 
         return $quoteTransfer;
     }
@@ -58,13 +63,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         $billingAddress = $this->quoteTransfer->getBillingAddress();
-        $itemTransfers = $this->quoteTransfer->getItems();
-
-        /** @var \Generated\Shared\Transfer\ItemTransfer $firstItem */
-        $firstItem = $itemTransfers->getIterator()->current();
-        $firstItemShipment = $firstItem->getShipment();
-
-        $shippingAddress = $firstItemShipment->getShippingAddress();
+        $items = $this->quoteTransfer->getItems();
 
         return [
             KlarnaSubForm::PAY_METHOD_CHOICES => $this->getPayMethods(),
@@ -77,17 +76,6 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
                 'city' => $billingAddress->getCity(),
                 'country' => $this->store->getCurrentCountry(),
                 'phone' => $billingAddress->getPhone(),
-            ],
-            KlarnaSubForm::SHIPPING_ADDRESS_DATA => [
-                'given_name' => $shippingAddress->getFirstName(),
-                'family_name' => $shippingAddress->getLastName(),
-                'email' => $quoteTransfer->getCustomer()->getEmail(),
-                'street_address' => implode(' ', [$shippingAddress->getAddress1(), $shippingAddress->getAddress2()]),
-                'postal_code' => $billingAddress->getZipCode(),
-                'city' => $shippingAddress->getCity(),
-                'country' => $this->store->getCurrentCountry(),
-                'phone' => $shippingAddress->getPhone(),
-
             ],
             KlarnaSubForm::CUSTOMER_DATA => [
                 'date_of_birth' => $quoteTransfer->getCustomer()->getDateOfBirth(),

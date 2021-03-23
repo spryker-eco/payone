@@ -11,10 +11,8 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use Pyz\Shared\Shipment\ShipmentConfig;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
@@ -57,7 +55,6 @@ class Klarna extends AbstractMapper
     public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
     {
         $preAuthorizationContainer = new KlarnaPreAuthorizationContainer();
-
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
 
         return $preAuthorizationContainer;
@@ -85,13 +82,12 @@ class Klarna extends AbstractMapper
     public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity)
     {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
-
         $captureContainer = new CaptureContainer();
 
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
         $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
-        $captureContainer->setCapturemode(PayoneApiConstants::CAPTURE_MODE_COMPLETED);
+        $captureContainer->setCapturemode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
 
         return $captureContainer;
     }
@@ -156,6 +152,11 @@ class Klarna extends AbstractMapper
         return $klarnaGenericPaymentContainer;
     }
 
+    /**
+     * @param QuoteTransfer $quoteTransfer
+     *
+     * @return PersonalContainer
+     */
     protected function createPersonalContainerFromQuoteTransfer(QuoteTransfer $quoteTransfer): PersonalContainer
     {
         $personalContainer = new PersonalContainer();
@@ -190,7 +191,6 @@ class Klarna extends AbstractMapper
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
         $authorizationContainer->setFinancingtype($paymentDetailEntity->getPayMethod());
-        $authorizationContainer->setLanguage($this->getStandardParameter()->getLanguage());
 
         $authorizationContainer->setReference($paymentEntity->getReference());
 
@@ -221,10 +221,34 @@ class Klarna extends AbstractMapper
 
         $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
 
-        $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
         $currentRequest = $this->requestStack->getCurrentRequest();
         $personalContainer->setIp($currentRequest->getClientIp());
 
         return $personalContainer;
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer $personalContainer
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     *
+     * @return void
+     */
+    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentEntity)
+    {
+        $orderEntity = $paymentEntity->getSpySalesOrder();
+        $billingAddressEntity = $orderEntity->getBillingAddress();
+        $personalContainer->setCountry($billingAddressEntity->getCountry()->getIso2Code());
+        $personalContainer->setFirstName($billingAddressEntity->getFirstName());
+        $personalContainer->setLastName($billingAddressEntity->getLastName());
+        $personalContainer->setSalutation($billingAddressEntity->getSalutation());
+        $personalContainer->setStreet(implode(' ', [$billingAddressEntity->getAddress1(), $billingAddressEntity->getAddress2()]));
+        $personalContainer->setAddressAddition($billingAddressEntity->getAddress3());
+        $personalContainer->setZip($billingAddressEntity->getZipCode());
+        $personalContainer->setCity($billingAddressEntity->getCity());
+        $personalContainer->setEmail($billingAddressEntity->getEmail());
+        $personalContainer->setTelephoneNumber($billingAddressEntity->getPhone());
+        $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
+        $personalContainer->setPersonalId($orderEntity->getCustomerReference());
+        $personalContainer->setEmail($orderEntity->getEmail());
     }
 }

@@ -45,6 +45,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     public const PAYMENT_REFERENCE = 'TX1234567890abcd';
     public const DEFAULT_SEQUENCE_NUMBER = 0;
     public const DEFAULT_EMAIL = 'default@email.com';
+    public const STANDARD_PARAMETER_LANGUAGE = 'en';
 
     public const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
@@ -209,6 +210,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $standardParameter = $this->getMockBuilder(PayoneStandardParameterTransfer::class)->getMock();
         $standardParameter->method('getAid')->willReturn(static::STANDARD_PARAMETER_AID);
         $standardParameter->method('getCurrency')->willReturn(static::STANDARD_PARAMETER_CURRENCY);
+        $standardParameter->method('getLanguage')->willReturn(static::STANDARD_PARAMETER_LANGUAGE);
 
         return $standardParameter;
     }
