@@ -35,6 +35,7 @@ class KlarnaController extends AbstractController
 
         return new JsonResponse([
             'is_valid' => $payoneKlarnaSessionResponseTransfer->getIsValid(),
+            'error_message' => $payoneKlarnaSessionResponseTransfer->getError(),
             'client_token' => $payoneKlarnaSessionResponseTransfer->getToken(),
         ]);
     }

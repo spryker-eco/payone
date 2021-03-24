@@ -536,6 +536,7 @@
     <transfer name="PayoneKlarnaSessionResponse">
         <property name="token" type="string"/>
         <property name="isValid" type="bool"/>
+        <property name="error" type="string"/>
     </transfer>
     <!--Response container replacement related transfers end-->
 </transfers>
