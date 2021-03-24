@@ -2,20 +2,37 @@
 
 {% define config = {
     name: 'payone-klarna',
-    tag: 'payone-klarna'
+    tag: 'payone-klarna',
 } %}
 
 {% define data = {
     scriptSrc: 'https://x.klarnacdn.net/kp/lib/v1/api.js',
     form: data.form,
     billingAddressData: data.billingAddressData,
-    customerData: data.customerData
+    customerData: data.customerData,
+    klarnaPayMethods: [{'KIV': 'pay_later'}, {'KIS': 'slice_it'}, {'KDD': 'pay_now'}],
+} %}
+
+{% set billingAddressData = data.billingAddressData %}
+
+{% define attributes = {
+    'given-name': billingAddressData['given_name'] | default,
+    'family-name': billingAddressData['family_name'] | default,
+    'email': billingAddressData['email'] | default,
+    'street-address': billingAddressData['street_address'] | default,
+    'postal-code': billingAddressData['postal_code'] | default,
+    'city': billingAddressData['city'] | default,
+    'country': billingAddressData['country'] | default,
+    'phone': billingAddressData['phone'] | default,
+    'date-of-birth': data.customerData['date_of_birth'] | default,
+    'field-class-name': 'js-payone-klarna__select-field',
+    'klarna-pay-methods' : data.klarnaPayMethods | default([]) | json_encode(),
 } %}
 
 {% block body %}
     <div class="payment-subform payone-form payone-klarna-form payment-form" id="payoneKlarna">
         <div class="field">
-            {{ form_widget(data.form.payoneKlarna.payMethod) }}
+            {{ form_widget(data.form.payoneKlarna.payMethod, {'attr': {'class': attributes['field-class-name']}}) }}
             {{ form_widget(data.form.payoneKlarna.payMethodTokens) }}
         </div>
     </div>
@@ -23,63 +40,11 @@
     {% include molecule('script-loader') with {
         attributes: {
             src: data.scriptSrc,
-            async: true
-        }
+            async: true,
+        },
     } only %}
 
     <div id="klarna_container"></div>
-
-    <script>
-
-        window.klarnaAsyncCallback = function () {
-            var formData = new FormData();
-            formData.append('pay_method', 'KIV');
-
-            fetch('/payone/get-token', { method: 'POST', body: formData})
-                .then((response) => response.json())
-                .then((parsedResponse) => {
-
-                    // if (!parsedResponse.is_valid)
-                    //     return;
-
-                    Klarna.Payments.init({
-                        client_token: parsedResponse.client_token
-                    })
-
-                    Klarna.Payments.load({
-                        container: '#klarna_container',
-                        payment_method_category: 'pay_later',
-                    }, function (res) {
-                        Klarna.Payments.authorize({
-                            payment_method_category: "pay_later"
-                        }, {
-                            billing_address: {
-                                given_name: "{{ data.billingAddressData['given_name'] }}",
-                                family_name: "{{ data.billingAddressData['family_name'] }}",
-                                email: "{{ data.billingAddressData['email'] }}",
-                                street_address: "{{ data.billingAddressData['street_address'] }}",
-                                postal_code: "{{ data.billingAddressData['postal_code'] }}",
-                                city: "{{ data.billingAddressData['city'] }}",
-                                country: "{{ data.billingAddressData['country'] }}",
-                                phone: "{{ data.billingAddressData['phone'] }}",
-                            },
-                           
-                            customer: {
-                                date_of_birth: "{{ data.customerData['date_of_birth'] }}",
-                            }
-                        }, function(res) {
-                            var tokenContainer = document.getElementById('paymentForm_payoneKlarna_payMethodTokens');
-                            tokenContainer.value = res.authorization_token
-                        })
-                    })
-                })
-                .catch((e) => {
-                    error(e); // TODO: handle error
-                });
-        };
-
-    </script>
-
 {% endblock %}
 
 
