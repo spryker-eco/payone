@@ -168,8 +168,8 @@ interface PayoneClientInterface
 
     /**
      * {@inheritDoc}
-     * - Send request to Payone to start session
-     * - Gives a token in response for further requests
+     * - Sends request to Payone to start session.
+     * - Gives a token in response for further requests.
      *
      * @api
      *

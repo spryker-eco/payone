@@ -13,80 +13,77 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataC
 
 class KlarnaGenericPaymentContainer extends AbstractRequestContainer
 {
-    /**
-     * @var string
-     */
     protected $request = PayoneApiConstants::REQUEST_TYPE_GENERICPAYMENT;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearingtype;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
     protected $paydata;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $financingtype;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer|null
      */
     protected $personalData;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingType(): string
+    public function getClearingType(): ?string
     {
         return $this->clearingtype;
     }
@@ -96,15 +93,15 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setClearingType($clearingType): void
+    public function setClearingType(string $clearingType): void
     {
         $this->clearingtype = $clearingType;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -114,15 +111,15 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAmount($amount): void
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -132,15 +129,15 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCurrency($currency): void
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstname;
     }
@@ -150,15 +147,15 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFirstName($firstName): void
+    public function setFirstName(string $firstName): void
     {
         $this->firstname = $firstName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastname;
     }
@@ -168,15 +165,15 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setLastName($lastName): void
+    public function setLastName(string $lastName): void
     {
         $this->lastname = $lastName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -186,15 +183,15 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreet($street): void
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getZip(): int
+    public function getZip(): ?int
     {
         return $this->zip;
     }
@@ -204,15 +201,15 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingZip($zip): void
+    public function setShippingZip(int $zip): void
     {
         $this->zip = $zip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -222,15 +219,15 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCity($city): void
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -240,33 +237,33 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCountry($country): void
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFinancingtype(): string
+    public function getFinancingType(): ?string
     {
         return $this->financingtype;
     }
 
     /**
-     * @param string $financingtype
+     * @param string $financingType
      *
      * @return void
      */
-    public function setFinancingtype(string $financingtype): void
+    public function setFinancingType(string $financingType): void
     {
-        $this->financingtype = $financingtype;
+        $this->financingtype = $financingType;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
-    public function getPaydata(): PaydataContainer
+    public function getPaydata(): ?ContainerInterface
     {
         return $this->paydata;
     }
@@ -292,9 +289,9 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer|null
      */
-    public function getPersonalData(): PersonalContainer
+    public function getPersonalData(): ?ContainerInterface
     {
         return $this->personalData;
     }

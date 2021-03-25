@@ -20,22 +20,22 @@ class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $financingtype;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
     protected $paydata;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
     protected $redirect;
 
@@ -44,9 +44,9 @@ class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
      *
      * @return void
      */
-    public function setWorkOrderId($workorderid): void
+    public function setWorkOrderId(string $workorderId): void
     {
-        $this->workorderid = $workorderid;
+        $this->workorderid = $workorderId;
     }
 
     /**
@@ -58,27 +58,27 @@ class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFinancingtype(): string
+    public function getFinancingType(): ?string
     {
         return $this->financingtype;
     }
 
     /**
-     * @param string $financingtype
+     * @param string $financingType
      *
      * @return void
      */
-    public function setFinancingtype(string $financingtype): void
+    public function setFinancingType(string $financingType): void
     {
-        $this->financingtype = $financingtype;
+        $this->financingtype = $financingType;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
-    public function getPaydata(): PaydataContainer
+    public function getPaydata(): ?ContainerInterface
     {
         return $this->paydata;
     }
@@ -104,9 +104,9 @@ class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
-    public function getRedirect(): RedirectContainer
+    public function getRedirect(): ?ContainerInterface
     {
         return $this->redirect;
     }

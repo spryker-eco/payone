@@ -164,18 +164,18 @@ class CaptureContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCapturemode(): string
+    public function getCaptureMode(): string
     {
         return $this->capturemode;
     }
 
     /**
-     * @param string $capturemode
+     * @param string $captureMode
      *
      * @return void
      */
     public function setCapturemode($capturemode): void
     {
-        $this->capturemode = $capturemode;
+        $this->capturemode = $captureMode;
     }
 }

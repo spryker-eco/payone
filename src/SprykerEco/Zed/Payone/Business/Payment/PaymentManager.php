@@ -94,6 +94,11 @@ class PaymentManager implements PaymentManagerInterface
      * use \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE instead if shipping version is higher
      */
     protected const SHIPMENT_EXPENSE_TYPE = 'SHIPMENT_EXPENSE_TYPE';
+    protected const ONE_ITEM = 1;
+    protected const DISCOUNT_PRODUCT_DESCRIPTION = 'Discount';
+    protected const ZERRO_ITEM_TAX_RATE = 0;
+    protected const SHIPMENT_PRODUCT_DESCRIPTION = 'Shipment';
+    protected const ZERRO_DELIVERY_COSTS = 0;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
@@ -1087,7 +1092,7 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 
-        if ($paymentEntity->getPaymentMethod() == PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
+        if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
             $this->prepareOrderItemsFromQuote($quoteTransfer, $requestContainer);
             $this->prepareOrderShipmentFromQuote($quoteTransfer, $requestContainer);
         }
@@ -1455,9 +1460,9 @@ class PaymentManager implements PaymentManagerInterface
         $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
         $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
         $arrayPr[$key] = $this->getDeliveryCostsFromQuote($quoteTransfer);
-        $arrayNo[$key] = 1;
-        $arrayDe[$key] = 'Shipment';
-        $arrayVa[$key] = 0;
+        $arrayNo[$key] = self::ONE_ITEM;
+        $arrayDe[$key] = self::SHIPMENT_PRODUCT_DESCRIPTION;
+        $arrayVa[$key] = self::ZERRO_ITEM_TAX_RATE;
 
         $container->setIt($arrayIt);
         $container->setId($arrayId);
@@ -1532,7 +1537,7 @@ class PaymentManager implements PaymentManagerInterface
             }
         }
 
-        return 0;
+        return self::ZERRO_DELIVERY_COSTS;
     }
 
     /**

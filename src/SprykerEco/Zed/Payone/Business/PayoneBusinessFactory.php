@@ -364,7 +364,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna
      */
-    protected function createKlarna(Store $store): Klarna
+    public function createKlarna(Store $store): Klarna
     {
         return new Klarna($store, $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_REQUEST_STACK));
     }

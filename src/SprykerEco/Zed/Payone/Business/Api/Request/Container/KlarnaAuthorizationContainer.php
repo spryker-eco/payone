@@ -21,22 +21,22 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer|null
      */
     protected $business;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
     protected $paydata;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
     protected $redirect;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $financingtype;
 
@@ -89,7 +89,7 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
     public function getRedirect(): RedirectContainer
     {
@@ -99,7 +99,7 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     /**
      * @return string
      */
-    public function getFinancingtype(): string
+    public function getFinancingtype(): ?string
     {
         return $this->financingtype;
     }

@@ -17,6 +17,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractA
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaAuthorizationContainer;
@@ -33,8 +34,6 @@ class Klarna extends AbstractMapper
     protected $requestStack;
 
     /**
-     * Klarna constructor.
-     *
      * @param Store $storeConfig
      * @param RequestStack $requestStack
      */
@@ -48,7 +47,7 @@ class Klarna extends AbstractMapper
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PayoneApiConstants::PAYMENT_METHOD_KLARNA;
     }
@@ -58,7 +57,7 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaPreAuthorizationContainer
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity): ContainerInterface
     {
         $preAuthorizationContainer = new KlarnaPreAuthorizationContainer();
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
@@ -72,7 +71,7 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer
      */
-    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer)
+    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): ContainerInterface
     {
         $authorizationContainer = new KlarnaAuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
@@ -85,7 +84,7 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): ContainerInterface
     {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
         $captureContainer = new CaptureContainer();
@@ -93,7 +92,7 @@ class Klarna extends AbstractMapper
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
         $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
-        $captureContainer->setCapturemode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
+        $captureContainer->setCaptureMode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
 
         return $captureContainer;
     }
@@ -103,7 +102,7 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer
      */
-    public function mapPaymentToDebit(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToDebit(SpyPaymentPayone $paymentEntity): ContainerInterface
     {
         $debitContainer = new DebitContainer();
 
@@ -120,7 +119,7 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity): ContainerInterface
     {
         $refundContainer = new RefundContainer();
 
@@ -136,7 +135,7 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaGenericPaymentContainer
      */
-    public function mapPaymentToStartSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): KlarnaGenericPaymentContainer
+    public function mapPaymentToStartSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): ContainerInterface
     {
         $quoteTransfer = $klarnaStartSessionRequestTransfer->getQuote();
 
@@ -146,7 +145,7 @@ class Klarna extends AbstractMapper
         $klarnaGenericPaymentContainer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $klarnaGenericPaymentContainer->setCurrency($quoteTransfer->getCurrency()->getCode());
         $klarnaGenericPaymentContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
-        $klarnaGenericPaymentContainer->setFinancingtype($klarnaStartSessionRequestTransfer->getPayMethod());
+        $klarnaGenericPaymentContainer->setFinancingType($klarnaStartSessionRequestTransfer->getPayMethod());
 
         $paydataContainer = new PaydataContainer();
         $paydataContainer->setAction(PayoneApiConstants::PAYMENT_KLARNA_START_SESSION_ACTION);
@@ -159,11 +158,11 @@ class Klarna extends AbstractMapper
     }
 
     /**
-     * @param QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return PersonalContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    protected function createPersonalContainerFromQuoteTransfer(QuoteTransfer $quoteTransfer): PersonalContainer
+    protected function createPersonalContainerFromQuoteTransfer(QuoteTransfer $quoteTransfer): ContainerInterface
     {
         $personalContainer = new PersonalContainer();
         $billingAddress = $quoteTransfer->getBillingAddress();
@@ -187,8 +186,10 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer): AbstractAuthorizationContainer
-    {
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): ContainerInterface {
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
 
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
@@ -196,7 +197,7 @@ class Klarna extends AbstractMapper
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
-        $authorizationContainer->setFinancingtype($paymentDetailEntity->getPayMethod());
+        $authorizationContainer->setFinancingType($paymentDetailEntity->getPayMethod());
 
         $authorizationContainer->setReference($paymentEntity->getReference());
 
@@ -221,7 +222,7 @@ class Klarna extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    protected function buildPersonalContainer(SpyPaymentPayone $paymentEntity): PersonalContainer
+    protected function buildPersonalContainer(SpyPaymentPayone $paymentEntity): ContainerInterface
     {
         $personalContainer = new PersonalContainer();
 
@@ -239,8 +240,10 @@ class Klarna extends AbstractMapper
      *
      * @return void
      */
-    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentEntity)
-    {
+    protected function mapBillingAddressToPersonalContainer(
+        PersonalContainer $personalContainer,
+        SpyPaymentPayone $paymentEntity
+    ): void {
         $orderEntity = $paymentEntity->getSpySalesOrder();
         $billingAddressEntity = $orderEntity->getBillingAddress();
         $personalContainer->setCountry($billingAddressEntity->getCountry()->getIso2Code());

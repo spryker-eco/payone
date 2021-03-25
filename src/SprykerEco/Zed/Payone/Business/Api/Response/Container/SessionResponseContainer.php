@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class SessionResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $response;
 
@@ -19,7 +19,7 @@ class SessionResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setResponse($response): void
+    public function setResponse(string $response): void
     {
         $this->response = $response;
     }
@@ -27,7 +27,7 @@ class SessionResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getResponse(): string
+    public function getResponse(): ?string
     {
         return $this->response;
     }

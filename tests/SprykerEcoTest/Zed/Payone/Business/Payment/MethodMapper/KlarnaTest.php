@@ -29,6 +29,8 @@ class KlarnaTest extends AbstractMethodMapperTest
 
     protected const STANDARD_PARAMETER_CLEARING_TYPE = 'fnc';
 
+    protected const CLIENT_IP = '127.0.0.1';
+
     public const AUTHORIZATION_KLARNA_REQUIRED_PARAMS = [
         'financingtype' => self::PAY_METHOD_TYPE,
     ];
@@ -79,14 +81,16 @@ class KlarnaTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToPreauthorization()
+    public function testMapPaymentToPreauthorization(): void
     {
+        // Arrange
         $paymentEntity = $this->getPaymentEntityMock();
-        $methodMapper = new Klarna($this->getStoreConfigMock(), $this->getRequestStackMock());
-        $paymentMethodMapper = $this->preparePaymentMethodMapper($methodMapper);
+        $paymentMethodMapper = $this->preparePaymentMethodMapper($this->createKlarna());
 
+        // Act
         $requestData = $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity)->toArray();
 
+        // Assert
         foreach (static::PREAUTHORIZATION_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
             $this->assertSame($value, $requestData[$key]);
@@ -106,16 +110,18 @@ class KlarnaTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToAuthorization()
+    public function testMapPaymentToAuthorization(): void
     {
+        // Arrange
         $paymentEntity = $this->getPaymentEntityMock();
-        $methodMapper = new Klarna($this->getStoreConfigMock(), $this->getRequestStackMock());
-        $paymentMethodMapper = $this->preparePaymentMethodMapper($methodMapper);
+        $paymentMethodMapper = $this->preparePaymentMethodMapper($this->createKlarna());
 
         $orderTransfer = $this->getSalesOrderTransfer();
 
+        // Act
         $requestData = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer)->toArray();
 
+        // Assert
         foreach (static::AUTHORIZATION_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
             $this->assertSame($value, $requestData[$key]);
@@ -135,13 +141,16 @@ class KlarnaTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToCapture()
+    public function testMapPaymentToCapture(): void
     {
+        // Arrange
         $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper(new Klarna($this->getStoreConfigMock(), $this->getRequestStackMock()));
+        $paymentMethodMapper = $this->preparePaymentMethodMapper($this->createKlarna());
 
+        // Act
         $requestData = $paymentMethodMapper->mapPaymentToCapture($paymentEntity)->toArray();
 
+        // Assert
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
             $this->assertSame($value, $requestData[$key]);
@@ -151,12 +160,15 @@ class KlarnaTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToStartSession()
+    public function testMapPaymentToStartSession(): void
     {
+        // Arrange
         $payoneKlarnaStartSessionRequest = $this->getPayoneKlarnaStartSessionRequestMock();
-        $methodMapper = new Klarna($this->getStoreConfigMock(), $this->getRequestStackMock());
-        $requestData = $methodMapper->mapPaymentToStartSession($payoneKlarnaStartSessionRequest)->toArray();
 
+        // Act
+        $requestData = $this->createKlarna()->mapPaymentToStartSession($payoneKlarnaStartSessionRequest)->toArray();
+
+        // Assert
         foreach (static::START_SESSION_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
             $this->assertSame($value, $requestData[$key]);
@@ -169,9 +181,17 @@ class KlarnaTest extends AbstractMethodMapperTest
     }
 
     /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna
+     */
+    protected function createKlarna(): Klarna
+    {
+        return new Klarna($this->getStoreConfigMock(), $this->getRequestStackMock());
+    }
+
+    /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
      */
-    protected function getPaymentPayoneDetailMock()
+    protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
     {
         $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
 
@@ -206,7 +226,7 @@ class KlarnaTest extends AbstractMethodMapperTest
             ->setMethods(['getClientIp'])
             ->getMock();
 
-        $mock->method('getClientIp')->willReturn('127.0.0.1');
+        $mock->method('getClientIp')->willReturn(self::CLIENT_IP);
 
         return $mock;
     }

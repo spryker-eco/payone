@@ -614,7 +614,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
-     * - Starts Payone session
+     * - Starts Payone session.
      *
      * @api
      *

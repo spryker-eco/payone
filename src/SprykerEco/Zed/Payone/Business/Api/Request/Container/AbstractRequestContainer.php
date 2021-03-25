@@ -585,13 +585,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string $backurl
+     * @param string $backUrl
      *
      * @return void
      */
-    public function setBackUrl(string $backurl): void
+    public function setBackUrl(string $backUrl): void
     {
-        $this->backurl = $backurl;
+        $this->backurl = $backUrl;
     }
 
     /**
@@ -603,13 +603,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string $successurl
+     * @param string $successUrl
      *
      * @return void
      */
-    public function setSuccessUrl(string $successurl): void
+    public function setSuccessUrl(string $successUrl): void
     {
-        $this->successurl = $successurl;
+        $this->successurl = $successUrl;
     }
 
     /**
@@ -621,12 +621,12 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string $errorurl
+     * @param string $errorUrl
      *
      * @return void
      */
-    public function setErrorUrl(string $errorurl): void
+    public function setErrorUrl(string $errorUrl): void
     {
-        $this->errorurl = $errorurl;
+        $this->errorurl = $errorUrl;
     }
 }
