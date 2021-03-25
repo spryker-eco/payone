@@ -1095,6 +1095,7 @@ class PaymentManager implements PaymentManagerInterface
         if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
             $this->prepareOrderItemsFromQuote($quoteTransfer, $requestContainer);
             $this->prepareOrderShipmentFromQuote($quoteTransfer, $requestContainer);
+            $this->prepareOrderDiscountFromQuote($quoteTransfer, $requestContainer);
         }
 
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
@@ -1509,6 +1510,40 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     */
+    protected function prepareOrderDiscountFromQuote(QuoteTransfer $quoteTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    {
+        $arrayIt = $container->getIt() ?? [];
+        $arrayId = $container->getId() ?? [];
+        $arrayPr = $container->getPr() ?? [];
+        $arrayNo = $container->getNo() ?? [];
+        $arrayDe = $container->getDe() ?? [];
+        $arrayVa = $container->getVa() ?? [];
+
+        $key = count($arrayId) + 1;
+
+        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
+        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
+        $arrayPr[$key] = - $quoteTransfer->getTotals()->getDiscountTotal();
+        $arrayNo[$key] = self::ONE_ITEM;
+        $arrayDe[$key] = self::DISCOUNT_PRODUCT_DESCRIPTION;
+        $arrayVa[$key] = self::ZERRO_ITEM_TAX_RATE;
+
+        $container->setIt($arrayIt);
+        $container->setId($arrayId);
+        $container->setPr($arrayPr);
+        $container->setNo($arrayNo);
+        $container->setDe($arrayDe);
+        $container->setVa($arrayVa);
+
+        return $container;
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return int
@@ -1712,6 +1747,7 @@ class PaymentManager implements PaymentManagerInterface
         $this->setStandardParameter($klarnaContainer);
         $this->prepareOrderItemsFromQuote($klarnaStartSessionRequestTransfer->getQuote(), $klarnaContainer);
         $this->prepareOrderShipmentFromQuote($klarnaStartSessionRequestTransfer->getQuote(), $klarnaContainer);
+        $this->prepareOrderDiscountFromQuote($klarnaStartSessionRequestTransfer->getQuote(), $klarnaContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaContainer);
 
         $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);
@@ -1720,6 +1756,7 @@ class PaymentManager implements PaymentManagerInterface
 
         if ($klarnaGenericPaymentResponseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_ERROR) {
             $payoneKlarnaSessionResponseTransfer->setIsValid(false);
+            $payoneKlarnaSessionResponseTransfer->setError(json_encode($rawResponse));
 
             return $payoneKlarnaSessionResponseTransfer;
         }

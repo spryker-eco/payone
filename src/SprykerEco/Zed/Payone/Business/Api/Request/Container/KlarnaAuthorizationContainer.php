@@ -45,7 +45,7 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
      *
      * @return $this
      */
-    public function setBusiness(BusinessContainer $business): self
+    public function setBusiness(BusinessContainer $business): ContainerInterface
     {
         $this->business = $business;
 
@@ -55,15 +55,15 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer
      */
-    public function getBusiness(): BusinessContainer
+    public function getBusiness(): ?ContainerInterface
     {
         return $this->business;
     }
 
     /**
-     * @return GenericPayment\PaydataContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
      */
-    public function getPaydata(): PaydataContainer
+    public function getPaydata(): ?ContainerInterface
     {
         return $this->paydata;
     }
@@ -91,7 +91,7 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
-    public function getRedirect(): RedirectContainer
+    public function getRedirect(): ?ContainerInterface
     {
         return $this->redirect;
     }

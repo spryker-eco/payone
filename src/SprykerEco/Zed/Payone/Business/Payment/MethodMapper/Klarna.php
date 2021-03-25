@@ -211,8 +211,11 @@ class Klarna extends AbstractMapper
         $authorizationContainer->setRedirect($this->createRedirectContainer($orderReference));
 
         $shippingAddressEntity = $paymentEntity->getSpySalesOrder()->getShippingAddress();
-        $shippingContainer = new ShippingContainer();
-        $this->mapShippingAddressToShippingContainer($shippingContainer, $shippingAddressEntity);
+
+        if ($shippingAddressEntity) {
+            $shippingContainer = new ShippingContainer();
+            $this->mapShippingAddressToShippingContainer($shippingContainer, $shippingAddressEntity);
+        }
 
         return $authorizationContainer;
     }

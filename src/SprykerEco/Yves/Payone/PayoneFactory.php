@@ -132,9 +132,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createKlarnaSubFormDataProvider(): KlarnaDataProvider
     {
-        $quoteTransfer = $this->getQuoteClient()->getQuote();
-
-        return new KlarnaDataProvider($quoteTransfer, $this->getStoreConfig());
+        return new KlarnaDataProvider($this->getStoreConfig());
     }
 
     /**

@@ -18,22 +18,15 @@ use SprykerEco\Yves\Payone\Form\KlarnaSubForm;
 class KlarnaDataProvider implements StepEngineFormDataProviderInterface
 {
     /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransfer;
-
-    /**
      * @var \Spryker\Shared\Kernel\Store
      */
     protected $store;
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Spryker\Shared\Kernel\Store $store
      */
-    public function __construct(QuoteTransfer $quoteTransfer, Store $store)
+    public function __construct(Store $store)
     {
-        $this->quoteTransfer = $quoteTransfer;
         $this->store = $store;
     }
 
@@ -62,24 +55,25 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
-        $billingAddress = $this->quoteTransfer->getBillingAddress();
-        $items = $this->quoteTransfer->getItems();
+        $billingAddress = $quoteTransfer->getBillingAddress();
+        $items = $quoteTransfer->getItems();
 
         return [
             KlarnaSubForm::PAY_METHOD_CHOICES => $this->getPayMethods(),
             KlarnaSubForm::BILLING_ADDRESS_DATA => [
-                'given_name' => $billingAddress->getFirstName(),
-                'family_name' => $billingAddress->getLastName(),
-                'email' => $quoteTransfer->getCustomer()->getEmail(),
-                'street_address' => implode(' ', [$billingAddress->getAddress1(), $billingAddress->getAddress2()]),
-                'postal_code' => $billingAddress->getZipCode(),
-                'city' => $billingAddress->getCity(),
-                'country' => $this->store->getCurrentCountry(),
-                'phone' => $billingAddress->getPhone(),
+                KlarnaSubForm::GIVEN_NAME => $billingAddress->getFirstName(),
+                KlarnaSubForm::FAMILY_NAME => $billingAddress->getLastName(),
+                KlarnaSubForm::EMAIL => $quoteTransfer->getCustomer()->getEmail(),
+                KlarnaSubForm::STREET_ADDRESS => implode(' ', [$billingAddress->getAddress1(), $billingAddress->getAddress2()]),
+                KlarnaSubForm::POSTAL_CODE => $billingAddress->getZipCode(),
+                KlarnaSubForm::CITY => $billingAddress->getCity(),
+                KlarnaSubForm::COUNTRY => $this->store->getCurrentCountry(),
+                KlarnaSubForm::PHONE => $billingAddress->getPhone(),
             ],
             KlarnaSubForm::CUSTOMER_DATA => [
-                'date_of_birth' => $quoteTransfer->getCustomer()->getDateOfBirth(),
+                KlarnaSubForm::DATE_OF_BIRTH => $quoteTransfer->getCustomer() ? $quoteTransfer->getCustomer()->getDateOfBirth() : null,
             ],
+            KlarnaSubForm::KLARNA_PAY_METHODS => $this->getKlarnaPayMethods(),
         ];
     }
 
@@ -89,9 +83,21 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     protected function getPayMethods(): array
     {
         return [
-            'Slice it' => 'KIS',
-            'Pay later' => 'KIV',
-            'Pay now' => 'KDD',
+            KlarnaSubForm::SLICE_IT_PAY_METHOD => KlarnaSubForm::SLICE_IT_PAY_METHOD_CODE,
+            KlarnaSubForm::PAY_LATER_PAY_METHOD => KlarnaSubForm::PAY_LATER_PAY_METHOD_CODE,
+            KlarnaSubForm::PAY_NOW_PAY_METHOD => KlarnaSubForm::PAY_NOW_PAY_METHOD_CODE,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getKlarnaPayMethods(): array
+    {
+        return [
+            KlarnaSubForm::SLICE_IT_PAY_METHOD_CODE => 'pay_over_time',
+            KlarnaSubForm::PAY_LATER_PAY_METHOD_CODE => 'pay_later',
+            KlarnaSubForm::PAY_NOW_PAY_METHOD_CODE => 'pay_now',
         ];
     }
 }

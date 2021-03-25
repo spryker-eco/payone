@@ -48,13 +48,13 @@ class PaydataContainer extends AbstractContainer
     }
 
     /**
-     * @param string $authorization_token
+     * @param string $authorizationToken
      *
      * @return void
      */
-    public function setAuthorizationToken(string $authorization_token): void
+    public function setAuthorizationToken(string $authorizationToken): void
     {
-        $this->authorization_token = $authorization_token;
+        $this->authorizationToken = $authorizationToken;
     }
 
     /**

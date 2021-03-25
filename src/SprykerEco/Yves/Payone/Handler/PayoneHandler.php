@@ -20,6 +20,7 @@ class PayoneHandler implements PayoneHandlerInterface
     public const PAYMENT_PROVIDER = 'Payone';
     public const CHECKOUT_INCLUDE_SUMMARY_PATH = 'Payone/partial/summary';
     public const CHECKOUT_INCLUDE_SUCCESS_PATH = 'Payone/partial/success';
+    protected const TX_1 = 'TX1';
 
     /**
      * @var array
@@ -169,16 +170,16 @@ class PayoneHandler implements PayoneHandlerInterface
             $shippingProvider = $quoteTransfer->getShipment()->getMethod()->getCarrierName();
             $paymentDetailTransfer->setShippingProvider($shippingProvider);
         } elseif ($paymentSelection == PaymentTransfer::PAYONE_KLARNA) {
-            /** @var \Generated\Shared\Transfer\PayoneKlarnaTransfer $payonePaymentTransfer */
             $paymentDetailTransfer->setPayMethod($payonePaymentTransfer->getPayMethod());
             $paymentDetailTransfer->setTokenList($payonePaymentTransfer->getPayMethodTokens());
         }
 
+        $payone = new PayonePaymentTransfer();
+        $payone->setReference(uniqid(self::TX_1));
+        $payone->setPaymentDetail($paymentDetailTransfer);
         $paymentTransfer = $quoteTransfer->getPayment();
-        $paymentTransfer->setPayone(new PayonePaymentTransfer());
-        $paymentTransfer->getPayone()->setReference(uniqid('TX1'));
-        $paymentTransfer->getPayone()->setPaymentDetail($paymentDetailTransfer);
-        $paymentTransfer->getPayone()->setPaymentMethod($paymentTransfer->getPaymentMethod());
+        $payone->setPaymentMethod($paymentTransfer->getPaymentMethod());
+        $paymentTransfer->setPayone($payone);
     }
 
     /**
