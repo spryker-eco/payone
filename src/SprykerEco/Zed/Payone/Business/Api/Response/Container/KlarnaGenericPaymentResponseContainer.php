@@ -9,7 +9,8 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
 {
-    const ADD_PAYDATA_REPLACEMENT_PATTERN = '/add_paydata\[(.*)\]/';
+    public const ADD_PAYDATA_REPLACEMENT_PATTERN = '/add_paydata\[(.*)\]/';
+
     /**
      * @var string
      */
@@ -55,7 +56,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @param string $client_token
+     * @param string $clientToken
      *
      * @return void
      */

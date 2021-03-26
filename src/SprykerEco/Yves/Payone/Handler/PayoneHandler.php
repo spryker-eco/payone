@@ -20,7 +20,7 @@ class PayoneHandler implements PayoneHandlerInterface
     public const PAYMENT_PROVIDER = 'Payone';
     public const CHECKOUT_INCLUDE_SUMMARY_PATH = 'Payone/partial/summary';
     public const CHECKOUT_INCLUDE_SUCCESS_PATH = 'Payone/partial/success';
-    protected const TX_1 = 'TX1';
+    protected const PAYONE_PAYMENT_REFERENCE_PREFIX = 'TX1';
 
     /**
      * @var array
@@ -175,7 +175,7 @@ class PayoneHandler implements PayoneHandlerInterface
         }
 
         $payone = new PayonePaymentTransfer();
-        $payone->setReference(uniqid(self::TX_1));
+        $payone->setReference(uniqid(self::PAYONE_PAYMENT_REFERENCE_PREFIX));
         $payone->setPaymentDetail($paymentDetailTransfer);
         $paymentTransfer = $quoteTransfer->getPayment();
         $payone->setPaymentMethod($paymentTransfer->getPaymentMethod());

@@ -40,7 +40,7 @@ class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
     protected $redirect;
 
     /**
-     * @param string $workorderid
+     * @param string $workorderId
      *
      * @return void
      */
@@ -50,9 +50,9 @@ class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWorkOrderId(): string
+    public function getWorkOrderId(): ?string
     {
         return $this->workorderid;
     }

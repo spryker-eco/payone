@@ -579,7 +579,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getBackUrl(): string
+    public function getBackUrl()
     {
         return $this->backurl;
     }
@@ -597,7 +597,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getSuccessUrl(): string
+    public function getSuccessUrl()
     {
         return $this->successurl;
     }
@@ -615,7 +615,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getErrorUrl(): string
+    public function getErrorUrl()
     {
         return $this->errorurl;
     }

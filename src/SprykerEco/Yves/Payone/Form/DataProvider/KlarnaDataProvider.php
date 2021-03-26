@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
@@ -17,6 +16,8 @@ use SprykerEco\Yves\Payone\Form\KlarnaSubForm;
 
 class KlarnaDataProvider implements StepEngineFormDataProviderInterface
 {
+    protected const ADDRESS_SEPARATOR = ' ';
+
     /**
      * @var \Spryker\Shared\Kernel\Store
      */
@@ -31,7 +32,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
@@ -49,7 +50,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return array
      */
@@ -64,7 +65,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
                 KlarnaSubForm::GIVEN_NAME => $billingAddress->getFirstName(),
                 KlarnaSubForm::FAMILY_NAME => $billingAddress->getLastName(),
                 KlarnaSubForm::EMAIL => $quoteTransfer->getCustomer()->getEmail(),
-                KlarnaSubForm::STREET_ADDRESS => implode(' ', [$billingAddress->getAddress1(), $billingAddress->getAddress2()]),
+                KlarnaSubForm::STREET_ADDRESS => implode(self::ADDRESS_SEPARATOR, [$billingAddress->getAddress1(), $billingAddress->getAddress2()]),
                 KlarnaSubForm::POSTAL_CODE => $billingAddress->getZipCode(),
                 KlarnaSubForm::CITY => $billingAddress->getCity(),
                 KlarnaSubForm::COUNTRY => $this->store->getCurrentCountry(),
@@ -73,7 +74,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
             KlarnaSubForm::CUSTOMER_DATA => [
                 KlarnaSubForm::DATE_OF_BIRTH => $quoteTransfer->getCustomer() ? $quoteTransfer->getCustomer()->getDateOfBirth() : null,
             ],
-            KlarnaSubForm::KLARNA_PAY_METHODS => $this->getKlarnaPayMethods(),
+            KlarnaSubForm::WIDGET_PAY_METHODS => $this->getKlarnaPayMethods(),
         ];
     }
 
@@ -95,9 +96,9 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     protected function getKlarnaPayMethods(): array
     {
         return [
-            KlarnaSubForm::SLICE_IT_PAY_METHOD_CODE => 'pay_over_time',
-            KlarnaSubForm::PAY_LATER_PAY_METHOD_CODE => 'pay_later',
-            KlarnaSubForm::PAY_NOW_PAY_METHOD_CODE => 'pay_now',
+            KlarnaSubForm::SLICE_IT_PAY_METHOD_CODE => KlarnaSubForm::SLICE_IT_WIDGET_PAY_METHOD_CODE,
+            KlarnaSubForm::PAY_LATER_PAY_METHOD_CODE => KlarnaSubForm::PAY_LATER_WIDGET_PAY_METHOD_CODE,
+            KlarnaSubForm::PAY_NOW_PAY_METHOD_CODE => KlarnaSubForm::PAY_NOW_WIDGET_PAY_METHOD_CODE,
         ];
     }
 }

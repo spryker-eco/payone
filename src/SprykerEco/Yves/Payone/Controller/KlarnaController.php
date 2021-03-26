@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Payone\Controller;
 
-use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class KlarnaController extends AbstractController
 {
+    protected const PAY_METHOD_REQUEST_PARAMETER = 'pay_method';
+    protected const IS_VALID_RESPONSE_PARAMETER = 'is_valid';
+    protected const ERROR_MESSAGE_RESPONSE_PARAMETER = 'error_message';
+    protected const CLIENT_TOKEN_RESPONSE_PARAMETER = 'client_token';
+
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
@@ -25,18 +29,18 @@ class KlarnaController extends AbstractController
      */
     public function getTokenAction(Request $request): JsonResponse
     {
-        $payMethod = $request->request->get('pay_method');
+        $klarnaStartSessionRequestTransfer = $this->getFactory()->createPayoneKlarnaStartSessionRequest();
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $klarnaStartSessionRequestTransfer = new PayoneKlarnaStartSessionRequestTransfer();
         $klarnaStartSessionRequestTransfer->setQuote($quoteTransfer);
+        $payMethod = $request->request->get(self::PAY_METHOD_REQUEST_PARAMETER);
         $klarnaStartSessionRequestTransfer->setPayMethod($payMethod);
 
         $payoneKlarnaSessionResponseTransfer = $this->getClient()->startKlarnaSessionRequest($klarnaStartSessionRequestTransfer);
 
         return $this->jsonResponse([
-            'is_valid' => $payoneKlarnaSessionResponseTransfer->getIsValid(),
-            'error_message' => $payoneKlarnaSessionResponseTransfer->getError(),
-            'client_token' => $payoneKlarnaSessionResponseTransfer->getToken(),
+            self::IS_VALID_RESPONSE_PARAMETER => $payoneKlarnaSessionResponseTransfer->getIsValid(),
+            self::ERROR_MESSAGE_RESPONSE_PARAMETER => $payoneKlarnaSessionResponseTransfer->getError(),
+            self::CLIENT_TOKEN_RESPONSE_PARAMETER => $payoneKlarnaSessionResponseTransfer->getToken(),
         ]);
     }
 }

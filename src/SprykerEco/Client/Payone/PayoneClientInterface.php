@@ -167,13 +167,13 @@ interface PayoneClientInterface
     public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
 
     /**
-     * {@inheritDoc}
+     * Specification:
      * - Sends request to Payone to start session.
      * - Gives a token in response for further requests.
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
      */

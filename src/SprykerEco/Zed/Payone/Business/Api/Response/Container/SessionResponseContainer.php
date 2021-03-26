@@ -25,7 +25,7 @@ class SessionResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getResponse(): ?string
     {

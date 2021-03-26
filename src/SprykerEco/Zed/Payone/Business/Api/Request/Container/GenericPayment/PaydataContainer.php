@@ -17,7 +17,7 @@ class PaydataContainer extends AbstractContainer
     protected $action;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $authorization_token;
 
@@ -40,9 +40,9 @@ class PaydataContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAuthorizationToken(): string
+    public function getAuthorizationToken(): ?string
     {
         return $this->authorization_token;
     }

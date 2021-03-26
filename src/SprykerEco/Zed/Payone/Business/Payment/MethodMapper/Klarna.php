@@ -28,14 +28,16 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class Klarna extends AbstractMapper
 {
+    protected const STREET_ADDRESS_SEPARATOR = ' ';
+
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */
     protected $requestStack;
 
     /**
-     * @param Store $storeConfig
-     * @param RequestStack $requestStack
+     * @param \Spryker\Shared\Kernel\Store $storeConfig
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
     public function __construct(Store $storeConfig, RequestStack $requestStack)
     {
@@ -131,7 +133,7 @@ class Klarna extends AbstractMapper
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaGenericPaymentContainer
      */
@@ -253,7 +255,7 @@ class Klarna extends AbstractMapper
         $personalContainer->setFirstName($billingAddressEntity->getFirstName());
         $personalContainer->setLastName($billingAddressEntity->getLastName());
         $personalContainer->setSalutation($billingAddressEntity->getSalutation());
-        $personalContainer->setStreet(implode(' ', [$billingAddressEntity->getAddress1(), $billingAddressEntity->getAddress2()]));
+        $personalContainer->setStreet(implode(self::STREET_ADDRESS_SEPARATOR, [$billingAddressEntity->getAddress1(), $billingAddressEntity->getAddress2()]));
         $personalContainer->setAddressAddition($billingAddressEntity->getAddress3());
         $personalContainer->setZip($billingAddressEntity->getZipCode());
         $personalContainer->setCity($billingAddressEntity->getCity());

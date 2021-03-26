@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Payone;
 
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
@@ -58,7 +59,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\PrePaymentForm
      */
-    public function createPrePaymentForm(): PrePaymentForm
+    public function createPrePaymentForm()
     {
         return new PrePaymentForm();
     }
@@ -66,7 +67,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\PrePaymentDataProvider
      */
-    public function createPrePaymentFormDataProvider(): PrePaymentDataProvider
+    public function createPrePaymentFormDataProvider()
     {
         return new PrePaymentDataProvider();
     }
@@ -74,7 +75,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\InvoiceSubForm
      */
-    public function createInvoiceSubForm(): InvoiceSubForm
+    public function createInvoiceSubForm()
     {
         return new InvoiceSubForm();
     }
@@ -88,7 +89,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\FormKlarnaSubForm
+     * @return \SprykerEco\Yves\Payone\Form\KlarnaSubForm
      */
     public function createKlarnaSubForm(): SubFormInterface
     {
@@ -130,7 +131,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\KlarnaDataProvider
      */
-    public function createKlarnaSubFormDataProvider(): KlarnaDataProvider
+    public function createKlarnaSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
         return new KlarnaDataProvider($this->getStoreConfig());
     }
@@ -414,5 +415,13 @@ class PayoneFactory extends AbstractFactory
             $this->getCustomerClient(),
             $this->getCalculationClient()
         );
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer
+     */
+    public function createPayoneKlarnaStartSessionRequest(): PayoneKlarnaStartSessionRequestTransfer
+    {
+        return new PayoneKlarnaStartSessionRequestTransfer();
     }
 }

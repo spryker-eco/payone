@@ -156,7 +156,6 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
         $personalContainer->setTelephoneNumber($billingAddressEntity->getPhone());
         $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
         $personalContainer->setPersonalId($orderEntity->getCustomerReference());
-        $personalContainer->setEmail($orderEntity->getEmail());
     }
 
     /**

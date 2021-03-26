@@ -24,7 +24,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     protected const PAYMENT_METHOD = 'klarna';
     protected const FIELD_PAY_METHOD_TYPE = 'payMethod';
     public const PAY_METHOD_CHOICES = 'pay_methods';
-    public const KLARNA_PAY_METHODS = 'klarna_paymethods';
+    public const WIDGET_PAY_METHODS = 'widget_pay_methods';
     protected const FIELD_PAY_METHOD_TOKENS = 'payMethodTokens';
     public const BILLING_ADDRESS_DATA = 'billing_address_data';
     public const CUSTOMER_DATA = 'customer_data';
@@ -52,7 +52,10 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     public const PAY_LATER_PAY_METHOD_CODE = 'KIV';
     public const PAY_NOW_PAY_METHOD_CODE = 'KDD';
 
-
+    // widget pay methods
+    public const SLICE_IT_WIDGET_PAY_METHOD_CODE = 'pay_over_time';
+    public const PAY_LATER_WIDGET_PAY_METHOD_CODE = 'pay_later';
+    public const PAY_NOW_WIDGET_PAY_METHOD_CODE = 'pay_now';
 
     /**
      * @return string
@@ -81,7 +84,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
         $this->addPayMethods(
             $builder,
             $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES],
-            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::KLARNA_PAY_METHODS]
+            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::WIDGET_PAY_METHODS]
         );
         $this->addPayMethodTokens($builder);
     }
@@ -119,11 +122,11 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $choices
-     * @param array $choices
+     * @param array $klarnaPayMethods
      *
      * @return $this
      */
-    protected function addPayMethods(FormBuilderInterface $builder, array $choices, array $klarnaPayMethods): KlarnaSubForm
+    protected function addPayMethods(FormBuilderInterface $builder, array $choices, array $klarnaPayMethods)
     {
         $builder->add(
             static::FIELD_PAY_METHOD_TYPE,
@@ -145,7 +148,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      *
      * @return $this
      */
-    protected function addPayMethodTokens(FormBuilderInterface $builder): KlarnaSubForm
+    protected function addPayMethodTokens(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_PAY_METHOD_TOKENS,
@@ -161,6 +164,10 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     }
 
     /**
+     * @param \Symfony\Component\Form\FormView $view
+     * @param \Symfony\Component\Form\FormInterface $form
+     * @param array $options
+     *
      * @return void
      */
     public function buildView(FormView $view, FormInterface $form, array $options): void
@@ -169,5 +176,6 @@ class KlarnaSubForm extends AbstractPayoneSubForm
 
         $view->vars[static::BILLING_ADDRESS_DATA] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::BILLING_ADDRESS_DATA];
         $view->vars[static::CUSTOMER_DATA] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::CUSTOMER_DATA];
+        $view->vars[static::WIDGET_PAY_METHODS] = $options[SubFormInterface::OPTIONS_FIELD_NAME][static::WIDGET_PAY_METHODS];
     }
 }

@@ -328,7 +328,6 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     protected function isPayment($idSalesOrder, $idSalesOrderItem, $status)
     {
         $statusLog = $this->getFirstUnprocessedTransactionStatusLog($idSalesOrder, $idSalesOrderItem, $status);
-
         if ($statusLog === null) {
             return false;
         }

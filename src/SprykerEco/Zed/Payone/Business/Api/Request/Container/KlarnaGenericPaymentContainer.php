@@ -13,6 +13,9 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataC
 
 class KlarnaGenericPaymentContainer extends AbstractRequestContainer
 {
+    /**
+     * @var string|null
+     */
     protected $request = PayoneApiConstants::REQUEST_TYPE_GENERICPAYMENT;
 
     /**

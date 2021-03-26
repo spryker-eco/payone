@@ -1732,7 +1732,7 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
      */
@@ -1756,7 +1756,7 @@ class PaymentManager implements PaymentManagerInterface
 
         if ($klarnaGenericPaymentResponseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_ERROR) {
             $payoneKlarnaSessionResponseTransfer->setIsValid(false);
-            $payoneKlarnaSessionResponseTransfer->setError(json_encode($rawResponse));
+            $payoneKlarnaSessionResponseTransfer->setError($klarnaGenericPaymentResponseContainer->getErrormessage());
 
             return $payoneKlarnaSessionResponseTransfer;
         }
