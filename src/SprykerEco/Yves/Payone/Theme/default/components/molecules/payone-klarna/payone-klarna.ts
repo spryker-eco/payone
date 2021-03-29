@@ -94,20 +94,21 @@ export default class PayoneKlarna extends Component {
                 payment_method_category: component.allKlarnaPayMethods[payData['pay_method']]
             }, {
                 billing_address: {
-                    given_name: this.givenName,
-                    family_name: this.familyName,
-                    email: this.email,
-                    street_address: this.streetAddress,
-                    postal_code: this.postalCode,
-                    city: this.city,
-                    country: this.country,
-                    phone: this.phone,
+                    given_name: component.givenName,
+                    family_name: component.familyName,
+                    email: component.email,
+                    street_address: component.streetAddress,
+                    postal_code: component.postalCode,
+                    city: component.city,
+                    country: component.country,
+                    phone: component.phone,
                 },
 
                 customer: {
-                    date_of_birth: this.dateOfBirth,
+                    date_of_birth: component.dateOfBirth,
                 }
             }, function(res) {
+
                 var tokenContainer = this.getElementById(TOKEN_CONTAINER_ID);
                 tokenContainer.value = res.authorization_token;
             })

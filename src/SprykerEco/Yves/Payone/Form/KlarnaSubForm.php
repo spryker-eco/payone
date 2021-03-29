@@ -133,11 +133,12 @@ class KlarnaSubForm extends AbstractPayoneSubForm
             ChoiceType::class,
             [
                 'label' => false,
-                'required' => true,
+                'required' => false,
                 'choices' => $choices,
                 'constraints' => new NotBlank(),
+                'data' => '',
                 'choice_attr' => function($val) {
-                    return $val === '' ? ['disabled' => 'disabled', 'selected'] : [];
+                    return $val === '' ? ['disabled' => 'disabled', 'selected' => 'selected'] : [];
                 }
             ]
         );

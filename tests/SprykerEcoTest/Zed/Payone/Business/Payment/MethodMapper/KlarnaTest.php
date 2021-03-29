@@ -34,8 +34,6 @@ class KlarnaTest extends AbstractMethodMapperTest
 
     protected const STANDARD_PARAMETER_CLEARING_TYPE = 'fnc';
 
-    protected const CLIENT_IP = '127.0.0.1';
-
     public const AUTHORIZATION_KLARNA_REQUIRED_PARAMS = [
         'financingtype' => self::PAY_METHOD_TYPE,
     ];
@@ -207,21 +205,6 @@ class KlarnaTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\RequestStack
-     */
-    protected function getRequestStackMock(): RequestStack
-    {
-        $mock = $this->getMockBuilder(RequestStack::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getCurrentRequest'])
-            ->getMock();
-
-        $mock->method('getCurrentRequest')->willReturn($this->getCurrentRequestMock());
-
-        return $mock;
-    }
-
-    /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
      */
     protected function getCurrentRequestMock(): Request
@@ -242,7 +225,8 @@ class KlarnaTest extends AbstractMethodMapperTest
     protected function getPayoneKlarnaStartSessionRequest(): PayoneKlarnaStartSessionRequestTransfer
     {
         $payoneKlarnaStartSessionRequestBuilder = new PayoneKlarnaStartSessionRequestBuilder([
-            'quote' => $this->getQuote()
+            'quote' => $this->getQuote(),
+            'payMethod' => self::PAY_METHOD_TYPE,
         ]);
 
         return $payoneKlarnaStartSessionRequestBuilder->build();

@@ -589,7 +589,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setBackUrl(string $backUrl): void
+    public function setBackUrl($backUrl)
     {
         $this->backurl = $backUrl;
     }
@@ -607,7 +607,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setSuccessUrl(string $successUrl): void
+    public function setSuccessUrl($successUrl)
     {
         $this->successurl = $successUrl;
     }
@@ -625,7 +625,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setErrorUrl(string $errorUrl): void
+    public function setErrorUrl($errorUrl)
     {
         $this->errorurl = $errorUrl;
     }

@@ -23,6 +23,7 @@ use PHPUnit_Framework_TestCase;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @group Unit
@@ -48,6 +49,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     public const DEFAULT_EMAIL = 'default@email.com';
     public const STANDARD_PARAMETER_LANGUAGE = 'en';
     public const DEFAULT_CITY= 'Berlin';
+    protected const CLIENT_IP = '127.0.0.1';
 
     public const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
@@ -270,5 +272,20 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $totals->setGrandTotal(100);
 
         return $totals;
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\RequestStack
+     */
+    protected function getRequestStackMock(): RequestStack
+    {
+        $mock = $this->getMockBuilder(RequestStack::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getCurrentRequest'])
+            ->getMock();
+
+        $mock->method('getCurrentRequest')->willReturn($this->getCurrentRequestMock());
+
+        return $mock;
     }
 }

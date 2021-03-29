@@ -36,6 +36,8 @@ use SprykerEco\Zed\Payone\Persistence\PayoneEntityManager;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepository;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @group Functional
@@ -48,6 +50,8 @@ use SprykerTest\Shared\Testify\Helper\ConfigHelper;
  */
 abstract class AbstractBusinessTest extends Test
 {
+    protected const CLIENT_IP = '127.0.0.1';
+
     /**
      * @var \Orm\Zed\Payone\Persistence\Base\SpyPaymentPayone
      */
@@ -396,5 +400,35 @@ abstract class AbstractBusinessTest extends Test
             ->setPayone(
                 (new PayonePaymentTransfer())
             );
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\RequestStack
+     */
+    protected function getRequestStackMock(): RequestStack
+    {
+        $mock = $this->getMockBuilder(RequestStack::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getCurrentRequest'])
+            ->getMock();
+
+        $mock->method('getCurrentRequest')->willReturn($this->getCurrentRequestMock());
+
+        return $mock;
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
+     */
+    protected function getCurrentRequestMock(): Request
+    {
+        $mock = $this->getMockBuilder(Request::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getClientIp'])
+            ->getMock();
+
+        $mock->method('getClientIp')->willReturn(self::CLIENT_IP);
+
+        return $mock;
     }
 }
