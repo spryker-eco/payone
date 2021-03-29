@@ -10,4 +10,10 @@
         <property name="failureUrl" dataBuilderRule="url" />
         <property name="backUrl" dataBuilderRule="url" />
     </transfer>
+
+    <transfer name="PayoneKlarnaStartSessionRequest">
+        <property name="payMethod" type="string"/>
+        <property name="quote" type="Quote"/>
+    </transfer>
+
 </transfers>

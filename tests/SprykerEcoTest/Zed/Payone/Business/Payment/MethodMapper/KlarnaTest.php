@@ -7,8 +7,13 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Payment\MethodMapper;
 
+use Generated\Shared\DataBuilder\PayoneKlarnaStartSessionRequestBuilder;
+use Generated\Shared\DataBuilder\QuoteBuilder;
+use Generated\Shared\Transfer\AddressTransfer;
+use Generated\Shared\Transfer\CurrencyTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -66,7 +71,6 @@ class KlarnaTest extends AbstractMethodMapperTest
     public const START_SESSION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
-        'reference' => self::PAYMENT_REFERENCE,
         'amount' => self::AMOUNT_FULL,
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
@@ -163,10 +167,11 @@ class KlarnaTest extends AbstractMethodMapperTest
     public function testMapPaymentToStartSession(): void
     {
         // Arrange
-        $payoneKlarnaStartSessionRequest = $this->getPayoneKlarnaStartSessionRequestMock();
+        $payoneKlarnaStartSessionRequest = $this->getPayoneKlarnaStartSessionRequest();
+        $paymentMethodMapper = $this->preparePaymentMethodMapper($this->createKlarna());
 
         // Act
-        $requestData = $this->createKlarna()->mapPaymentToStartSession($payoneKlarnaStartSessionRequest)->toArray();
+        $requestData = $paymentMethodMapper->mapPaymentToStartSession($payoneKlarnaStartSessionRequest)->toArray();
 
         // Assert
         foreach (static::START_SESSION_COMMON_REQUIRED_PARAMS as $key => $value) {
@@ -189,9 +194,9 @@ class KlarnaTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
      */
-    protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
+    protected function getPaymentPayoneDetailMock()
     {
         $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
 
@@ -232,33 +237,39 @@ class KlarnaTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer
+     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer
      */
-    protected function getPayoneKlarnaStartSessionRequestMock(): PayoneKlarnaStartSessionRequestTransfer
+    protected function getPayoneKlarnaStartSessionRequest(): PayoneKlarnaStartSessionRequestTransfer
     {
-        $mock = $this->getMockBuilder(PayoneKlarnaStartSessionRequestTransfer::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getQuote', 'getPayMethod'])
-            ->getMock();
+        $payoneKlarnaStartSessionRequestBuilder = new PayoneKlarnaStartSessionRequestBuilder([
+            'quote' => $this->getQuote()
+        ]);
 
-        $mock->method('getQuote')->willReturn($this->getQuoteMock());
-
-        return $mock;
+        return $payoneKlarnaStartSessionRequestBuilder->build();
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function getQuoteMock(): QuoteTransfer
+    protected function getQuote(): QuoteTransfer
     {
-        $mock = $this->getMockBuilder(QuoteTransfer::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getTotals', 'getCurrency'])
-            ->getMock();
+        $quoteBuilder = new QuoteBuilder([
+            'totals' => $this->getTotals(),
+            'currency' => $this->createCurrency(),
+            'billingAddress' => $this->getAddressMock(),
+        ]);
 
-        $mock->method('getTotals')->willReturn($this->getTotals());
-        $mock->method('getCurrency')->willReturn(static::STANDARD_PARAMETER_CURRENCY);
+        return $quoteBuilder->build();
+    }
 
-        return $mock;
+    /**
+     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransferCurrencyTransfer
+     */
+    protected function createCurrency(): CurrencyTransfer
+    {
+        $currency = new CurrencyTransfer();
+        $currency->setCode(static::STANDARD_PARAMETER_CURRENCY);
+
+        return $currency;
     }
 }

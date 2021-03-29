@@ -18,6 +18,7 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
 use Orm\Zed\Sales\Persistence\SpySalesOrderTotals;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit_Framework_TestCase;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
@@ -46,6 +47,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     public const DEFAULT_SEQUENCE_NUMBER = 0;
     public const DEFAULT_EMAIL = 'default@email.com';
     public const STANDARD_PARAMETER_LANGUAGE = 'en';
+    public const DEFAULT_CITY= 'Berlin';
 
     public const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
@@ -113,7 +115,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getPaymentPayoneDetailMock()
     {
@@ -136,7 +138,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $salesOrder->method('getBillingAddress')->willReturn($this->getAddressMock());
         $salesOrder->method('getShippingAddress')->willReturn($this->getAddressMock());
         $salesOrder->method('getEmail')->willReturn(static::DEFAULT_EMAIL);
-        $salesOrder->method('getOrderTotals')->willReturn($this->getTotals());
+        $salesOrder->method('getOrderTotals')->willReturn($this->getSalesOrderTotals());
 
         return $salesOrder;
     }
@@ -171,6 +173,8 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $address->method('getCountry')->willReturn($this->getCountryMock());
         $address->method('getFirstName')->willReturn(static::ADDRESS_FIRST_NAME);
         $address->method('getLastName')->willReturn(static::ADDRESS_LAST_NAME);
+        $address->method('getEmail')->willReturn(static::DEFAULT_EMAIL);
+        $address->method('getCity')->willReturn(static::DEFAULT_CITY);
 
         return $address;
     }
@@ -243,14 +247,27 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\Sales\Persistence\SpySalesOrderTotals
      */
-    protected function getTotals(): SpySalesOrderTotals
+    protected function getSalesOrderTotals(): SpySalesOrderTotals
     {
-        $totals = $this->getMockBuilder(SpySalesOrderTotals::class)
+        $orderTotals = $this->getMockBuilder(SpySalesOrderTotals::class)
             ->disableOriginalConstructor()
             ->setMethods(['get'])
             ->getMock();
 
-        $totals->method('get')->willReturn((new TotalsTransfer())->setSubtotal(100));
+        $orderTotals->method('get')->willReturn($this->getTotals());
+
+        return $orderTotals;
+    }
+
+    /**
+     * @return TotalsTransfer
+     */
+    protected function getTotals(): TotalsTransfer
+    {
+        $totals = new TotalsTransfer();
+
+        $totals->setSubtotal(100);
+        $totals->setGrandTotal(100);
 
         return $totals;
     }

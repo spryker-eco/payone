@@ -147,7 +147,7 @@ class Klarna extends AbstractMapper
         $klarnaGenericPaymentContainer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $klarnaGenericPaymentContainer->setCurrency($quoteTransfer->getCurrency()->getCode());
         $klarnaGenericPaymentContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
-        $klarnaGenericPaymentContainer->setFinancingType($klarnaStartSessionRequestTransfer->getPayMethod());
+        $klarnaGenericPaymentContainer->setFinancingType('KDD');
 
         $paydataContainer = new PaydataContainer();
         $paydataContainer->setAction(PayoneApiConstants::PAYMENT_KLARNA_START_SESSION_ACTION);

@@ -83,8 +83,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     {
         $this->addPayMethods(
             $builder,
-            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES],
-            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::WIDGET_PAY_METHODS]
+            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES]
         );
         $this->addPayMethodTokens($builder);
     }
@@ -122,12 +121,13 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $choices
-     * @param array $klarnaPayMethods
      *
      * @return $this
      */
-    protected function addPayMethods(FormBuilderInterface $builder, array $choices, array $klarnaPayMethods)
+    protected function addPayMethods(FormBuilderInterface $builder, array $choices)
     {
+        $choices = ['Choose payment category' => ''] + $choices;
+
         $builder->add(
             static::FIELD_PAY_METHOD_TYPE,
             ChoiceType::class,
@@ -136,7 +136,9 @@ class KlarnaSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'choices' => $choices,
                 'constraints' => new NotBlank(),
-                'choice_attr' => ['KIV' => ['class' => 'dddddddd']],
+                'choice_attr' => function($val) {
+                    return $val === '' ? ['disabled' => 'disabled', 'selected'] : [];
+                }
             ]
         );
 
