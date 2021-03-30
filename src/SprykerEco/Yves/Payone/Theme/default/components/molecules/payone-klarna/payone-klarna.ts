@@ -109,8 +109,8 @@ export default class PayoneKlarna extends Component {
                 }
             }, function(res) {
 
-                var tokenContainer = this.getElementById(TOKEN_CONTAINER_ID);
-                tokenContainer.value = res.authorization_token;
+                var tokenContainer = document.getElementById(TOKEN_CONTAINER_ID);
+                tokenContainer.setAttribute('value', res.authorization_token);
             })
         })
     }
