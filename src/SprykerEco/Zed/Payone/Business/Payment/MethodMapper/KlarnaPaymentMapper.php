@@ -95,6 +95,8 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setCaptureMode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
+        $sequenceNumber = $this->getNextSequenceNumber($paymentEntity->getTransactionId());
+        $captureContainer->setSequenceNumber($sequenceNumber);
 
         return $captureContainer;
     }
