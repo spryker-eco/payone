@@ -76,7 +76,7 @@ abstract class AbstractSubFormsCreator
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneKlarnaSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createPayoneKlarnaSubFormPlugin(): SubFormPluginInterface
     {

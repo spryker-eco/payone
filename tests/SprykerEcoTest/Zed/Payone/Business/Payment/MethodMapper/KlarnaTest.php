@@ -9,14 +9,11 @@ namespace SprykerEcoTest\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\DataBuilder\PayoneKlarnaStartSessionRequestBuilder;
 use Generated\Shared\DataBuilder\QuoteBuilder;
-use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CurrencyTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use PHPUnit\Framework\MockObject\MockObject;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @group Unit
@@ -194,7 +191,7 @@ class KlarnaTest extends AbstractMethodMapperTest
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
      */
-    protected function getPaymentPayoneDetailMock()
+    protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
     {
         $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
 

@@ -32,6 +32,7 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
@@ -362,9 +363,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $store
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaMapperInterface
      */
-    public function createKlarna(Store $store): Klarna
+    public function createKlarna(Store $store): KlarnaMapperInterface
     {
         return new Klarna($store, $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_REQUEST_STACK));
     }

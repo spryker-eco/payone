@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Payone;
 
-use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
@@ -89,7 +88,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\KlarnaSubForm
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createKlarnaSubForm(): SubFormInterface
     {
@@ -99,7 +98,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider
      */
-    public function createInvoiceSubFormDataProvider(): InvoiceDataProvider
+    public function createInvoiceSubFormDataProvider()
     {
         return new InvoiceDataProvider();
     }
@@ -129,7 +128,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\KlarnaDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createKlarnaSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -415,13 +414,5 @@ class PayoneFactory extends AbstractFactory
             $this->getCustomerClient(),
             $this->getCalculationClient()
         );
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer
-     */
-    public function createPayoneKlarnaStartSessionRequest(): PayoneKlarnaStartSessionRequestTransfer
-    {
-        return new PayoneKlarnaStartSessionRequestTransfer();
     }
 }

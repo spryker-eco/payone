@@ -18,7 +18,6 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
 use Orm\Zed\Sales\Persistence\SpySalesOrderTotals;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit_Framework_TestCase;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
@@ -48,7 +47,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     public const DEFAULT_SEQUENCE_NUMBER = 0;
     public const DEFAULT_EMAIL = 'default@email.com';
     public const STANDARD_PARAMETER_LANGUAGE = 'en';
-    public const DEFAULT_CITY= 'Berlin';
+    public const DEFAULT_CITY = 'Berlin';
     protected const CLIENT_IP = '127.0.0.1';
 
     public const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
@@ -119,7 +118,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getPaymentPayoneDetailMock()
+    protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
     {
         $paymentPayoneDetail = $this->getMockBuilder(SpyPaymentPayoneDetail::class)
             ->disableOriginalConstructor()
@@ -262,7 +261,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return TotalsTransfer
+     * @return \Generated\Shared\Transfer\TotalsTransfer
      */
     protected function getTotals(): TotalsTransfer
     {

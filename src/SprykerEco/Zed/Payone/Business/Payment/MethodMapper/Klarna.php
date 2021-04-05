@@ -26,7 +26,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaPreAuthorizationC
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class Klarna extends AbstractMapper
+class Klarna extends AbstractMapper implements KlarnaMapperInterface
 {
     protected const STREET_ADDRESS_SEPARATOR = ' ';
 

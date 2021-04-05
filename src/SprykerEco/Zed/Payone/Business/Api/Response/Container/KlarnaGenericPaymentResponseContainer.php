@@ -17,7 +17,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
     protected $workorderid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $client_token;
 
@@ -48,9 +48,9 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClientToken(): string
+    public function getClientToken(): ?string
     {
         return $this->client_token;
     }
