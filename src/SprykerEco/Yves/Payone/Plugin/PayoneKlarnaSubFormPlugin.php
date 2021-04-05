@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Payone\Plugin;
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
+use SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm;
 use SprykerEco\Yves\Payone\Form\KlarnaSubForm;
 
 /**
@@ -23,9 +24,9 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
      *
      * @api
      *
-     * @return \SprykerEco\Yves\Payone\Form\KlarnaSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): KlarnaSubForm
+    public function createSubForm(): AbstractPayoneSubForm
     {
         return $this->getFactory()->createKlarnaSubForm();
     }
