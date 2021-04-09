@@ -28,6 +28,7 @@ use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -38,6 +39,8 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
 {
     /**
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacade::saveOrderPayment} instead.
+     *
      * {@inheritDoc}
      *
      * @api
@@ -50,6 +53,21 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
     {
         $this->getFactory()->createOrderManager()->saveOrder($quoteTransfer, $checkoutResponse);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return void
+     */
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
+    {
+        $this->getFactory()->createOrderManager()->saveOrderPayments($quoteTransfer, $saveOrderTransfer);
     }
 
     /**

@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Propel\Runtime\Propel;
@@ -44,6 +45,8 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Order\OrderManager::saveOrderPayments} instead.
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
      *
@@ -51,15 +54,38 @@ class OrderManager implements OrderManagerInterface
      */
     public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
     {
+        $this->doSaveOrderPayments($quoteTransfer, $checkoutResponse->getSaveOrder());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return void
+     */
+    public function saveOrderPayments(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
+    {
+        $this->doSaveOrderPayments($quoteTransfer, $saveOrderTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return void
+     */
+    protected function doSaveOrderPayments(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
+    {
+        // todo::maybe be good to use TransactionTrait
         Propel::getConnection()->beginTransaction();
 
         $paymentTransfer = $quoteTransfer->getPayment()->getPayone();
-        $paymentTransfer->setFkSalesOrder($checkoutResponse->getSaveOrder()->getIdSalesOrder());
+        $paymentTransfer->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
         $payment = $this->savePayment($paymentTransfer);
 
         $paymentDetailTransfer = $paymentTransfer->getPaymentDetail();
         $this->savePaymentDetail($payment, $paymentDetailTransfer);
-        $this->savePaymentPayoneOrderItems($checkoutResponse, $payment->getIdPaymentPayone());
+        $this->savePaymentPayoneOrderItems($saveOrderTransfer, $payment->getIdPaymentPayone());
 
         Propel::getConnection()->commit();
     }
@@ -99,14 +125,14 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
      * @param int $idSalesOrderItem
      *
      * @return void
      */
-    protected function savePaymentPayoneOrderItems(CheckoutResponseTransfer $checkoutResponse, int $idSalesOrderItem): void
+    protected function savePaymentPayoneOrderItems(SaveOrderTransfer $saveOrderTransfer, int $idSalesOrderItem): void
     {
-        foreach ($checkoutResponse->getSaveOrder()->getOrderItems() as $itemTransfer) {
+        foreach ($saveOrderTransfer->getOrderItems() as $itemTransfer) {
             $paymentPayoneOrderItemTransfer = (new PaymentPayoneOrderItemTransfer())
                 ->setIdPaymentPayone($idSalesOrderItem)
                 ->setIdSalesOrderItem($itemTransfer->getIdSalesOrderItem())
