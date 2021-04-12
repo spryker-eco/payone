@@ -39,11 +39,11 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
 {
     /**
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacade::saveOrderPayment} instead.
-     *
      * {@inheritDoc}
      *
      * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacade::saveOrderPayment} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse

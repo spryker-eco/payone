@@ -36,12 +36,12 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 interface PayoneFacadeInterface
 {
     /**
+     * @api
+     *
      * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::saveOrderPayment} instead.
      *
      * Specification:
      * - Saves order payment method data according to quote and checkout response transfer data.
-     *
-     * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse

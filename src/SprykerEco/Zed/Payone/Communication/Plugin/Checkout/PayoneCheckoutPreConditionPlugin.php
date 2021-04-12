@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\CheckoutExtension\Dependency\Plugin\CheckoutPreConditionPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
+use SprykerEco\Zed\Payone\PayoneConfig;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
@@ -32,8 +33,10 @@ class PayoneCheckoutPreConditionPlugin extends AbstractPlugin implements Checkou
      */
     public function checkCondition(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        $quoteTransfer = $this->getFactory()->getCalculationFacade()->recalculateQuote($quoteTransfer);
-        $quoteTransfer->getPayment()->getPayone()->getPaymentDetail()->setAmount($quoteTransfer->getPayment()->getAmount());
+        if ($quoteTransfer->getPayment()->getPaymentProvider() === PayoneConfig::PROVIDER_NAME) {
+            $quoteTransfer = $this->getFactory()->getCalculationFacade()->recalculateQuote($quoteTransfer);
+            $quoteTransfer->getPayment()->getPayone()->getPaymentDetail()->setAmount($quoteTransfer->getPayment()->getAmount());
+        }
 
         return true;
     }

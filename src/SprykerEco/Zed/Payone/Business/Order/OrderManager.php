@@ -15,13 +15,15 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
-use Propel\Runtime\Propel;
+use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionTrait;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 
 class OrderManager implements OrderManagerInterface
 {
+    use TransactionTrait;
+
     /**
      * @var \SprykerEco\Zed\Payone\PayoneConfig
      */
@@ -76,18 +78,19 @@ class OrderManager implements OrderManagerInterface
      */
     protected function doSaveOrderPayments(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
     {
-        // todo::maybe be good to use TransactionTrait
-        Propel::getConnection()->beginTransaction();
+        if ($quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
+            return;
+        }
 
-        $paymentTransfer = $quoteTransfer->getPayment()->getPayone();
-        $paymentTransfer->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
-        $payment = $this->savePayment($paymentTransfer);
+        $this->getTransactionHandler()->handleTransaction(function () use ($quoteTransfer, $saveOrderTransfer): void {
+            $paymentTransfer = $quoteTransfer->getPayment()->getPayone();
+            $paymentTransfer->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
+            $payment = $this->savePayment($paymentTransfer);
 
-        $paymentDetailTransfer = $paymentTransfer->getPaymentDetail();
-        $this->savePaymentDetail($payment, $paymentDetailTransfer);
-        $this->savePaymentPayoneOrderItems($saveOrderTransfer, $payment->getIdPaymentPayone());
-
-        Propel::getConnection()->commit();
+            $paymentDetailTransfer = $paymentTransfer->getPaymentDetail();
+            $this->savePaymentDetail($payment, $paymentDetailTransfer);
+            $this->savePaymentPayoneOrderItems($saveOrderTransfer, $payment->getIdPaymentPayone());
+        });
     }
 
     /**

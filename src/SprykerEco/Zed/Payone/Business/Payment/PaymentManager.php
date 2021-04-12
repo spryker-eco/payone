@@ -1041,6 +1041,10 @@ class PaymentManager implements PaymentManagerInterface
      */
     public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
     {
+        if ($quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
+            return $checkoutResponse;
+        }
+
         $apiLogsQuery = $this->queryContainer->createLastApiLogsByOrderId($quoteTransfer->getPayment()->getPayone()->getFkSalesOrder());
         $apiLog = $apiLogsQuery->findOne();
 
