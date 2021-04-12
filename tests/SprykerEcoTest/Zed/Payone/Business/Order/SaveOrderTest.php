@@ -54,6 +54,32 @@ class SaveOrderTest extends AbstractPayoneTest
     }
 
     /**
+     * @return void
+     */
+    public function testSaveOrderPayment()
+    {
+        $checkoutResponseTransfer = $this->hydrateCheckoutResponseTransfer();
+        $this->preparePayonePaymentTransfer();
+
+        $this->payoneFacade->saveOrderPayment($this->quoteTransfer, $checkoutResponseTransfer->getSaveOrder());
+
+        $payoneEntity = SpyPaymentPayoneQuery::create()
+            ->filterByFkSalesOrder($this->orderEntity->getIdSalesOrder())
+            ->findOne();
+        $paymentDetailEntity = $payoneEntity->getSpyPaymentPayoneDetail();
+
+        $this->assertInstanceOf(SpyPaymentPayone::class, $payoneEntity);
+        $this->assertEquals(PayoneApiConstants::PAYMENT_METHOD_INVOICE, $payoneEntity->getPaymentMethod());
+        $this->assertNotEmpty($payoneEntity->getReference());
+
+        $this->assertInstanceOf(SpyPaymentPayoneDetail::class, $paymentDetailEntity);
+        $this->assertEquals('EUR', $paymentDetailEntity->getCurrency());
+        $this->assertEquals('iban', $paymentDetailEntity->getIban());
+        $this->assertEquals('bic', $paymentDetailEntity->getBic());
+        $this->assertEquals('12345', $paymentDetailEntity->getAmount());
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
     protected function hydrateCheckoutResponseTransfer()
