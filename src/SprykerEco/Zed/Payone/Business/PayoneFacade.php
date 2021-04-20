@@ -67,7 +67,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      */
     public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
     {
-        $this->getFactory()->createOrderManager()->saveOrderPayments($quoteTransfer, $saveOrderTransfer);
+        $this->getFactory()->createOrderManager()->saveOrderPayment($quoteTransfer, $saveOrderTransfer);
     }
 
     /**

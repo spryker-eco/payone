@@ -22,6 +22,7 @@ class PayoneCheckoutPostSavePlugin extends AbstractPlugin implements CheckoutPos
 {
     /**
      * {@inheritDoc}
+     * - If the payment provider is 'Payone' then it handles redirects and errors after order placement.
      *
      * @api
      *

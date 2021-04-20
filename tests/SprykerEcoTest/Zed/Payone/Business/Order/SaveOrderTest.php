@@ -32,11 +32,14 @@ class SaveOrderTest extends AbstractPayoneTest
      */
     public function testSaveOrder()
     {
+        // Arrange
         $checkoutResponseTransfer = $this->hydrateCheckoutResponseTransfer();
         $this->preparePayonePaymentTransfer();
 
+        // Act
         $this->payoneFacade->saveOrder($this->quoteTransfer, $checkoutResponseTransfer);
 
+        // Assert
         $payoneEntity = SpyPaymentPayoneQuery::create()
             ->filterByFkSalesOrder($this->orderEntity->getIdSalesOrder())
             ->findOne();
@@ -56,13 +59,16 @@ class SaveOrderTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testSaveOrderPayment()
+    public function testSaveOrderPaymentStoresCorrectOrderPayment()
     {
+        // Arrange
         $checkoutResponseTransfer = $this->hydrateCheckoutResponseTransfer();
         $this->preparePayonePaymentTransfer();
 
+        // Act
         $this->payoneFacade->saveOrderPayment($this->quoteTransfer, $checkoutResponseTransfer->getSaveOrder());
 
+        // Assert
         $payoneEntity = SpyPaymentPayoneQuery::create()
             ->filterByFkSalesOrder($this->orderEntity->getIdSalesOrder())
             ->findOne();

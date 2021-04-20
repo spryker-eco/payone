@@ -14,7 +14,7 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 interface OrderManagerInterface
 {
     /**
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface::saveOrderPayments} instead.
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface::saveOrderPayment()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -29,5 +29,5 @@ interface OrderManagerInterface
      *
      * @return void
      */
-    public function saveOrderPayments(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void;
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void;
 }

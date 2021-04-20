@@ -27,7 +27,7 @@ class OrderManager implements OrderManagerInterface
     /**
      * @var \SprykerEco\Zed\Payone\PayoneConfig
      */
-    private $config;
+    protected $payoneConfig;
 
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface
@@ -35,19 +35,19 @@ class OrderManager implements OrderManagerInterface
     protected $payoneEntityManager;
 
     /**
-     * @param \SprykerEco\Zed\Payone\PayoneConfig $config
+     * @param \SprykerEco\Zed\Payone\PayoneConfig $payoneConfig
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      */
     public function __construct(
-        PayoneConfig $config,
+        PayoneConfig $payoneConfig,
         PayoneEntityManagerInterface $payoneEntityManager
     ) {
-        $this->config = $config;
+        $this->payoneConfig = $payoneConfig;
         $this->payoneEntityManager = $payoneEntityManager;
     }
 
     /**
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Order\OrderManager::saveOrderPayments} instead.
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Order\OrderManager::saveOrderPayment()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -56,7 +56,7 @@ class OrderManager implements OrderManagerInterface
      */
     public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
     {
-        $this->doSaveOrderPayments($quoteTransfer, $checkoutResponse->getSaveOrder());
+        $this->doSaveOrderPayment($quoteTransfer, $checkoutResponse->getSaveOrder());
     }
 
     /**
@@ -65,9 +65,9 @@ class OrderManager implements OrderManagerInterface
      *
      * @return void
      */
-    public function saveOrderPayments(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
     {
-        $this->doSaveOrderPayments($quoteTransfer, $saveOrderTransfer);
+        $this->doSaveOrderPayment($quoteTransfer, $saveOrderTransfer);
     }
 
     /**
@@ -76,20 +76,21 @@ class OrderManager implements OrderManagerInterface
      *
      * @return void
      */
-    protected function doSaveOrderPayments(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
+    protected function doSaveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void
     {
         if ($quoteTransfer->getPayment()->getPaymentProvider() !== PayoneConfig::PROVIDER_NAME) {
             return;
         }
 
+        $quoteTransfer->getPayment()->requirePayone();
         $this->getTransactionHandler()->handleTransaction(function () use ($quoteTransfer, $saveOrderTransfer): void {
             $paymentTransfer = $quoteTransfer->getPayment()->getPayone();
             $paymentTransfer->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
-            $payment = $this->savePayment($paymentTransfer);
+            $paymentPayoneEntity = $this->savePayment($paymentTransfer);
 
             $paymentDetailTransfer = $paymentTransfer->getPaymentDetail();
-            $this->savePaymentDetail($payment, $paymentDetailTransfer);
-            $this->savePaymentPayoneOrderItems($saveOrderTransfer, $payment->getIdPaymentPayone());
+            $this->savePaymentDetail($paymentPayoneEntity, $paymentDetailTransfer);
+            $this->savePaymentPayoneOrderItems($saveOrderTransfer, $paymentPayoneEntity->getIdPaymentPayone());
         });
     }
 
@@ -98,14 +99,14 @@ class OrderManager implements OrderManagerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function savePayment(PayonePaymentTransfer $paymentTransfer)
+    protected function savePayment(PayonePaymentTransfer $paymentTransfer): SpyPaymentPayone
     {
         $payment = new SpyPaymentPayone();
         $payment->fromArray(($paymentTransfer->toArray()));
 
         if ($payment->getReference() === null) {
             $orderEntity = $payment->getSpySalesOrder();
-            $payment->setReference($this->config->generatePayoneReference($paymentTransfer, $orderEntity));
+            $payment->setReference($this->payoneConfig->generatePayoneReference($paymentTransfer, $orderEntity));
         }
 
         $payment->save();
@@ -129,15 +130,15 @@ class OrderManager implements OrderManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
-     * @param int $idSalesOrderItem
+     * @param int $idPaymentPayone
      *
      * @return void
      */
-    protected function savePaymentPayoneOrderItems(SaveOrderTransfer $saveOrderTransfer, int $idSalesOrderItem): void
+    protected function savePaymentPayoneOrderItems(SaveOrderTransfer $saveOrderTransfer, int $idPaymentPayone): void
     {
         foreach ($saveOrderTransfer->getOrderItems() as $itemTransfer) {
             $paymentPayoneOrderItemTransfer = (new PaymentPayoneOrderItemTransfer())
-                ->setIdPaymentPayone($idSalesOrderItem)
+                ->setIdPaymentPayone($idPaymentPayone)
                 ->setIdSalesOrderItem($itemTransfer->getIdSalesOrderItem())
                 ->setStatus(PayoneTransactionStatusConstants::STATUS_NEW);
 

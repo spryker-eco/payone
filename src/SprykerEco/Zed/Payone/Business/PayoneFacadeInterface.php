@@ -38,7 +38,7 @@ interface PayoneFacadeInterface
     /**
      * @api
      *
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::saveOrderPayment} instead.
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::saveOrderPayment()} instead.
      *
      * Specification:
      * - Saves order payment method data according to quote and checkout response transfer data.
@@ -52,7 +52,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
-     * - Saves order payment method data according to quote and checkout response transfer data.
+     * - Saves order payment method data according to quote and order data.
      *
      * @api
      *
