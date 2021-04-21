@@ -31,11 +31,11 @@ class KlarnaController extends AbstractController
     public function getTokenAction(Request $request): JsonResponse
     {
         $klarnaStartSessionRequest = $this->createPayoneKlarnaStartSessionRequest($request);
-        $payoneKlarnaSessionResponse = $this->getClient()->startKlarnaSessionRequest($klarnaStartSessionRequest);
+        $payoneKlarnaSessionResponse = $this->getClient()->sendKlarnaStartSessionRequest($klarnaStartSessionRequest);
 
         return $this->jsonResponse([
-            self::IS_VALID_RESPONSE_PARAMETER => $payoneKlarnaSessionResponse->getIsValid(),
-            self::ERROR_MESSAGE_RESPONSE_PARAMETER => $payoneKlarnaSessionResponse->getError(),
+            self::IS_VALID_RESPONSE_PARAMETER => $payoneKlarnaSessionResponse->getIsSuccessful(),
+            self::ERROR_MESSAGE_RESPONSE_PARAMETER => $payoneKlarnaSessionResponse->getErrorMessage(),
             self::CLIENT_TOKEN_RESPONSE_PARAMETER => $payoneKlarnaSessionResponse->getToken(),
         ]);
     }

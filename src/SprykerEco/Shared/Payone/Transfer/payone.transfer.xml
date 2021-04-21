@@ -533,10 +533,10 @@
         <property name="gender" type="string"/>
     </transfer>
 
-    <transfer name="PayoneKlarnaSessionResponse">
+    <transfer name="PayoneKlarnaStartSessionResponse">
         <property name="token" type="string"/>
-        <property name="isValid" type="bool"/>
-        <property name="error" type="string"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="errorMessage" type="string"/>
     </transfer>
     <!--Response container replacement related transfers end-->
 </transfers>

@@ -16,7 +16,7 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
@@ -211,12 +211,12 @@ class GatewayController extends AbstractGatewayController
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
      *
-     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
+     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function startKlarnaSessionAction(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaSessionResponseTransfer
+    public function startKlarnaSessionAction(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): PayoneKlarnaStartSessionResponseTransfer
     {
-        return $this->getFacade()->startKlarnaSession($klarnaStartSessionRequestTransfer);
+        return $this->getFacade()->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);
     }
 }

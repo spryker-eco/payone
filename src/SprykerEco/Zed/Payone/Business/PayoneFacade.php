@@ -22,7 +22,7 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
@@ -743,15 +743,15 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
      *
-     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
+     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function startKlarnaSession(
-        PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
-    ): PayoneKlarnaSessionResponseTransfer {
+    public function sendKlarnaStartSessionRequest(
+        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+    ): PayoneKlarnaStartSessionResponseTransfer {
         return $this->getFactory()
             ->createPaymentManager()
-            ->startKlarnaSession($klarnaStartSessionRequestTransfer);
+            ->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);
     }
 }

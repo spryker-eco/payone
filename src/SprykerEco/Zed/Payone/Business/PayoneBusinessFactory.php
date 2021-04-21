@@ -31,8 +31,8 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
-use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna;
-use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaMapperInterface;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
@@ -123,7 +123,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
      */
-    protected function createExecutionAdapter()
+    public function createExecutionAdapter()
     {
         return new Guzzle(
             $this->getStandardParameter()->getPaymentGatewayUrl(),
@@ -134,7 +134,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriter
      */
-    protected function createApiCallLogWriter()
+    public function createApiCallLogWriter()
     {
         return new ApiCallLogWriter(
             $this->getQueryContainer()
@@ -144,7 +144,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface
      */
-    protected function createSequenceNumberProvider()
+    public function createSequenceNumberProvider()
     {
         $defaultEmptySequenceNumber = $this->getConfig()->getEmptySequenceNumber();
 
@@ -157,7 +157,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\HashInterface
      */
-    protected function createKeyHashProvider()
+    public function createKeyHashProvider()
     {
         $hashProvider = new HashProvider();
 
@@ -167,7 +167,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HashGenerator
      */
-    protected function createKeyHashGenerator()
+    public function createKeyHashGenerator()
     {
         return new HashGenerator(
             $this->createHashProvider()
@@ -177,7 +177,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
-    protected function createUrlHmacGenerator()
+    public function createUrlHmacGenerator()
     {
         return new UrlHmacGenerator();
     }
@@ -185,7 +185,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface
      */
-    protected function createModeDetector()
+    public function createModeDetector()
     {
         $modeDetector = new ModeDetector($this->getConfig());
 
@@ -205,7 +205,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return array
      */
-    protected function getAvailablePaymentMethods()
+    public function getAvailablePaymentMethods()
     {
         $storeConfig = $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
 
@@ -226,7 +226,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    protected function getStandardParameter()
+    public function getStandardParameter()
     {
         if ($this->standardParameter === null) {
             $this->standardParameter = $this->getConfig()->getRequestStandardParameter();
@@ -238,7 +238,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HashProvider
      */
-    protected function createHashProvider()
+    public function createHashProvider()
     {
         $hashProvider = new HashProvider();
 
@@ -250,7 +250,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo
      */
-    protected function createCreditCardPseudo($storeConfig)
+    public function createCreditCardPseudo($storeConfig)
     {
         $creditCardPseudo = new CreditCardPseudo($storeConfig);
 
@@ -262,7 +262,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit
      */
-    protected function createDirectDebit($storeConfig)
+    public function createDirectDebit($storeConfig)
     {
         $creditCardPseudo = new DirectDebit($storeConfig);
 
@@ -274,7 +274,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice
      */
-    protected function createInvoice($storeConfig)
+    public function createInvoice($storeConfig)
     {
         $invoice = new Invoice($storeConfig);
 
@@ -286,7 +286,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    protected function createSecurityInvoice($storeConfig): PaymentMethodMapperInterface
+    public function createSecurityInvoice($storeConfig): PaymentMethodMapperInterface
     {
         $invoice = new SecurityInvoice($storeConfig, $this->getConfig());
 
@@ -298,7 +298,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer
      */
-    protected function createOnlineBankTransfer($storeConfig)
+    public function createOnlineBankTransfer($storeConfig)
     {
         $onlineBankTransfer = new OnlineBankTransfer($storeConfig);
 
@@ -310,7 +310,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet
      */
-    protected function createEWallet($storeConfig)
+    public function createEWallet($storeConfig)
     {
         $EWallet = new EWallet($storeConfig);
 
@@ -323,7 +323,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    protected function createCashOnDelivery(Store $storeConfig, PayoneToGlossaryFacadeInterface $glossary): PaymentMethodMapperInterface
+    public function createCashOnDelivery(Store $storeConfig, PayoneToGlossaryFacadeInterface $glossary): PaymentMethodMapperInterface
     {
         return new CashOnDelivery($storeConfig, $glossary);
     }
@@ -333,7 +333,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment
      */
-    protected function createPrepayment($storeConfig)
+    public function createPrepayment($storeConfig)
     {
         $prepayment = new Prepayment($storeConfig);
 
@@ -343,7 +343,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface
      */
-    protected function getGlossaryFacade()
+    public function getGlossaryFacade()
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_GLOSSARY);
     }
@@ -353,7 +353,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment
      */
-    protected function createGenericPayment(Store $store)
+    public function createGenericPayment(Store $store)
     {
         $genericPayment = new GenericPayment($store);
 
@@ -363,11 +363,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $store
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaMapperInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface
      */
-    public function createKlarna(Store $store): KlarnaMapperInterface
+    public function createKlarna(Store $store): KlarnaPaymentMapperInterface
     {
-        return new Klarna($store, $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_REQUEST_STACK));
+        return new KlarnaPaymentMapper($store, $this->getRequestStack());
     }
 
     /**
@@ -385,7 +385,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapperInterface
      */
-    protected function createRiskCheckMapper(): RiskCheckMapperInterface
+    public function createRiskCheckMapper(): RiskCheckMapperInterface
     {
         return new RiskCheckMapper(
             $this->createRiskCheckFactory(),
@@ -398,7 +398,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface
      */
-    protected function createRiskCheckFactory(): RiskCheckFactoryInterface
+    public function createRiskCheckFactory(): RiskCheckFactoryInterface
     {
         return new RiskCheckFactory();
     }
@@ -425,5 +425,15 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createOrderPriceDistributor(): OrderPriceDistributorInterface
     {
         return new OrderPriceDistributor();
+    }
+
+    /**
+     * @return mixed
+     *
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
+    public function getRequestStack()
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_REQUEST_STACK);
     }
 }

@@ -272,13 +272,13 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $paydata
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $payData
      *
      * @return void
      */
-    public function setPaydata(PaydataContainer $paydata): void
+    public function setPaydata(PaydataContainer $payData): void
     {
-        $this->paydata = $paydata;
+        $this->paydata = $payData;
     }
 
     /**

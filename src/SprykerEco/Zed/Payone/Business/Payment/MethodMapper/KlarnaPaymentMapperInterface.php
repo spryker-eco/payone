@@ -11,17 +11,12 @@ use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 
-interface KlarnaMapperInterface extends PaymentMethodMapperInterface
+interface KlarnaPaymentMapperInterface extends PaymentMethodMapperInterface
 {
     /**
-     * {@inheritDoc}
-     * - Maps data for Klarna start session request.
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaGenericPaymentContainer
      */
-    public function mapPaymentToStartSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): ContainerInterface;
+    public function mapPaymentToKlarnaGenericPaymentContainer(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): ContainerInterface;
 }

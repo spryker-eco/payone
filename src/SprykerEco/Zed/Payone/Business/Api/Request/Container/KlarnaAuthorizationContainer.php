@@ -43,13 +43,11 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer $business
      *
-     * @return $this
+     * @return void
      */
     public function setBusiness(BusinessContainer $business)
     {
         $this->business = $business;
-
-        return $this;
     }
 
     /**
@@ -69,13 +67,13 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $paydata
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $payData
      *
      * @return void
      */
-    public function setPaydata(PaydataContainer $paydata): void
+    public function setPaydata(PaydataContainer $payData): void
     {
-        $this->paydata = $paydata;
+        $this->paydata = $payData;
     }
 
     /**
@@ -105,12 +103,12 @@ class KlarnaAuthorizationContainer extends AbstractAuthorizationContainer
     }
 
     /**
-     * @param string $financingtype
+     * @param string $financingType
      *
      * @return void
      */
-    public function setFinancingtype(string $financingtype): void
+    public function setFinancingtype(string $financingType): void
     {
-        $this->financingtype = $financingtype;
+        $this->financingtype = $financingType;
     }
 }

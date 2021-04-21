@@ -12,7 +12,8 @@ use Generated\Shared\DataBuilder\QuoteBuilder;
 use Generated\Shared\Transfer\CurrencyTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -27,11 +28,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class KlarnaTest extends AbstractMethodMapperTest
 {
-    public const PAY_METHOD_TYPE = 'KIV';
+    protected const PAY_METHOD_TYPE = 'KIV';
 
     protected const STANDARD_PARAMETER_CLEARING_TYPE = 'fnc';
 
-    public const AUTHORIZATION_KLARNA_REQUIRED_PARAMS = [
+    protected const AUTHORIZATION_KLARNA_REQUIRED_PARAMS = [
         'financingtype' => self::PAY_METHOD_TYPE,
     ];
 
@@ -63,14 +64,14 @@ class KlarnaTest extends AbstractMethodMapperTest
         'email' => self::DEFAULT_EMAIL,
     ];
 
-    public const START_SESSION_COMMON_REQUIRED_PARAMS = [
+    protected const START_SESSION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
         'amount' => self::AMOUNT_FULL,
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
-    public const START_SESSION_PERSONAL_DATA_REQUIRED_PARAMS = [
+    protected const START_SESSION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
         'country' => self::COUNTRY_ISO2CODE,
         'language' => self::STANDARD_PARAMETER_LANGUAGE,
@@ -166,7 +167,7 @@ class KlarnaTest extends AbstractMethodMapperTest
         $paymentMethodMapper = $this->preparePaymentMethodMapper($this->createKlarna());
 
         // Act
-        $requestData = $paymentMethodMapper->mapPaymentToStartSession($payoneKlarnaStartSessionRequest)->toArray();
+        $requestData = $paymentMethodMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequest)->toArray();
 
         // Assert
         foreach (static::START_SESSION_COMMON_REQUIRED_PARAMS as $key => $value) {
@@ -181,11 +182,11 @@ class KlarnaTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper
      */
-    protected function createKlarna(): Klarna
+    protected function createKlarna(): KlarnaPaymentMapper
     {
-        return new Klarna($this->getStoreConfigMock(), $this->getRequestStackMock());
+        return new KlarnaPaymentMapper($this->getStoreConfigMock(), $this->getRequestStackMock());
     }
 
     /**
@@ -244,7 +245,7 @@ class KlarnaTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \Spryker\Shared\Kernel\Transfer\AbstractTransferCurrencyTransfer
+     * @return \Generated\Shared\Transfer\CurrencyTransfer
      */
     protected function createCurrency(): CurrencyTransfer
     {

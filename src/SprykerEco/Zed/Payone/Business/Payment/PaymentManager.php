@@ -20,8 +20,8 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
@@ -1732,38 +1732,38 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
      *
-     * @return \Generated\Shared\Transfer\PayoneKlarnaSessionResponseTransfer
+     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function startKlarnaSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaSessionResponseTransfer
+    public function sendKlarnaStartSessionRequest(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): PayoneKlarnaStartSessionResponseTransfer
     {
-        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Klarna $paymentMethodMapper */
+        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper $paymentMethodMapper */
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_KLARNA
         );
 
-        $klarnaContainer = $paymentMethodMapper->mapPaymentToStartSession($klarnaStartSessionRequestTransfer);
-        $this->setStandardParameter($klarnaContainer);
-        $this->prepareOrderItemsFromQuote($klarnaStartSessionRequestTransfer->getQuote(), $klarnaContainer);
-        $this->prepareOrderShipmentFromQuote($klarnaStartSessionRequestTransfer->getQuote(), $klarnaContainer);
-        $this->prepareOrderDiscountFromQuote($klarnaStartSessionRequestTransfer->getQuote(), $klarnaContainer);
-        $rawResponse = $this->executionAdapter->sendRequest($klarnaContainer);
+        $klarnaGenericPaymentContainer = $paymentMethodMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequestTransfer);
+        $this->setStandardParameter($klarnaGenericPaymentContainer);
+        $this->prepareOrderItemsFromQuote($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
+        $this->prepareOrderShipmentFromQuote($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
+        $this->prepareOrderDiscountFromQuote($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
+        $rawResponse = $this->executionAdapter->sendRequest($klarnaGenericPaymentContainer);
 
         $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);
 
-        $payoneKlarnaSessionResponseTransfer = new PayoneKlarnaSessionResponseTransfer();
+        $payoneKlarnaStartSessionResponseTransfer = new PayoneKlarnaStartSessionResponseTransfer();
 
         if ($klarnaGenericPaymentResponseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_ERROR) {
-            $payoneKlarnaSessionResponseTransfer->setIsValid(false);
-            $payoneKlarnaSessionResponseTransfer->setError($klarnaGenericPaymentResponseContainer->getErrormessage());
+            $payoneKlarnaStartSessionResponseTransfer->setIsSuccessful(false);
+            $payoneKlarnaStartSessionResponseTransfer->setErrorMessage($klarnaGenericPaymentResponseContainer->getErrormessage());
 
-            return $payoneKlarnaSessionResponseTransfer;
+            return $payoneKlarnaStartSessionResponseTransfer;
         }
 
-        $payoneKlarnaSessionResponseTransfer->setIsValid(true);
-        $payoneKlarnaSessionResponseTransfer->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
+        $payoneKlarnaStartSessionResponseTransfer->setIsSuccessful(true);
+        $payoneKlarnaStartSessionResponseTransfer->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
 
-        return $payoneKlarnaSessionResponseTransfer;
+        return $payoneKlarnaStartSessionResponseTransfer;
     }
 }

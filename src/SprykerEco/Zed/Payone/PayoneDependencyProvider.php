@@ -26,7 +26,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     public const FACADE_CALCULATION = 'calculation facade';
 
     /**
-     * @uses \Spryker\Yves\Http\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
+     * @uses \Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
      */
     public const SERVICE_REQUEST_STACK = 'request_stack';
 

@@ -26,7 +26,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaPreAuthorizationC
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class Klarna extends AbstractMapper implements KlarnaMapperInterface
+class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperInterface
 {
     protected const STREET_ADDRESS_SEPARATOR = ' ';
 
@@ -133,13 +133,13 @@ class Klarna extends AbstractMapper implements KlarnaMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaGenericPaymentContainer
      */
-    public function mapPaymentToStartSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): ContainerInterface
+    public function mapPaymentToKlarnaGenericPaymentContainer(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): ContainerInterface
     {
-        $quoteTransfer = $klarnaStartSessionRequestTransfer->getQuote();
+        $quoteTransfer = $payoneKlarnaStartSessionRequestTransfer->getQuote();
 
         $klarnaGenericPaymentContainer = new KlarnaGenericPaymentContainer();
 
@@ -147,7 +147,7 @@ class Klarna extends AbstractMapper implements KlarnaMapperInterface
         $klarnaGenericPaymentContainer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $klarnaGenericPaymentContainer->setCurrency($quoteTransfer->getCurrency()->getCode());
         $klarnaGenericPaymentContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
-        $klarnaGenericPaymentContainer->setFinancingType($klarnaStartSessionRequestTransfer->getPayMethod());
+        $klarnaGenericPaymentContainer->setFinancingType($payoneKlarnaStartSessionRequestTransfer->getPayMethod());
 
         $paydataContainer = new PaydataContainer();
         $paydataContainer->setAction(PayoneApiConstants::PAYMENT_KLARNA_START_SESSION_ACTION);

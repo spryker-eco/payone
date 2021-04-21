@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
-class SessionResponseContainer extends AbstractResponseContainer
+class KlarnaStartSessionResponseContainer extends AbstractResponseContainer
 {
     /**
      * @var string|null
