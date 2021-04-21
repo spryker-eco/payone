@@ -429,8 +429,6 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
 
     /**
      * @return mixed
-     *
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getRequestStack()
     {

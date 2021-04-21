@@ -1736,8 +1736,9 @@ class PaymentManager implements PaymentManagerInterface
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function sendKlarnaStartSessionRequest(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): PayoneKlarnaStartSessionResponseTransfer
-    {
+    public function sendKlarnaStartSessionRequest(
+        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+    ): PayoneKlarnaStartSessionResponseTransfer {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper $paymentMethodMapper */
         $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_KLARNA

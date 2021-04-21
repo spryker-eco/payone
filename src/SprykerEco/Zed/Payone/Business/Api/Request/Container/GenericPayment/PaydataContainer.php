@@ -54,7 +54,7 @@ class PaydataContainer extends AbstractContainer
      */
     public function setAuthorizationToken(string $authorizationToken): void
     {
-        $this->authorizationToken = $authorizationToken;
+        $this->authorization_token = $authorizationToken;
     }
 
     /**

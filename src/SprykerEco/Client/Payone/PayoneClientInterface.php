@@ -177,5 +177,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function sendKlarnaStartSessionRequest(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaStartSessionResponseTransfer;
+    public function sendKlarnaStartSessionRequest(
+        PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
+    ): PayoneKlarnaStartSessionResponseTransfer;
 }

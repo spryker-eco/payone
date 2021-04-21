@@ -11,7 +11,6 @@ use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 use SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm;
-use SprykerEco\Yves\Payone\Form\KlarnaSubForm;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()

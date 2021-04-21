@@ -14,7 +14,6 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractPayoneKlarnaAuthorizationContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
@@ -138,8 +137,9 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaGenericPaymentContainer
      */
-    public function mapPaymentToKlarnaGenericPaymentContainer(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): ContainerInterface
-    {
+    public function mapPaymentToKlarnaGenericPaymentContainer(
+        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+    ): ContainerInterface {
         $quoteTransfer = $payoneKlarnaStartSessionRequestTransfer->getQuote();
 
         $klarnaGenericPaymentContainer = new KlarnaGenericPaymentContainer();
