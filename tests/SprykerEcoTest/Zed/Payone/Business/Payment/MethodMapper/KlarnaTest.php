@@ -190,7 +190,7 @@ class KlarnaTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
     {
