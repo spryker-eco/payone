@@ -12,7 +12,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractA
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
 
-class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
+class KlarnaPreAuthorizationContainer extends AbstractPayoneKlarnaAuthorizationContainer
 {
     /**
      * @var string
@@ -23,21 +23,6 @@ class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
      * @var string|null
      */
     protected $workorderid;
-
-    /**
-     * @var string|null
-     */
-    protected $financingtype;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
-     */
-    protected $paydata;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
-     */
-    protected $redirect;
 
     /**
      * @param string $workorderId
@@ -55,59 +40,5 @@ class KlarnaPreAuthorizationContainer extends AbstractAuthorizationContainer
     public function getWorkOrderId(): ?string
     {
         return $this->workorderid;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getFinancingType(): ?string
-    {
-        return $this->financingtype;
-    }
-
-    /**
-     * @param string $financingType
-     *
-     * @return void
-     */
-    public function setFinancingType(string $financingType): void
-    {
-        $this->financingtype = $financingType;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
-     */
-    public function getPaydata(): ?ContainerInterface
-    {
-        return $this->paydata;
-    }
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $payData
-     *
-     * @return void
-     */
-    public function setPaydata(PaydataContainer $payData): void
-    {
-        $this->paydata = $payData;
-    }
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer $redirect
-     *
-     * @return void
-     */
-    public function setRedirect(RedirectContainer $redirect): void
-    {
-        $this->redirect = $redirect;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
-     */
-    public function getRedirect(): ?ContainerInterface
-    {
-        return $this->redirect;
     }
 }

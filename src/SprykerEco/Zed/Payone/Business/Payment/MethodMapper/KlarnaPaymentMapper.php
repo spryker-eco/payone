@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractPayoneKlarnaAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
@@ -184,13 +185,13 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $authorizationContainer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractPayoneKlarnaAuthorizationContainer $authorizationContainer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractPayoneKlarnaAuthorizationContainer
      */
     protected function mapPaymentToAbstractAuthorization(
         SpyPaymentPayone $paymentEntity,
-        AbstractAuthorizationContainer $authorizationContainer
+        AbstractPayoneKlarnaAuthorizationContainer $authorizationContainer
     ): ContainerInterface {
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
 
