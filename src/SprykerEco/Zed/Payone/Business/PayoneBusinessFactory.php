@@ -26,7 +26,7 @@ use SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface;
 use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinder;
 use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
@@ -82,12 +82,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->getStandardParameter(),
             $this->createKeyHashGenerator(),
             $this->createModeDetector(),
-            $this->createUrlHmacGenerator(),
             $this->getRepository(),
             $this->getEntityManager(),
             $this->createOrderPriceDistributor(),
             $this->createStandartParameterMapper(),
-            $this->createOrderItemsMapper(),
+            $this->createProductsMapper(),
             $this->createShipmentMapper(),
             $this->createDiscountMapper(),
             $this->createPaymentMapperManager(),
@@ -106,7 +105,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createKeyHashGenerator(),
             $this->createUrlHmacGenerator(),
             $this->createStandartParameterMapper(),
-            $this->createOrderItemsMapper(),
+            $this->createProductsMapper(),
             $this->createShipmentMapper(),
             $this->createDiscountMapper(),
             $this->createPaymentMapperManager(),
@@ -460,11 +459,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper
+     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper
      */
-    public function createOrderItemsMapper(): OrderItemsMapper
+    public function createProductsMapper(): ProductsMapper
     {
-        return new OrderItemsMapper();
+        return new ProductsMapper();
     }
 
     /**
