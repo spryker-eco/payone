@@ -23,7 +23,7 @@ class PayoneCheckoutPreConditionPlugin extends AbstractPlugin implements Checkou
 {
     /**
      * {@inheritDoc}
-     * - Does some additional logic only if the payment provider is 'Payone' otherwise does nothing.
+     * - Does additional logic only if the payment provider is 'Payone' otherwise does nothing.
      * - Maps Quote to CalculableObject.
      * - Run all calculator plugins.
      * - Maps CalculableObject to Quote.
