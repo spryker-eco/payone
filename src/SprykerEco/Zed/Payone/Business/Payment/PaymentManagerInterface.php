@@ -19,8 +19,6 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
@@ -29,13 +27,6 @@ use Generated\Shared\Transfer\RefundResponseTransfer;
 
 interface PaymentManagerInterface
 {
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
-     *
-     * @return void
-     */
-    public function registerPaymentMethodMapper(PaymentMethodMapperInterface $paymentMethodMapper);
-
     /**
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
      *
@@ -204,13 +195,4 @@ interface PaymentManagerInterface
     public function executePartialCapture(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
     ): CaptureResponseTransfer;
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
-     */
-    public function sendKlarnaStartSessionRequest(
-        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
-    ): PayoneKlarnaStartSessionResponseTransfer;
 }

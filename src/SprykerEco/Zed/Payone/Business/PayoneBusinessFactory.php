@@ -25,6 +25,10 @@ use SprykerEco\Zed\Payone\Business\Order\OrderManager;
 use SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface;
 use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinder;
 use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
@@ -38,9 +42,11 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManager;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentManagerInterface;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
+use SprykerEco\Zed\Payone\Business\Payment\PayoneKlarnaStartSessionHandler;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactory;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapper;
@@ -75,19 +81,37 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->getQueryContainer(),
             $this->getStandardParameter(),
             $this->createKeyHashGenerator(),
-            $this->createSequenceNumberProvider(),
             $this->createModeDetector(),
             $this->createUrlHmacGenerator(),
             $this->getRepository(),
             $this->getEntityManager(),
-            $this->createOrderPriceDistributor()
+            $this->createOrderPriceDistributor(),
+            $this->createStandartParameterMapper(),
+            $this->createOrderItemsMapper(),
+            $this->createShipmentMapper(),
+            $this->createDiscountMapper(),
+            $this->createPaymentMapperManager(),
         );
 
-        foreach ($this->getAvailablePaymentMethods() as $paymentMethod) {
-            $paymentManager->registerPaymentMethodMapper($paymentMethod);
-        }
-
         return $paymentManager;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PayoneKlarnaStartSessionHandler
+     */
+    public function createPayoneKlarnaStartSessionHandler()
+    {
+        return new PayoneKlarnaStartSessionHandler(
+            $this->createExecutionAdapter(),
+            $this->createKeyHashGenerator(),
+            $this->createUrlHmacGenerator(),
+            $this->createStandartParameterMapper(),
+            $this->createOrderItemsMapper(),
+            $this->createShipmentMapper(),
+            $this->createDiscountMapper(),
+            $this->createPaymentMapperManager(),
+            $this->getStandardParameter()
+        );
     }
 
     /**
@@ -425,6 +449,55 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createOrderPriceDistributor(): OrderPriceDistributorInterface
     {
         return new OrderPriceDistributor();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper
+     */
+    public function createStandartParameterMapper(): StandartParameterMapper
+    {
+        return new StandartParameterMapper($this->createKeyHashGenerator(), $this->createModeDetector());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper
+     */
+    public function createOrderItemsMapper(): OrderItemsMapper
+    {
+        return new OrderItemsMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper
+     */
+    public function createShipmentMapper(): ShipmentMapper
+    {
+        return new ShipmentMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     */
+    public function createPaymentMapperManager(): PaymentMapperManager
+    {
+        $paymentMapperManager = new PaymentMapperManager(
+            $this->createSequenceNumberProvider(),
+            $this->createUrlHmacGenerator()
+        );
+
+        foreach ($this->getAvailablePaymentMethods() as $paymentMethod) {
+            $paymentMapperManager->registerPaymentMethodMapper($paymentMethod, $this->standardParameter);
+        }
+
+        return $paymentMapperManager;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper
+     */
+    public function createDiscountMapper(): DiscountMapper
+    {
+        return new DiscountMapper();
     }
 
     /**

@@ -20,8 +20,6 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
-use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
@@ -59,7 +57,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\GenericPaymentResponse
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetSecurityInvoiceResponseContainer;
-use SprykerEco\Zed\Payone\Business\Api\Response\Container\KlarnaGenericPaymentResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\ManageMandateResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
@@ -68,10 +65,12 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMa
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapper;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapper;
 use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
-use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
-use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
@@ -94,9 +93,6 @@ class PaymentManager implements PaymentManagerInterface
      * use \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE instead if shipping version is higher
      */
     protected const SHIPMENT_EXPENSE_TYPE = 'SHIPMENT_EXPENSE_TYPE';
-    protected const ONE_ITEM = 1;
-    protected const DISCOUNT_PRODUCT_DESCRIPTION = 'Discount';
-    protected const ZERRO_ITEM_TAX_RATE = 0;
     protected const SHIPMENT_PRODUCT_DESCRIPTION = 'Shipment';
     protected const ZERRO_DELIVERY_COSTS = 0;
 
@@ -116,11 +112,6 @@ class PaymentManager implements PaymentManagerInterface
     protected $standardParameter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface
-     */
-    protected $sequenceNumberProvider;
-
-    /**
      * @var \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface
      */
     protected $modeDetector;
@@ -129,11 +120,6 @@ class PaymentManager implements PaymentManagerInterface
      * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface|\SprykerEco\Zed\Payone\Business\Key\HashGenerator
      */
     protected $hashGenerator;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator
-     */
-    protected $urlHmacGenerator;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
@@ -156,85 +142,74 @@ class PaymentManager implements PaymentManagerInterface
     protected $orderPriceDistributor;
 
     /**
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper
+     */
+    protected $standartParameterMapper;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper
+     */
+    protected $orderItemsMapper;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper
+     */
+    protected $shipmentMapper;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper
+     */
+    protected $discountMapper;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     */
+    protected $paymentMapperManager;
+
+    /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Key\HashGenerator $hashGenerator
-     * @param \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface $sequenceNumberProvider
      * @param \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface $modeDetector
-     * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper $orderItemsMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper $shipmentMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper $discountMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
         HashGenerator $hashGenerator,
-        SequenceNumberProviderInterface $sequenceNumberProvider,
         ModeDetectorInterface $modeDetector,
         HmacGeneratorInterface $urlHmacGenerator,
         PayoneRepositoryInterface $payoneRepository,
         PayoneEntityManagerInterface $payoneEntityManager,
-        OrderPriceDistributorInterface $orderPriceDistributor
+        OrderPriceDistributorInterface $orderPriceDistributor,
+        StandartParameterMapper $standartParameterMapper,
+        OrderItemsMapper $orderItemsMapper,
+        ShipmentMapper $shipmentMapper,
+        DiscountMapper $discountMapper,
+        PaymentMapperManager $paymentMapperManager
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
         $this->hashGenerator = $hashGenerator;
-        $this->sequenceNumberProvider = $sequenceNumberProvider;
         $this->modeDetector = $modeDetector;
-        $this->urlHmacGenerator = $urlHmacGenerator;
         $this->payoneRepository = $payoneRepository;
         $this->payoneEntityManager = $payoneEntityManager;
         $this->orderPriceDistributor = $orderPriceDistributor;
-    }
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
-     *
-     * @return void
-     */
-    public function registerPaymentMethodMapper(PaymentMethodMapperInterface $paymentMethodMapper)
-    {
-        $paymentMethodMapper->setStandardParameter($this->standardParameter);
-        $paymentMethodMapper->setSequenceNumberProvider($this->sequenceNumberProvider);
-        $paymentMethodMapper->setUrlHmacGenerator($this->urlHmacGenerator);
-        $this->registeredMethodMappers[$paymentMethodMapper->getName()] = $paymentMethodMapper;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface|null
-     */
-    protected function findPaymentMethodMapperByName($name)
-    {
-        if (array_key_exists($name, $this->registeredMethodMappers)) {
-            return $this->registeredMethodMappers[$name];
-        }
-
-        return null;
-    }
-
-    /**
-     * @param string $paymentMethodName
-     *
-     * @throws \SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
-     */
-    protected function getRegisteredPaymentMethodMapper($paymentMethodName)
-    {
-        $paymentMethodMapper = $this->findPaymentMethodMapperByName($paymentMethodName);
-        if ($paymentMethodMapper === null) {
-            throw new InvalidPaymentMethodException(
-                sprintf('No registered payment method mapper found for given method name %s', $paymentMethodName)
-            );
-        }
-
-        return $paymentMethodMapper;
+        $this->standartParameterMapper = $standartParameterMapper;
+        $this->orderItemsMapper = $orderItemsMapper;
+        $this->shipmentMapper = $shipmentMapper;
+        $this->discountMapper = $discountMapper;
+        $this->paymentMapperManager = $paymentMapperManager;
     }
 
     /**
@@ -247,9 +222,9 @@ class PaymentManager implements PaymentManagerInterface
         $paymentEntity = $this->getPaymentEntity($orderTransfer->getIdSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
-        $requestContainer = $this->prepareOrderItems($orderTransfer, $requestContainer);
-        $requestContainer = $this->prepareOrderShipment($orderTransfer, $requestContainer);
-        $requestContainer = $this->prepareOrderDiscount($orderTransfer, $requestContainer);
+        $requestContainer = $this->orderItemsMapper->prepareOrderItems($orderTransfer, $requestContainer);
+        $requestContainer = $this->shipmentMapper->prepareOrderShipment($orderTransfer, $requestContainer);
+        $requestContainer = $this->discountMapper->prepareOrderDiscount($orderTransfer, $requestContainer);
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
 
         $responseMapper = new AuthorizationResponseMapper();
@@ -284,7 +259,7 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected function performAuthorizationRequest(SpyPaymentPayone $paymentEntity, AuthorizationContainerInterface $requestContainer)
     {
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
@@ -303,7 +278,7 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected function getPaymentMethodMapper(SpyPaymentPayone $paymentEntity)
     {
-        return $this->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
+        return $this->paymentMapperManager->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
     }
 
     /**
@@ -335,9 +310,9 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
 
         if ($captureTransfer->getAmount()) {
-            $requestContainer = $this->prepareOrderItems($captureTransfer->getOrder(), $requestContainer);
-            $requestContainer = $this->prepareOrderShipment($captureTransfer->getOrder(), $requestContainer);
-            $requestContainer = $this->prepareOrderDiscount($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->orderItemsMapper->prepareOrderItems($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->shipmentMapper->prepareOrderShipment($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->discountMapper->prepareOrderDiscount($captureTransfer->getOrder(), $requestContainer);
             $requestContainer = $this->prepareOrderHandling($captureTransfer->getOrder(), $requestContainer);
         }
 
@@ -352,7 +327,7 @@ class PaymentManager implements PaymentManagerInterface
             $requestContainer->setAmount($captureTransfer->getAmount());
         }
 
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
 
@@ -386,7 +361,7 @@ class PaymentManager implements PaymentManagerInterface
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
 
         $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
-        $requestContainer = $this->prepareOrderShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->shipmentMapper->prepareOrderShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
 
         $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
@@ -397,7 +372,7 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer->setBusiness($businessContainer);
 
         $requestContainer->setAmount($captureAmount);
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
 
@@ -426,7 +401,7 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
         $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentEntity);
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $paymentEntity = $this->findPaymentByTransactionId($paymentEntity->getTransactionId());
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
@@ -450,10 +425,10 @@ class PaymentManager implements PaymentManagerInterface
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData)
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo $paymentMethodMapper */
-        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper($creditCardData->getPayment()->getPaymentMethod());
+        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper($creditCardData->getPayment()->getPaymentMethod());
         $requestContainer = $paymentMethodMapper->mapCreditCardCheck($creditCardData);
 
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new CreditCardCheckResponseContainer($rawResponse);
@@ -472,9 +447,9 @@ class PaymentManager implements PaymentManagerInterface
     public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer)
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
-        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER);
+        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER);
         $requestContainer = $paymentMethodMapper->mapBankAccountCheck($bankAccountCheckTransfer);
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new BankAccountCheckResponseContainer($rawResponse);
@@ -495,9 +470,9 @@ class PaymentManager implements PaymentManagerInterface
     public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer)
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
-        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
+        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
         $requestContainer = $paymentMethodMapper->mapManageMandate($manageMandateTransfer);
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new ManageMandateResponseContainer($rawResponse);
@@ -529,9 +504,9 @@ class PaymentManager implements PaymentManagerInterface
 
         if ($paymentEntity) {
             /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
-            $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
+            $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
             $requestContainer = $paymentMethodMapper->mapGetFile($getFileTransfer);
-            $this->setStandardParameter($requestContainer);
+            $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
             $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
             $responseContainer->init($rawResponse);
         } else {
@@ -562,9 +537,9 @@ class PaymentManager implements PaymentManagerInterface
 
         if ($paymentEntity) {
             /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice $paymentMethodMapper */
-            $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
+            $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
             $requestContainer = $paymentMethodMapper->mapGetInvoice($getInvoiceTransfer);
-            $this->setStandardParameter($requestContainer);
+            $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
             $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
             $responseContainer->init($rawResponse);
         } else {
@@ -599,10 +574,10 @@ class PaymentManager implements PaymentManagerInterface
         }
 
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice $paymentMethodMapper */
-        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE);
+        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE);
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer */
         $requestContainer = $paymentMethodMapper->mapGetSecurityInvoice($getSecurityInvoiceTransfer);
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer->init($rawResponse);
 
@@ -646,11 +621,11 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
         $requestContainer->setAmount(0 - $paymentEntity->getSpyPaymentPayoneDetail()->getAmount());
-        $requestContainer = $this->prepareOrderItems($refundTransfer->getOrder(), $requestContainer);
-        $requestContainer = $this->prepareOrderShipment($refundTransfer->getOrder(), $requestContainer);
-        $requestContainer = $this->prepareOrderDiscount($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->orderItemsMapper->prepareOrderItems($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->shipmentMapper->prepareOrderShipment($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->discountMapper->prepareOrderDiscount($refundTransfer->getOrder(), $requestContainer);
 
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
 
@@ -679,7 +654,7 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer->setAmount($payonePartialOperationRequestTransfer->getRefund()->getAmount() * -1);
         $requestContainer = $this->preparePartialRefundOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
         $requestContainer = $this->preparePartialRefundExpenses($payonePartialOperationRequestTransfer, $requestContainer);
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
@@ -896,25 +871,6 @@ class PaymentManager implements PaymentManagerInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
-     *
-     * @return void
-     */
-    protected function setStandardParameter(AbstractRequestContainer $container)
-    {
-        $container->setApiVersion(PayoneApiConstants::API_VERSION_3_9);
-        $container->setEncoding($this->standardParameter->getEncoding());
-        $container->setKey($this->hashGenerator->hash($this->standardParameter->getKey()));
-        $container->setMid($this->standardParameter->getMid());
-        $container->setPortalid($this->standardParameter->getPortalId());
-        $container->setMode($this->modeDetector->getMode());
-        $container->setIntegratorName(PayoneApiConstants::INTEGRATOR_NAME_SPRYKER);
-        $container->setIntegratorVersion(PayoneApiConstants::INTEGRATOR_VERSION_3_0_0);
-        $container->setSolutionName(PayoneApiConstants::SOLUTION_NAME_SPRYKER);
-        $container->setSolutionVersion(PayoneApiConstants::SOLUTION_VERSION_3_0_0);
-    }
-
-    /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer $container
      *
      * @return void
@@ -1093,9 +1049,9 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 
         if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
-            $this->prepareOrderItemsFromQuote($quoteTransfer, $requestContainer);
-            $this->prepareOrderShipmentFromQuote($quoteTransfer, $requestContainer);
-            $this->prepareOrderDiscountFromQuote($quoteTransfer, $requestContainer);
+            $this->orderItemsMapper->prepareOrderItems($quoteTransfer, $requestContainer);
+            $this->shipmentMapper->prepareOrderShipment($quoteTransfer, $requestContainer);
+            $this->discountMapper->prepareOrderDiscount($quoteTransfer, $requestContainer);
         }
 
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
@@ -1174,7 +1130,7 @@ class PaymentManager implements PaymentManagerInterface
     public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface $paymentMethodMapper */
-        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
+        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
         );
         $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();
@@ -1196,7 +1152,7 @@ class PaymentManager implements PaymentManagerInterface
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface $paymentMethodMapper */
-        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
+        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
         );
 
@@ -1220,7 +1176,7 @@ class PaymentManager implements PaymentManagerInterface
      */
     protected function performGenericRequest(GenericPaymentContainer $requestContainer)
     {
-        $this->setStandardParameter($requestContainer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new GenericPaymentResponseContainer($rawResponse);
@@ -1244,80 +1200,6 @@ class PaymentManager implements PaymentManagerInterface
         $responseTransfer->setShippingZip($responseContainer->getShippingZip());
 
         return $responseTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
-     */
-    protected function prepareOrderItems(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
-    {
-        $arrayIt = [];
-        $arrayId = [];
-        $arrayPr = [];
-        $arrayNo = [];
-        $arrayDe = [];
-        $arrayVa = [];
-
-        $key = 1;
-
-        foreach ($orderTransfer->getItems() as $itemTransfer) {
-            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
-            $arrayId[$key] = $itemTransfer->getSku();
-            $arrayPr[$key] = $itemTransfer->getUnitGrossPrice();
-            $arrayNo[$key] = $itemTransfer->getQuantity();
-            $arrayDe[$key] = $itemTransfer->getName();
-            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
-            $key++;
-        }
-
-        $container->setIt($arrayIt);
-        $container->setId($arrayId);
-        $container->setPr($arrayPr);
-        $container->setNo($arrayNo);
-        $container->setDe($arrayDe);
-        $container->setVa($arrayVa);
-
-        return $container;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
-     */
-    protected function prepareOrderItemsFromQuote(QuoteTransfer $quoteTransfer, AbstractRequestContainer $container): AbstractRequestContainer
-    {
-        $arrayIt = [];
-        $arrayId = [];
-        $arrayPr = [];
-        $arrayNo = [];
-        $arrayDe = [];
-        $arrayVa = [];
-
-        $key = 1;
-
-        foreach ($quoteTransfer->getItems() as $itemTransfer) {
-            $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
-            $arrayId[$key] = $itemTransfer->getSku();
-            $arrayPr[$key] = $itemTransfer->getUnitGrossPrice();
-            $arrayNo[$key] = $itemTransfer->getQuantity();
-            $arrayDe[$key] = $itemTransfer->getName();
-            $arrayVa[$key] = (int)$itemTransfer->getTaxRate();
-            $key++;
-        }
-
-        $container->setIt($arrayIt);
-        $container->setId($arrayId);
-        $container->setPr($arrayPr);
-        $container->setNo($arrayNo);
-        $container->setDe($arrayDe);
-        $container->setVa($arrayVa);
-
-        return $container;
     }
 
     /**
@@ -1409,142 +1291,6 @@ class PaymentManager implements PaymentManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
-     */
-    protected function prepareOrderShipment(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
-    {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
-
-        $key = count($arrayId) + 1;
-
-        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
-        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
-        $arrayPr[$key] = $this->getDeliveryCosts($orderTransfer);
-        $arrayNo[$key] = 1;
-        $arrayDe[$key] = 'Shipment';
-        $arrayVa[$key] = 0;
-
-        $container->setIt($arrayIt);
-        $container->setId($arrayId);
-        $container->setPr($arrayPr);
-        $container->setNo($arrayNo);
-        $container->setDe($arrayDe);
-        $container->setVa($arrayVa);
-
-        return $container;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
-     */
-    protected function prepareOrderShipmentFromQuote(QuoteTransfer $quoteTransfer, AbstractRequestContainer $container): AbstractRequestContainer
-    {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
-
-        $key = count($arrayId) + 1;
-
-        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
-        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT;
-        $arrayPr[$key] = $this->getDeliveryCostsFromQuote($quoteTransfer);
-        $arrayNo[$key] = self::ONE_ITEM;
-        $arrayDe[$key] = self::SHIPMENT_PRODUCT_DESCRIPTION;
-        $arrayVa[$key] = self::ZERRO_ITEM_TAX_RATE;
-
-        $container->setIt($arrayIt);
-        $container->setId($arrayId);
-        $container->setPr($arrayPr);
-        $container->setNo($arrayNo);
-        $container->setDe($arrayDe);
-        $container->setVa($arrayVa);
-
-        return $container;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
-     */
-    protected function prepareOrderDiscount(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
-    {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
-
-        $key = count($arrayId) + 1;
-
-        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
-        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
-        $arrayPr[$key] = - $orderTransfer->getTotals()->getDiscountTotal();
-        $arrayNo[$key] = 1;
-        $arrayDe[$key] = 'Discount';
-        $arrayVa[$key] = 0;
-
-        $container->setIt($arrayIt);
-        $container->setId($arrayId);
-        $container->setPr($arrayPr);
-        $container->setNo($arrayNo);
-        $container->setDe($arrayDe);
-        $container->setVa($arrayVa);
-
-        return $container;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
-     */
-    protected function prepareOrderDiscountFromQuote(QuoteTransfer $quoteTransfer, AbstractRequestContainer $container): AbstractRequestContainer
-    {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
-
-        $key = count($arrayId) + 1;
-
-        $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
-        $arrayId[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_VOUCHER;
-        $arrayPr[$key] = - $quoteTransfer->getTotals()->getDiscountTotal();
-        $arrayNo[$key] = self::ONE_ITEM;
-        $arrayDe[$key] = self::DISCOUNT_PRODUCT_DESCRIPTION;
-        $arrayVa[$key] = self::ZERRO_ITEM_TAX_RATE;
-
-        $container->setIt($arrayIt);
-        $container->setId($arrayId);
-        $container->setPr($arrayPr);
-        $container->setNo($arrayNo);
-        $container->setDe($arrayDe);
-        $container->setVa($arrayVa);
-
-        return $container;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return int
      */
@@ -1557,22 +1303,6 @@ class PaymentManager implements PaymentManagerInterface
         }
 
         return 0;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return int
-     */
-    protected function getDeliveryCostsFromQuote(QuoteTransfer $quoteTransfer): int
-    {
-        foreach ($quoteTransfer->getExpenses() as $expense) {
-            if ($expense->getType() === static::SHIPMENT_EXPENSE_TYPE) {
-                return $expense->getSumGrossPrice();
-            }
-        }
-
-        return self::ZERRO_DELIVERY_COSTS;
     }
 
     /**
@@ -1729,42 +1459,5 @@ class PaymentManager implements PaymentManagerInterface
             );
 
         return $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
-     */
-    public function sendKlarnaStartSessionRequest(
-        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
-    ): PayoneKlarnaStartSessionResponseTransfer {
-        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper $paymentMethodMapper */
-        $paymentMethodMapper = $this->getRegisteredPaymentMethodMapper(
-            PayoneApiConstants::PAYMENT_METHOD_KLARNA
-        );
-
-        $klarnaGenericPaymentContainer = $paymentMethodMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequestTransfer);
-        $this->setStandardParameter($klarnaGenericPaymentContainer);
-        $this->prepareOrderItemsFromQuote($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
-        $this->prepareOrderShipmentFromQuote($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
-        $this->prepareOrderDiscountFromQuote($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
-        $rawResponse = $this->executionAdapter->sendRequest($klarnaGenericPaymentContainer);
-
-        $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);
-
-        $payoneKlarnaStartSessionResponseTransfer = new PayoneKlarnaStartSessionResponseTransfer();
-
-        if ($klarnaGenericPaymentResponseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_ERROR) {
-            $payoneKlarnaStartSessionResponseTransfer->setIsSuccessful(false);
-            $payoneKlarnaStartSessionResponseTransfer->setErrorMessage($klarnaGenericPaymentResponseContainer->getErrormessage());
-
-            return $payoneKlarnaStartSessionResponseTransfer;
-        }
-
-        $payoneKlarnaStartSessionResponseTransfer->setIsSuccessful(true);
-        $payoneKlarnaStartSessionResponseTransfer->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
-
-        return $payoneKlarnaStartSessionResponseTransfer;
     }
 }

@@ -751,7 +751,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
     ): PayoneKlarnaStartSessionResponseTransfer {
         return $this->getFactory()
-            ->createPaymentManager()
+            ->createPayoneKlarnaStartSessionHandler()
             ->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);
     }
 }
