@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 
@@ -28,6 +29,10 @@ class PaymentMapperManager
      */
     protected $registeredMethodMappers;
 
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface $sequenceNumberProvider
+     * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
+     */
     public function __construct(SequenceNumberProviderInterface $sequenceNumberProvider, HmacGeneratorInterface $urlHmacGenerator)
     {
         $this->sequenceNumberProvider = $sequenceNumberProvider;
@@ -36,6 +41,7 @@ class PaymentMapperManager
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
+     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      *
      * @return void
      */

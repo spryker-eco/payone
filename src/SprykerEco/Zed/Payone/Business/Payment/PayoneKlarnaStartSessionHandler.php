@@ -13,10 +13,9 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\KlarnaGenericPaymentResponseContainer;
-use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
 
@@ -33,9 +32,9 @@ class PayoneKlarnaStartSessionHandler
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper
      */
-    protected $orderItemsMapper;
+    protected $productsMappaer;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper
@@ -59,18 +58,19 @@ class PayoneKlarnaStartSessionHandler
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
+     * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper $orderItemsMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper $productsMappaer
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper $shipmentMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper $discountMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        HashGenerator $hashGenerator,
         HmacGeneratorInterface $urlHmacGenerator,
         StandartParameterMapper $standartParameterMapper,
-        OrderItemsMapper $orderItemsMapper,
+        ProductsMapper $productsMappaer,
         ShipmentMapper $shipmentMapper,
         DiscountMapper $discountMapper,
         PaymentMapperManager $paymentMapperManager,
@@ -78,7 +78,7 @@ class PayoneKlarnaStartSessionHandler
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standartParameterMapper = $standartParameterMapper;
-        $this->orderItemsMapper = $orderItemsMapper;
+        $this->productsMappaer = $productsMappaer;
         $this->shipmentMapper = $shipmentMapper;
         $this->discountMapper = $discountMapper;
         $this->paymentMapperManager = $paymentMapperManager;
@@ -100,9 +100,9 @@ class PayoneKlarnaStartSessionHandler
 
         $klarnaGenericPaymentContainer = $paymentMethodMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequestTransfer);
         $this->standartParameterMapper->setStandardParameter($klarnaGenericPaymentContainer, $this->standardParameter);
-        $this->orderItemsMapper->prepareOrderItems($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
-        $this->shipmentMapper->prepareOrderShipment($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
-        $this->discountMapper->prepareOrderDiscount($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
+        $this->productsMappaer->prepareProductItems($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
+        $this->shipmentMapper->prepareShipment($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
+        $this->discountMapper->prepareDiscount($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaGenericPaymentContainer);
 
         $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);

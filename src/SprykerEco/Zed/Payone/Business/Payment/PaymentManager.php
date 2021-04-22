@@ -66,9 +66,8 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapper;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapper;
 use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
-use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
 use SprykerEco\Zed\Payone\PayoneConfig;
@@ -147,9 +146,9 @@ class PaymentManager implements PaymentManagerInterface
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper
      */
-    protected $orderItemsMapper;
+    protected $productsMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper
@@ -176,7 +175,7 @@ class PaymentManager implements PaymentManagerInterface
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderItemsMapper $orderItemsMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper $productsMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper $shipmentMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper $discountMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
@@ -187,12 +186,11 @@ class PaymentManager implements PaymentManagerInterface
         PayoneStandardParameterTransfer $standardParameter,
         HashGenerator $hashGenerator,
         ModeDetectorInterface $modeDetector,
-        HmacGeneratorInterface $urlHmacGenerator,
         PayoneRepositoryInterface $payoneRepository,
         PayoneEntityManagerInterface $payoneEntityManager,
         OrderPriceDistributorInterface $orderPriceDistributor,
         StandartParameterMapper $standartParameterMapper,
-        OrderItemsMapper $orderItemsMapper,
+        ProductsMapper $productsMapper,
         ShipmentMapper $shipmentMapper,
         DiscountMapper $discountMapper,
         PaymentMapperManager $paymentMapperManager
@@ -206,7 +204,7 @@ class PaymentManager implements PaymentManagerInterface
         $this->payoneEntityManager = $payoneEntityManager;
         $this->orderPriceDistributor = $orderPriceDistributor;
         $this->standartParameterMapper = $standartParameterMapper;
-        $this->orderItemsMapper = $orderItemsMapper;
+        $this->productsMapper = $productsMapper;
         $this->shipmentMapper = $shipmentMapper;
         $this->discountMapper = $discountMapper;
         $this->paymentMapperManager = $paymentMapperManager;
@@ -222,9 +220,9 @@ class PaymentManager implements PaymentManagerInterface
         $paymentEntity = $this->getPaymentEntity($orderTransfer->getIdSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
-        $requestContainer = $this->orderItemsMapper->prepareOrderItems($orderTransfer, $requestContainer);
-        $requestContainer = $this->shipmentMapper->prepareOrderShipment($orderTransfer, $requestContainer);
-        $requestContainer = $this->discountMapper->prepareOrderDiscount($orderTransfer, $requestContainer);
+        $requestContainer = $this->productsMapper->prepareProductItems($orderTransfer, $requestContainer);
+        $requestContainer = $this->shipmentMapper->prepareShipment($orderTransfer, $requestContainer);
+        $requestContainer = $this->discountMapper->prepareDiscount($orderTransfer, $requestContainer);
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
 
         $responseMapper = new AuthorizationResponseMapper();
@@ -310,9 +308,9 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
 
         if ($captureTransfer->getAmount()) {
-            $requestContainer = $this->orderItemsMapper->prepareOrderItems($captureTransfer->getOrder(), $requestContainer);
-            $requestContainer = $this->shipmentMapper->prepareOrderShipment($captureTransfer->getOrder(), $requestContainer);
-            $requestContainer = $this->discountMapper->prepareOrderDiscount($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->productsMapper->prepareProductItems($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->shipmentMapper->prepareShipment($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->discountMapper->prepareDiscount($captureTransfer->getOrder(), $requestContainer);
             $requestContainer = $this->prepareOrderHandling($captureTransfer->getOrder(), $requestContainer);
         }
 
@@ -361,7 +359,7 @@ class PaymentManager implements PaymentManagerInterface
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
 
         $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
-        $requestContainer = $this->shipmentMapper->prepareOrderShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->shipmentMapper->prepareShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
 
         $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
@@ -621,9 +619,9 @@ class PaymentManager implements PaymentManagerInterface
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
         $requestContainer->setAmount(0 - $paymentEntity->getSpyPaymentPayoneDetail()->getAmount());
-        $requestContainer = $this->orderItemsMapper->prepareOrderItems($refundTransfer->getOrder(), $requestContainer);
-        $requestContainer = $this->shipmentMapper->prepareOrderShipment($refundTransfer->getOrder(), $requestContainer);
-        $requestContainer = $this->discountMapper->prepareOrderDiscount($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->productsMapper->prepareProductItems($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->shipmentMapper->prepareShipment($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->discountMapper->prepareDiscount($refundTransfer->getOrder(), $requestContainer);
 
         $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
@@ -1049,9 +1047,9 @@ class PaymentManager implements PaymentManagerInterface
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 
         if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
-            $this->orderItemsMapper->prepareOrderItems($quoteTransfer, $requestContainer);
-            $this->shipmentMapper->prepareOrderShipment($quoteTransfer, $requestContainer);
-            $this->discountMapper->prepareOrderDiscount($quoteTransfer, $requestContainer);
+            $this->productsMapper->prepareProductItems($quoteTransfer, $requestContainer);
+            $this->shipmentMapper->prepareShipment($quoteTransfer, $requestContainer);
+            $this->discountMapper->prepareDiscount($quoteTransfer, $requestContainer);
         }
 
         $responseContainer = $this->performAuthorizationRequest($paymentEntity, $requestContainer);
