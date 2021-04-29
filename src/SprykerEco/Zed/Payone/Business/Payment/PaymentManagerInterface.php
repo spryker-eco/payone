@@ -152,9 +152,21 @@ interface PaymentManagerInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
+    public function executePostSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
+
+    /**
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Payment\PaymentManagerInterface::executePostSaveHook()} instead.
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
     public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
 
     /**
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Payment\PaymentManagerInterface::executePostSaveHook()} instead.
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
      *

@@ -572,6 +572,25 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
+    public function executePostSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
+    {
+        return $this->getFactory()
+            ->createPaymentManager()
+            ->executePostSaveHook($quoteTransfer, $checkoutResponse);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacade::executePostSaveHook()} instead.
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
     public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
     {
         return $this->getFactory()
@@ -583,6 +602,8 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      * {@inheritDoc}
      *
      * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacade::executePostSaveHook()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse

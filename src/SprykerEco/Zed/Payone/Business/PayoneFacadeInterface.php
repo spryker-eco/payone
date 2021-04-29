@@ -412,8 +412,25 @@ interface PayoneFacadeInterface
     /**
      * Specification:
      * - Handles redirects and errors after order placement.
+     * - Executes `authorization` or `pre-authorization` API call depends on payment method.
+     * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
      *
      * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function executePostSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
+
+    /**
+     * Specification:
+     * - Handles redirects and errors after order placement.
+     *
+     * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::executePostSaveHook()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -428,6 +445,8 @@ interface PayoneFacadeInterface
      * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
      *
      * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::executePostSaveHook()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
