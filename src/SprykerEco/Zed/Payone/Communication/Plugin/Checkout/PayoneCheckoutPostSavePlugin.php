@@ -35,6 +35,6 @@ class PayoneCheckoutPostSavePlugin extends AbstractPlugin implements CheckoutPos
      */
     public function executeHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        $this->getFacade()->executePostSaveHook($quoteTransfer, $checkoutResponseTransfer);
+        $this->getFacade()->orderPostSave($quoteTransfer, $checkoutResponseTransfer);
     }
 }

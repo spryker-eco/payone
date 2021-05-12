@@ -13,7 +13,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 {
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -25,7 +25,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -37,7 +37,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -50,7 +50,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -63,7 +63,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -76,7 +76,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -88,7 +88,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -101,7 +101,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -113,7 +113,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -125,7 +125,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -138,7 +138,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -150,7 +150,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -162,7 +162,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *
@@ -174,7 +174,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
 
     /**
      * Specification:
-     * - Todo
+     * - TODO: Add method specification.
      *
      * @api
      *

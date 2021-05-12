@@ -16,7 +16,7 @@ use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\DummyAdapter;
 /**
  * @property \SprykerEcoTest\Zed\Payone\PayoneZedTester $tester
  */
-class PayoneFacadeExecutePostSaveHookTest extends AbstractPayoneTest
+class PayoneFacadeOrderPostSaveTest extends AbstractPayoneTest
 {
     protected const FAKE_REFUND_RESPONSE = '{"txid":"375461930","status":"APPROVED"}';
 
@@ -34,7 +34,7 @@ class PayoneFacadeExecutePostSaveHookTest extends AbstractPayoneTest
         // Act
         $newCheckoutResponseTransfer = $this->createFacadeMock(
             new DummyAdapter(static::FAKE_REFUND_RESPONSE)
-        )->executePostSaveHook($this->quoteTransfer, $checkoutResponseTransfer);
+        )->orderPostSave($this->quoteTransfer, $checkoutResponseTransfer);
 
         // Assert
         $this->assertInstanceOf(CheckoutResponseTransfer::class, $newCheckoutResponseTransfer);
@@ -57,7 +57,7 @@ class PayoneFacadeExecutePostSaveHookTest extends AbstractPayoneTest
         // Act
         $newCheckoutResponseTransfer = $this->createFacadeMock(
             new DummyAdapter(static::FAKE_REFUND_RESPONSE)
-        )->executePostSaveHook($this->quoteTransfer, $checkoutResponseTransfer);
+        )->orderPostSave($this->quoteTransfer, $checkoutResponseTransfer);
 
         // Assert
         $this->assertInstanceOf(CheckoutResponseTransfer::class, $newCheckoutResponseTransfer);
@@ -81,7 +81,7 @@ class PayoneFacadeExecutePostSaveHookTest extends AbstractPayoneTest
         // Act
         $newCheckoutResponseTransfer = $this->createFacadeMock(
             new DummyAdapter('{"txid":"375461930","status":"APPROVED","redirect_url":"http://test.com"}')
-        )->executePostSaveHook($this->quoteTransfer, $checkoutResponseTransfer);
+        )->orderPostSave($this->quoteTransfer, $checkoutResponseTransfer);
 
         // Assert
         $this->assertInstanceOf(CheckoutResponseTransfer::class, $newCheckoutResponseTransfer);
@@ -103,7 +103,7 @@ class PayoneFacadeExecutePostSaveHookTest extends AbstractPayoneTest
         // Act
         $newCheckoutResponseTransfer = $this->createFacadeMock(
             new DummyAdapter('{"txid":"375461930","status":"FAILED","customer_message":"error customer message","error_code":"123"}')
-        )->executePostSaveHook($this->quoteTransfer, $checkoutResponseTransfer);
+        )->orderPostSave($this->quoteTransfer, $checkoutResponseTransfer);
 
         // Assert
         $this->assertInstanceOf(CheckoutResponseTransfer::class, $newCheckoutResponseTransfer);
