@@ -12,6 +12,9 @@ use Spryker\Zed\Kernel\Persistence\QueryContainer\QueryContainerInterface;
 interface PayoneQueryContainerInterface extends QueryContainerInterface
 {
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $idPaymentPayone
@@ -21,6 +24,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createCurrentSequenceNumberQuery($idPaymentPayone);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $transactionId
@@ -30,6 +36,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentByTransactionIdQuery($transactionId);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param string $invoiceTitle
@@ -40,6 +49,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param string $fileReference
@@ -50,6 +62,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $fkPayment
@@ -60,6 +75,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createApiLogByPaymentAndRequestTypeQuery($fkPayment, $requestType);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $idOrder
@@ -69,6 +87,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentByOrderId($idOrder);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $orderId
@@ -79,6 +100,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createApiLogsByOrderIdAndRequest($orderId, $request);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $orderId
@@ -88,6 +112,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentById($orderId);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $idSalesOrder
@@ -97,6 +124,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createTransactionStatusLogsBySalesOrder($idSalesOrder);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $idSalesOrderItem
@@ -107,6 +137,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createTransactionStatusLogOrderItemsByLogIds($idSalesOrderItem, $ids);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param \Propel\Runtime\Collection\ObjectCollection $orders
@@ -116,6 +149,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createApiLogsByOrderIds($orders);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param int $idSalesOrder
@@ -125,6 +161,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createLastApiLogsByOrderId($idSalesOrder);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @param \Propel\Runtime\Collection\ObjectCollection $orders
@@ -134,6 +173,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createTransactionStatusLogsByOrderIds($orders);
 
     /**
+     * Specification:
+     * - Todo
+     *
      * @api
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery
