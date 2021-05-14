@@ -14,7 +14,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneDebitMethodSender extends AbstractPayoneMethodSender implements PayoneDebitMethodSenderInterface
@@ -44,16 +44,16 @@ class PayoneDebitMethodSender extends AbstractPayoneMethodSender implements Payo
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper,
-        PaymentMapperManager $paymentMapperManager
+        PaymentMapperReader $paymentMapperReader
     ) {
-        parent::__construct($queryContainer, $paymentMapperManager);
+        parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;

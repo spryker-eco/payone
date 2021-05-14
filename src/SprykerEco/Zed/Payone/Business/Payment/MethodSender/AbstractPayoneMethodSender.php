@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 abstract class AbstractPayoneMethodSender
@@ -24,20 +24,20 @@ abstract class AbstractPayoneMethodSender
     protected $queryContainer;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
-    protected $paymentMapperManager;
+    protected $paymentMapperReader;
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      */
     public function __construct(
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperManager $paymentMapperManager
+        PaymentMapperReader $paymentMapperReader
     ) {
         $this->queryContainer = $queryContainer;
-        $this->paymentMapperManager = $paymentMapperManager;
+        $this->paymentMapperReader = $paymentMapperReader;
     }
 
     /**
@@ -47,7 +47,7 @@ abstract class AbstractPayoneMethodSender
      */
     protected function getPaymentMethodMapper(SpyPaymentPayone $paymentEntity)
     {
-        return $this->paymentMapperManager->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
+        return $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
     }
 
     /**

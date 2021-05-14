@@ -12,9 +12,9 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 class PayoneRequestProductDataMapper implements PayoneRequestProductDataMapperInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapperInterface
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductMapperInterface
      */
-    protected $productsMapper;
+    protected $productMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface
@@ -27,16 +27,16 @@ class PayoneRequestProductDataMapper implements PayoneRequestProductDataMapperIn
     protected $discountMapper;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapperInterface $productsMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductMapperInterface $productMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface $shipmentMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapperInterface $discountMapper
      */
     public function __construct(
-        ProductsMapperInterface $productsMapper,
+        ProductMapperInterface $productMapper,
         ShipmentMapperInterface $shipmentMapper,
         DiscountMapperInterface $discountMapper
     ) {
-        $this->productsMapper = $productsMapper;
+        $this->productMapper = $productMapper;
         $this->shipmentMapper = $shipmentMapper;
         $this->discountMapper = $discountMapper;
     }
@@ -49,7 +49,7 @@ class PayoneRequestProductDataMapper implements PayoneRequestProductDataMapperIn
      */
     public function mapData($itemsContainer, AbstractRequestContainer $requestContainer): AbstractRequestContainer
     {
-        $this->productsMapper->prepareProductItems($itemsContainer, $requestContainer);
+        $this->productMapper->prepareProductItems($itemsContainer, $requestContainer);
         $this->shipmentMapper->prepareShipment($itemsContainer, $requestContainer);
         $this->discountMapper->prepareDiscount($itemsContainer, $requestContainer);
 

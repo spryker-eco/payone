@@ -15,7 +15,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneBaseAuthorizeSender extends AbstractPayoneMethodSender implements PayoneBaseAuthorizeSenderInterface
@@ -42,7 +42,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneMethodSender implements Pa
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
@@ -50,11 +50,11 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneMethodSender implements Pa
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper
     ) {
-        parent::__construct($queryContainer, $paymentMapperManager);
+        parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->standartParameterMapper = $standartParameterMapper;

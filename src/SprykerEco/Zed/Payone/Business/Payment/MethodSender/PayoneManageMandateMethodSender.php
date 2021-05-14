@@ -13,7 +13,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\ManageMandateResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 
 class PayoneManageMandateMethodSender implements PayoneManageMandateMethodSenderInterface
 {
@@ -38,26 +38,26 @@ class PayoneManageMandateMethodSender implements PayoneManageMandateMethodSender
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
-    protected $paymentMapperManager;
+    protected $paymentMapperReader;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper,
-        PaymentMapperManager $paymentMapperManager
+        PaymentMapperReader $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->standartParameterMapper = $standartParameterMapper;
-        $this->paymentMapperManager = $paymentMapperManager;
+        $this->paymentMapperReader = $paymentMapperReader;
     }
 
     /**
@@ -68,7 +68,7 @@ class PayoneManageMandateMethodSender implements PayoneManageMandateMethodSender
     public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer): PayoneManageMandateTransfer
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
-        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
         $requestContainer = $paymentMethodMapper->mapManageMandate($manageMandateTransfer);
         $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 

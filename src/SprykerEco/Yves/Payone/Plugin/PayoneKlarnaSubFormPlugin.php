@@ -19,7 +19,7 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
 {
     /**
      * {@inheritDoc}
-     * - Creates KlarnaSubForm.
+     * - Creates KlarnaSubForm subform.
      *
      * @api
      *
@@ -32,7 +32,7 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
 
     /**
      * {@inheritDoc}
-     * - Creates KlarnaSubFormDataProvider.
+     * - Creates KlarnaSubFormDataProvider data provider.
      *
      * @api
      *
@@ -40,6 +40,6 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
      */
     public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
-        return $this->getFactory()->createKlarnaSubFormDataProvider();
+        return $this->getFactory()->createKlarnaDataProvider();
     }
 }

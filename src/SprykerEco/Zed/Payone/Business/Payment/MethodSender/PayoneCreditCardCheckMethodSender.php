@@ -14,7 +14,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 
 class PayoneCreditCardCheckMethodSender implements PayoneCreditCardCheckMethodSenderInterface
 {
@@ -39,26 +39,26 @@ class PayoneCreditCardCheckMethodSender implements PayoneCreditCardCheckMethodSe
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
-    protected $paymentMapperManager;
+    protected $paymentMapperReader;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper,
-        PaymentMapperManager $paymentMapperManager
+        PaymentMapperReader $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->standartParameterMapper = $standartParameterMapper;
-        $this->paymentMapperManager = $paymentMapperManager;
+        $this->paymentMapperReader = $paymentMapperReader;
     }
 
     /**
@@ -69,7 +69,7 @@ class PayoneCreditCardCheckMethodSender implements PayoneCreditCardCheckMethodSe
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData): CreditCardCheckResponseTransfer
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo $paymentMethodMapper */
-        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper($creditCardData->getPayment()->getPaymentMethod());
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($creditCardData->getPayment()->getPaymentMethod());
         $requestContainer = $paymentMethodMapper->mapCreditCardCheck($creditCardData);
 
         $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);

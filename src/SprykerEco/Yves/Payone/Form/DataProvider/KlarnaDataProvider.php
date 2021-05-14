@@ -18,6 +18,29 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
 {
     protected const ADDRESS_SEPARATOR = ' ';
 
+    protected const GIVEN_NAME = 'given_name';
+    protected const FAMILY_NAME = 'family_name';
+    protected const EMAIL = 'email';
+    protected const STREET_ADDRESS = 'street_address';
+    protected const POSTAL_CODE = 'postal_code';
+    protected const CITY = 'city';
+    protected const COUNTRY = 'country';
+    protected const PHONE = 'phone';
+
+    protected const DATE_OF_BIRTH = 'date_of_birth';
+
+    protected const SLICE_IT_PAY_METHOD = 'Slice it';
+    protected const PAY_LATER_PAY_METHOD = 'Pay later';
+    protected const PAY_NOW_PAY_METHOD = 'Pay now';
+
+    protected const SLICE_IT_PAY_METHOD_CODE = 'KIS';
+    protected const PAY_LATER_PAY_METHOD_CODE = 'KIV';
+    protected const PAY_NOW_PAY_METHOD_CODE = 'KDD';
+
+    protected const SLICE_IT_WIDGET_PAY_METHOD_CODE = 'pay_over_time';
+    protected const PAY_LATER_WIDGET_PAY_METHOD_CODE = 'pay_later';
+    protected const PAY_NOW_WIDGET_PAY_METHOD_CODE = 'pay_now';
+
     /**
      * @var \Spryker\Shared\Kernel\Store
      */
@@ -52,41 +75,40 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array
+     * @return string[]
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         $billingAddress = $quoteTransfer->getBillingAddress();
-        $items = $quoteTransfer->getItems();
 
         return [
             KlarnaSubForm::PAY_METHOD_CHOICES => $this->getPayMethods(),
             KlarnaSubForm::BILLING_ADDRESS_DATA => [
-                KlarnaSubForm::GIVEN_NAME => $billingAddress->getFirstName(),
-                KlarnaSubForm::FAMILY_NAME => $billingAddress->getLastName(),
-                KlarnaSubForm::EMAIL => $quoteTransfer->getCustomer()->getEmail(),
-                KlarnaSubForm::STREET_ADDRESS => implode(self::ADDRESS_SEPARATOR, [$billingAddress->getAddress1(), $billingAddress->getAddress2()]),
-                KlarnaSubForm::POSTAL_CODE => $billingAddress->getZipCode(),
-                KlarnaSubForm::CITY => $billingAddress->getCity(),
-                KlarnaSubForm::COUNTRY => $this->store->getCurrentCountry(),
-                KlarnaSubForm::PHONE => $billingAddress->getPhone(),
+                static::GIVEN_NAME => $billingAddress->getFirstName(),
+                static::FAMILY_NAME => $billingAddress->getLastName(),
+                static::EMAIL => $quoteTransfer->getCustomer()->getEmail(),
+                static::STREET_ADDRESS => implode(self::ADDRESS_SEPARATOR, [$billingAddress->getAddress1(), $billingAddress->getAddress2()]),
+                static::POSTAL_CODE => $billingAddress->getZipCode(),
+                static::CITY => $billingAddress->getCity(),
+                static::COUNTRY => $this->store->getCurrentCountry(),
+                static::PHONE => $billingAddress->getPhone(),
             ],
             KlarnaSubForm::CUSTOMER_DATA => [
-                KlarnaSubForm::DATE_OF_BIRTH => $quoteTransfer->getCustomer() ? $quoteTransfer->getCustomer()->getDateOfBirth() : null,
+                static::DATE_OF_BIRTH => $quoteTransfer->getCustomer() ? $quoteTransfer->getCustomer()->getDateOfBirth() : null,
             ],
             KlarnaSubForm::WIDGET_PAY_METHODS => $this->getKlarnaPayMethods(),
         ];
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     protected function getPayMethods(): array
     {
         return [
-            KlarnaSubForm::SLICE_IT_PAY_METHOD => KlarnaSubForm::SLICE_IT_PAY_METHOD_CODE,
-            KlarnaSubForm::PAY_LATER_PAY_METHOD => KlarnaSubForm::PAY_LATER_PAY_METHOD_CODE,
-            KlarnaSubForm::PAY_NOW_PAY_METHOD => KlarnaSubForm::PAY_NOW_PAY_METHOD_CODE,
+            static::SLICE_IT_PAY_METHOD => static::SLICE_IT_PAY_METHOD_CODE,
+            static::PAY_LATER_PAY_METHOD => static::PAY_LATER_PAY_METHOD_CODE,
+            static::PAY_NOW_PAY_METHOD => static::PAY_NOW_PAY_METHOD_CODE,
         ];
     }
 
@@ -96,9 +118,9 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     protected function getKlarnaPayMethods(): array
     {
         return [
-            KlarnaSubForm::SLICE_IT_PAY_METHOD_CODE => KlarnaSubForm::SLICE_IT_WIDGET_PAY_METHOD_CODE,
-            KlarnaSubForm::PAY_LATER_PAY_METHOD_CODE => KlarnaSubForm::PAY_LATER_WIDGET_PAY_METHOD_CODE,
-            KlarnaSubForm::PAY_NOW_PAY_METHOD_CODE => KlarnaSubForm::PAY_NOW_WIDGET_PAY_METHOD_CODE,
+            static::SLICE_IT_PAY_METHOD_CODE => static::SLICE_IT_WIDGET_PAY_METHOD_CODE,
+            static::PAY_LATER_PAY_METHOD_CODE => static::PAY_LATER_WIDGET_PAY_METHOD_CODE,
+            static::PAY_NOW_PAY_METHOD_CODE => static::PAY_NOW_WIDGET_PAY_METHOD_CODE,
         ];
     }
 }

@@ -10,14 +10,14 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 
 class PayoneInitPaypalExpressCheckoutMethodSender implements PayoneInitPaypalExpressCheckoutMethodSenderInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
-    protected $paymentMapperManager;
+    protected $paymentMapperReader;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface
@@ -25,14 +25,14 @@ class PayoneInitPaypalExpressCheckoutMethodSender implements PayoneInitPaypalExp
     protected $genericRequestMethodSender;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface $genericRequestMethodSender
      */
     public function __construct(
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         PayoneGenericRequestMethodSenderInterface $genericRequestMethodSender
     ) {
-        $this->paymentMapperManager = $paymentMapperManager;
+        $this->paymentMapperReader = $paymentMapperReader;
         $this->genericRequestMethodSender = $genericRequestMethodSender;
     }
 
@@ -45,7 +45,7 @@ class PayoneInitPaypalExpressCheckoutMethodSender implements PayoneInitPaypalExp
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
     ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface $paymentMethodMapper */
-        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
         );
         $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();

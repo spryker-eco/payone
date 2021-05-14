@@ -30,7 +30,7 @@ class KlarnaController extends AbstractController
      */
     public function getTokenAction(Request $request): JsonResponse
     {
-        $klarnaStartSessionRequest = $this->createPayoneKlarnaStartSessionRequest($request);
+        $klarnaStartSessionRequest = $this->createPayoneKlarnaStartSessionRequestTransfer($request);
         $payoneKlarnaSessionResponse = $this->getClient()->sendKlarnaStartSessionRequest($klarnaStartSessionRequest);
 
         return $this->jsonResponse([
@@ -45,7 +45,7 @@ class KlarnaController extends AbstractController
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer
      */
-    protected function createPayoneKlarnaStartSessionRequest(Request $request): PayoneKlarnaStartSessionRequestTransfer
+    protected function createPayoneKlarnaStartSessionRequestTransfer(Request $request): PayoneKlarnaStartSessionRequestTransfer
     {
         $klarnaStartSessionRequestTransfer = new PayoneKlarnaStartSessionRequestTransfer();
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();

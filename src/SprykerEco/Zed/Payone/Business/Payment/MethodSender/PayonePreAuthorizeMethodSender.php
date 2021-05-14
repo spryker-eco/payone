@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayonePreAuthorizeMethodSender extends AbstractPayoneMethodSender implements PayonePreAuthorizeMethodSenderInterface
@@ -21,15 +21,15 @@ class PayonePreAuthorizeMethodSender extends AbstractPayoneMethodSender implemen
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
      */
     public function __construct(
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
     ) {
-        parent::__construct($queryContainer, $paymentMapperManager);
+        parent::__construct($queryContainer, $paymentMapperReader);
         $this->baseAuthorizeSender = $baseAuthorizeSender;
     }
 

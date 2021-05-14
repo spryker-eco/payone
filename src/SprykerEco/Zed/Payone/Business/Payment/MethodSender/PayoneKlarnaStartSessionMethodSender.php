@@ -15,9 +15,9 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\KlarnaGenericPaymentResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 
-class PayoneKlarnaStartSessionMethodSender extends AbstractPayoneMethodSender implements PayoneKlarnaStartSessionMethodSenderInterface
+class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMethodSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
@@ -35,9 +35,9 @@ class PayoneKlarnaStartSessionMethodSender extends AbstractPayoneMethodSender im
     protected $payoneRequestProductDataMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
-    protected $paymentMapperManager;
+    protected $paymentMapperReader;
 
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
@@ -48,20 +48,20 @@ class PayoneKlarnaStartSessionMethodSender extends AbstractPayoneMethodSender im
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper $standartParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         StandartParameterMapper $standartParameterMapper,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standartParameterMapper = $standartParameterMapper;
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
-        $this->paymentMapperManager = $paymentMapperManager;
+        $this->paymentMapperReader = $paymentMapperReader;
         $this->standardParameter = $standardParameter;
     }
 
@@ -74,7 +74,7 @@ class PayoneKlarnaStartSessionMethodSender extends AbstractPayoneMethodSender im
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
     ): PayoneKlarnaStartSessionResponseTransfer {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper $paymentMethodMapper */
-        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(
             PayoneApiConstants::PAYMENT_METHOD_KLARNA
         );
 

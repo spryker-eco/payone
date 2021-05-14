@@ -35,8 +35,8 @@ use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapperInterface;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
@@ -94,7 +94,7 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundMethodSender
 use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundMethodSenderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentDetail;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentDetailInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
@@ -133,7 +133,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     {
         $paymentManager = new PayonePreAuthorizeMethodSender(
             $this->getQueryContainer(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->createPayoneBaseAuthorizeSender(),
         );
 
@@ -147,7 +147,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     {
         $paymentManager = new PayoneAuthorizeMethodSender(
             $this->getQueryContainer(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->getStandardParameter(),
             $this->createPayoneRequestProductDataMapper(),
             $this->createPayoneBaseAuthorizeSender(),
@@ -164,7 +164,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $paymentManager = new PayoneCaptureMethodSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->getStandardParameter(),
             $this->createOrderPriceDistributor(),
             $this->createStandartParameterMapper(),
@@ -183,7 +183,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $paymentManager = new PayonePartialCaptureMethodSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->createOrderHandlingMapper(),
             $this->getStandardParameter(),
             $this->getRepository(),
@@ -206,7 +206,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->getQueryContainer(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
         );
 
         return $paymentManager;
@@ -220,7 +220,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $paymentManager = new PayoneRefundMethodSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->getStandardParameter(),
             $this->createOrderPriceDistributor(),
             $this->createStandartParameterMapper(),
@@ -238,7 +238,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $paymentManager = new PayonePartialRefundMethodSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->getStandardParameter(),
             $this->getRepository(),
             $this->getEntityManager(),
@@ -255,7 +255,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     {
         $paymentManager = new PayoneBankAccountCheckMethodSender(
             $this->createExecutionAdapter(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
         );
@@ -272,7 +272,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createExecutionAdapter(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
         );
 
         return $paymentManager;
@@ -287,7 +287,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createExecutionAdapter(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
         );
 
         return $paymentManager;
@@ -303,7 +303,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->getQueryContainer(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
         );
 
         return $paymentManager;
@@ -319,7 +319,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->getQueryContainer(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
         );
 
         return $paymentManager;
@@ -343,7 +343,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createProductsMapper(),
             $this->createShipmentMapper(),
             $this->createDiscountMapper(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
         );
 
         return $paymentManager;
@@ -355,19 +355,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createLogsReceiver(): PayoneLogsReceiverInterface
     {
         $paymentManager = new PayoneLogsReceiver(
-            $this->createExecutionAdapter(),
             $this->getQueryContainer(),
-            $this->getStandardParameter(),
-            $this->createKeyHashGenerator(),
-            $this->createModeDetector(),
-            $this->getRepository(),
-            $this->getEntityManager(),
-            $this->createOrderPriceDistributor(),
-            $this->createStandartParameterMapper(),
-            $this->createProductsMapper(),
-            $this->createShipmentMapper(),
-            $this->createDiscountMapper(),
-            $this->createPaymentMapperManager(),
         );
 
         return $paymentManager;
@@ -379,7 +367,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createInitPaypalExpressCheckoutMethodSender(): PayoneInitPaypalExpressCheckoutMethodSenderInterface
     {
         $paymentManager = new PayoneInitPaypalExpressCheckoutMethodSender(
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->createGenericRequestMethodSender(),
         );
 
@@ -392,7 +380,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createGetPaypalExpressCheckoutDetailsMethodSender(): PayoneGetPaypalExpressCheckoutDetailsMethodSenderInterface
     {
         $paymentManager = new PayoneGetPaypalExpressCheckoutDetailsMethodSender(
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->createGenericrequestMethodSender()
         );
 
@@ -422,7 +410,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createExecutionAdapter(),
             $this->createStandartParameterMapper(),
             $this->createPayoneRequestProductDataMapper(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->getStandardParameter()
         );
     }
@@ -556,8 +544,16 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT => $this->createDirectDebit($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => $this->createGenericPayment($storeConfig),
             PayoneApiConstants::PAYMENT_METHOD_CASH_ON_DELIVERY => $this->createCashOnDelivery($storeConfig, $this->getGlossaryFacade()),
-            PayoneApiConstants::PAYMENT_METHOD_KLARNA => $this->createKlarna($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_KLARNA => $this->createKlarnaPaymentMapper($storeConfig),
         ];
+    }
+
+    /**
+     * @return \Spryker\Shared\Kernel\Store
+     */
+    public function getStore(): Store
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
     }
 
     /**
@@ -702,7 +698,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface
      */
-    public function createKlarna(Store $store): KlarnaPaymentMapperInterface
+    public function createKlarnaPaymentMapper(Store $store): KlarnaPaymentMapperInterface
     {
         return new KlarnaPaymentMapper($store, $this->getRequestStack());
     }
@@ -793,11 +789,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapperInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductMapperInterface
      */
-    public function createProductsMapper(): ProductsMapperInterface
+    public function createProductsMapper(): ProductMapperInterface
     {
-        return new ProductsMapper();
+        return new ProductMapper();
     }
 
     /**
@@ -809,20 +805,20 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
-    public function createPaymentMapperManager(): PaymentMapperManager
+    public function createPaymentMapperReader(): PaymentMapperReader
     {
-        $paymentMapperManager = new PaymentMapperManager(
+        $paymentMapperReader = new PaymentMapperReader(
             $this->createSequenceNumberProvider(),
             $this->createUrlHmacGenerator()
         );
 
         foreach ($this->getAvailablePaymentMethods() as $paymentMethod) {
-            $paymentMapperManager->registerPaymentMethodMapper($paymentMethod, $this->getStandardParameter());
+            $paymentMapperReader->registerPaymentMethodMapper($paymentMethod, $this->getStandardParameter());
         }
 
-        return $paymentMapperManager;
+        return $paymentMapperReader;
     }
 
     /**
@@ -842,7 +838,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return mixed
+     * @return \Symfony\Component\HttpFoundation\RequestStack
      */
     public function getRequestStack()
     {
@@ -888,7 +884,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     {
         return new CheckoutPostSaveHookExecutor(
             $this->getQueryContainer(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->createPayoneRequestProductDataMapper(),
             $this->createPayoneBaseAuthorizeSender(),
         );
@@ -902,7 +898,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         return new PayoneBaseAuthorizeSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
-            $this->createPaymentMapperManager(),
+            $this->createPaymentMapperReader(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
         );

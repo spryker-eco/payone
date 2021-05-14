@@ -14,7 +14,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
@@ -27,9 +27,9 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
     protected $queryContainer;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
-    protected $paymentMapperManager;
+    protected $paymentMapperReader;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface
@@ -43,18 +43,18 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
      */
     public function __construct(
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
     ) {
         $this->queryContainer = $queryContainer;
-        $this->paymentMapperManager = $paymentMapperManager;
+        $this->paymentMapperReader = $paymentMapperReader;
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
         $this->baseAuthorizeSender = $baseAuthorizeSender;
     }
@@ -76,7 +76,7 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
         $idSalesOrder = $checkoutResponse->getSaveOrder()->getIdSalesOrder();
         $paymentEntity = $this->queryContainer->createPaymentById($idSalesOrder)->findOne();
 
-        $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 
         if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {

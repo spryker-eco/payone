@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\DataMapper;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 
-class ProductsMapper implements ProductsMapperInterface
+class ProductMapper implements ProductMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer $itemsContainer

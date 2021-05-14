@@ -14,7 +14,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneGetInvoiceMethodSender implements PayoneGetInvoiceMethodSenderInterface
@@ -47,7 +47,7 @@ class PayoneGetInvoiceMethodSender implements PayoneGetInvoiceMethodSenderInterf
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
     protected $paymentMapperManager;
 
@@ -56,20 +56,20 @@ class PayoneGetInvoiceMethodSender implements PayoneGetInvoiceMethodSenderInterf
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper,
-        PaymentMapperManager $paymentMapperManager
+        PaymentMapperReader $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
         $this->standartParameterMapper = $standartParameterMapper;
-        $this->paymentMapperManager = $paymentMapperManager;
+        $this->paymentMapperReader = $paymentMapperReader;
     }
 
     /**
@@ -87,7 +87,7 @@ class PayoneGetInvoiceMethodSender implements PayoneGetInvoiceMethodSenderInterf
 
         if ($paymentEntity) {
             /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice $paymentMethodMapper */
-            $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
+            $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
             $requestContainer = $paymentMethodMapper->mapGetInvoice($getInvoiceTransfer);
             $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
             $rawResponse = $this->executionAdapter->sendRequest($requestContainer);

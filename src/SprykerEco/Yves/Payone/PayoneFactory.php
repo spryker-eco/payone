@@ -131,7 +131,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createKlarnaSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createKlarnaDataProvider(): StepEngineFormDataProviderInterface
     {
         return new KlarnaDataProvider($this->getStoreConfig());
     }

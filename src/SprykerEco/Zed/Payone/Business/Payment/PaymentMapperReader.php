@@ -12,7 +12,7 @@ use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 
-class PaymentMapperManager
+class PaymentMapperReader
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface
@@ -45,7 +45,7 @@ class PaymentMapperManager
      *
      * @return void
      */
-    public function registerPaymentMethodMapper(PaymentMethodMapperInterface $paymentMethodMapper, PayoneStandardParameterTransfer $standardParameter)
+    public function registerPaymentMethodMapper(PaymentMethodMapperInterface $paymentMethodMapper, PayoneStandardParameterTransfer $standardParameter): void
     {
         $paymentMethodMapper->setStandardParameter($standardParameter);
         $paymentMethodMapper->setSequenceNumberProvider($this->sequenceNumberProvider);

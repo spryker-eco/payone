@@ -615,9 +615,9 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
-     * - Starts Payone session.
+     * - Starts Payone Klarna session.
      * - Returns client token in case session started successfully.
-     * - Returns error message if case of error.
+     * - Returns 'isSuccessful=false' and error message in case of error.
      *
      * @api
      *

@@ -19,7 +19,7 @@ use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneCaptureMethodSender extends AbstractPayoneMethodSender implements PayoneCaptureMethodSenderInterface
@@ -70,7 +70,7 @@ class PayoneCaptureMethodSender extends AbstractPayoneMethodSender implements Pa
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
@@ -80,14 +80,14 @@ class PayoneCaptureMethodSender extends AbstractPayoneMethodSender implements Pa
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         OrderPriceDistributorInterface $orderPriceDistributor,
         StandartParameterMapperInterface $standartParameterMapper,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         OrderHandlingMapperInterface $orderHandlingMapper
     ) {
-        parent::__construct($queryContainer, $paymentMapperManager);
+        parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->orderPriceDistributor = $orderPriceDistributor;

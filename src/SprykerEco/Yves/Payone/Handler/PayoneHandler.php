@@ -175,12 +175,12 @@ class PayoneHandler implements PayoneHandlerInterface
             $paymentDetailTransfer->setTokenList($payonePaymentTransfer->getPayMethodTokens());
         }
 
-        $payone = new PayonePaymentTransfer();
-        $payone->setReference(uniqid(self::PAYONE_PAYMENT_REFERENCE_PREFIX));
-        $payone->setPaymentDetail($paymentDetailTransfer);
+        $payonePaymentTransfer = new PayonePaymentTransfer();
+        $payonePaymentTransfer->setReference(uniqid(self::PAYONE_PAYMENT_REFERENCE_PREFIX));
+        $payonePaymentTransfer->setPaymentDetail($paymentDetailTransfer);
         $paymentTransfer = $quoteTransfer->getPayment();
-        $payone->setPaymentMethod($paymentTransfer->getPaymentMethod());
-        $paymentTransfer->setPayone($payone);
+        $payonePaymentTransfer->setPaymentMethod($paymentTransfer->getPaymentMethod());
+        $paymentTransfer->setPayone($payonePaymentTransfer);
     }
 
     /**

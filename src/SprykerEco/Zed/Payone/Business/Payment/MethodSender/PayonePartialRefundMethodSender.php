@@ -20,7 +20,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
@@ -64,12 +64,12 @@ class PayonePartialRefundMethodSender extends AbstractPayoneMethodSender impleme
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         PayoneRepositoryInterface $payoneRepository,
         PayoneEntityManagerInterface $payoneEntityManager,

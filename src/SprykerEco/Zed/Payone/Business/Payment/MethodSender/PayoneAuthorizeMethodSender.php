@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneAuthorizeMethodSender extends AbstractPayoneMethodSender implements PayoneAuthorizeMethodSenderInterface
@@ -29,19 +29,19 @@ class PayoneAuthorizeMethodSender extends AbstractPayoneMethodSender implements 
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
      */
     public function __construct(
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
     ) {
-        parent::__construct($queryContainer, $paymentMapperManager);
+        parent::__construct($queryContainer, $paymentMapperReader);
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
         $this->baseAuthorizeSender = $baseAuthorizeSender;
     }

@@ -25,7 +25,7 @@ use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
@@ -78,9 +78,9 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
     protected $shipmentMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
      */
-    protected $paymentMapperManager;
+    protected $paymentMapperReader;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface
@@ -96,13 +96,13 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface $shipmentMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface $orderHandlingMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperManager $paymentMapperManager,
+        PaymentMapperReader $paymentMapperReader,
         OrderHandlingMapperInterface $orderHandlingMapper,
         PayoneStandardParameterTransfer $standardParameter,
         PayoneRepositoryInterface $payoneRepository,
@@ -111,7 +111,7 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
         StandartParameterMapperInterface $standartParameterMapper,
         ShipmentMapperInterface $shipmentMapper
     ) {
-        parent::__construct($queryContainer, $paymentMapperManager);
+        parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->payoneRepository = $payoneRepository;
