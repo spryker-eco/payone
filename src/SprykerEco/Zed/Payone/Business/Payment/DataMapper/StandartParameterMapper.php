@@ -13,7 +13,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 
-class StandartParameterMapper
+class StandartParameterMapper implements StandartParameterMapperInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface|\SprykerEco\Zed\Payone\Business\Key\HashGenerator

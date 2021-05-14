@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\AddressCheckResponseTransfer;
+use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
@@ -30,6 +31,7 @@ use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneBusinessFactory getFactory()
@@ -69,9 +71,9 @@ interface PayoneFacadeInterface
      *
      * @param int $idPayment
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
+     * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment($idPayment);
+    public function preAuthorizePayment(int $idSalesOrder): AuthorizationResponseTransfer;
 
     /**
      * Specification:
@@ -94,7 +96,7 @@ interface PayoneFacadeInterface
      *
      * @param int $idPayment
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
+     * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
     public function debitPayment($idPayment);
 
@@ -107,9 +109,9 @@ interface PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer
+     * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer);
+    public function refundPayment(PayoneRefundTransfer $refundTransfer): RefundResponseTransfer;
 
     /**
      * Specification:
@@ -131,7 +133,7 @@ interface PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneCreditCardTransfer $creditCardData
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer
+     * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData);
 
@@ -470,7 +472,7 @@ interface PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\BankAccountCheckResponseContainer
+     * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
     public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer);
 

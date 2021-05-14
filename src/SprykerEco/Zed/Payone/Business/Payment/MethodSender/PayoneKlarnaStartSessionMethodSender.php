@@ -1,25 +1,23 @@
 <?php
 
-/**
- * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- */
-
-namespace SprykerEco\Zed\Payone\Business\Payment;
+namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\KlarnaGenericPaymentResponseContainer;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
 
-class PayoneKlarnaStartSessionHandler
+class PayoneKlarnaStartSessionMethodSender extends AbstractPayoneMethodSender implements PayoneKlarnaStartSessionMethodSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
@@ -30,21 +28,10 @@ class PayoneKlarnaStartSessionHandler
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper
      */
     protected $standartParameterMapper;
-
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface
      */
-    protected $productsMappaer;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper
-     */
-    protected $shipmentMapper;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper
-     */
-    protected $discountMapper;
+    protected $payoneRequestProductDataMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager
@@ -58,29 +45,21 @@ class PayoneKlarnaStartSessionHandler
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper $productsMappaer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper $shipmentMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper $discountMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager $paymentMapperManager
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        HmacGeneratorInterface $urlHmacGenerator,
         StandartParameterMapper $standartParameterMapper,
-        ProductsMapper $productsMappaer,
-        ShipmentMapper $shipmentMapper,
-        DiscountMapper $discountMapper,
+        PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         PaymentMapperManager $paymentMapperManager,
         PayoneStandardParameterTransfer $standardParameter
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standartParameterMapper = $standartParameterMapper;
-        $this->productsMappaer = $productsMappaer;
-        $this->shipmentMapper = $shipmentMapper;
-        $this->discountMapper = $discountMapper;
+        $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
         $this->paymentMapperManager = $paymentMapperManager;
         $this->standardParameter = $standardParameter;
     }
@@ -100,9 +79,7 @@ class PayoneKlarnaStartSessionHandler
 
         $klarnaGenericPaymentContainer = $paymentMethodMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequestTransfer);
         $this->standartParameterMapper->setStandardParameter($klarnaGenericPaymentContainer, $this->standardParameter);
-        $this->productsMappaer->prepareProductItems($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
-        $this->shipmentMapper->prepareShipment($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
-        $this->discountMapper->prepareDiscount($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
+        $this->payoneRequestProductDataMapper->mapData($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaGenericPaymentContainer);
 
         $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);

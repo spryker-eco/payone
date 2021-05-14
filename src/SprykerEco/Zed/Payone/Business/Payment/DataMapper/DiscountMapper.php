@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\DataMapper;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 
-class DiscountMapper
+class DiscountMapper implements DiscountMapperInterface
 {
     protected const ZERRO_ITEM_TAX_RATE = 0;
     protected const DISCOUNT_PRODUCT_DESCRIPTION = 'Discount';

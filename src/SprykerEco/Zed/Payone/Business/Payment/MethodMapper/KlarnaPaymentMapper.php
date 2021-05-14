@@ -62,7 +62,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity): ContainerInterface
     {
         $preAuthorizationContainer = new KlarnaPreAuthorizationContainer();
-        $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
+        $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
 
         return $preAuthorizationContainer;
     }
@@ -76,7 +76,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): ContainerInterface
     {
         $authorizationContainer = new KlarnaAuthorizationContainer();
-        $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
+        $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
 
         return $authorizationContainer;
     }

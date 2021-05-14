@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Payone\Plugin;
 
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
+use SprykerEco\Yves\Payone\Form\InstantOnlineTransferSubForm;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()
@@ -16,7 +17,7 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayoneInstantOnlineTransferSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * @return \SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\InstantOnlineTransferSubForm
      */
     public function createSubForm()
     {
@@ -24,7 +25,7 @@ class PayoneInstantOnlineTransferSubFormPlugin extends AbstractPlugin implements
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\EpsOnlineTransferDataProvider
+     * @return \SprykerEco\Yves\Payone\Form\DataProvider\InstantOnlineTransferDataProvider
      */
     public function createSubFormDataProvider()
     {

@@ -59,7 +59,7 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
     protected $street;
 
     /**
-     * @var string|null
+     * @var int|null
      */
     protected $zip;
 

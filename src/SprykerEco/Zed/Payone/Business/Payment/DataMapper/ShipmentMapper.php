@@ -11,7 +11,7 @@ use Spryker\Shared\Shipment\ShipmentConfig;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 
-class ShipmentMapper
+class ShipmentMapper implements ShipmentMapperInterface
 {
     protected const SHIPMENT_PRODUCT_DESCRIPTION = 'Shipment';
     protected const ZERRO_ITEM_TAX_RATE = 0;

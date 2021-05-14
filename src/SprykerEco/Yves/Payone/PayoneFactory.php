@@ -12,6 +12,7 @@ use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientInterface;
+use SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\CashOnDeliverySubForm;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
@@ -88,9 +89,9 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createKlarnaSubForm(): SubFormInterface
+    public function createKlarnaSubForm(): AbstractPayoneSubForm
     {
         return new KlarnaSubForm();
     }
@@ -317,7 +318,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\PostfinanceCardOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm
      */
     public function createPrzelewy24OnlineTransferSubForm()
     {
@@ -325,7 +326,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceCardOnlineTransferDataProvider
+     * @return \SprykerEco\Yves\Payone\Form\DataProvider\Przelewy24OnlineTransferDataProvider
      */
     public function createPrzelewy24OnlineTransferSubFormDataProvider()
     {
