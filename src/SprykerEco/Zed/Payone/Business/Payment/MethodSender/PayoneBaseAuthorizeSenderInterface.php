@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
@@ -14,5 +19,8 @@ interface PayoneBaseAuthorizeSenderInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
      */
-    public function performAuthorizationRequest(SpyPaymentPayone $paymentEntity, AuthorizationContainerInterface $requestContainer): AuthorizationResponseContainer;
+    public function performAuthorizationRequest(
+        SpyPaymentPayone $paymentEntity,
+        AuthorizationContainerInterface $requestContainer
+    ): AuthorizationResponseContainer;
 }

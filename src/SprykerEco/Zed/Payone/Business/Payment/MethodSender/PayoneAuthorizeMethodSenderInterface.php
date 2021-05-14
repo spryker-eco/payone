@@ -1,10 +1,14 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
 
 interface PayoneAuthorizeMethodSenderInterface
 {

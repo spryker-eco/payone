@@ -1,30 +1,28 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneCaptureTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Shared\Shipment\ShipmentConfig;
-use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer;
-use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapper;
 use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
-use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;

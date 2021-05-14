@@ -1,9 +1,13 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
 use Generated\Shared\Transfer\PaymentDetailTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PaymentDetail implements PaymentDetailInterface

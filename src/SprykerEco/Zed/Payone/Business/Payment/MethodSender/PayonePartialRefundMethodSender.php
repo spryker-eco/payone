@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
@@ -7,21 +12,13 @@ use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Shared\Shipment\ShipmentConfig;
-use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
-use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapper;
-use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
-use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
@@ -39,6 +36,7 @@ class PayonePartialRefundMethodSender extends AbstractPayoneMethodSender impleme
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
     protected $standardParameter;
+
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
      */
@@ -256,5 +254,4 @@ class PayonePartialRefundMethodSender extends AbstractPayoneMethodSender impleme
 
         return PayoneTransactionStatusConstants::STATUS_REFUND_FAILED;
     }
-
 }

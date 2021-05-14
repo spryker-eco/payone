@@ -1,19 +1,19 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\KlarnaGenericPaymentResponseContainer;
-use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductsMapper;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
 
@@ -28,6 +28,7 @@ class PayoneKlarnaStartSessionMethodSender extends AbstractPayoneMethodSender im
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper
      */
     protected $standartParameterMapper;
+
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface
      */

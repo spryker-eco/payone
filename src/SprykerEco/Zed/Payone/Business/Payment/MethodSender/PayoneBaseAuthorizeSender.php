@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
@@ -8,7 +13,6 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
-use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperManager;
@@ -62,8 +66,10 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneMethodSender implements Pa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
      */
-    public function performAuthorizationRequest(SpyPaymentPayone $paymentEntity, AuthorizationContainerInterface $requestContainer): AuthorizationResponseContainer
-    {
+    public function performAuthorizationRequest(
+        SpyPaymentPayone $paymentEntity,
+        AuthorizationContainerInterface $requestContainer
+    ): AuthorizationResponseContainer {
         $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);

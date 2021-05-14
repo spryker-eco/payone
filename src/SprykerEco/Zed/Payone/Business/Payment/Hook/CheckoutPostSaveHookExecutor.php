@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Zed\Payone\Business\Payment\Hook;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
@@ -70,7 +74,8 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
         }
 
         $idSalesOrder = $checkoutResponse->getSaveOrder()->getIdSalesOrder();
-        $paymentEntity = $this->queryContainer->createPaymentById($idSalesOrder)->findOne();;
+        $paymentEntity = $this->queryContainer->createPaymentById($idSalesOrder)->findOne();
+
         $paymentMethodMapper = $this->paymentMapperManager->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 

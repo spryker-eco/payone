@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Payone\Plugin;
 
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
-use SprykerEco\Yves\Payone\Form\InvoiceSubForm;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()

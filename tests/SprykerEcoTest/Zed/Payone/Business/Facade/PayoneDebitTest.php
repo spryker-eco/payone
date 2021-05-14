@@ -7,26 +7,10 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
-use Generated\Shared\DataBuilder\PayoneBankAccountCheckBuilder;
-use Generated\Shared\DataBuilder\PayoneCreditCardBuilder;
-use Generated\Shared\DataBuilder\PayoneDebitBuilder;
-use Generated\Shared\DataBuilder\PayonePaymentBuilder;
-use Generated\Shared\Transfer\CreditCardCheckResponseTransfer;
 use Generated\Shared\Transfer\DebitResponseTransfer;
-use Generated\Shared\Transfer\PaymentTransfer;
-use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
-use Generated\Shared\Transfer\PayoneCreditCardTransfer;
-use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
-use Generated\Shared\Transfer\PayonePaymentTransfer;
-use Generated\Shared\Transfer\RefundResponseTransfer;
 use Spryker\Shared\Kernel\Container\GlobalContainer;
-use Spryker\Shared\Testify\AbstractDataBuilder;
-use Spryker\Zed\ContentStorage\Persistence\ContentStoragePersistenceFactory;
 use Spryker\Zed\Kernel\Container;
-use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
-use SprykerEco\Zed\Payone\Business\Api\Response\Container\BankAccountCheckResponseContainer;
 use SprykerEco\Zed\Payone\Business\PayoneBusinessFactory;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
@@ -35,18 +19,12 @@ use SprykerEco\Zed\Payone\Persistence\PayonePersistenceFactory;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepository;
 use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
-use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\AbstractAdapterMock;
-use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\BankAccountCheckAdapterMock;
-use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\CreditCardCheckAdapterMock;
 use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\DebitAdapterMock;
-use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\DummyAdapter;
-use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\GetExpressCheckoutAdapterMock;
 use SprykerEcoTest\Zed\Payone\PayoneZedTester;
-use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 class PayoneDebitTest extends AbstractBusinessTest
 {
-    const EXPECTED_TXID = 'testtxid';
+    public const EXPECTED_TXID = 'testtxid';
 
     /**
      * @var \SprykerEcoTest\Zed\Payone\PayoneZedTester

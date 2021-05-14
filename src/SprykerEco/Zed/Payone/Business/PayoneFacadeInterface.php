@@ -31,7 +31,6 @@ use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
-use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneBusinessFactory getFactory()
