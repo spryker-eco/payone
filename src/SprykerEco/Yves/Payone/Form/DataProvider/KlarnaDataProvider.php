@@ -9,9 +9,11 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Spryker\Client\Store\StoreClientInterface;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface;
 use SprykerEco\Yves\Payone\Form\KlarnaSubForm;
 
 class KlarnaDataProvider implements StepEngineFormDataProviderInterface
@@ -42,16 +44,16 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     protected const PAY_NOW_WIDGET_PAY_METHOD_CODE = 'pay_now';
 
     /**
-     * @var \Spryker\Shared\Kernel\Store
+     * @var \SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface
      */
-    protected $store;
+    protected $storeClient;
 
     /**
-     * @param \Spryker\Shared\Kernel\Store $store
+     * @param \SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface $storeClient
      */
-    public function __construct(Store $store)
+    public function __construct(PayoneToStoreClientInterface $storeClient)
     {
-        $this->store = $store;
+        $this->storeClient = $storeClient;
     }
 
     /**
@@ -81,6 +83,9 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     {
         $billingAddress = $quoteTransfer->getBillingAddress();
 
+        $currentStoreCountryList = $this->storeClient->getCurrentStore()->getCountries();
+        $firstCurrentStoreCountry = reset($currentStoreCountryList);
+
         return [
             KlarnaSubForm::PAY_METHOD_CHOICES => $this->getPayMethods(),
             KlarnaSubForm::BILLING_ADDRESS_DATA => [
@@ -90,7 +95,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
                 static::STREET_ADDRESS => implode(self::ADDRESS_SEPARATOR, [$billingAddress->getAddress1(), $billingAddress->getAddress2()]),
                 static::POSTAL_CODE => $billingAddress->getZipCode(),
                 static::CITY => $billingAddress->getCity(),
-                static::COUNTRY => $this->store->getCurrentCountry(),
+                static::COUNTRY => $firstCurrentStoreCountry,
                 static::PHONE => $billingAddress->getPhone(),
             ],
             KlarnaSubForm::CUSTOMER_DATA => [

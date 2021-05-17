@@ -57,10 +57,11 @@ export default class PayoneKlarna extends Component {
                         };
 
                         this.availablePaymentArray.push(this.availablePayment);
+
+                        option.removeAttribute('disabled');
                         return;
                     }
 
-                    option.setAttribute('disabled', 'disabled');
                 })
                 .catch((e: Error) => {
                     console.log(e.message);

@@ -13,9 +13,13 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\KlarnaGenericPaymentResponseContainer;
+use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 
 class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMethodSenderInterface
 {
@@ -35,9 +39,9 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
     protected $payoneRequestProductDataMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface
      */
-    protected $paymentMapperReader;
+    protected $klarnaPaymentMapper;
 
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
@@ -45,24 +49,40 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
     protected $standardParameter;
 
     /**
+     * @var \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface
+     */
+    protected $sequenceNumberProvider;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator
+     */
+    protected $urlHmacGenerator;
+
+    /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper $standartParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface $klarnaPaymentMapper
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
+     * @param \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface $sequenceNumberProvider
+     * @param \SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator $urlHmacGenerator
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         StandartParameterMapper $standartParameterMapper,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
-        PaymentMapperReader $paymentMapperReader,
-        PayoneStandardParameterTransfer $standardParameter
+        KlarnaPaymentMapperInterface $klarnaPaymentMapper,
+        PayoneStandardParameterTransfer $standardParameter,
+        SequenceNumberProviderInterface $sequenceNumberProvider,
+        UrlHmacGenerator $urlHmacGenerator
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standartParameterMapper = $standartParameterMapper;
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
-        $this->paymentMapperReader = $paymentMapperReader;
+        $this->klarnaPaymentMapper = $klarnaPaymentMapper;
         $this->standardParameter = $standardParameter;
+        $this->sequenceNumberProvider = $sequenceNumberProvider;
+        $this->urlHmacGenerator = $urlHmacGenerator;
     }
 
     /**
@@ -73,12 +93,12 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
     public function sendKlarnaStartSessionRequest(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
     ): PayoneKlarnaStartSessionResponseTransfer {
-        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper $paymentMethodMapper */
-        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(
-            PayoneApiConstants::PAYMENT_METHOD_KLARNA
-        );
+        $this->klarnaPaymentMapper->setStandardParameter($this->standardParameter);
+        $this->klarnaPaymentMapper->setSequenceNumberProvider($this->sequenceNumberProvider);
+        $this->klarnaPaymentMapper->setUrlHmacGenerator($this->urlHmacGenerator);
 
-        $klarnaGenericPaymentContainer = $paymentMethodMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequestTransfer);
+        $klarnaGenericPaymentContainer = $this->klarnaPaymentMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequestTransfer);
+
         $this->standartParameterMapper->setStandardParameter($klarnaGenericPaymentContainer, $this->standardParameter);
         $this->payoneRequestProductDataMapper->mapData($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaGenericPaymentContainer);

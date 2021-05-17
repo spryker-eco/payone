@@ -410,8 +410,10 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createExecutionAdapter(),
             $this->createStandartParameterMapper(),
             $this->createPayoneRequestProductDataMapper(),
-            $this->createPaymentMapperReader(),
-            $this->getStandardParameter()
+            $this->createKlarnaPaymentMapper($this->getStore()),
+            $this->getStandardParameter(),
+            $this->createSequenceNumberProvider(),
+            $this->createUrlHmacGenerator(),
         );
     }
 

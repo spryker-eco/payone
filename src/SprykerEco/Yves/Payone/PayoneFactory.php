@@ -12,6 +12,7 @@ use Spryker\Yves\Kernel\AbstractFactory;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientInterface;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface;
 use SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\CashOnDeliverySubForm;
@@ -133,7 +134,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createKlarnaDataProvider(): StepEngineFormDataProviderInterface
     {
-        return new KlarnaDataProvider($this->getStoreConfig());
+        return new KlarnaDataProvider($this->getClientStore());
     }
 
     /**
@@ -398,11 +399,11 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Shared\Kernel\Store
+     * @return \SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface
      */
-    public function getStoreConfig(): Store
+    public function getClientStore(): PayoneToStoreClientInterface
     {
-        return $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
+        return $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_STORE);
     }
 
     /**
