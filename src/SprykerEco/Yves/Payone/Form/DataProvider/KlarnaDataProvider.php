@@ -106,9 +106,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     protected function getPayMethods(): array
     {
         return [
-            static::SLICE_IT_PAY_METHOD => static::SLICE_IT_PAY_METHOD_CODE,
             static::PAY_LATER_PAY_METHOD => static::PAY_LATER_PAY_METHOD_CODE,
-            static::PAY_NOW_PAY_METHOD => static::PAY_NOW_PAY_METHOD_CODE,
         ];
     }
 

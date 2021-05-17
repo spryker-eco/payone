@@ -5,7 +5,7 @@ declare var Klarna: any;
 import Component from 'ShopUi/models/component';
 import ScriptLoader from 'ShopUi/components/molecules/script-loader/script-loader';
 
-const TOKEN_CONTAINER_ID = 'paymentForm_payoneKlarna_payMethodTokens';
+const TOKEN_CONTAINER_ID = 'paymentForm_payoneKlarna_payMethodToken';
 const IS_VALID_PARAM = 'is_valid';
 const GET_TOKEN_URL = '/payone/get-token';
 const CONTAINER_ID = '#klarna_container';

@@ -197,7 +197,7 @@ class KlarnaTest extends AbstractMethodMapperTest
         $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
 
         $paymentPayoneDetail->method('getPayMethod')->willReturn(static::PAY_METHOD_TYPE);
-        $paymentPayoneDetail->method('getTokenList')->willReturn('token');
+        $paymentPayoneDetail->method('getToken')->willReturn('token');
 
         return $paymentPayoneDetail;
     }

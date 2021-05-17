@@ -14,9 +14,9 @@ use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 interface KlarnaPaymentMapperInterface extends PaymentMethodMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaGenericPaymentContainer
      */
-    public function mapPaymentToKlarnaGenericPaymentContainer(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): ContainerInterface;
+    public function mapPaymentToKlarnaGenericPaymentContainer(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): ContainerInterface;
 }

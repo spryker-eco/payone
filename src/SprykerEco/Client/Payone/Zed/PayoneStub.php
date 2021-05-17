@@ -162,14 +162,14 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
-     * @uses \SprykerEco\Yves\Payone\Controller\KlarnaController::getTokenAction()
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::startKlarnaSessionAction()
      *
-     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function startKlarnaSession(PayoneKlarnaStartSessionRequestTransfer $klarnaStartSessionRequestTransfer): PayoneKlarnaStartSessionResponseTransfer
+    public function startKlarnaSession(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): PayoneKlarnaStartSessionResponseTransfer
     {
-        return $this->zedStub->call('/payone/gateway/start-klarna-session', $klarnaStartSessionRequestTransfer);
+        return $this->zedStub->call('/payone/gateway/start-klarna-session', $payoneKlarnaStartSessionRequestTransfer);
     }
 }

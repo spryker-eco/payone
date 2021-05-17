@@ -172,7 +172,7 @@ class PayoneHandler implements PayoneHandlerInterface
         } elseif ($paymentSelection == PaymentTransfer::PAYONE_KLARNA) {
             /** @var \Generated\Shared\Transfer\PayoneKlarnaTransfer $payonePaymentTransfer */
             $paymentDetailTransfer->setPayMethod($payonePaymentTransfer->getPayMethod());
-            $paymentDetailTransfer->setTokenList($payonePaymentTransfer->getPayMethodTokens());
+            $paymentDetailTransfer->setToken($payonePaymentTransfer->getPayMethodToken());
         }
 
         $payonePaymentTransfer = new PayonePaymentTransfer();
