@@ -168,8 +168,9 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function startKlarnaSession(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): PayoneKlarnaStartSessionResponseTransfer
-    {
+    public function startKlarnaSession(
+        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+    ): PayoneKlarnaStartSessionResponseTransfer {
         return $this->zedStub->call('/payone/gateway/start-klarna-session', $payoneKlarnaStartSessionRequestTransfer);
     }
 }

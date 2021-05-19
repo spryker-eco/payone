@@ -86,7 +86,7 @@ class CashOnDelivery extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer|\SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity): AbstractAuthorizationContainer
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);

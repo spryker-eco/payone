@@ -60,11 +60,11 @@ class PayonePartialRefundMethodSender extends AbstractPayoneMethodSender impleme
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,

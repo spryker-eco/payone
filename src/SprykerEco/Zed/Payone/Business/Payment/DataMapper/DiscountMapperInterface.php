@@ -11,7 +11,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 
 interface DiscountMapperInterface
 {
-    /*
+    /**
      * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer $discountContainer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *

@@ -1,8 +1,11 @@
 <?php
 
-namespace SprykerEco\Yves\Payone\Dependency\Client;
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
 
-use Spryker\Client\Store\StoreClientInterface;
+namespace SprykerEco\Yves\Payone\Dependency\Client;
 
 class PayoneToStoreClientBridge implements PayoneToStoreClientInterface
 {
@@ -11,7 +14,10 @@ class PayoneToStoreClientBridge implements PayoneToStoreClientInterface
      */
     protected $storeClient;
 
-    public function __construct(StoreClientInterface $storeClient)
+    /**
+     * @param \Spryker\Client\Store\StoreClientInterface $storeClient
+     */
+    public function __construct($storeClient)
     {
         $this->storeClient = $storeClient;
     }

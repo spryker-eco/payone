@@ -18,5 +18,7 @@ interface KlarnaPaymentMapperInterface extends PaymentMethodMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaGenericPaymentContainer
      */
-    public function mapPaymentToKlarnaGenericPaymentContainer(PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer): ContainerInterface;
+    public function mapPaymentToKlarnaGenericPaymentContainer(
+        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+    ): ContainerInterface;
 }

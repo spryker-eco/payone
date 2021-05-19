@@ -23,6 +23,7 @@ use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributor;
 use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HashProvider;
+use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Mode\ModeDetector;
 use SprykerEco\Zed\Payone\Business\Order\OrderManager;
@@ -148,7 +149,6 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         $paymentManager = new PayoneAuthorizeMethodSender(
             $this->getQueryContainer(),
             $this->createPaymentMapperReader(),
-            $this->getStandardParameter(),
             $this->createPayoneRequestProductDataMapper(),
             $this->createPayoneBaseAuthorizeSender(),
         );
@@ -334,15 +334,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->getStandardParameter(),
-            $this->createKeyHashGenerator(),
-            $this->createModeDetector(),
-            $this->getRepository(),
-            $this->getEntityManager(),
-            $this->createOrderPriceDistributor(),
             $this->createStandartParameterMapper(),
-            $this->createProductsMapper(),
-            $this->createShipmentMapper(),
-            $this->createDiscountMapper(),
             $this->createPaymentMapperReader(),
         );
 
@@ -350,7 +342,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneLogsReceiverInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PayoneLogsReceiverInterface
      */
     public function createLogsReceiver(): PayoneLogsReceiverInterface
     {
@@ -402,7 +394,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PayoneKlarnaStartSessionMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneKlarnaStartSessionMethodSenderInterface
      */
     public function createPayoneKlarnaStartSessionMethodSender(): PayoneKlarnaStartSessionMethodSenderInterface
     {
@@ -504,7 +496,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
-    public function createUrlHmacGenerator()
+    public function createUrlHmacGenerator(): HmacGeneratorInterface
     {
         return new UrlHmacGenerator();
     }

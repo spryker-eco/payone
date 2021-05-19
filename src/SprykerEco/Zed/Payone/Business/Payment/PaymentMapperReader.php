@@ -20,7 +20,7 @@ class PaymentMapperReader
     protected $sequenceNumberProvider;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator
+     * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
     protected $urlHmacGenerator;
 

@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Payment\Hook;
 
+use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
@@ -18,6 +19,9 @@ class PostSaveHook implements PostSaveHookInterface
      */
     protected $queryContainer;
 
+    /**
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     */
     public function __construct(PayoneQueryContainerInterface $queryContainer)
     {
         $this->queryContainer = $queryContainer;

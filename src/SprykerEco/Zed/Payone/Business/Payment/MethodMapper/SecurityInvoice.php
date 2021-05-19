@@ -76,7 +76,7 @@ class SecurityInvoice extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity): AuthorizationContainerInterface
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);

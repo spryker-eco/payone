@@ -59,7 +59,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaPreAuthorizationContainer
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity): ContainerInterface
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
     {
         $preAuthorizationContainer = new KlarnaPreAuthorizationContainer();
         $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
@@ -235,37 +235,12 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $personalContainer = new PersonalContainer();
 
         $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
+        $personalContainer->setCompany(null);
+        $personalContainer->setEmail($paymentEntity->getSpySalesOrder()->getEmail());
 
         $currentRequest = $this->requestStack->getCurrentRequest();
         $personalContainer->setIp($currentRequest->getClientIp());
 
         return $personalContainer;
-    }
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer $personalContainer
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     *
-     * @return void
-     */
-    protected function mapBillingAddressToPersonalContainer(
-        PersonalContainer $personalContainer,
-        SpyPaymentPayone $paymentEntity
-    ): void {
-        $orderEntity = $paymentEntity->getSpySalesOrder();
-        $billingAddressEntity = $orderEntity->getBillingAddress();
-        $personalContainer->setCountry($billingAddressEntity->getCountry()->getIso2Code());
-        $personalContainer->setFirstName($billingAddressEntity->getFirstName());
-        $personalContainer->setLastName($billingAddressEntity->getLastName());
-        $personalContainer->setSalutation($billingAddressEntity->getSalutation());
-        $personalContainer->setStreet(implode(self::STREET_ADDRESS_SEPARATOR, [$billingAddressEntity->getAddress1(), $billingAddressEntity->getAddress2()]));
-        $personalContainer->setAddressAddition($billingAddressEntity->getAddress3());
-        $personalContainer->setZip($billingAddressEntity->getZipCode());
-        $personalContainer->setCity($billingAddressEntity->getCity());
-        $personalContainer->setEmail($billingAddressEntity->getEmail());
-        $personalContainer->setTelephoneNumber($billingAddressEntity->getPhone());
-        $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
-        $personalContainer->setPersonalId($orderEntity->getCustomerReference());
-        $personalContainer->setEmail($orderEntity->getEmail());
     }
 }
