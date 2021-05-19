@@ -68,6 +68,20 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     }
 
     /**
+    * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+    * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+    *
+    * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaPreAuthorizationContainer
+    */
+    public function mapKlarnaPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity, QuoteTransfer $quoteTransfer): ContainerInterface
+    {
+        $preAuthorizationContainer = new KlarnaPreAuthorizationContainer();
+        $this->mapKlarnaPaymentToAbstractAuthorization($paymentEntity, $quoteTransfer, $preAuthorizationContainer);
+
+        return $preAuthorizationContainer;
+    }
+
+    /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
@@ -208,6 +222,49 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
 
         $paydataContainer = new PaydataContainer();
         $paydataContainer->setAuthorizationToken($paymentDetailEntity->getToken());
+        $authorizationContainer->setPaydata($paydataContainer);
+
+        $personalContainer = $this->buildPersonalContainer($paymentEntity);
+        $authorizationContainer->setPersonalData($personalContainer);
+        $orderReference = $paymentEntity->getSpySalesOrder()->getOrderReference();
+        $authorizationContainer->setRedirect($this->createRedirectContainer($orderReference));
+
+        $shippingAddressEntity = $paymentEntity->getSpySalesOrder()->getShippingAddress();
+
+        if ($shippingAddressEntity) {
+            $shippingContainer = new ShippingContainer();
+            $this->mapShippingAddressToShippingContainer($shippingContainer, $shippingAddressEntity);
+        }
+
+        return $authorizationContainer;
+    }
+
+    /**
+    * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+    * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+    * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractPayoneKlarnaAuthorizationContainer $authorizationContainer
+    *
+    * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractPayoneKlarnaAuthorizationContainer
+    */
+    protected function mapKlarnaPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        QuoteTransfer $quoteTransfer,
+        AbstractPayoneKlarnaAuthorizationContainer $authorizationContainer
+    ): ContainerInterface {
+        $authorizationContainer->setAid($this->getStandardParameter()->getAid());
+
+        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+        $payoneKlarnaTransfer = $quoteTransfer->getPayment()->getPayoneKlarna();
+
+        $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
+        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
+        $authorizationContainer->setFinancingType($payoneKlarnaTransfer->getPayMethod());
+
+        $authorizationContainer->setReference($paymentEntity->getReference());
+
+        $paydataContainer = new PaydataContainer();
+        $paydataContainer->setAuthorizationToken($payoneKlarnaTransfer->getPayMethodToken());
         $authorizationContainer->setPaydata($paydataContainer);
 
         $personalContainer = $this->buildPersonalContainer($paymentEntity);

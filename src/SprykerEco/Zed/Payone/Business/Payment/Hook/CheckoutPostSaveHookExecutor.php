@@ -119,6 +119,11 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
         QuoteTransfer $quoteTransfer
     ): AuthorizationContainerInterface {
         if (method_exists($paymentMethodMapper, 'mapPaymentToPreAuthorization')) {
+            if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
+
+                return $paymentMethodMapper->mapKlarnaPaymentToPreAuthorization($paymentEntity, $quoteTransfer);
+            }
+
             return $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity);
         }
 
