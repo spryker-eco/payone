@@ -1,11 +1,9 @@
 name: CI
 
-on:
-    push:
-        branches:
-            - 'master'
-    pull_request:
-    workflow_dispatch:
+on: [
+    push,
+    workflow_dispatch
+]
 
 jobs:
     validation:
@@ -42,11 +40,11 @@ jobs:
             - uses: actions/checkout@v2
 
             - name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '7.3'
-                    extensions: mbstring, intl, bcmath
-                    coverage: none
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '7.3'
+                  extensions: mbstring, intl, bcmath
+                  coverage: none
 
             - name: Composer Install
               run: composer install --prefer-dist --no-interaction --profile
