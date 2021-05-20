@@ -54,5 +54,3 @@ jobs:
             - name: Composer Install prefer lowest tool
               run: composer require --dev dereuromark/composer-prefer-lowest;
 
-            - name: Run validation
-              run: vendor/bin/validate-prefer-lowest -m
