@@ -182,7 +182,7 @@ class PayoneRouteProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @uses \SprykerEco\Yves\Payone\Controller\KlarnaController::createPayoneKlarnaStartSessionRequestTransfer()
+     * @uses \SprykerEco\Yves\Payone\Controller\KlarnaController::getTokenAction()
      *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *

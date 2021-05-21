@@ -19,7 +19,7 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
 {
     /**
      * {@inheritDoc}
-     * - Creates KlarnaSubForm subform.
+     * - Creates `KlarnaSubForm` subform.
      *
      * @api
      *
@@ -32,7 +32,7 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
 
     /**
      * {@inheritDoc}
-     * - Creates KlarnaSubFormDataProvider data provider.
+     * - Creates `KlarnaSubFormDataProvider` data provider.
      *
      * @api
      *

@@ -68,7 +68,7 @@ interface PayoneFacadeInterface
      *
      * @api
      *
-     * @param int $idPayment
+     * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */

@@ -31,12 +31,12 @@ class KlarnaController extends AbstractController
     public function getTokenAction(Request $request): JsonResponse
     {
         $payoneKlarnaStartSessionRequestTransfer = $this->createPayoneKlarnaStartSessionRequestTransfer($request);
-        $payoneKlarnaSessionResponse = $this->getClient()->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);
+        $payoneKlarnaStartSessionResponseTransfer = $this->getClient()->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);
 
         return $this->jsonResponse([
-            self::RESPONSE_PARAMETER_IS_VALID => $payoneKlarnaSessionResponse->getIsSuccessful(),
-            self::RESPONSE_PARAMETER_ERROR_MESSAGE => $payoneKlarnaSessionResponse->getErrorMessage(),
-            self::RESPONSE_PARAMETER_CLIENT_TOKEN => $payoneKlarnaSessionResponse->getToken(),
+            self::RESPONSE_PARAMETER_IS_VALID => $payoneKlarnaStartSessionResponseTransfer->getIsSuccessful(),
+            self::RESPONSE_PARAMETER_ERROR_MESSAGE => $payoneKlarnaStartSessionResponseTransfer->getErrorMessage(),
+            self::RESPONSE_PARAMETER_CLIENT_TOKEN => $payoneKlarnaStartSessionResponseTransfer->getToken(),
         ]);
     }
 
@@ -47,10 +47,11 @@ class KlarnaController extends AbstractController
      */
     protected function createPayoneKlarnaStartSessionRequestTransfer(Request $request): PayoneKlarnaStartSessionRequestTransfer
     {
-        $payoneKlarnaStartSessionRequestTransfer = new PayoneKlarnaStartSessionRequestTransfer();
         $quoteTransfer = $this->getFactory()->getQuoteClient()->getQuote();
-        $payoneKlarnaStartSessionRequestTransfer->setQuote($quoteTransfer);
         $payMethod = $request->request->get(self::REQUEST_PARAMETER_PAY_METHOD);
+
+        $payoneKlarnaStartSessionRequestTransfer = new PayoneKlarnaStartSessionRequestTransfer();
+        $payoneKlarnaStartSessionRequestTransfer->setQuote($quoteTransfer);
         $payoneKlarnaStartSessionRequestTransfer->setPayMethod($payMethod);
 
         return $payoneKlarnaStartSessionRequestTransfer;

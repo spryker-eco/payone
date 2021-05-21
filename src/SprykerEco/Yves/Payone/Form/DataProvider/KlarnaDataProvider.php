@@ -114,7 +114,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     protected function getKlarnaPayMethods(): array
     {

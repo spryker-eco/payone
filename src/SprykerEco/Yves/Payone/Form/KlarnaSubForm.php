@@ -20,13 +20,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class KlarnaSubForm extends AbstractPayoneSubForm
 {
-    protected const PAYMENT_METHOD = 'klarna';
-    protected const FIELD_PAY_METHOD_TYPE = 'payMethod';
     public const PAY_METHOD_CHOICES = 'pay_methods';
     public const WIDGET_PAY_METHODS = 'widget_pay_methods';
-    protected const FIELD_PAY_METHOD_TOKEN = 'payMethodToken';
     public const BILLING_ADDRESS_DATA = 'billing_address_data';
     public const CUSTOMER_DATA = 'customer_data';
+    protected const PAYMENT_METHOD = 'klarna';
+    protected const FIELD_PAY_METHOD_TYPE = 'payMethod';
+    protected const FIELD_PAY_METHOD_TOKEN = 'payMethodToken';
     protected const FORM_TEMPLATE_PATH = '%s/%s';
 
     /**

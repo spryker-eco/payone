@@ -8,6 +8,8 @@
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
 use Generated\Shared\Transfer\DebitResponseTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Spryker\Shared\Kernel\Container\GlobalContainer;
 use Spryker\Zed\Kernel\Container;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
@@ -25,6 +27,10 @@ use SprykerEcoTest\Zed\Payone\PayoneZedTester;
 class PayoneDebitTest extends AbstractBusinessTest
 {
     public const EXPECTED_TXID = 'testtxid';
+    protected const FAKE_PAYMENT_METHOD = 'payment.payone.e_wallet';
+    protected const FAKE_REFERENCE = 'reference';
+    protected const PAYMENT_AMOUT = 10;
+    protected const PAYMENT_CURRENCY = 'EUR';
 
     /**
      * @var \SprykerEcoTest\Zed\Payone\PayoneZedTester
@@ -111,6 +117,10 @@ class PayoneDebitTest extends AbstractBusinessTest
     protected function createQueryContainerMock(): PayoneQueryContainer
     {
         $persistenceFactory = new PayonePersistenceFactory();
+
+        $saveOrderTransfer = $this->tester->createOrder();
+        $this->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
+
         $paymentPayoneQuery = $persistenceFactory->createPaymentPayoneQuery()->lastCreatedFirst();
 
         $queryContainerMock = $this->createPartialMock(
@@ -123,5 +133,26 @@ class PayoneDebitTest extends AbstractBusinessTest
         $queryContainerMock->method('getFactory')->willReturn($persistenceFactory);
 
         return $queryContainerMock;
+    }
+
+    /**
+     * @param int $idSalesOrder
+     *
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
+     */
+    public function createPaymentPayone(int $idSalesOrder): SpyPaymentPayone
+    {
+        $spyPaymentPayoneDetail = new SpyPaymentPayoneDetail();
+        $spyPaymentPayoneDetail->setAmount(static::PAYMENT_AMOUT);
+        $spyPaymentPayoneDetail->setCurrency(static::PAYMENT_CURRENCY);
+
+        $paymentPayoneEntity = (new SpyPaymentPayone())
+            ->setFkSalesOrder($idSalesOrder)
+            ->setPaymentMethod(static::FAKE_PAYMENT_METHOD)
+            ->setReference(static::FAKE_REFERENCE)
+            ->setSpyPaymentPayoneDetail($spyPaymentPayoneDetail);
+        $paymentPayoneEntity->save();
+
+        return $paymentPayoneEntity;
     }
 }
