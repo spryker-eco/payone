@@ -21,16 +21,17 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ExpenseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
-class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implements PayonePartialCaptureMethodSenderInterface
+class PayonePartialCaptureMethodSender extends AbstractPayoneRequestSender implements PayonePartialCaptureMethodSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
@@ -46,11 +47,6 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
     protected $standardParameter;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
-     */
-    protected $registeredMethodMappers;
 
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
@@ -78,38 +74,45 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
     protected $shipmentMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
     protected $paymentMapperReader;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface
+     * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ExpenseMapperInterface
      */
-    protected $orderHandlingMapper;
+    protected $expenseMapper;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapperInterface
+     */
+    protected $captureResponseMapper;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface $orderHandlingMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ExpenseMapperInterface $expenseMapper
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface $shipmentMapper
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapperInterface $captureResponseMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperReader $paymentMapperReader,
-        OrderHandlingMapperInterface $orderHandlingMapper,
+        PaymentMapperReaderInterface $paymentMapperReader,
+        ExpenseMapperInterface $expenseMapper,
         PayoneStandardParameterTransfer $standardParameter,
         PayoneRepositoryInterface $payoneRepository,
         PayoneEntityManagerInterface $payoneEntityManager,
         OrderPriceDistributorInterface $orderPriceDistributor,
         StandartParameterMapperInterface $standartParameterMapper,
-        ShipmentMapperInterface $shipmentMapper
+        ShipmentMapperInterface $shipmentMapper,
+        CaptureResponseMapperInterface $captureResponseMapper
     ) {
         parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
@@ -119,7 +122,8 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
         $this->orderPriceDistributor = $orderPriceDistributor;
         $this->standartParameterMapper = $standartParameterMapper;
         $this->shipmentMapper = $shipmentMapper;
-        $this->orderHandlingMapper = $orderHandlingMapper;
+        $this->expenseMapper = $expenseMapper;
+        $this->captureResponseMapper = $captureResponseMapper;
     }
 
     /**
@@ -143,11 +147,11 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
 
         $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
-        $requestContainer = $this->shipmentMapper->prepareShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->shipmentMapper->mapShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
 
         $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
-        $requestContainer = $this->orderHandlingMapper->prepareOrderHandling($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->expenseMapper->mapExpenses($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
 
         $businessContainer = new BusinessContainer();
         $businessContainer->setSettleAccount(PayoneApiConstants::SETTLE_ACCOUNT_YES);
@@ -167,9 +171,7 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
             $this->getPartialCaptureStatus($responseContainer)
         );
 
-        $responseMapper = new CaptureResponseMapper();
-
-        return $responseMapper->getCaptureResponseTransfer($responseContainer);
+        return $this->captureResponseMapper->getCaptureResponseTransfer($responseContainer);
     }
 
     /**
@@ -178,7 +180,7 @@ class PayonePartialCaptureMethodSender extends AbstractPayoneMethodSender implem
      *
      * @return void
      */
-    protected function updateApiLogAfterCapture(SpyPaymentPayoneApiLog $apiLogEntity, CaptureResponseContainer $responseContainer)
+    protected function updateApiLogAfterCapture(SpyPaymentPayoneApiLog $apiLogEntity, CaptureResponseContainer $responseContainer): void
     {
         $apiLogEntity->setStatus($responseContainer->getStatus());
         $apiLogEntity->setTransactionId($responseContainer->getTxid());

@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\Checker;
 
 use Generated\Shared\Transfer\CreditCardCheckResponseTransfer;
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
@@ -13,10 +13,11 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 
-class PayoneCreditCardCheckMethodSender implements PayoneCreditCardCheckMethodSenderInterface
+class PayoneCreditCardChecker implements PayoneCreditCardCheckerInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
@@ -29,36 +30,39 @@ class PayoneCreditCardCheckMethodSender implements PayoneCreditCardCheckMethodSe
     protected $standardParameter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
-     */
-    protected $registeredMethodMappers;
-
-    /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
     protected $paymentMapperReader;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapperInterface
+     */
+    protected $creditCardCheckResponseMapper;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapperInterface $creditCardCheckResponseMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper,
-        PaymentMapperReader $paymentMapperReader
+        PaymentMapperReaderInterface $paymentMapperReader,
+        CreditCardCheckResponseMapperInterface $creditCardCheckResponseMapper
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->standartParameterMapper = $standartParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;
+        $this->creditCardCheckResponseMapper = $creditCardCheckResponseMapper;
     }
 
     /**
@@ -77,9 +81,6 @@ class PayoneCreditCardCheckMethodSender implements PayoneCreditCardCheckMethodSe
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new CreditCardCheckResponseContainer($rawResponse);
 
-        $responseMapper = new CreditCardCheckResponseMapper();
-        $responseTransfer = $responseMapper->getCreditCardCheckResponseTransfer($responseContainer);
-
-        return $responseTransfer;
+        return $this->creditCardCheckResponseMapper->getCreditCardCheckResponseTransfer($responseContainer);
     }
 }

@@ -39,9 +39,9 @@ class StandartParameterMapper implements StandartParameterMapperInterface
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      *
-     * @return void
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function setStandardParameter(AbstractRequestContainer $container, PayoneStandardParameterTransfer $standardParameter): void
+    public function setStandardParameter(AbstractRequestContainer $container, PayoneStandardParameterTransfer $standardParameter): AbstractRequestContainer
     {
         $container->setApiVersion(PayoneApiConstants::API_VERSION_3_9);
         $container->setEncoding($standardParameter->getEncoding());
@@ -53,5 +53,7 @@ class StandartParameterMapper implements StandartParameterMapperInterface
         $container->setIntegratorVersion(PayoneApiConstants::INTEGRATOR_VERSION_3_0_0);
         $container->setSolutionName(PayoneApiConstants::SOLUTION_NAME_SPRYKER);
         $container->setSolutionVersion(PayoneApiConstants::SOLUTION_VERSION_3_0_0);
+
+        return $container;
     }
 }

@@ -14,13 +14,14 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-class PayoneRefundMethodSender extends AbstractPayoneMethodSender implements PayoneRefundMethodSenderInterface
+class PayoneRefundMethodSender extends AbstractPayoneRequestSender implements PayoneRefundMethodSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
@@ -31,11 +32,6 @@ class PayoneRefundMethodSender extends AbstractPayoneMethodSender implements Pay
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
     protected $standardParameter;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
-     */
-    protected $registeredMethodMappers;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface
@@ -53,22 +49,29 @@ class PayoneRefundMethodSender extends AbstractPayoneMethodSender implements Pay
     protected $payoneRequestProductDataMapper;
 
     /**
+     * @var \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface
+     */
+    protected $refundResponseMapper;
+
+    /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface $payoneRequestProductDataMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperReader $paymentMapperReader,
+        PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         OrderPriceDistributorInterface $orderPriceDistributor,
         StandartParameterMapperInterface $standartParameterMapper,
-        PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
+        PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
+        RefundResponseMapperInterface $refundResponseMapper
     ) {
         parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
@@ -76,6 +79,7 @@ class PayoneRefundMethodSender extends AbstractPayoneMethodSender implements Pay
         $this->orderPriceDistributor = $orderPriceDistributor;
         $this->standartParameterMapper = $standartParameterMapper;
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
+        $this->refundResponseMapper = $refundResponseMapper;
     }
 
     /**
@@ -96,7 +100,7 @@ class PayoneRefundMethodSender extends AbstractPayoneMethodSender implements Pay
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
         $requestContainer->setAmount(0 - $paymentEntity->getSpyPaymentPayoneDetail()->getAmount());
-        $requestContainer = $this->payoneRequestProductDataMapper->mapData($refundTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($refundTransfer->getOrder(), $requestContainer);
 
         $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
@@ -107,8 +111,7 @@ class PayoneRefundMethodSender extends AbstractPayoneMethodSender implements Pay
 
         $this->updateApiLogAfterRefund($apiLogEntity, $responseContainer);
 
-        $responseMapper = new RefundResponseMapper();
-        $responseTransfer = $responseMapper->getRefundResponseTransfer($responseContainer);
+        $responseTransfer = $this->refundResponseMapper->getRefundResponseTransfer($responseContainer);
 
         return $responseTransfer;
     }
@@ -119,7 +122,7 @@ class PayoneRefundMethodSender extends AbstractPayoneMethodSender implements Pay
      *
      * @return void
      */
-    protected function updateApiLogAfterRefund(SpyPaymentPayoneApiLog $apiLogEntity, RefundResponseContainer $responseContainer)
+    protected function updateApiLogAfterRefund(SpyPaymentPayoneApiLog $apiLogEntity, RefundResponseContainer $responseContainer): void
     {
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setStatus($responseContainer->getStatus());

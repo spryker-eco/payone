@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\DataMapper;
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 
-interface OrderHandlingMapperInterface
+interface ExpenseMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -18,5 +18,5 @@ interface OrderHandlingMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function prepareOrderHandling(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer;
+    public function mapExpenses(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer;
 }

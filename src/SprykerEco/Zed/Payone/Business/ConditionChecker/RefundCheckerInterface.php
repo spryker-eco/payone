@@ -9,12 +9,12 @@ namespace SprykerEco\Zed\Payone\Business\ConditionChecker;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-interface IsPaymentDataRequiredCheckerInterface
+interface RefundCheckerInterface
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isPaymentDataRequired(OrderTransfer $orderTransfer): bool;
+    public function isRefundPossible(OrderTransfer $orderTransfer): bool;
 }

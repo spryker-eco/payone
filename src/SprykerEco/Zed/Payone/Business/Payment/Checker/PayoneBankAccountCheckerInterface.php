@@ -5,11 +5,11 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\Checker;
 
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 
-interface PayoneBankAccountCheckMethodSenderInterface
+interface PayoneBankAccountCheckerInterface
 {
     /**
      * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer

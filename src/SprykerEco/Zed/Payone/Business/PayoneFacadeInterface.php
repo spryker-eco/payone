@@ -72,7 +72,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment(int $idSalesOrder): AuthorizationResponseTransfer;
+    public function preAuthorizePayment($idSalesOrder): AuthorizationResponseTransfer;
 
     /**
      * Specification:
@@ -110,7 +110,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer): RefundResponseTransfer;
+    public function refundPayment(PayoneRefundTransfer $refundTransfer);
 
     /**
      * Specification:

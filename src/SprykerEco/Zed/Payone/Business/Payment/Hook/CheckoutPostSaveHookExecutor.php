@@ -13,9 +13,10 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
@@ -28,7 +29,7 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
     protected $queryContainer;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
     protected $paymentMapperReader;
 
@@ -44,13 +45,13 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
      */
     public function __construct(
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperReader $paymentMapperReader,
+        PaymentMapperReaderInterface $paymentMapperReader,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
     ) {
@@ -81,16 +82,13 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 
         if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
-            $this->payoneRequestProductDataMapper->mapData($quoteTransfer, $requestContainer);
+            $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($quoteTransfer, $requestContainer);
         }
 
         $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
 
         if ($responseContainer->getErrorcode()) {
-            $checkoutErrorTransfer = new CheckoutErrorTransfer();
-            $checkoutErrorTransfer->setMessage($responseContainer->getCustomermessage());
-            $checkoutErrorTransfer->setErrorCode($responseContainer->getErrorcode());
-            $checkoutResponse->addError($checkoutErrorTransfer);
+            $checkoutResponse->addError($this->createCheckoutErrorTransfer($responseContainer));
             $checkoutResponse->setIsSuccess(false);
 
             return $checkoutResponse;
@@ -129,5 +127,20 @@ class CheckoutPostSaveHookExecutor implements CheckoutPostSaveHookExecutorInterf
             );
 
         return $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer $responseContainer
+     *
+     * @return \Generated\Shared\Transfer\CheckoutErrorTransfer
+     */
+    protected function createCheckoutErrorTransfer(AuthorizationResponseContainer $responseContainer): CheckoutErrorTransfer
+    {
+        $checkoutErrorTransfer = new CheckoutErrorTransfer();
+
+        $checkoutErrorTransfer->setMessage($responseContainer->getCustomermessage());
+        $checkoutErrorTransfer->setErrorCode($responseContainer->getErrorcode());
+
+        return $checkoutErrorTransfer;
     }
 }

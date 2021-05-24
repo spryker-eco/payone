@@ -5,19 +5,21 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\Reader;
 
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
+use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-class PayoneGetFileMethodSender implements PayoneGetFileMethodSenderInterface
+class PayoneFileReader implements PayoneFileReaderInterface
 {
     public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
@@ -42,17 +44,12 @@ class PayoneGetFileMethodSender implements PayoneGetFileMethodSenderInterface
     protected $hashGenerator;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
-     */
-    protected $registeredMethodMappers;
-
-    /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
     protected $paymentMapperReader;
 
@@ -61,14 +58,14 @@ class PayoneGetFileMethodSender implements PayoneGetFileMethodSenderInterface
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper,
-        PaymentMapperReader $paymentMapperReader
+        PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
@@ -84,22 +81,17 @@ class PayoneGetFileMethodSender implements PayoneGetFileMethodSenderInterface
      */
     public function getFile(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer
     {
-        $responseContainer = new GetFileResponseContainer();
         $paymentEntity = $this->findPaymentByFileReferenceAndCustomerId(
             $getFileTransfer->getReference(),
             $getFileTransfer->getCustomerId()
         );
 
-        if ($paymentEntity) {
-            /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
-            $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
-            $requestContainer = $paymentMethodMapper->mapGetFile($getFileTransfer);
-            $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
-            $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
-            $responseContainer->init($rawResponse);
-        } else {
-            $this->setAccessDeniedError($responseContainer);
+        if (!$paymentEntity) {
+
+            return $this->setAccessDeniedError($getFileTransfer);
         }
+
+        $this->fetchFile($getFileTransfer);
 
         $getFileTransfer->setRawResponse($responseContainer->getRawResponse());
         $getFileTransfer->setStatus($responseContainer->getStatus());
@@ -116,20 +108,42 @@ class PayoneGetFileMethodSender implements PayoneGetFileMethodSenderInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByFileReferenceAndCustomerId($fileReference, $customerId)
+    protected function findPaymentByFileReferenceAndCustomerId($fileReference, $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId)->findOne();
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer $container
+     * @param \Generated\Shared\Transfer\PayoneGetFileTransfer $getFileTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    protected function setAccessDeniedError(AbstractResponseContainer $container)
+    protected function setAccessDeniedError(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer
     {
-        $container->setStatus(PayoneApiConstants::RESPONSE_TYPE_ERROR);
-        $container->setErrormessage(static::ERROR_ACCESS_DENIED_MESSAGE);
-        $container->setCustomermessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+        $getFileTransfer->setStatus(PayoneApiConstants::RESPONSE_TYPE_ERROR);
+        $getFileTransfer->setInternalErrorMessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+        $getFileTransfer->setCustomerErrorMessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+
+        return $getFileTransfer;
+    }
+
+    /**
+     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer\PayoneGetFileTransfer $getFileTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer $responseContainer
+     *
+     * @return  \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer
+     */
+    protected function fetchFile(PayoneGetFileTransfer $getFileTransfer, GetFileResponseContainer $responseContainer): GetFileResponseContainer
+    {
+        $responseContainer = new GetFileResponseContainer();
+
+        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
+        $requestContainer = $paymentMethodMapper->mapGetFile($getFileTransfer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+        $responseContainer->init($rawResponse);
+
+        return $responseContainer;
     }
 }

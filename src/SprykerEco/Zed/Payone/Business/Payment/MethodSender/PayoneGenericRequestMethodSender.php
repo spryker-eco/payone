@@ -57,7 +57,20 @@ class PayoneGenericRequestMethodSender implements PayoneGenericRequestMethodSend
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new GenericPaymentResponseContainer($rawResponse);
+
+        return $this->mapToPayonePaypalExpressCheckoutGenericPaymentResponseTransfer($responseContainer, $rawResponse);
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\GenericPaymentResponseContainer $responseContainer
+     * @param array $rawResponse
+     *
+     * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+     */
+    protected function mapToPayonePaypalExpressCheckoutGenericPaymentResponseTransfer(GenericPaymentResponseContainer $responseContainer, array $rawResponse): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
+    {
         $responseTransfer = new PayonePaypalExpressCheckoutGenericPaymentResponseTransfer();
+
         $responseTransfer->setRedirectUrl($responseContainer->getRedirectUrl());
         $responseTransfer->setWorkOrderId($responseContainer->getWorkOrderId());
         $responseTransfer->setRawResponse(json_encode($rawResponse));

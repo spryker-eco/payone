@@ -10,11 +10,12 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-class PayoneAuthorizeMethodSender extends AbstractPayoneMethodSender implements PayoneAuthorizeMethodSenderInterface
+class PayoneAuthorizeMethodSender extends AbstractPayoneRequestSender implements PayoneAuthorizeMethodSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface
@@ -27,20 +28,28 @@ class PayoneAuthorizeMethodSender extends AbstractPayoneMethodSender implements 
     protected $baseAuthorizeSender;
 
     /**
+     * @var \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface
+     */
+    protected $authorizationResponseMapper;
+
+    /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface $authorizationResponseMapper
      */
     public function __construct(
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperReader $paymentMapperReader,
+        PaymentMapperReaderInterface $paymentMapperReader,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
-        PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
+        PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender,
+        AuthorizationResponseMapperInterface $authorizationResponseMapper
     ) {
         parent::__construct($queryContainer, $paymentMapperReader);
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
         $this->baseAuthorizeSender = $baseAuthorizeSender;
+        $this->authorizationResponseMapper = $authorizationResponseMapper;
     }
 
     /**
@@ -53,12 +62,9 @@ class PayoneAuthorizeMethodSender extends AbstractPayoneMethodSender implements 
         $paymentEntity = $this->getPaymentEntity($orderTransfer->getIdSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
-        $requestContainer = $this->payoneRequestProductDataMapper->mapData($orderTransfer, $requestContainer);
+        $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($orderTransfer, $requestContainer);
         $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
 
-        $responseMapper = new AuthorizationResponseMapper();
-        $responseTransfer = $responseMapper->getAuthorizationResponseTransfer($responseContainer);
-
-        return $responseTransfer;
+        return $this->authorizationResponseMapper->getAuthorizationResponseTransfer($responseContainer);
     }
 }

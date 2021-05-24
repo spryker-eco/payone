@@ -13,10 +13,10 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-abstract class AbstractPayoneMethodSender
+abstract class AbstractPayoneRequestSender
 {
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
@@ -24,17 +24,17 @@ abstract class AbstractPayoneMethodSender
     protected $queryContainer;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
     protected $paymentMapperReader;
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         PayoneQueryContainerInterface $queryContainer,
-        PaymentMapperReader $paymentMapperReader
+        PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->queryContainer = $queryContainer;
         $this->paymentMapperReader = $paymentMapperReader;
@@ -78,7 +78,7 @@ abstract class AbstractPayoneMethodSender
         if ($container instanceof CaptureContainer || $container instanceof RefundContainer || $container instanceof DebitContainer) {
             $entity->setSequenceNumber($container->getSequenceNumber());
         }
-        // Logging request data for debug
+
         $entity->setRawRequest(json_encode($container->toArray()));
         $entity->save();
 

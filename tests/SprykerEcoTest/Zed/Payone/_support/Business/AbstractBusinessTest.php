@@ -38,6 +38,7 @@ use SprykerEco\Zed\Payone\Persistence\PayoneRepository;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 /**
  * @group Functional
@@ -196,6 +197,11 @@ abstract class AbstractBusinessTest extends Test
                     PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
                     PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
                     PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
+                ],
+                PayoneConstants::PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA => [
+                    PayoneApiConstants::PAYMENT_METHOD_E_WALLET,
+                    PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO,
+                    PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
                 ],
             ]
         );

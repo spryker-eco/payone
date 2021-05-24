@@ -5,14 +5,15 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\Reader;
 
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 
-class PayoneGetPaypalExpressCheckoutDetailsMethodSender implements PayoneGetPaypalExpressCheckoutDetailsMethodSenderInterface
+class PayonePaypalExpressCheckoutDetailsReader implements PayonePaypalExpressCheckoutDetailsReaderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
@@ -20,7 +21,7 @@ class PayoneGetPaypalExpressCheckoutDetailsMethodSender implements PayoneGetPayp
     protected $registeredMethodMappers;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
     protected $paymentMapperReader;
 
@@ -30,11 +31,11 @@ class PayoneGetPaypalExpressCheckoutDetailsMethodSender implements PayoneGetPayp
     protected $genericRequestMethodSender;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface $genericRequestMethodSender
      */
     public function __construct(
-        PaymentMapperReader $paymentMapperReader,
+        PaymentMapperReaderInterface $paymentMapperReader,
         PayoneGenericRequestMethodSenderInterface $genericRequestMethodSender
     ) {
         $this->paymentMapperReader = $paymentMapperReader;

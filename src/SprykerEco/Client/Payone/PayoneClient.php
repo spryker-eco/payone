@@ -230,6 +230,6 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
     public function sendKlarnaStartSessionRequest(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
     ): PayoneKlarnaStartSessionResponseTransfer {
-        return $this->getFactory()->createZedStub()->startKlarnaSession($payoneKlarnaStartSessionRequestTransfer);
+        return $this->getFactory()->createZedStub()->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);
     }
 }

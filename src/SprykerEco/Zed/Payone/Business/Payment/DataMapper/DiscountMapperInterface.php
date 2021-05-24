@@ -17,5 +17,5 @@ interface DiscountMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function prepareDiscount($discountContainer, AbstractRequestContainer $container): AbstractRequestContainer;
+    public function mapDiscounts($discountContainer, AbstractRequestContainer $container): AbstractRequestContainer;
 }

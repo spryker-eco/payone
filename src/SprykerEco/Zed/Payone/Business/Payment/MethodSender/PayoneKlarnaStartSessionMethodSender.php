@@ -98,7 +98,7 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
         $klarnaGenericPaymentContainer = $this->klarnaPaymentMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequestTransfer);
 
         $this->standartParameterMapper->setStandardParameter($klarnaGenericPaymentContainer, $this->standardParameter);
-        $this->payoneRequestProductDataMapper->mapData($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
+        $this->payoneRequestProductDataMapper->mapProductData($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaGenericPaymentContainer);
 
         $klarnaGenericPaymentResponseContainer = new KlarnaGenericPaymentResponseContainer($rawResponse);
@@ -106,14 +106,16 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
         $payoneKlarnaStartSessionResponseTransfer = new PayoneKlarnaStartSessionResponseTransfer();
 
         if ($klarnaGenericPaymentResponseContainer->getStatus() === PayoneApiConstants::RESPONSE_TYPE_ERROR) {
-            $payoneKlarnaStartSessionResponseTransfer->setIsSuccessful(false);
-            $payoneKlarnaStartSessionResponseTransfer->setErrorMessage($klarnaGenericPaymentResponseContainer->getErrormessage());
+            $payoneKlarnaStartSessionResponseTransfer
+                ->setIsSuccessful(false)
+                ->setErrorMessage($klarnaGenericPaymentResponseContainer->getErrormessage());
 
             return $payoneKlarnaStartSessionResponseTransfer;
         }
 
-        $payoneKlarnaStartSessionResponseTransfer->setIsSuccessful(true);
-        $payoneKlarnaStartSessionResponseTransfer->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
+        $payoneKlarnaStartSessionResponseTransfer
+            ->setIsSuccessful(true)
+            ->setToken($klarnaGenericPaymentResponseContainer->getClientToken());
 
         return $payoneKlarnaStartSessionResponseTransfer;
     }

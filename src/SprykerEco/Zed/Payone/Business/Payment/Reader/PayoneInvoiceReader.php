@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\Reader;
 
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
@@ -14,10 +14,10 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-class PayoneGetInvoiceMethodSender implements PayoneGetInvoiceMethodSenderInterface
+class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
 {
     public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
@@ -37,33 +37,28 @@ class PayoneGetInvoiceMethodSender implements PayoneGetInvoiceMethodSenderInterf
     protected $standardParameter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
-     */
-    protected $registeredMethodMappers;
-
-    /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
-    protected $paymentMapperManager;
+    protected $paymentMapperReader;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper,
-        PaymentMapperReader $paymentMapperReader
+        PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
@@ -79,22 +74,17 @@ class PayoneGetInvoiceMethodSender implements PayoneGetInvoiceMethodSenderInterf
      */
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
     {
-        $responseContainer = new GetInvoiceResponseContainer();
         $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
             $getInvoiceTransfer->getReference(),
             $getInvoiceTransfer->getCustomerId()
         );
 
-        if ($paymentEntity) {
-            /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice $paymentMethodMapper */
-            $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
-            $requestContainer = $paymentMethodMapper->mapGetInvoice($getInvoiceTransfer);
-            $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
-            $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
-            $responseContainer->init($rawResponse);
-        } else {
-            $this->setAccessDeniedError($responseContainer);
+        if (!$paymentEntity) {
+
+            return $this->setAccessDeniedError($getInvoiceTransfer);
         }
+
+        $responseContainer = $this->fetchInvoice($getInvoiceTransfer);
 
         $getInvoiceTransfer->setRawResponse($responseContainer->getRawResponse());
         $getInvoiceTransfer->setStatus($responseContainer->getStatus());
@@ -110,20 +100,38 @@ class PayoneGetInvoiceMethodSender implements PayoneGetInvoiceMethodSenderInterf
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByInvoiceTitleAndCustomerId($invoiceTitle, $customerId)
+    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId)
     {
         return $this->queryContainer->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer $container
+     * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $getInvoiceTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    protected function setAccessDeniedError(AbstractResponseContainer $container)
+    protected function setAccessDeniedError(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
     {
-        $container->setStatus(PayoneApiConstants::RESPONSE_TYPE_ERROR);
-        $container->setErrormessage(static::ERROR_ACCESS_DENIED_MESSAGE);
-        $container->setCustomermessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+        $getInvoiceTransfer->setStatus(PayoneApiConstants::RESPONSE_TYPE_ERROR);
+        $getInvoiceTransfer->setInternalErrorMessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+        $getInvoiceTransfer->setCustomerErrorMessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+
+        return $getInvoiceTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $getInvoiceTransfer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer $responseContainer
+     */
+    protected function fetchInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer, GetInvoiceResponseContainer $responseContainer): GetInvoiceResponseContainer
+    {
+        /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice $paymentMethodMapper */
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
+        $requestContainer = $paymentMethodMapper->mapGetInvoice($getInvoiceTransfer);
+        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
+        $responseContainer->init($rawResponse);
+
+        return $responseContainer;
     }
 }

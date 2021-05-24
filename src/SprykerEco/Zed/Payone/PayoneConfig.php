@@ -247,4 +247,16 @@ class PayoneConfig extends AbstractBundleConfig
 
         return $settings[PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE];
     }
+
+    /**
+     * @api
+     *
+     * @return string[]
+     */
+    public function getPaymentMethodsWithOptionalPaymentData(): array
+    {
+        $settings = $this->get(PayoneConstants::PAYONE);
+
+        return $settings[PayoneConstants::PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA];
+    }
 }

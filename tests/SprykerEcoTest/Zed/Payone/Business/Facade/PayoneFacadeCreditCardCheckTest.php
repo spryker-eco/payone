@@ -48,7 +48,7 @@ class PayoneFacadeCreditCardCheckTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    public function testBankAccountCheck(): void
+    public function testCreditCardCheck(): void
     {
         //Arrange
         $adapter = new CreditCardCheckAdapterMock();

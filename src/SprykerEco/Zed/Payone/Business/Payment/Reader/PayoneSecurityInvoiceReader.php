@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\Reader;
 
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
@@ -14,10 +14,10 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetSecurityInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-class PayoneGetSecurityInvoiceMethodSender implements PayoneGetSecurityInvoiceMethodSenderInterface
+class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterface
 {
     public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
@@ -37,17 +37,12 @@ class PayoneGetSecurityInvoiceMethodSender implements PayoneGetSecurityInvoiceMe
     protected $standardParameter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
-     */
-    protected $registeredMethodMappers;
-
-    /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
     protected $paymentMapperReader;
 
@@ -56,14 +51,14 @@ class PayoneGetSecurityInvoiceMethodSender implements PayoneGetSecurityInvoiceMe
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader $paymentMapperReader
+     * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standartParameterMapper,
-        PaymentMapperReader $paymentMapperReader
+        PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
@@ -113,7 +108,7 @@ class PayoneGetSecurityInvoiceMethodSender implements PayoneGetSecurityInvoiceMe
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByInvoiceTitleAndCustomerId($invoiceTitle, $customerId)
+    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
     }
@@ -123,7 +118,7 @@ class PayoneGetSecurityInvoiceMethodSender implements PayoneGetSecurityInvoiceMe
      *
      * @return void
      */
-    protected function setAccessDeniedError(AbstractResponseContainer $container)
+    protected function setAccessDeniedError(AbstractResponseContainer $container): void
     {
         $container->setStatus(PayoneApiConstants::RESPONSE_TYPE_ERROR);
         $container->setErrormessage(static::ERROR_ACCESS_DENIED_MESSAGE);
