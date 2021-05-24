@@ -108,7 +108,7 @@ class PayoneFileReader implements PayoneFileReaderInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByFileReferenceAndCustomerId($fileReference, $customerId): ?SpyPaymentPayone
+    protected function findPaymentByFileReferenceAndCustomerId(string $fileReference, int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId)->findOne();
     }

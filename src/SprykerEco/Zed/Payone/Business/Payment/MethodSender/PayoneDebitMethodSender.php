@@ -98,7 +98,7 @@ class PayoneDebitMethodSender extends AbstractPayoneRequestSender implements Pay
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByTransactionId($transactionId)
+    protected function findPaymentByTransactionId(string $transactionId): SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
     }
