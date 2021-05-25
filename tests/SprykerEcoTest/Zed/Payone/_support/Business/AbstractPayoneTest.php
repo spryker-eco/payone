@@ -71,6 +71,33 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
     }
 
     /**
+     * @param string $request
+     * @param string $status
+     *
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog
+     */
+    protected function createPayoneApiLogWithError(
+        $request = PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
+        $status = PayoneApiConstants::RESPONSE_TYPE_APPROVED
+    ) {
+        $paymentApiLog = (new SpyPaymentPayoneApiLog())
+            ->setRequest($request)
+            ->setStatus($status)
+            ->setRedirectUrl('redirect url')
+            ->setMode(PayoneApiConstants::MODE_TEST)
+            ->setTransactionId('213552995')
+            ->setMerchantId('32481')
+            ->setUserId('123')
+            ->setPortalId('123')
+            ->setErrorCode('123')
+            ->setErrorMessageUser('any error')
+            ->setSpyPaymentPayone($this->spyPaymentPayone);
+        $paymentApiLog->save();
+
+        return $paymentApiLog;
+    }
+
+    /**
      * @param string $iban
      * @param string $bic
      *
