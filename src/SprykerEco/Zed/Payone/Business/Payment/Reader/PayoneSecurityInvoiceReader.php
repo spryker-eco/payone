@@ -107,7 +107,7 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
      * @param string $invoiceTitle
      * @param int $customerId
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
     protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): ?SpyPaymentPayone
     {

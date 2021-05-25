@@ -90,7 +90,7 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getEncoding(): ?string
     {
@@ -126,7 +126,7 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getMid(): ?string
     {
@@ -144,7 +144,7 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAid(): ?string
     {
@@ -162,7 +162,7 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getMode(): ?string
     {
@@ -180,7 +180,7 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPortalid(): ?string
     {
@@ -216,7 +216,7 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getResponseType(): ?string
     {
@@ -332,7 +332,7 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getLanguage(): ?string
     {

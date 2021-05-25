@@ -67,8 +67,10 @@ class PayoneGenericRequestMethodSender implements PayoneGenericRequestMethodSend
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    protected function mapToPayonePaypalExpressCheckoutGenericPaymentResponseTransfer(GenericPaymentResponseContainer $responseContainer, array $rawResponse): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
-    {
+    protected function mapToPayonePaypalExpressCheckoutGenericPaymentResponseTransfer(
+        GenericPaymentResponseContainer $responseContainer,
+        array $rawResponse
+    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
         $responseTransfer = new PayonePaypalExpressCheckoutGenericPaymentResponseTransfer();
 
         $responseTransfer->setRedirectUrl($responseContainer->getRedirectUrl());

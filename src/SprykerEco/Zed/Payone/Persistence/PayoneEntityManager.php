@@ -85,6 +85,7 @@ class PayoneEntityManager extends AbstractEntityManager implements PayoneEntityM
 
     /**
      * @param int $idOrder
+     *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
     protected function createPaymentByOrderId(int $idOrder)

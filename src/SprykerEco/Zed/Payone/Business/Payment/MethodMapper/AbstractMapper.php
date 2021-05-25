@@ -15,7 +15,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalC
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
-use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 

@@ -18,7 +18,6 @@ use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItemQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -138,7 +137,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     /**
      * @param int $idSalesOrder
      *
-     * @return \Generated\Shared\Transfer\PayoneApiLogTransfer
+     * @return \Generated\Shared\Transfer\PayoneApiLogTransfer|null
      */
     public function createLastApiLogsByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer
     {
@@ -188,6 +187,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
 
     /**
      * @param int $idOrder
+     *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
     protected function createPaymentByOrderId(int $idOrder)

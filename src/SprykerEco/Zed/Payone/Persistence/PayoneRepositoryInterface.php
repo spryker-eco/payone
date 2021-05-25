@@ -33,7 +33,7 @@ interface PayoneRepositoryInterface
     /**
      * @param int $idSalesOrder
      *
-     * @return \Generated\Shared\Transfer\PayoneApiLogTransfer
+     * @return \Generated\Shared\Transfer\PayoneApiLogTransfer|null
      */
     public function createLastApiLogsByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer;
 

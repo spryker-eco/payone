@@ -79,8 +79,10 @@ class PayoneBankAccountChecker implements PayoneBankAccountCheckerInterface
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    protected function mapToBankAccountCheckTransfer(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer, BankAccountCheckResponseContainer $responseContainer): PayoneBankAccountCheckTransfer
-    {
+    protected function mapToBankAccountCheckTransfer(
+        PayoneBankAccountCheckTransfer $bankAccountCheckTransfer,
+        BankAccountCheckResponseContainer $responseContainer
+    ): PayoneBankAccountCheckTransfer {
         $bankAccountCheckTransfer->setErrorCode($responseContainer->getErrorcode());
         $bankAccountCheckTransfer->setCustomerErrorMessage($responseContainer->getCustomermessage());
         $bankAccountCheckTransfer->setStatus($responseContainer->getStatus());

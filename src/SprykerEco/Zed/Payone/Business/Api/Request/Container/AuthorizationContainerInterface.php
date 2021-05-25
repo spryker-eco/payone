@@ -38,7 +38,7 @@ interface AuthorizationContainerInterface
     public function getNarrativeText();
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPortalid(): ?string;
 
@@ -213,7 +213,7 @@ interface AuthorizationContainerInterface
     public function getPaymentMethod();
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getMid(): ?string;
 
@@ -289,7 +289,7 @@ interface AuthorizationContainerInterface
     public function getShippingData();
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAid(): ?string;
 

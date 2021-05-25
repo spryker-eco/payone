@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Payment;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
-use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 
 interface BasePaymentMethodMapperInterface

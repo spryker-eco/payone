@@ -11,8 +11,6 @@ use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\PayoneApiLogTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PostSaveHook implements PostSaveHookInterface
@@ -41,7 +39,6 @@ class PostSaveHook implements PostSaveHookInterface
         $apiLogTransfer = $this->payoneRepository->createLastApiLogsByOrderId($quoteTransfer->getPayment()->getPayone()->getFkSalesOrder());
 
         if (!$apiLogTransfer) {
-
             return $checkoutResponse;
         }
 

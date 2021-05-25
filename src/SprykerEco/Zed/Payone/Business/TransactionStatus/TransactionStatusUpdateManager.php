@@ -14,7 +14,6 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem;
 use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse;
-use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 

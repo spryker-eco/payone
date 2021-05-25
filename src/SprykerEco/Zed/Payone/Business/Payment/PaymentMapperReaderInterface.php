@@ -8,9 +8,6 @@
 namespace SprykerEco\Zed\Payone\Business\Payment;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
-use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
-use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
-use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 
 interface PaymentMapperReaderInterface
 {

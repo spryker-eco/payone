@@ -157,7 +157,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getStoreCardData(): ?string
     {

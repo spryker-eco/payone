@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
-use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
@@ -81,7 +80,6 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
         );
 
         if (!$paymentEntity) {
-
             return $this->setAccessDeniedError($getInvoiceTransfer);
         }
 
@@ -99,7 +97,7 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
      * @param string $invoiceTitle
      * @param int $customerId
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
     protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): ?SpyPaymentPayone
     {
@@ -122,6 +120,8 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
 
     /**
      * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $getInvoiceTransfer
+     *
+     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer
      */
     protected function fetchInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): GetInvoiceResponseContainer
     {

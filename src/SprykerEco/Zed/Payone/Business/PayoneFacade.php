@@ -32,10 +32,6 @@ use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
-use SprykerEco\Zed\Payone\Business\ConditionChecker\RefundChecker;
-use SprykerEco\Zed\Payone\Business\Payment\Checker\PayoneCreditCardChecker;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneAuthorizeMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundMethodSender;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneBusinessFactory getFactory()

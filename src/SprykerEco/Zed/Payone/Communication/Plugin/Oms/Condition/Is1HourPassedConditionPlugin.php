@@ -31,7 +31,7 @@ class Is1HourPassedConditionPlugin extends SprykerAbstractPlugin implements Cond
      */
     public function check(SpySalesOrderItem $orderItem): bool
     {
-        /** @var DateTime $createdAt */
+        /** @var \DateTime $createdAt */
         $createdAt = $orderItem->getCreatedAt();
 
         return $createdAt->add(new DateInterval('PT1H')) < (new DateTime());

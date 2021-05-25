@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
-use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
 use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
 
 class StandartParameterMapper implements StandartParameterMapperInterface
