@@ -405,7 +405,8 @@ abstract class AbstractBusinessTest extends Test
         return (new PaymentTransfer())
             ->setPayone(
                 (new PayonePaymentTransfer())
-            );
+            )
+            ->setPaymentProvider(PayoneConfig::PROVIDER_NAME);
     }
 
     /**

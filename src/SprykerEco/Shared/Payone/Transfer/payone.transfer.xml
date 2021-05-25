@@ -545,4 +545,43 @@
         <property name="errorMessageUser" type="string"/>
     </transfer>
     <!--Response container replacement related transfers end-->
+
+    <transfer name="Refund">
+    </transfer>
+
+    <transfer name="KeyTranslation">
+    </transfer>
+
+    <transfer name="Locale">
+    </transfer>
+
+    <transfer name="CheckoutResponse">
+    </transfer>
+
+    <transfer name="SaveOrder">
+    </transfer>
+
+    <transfer name="PaymentMethods">
+    </transfer>
+
+    <transfer name="CheckoutError">
+    </transfer>
+
+    <transfer name="PaymentMethod">
+    </transfer>
+
+    <transfer name="Customer">
+    </transfer>
+
+    <transfer name="Address">
+    </transfer>
+
+    <transfer name="ShipmentMethod">
+    </transfer>
+
+    <transfer name="Shipment">
+    </transfer>
+
+    <transfer name="PersonalData">
+    </transfer>
 </transfers>

@@ -24,5 +24,8 @@
 .grunt
 .sass-cache
 /node_modules/
+
+# tests
+tests/**/_generated/
 /tests/_output/*
 !/tests/_output/.gitkeep
