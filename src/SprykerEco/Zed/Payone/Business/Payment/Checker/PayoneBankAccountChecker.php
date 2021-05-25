@@ -58,7 +58,7 @@ class PayoneBankAccountChecker implements PayoneBankAccountCheckerInterface
     /**
      * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
      *
-     * @return \Genera$standartParameterMapperted\Shared\Transfer\PayoneBankAccountCheckTransfer
+     * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
     public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer): PayoneBankAccountCheckTransfer
     {

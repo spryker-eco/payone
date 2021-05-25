@@ -14,6 +14,7 @@ use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
+use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
@@ -31,7 +32,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     private $sequenceNumberProvider;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator
+     * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
     private $urlHmacGenerator;
 
@@ -67,11 +68,11 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator $urlHmacGenerator
+     * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
      *
      * @return void
      */
-    public function setUrlHmacGenerator(UrlHmacGenerator $urlHmacGenerator)
+    public function setUrlHmacGenerator(HmacGeneratorInterface $urlHmacGenerator)
     {
         $this->urlHmacGenerator = $urlHmacGenerator;
     }

@@ -57,24 +57,6 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     protected $bic;
 
     /**
-     * @param int $aid
-     *
-     * @return void
-     */
-    public function setAid($aid)
-    {
-        $this->aid = $aid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAid()
-    {
-        return $this->aid;
-    }
-
-    /**
      * @param string $bankaccount
      *
      * @return void
@@ -144,24 +126,6 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     public function getCheckType()
     {
         return $this->checktype;
-    }
-
-    /**
-     * @param string $language
-     *
-     * @return void
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
     }
 
     /**

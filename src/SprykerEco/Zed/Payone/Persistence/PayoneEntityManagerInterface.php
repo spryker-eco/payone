@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Persistence;
 
+use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer;
 
 interface PayoneEntityManagerInterface
@@ -24,4 +25,12 @@ interface PayoneEntityManagerInterface
      * @return \Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer
      */
     public function updatePaymentPayoneOrderItem(PaymentPayoneOrderItemTransfer $paymentPayoneOrderItemTransfer): PaymentPayoneOrderItemTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentDetailTransfer $paymentDataTransfer
+     * @param int $idOrder
+     *
+     * @return void
+     */
+    public function updatePaymentDetail(PaymentDetailTransfer $paymentDataTransfer, $idOrder): void;
 }

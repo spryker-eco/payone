@@ -117,24 +117,6 @@ class ManageMandateContainer extends AbstractRequestContainer
     protected $bic;
 
     /**
-     * @param int $aid
-     *
-     * @return void
-     */
-    public function setAid($aid)
-    {
-        $this->aid = $aid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAid()
-    {
-        return $this->aid;
-    }
-
-    /**
      * @param string $bankaccount
      *
      * @return void
@@ -420,24 +402,6 @@ class ManageMandateContainer extends AbstractRequestContainer
     public function getEmail(): string
     {
         return $this->email;
-    }
-
-    /**
-     * @param string $language
-     *
-     * @return void
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
     }
 
     /**

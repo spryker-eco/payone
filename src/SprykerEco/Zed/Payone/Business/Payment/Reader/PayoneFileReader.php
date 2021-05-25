@@ -91,7 +91,7 @@ class PayoneFileReader implements PayoneFileReaderInterface
             return $this->setAccessDeniedError($getFileTransfer);
         }
 
-        $this->fetchFile($getFileTransfer);
+        $responseContainer = $this->fetchFile($getFileTransfer);
 
         $getFileTransfer->setRawResponse($responseContainer->getRawResponse());
         $getFileTransfer->setStatus($responseContainer->getStatus());
@@ -128,12 +128,11 @@ class PayoneFileReader implements PayoneFileReaderInterface
     }
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer\PayoneGetFileTransfer $getFileTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer $responseContainer
+     * @param \Generated\Shared\Transfer\PayoneGetFileTransfer $getFileTransfer
      *
-     * @return  \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer
      */
-    protected function fetchFile(PayoneGetFileTransfer $getFileTransfer, GetFileResponseContainer $responseContainer): GetFileResponseContainer
+    protected function fetchFile(PayoneGetFileTransfer $getFileTransfer): GetFileResponseContainer
     {
         $responseContainer = new GetFileResponseContainer();
 

@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Persistence;
 
+use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItem;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
@@ -64,5 +65,33 @@ class PayoneEntityManager extends AbstractEntityManager implements PayoneEntityM
         );
 
         return $paymentPayoneOrderItemTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentDetailTransfer $paymentDataTransfer
+     * @param int $idOrder
+     *
+     * @return void
+     */
+    public function updatePaymentDetail(PaymentDetailTransfer $paymentDataTransfer, $idOrder): void
+    {
+        $paymentEntity = $this->createPaymentByOrderId($idOrder)->findOne();
+        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+
+        $paymentDetailEntity->fromArray($paymentDataTransfer->toArray());
+
+        $paymentDetailEntity->save();
+    }
+
+    /**
+     * @param int $idOrder
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
+     */
+    protected function createPaymentByOrderId(int $idOrder)
+    {
+        $query = $this->getFactory()->createPaymentPayoneQuery();
+        $query->findByFkSalesOrder($idOrder);
+
+        return $query;
     }
 }

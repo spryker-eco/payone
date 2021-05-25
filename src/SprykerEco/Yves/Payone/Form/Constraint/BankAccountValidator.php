@@ -21,7 +21,7 @@ class BankAccountValidator extends ConstraintValidator
     ];
 
     /**
-     * @param string $value
+     * @param string|null $value
      * @param \Symfony\Component\Validator\Constraint|\SprykerEco\Yves\Payone\Form\Constraint\BankAccount $constraint
      *
      * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException

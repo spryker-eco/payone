@@ -148,6 +148,7 @@ class PayoneDebitTest extends AbstractBusinessTest
 
         $paymentPayoneEntity = (new SpyPaymentPayone())
             ->setFkSalesOrder($idSalesOrder)
+            ->setTransactionId(1)
             ->setPaymentMethod(static::FAKE_PAYMENT_METHOD)
             ->setReference(static::FAKE_REFERENCE)
             ->setSpyPaymentPayoneDetail($spyPaymentPayoneDetail);

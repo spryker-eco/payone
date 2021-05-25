@@ -67,7 +67,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $shipping_street;
 
     /**
-     * @var string
+     * @var int
      */
     protected $shipping_zip;
 

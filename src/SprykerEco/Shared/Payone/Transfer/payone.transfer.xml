@@ -542,6 +542,7 @@
     <transfer name="PayoneApiLog">
         <property name="redirectUrl" type="string"/>
         <property name="errorCode" type="string"/>
+        <property name="errorMessageUser" type="string"/>
     </transfer>
     <!--Response container replacement related transfers end-->
 </transfers>

@@ -72,24 +72,6 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     protected $language;
 
     /**
-     * @param int $aid
-     *
-     * @return void
-     */
-    public function setAid($aid)
-    {
-        $this->aid = $aid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAid()
-    {
-        return $this->aid;
-    }
-
-    /**
      * @param int $amount
      *
      * @return void
@@ -231,24 +213,6 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     public function getExitUrl()
     {
         return $this->exiturl;
-    }
-
-    /**
-     * @param string $language
-     *
-     * @return void
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
     }
 
     /**

@@ -61,7 +61,7 @@ class PayoneRefundMethodSender extends AbstractPayoneRequestSender implements Pa
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
-     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface $payoneRequestProductDataMapper
+     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface $refundResponseMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,

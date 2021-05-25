@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\Reader;
 
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
@@ -100,7 +101,7 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId)
+    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
     }
@@ -121,10 +122,11 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
 
     /**
      * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $getInvoiceTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer $responseContainer
      */
-    protected function fetchInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer, GetInvoiceResponseContainer $responseContainer): GetInvoiceResponseContainer
+    protected function fetchInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): GetInvoiceResponseContainer
     {
+        $responseContainer = new GetInvoiceResponseContainer();
+
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice $paymentMethodMapper */
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
         $requestContainer = $paymentMethodMapper->mapGetInvoice($getInvoiceTransfer);

@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\DebitResponseTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer;

@@ -8,8 +8,10 @@
 namespace SprykerEco\Zed\Payone\Persistence;
 
 use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneApiLogTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
+use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 
 interface PayoneRepositoryInterface
@@ -31,7 +33,23 @@ interface PayoneRepositoryInterface
     /**
      * @param int $idSalesOrder
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
+     * @return \Generated\Shared\Transfer\PayoneApiLogTransfer
      */
     public function createLastApiLogsByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer;
+
+    /**
+     * @param int $idOrder
+     *
+     * @return \Generated\Shared\Transfer\PaymentDetailTransfer
+     */
+    public function getPaymentDetail(int $idOrder): PaymentDetailTransfer;
+
+    /**
+     * Gets payment logs (both api and transaction status) for specific orders in chronological order.
+     *
+     * @param \ArrayObject<string, \Generated\Shared\Transfer\OrderTransfer>|\Generated\Shared\Transfer\OrderTransfer[] $orders
+     *
+     * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
+     */
+    public function getPaymentLogs($orders): PayonePaymentLogCollectionTransfer;
 }

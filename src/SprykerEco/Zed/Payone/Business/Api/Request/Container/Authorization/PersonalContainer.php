@@ -21,7 +21,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * PAYONE debtor ID
      *
-     * @var int
+     * @var string
      */
     protected $userid;
 
@@ -95,7 +95,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * Date of birth (YYYYMMDD)
      *
-     * @var int
+     * @var string
      */
     protected $birthday;
 

@@ -17,5 +17,12 @@ interface HashGeneratorInterface
      *
      * @return string
      */
-    public function generateParamHash(AbstractRequestContainer $request, $securityKey);
+    public function generateParamHash(AbstractRequestContainer $request, $securityKey): string;
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    public function hash($string): string;
 }

@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\Reader;
 
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
@@ -108,7 +109,7 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): SpyPaymentPayone
+    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
     }

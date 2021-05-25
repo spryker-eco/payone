@@ -10,17 +10,17 @@ namespace SprykerEco\Client\Payone\ClientApi\Request;
 abstract class AbstractRequest extends AbstractContainer
 {
     /**
-     * @var int
+     * @var string|null
      */
     protected $mid;
 
     /**
-     * @var int
+     * @var string|null
      */
     protected $aid;
 
     /**
-     * @var int
+     * @var string|null
      */
     protected $portalid;
 
@@ -30,7 +30,7 @@ abstract class AbstractRequest extends AbstractContainer
     protected $key;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mode;
 
@@ -40,12 +40,12 @@ abstract class AbstractRequest extends AbstractContainer
     protected $request;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $responsetype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $encoding;
 
@@ -70,7 +70,7 @@ abstract class AbstractRequest extends AbstractContainer
     protected $integrator_version;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $language;
 
@@ -92,7 +92,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getEncoding()
+    public function getEncoding(): ?string
     {
         return $this->encoding;
     }
@@ -116,7 +116,7 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @param int $mid
+     * @param string $mid
      *
      * @return void
      */
@@ -126,15 +126,15 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getMid()
+    public function getMid(): ?string
     {
         return $this->mid;
     }
 
     /**
-     * @param int $aid
+     * @param string $aid
      *
      * @return void
      */
@@ -144,9 +144,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAid()
+    public function getAid(): ?string
     {
         return $this->aid;
     }
@@ -164,13 +164,13 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getMode()
+    public function getMode(): ?string
     {
         return $this->mode;
     }
 
     /**
-     * @param int $portalid
+     * @param string $portalid
      *
      * @return void
      */
@@ -180,9 +180,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getPortalid()
+    public function getPortalid(): ?string
     {
         return $this->portalid;
     }
@@ -218,7 +218,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getResponseType()
+    public function getResponseType(): ?string
     {
         return $this->responsetype;
     }
@@ -334,7 +334,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getLanguage()
+    public function getLanguage(): ?string
     {
         return $this->language;
     }

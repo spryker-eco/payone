@@ -19,7 +19,7 @@ class RefundContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_REFUND;
 
     /**
-     * @var string
+     * @var int
      */
     protected $txid;
 
@@ -218,7 +218,7 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $txid
+     * @param int $txid
      *
      * @return $this
      */
@@ -230,7 +230,7 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getTxid()
     {

@@ -15,6 +15,7 @@ use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
+use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerInterface
@@ -30,19 +31,19 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     protected $standardParameter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Key\HashGenerator
+     * @var \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface
      */
     protected $hashGenerator;
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Key\HashGenerator $hashGenerator
+     * @param \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface $hashGenerator
      */
     public function __construct(
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
-        HashGenerator $hashGenerator
+        HashGeneratorInterface $hashGenerator
     ) {
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
@@ -183,11 +184,11 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     }
 
     /**
-     * @param string $transactionId
+     * @param int $transactionId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByTransactionId($transactionId): ?SpyPaymentPayone
+    protected function findPaymentByTransactionId(int $transactionId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
     }

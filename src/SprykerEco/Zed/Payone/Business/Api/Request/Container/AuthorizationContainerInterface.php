@@ -38,9 +38,9 @@ interface AuthorizationContainerInterface
     public function getNarrativeText();
 
     /**
-     * @return int
+     * @return string
      */
-    public function getPortalid();
+    public function getPortalid(): ?string;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer $personalData
@@ -115,7 +115,7 @@ interface AuthorizationContainerInterface
     public function get3dsecure();
 
     /**
-     * @param int $portalid
+     * @param string $portalid
      *
      * @return void
      */
@@ -213,9 +213,16 @@ interface AuthorizationContainerInterface
     public function getPaymentMethod();
 
     /**
-     * @return int
+     * @return string
      */
-    public function getMid();
+    public function getMid(): ?string;
+
+    /**
+     * @param string $mid
+     *
+     * @return void
+     */
+    public function setMid($mid);
 
     /**
      * @return string
@@ -246,7 +253,7 @@ interface AuthorizationContainerInterface
     public function setRequest($request);
 
     /**
-     * @param int $aid
+     * @param string $aid
      *
      * @return void
      */
@@ -282,9 +289,9 @@ interface AuthorizationContainerInterface
     public function getShippingData();
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAid();
+    public function getAid(): ?string;
 
     /**
      * @param int $amount

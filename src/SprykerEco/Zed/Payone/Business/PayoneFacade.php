@@ -629,7 +629,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      */
     public function updatePaymentDetail(PaymentDetailTransfer $paymentData, $idOrder)
     {
-        $this->getRepository()->updatePaymentDetail($paymentData, $idOrder);
+        $this->getEntityManager()->updatePaymentDetail($paymentData, $idOrder);
     }
 
     /**

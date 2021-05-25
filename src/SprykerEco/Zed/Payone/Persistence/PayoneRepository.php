@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItemQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
@@ -89,25 +90,9 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PaymentDetailTransfer $paymentDataTransfer
-     * @param int $idOrder
-     *
-     * @return void
-     */
-    public function updatePaymentDetail(PaymentDetailTransfer $paymentDataTransfer, $idOrder): void
-    {
-        $paymentEntity = $this->createPaymentByOrderId($idOrder)->findOne();
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
-
-        $paymentDetailEntity->fromArray($paymentDataTransfer->toArray());
-
-        $paymentDetailEntity->save();
-    }
-
-    /**
      * Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
-     * @param \Propel\Runtime\Collection\ObjectCollection|\ArrayObject $orders
+     * @param \Generated\Shared\Transfer\OrderTransfer[] $orders
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
@@ -120,7 +105,9 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
         $logs = [];
         /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog $apiLog */
         foreach ($apiLogs as $apiLog) {
-            $key = $apiLog->getCreatedAt()->format('Y-m-d\TH:i:s\Z') . 'a' . $apiLog->getIdPaymentPayoneApiLog();
+            /** @var \DateTime $apiLogCreatedAtDateTime */
+            $apiLogCreatedAtDateTime = $apiLog->getCreatedAt();
+            $key = $apiLogCreatedAtDateTime->format('Y-m-d\TH:i:s\Z') . 'a' . $apiLog->getIdPaymentPayoneApiLog();
             $payonePaymentLogTransfer = new PayonePaymentLogTransfer();
             $payonePaymentLogTransfer->fromArray($apiLog->toArray(), true);
             $payonePaymentLogTransfer->setLogType(static::LOG_TYPE_API_LOG);
@@ -128,7 +115,9 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
         }
         /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog $transactionStatusLog */
         foreach ($transactionStatusLogs as $transactionStatusLog) {
-            $key = $transactionStatusLog->getCreatedAt()->format('Y-m-d\TH:i:s\Z') . 't' . $transactionStatusLog->getIdPaymentPayoneTransactionStatusLog();
+            /** @var \DateTime $transactionStatusLogDateTime */
+            $transactionStatusLogDateTime = $transactionStatusLog->getCreatedAt();
+            $key = $transactionStatusLogDateTime->format('Y-m-d\TH:i:s\Z') . 't' . $transactionStatusLog->getIdPaymentPayoneTransactionStatusLog();
             $payonePaymentLogTransfer = new PayonePaymentLogTransfer();
             $payonePaymentLogTransfer->fromArray($transactionStatusLog->toArray(), true);
             $payonePaymentLogTransfer->setLogType(static::LOG_TYPE_TRANSACTION_STATUS_LOG);
@@ -149,9 +138,9 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     /**
      * @param int $idSalesOrder
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
+     * @return \Generated\Shared\Transfer\PayoneApiLogTransfer
      */
-    public function createLastApiLogsByOrderId($idSalesOrder): ?PayoneApiLogTransfer
+    public function createLastApiLogsByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer
     {
         $paymentPayoneApiLogEntity = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
@@ -198,10 +187,10 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param $idOrder
+     * @param int $idOrder
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    protected function createPaymentByOrderId($idOrder)
+    protected function createPaymentByOrderId(int $idOrder)
     {
         $query = $this->getFactory()->createPaymentPayoneQuery();
         $query->findByFkSalesOrder($idOrder);
@@ -210,11 +199,11 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \Propel\Runtime\Collection\ObjectCollection $orders
+     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orders
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    protected function createApiLogsByOrderIds($orders)
+    protected function createApiLogsByOrderIds($orders): SpyPaymentPayoneApiLogQuery
     {
         $ids = [];
         /** @var \Orm\Zed\Sales\Persistence\SpySalesOrder $order */
@@ -232,7 +221,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder[] $orders
+     * @param \Generated\Shared\Transfer\OrderTransfer[] $orders
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */

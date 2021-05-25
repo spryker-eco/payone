@@ -10,17 +10,17 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 abstract class AbstractRequestContainer extends AbstractContainer
 {
     /**
-     * @var int merchant id
+     * @var string|null merchant id
      */
     protected $mid;
 
     /**
-     * @var int
+     * @var string|null
      */
     protected $aid;
 
     /**
-     * @var int payment portal id
+     * @var string|null payment portal id
      */
     protected $portalid;
 
@@ -30,12 +30,12 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $key;
 
     /**
-     * @var string version of the the payone api defaults to 3.8
+     * @var string|null version of the the payone api defaults to 3.8
      */
     protected $api_version;
 
     /**
-     * @var string test or live mode
+     * @var string|null test or live mode
      */
     protected $mode;
 
@@ -45,7 +45,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $request;
 
     /**
-     * @var string encoding (ISO 8859-1 or UTF-8)
+     * @var string|null encoding (ISO 8859-1 or UTF-8)
      */
     protected $encoding;
 
@@ -78,7 +78,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $integrator_version;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $language;
 
@@ -88,7 +88,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $hash;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $responsetype;
 
@@ -157,7 +157,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getEncoding()
+    public function getEncoding(): ?string
     {
         return $this->encoding;
     }
@@ -197,13 +197,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getApiVersion()
+    public function getApiVersion(): ?string
     {
         return $this->api_version;
     }
 
     /**
-     * @param int $mid
+     * @param string $mid
      *
      * @return $this
      */
@@ -215,9 +215,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getMid()
+    public function getMid(): ?string
     {
         return $this->mid;
     }
@@ -237,13 +237,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getMode()
+    public function getMode(): ?string
     {
         return $this->mode;
     }
 
     /**
-     * @param int $portalid
+     * @param string $portalid
      *
      * @return $this
      */
@@ -255,9 +255,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getPortalid()
+    public function getPortalid(): ?string
     {
         return $this->portalid;
     }
@@ -371,15 +371,15 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAid()
+    public function getAid(): ?string
     {
         return $this->aid;
     }
 
     /**
-     * @param int $aid
+     * @param string $aid
      *
      * @return $this
      */
@@ -393,7 +393,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getLanguage()
+    public function getLanguage(): ?string
     {
         return $this->language;
     }
@@ -433,7 +433,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getResponsetype()
+    public function getResponsetype(): ?string
     {
         return $this->responsetype;
     }
