@@ -9,10 +9,11 @@ namespace SprykerEco\Zed\Payone\Business\Payment\Hook;
 
 use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneApiLogTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\TotalsTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
@@ -21,7 +22,6 @@ use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PostSaveHook implements PostSaveHookInterface
 {
@@ -81,7 +81,7 @@ class PostSaveHook implements PostSaveHookInterface
     }
 
     /**
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Payment\PaymentManager::executePostSaveHook()} instead.
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHook::executePostSaveHook()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -98,7 +98,7 @@ class PostSaveHook implements PostSaveHookInterface
     }
 
     /**
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Payment\PaymentManager::executePostSaveHook()} instead.
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHook::executePostSaveHook()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse

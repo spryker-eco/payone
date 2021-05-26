@@ -16,7 +16,7 @@ use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
 class StandartParameterMapper implements StandartParameterMapperInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
+     * @var \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface
      */
     protected $hashGenerator;
 
