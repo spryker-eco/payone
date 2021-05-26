@@ -1,3 +1,13 @@
 parameters:
-    checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#.+Generated\\Shared\\Transfer.+#'
+        - '#Parameter .+ of method .+ has invalid typehint type Orm\\Zed\\Payone\\Persistence\\.+#'
+        - '#Return typehint of method .+ has invalid type Orm\\Zed\\Payone\\Persistence\\.+#'
+        - '#Call to static method create\(\) on an unknown class Orm\\Zed\\.+\\Persistence\\.+#'
+        - '#Instantiated class Orm\\Zed\\Payone\\Persistence\\.+ not found.+#'
+        - '#Parameter .+ of method .+ has invalid typehint type Orm\\Zed\\Sales\\Persistence\\.+#'
+    excludePaths:
+        - src/SprykerEco/Zed/Payone/Persistence/Propel
+

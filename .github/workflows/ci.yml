@@ -1,59 +1,66 @@
 name: CI
 
-on: [
-    push,
-    workflow_dispatch
-]
+on:
+    pull_request:
+    push:
+        branches:
+            - master
+    workflow_dispatch:
 
 jobs:
     validation:
-        name: Validation
-        runs-on: ubuntu-20.04
+        name: "Validation"
+        runs-on: ubuntu-18.04
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - php: '7.4'
+
+        env:
+            APPLICATION_ENV: devtest
+            APPLICATION_STORE: DE
+            PROJECT: adyen
 
         steps:
             - uses: actions/checkout@v2
 
+            - name: Configure sysctl limits
+              run: |
+                  sudo swapoff -a
+                  sudo sysctl -w vm.swappiness=1
+                  sudo sysctl -w fs.file-max=262144
+                  sudo sysctl -w vm.max_map_count=262144
+            - name: Composer get cache directory
+              id: composer-cache
+              run: |
+                  echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - name: Composer cache
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+            - name: Composer validate
+              run: composer validate
+
+            - name: Composer install
+              run: |
+                  composer --version
+                  composer install
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: '7.4'
-                  extensions: mbstring, intl, bcmath
-                  coverage: none
-
-            - name: Composer Install
-              run: composer install --prefer-dist --no-interaction --profile
-
-            - name: Run validation
-              run: composer validate
+                  php-version: ${{ matrix.php }}
+                  extensions: mbstring, intl
+                  tools: composer:v2
 
             - name: Run CodeStyle checks
               run: composer cs-check
 
-            - name: Syntax check
-              run: find ./src -path src -prune -o -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected" )
+            - name: PHPStan setup
+              run: composer stan-setup
 
-    lowest:
-        name: Prefer Lowest
-        runs-on: ubuntu-20.04
-
-        steps:
-            - uses: actions/checkout@v2
-
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: '7.3'
-                  extensions: mbstring, intl, bcmath
-                  coverage: none
-
-            - name: Composer Install
-              run: composer install --prefer-dist --no-interaction --profile
-
-            - name: Composer Update
-              run: composer update --prefer-lowest --prefer-dist --no-interaction --profile -vvv
-
-            - name: Composer Install prefer lowest tool
-              run: composer require --dev dereuromark/composer-prefer-lowest;
-
-            - name: Run validation
-              run: vendor/bin/validate-prefer-lowest -m
+            - name: Run PHPStan
+              run: composer stan
