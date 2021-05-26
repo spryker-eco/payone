@@ -62,8 +62,6 @@ use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\Hook\CheckoutPostSaveHookExecutor;
-use SprykerEco\Zed\Payone\Business\Payment\Hook\CheckoutPostSaveHookExecutorInterface;
 use SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHook;
 use SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHookInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
@@ -757,19 +755,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     public function createPostSaveHook(): PostSaveHookInterface
     {
-        return new PostSaveHook($this->getRepository());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\Hook\CheckoutPostSaveHookExecutorInterface
-     */
-    public function createCheckoutPostSaveHookExecutor(): CheckoutPostSaveHookExecutorInterface
-    {
-        return new CheckoutPostSaveHookExecutor(
+        return new PostSaveHook(
             $this->getQueryContainer(),
             $this->createPaymentMapperReader(),
             $this->createPayoneRequestProductDataMapper(),
-            $this->createPayoneBaseAuthorizeSender(),
+            $this->createPayoneBaseAuthorizeSender()
         );
     }
 

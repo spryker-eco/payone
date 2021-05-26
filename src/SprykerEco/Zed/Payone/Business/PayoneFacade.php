@@ -578,7 +578,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
     public function orderPostSave(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
     {
         return $this->getFactory()
-            ->createPaymentManager()
+            ->createPostSaveHook()
             ->executePostSaveHook($quoteTransfer, $checkoutResponse);
     }
 
@@ -618,7 +618,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
         CheckoutResponseTransfer $checkoutResponse
     ): CheckoutResponseTransfer {
         return $this->getFactory()
-            ->createCheckoutPostSaveHookExecutor()
+            ->createPostSaveHook()
             ->executeCheckoutPostSaveHook($quoteTransfer, $checkoutResponse);
     }
 
