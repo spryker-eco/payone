@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -298,7 +299,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return string
      */
-    protected function getPreparedKey($key)
+    protected function getPreparedKey(string $key): string
     {
         $key = preg_replace('/add_paydata\[(.*)\]/', '$1', $key);
 

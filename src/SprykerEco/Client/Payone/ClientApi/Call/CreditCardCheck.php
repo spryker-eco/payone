@@ -20,7 +20,7 @@ class CreditCardCheck extends AbstractCall
     /**
      * @return void
      */
-    public function setDoStoreCardData()
+    public function setDoStoreCardData(): void
     {
         $this->storeCardData = PayoneApiConstants::STORE_CARD_DATA_YES;
     }
@@ -28,7 +28,7 @@ class CreditCardCheck extends AbstractCall
     /**
      * @return void
      */
-    public function setDoNotStoreCardData()
+    public function setDoNotStoreCardData(): void
     {
         $this->storeCardData = PayoneApiConstants::STORE_CARD_DATA_NO;
     }
@@ -36,7 +36,7 @@ class CreditCardCheck extends AbstractCall
     /**
      * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainer
      */
-    public function mapCreditCardCheckData()
+    public function mapCreditCardCheckData(): CreditCardCheckContainer
     {
         $container = new CreditCardCheckContainer($this->utilEncodingService);
         $this->applyStandardParameter($container);

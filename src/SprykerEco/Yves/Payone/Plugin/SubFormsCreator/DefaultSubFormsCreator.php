@@ -14,7 +14,7 @@ class DefaultSubFormsCreator extends AbstractSubFormsCreator implements SubForms
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
      */
-    public function createPaymentMethodsSubForms()
+    public function createPaymentMethodsSubForms(): array
     {
         return [
             PaymentTransfer::PAYONE_CREDIT_CARD => $this->createPayoneCreditCardSubFormPlugin(),

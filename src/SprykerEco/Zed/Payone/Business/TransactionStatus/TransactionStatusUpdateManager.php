@@ -54,7 +54,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse
      */
-    public function processTransactionStatusUpdate(TransactionStatusUpdateInterface $request)
+    public function processTransactionStatusUpdate(TransactionStatusUpdateInterface $request): TransactionStatusResponse
     {
         $validationResult = $this->validate($request);
         if ($validationResult instanceof TransactionStatusResponse) {
@@ -79,7 +79,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return void
      */
-    protected function persistRequest(TransactionStatusUpdateInterface $request, ?SpyPaymentPayone $paymentPayoneEntity = null)
+    protected function persistRequest(TransactionStatusUpdateInterface $request, ?SpyPaymentPayone $paymentPayoneEntity = null): void
     {
         if (!$paymentPayoneEntity) {
             return;
@@ -110,7 +110,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    public function isPaymentNotificationAvailable($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentNotificationAvailable(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         return $this->hasUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
     }
@@ -120,7 +120,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return void
      */
-    protected function transformCurrency(TransactionStatusUpdateInterface $request)
+    protected function transformCurrency(TransactionStatusUpdateInterface $request): void
     {
         /** @var \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest $request */
         $balance = $request->getBalance();
@@ -164,7 +164,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse
      */
-    protected function createErrorResponse($errorMessage)
+    protected function createErrorResponse(string $errorMessage): TransactionStatusResponse
     {
         $response = new TransactionStatusResponse(false);
         $response->setErrorMessage($errorMessage);
@@ -175,11 +175,9 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse
      */
-    protected function createSuccessResponse()
+    protected function createSuccessResponse(): TransactionStatusResponse
     {
-        $response = new TransactionStatusResponse(true);
-
-        return $response;
+        return new TransactionStatusResponse(true);
     }
 
     /**
@@ -198,7 +196,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    public function isPaymentPaid($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentPaid(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $status = PayoneTransactionStatusConstants::TXACTION_PAID;
         $statusLog = $this->getFirstUnprocessedTransactionStatusLog($idSalesOrder, $idSalesOrderItem, $status);
@@ -220,7 +218,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    public function isPaymentCapture($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentCapture(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $status = PayoneTransactionStatusConstants::TXACTION_CAPTURE;
 
@@ -233,7 +231,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    public function isPaymentOverpaid($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentOverpaid(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $status = PayoneTransactionStatusConstants::TXACTION_PAID;
         $statusLog = $this->getFirstUnprocessedTransactionStatusLog($idSalesOrder, $idSalesOrderItem, $status);
@@ -255,7 +253,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    public function isPaymentUnderpaid($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentUnderpaid(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $status = PayoneTransactionStatusConstants::TXACTION_UNDERPAID;
 
@@ -268,7 +266,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    public function isPaymentRefund($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentRefund(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $status = PayoneTransactionStatusConstants::TXACTION_REFUND;
 
@@ -281,7 +279,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    public function isPaymentAppointed($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentAppointed(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $status = PayoneTransactionStatusConstants::TXACTION_APPOINTED;
 
@@ -294,7 +292,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    public function isPaymentOther($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentOther(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $statusLogs = $this->getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
         if (empty($statusLogs)) {
@@ -325,7 +323,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    protected function isPayment($idSalesOrder, $idSalesOrderItem, $status)
+    protected function isPayment(int $idSalesOrder, int $idSalesOrderItem, string $status): bool
     {
         $statusLog = $this->getFirstUnprocessedTransactionStatusLog($idSalesOrder, $idSalesOrderItem, $status);
         if ($statusLog === null) {
@@ -343,7 +341,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return bool
      */
-    protected function hasUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem)
+    protected function hasUnprocessedTransactionStatusLogs(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $records = $this->getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
 
@@ -357,7 +355,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog|null
      */
-    protected function getFirstUnprocessedTransactionStatusLog($idSalesOrder, $idSalesOrderItem, $status)
+    protected function getFirstUnprocessedTransactionStatusLog(int $idSalesOrder, int $idSalesOrderItem, string $status): ?SpyPaymentPayoneTransactionStatusLog
     {
         $transactionStatusLogs = $this->getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
 
@@ -383,7 +381,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog[]
      */
-    protected function getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem)
+    protected function getUnprocessedTransactionStatusLogs(int $idSalesOrder, int $idSalesOrderItem): array
     {
         $transactionStatusLogs = $this->queryContainer->createTransactionStatusLogsBySalesOrder($idSalesOrder)->find();
 
@@ -412,7 +410,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      *
      * @return void
      */
-    protected function saveSpyPaymentPayoneTransactionStatusLogOrderItem($idSalesOrderItem, SpyPaymentPayoneTransactionStatusLog $statusLog)
+    protected function saveSpyPaymentPayoneTransactionStatusLogOrderItem(int $idSalesOrderItem, SpyPaymentPayoneTransactionStatusLog $statusLog): void
     {
         $entity = new SpyPaymentPayoneTransactionStatusLogOrderItem();
         $entity->setSpyPaymentPayoneTransactionStatusLog($statusLog);

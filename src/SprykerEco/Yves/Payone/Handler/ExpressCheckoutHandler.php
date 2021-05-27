@@ -61,7 +61,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function initPaypalExpressCheckout()
+    public function initPaypalExpressCheckout(): RedirectResponse
     {
         $initExpressCheckoutRequest = $this->prepareInitExpressCheckoutRequest();
         $response = $this->payoneClient->initPaypalExpressCheckout($initExpressCheckoutRequest);
@@ -78,7 +78,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @return void
      */
-    public function loadExpressCheckoutDetails()
+    public function loadExpressCheckoutDetails(): void
     {
         $quoteTransfer = $this->cartClient->getQuote();
 
@@ -94,7 +94,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectToCheckoutEntryPoint()
+    public function redirectToCheckoutEntryPoint(): RedirectResponse
     {
         return new RedirectResponse(
             $this->payoneConfig->getStandardCheckoutEntryPoint()
@@ -104,7 +104,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectToFailureUrl()
+    public function redirectToFailureUrl(): RedirectResponse
     {
         return new RedirectResponse(
             $this->payoneConfig->getFailureProjectUrl()
@@ -114,7 +114,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectToBackUrl()
+    public function redirectToBackUrl(): RedirectResponse
     {
         return new RedirectResponse(
             $this->payoneConfig->getBackProjectUrl()
@@ -124,7 +124,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @return \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer
      */
-    protected function prepareInitExpressCheckoutRequest()
+    protected function prepareInitExpressCheckoutRequest(): PayoneInitPaypalExpressCheckoutRequestTransfer
     {
         $initExpressCheckoutRequest = new PayoneInitPaypalExpressCheckoutRequestTransfer();
         $quoteTransfer = $this->cartClient->getQuote();
@@ -149,7 +149,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
      *
      * @return void
      */
-    protected function addExpressCheckoutPaymentToQuote(QuoteTransfer $quoteTransfer)
+    protected function addExpressCheckoutPaymentToQuote(QuoteTransfer $quoteTransfer): void
     {
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setPaymentProvider(PayoneConstants::PROVIDER_NAME);

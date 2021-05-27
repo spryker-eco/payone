@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Persistence;
 
+use ArrayObject;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer;
@@ -17,6 +18,8 @@ use Generated\Shared\Transfer\PayonePaymentLogTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItemQuery;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -91,11 +94,11 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     /**
      * Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
-     * @param \Generated\Shared\Transfer\OrderTransfer[] $orders
+     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orders
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs($orders): PayonePaymentLogCollectionTransfer
+    public function getPaymentLogs(ArrayObject $orders): PayonePaymentLogCollectionTransfer
     {
         $apiLogs = $this->createApiLogsByOrderIds($orders)->find()->getData();
 
@@ -190,7 +193,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    protected function createPaymentByOrderId(int $idOrder)
+    protected function createPaymentByOrderId(int $idOrder): SpyPaymentPayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneQuery();
         $query->findByFkSalesOrder($idOrder);
@@ -221,11 +224,11 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer[] $orders
+     * @param \ArrayObject\Generated\Shared\Transfer\OrderTransfer[] $orders
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
-    protected function createTransactionStatusLogsByOrderIds($orders)
+    protected function createTransactionStatusLogsByOrderIds(ArrayObject $orders): SpyPaymentPayoneTransactionStatusLogQuery
     {
         $ids = [];
         foreach ($orders as $order) {

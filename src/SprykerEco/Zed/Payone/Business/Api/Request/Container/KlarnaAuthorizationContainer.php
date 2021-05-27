@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer;
 
 class KlarnaAuthorizationContainer extends AbstractPayoneKlarnaAuthorizationContainer
 {
@@ -16,21 +15,6 @@ class KlarnaAuthorizationContainer extends AbstractPayoneKlarnaAuthorizationCont
      * @var string
      */
     protected $request = PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer|null
-     */
-    protected $business;
-
-    /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer $business
-     *
-     * @return void
-     */
-    public function setBusiness(BusinessContainer $business)
-    {
-        $this->business = $business;
-    }
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer|null

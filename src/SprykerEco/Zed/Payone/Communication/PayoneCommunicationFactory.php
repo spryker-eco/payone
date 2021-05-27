@@ -8,7 +8,12 @@
 namespace SprykerEco\Zed\Payone\Communication;
 
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
+use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCalculationInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 
 /**
@@ -23,7 +28,7 @@ class PayoneCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsInterface
      */
-    public function getOmsFacade()
+    public function getOmsFacade(): PayoneToOmsInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_OMS);
     }
@@ -31,7 +36,7 @@ class PayoneCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesInterface
      */
-    public function getSalesFacade()
+    public function getSalesFacade(): PayoneToSalesInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_SALES);
     }
@@ -39,7 +44,7 @@ class PayoneCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundInterface
      */
-    public function getRefundFacade()
+    public function getRefundFacade(): PayoneToRefundInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_REFUND);
     }
@@ -47,7 +52,7 @@ class PayoneCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCalculationInterface
      */
-    public function getCalculationFacade()
+    public function getCalculationFacade(): PayoneToCalculationInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_CALCULATION);
     }
@@ -55,7 +60,7 @@ class PayoneCommunicationFactory extends AbstractCommunicationFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
-    public function createUrlHmacGenerator()
+    public function createUrlHmacGenerator(): HmacGeneratorInterface
     {
         return new UrlHmacGenerator();
     }

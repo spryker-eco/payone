@@ -7,7 +7,8 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Plugin\Oms\Command;
 
-use Orm\Zed\Sales\Persistence\Base\SpySalesOrder;
+use Generated\Shared\Transfer\OrderTransfer;
+use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
@@ -23,7 +24,7 @@ class AbstractPayonePlugin extends AbstractPlugin
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    protected function getOrderTransfer(SpySalesOrder $orderEntity)
+    protected function getOrderTransfer(SpySalesOrder $orderEntity): OrderTransfer
     {
         return $this
             ->getFactory()

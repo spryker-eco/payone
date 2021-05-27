@@ -9,11 +9,15 @@ namespace SprykerEco\Client\Payone;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Spryker\Client\Kernel\AbstractFactory;
+use Spryker\Service\UtilEncoding\UtilEncodingService;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheck;
 use SprykerEco\Client\Payone\ClientApi\HashGenerator;
+use SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface;
 use SprykerEco\Client\Payone\ClientApi\HashProvider;
 use SprykerEco\Client\Payone\Zed\PayoneStub;
+use SprykerEco\Shared\Payone\Dependency\HashInterface;
+use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\Business\Mode\ModeDetector;
@@ -26,7 +30,7 @@ class PayoneFactory extends AbstractFactory
      *
      * @return \SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheck
      */
-    public function createCreditCardCheckCall(array $defaults)
+    public function createCreditCardCheckCall(array $defaults): CreditCardCheck
     {
         return new CreditCardCheck(
             $this->createStandardParameter($defaults),
@@ -39,7 +43,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\HashInterface
      */
-    protected function createHashProvider()
+    protected function createHashProvider(): HashInterface
     {
         return new HashProvider();
     }
@@ -47,7 +51,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface
      */
-    protected function createModeDetector()
+    protected function createModeDetector(): ModeDetectorInterface
     {
         return new ModeDetector($this->createBundleConfig());
     }
@@ -55,7 +59,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Zed\Payone\PayoneConfig
      */
-    protected function createBundleConfig()
+    protected function createBundleConfig(): PayoneConfig
     {
         return new PayoneConfig();
     }
@@ -63,7 +67,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface
      */
-    protected function createHashGenerator()
+    protected function createHashGenerator(): HashGeneratorInterface
     {
         return new HashGenerator(
             $this->createHashProvider()
@@ -75,7 +79,7 @@ class PayoneFactory extends AbstractFactory
      *
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    protected function createStandardParameter(array $defaults)
+    protected function createStandardParameter(array $defaults): PayoneStandardParameterTransfer
     {
         $standardParameterTransfer = new PayoneStandardParameterTransfer();
         $standardParameterTransfer->fromArray($defaults);
@@ -94,7 +98,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Client\Payone\Zed\PayoneStub
      */
-    public function createZedStub()
+    public function createZedStub(): PayoneStub
     {
         $zedStub = $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_ZED);
 
@@ -104,7 +108,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \Spryker\Service\UtilEncoding\UtilEncodingService
      */
-    public function createUtilEncodingService()
+    public function createUtilEncodingService(): UtilEncodingService
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_UTIL_ENCODING);
     }

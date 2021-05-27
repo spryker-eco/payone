@@ -16,26 +16,26 @@ interface BasePaymentMethodMapperInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface $sequenceNumberProvider
      *
      * @return void
      */
-    public function setSequenceNumberProvider(SequenceNumberProviderInterface $sequenceNumberProvider);
+    public function setSequenceNumberProvider(SequenceNumberProviderInterface $sequenceNumberProvider): void;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface $urlHmacGenerator
      *
      * @return void
      */
-    public function setUrlHmacGenerator(HmacGeneratorInterface $urlHmacGenerator);
+    public function setUrlHmacGenerator(HmacGeneratorInterface $urlHmacGenerator): void;
 
     /**
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      *
      * @return void
      */
-    public function setStandardParameter(PayoneStandardParameterTransfer $standardParameter);
+    public function setStandardParameter(PayoneStandardParameterTransfer $standardParameter): void;
 }

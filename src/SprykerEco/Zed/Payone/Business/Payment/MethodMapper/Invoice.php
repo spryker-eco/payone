@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -30,7 +31,7 @@ class Invoice extends AbstractMapper
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PayoneApiConstants::PAYMENT_METHOD_INVOICE;
     }

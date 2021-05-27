@@ -21,5 +21,5 @@ interface QuoteHydratorInterface
     public function getHydratedQuote(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-    );
+    ): QuoteTransfer;
 }

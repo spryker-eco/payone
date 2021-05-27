@@ -76,6 +76,7 @@ class SecurityInvoice extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
+    //phpcs:ignore
     public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
@@ -130,7 +131,7 @@ class SecurityInvoice extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer
      */
-    public function mapExpenseToItemContainer(ExpenseTransfer $expense)
+    public function mapExpenseToItemContainer(ExpenseTransfer $expense): ItemContainer
     {
         $itemContainer = new ItemContainer();
         $itemContainer->setIt(PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT);

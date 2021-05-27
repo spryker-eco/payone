@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -61,7 +62,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardCvc2($cardcvc2)
+    public function setCardCvc2($cardcvc2): void
     {
         $this->cardcvc2 = $cardcvc2;
     }
@@ -79,7 +80,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardExpireDate($cardexpiredate)
+    public function setCardExpireDate($cardexpiredate): void
     {
         $this->cardexpiredate = $cardexpiredate;
     }
@@ -97,7 +98,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardIssueNumber($cardissuenumber)
+    public function setCardIssueNumber($cardissuenumber): void
     {
         $this->cardissuenumber = $cardissuenumber;
     }
@@ -115,7 +116,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardPan($cardpan)
+    public function setCardPan($cardpan): void
     {
         $this->cardpan = $cardpan;
     }
@@ -133,7 +134,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardType($cardtype)
+    public function setCardType($cardtype): void
     {
         $this->cardtype = $cardtype;
     }
@@ -151,7 +152,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStoreCardData($storecarddata)
+    public function setStoreCardData($storecarddata): void
     {
         $this->storecarddata = $storecarddata;
     }

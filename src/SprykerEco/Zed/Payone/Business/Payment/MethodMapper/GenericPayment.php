@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -36,7 +37,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     public function mapRequestTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    ) {
+    ): GenericPaymentContainer {
         $quoteTransfer = $requestTransfer->getQuote();
 
         $genericPayment = $this->mapQuoteTransferToGenericPayment($genericPayment, $quoteTransfer);
@@ -56,7 +57,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     public function mapQuoteTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
         QuoteTransfer $quoteTransfer
-    ) {
+    ): GenericPaymentContainer {
         $genericPayment->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $genericPayment->setWorkOrderId(
             $quoteTransfer->getPayment()
@@ -69,7 +70,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer
      */
-    public function createBaseGenericPaymentContainer()
+    public function createBaseGenericPaymentContainer(): GenericPaymentContainer
     {
         $genericPayment = new GenericPaymentContainer();
         $paydataContainer = new PaydataContainer();
@@ -86,7 +87,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT;
     }

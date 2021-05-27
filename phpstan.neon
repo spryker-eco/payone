@@ -8,6 +8,13 @@ parameters:
         - '#Call to static method create\(\) on an unknown class Orm\\Zed\\.+\\Persistence\\.+#'
         - '#Instantiated class Orm\\Zed\\Payone\\Persistence\\.+ not found.+#'
         - '#Parameter .+ of method .+ has invalid typehint type Orm\\Zed\\Sales\\Persistence\\.+#'
+        - '#Call to method .+ on an unknown class Orm\\Zed\\.+\\Persistence\\.+#'
+        - '#PHPDoc tag @var for variable .+ contains unknown class Orm\\Zed\\.+\\Persistence\\.+#'
+        - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
+        - '#Property .+ has unknown class Orm\\Zed\\Payone\\Persistence\\.+ as its type\.#'
+        - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\AbstractTransfer::.+#'
+        - '#PHPDoc tag @param for parameter \$constraint with type Spryker\\Zed\\Discount\\Communication\\Form\\Constraint\\QueryString is not subtype of native type Symfony\\Component\\Validator\\Constraint\.#'
+        - '#Parameter \$constraint of method SprykerEco\\Yves\\Payone\\Form\\Constraint\\ManageMandateValidator::validate\(\) has invalid typehint type Spryker\\Zed\\Discount\\Communication\\Form\\Constraint\\QueryString\.#'
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
 

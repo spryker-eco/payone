@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Shared\Payone\Dependency\HashInterface;
+use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\Guzzle;
@@ -478,7 +479,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface
      */
-    public function createModeDetector()
+    public function createModeDetector(): ModeDetectorInterface
     {
         return new ModeDetector($this->getConfig());
     }
@@ -512,7 +513,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo
      */
-    public function createCreditCardPseudo($storeConfig): CreditCardPseudo
+    public function createCreditCardPseudo(Store $storeConfig): CreditCardPseudo
     {
         return new CreditCardPseudo($storeConfig);
     }
@@ -522,7 +523,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit
      */
-    public function createDirectDebit($storeConfig): DirectDebit
+    public function createDirectDebit(Store $storeConfig): DirectDebit
     {
         return new DirectDebit($storeConfig);
     }
@@ -532,7 +533,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice
      */
-    public function createInvoice($storeConfig): Invoice
+    public function createInvoice(Store $storeConfig): Invoice
     {
         return new Invoice($storeConfig);
     }
@@ -542,7 +543,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    public function createSecurityInvoice($storeConfig): PaymentMethodMapperInterface
+    public function createSecurityInvoice(Store $storeConfig): PaymentMethodMapperInterface
     {
         return new SecurityInvoice($storeConfig, $this->getConfig());
     }
@@ -552,7 +553,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer
      */
-    public function createOnlineBankTransfer($storeConfig): OnlineBankTransfer
+    public function createOnlineBankTransfer(Store $storeConfig): OnlineBankTransfer
     {
         return new OnlineBankTransfer($storeConfig);
     }
@@ -562,7 +563,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet
      */
-    public function createEWallet($storeConfig): EWallet
+    public function createEWallet(Store $storeConfig): EWallet
     {
         return new EWallet($storeConfig);
     }
@@ -583,7 +584,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment
      */
-    public function createPrepayment($storeConfig): Prepayment
+    public function createPrepayment(Store $storeConfig): Prepayment
     {
         return new Prepayment($storeConfig);
     }

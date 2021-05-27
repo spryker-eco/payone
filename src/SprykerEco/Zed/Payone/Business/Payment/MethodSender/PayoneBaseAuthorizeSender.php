@@ -83,7 +83,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
      *
      * @return void
      */
-    protected function updatePaymentAfterAuthorization(SpyPaymentPayone $paymentEntity, AuthorizationResponseContainer $responseContainer)
+    protected function updatePaymentAfterAuthorization(SpyPaymentPayone $paymentEntity, AuthorizationResponseContainer $responseContainer): void
     {
         $paymentEntity->setTransactionId($responseContainer->getTxid());
         $paymentEntity->save();
@@ -116,7 +116,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
      *
      * @return void
      */
-    protected function updatePaymentDetailAfterAuthorization(SpyPaymentPayone $paymentEntity, AuthorizationResponseContainer $responseContainer)
+    protected function updatePaymentDetailAfterAuthorization(SpyPaymentPayone $paymentEntity, AuthorizationResponseContainer $responseContainer): void
     {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
@@ -146,7 +146,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
      *
      * @return string
      */
-    public function getInvoiceTitle($transactionId)
+    public function getInvoiceTitle(int $transactionId): string
     {
         return implode('-', [
             PayoneApiConstants::INVOICE_TITLE_PREFIX_INVOICE,

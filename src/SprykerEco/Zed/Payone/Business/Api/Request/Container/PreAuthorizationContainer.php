@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -32,7 +33,7 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
      *
      * @return void
      */
-    public function setWorkOrderId($workorderid)
+    public function setWorkOrderId($workorderid): void
     {
         $this->workorderid = $workorderid;
     }
@@ -40,7 +41,7 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
     /**
      * @return string
      */
-    public function getWorkOrderId()
+    public function getWorkOrderId(): ?string
     {
         return $this->workorderid;
     }
@@ -48,7 +49,7 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
     /**
      * @return string
      */
-    public function getFinancingtype(): string
+    public function getFinancingtype(): ?string
     {
         return $this->financingtype;
     }

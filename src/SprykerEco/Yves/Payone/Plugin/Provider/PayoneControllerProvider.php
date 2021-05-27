@@ -34,7 +34,7 @@ class PayoneControllerProvider extends YvesControllerProvider
      *
      * @return void
      */
-    protected function defineControllers(Application $app)
+    protected function defineControllers(Application $app): void
     {
         $this->createController('/payone', 'payone-index', 'Payone', 'index', 'index')->method('POST');
         $this->createController('/payone/getfile', 'payone-getfile', 'payone', 'index', 'getFile')->method('GET|POST');

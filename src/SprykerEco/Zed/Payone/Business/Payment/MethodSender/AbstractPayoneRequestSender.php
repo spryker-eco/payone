@@ -14,6 +14,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 abstract class AbstractPayoneRequestSender
@@ -45,7 +46,7 @@ abstract class AbstractPayoneRequestSender
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    protected function getPaymentMethodMapper(SpyPaymentPayone $paymentEntity)
+    protected function getPaymentMethodMapper(SpyPaymentPayone $paymentEntity): PaymentMethodMapperInterface
     {
         return $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
     }
@@ -55,7 +56,7 @@ abstract class AbstractPayoneRequestSender
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function getPaymentEntity($orderId)
+    protected function getPaymentEntity(int $orderId): SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentById($orderId)->findOne();
     }
@@ -66,7 +67,7 @@ abstract class AbstractPayoneRequestSender
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog
      */
-    protected function initializeApiLog(SpyPaymentPayone $paymentEntity, AbstractRequestContainer $container)
+    protected function initializeApiLog(SpyPaymentPayone $paymentEntity, AbstractRequestContainer $container): SpyPaymentPayoneApiLog
     {
         $entity = new SpyPaymentPayoneApiLog();
 

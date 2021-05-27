@@ -16,5 +16,5 @@ interface PayonePreAuthorizeMethodSenderInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment($idSalesOrder): AuthorizationResponseTransfer;
+    public function preAuthorizePayment(int $idSalesOrder): AuthorizationResponseTransfer;
 }

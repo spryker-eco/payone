@@ -58,7 +58,7 @@ abstract class AbstractCall implements CallInterface
      *
      * @return void
      */
-    protected function applyStandardParameter(AbstractRequest $container)
+    protected function applyStandardParameter(AbstractRequest $container): void
     {
         if ($container->getPortalid() === null) {
             $container->setPortalid($this->standardParameter->getPortalId());
@@ -86,7 +86,7 @@ abstract class AbstractCall implements CallInterface
     /**
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    protected function getStandardParameter()
+    protected function getStandardParameter(): PayoneStandardParameterTransfer
     {
         return $this->standardParameter;
     }
@@ -94,7 +94,7 @@ abstract class AbstractCall implements CallInterface
     /**
      * @return \SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface
      */
-    protected function getHashGenerator()
+    protected function getHashGenerator(): HashGeneratorInterface
     {
         return $this->hashGenerator;
     }
@@ -102,7 +102,7 @@ abstract class AbstractCall implements CallInterface
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface
      */
-    protected function getModeDetector()
+    protected function getModeDetector(): ModeDetectorInterface
     {
         return $this->modeDetector;
     }

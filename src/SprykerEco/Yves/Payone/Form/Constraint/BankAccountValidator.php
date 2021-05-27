@@ -28,6 +28,7 @@ class BankAccountValidator extends ConstraintValidator
      *
      * @return void
      */
+    //phpcs:ignore
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof BankAccount) {
@@ -61,7 +62,7 @@ class BankAccountValidator extends ConstraintValidator
      *
      * @return string[]
      */
-    protected function validateBankAccount(QuoteTransfer $data, BankAccount $constraint)
+    protected function validateBankAccount(QuoteTransfer $data, BankAccount $constraint): array
     {
         $response = $constraint->getPayoneClient()->bankAccountCheck($data);
         if (in_array($response->getStatus(), static::INVALID_STATUSES)) {

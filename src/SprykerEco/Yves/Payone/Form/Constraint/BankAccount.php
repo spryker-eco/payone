@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Yves\Payone\Form\Constraint;
 
+use SprykerEco\Client\Payone\PayoneClient;
 use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 
 class BankAccount extends SymfonyConstraint
@@ -21,7 +22,7 @@ class BankAccount extends SymfonyConstraint
     /**
      * @return \SprykerEco\Client\Payone\PayoneClient
      */
-    public function getPayoneClient()
+    public function getPayoneClient(): PayoneClient
     {
         return $this->payoneClient;
     }

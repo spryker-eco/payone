@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -42,7 +43,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @param int $transactionId
      *
-     * @return \Orm\Zed\Payone\Persistence\Base\SpyPaymentPayoneQuery
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
     public function createPaymentByTransactionIdQuery($transactionId)
     {
@@ -130,7 +131,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @param int $idOrder
      *
-     * @return \Orm\Zed\Payone\Persistence\Base\SpyPaymentPayoneQuery
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
     public function createPaymentByOrderId($idOrder)
     {
@@ -170,7 +171,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @param int $orderId
      *
-     * @return \Orm\Zed\Payone\Persistence\Base\SpyPaymentPayoneQuery
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
     public function createPaymentById($orderId)
     {
@@ -282,13 +283,11 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
             $ids[] = $order->getIdSalesOrder();
         }
 
-        $query = $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
+        return $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
             ->useSpyPaymentPayoneQuery()
             ->filterByFkSalesOrder($ids, Criteria::IN)
             ->endUse()
             ->orderByCreatedAt();
-
-        return $query;
     }
 
     /**

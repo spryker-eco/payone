@@ -59,6 +59,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\KlarnaPreAuthorizationContainer
      */
+    //phpcs:ignore
     public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
     {
         $preAuthorizationContainer = new KlarnaPreAuthorizationContainer();

@@ -45,7 +45,7 @@ class AbstractPayoneKlarnaAuthorizationContainer extends AbstractAuthorizationCo
      *
      * @return void
      */
-    public function setBusiness(BusinessContainer $business)
+    public function setBusiness(BusinessContainer $business): void
     {
         $this->business = $business;
     }

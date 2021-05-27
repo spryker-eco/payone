@@ -32,5 +32,5 @@ interface PayoneEntityManagerInterface
      *
      * @return void
      */
-    public function updatePaymentDetail(PaymentDetailTransfer $paymentDataTransfer, $idOrder): void;
+    public function updatePaymentDetail(PaymentDetailTransfer $paymentDataTransfer, int $idOrder): void;
 }

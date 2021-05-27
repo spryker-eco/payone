@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Persistence;
 
+use ArrayObject;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneApiLogTransfer;
@@ -51,5 +52,5 @@ interface PayoneRepositoryInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs($orders): PayonePaymentLogCollectionTransfer;
+    public function getPaymentLogs(ArrayObject $orders): PayonePaymentLogCollectionTransfer;
 }

@@ -16,7 +16,7 @@ class ChSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
      */
-    public function createPaymentMethodsSubForms()
+    public function createPaymentMethodsSubForms(): array
     {
         return [
             PaymentTransfer::PAYONE_CREDIT_CARD => $this->createPayoneCreditCardSubFormPlugin(),
@@ -34,7 +34,7 @@ class ChSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayonePostfinanceEfinanceOnlineTransferSubFormPlugin
      */
-    protected function createPayonePostfinanceEfinanceOnlineTransferSubFormPlugin()
+    protected function createPayonePostfinanceEfinanceOnlineTransferSubFormPlugin(): PayonePostfinanceEfinanceOnlineTransferSubFormPlugin
     {
         return new PayonePostfinanceEfinanceOnlineTransferSubFormPlugin();
     }
@@ -42,7 +42,7 @@ class ChSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayonePostfinanceCardOnlineTransferSubFormPlugin
      */
-    protected function createPayonePostfinanceCardOnlineTransferSubFormPlugin()
+    protected function createPayonePostfinanceCardOnlineTransferSubFormPlugin(): PayonePostfinanceCardOnlineTransferSubFormPlugin
     {
         return new PayonePostfinanceCardOnlineTransferSubFormPlugin();
     }

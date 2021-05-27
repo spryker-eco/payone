@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -27,7 +28,7 @@ class OnlineBankTransfer extends AbstractMapper
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER;
     }

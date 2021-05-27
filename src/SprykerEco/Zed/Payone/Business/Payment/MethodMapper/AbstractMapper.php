@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -53,7 +54,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return void
      */
-    public function setStandardParameter(PayoneStandardParameterTransfer $standardParameterTransfer)
+    public function setStandardParameter(PayoneStandardParameterTransfer $standardParameterTransfer): void
     {
         $this->standardParameter = $standardParameterTransfer;
     }
@@ -71,13 +72,13 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return void
      */
-    public function setUrlHmacGenerator(HmacGeneratorInterface $urlHmacGenerator)
+    public function setUrlHmacGenerator(HmacGeneratorInterface $urlHmacGenerator): void
     {
         $this->urlHmacGenerator = $urlHmacGenerator;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator
+     * @return \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
     protected function getUrlHmacGenerator()
     {
@@ -89,7 +90,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return void
      */
-    public function setSequenceNumberProvider(SequenceNumberProviderInterface $sequenceNumberProvider)
+    public function setSequenceNumberProvider(SequenceNumberProviderInterface $sequenceNumberProvider): void
     {
         $this->sequenceNumberProvider = $sequenceNumberProvider;
     }

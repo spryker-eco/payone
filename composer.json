@@ -58,7 +58,7 @@
     "scripts": {
         "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/",
         "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/",
-        "stan": "phpstan analyse -c phpstan.neon -l 1 src/",
+        "stan": "phpstan analyse -c phpstan.neon -l 2 src/",
         "stan-setup": "cp composer.json composer.backup && COMPOSER_MEMORY_LIMIT=-1 composer require --dev phpstan/phpstan:^0.12 && mv composer.backup composer.json"
     },
     "extra": {

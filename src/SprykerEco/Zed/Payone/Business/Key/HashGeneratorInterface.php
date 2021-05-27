@@ -13,16 +13,16 @@ interface HashGeneratorInterface
 {
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $request
-     * @param string $securityKey
+     * @param string|null $securityKey
      *
      * @return string
      */
-    public function generateParamHash(AbstractRequestContainer $request, $securityKey): string;
+    public function generateParamHash(AbstractRequestContainer $request, ?string $securityKey): string;
 
     /**
      * @param string $string
      *
      * @return string
      */
-    public function hash($string): string;
+    public function hash(string $string): string;
 }

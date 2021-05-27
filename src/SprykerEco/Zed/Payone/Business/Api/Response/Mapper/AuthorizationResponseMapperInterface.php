@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Response\Mapper;
 
+use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 
 interface AuthorizationResponseMapperInterface extends ResponseMapperInterface
@@ -16,5 +17,5 @@ interface AuthorizationResponseMapperInterface extends ResponseMapperInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function getAuthorizationResponseTransfer(AuthorizationResponseContainer $responseContainer);
+    public function getAuthorizationResponseTransfer(AuthorizationResponseContainer $responseContainer): AuthorizationResponseTransfer;
 }

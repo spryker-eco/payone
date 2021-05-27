@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -71,9 +72,10 @@ class Simulator extends AbstractHttpAdapter
     }
 
     /**
-     * @return void
+     * @return string
      */
-    public function getUrl(): void
+    public function getUrl(): string
     {
+        return '';
     }
 }

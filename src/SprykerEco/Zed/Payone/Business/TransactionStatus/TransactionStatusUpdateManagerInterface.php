@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\TransactionStatus;
 
 use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
+use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse;
 
 interface TransactionStatusUpdateManagerInterface
 {
@@ -16,7 +17,7 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse
      */
-    public function processTransactionStatusUpdate(TransactionStatusUpdateInterface $request);
+    public function processTransactionStatusUpdate(TransactionStatusUpdateInterface $request): TransactionStatusResponse;
 
     /**
      * @param int $idSalesOrder
@@ -24,7 +25,7 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return bool
      */
-    public function isPaymentNotificationAvailable($idSalesOrder, $idSalesOrderItem);
+    public function isPaymentNotificationAvailable(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * @param int $idSalesOrder
@@ -32,7 +33,7 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return bool
      */
-    public function isPaymentPaid($idSalesOrder, $idSalesOrderItem);
+    public function isPaymentPaid(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * @param int $idSalesOrder
@@ -40,7 +41,7 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return bool
      */
-    public function isPaymentCapture($idSalesOrder, $idSalesOrderItem);
+    public function isPaymentCapture(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * @param int $idSalesOrder
@@ -48,7 +49,7 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return bool
      */
-    public function isPaymentOverpaid($idSalesOrder, $idSalesOrderItem);
+    public function isPaymentOverpaid(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * @param int $idSalesOrder
@@ -56,7 +57,7 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return bool
      */
-    public function isPaymentUnderpaid($idSalesOrder, $idSalesOrderItem);
+    public function isPaymentUnderpaid(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * @param int $idSalesOrder
@@ -64,7 +65,7 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return bool
      */
-    public function isPaymentRefund($idSalesOrder, $idSalesOrderItem);
+    public function isPaymentRefund(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * @param int $idSalesOrder
@@ -72,7 +73,7 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return bool
      */
-    public function isPaymentAppointed($idSalesOrder, $idSalesOrderItem);
+    public function isPaymentAppointed(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * @param int $idSalesOrder
@@ -80,5 +81,5 @@ interface TransactionStatusUpdateManagerInterface
      *
      * @return bool
      */
-    public function isPaymentOther($idSalesOrder, $idSalesOrderItem);
+    public function isPaymentOther(int $idSalesOrder, int $idSalesOrderItem): bool;
 }
