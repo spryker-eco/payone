@@ -162,8 +162,6 @@
         <property name="workOrderId" type="string"/>
         <property name="shippingProvider" type="string"/>
         <property name="capturedAmount" type="int"/>
-        <property name="payMethod" type="string"/>
-        <property name="token" type="string"/>
     </transfer>
 
     <transfer name="PayoneBankAccountCheck">

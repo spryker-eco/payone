@@ -17,6 +17,7 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
@@ -216,6 +217,10 @@ class PostSaveHook implements PostSaveHookInterface
         QuoteTransfer $quoteTransfer
     ): AuthorizationContainerInterface {
         if (method_exists($paymentMethodMapper, 'mapPaymentToPreAuthorization')) {
+            if ($paymentMethodMapper instanceof KlarnaPaymentMapper) {
+                return $paymentMethodMapper->mapKlarnaPaymentToPreAuthorization($paymentEntity, $quoteTransfer);
+            }
+
             return $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity);
         }
 

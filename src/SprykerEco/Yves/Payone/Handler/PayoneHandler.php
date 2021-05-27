@@ -169,10 +169,6 @@ class PayoneHandler implements PayoneHandlerInterface
         } elseif ($paymentSelection == PaymentTransfer::PAYONE_CASH_ON_DELIVERY) {
             $shippingProvider = $quoteTransfer->getShipment()->getMethod()->getCarrierName();
             $paymentDetailTransfer->setShippingProvider($shippingProvider);
-        } elseif ($paymentSelection == PaymentTransfer::PAYONE_KLARNA) {
-            /** @var \Generated\Shared\Transfer\PayoneKlarnaTransfer $payonePaymentTransfer */
-            $paymentDetailTransfer->setPayMethod($payonePaymentTransfer->getPayMethod());
-            $paymentDetailTransfer->setToken($payonePaymentTransfer->getPayMethodToken());
         }
 
         $payonePaymentTransfer = new PayonePaymentTransfer();
