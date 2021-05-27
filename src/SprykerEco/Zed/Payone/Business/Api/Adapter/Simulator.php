@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\AbstractHttpAdapter;
 class Simulator extends AbstractHttpAdapter
 {
     /**
-     * @var array
+     * @var string
      */
     protected $rawResponse;
 

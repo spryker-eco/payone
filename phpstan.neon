@@ -13,8 +13,11 @@ parameters:
         - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
         - '#Property .+ has unknown class Orm\\Zed\\Payone\\Persistence\\.+ as its type\.#'
         - '#Call to an undefined method Spryker\\Shared\\Kernel\\Transfer\\AbstractTransfer::.+#'
-        - '#PHPDoc tag @param for parameter \$constraint with type Spryker\\Zed\\Discount\\Communication\\Form\\Constraint\\QueryString is not subtype of native type Symfony\\Component\\Validator\\Constraint\.#'
-        - '#Parameter \$constraint of method SprykerEco\\Yves\\Payone\\Form\\Constraint\\ManageMandateValidator::validate\(\) has invalid typehint type Spryker\\Zed\\Discount\\Communication\\Form\\Constraint\\QueryString\.#'
+        - '#Argument of an invalid type .+ supplied for foreach, only iterables are supported\.#'
+        - '#Parameter .+ .+ of method .+ expects SprykerEco\\Zed\\Payone\\Business\\.+, SprykerEco\\Zed\\Payone\\Business\\Api\\Request\\Container\\.+ given\.#'
+        - '#Method SprykerEco\\Zed\\Payone\\Business\\Payment\\MethodMapper\\.+ should return SprykerEco\\Zed\\Payone\\Business\\Api\\Request\\Container\\.+ but returns SprykerEco\\Zed\\Payone\\Business\\Api\\Request\\Container\\.+#'
+        - '#Return type \(SprykerEco\\Zed\\Payone\\Business\\Api\\Request\\Container\\KlarnaPreAuthorizationContainer\) of method SprykerEco\\Zed\\Payone\\Business\\Payment\\MethodMapper\\KlarnaPaymentMapper::.+ compatible with return type \(SprykerEco\\Zed\\Payone\\Business\\Api\\Request\\Container\\PreAuthorizationContainer\) of method SprykerEco\\Zed\\Payone\\Business\\Payment\\PaymentMethodMapperInterface::.+#'
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
+        - src/SprykerEco/Yves/Payone/Form/Constraint
 

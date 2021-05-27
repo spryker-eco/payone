@@ -47,7 +47,7 @@ class PersonalContainer extends AbstractContainer
     protected $lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $company;
 
@@ -182,7 +182,7 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $company
+     * @param string|null $company
      *
      * @return void
      */

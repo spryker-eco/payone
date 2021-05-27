@@ -85,17 +85,17 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     protected $sequencenumber;
 
     /**
-     * @var string
+     * @var float
      */
     protected $receivable;
 
     /**
-     * @var string
+     * @var float
      */
     protected $balance;
 
     /**
-     * @var string
+     * @var float
      */
     protected $price;
 
@@ -273,7 +273,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $balance
+     * @param float $balance
      *
      * @return void
      */
@@ -283,7 +283,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getBalance()
     {
@@ -543,7 +543,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $receivable
+     * @param float $receivable
      *
      * @return void
      */
@@ -553,7 +553,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getReceivable()
     {
@@ -1011,7 +1011,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getPrice()
     {
@@ -1019,7 +1019,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $price
+     * @param float $price
      *
      * @return void
      */

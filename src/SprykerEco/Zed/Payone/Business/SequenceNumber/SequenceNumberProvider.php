@@ -33,11 +33,11 @@ class SequenceNumberProvider implements SequenceNumberProviderInterface
     }
 
     /**
-     * @param string $transactionId
+     * @param int $transactionId
      *
      * @return int
      */
-    public function getNextSequenceNumber(string $transactionId): int
+    public function getNextSequenceNumber(int $transactionId): int
     {
         $current = $this->getCurrentSequenceNumber($transactionId);
         if ($current < 0) {
@@ -48,11 +48,11 @@ class SequenceNumberProvider implements SequenceNumberProviderInterface
     }
 
     /**
-     * @param string $transactionId
+     * @param int $transactionId
      *
      * @return int|null
      */
-    public function getCurrentSequenceNumber(string $transactionId): ?int
+    public function getCurrentSequenceNumber(int $transactionId): ?int
     {
         $transactionEntity = $this->queryContainer
             ->createCurrentSequenceNumberQuery($transactionId)

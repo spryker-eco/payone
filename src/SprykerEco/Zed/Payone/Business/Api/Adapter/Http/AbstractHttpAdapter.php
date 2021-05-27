@@ -109,7 +109,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      */
     protected function generateUrlArray(array $params)
     {
-        $urlRequest = $this->getUrl() . '?' . http_build_query($params, null, '&');
+        $urlRequest = $this->getUrl() . '?' . http_build_query($params, '', '&');
         $urlArray = parse_url($urlRequest);
 
         return $urlArray;

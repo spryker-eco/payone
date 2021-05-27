@@ -10,16 +10,16 @@ namespace SprykerEco\Zed\Payone\Business\SequenceNumber;
 interface SequenceNumberProviderInterface
 {
     /**
-     * @param string $transactionId
+     * @param int $transactionId
      *
      * @return int
      */
-    public function getNextSequenceNumber(string $transactionId): int;
+    public function getNextSequenceNumber(int $transactionId): int;
 
     /**
-     * @param string $transactionId
+     * @param int $transactionId
      *
      * @return int|null
      */
-    public function getCurrentSequenceNumber(string $transactionId): ?int;
+    public function getCurrentSequenceNumber(int $transactionId): ?int;
 }

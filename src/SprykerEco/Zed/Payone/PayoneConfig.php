@@ -76,7 +76,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @api
      *
-     * @return string
+     * @return int
      */
     public function getEmptySequenceNumber()
     {

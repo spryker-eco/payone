@@ -18,7 +18,7 @@ class ManageMandateValidator extends ConstraintValidator
      * {@inheritDoc}
      *
      * @param string $value
-     * @param \Spryker\Zed\Discount\Communication\Form\Constraint\QueryString $constraint
+     * @param \Symfony\Component\Validator\Constraint $constraint
      *
      * @return void
      */

@@ -104,7 +104,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     }
 
     /**
-     * @param string $transactionId
+     * @param int $transactionId
      *
      * @return int
      */
