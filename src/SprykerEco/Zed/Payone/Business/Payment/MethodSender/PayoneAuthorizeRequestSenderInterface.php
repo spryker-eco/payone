@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
-interface PayoneAuthorizeMethodSenderInterface
+interface PayoneAuthorizeRequestSenderInterface
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

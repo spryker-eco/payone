@@ -30,7 +30,7 @@ use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
-class PayonePartialCaptureMethodSender extends AbstractPayoneRequestSender implements PayonePartialCaptureMethodSenderInterface
+class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender implements PayonePartialCaptureRequestSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface

@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 
 use Generated\Shared\Transfer\DebitResponseTransfer;
 
-interface PayoneDebitMethodSenderInterface
+interface PayoneDebitRequestSenderInterface
 {
     /**
      * @param int $idPayment

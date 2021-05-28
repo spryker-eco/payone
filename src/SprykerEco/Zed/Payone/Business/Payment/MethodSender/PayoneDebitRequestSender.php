@@ -18,7 +18,7 @@ use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInt
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-class PayoneDebitMethodSender extends AbstractPayoneRequestSender implements PayoneDebitMethodSenderInterface
+class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements PayoneDebitRequestSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface

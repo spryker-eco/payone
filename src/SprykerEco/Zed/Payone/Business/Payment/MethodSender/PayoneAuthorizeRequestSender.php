@@ -14,7 +14,7 @@ use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMa
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-class PayoneAuthorizeMethodSender extends AbstractPayoneRequestSender implements PayoneAuthorizeMethodSenderInterface
+class PayoneAuthorizeRequestSender extends AbstractPayoneRequestSender implements PayoneAuthorizeRequestSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface

@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\AddressCheckResponseTransfer;
-use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
@@ -84,7 +83,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      */
     public function authorizePayment(OrderTransfer $orderTransfer)
     {
-        return $this->getFactory()->createPayoneAuthorizeMethodSender()->authorizePayment($orderTransfer);
+        return $this->getFactory()->createPayoneAuthorizeRequestSender()->authorizePayment($orderTransfer);
     }
 
     /**
@@ -96,9 +95,9 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment($idSalesOrder): AuthorizationResponseTransfer
+    public function preAuthorizePayment($idSalesOrder)
     {
-        return $this->getFactory()->createPayonePreAuthorizeMethodSender()->preAuthorizePayment($idSalesOrder);
+        return $this->getFactory()->createPayonePreAuthorizeRequestSender()->preAuthorizePayment($idSalesOrder);
     }
 
     /**
@@ -112,7 +111,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      */
     public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
-        return $this->getFactory()->createPayoneCaptureMethodSender()->capturePayment($captureTransfer);
+        return $this->getFactory()->createPayoneCaptureRequestSender()->capturePayment($captureTransfer);
     }
 
     /**
@@ -126,7 +125,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      */
     public function debitPayment($idPayment)
     {
-        return $this->getFactory()->createPayoneDebitMethodSender()->debitPayment($idPayment);
+        return $this->getFactory()->createPayoneDebitRequestSender()->debitPayment($idPayment);
     }
 
     /**
@@ -140,7 +139,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer)
     {
-        return $this->getFactory()->createPayoneRefundMethodSender()->refundPayment($refundTransfer);
+        return $this->getFactory()->createPayoneRefundRequestSender()->refundPayment($refundTransfer);
     }
 
     /**
@@ -154,7 +153,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      */
     public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): RefundResponseTransfer
     {
-        return $this->getFactory()->createPayonePartialRefundMethodSender()->executePartialRefund($payonePartialOperationRequestTransfer);
+        return $this->getFactory()->createPayonePartialRefundRequestSender()->executePartialRefund($payonePartialOperationRequestTransfer);
     }
 
     /**
@@ -774,7 +773,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
     ): CaptureResponseTransfer {
         return $this->getFactory()
-            ->createPayonePartialCaptureMethodSender()
+            ->createPayonePartialCaptureRequestSender()
             ->executePartialCapture($payonePartialOperationRequestTransfer);
     }
 

@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
 
-interface PayoneRefundMethodSenderInterface
+interface PayoneRefundRequestSenderInterface
 {
     /**
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer

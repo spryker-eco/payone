@@ -25,7 +25,7 @@ use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
-class PayonePartialRefundMethodSender extends AbstractPayoneRequestSender implements PayonePartialRefundMethodSenderInterface
+class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender implements PayonePartialRefundRequestSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface

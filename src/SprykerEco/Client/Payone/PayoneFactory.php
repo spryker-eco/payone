@@ -16,6 +16,7 @@ use SprykerEco\Client\Payone\ClientApi\HashGenerator;
 use SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface;
 use SprykerEco\Client\Payone\ClientApi\HashProvider;
 use SprykerEco\Client\Payone\Zed\PayoneStub;
+use SprykerEco\Client\Payone\Zed\PayoneStubInterface;
 use SprykerEco\Shared\Payone\Dependency\HashInterface;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -96,9 +97,9 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Client\Payone\Zed\PayoneStub
+     * @return \SprykerEco\Client\Payone\Zed\PayoneStubInterface
      */
-    public function createZedStub(): PayoneStub
+    public function createZedStub(): PayoneStubInterface
     {
         $zedStub = $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_ZED);
 

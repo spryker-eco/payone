@@ -9,7 +9,6 @@
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\AddressCheckResponseTransfer;
-use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
@@ -40,12 +39,12 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 interface PayoneFacadeInterface
 {
     /**
-     * @api
-     *
      * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::saveOrderPayment()} instead.
      *
      * Specification:
      * - Saves order payment method data according to quote and checkout response transfer data.
+     *
+     * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -89,7 +88,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment($idSalesOrder): AuthorizationResponseTransfer;
+    public function preAuthorizePayment($idSalesOrder);
 
     /**
      * Specification:

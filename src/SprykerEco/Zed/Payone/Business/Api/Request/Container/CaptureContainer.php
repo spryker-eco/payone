@@ -12,7 +12,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer;
 
-class CaptureContainer extends AbstractRequestContainer
+class CaptureContainer extends AbstractRequestContainer implements CaptureContainerInterface
 {
     /**
      * @var string
@@ -59,7 +59,7 @@ class CaptureContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAmount($amount)
+    public function setAmount($amount): void
     {
         $this->amount = $amount;
     }
@@ -67,7 +67,7 @@ class CaptureContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -77,7 +77,7 @@ class CaptureContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCurrency($currency)
+    public function setCurrency($currency): void
     {
         $this->currency = $currency;
     }
@@ -85,7 +85,7 @@ class CaptureContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -95,7 +95,7 @@ class CaptureContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setSequenceNumber($sequencenumber)
+    public function setSequenceNumber($sequencenumber): void
     {
         $this->sequencenumber = $sequencenumber;
     }
@@ -103,7 +103,7 @@ class CaptureContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getSequenceNumber()
+    public function getSequenceNumber(): ?int
     {
         return $this->sequencenumber;
     }
@@ -113,7 +113,7 @@ class CaptureContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setTxid($txid)
+    public function setTxid($txid): void
     {
         $this->txid = $txid;
     }
@@ -121,25 +121,25 @@ class CaptureContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getTxid()
+    public function getTxid(): ?string
     {
         return $this->txid;
     }
 
     /**
-     * @param Capture\BusinessContainer $business
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer $business
      *
      * @return void
      */
-    public function setBusiness(BusinessContainer $business)
+    public function setBusiness(BusinessContainer $business): void
     {
         $this->business = $business;
     }
 
     /**
-     * @return Capture\BusinessContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer
      */
-    public function getBusiness()
+    public function getBusiness(): ?BusinessContainer
     {
         return $this->business;
     }
@@ -149,15 +149,15 @@ class CaptureContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setInvoicing(TransactionContainer $invoicing)
+    public function setInvoicing(TransactionContainer $invoicing): void
     {
         $this->invoicing = $invoicing;
     }
 
     /**
-     * @return Invoicing\TransactionContainer|null
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer|null
      */
-    public function getInvoicing()
+    public function getInvoicing(): ?TransactionContainer
     {
         return $this->invoicing;
     }

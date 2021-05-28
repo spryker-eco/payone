@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Yves\Payone\Form\Constraint;
 
-use SprykerEco\Client\Payone\PayoneClient;
+use SprykerEco\Client\Payone\PayoneClientInterface;
 use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 
 class ManageMandate extends SymfonyConstraint
@@ -15,14 +15,14 @@ class ManageMandate extends SymfonyConstraint
     public const OPTION_PAYONE_CLIENT = 'payoneClient';
 
     /**
-     * @var \SprykerEco\Client\Payone\PayoneClient
+     * @var \SprykerEco\Client\Payone\PayoneClientInterface
      */
     protected $payoneClient;
 
     /**
-     * @return \SprykerEco\Client\Payone\PayoneClient
+     * @return \SprykerEco\Client\Payone\PayoneClientInterface
      */
-    public function getPayoneClient(): PayoneClient
+    public function getPayoneClient(): PayoneClientInterface
     {
         return $this->payoneClient;
     }

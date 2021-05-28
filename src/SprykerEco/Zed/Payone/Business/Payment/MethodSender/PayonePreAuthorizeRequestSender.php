@@ -12,7 +12,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapp
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
-class PayonePreAuthorizeMethodSender extends AbstractPayoneRequestSender implements PayonePreAuthorizeMethodSenderInterface
+class PayonePreAuthorizeRequestSender extends AbstractPayoneRequestSender implements PayonePreAuthorizeRequestSenderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface

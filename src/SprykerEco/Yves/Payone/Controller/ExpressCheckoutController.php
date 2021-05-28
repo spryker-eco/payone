@@ -8,7 +8,6 @@
 namespace SprykerEco\Yves\Payone\Controller;
 
 use Spryker\Yves\Kernel\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * @method \SprykerEco\Client\Payone\PayoneClientInterface getClient()
@@ -19,7 +18,8 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return array
      */
-    public function checkoutWithPaypalButtonAction(): array
+    //phpcs:ignore
+    public function checkoutWithPaypalButtonAction()
     {
         return $this->viewResponse();
     }
@@ -27,7 +27,8 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function initPaypalExpressCheckoutAction(): RedirectResponse
+    //phpcs:ignore
+    public function initPaypalExpressCheckoutAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
 
@@ -37,7 +38,8 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function loadPaypalExpressCheckoutDetailsAction(): RedirectResponse
+    //phpcs:ignore
+    public function loadPaypalExpressCheckoutDetailsAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
         $expressCheckoutHandler->loadExpressCheckoutDetails();
@@ -48,7 +50,8 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function failureAction(): RedirectResponse
+    //phpcs:ignore
+    public function failureAction()
     {
         $this->addErrorMessage('Paypal transaction failed.');
 
@@ -60,7 +63,8 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function backAction(): RedirectResponse
+    //phpcs:ignore
+    public function backAction()
     {
         return $this->getFactory()
             ->createExpressCheckoutHandler()

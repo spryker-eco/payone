@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Payone\Business\Payment\Hook;
 use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneApiLogTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
@@ -22,14 +21,14 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSende
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PostSaveHook implements PostSaveHookInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
      */
-    protected $queryContainer;
+    protected $payoneRepository;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
@@ -47,18 +46,18 @@ class PostSaveHook implements PostSaveHookInterface
     protected $baseAuthorizeSender;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
      */
     public function __construct(
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
     ) {
-        $this->queryContainer = $queryContainer;
+        $this->payoneRepository = $payoneRepository;
         $this->paymentMapperReader = $paymentMapperReader;
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
         $this->baseAuthorizeSender = $baseAuthorizeSender;
@@ -125,26 +124,23 @@ class PostSaveHook implements PostSaveHookInterface
      */
     protected function checkApiLogRedirectAndError(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
     {
-        $apiLogsQuery = $this->queryContainer->createLastApiLogsByOrderId($quoteTransfer->getPayment()->getPayone()->getFkSalesOrder());
-        $apiLog = $apiLogsQuery->findOne();
+        $apiLogTransfer = $this->payoneRepository->findLastApiLogByOrderId($quoteTransfer->getPayment()->getPayone()->getFkSalesOrder());
 
-        if ($apiLog) {
-            $redirectUrl = $apiLog->getRedirectUrl();
+        if (!$apiLogTransfer) {
+            return $checkoutResponse;
+        }
+        $redirectUrl = $apiLogTransfer->getRedirectUrl();
 
-            if ($redirectUrl !== null) {
-                $checkoutResponse->setIsExternalRedirect(true);
-                $checkoutResponse->setRedirectUrl($redirectUrl);
-            }
+        if ($redirectUrl !== null) {
+            $checkoutResponse->setIsExternalRedirect(true);
+            $checkoutResponse->setRedirectUrl($redirectUrl);
+        }
 
-            $errorCode = $apiLog->getErrorCode();
+        $errorCode = $apiLogTransfer->getErrorCode();
 
-            if ($errorCode) {
-                $error = new CheckoutErrorTransfer();
-                $error->setMessage($apiLog->getErrorMessageUser());
-                $error->setErrorCode($errorCode);
-                $checkoutResponse->addError($error);
-                $checkoutResponse->setIsSuccess(false);
-            }
+        if ($errorCode) {
+            $checkoutResponse->addError($this->createCheckoutErrorTransfer($apiLogTransfer->getErrorMessageUser(), $errorCode));
+            $checkoutResponse->setIsSuccess(false);
         }
 
         return $checkoutResponse;
@@ -158,7 +154,7 @@ class PostSaveHook implements PostSaveHookInterface
      */
     protected function checkApiAuthorizationRedirectAndError(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
     {
-        $paymentEntity = $this->queryContainer->createPaymentById($checkoutResponse->getSaveOrder()->getIdSalesOrder())->findOne();
+        $paymentEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponse->getSaveOrder()->getIdSalesOrder())->findOne();
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 
@@ -169,9 +165,7 @@ class PostSaveHook implements PostSaveHookInterface
         $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
 
         if ($responseContainer->getErrorcode()) {
-            $checkoutErrorTransfer = new CheckoutErrorTransfer();
-            $checkoutErrorTransfer->setMessage($responseContainer->getCustomermessage());
-            $checkoutErrorTransfer->setErrorCode($responseContainer->getErrorcode());
+            $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage(), $responseContainer->getErrorcode());
             $checkoutResponse->addError($checkoutErrorTransfer);
             $checkoutResponse->setIsSuccess(false);
 
@@ -189,16 +183,16 @@ class PostSaveHook implements PostSaveHookInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneApiLogTransfer $apiLogTransfer
+     * @param string $errorMessage
      * @param string $errorCode
      *
      * @return \Generated\Shared\Transfer\CheckoutErrorTransfer
      */
-    protected function createCheckoutErrorTransfer(PayoneApiLogTransfer $apiLogTransfer, string $errorCode): CheckoutErrorTransfer
+    protected function createCheckoutErrorTransfer(string $errorMessage, string $errorCode): CheckoutErrorTransfer
     {
         $checkoutErrorTransfer = new CheckoutErrorTransfer();
 
-        $checkoutErrorTransfer->setMessage($apiLogTransfer->getErrorMessageUser());
+        $checkoutErrorTransfer->setMessage($errorMessage);
         $checkoutErrorTransfer->setErrorCode($errorCode);
 
         return $checkoutErrorTransfer;

@@ -21,12 +21,7 @@ interface PostSaveHookInterface
     public function executePostSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
 
     /**
-     * @api
-     *
      * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
-     *
-     * Specification:
-     * - Handles redirects and errors after order placement.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -36,13 +31,7 @@ interface PostSaveHookInterface
     public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
 
     /**
-     * @api
-     *
      * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
-     *
-     * Specification:
-     * - Executes `authorization` or `pre-authorization` API call depends on payment method.
-     * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse

@@ -10,8 +10,11 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
 
-class PreAuthorizationContainer extends AbstractAuthorizationContainer
+class PreAuthorizationContainer extends AbstractAuthorizationContainer implements PreAuthorizationContainerInterface
 {
     /**
      * @var string
@@ -27,6 +30,16 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
      * @var string
      */
     protected $financingtype;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
+     */
+    protected $paydata;
+
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
+     */
+    protected $redirect;
 
     /**
      * @param string $workorderid
@@ -62,5 +75,41 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer
     public function setFinancingtype(string $financingType): void
     {
         $this->financingtype = $financingType;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
+     */
+    public function getPaydata(): ?ContainerInterface
+    {
+        return $this->paydata;
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $payData
+     *
+     * @return void
+     */
+    public function setPaydata(PaydataContainer $payData): void
+    {
+        $this->paydata = $payData;
+    }
+
+    /**
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer $redirect
+     *
+     * @return void
+     */
+    public function setRedirect(RedirectContainer $redirect): void
+    {
+        $this->redirect = $redirect;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
+     */
+    public function getRedirect(): ?ContainerInterface
+    {
+        return $this->redirect;
     }
 }

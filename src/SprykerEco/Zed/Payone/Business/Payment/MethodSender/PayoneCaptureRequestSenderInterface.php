@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\PayoneCaptureTransfer;
 
-interface PayoneCaptureMethodSenderInterface
+interface PayoneCaptureRequestSenderInterface
 {
     /**
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer

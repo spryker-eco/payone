@@ -14,6 +14,7 @@ use Generated\Shared\Transfer\PayoneApiLogTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
 
 interface PayoneRepositoryInterface
 {
@@ -36,7 +37,7 @@ interface PayoneRepositoryInterface
      *
      * @return \Generated\Shared\Transfer\PayoneApiLogTransfer|null
      */
-    public function createLastApiLogsByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer;
+    public function findLastApiLogByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer;
 
     /**
      * @param int $idOrder
@@ -53,4 +54,11 @@ interface PayoneRepositoryInterface
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
     public function getPaymentLogs(ArrayObject $orders): PayonePaymentLogCollectionTransfer;
+
+    /**
+     * @param int $orderId
+     *
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
+     */
+    public function createPaymentPayoneQueryByOrderId(int $orderId): SpyPaymentPayoneQuery;
 }
