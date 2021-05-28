@@ -73,7 +73,7 @@ interface CaptureContainerInterface
     public function getBusiness(): ?BusinessContainer;
 
     /**
-     * @param Invoicing\TransactionContainer $invoicing
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer $invoicing
      *
      * @return void
      */

@@ -19,7 +19,7 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
 {
-    public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
+    protected const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface

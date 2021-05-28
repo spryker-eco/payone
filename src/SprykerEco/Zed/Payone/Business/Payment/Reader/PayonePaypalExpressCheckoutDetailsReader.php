@@ -16,11 +16,6 @@ use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 class PayonePaypalExpressCheckoutDetailsReader implements PayonePaypalExpressCheckoutDetailsReaderInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
-     */
-    protected $registeredMethodMappers;
-
-    /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
     protected $paymentMapperReader;

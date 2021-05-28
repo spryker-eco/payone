@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\BusinessContainer
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\PaymentMethod\AbstractPaymentMethodContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer;
 
-class DebitContainer extends AbstractRequestContainer
+class DebitContainer extends AbstractRequestContainer implements DebitContainerInterface
 {
     /**
      * @var string
@@ -70,7 +70,7 @@ class DebitContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAmount($amount)
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
@@ -78,25 +78,25 @@ class DebitContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
     /**
-     * @param Debit\BusinessContainer $business
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\BusinessContainer $business
      *
      * @return void
      */
-    public function setBusiness(BusinessContainer $business)
+    public function setBusiness(BusinessContainer $business): void
     {
         $this->business = $business;
     }
 
     /**
-     * @return Debit\BusinessContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\BusinessContainer
      */
-    public function getBusiness()
+    public function getBusiness(): BusinessContainer
     {
         return $this->business;
     }
@@ -106,7 +106,7 @@ class DebitContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setClearingType($clearingtype)
+    public function setClearingType(string $clearingtype): void
     {
         $this->clearingtype = $clearingtype;
     }
@@ -114,61 +114,61 @@ class DebitContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getClearingType()
+    public function getClearingType(): string
     {
         return $this->clearingtype;
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return void
      */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency): void
     {
         $this->currency = $currency;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
     /**
-     * @param Invoicing\TransactionContainer $invoicing
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer $invoicing
      *
      * @return void
      */
-    public function setInvoicing(TransactionContainer $invoicing)
+    public function setInvoicing(TransactionContainer $invoicing): void
     {
         $this->invoicing = $invoicing;
     }
 
     /**
-     * @return Invoicing\TransactionContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer
      */
-    public function getInvoicing()
+    public function getInvoicing(): TransactionContainer
     {
         return $this->invoicing;
     }
 
     /**
-     * @param Debit\PaymentMethod\AbstractPaymentMethodContainer $paymentMethod
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\PaymentMethod\AbstractPaymentMethodContainer $paymentMethod
      *
      * @return void
      */
-    public function setPaymentMethod(AbstractPaymentMethodContainer $paymentMethod)
+    public function setPaymentMethod(AbstractPaymentMethodContainer $paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
     }
 
     /**
-     * @return Debit\PaymentMethod\AbstractPaymentMethodContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\PaymentMethod\AbstractPaymentMethodContainer
      */
-    public function getPaymentMethod()
+    public function getPaymentMethod(): AbstractPaymentMethodContainer
     {
         return $this->paymentMethod;
     }
@@ -178,15 +178,15 @@ class DebitContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setSequenceNumber($sequencenumber)
+    public function setSequenceNumber(int $sequencenumber): void
     {
         $this->sequencenumber = $sequencenumber;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getSequenceNumber()
+    public function getSequenceNumber(): ?int
     {
         return $this->sequencenumber;
     }
@@ -196,7 +196,7 @@ class DebitContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setTxid($txid)
+    public function setTxid(string $txid): void
     {
         $this->txid = $txid;
     }
@@ -204,7 +204,7 @@ class DebitContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getTxid()
+    public function getTxid(): string
     {
         return $this->txid;
     }
@@ -214,7 +214,7 @@ class DebitContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setUseCustomerData($use_customerdata)
+    public function setUseCustomerData(string $use_customerdata): void
     {
         $this->use_customerdata = $use_customerdata;
     }
@@ -222,7 +222,7 @@ class DebitContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getUseCustomerData()
+    public function getUseCustomerData(): string
     {
         return $this->use_customerdata;
     }

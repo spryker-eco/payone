@@ -25,11 +25,11 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements PayoneCaptureRequestSenderInterface
 {
     /**
-     * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE
-     * @see \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
-     *
      * @deprecated Necessary in order to save compatibility with spryker/shipping version less than "^8.0.0".
      * use \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE instead if shipping version is higher
+     *
+     * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE
+     * @see \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
      */
     protected const SHIPMENT_EXPENSE_TYPE = 'SHIPMENT_EXPENSE_TYPE';
 

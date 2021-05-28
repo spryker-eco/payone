@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
-use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetSecurityInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
@@ -20,7 +19,7 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterface
 {
-    public const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
+    protected const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
@@ -82,9 +81,7 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
         );
 
         if (!$paymentEntity) {
-            $this->setAccessDeniedError($responseContainer);
-
-            return $getSecurityInvoiceTransfer;
+            return $this->setAccessDeniedError($getSecurityInvoiceTransfer);
         }
 
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice $paymentMethodMapper */
@@ -115,14 +112,16 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer $container
+     * @param \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
      */
-    protected function setAccessDeniedError(AbstractResponseContainer $container): void
+    protected function setAccessDeniedError(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer): PayoneGetSecurityInvoiceTransfer
     {
-        $container->setStatus(PayoneApiConstants::RESPONSE_TYPE_ERROR);
-        $container->setErrormessage(static::ERROR_ACCESS_DENIED_MESSAGE);
-        $container->setCustomermessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+        $getSecurityInvoiceTransfer->setStatus(PayoneApiConstants::RESPONSE_TYPE_ERROR);
+        $getSecurityInvoiceTransfer->setInternalErrorMessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+        $getSecurityInvoiceTransfer->setCustomerErrorMessage(static::ERROR_ACCESS_DENIED_MESSAGE);
+
+        return $getSecurityInvoiceTransfer;
     }
 }
