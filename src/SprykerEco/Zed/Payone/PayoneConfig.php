@@ -14,6 +14,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 
 class PayoneConfig extends AbstractBundleConfig
@@ -56,6 +57,12 @@ class PayoneConfig extends AbstractBundleConfig
 
     public const PAYONE_SCHUFA_CONSUMER_SCORE_SHORT = 'SFS';
     public const PAYONE_SCHUFA_CONSUMER_SCORE_MIDDLE = 'SFM';
+
+    protected const DEFAULT_PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA = [
+        PayoneApiConstants::PAYMENT_METHOD_E_WALLET,
+        PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO,
+        PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
+    ];
 
     /**
      * Fetches API request mode from config (could be 'live' or 'test').
@@ -258,6 +265,6 @@ class PayoneConfig extends AbstractBundleConfig
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
-        return $settings[PayoneConstants::PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA];
+        return $settings[PayoneConstants::PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA] ?? static::DEFAULT_PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA;
     }
 }

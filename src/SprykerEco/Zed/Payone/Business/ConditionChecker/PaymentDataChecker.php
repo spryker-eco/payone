@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Payone\Business\ConditionChecker;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
@@ -44,11 +43,6 @@ class PaymentDataChecker implements PaymentDataCheckerInterface
         $paymentTransfer = $this->payoneRepository->getPayonePaymentByOrder($orderTransfer);
 
         $paymentMethod = $paymentTransfer->getPaymentMethod();
-        $whiteList = [
-            PayoneApiConstants::PAYMENT_METHOD_E_WALLET,
-            PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO,
-            PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
-        ];
 
         if (in_array($paymentMethod, $this->payoneConfig->getPaymentMethodsWithOptionalPaymentData())) {
             return false;
