@@ -75,7 +75,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return array<string, array>
+     * @return array
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
