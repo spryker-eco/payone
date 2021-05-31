@@ -20,4 +20,19 @@ interface ExpressCheckoutHandlerInterface
      * @return void
      */
     public function loadExpressCheckoutDetails(): void;
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToCheckoutEntryPoint(): RedirectResponse;
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToFailureUrl(): RedirectResponse;
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToBackUrl(): RedirectResponse;
 }

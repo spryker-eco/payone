@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -18,7 +19,6 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return array
      */
-    //phpcs:ignore
     public function checkoutWithPaypalButtonAction()
     {
         return $this->viewResponse();
@@ -27,7 +27,6 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    //phpcs:ignore
     public function initPaypalExpressCheckoutAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
@@ -38,7 +37,6 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    //phpcs:ignore
     public function loadPaypalExpressCheckoutDetailsAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
@@ -50,7 +48,6 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    //phpcs:ignore
     public function failureAction()
     {
         $this->addErrorMessage('Paypal transaction failed.');
@@ -63,7 +60,6 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    //phpcs:ignore
     public function backAction()
     {
         return $this->getFactory()

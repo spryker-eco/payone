@@ -89,7 +89,7 @@ class TransactionController extends AbstractController
         $orderItems = SpySalesOrderItemQuery::create()
             ->useOrderQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByTransactionId($payoneTransactionStatusUpdateTransfer->getTxid())
+                ->filterByTransactionId($payoneTransactionStatusUpdateTransfer->getTxid())
             ->endUse()
             ->endUse()
             ->find();

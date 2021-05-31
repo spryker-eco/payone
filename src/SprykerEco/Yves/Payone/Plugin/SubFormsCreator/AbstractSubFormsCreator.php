@@ -22,7 +22,7 @@ abstract class AbstractSubFormsCreator
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin
      */
-    protected function createPayoneCreditCardSubFormPlugin(): PayoneCreditCardSubFormPlugin
+    protected function createPayoneCreditCardSubFormPlugin(): SubFormPluginInterface
     {
         return new PayoneCreditCardSubFormPlugin();
     }
@@ -30,7 +30,7 @@ abstract class AbstractSubFormsCreator
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayoneDirectDebitSubFormPlugin
      */
-    protected function createPayoneDirectDebitSubFormPlugin(): PayoneDirectDebitSubFormPlugin
+    protected function createPayoneDirectDebitSubFormPlugin(): SubFormPluginInterface
     {
         return new PayoneDirectDebitSubFormPlugin();
     }
@@ -38,7 +38,7 @@ abstract class AbstractSubFormsCreator
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin
      */
-    protected function createPayonePrePaymentSubFormPlugin(): PayonePrePaymentSubFormPlugin
+    protected function createPayonePrePaymentSubFormPlugin(): SubFormPluginInterface
     {
         return new PayonePrePaymentSubFormPlugin();
     }
@@ -46,7 +46,7 @@ abstract class AbstractSubFormsCreator
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayoneInvoiceSubFormPlugin
      */
-    protected function createPayoneInvoiceSubFormPlugin(): PayoneInvoiceSubFormPlugin
+    protected function createPayoneInvoiceSubFormPlugin(): SubFormPluginInterface
     {
         return new PayoneInvoiceSubFormPlugin();
     }
@@ -62,7 +62,7 @@ abstract class AbstractSubFormsCreator
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayoneEWalletSubFormPlugin
      */
-    protected function createEWalletSubFormPlugin(): PayoneEWalletSubFormPlugin
+    protected function createEWalletSubFormPlugin(): SubFormPluginInterface
     {
         return new PayoneEWalletSubFormPlugin();
     }
@@ -70,7 +70,7 @@ abstract class AbstractSubFormsCreator
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayoneInstantOnlineTransferSubFormPlugin
      */
-    protected function createPayoneInstantOnlineTransferSubFormPlugin(): PayoneInstantOnlineTransferSubFormPlugin
+    protected function createPayoneInstantOnlineTransferSubFormPlugin(): SubFormPluginInterface
     {
         return new PayoneInstantOnlineTransferSubFormPlugin();
     }

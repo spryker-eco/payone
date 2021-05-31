@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Payone\Plugin\SubFormsCreator;
 
 use Generated\Shared\Transfer\PaymentTransfer;
+use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 use SprykerEco\Yves\Payone\Plugin\PayonePostfinanceCardOnlineTransferSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayonePostfinanceEfinanceOnlineTransferSubFormPlugin;
 
@@ -34,7 +35,7 @@ class ChSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayonePostfinanceEfinanceOnlineTransferSubFormPlugin
      */
-    protected function createPayonePostfinanceEfinanceOnlineTransferSubFormPlugin(): PayonePostfinanceEfinanceOnlineTransferSubFormPlugin
+    protected function createPayonePostfinanceEfinanceOnlineTransferSubFormPlugin(): SubFormPluginInterface
     {
         return new PayonePostfinanceEfinanceOnlineTransferSubFormPlugin();
     }
@@ -42,7 +43,7 @@ class ChSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     /**
      * @return \SprykerEco\Yves\Payone\Plugin\PayonePostfinanceCardOnlineTransferSubFormPlugin
      */
-    protected function createPayonePostfinanceCardOnlineTransferSubFormPlugin(): PayonePostfinanceCardOnlineTransferSubFormPlugin
+    protected function createPayonePostfinanceCardOnlineTransferSubFormPlugin(): SubFormPluginInterface
     {
         return new PayonePostfinanceCardOnlineTransferSubFormPlugin();
     }

@@ -14,7 +14,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Client\Payone\PayoneClientInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartInterface;
-use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
+use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydratorInterface;
 use SprykerEco\Yves\Payone\PayoneConfig;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -31,7 +31,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     protected $cartClient;
 
     /**
-     * @var \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator
+     * @var \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydratorInterface
      */
     protected $quoteHydrator;
 
@@ -43,13 +43,13 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     /**
      * @param \SprykerEco\Client\Payone\PayoneClientInterface $payoneClient
      * @param \SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartInterface $cartClient
-     * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator $quoteHydrator
+     * @param \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydratorInterface $quoteHydrator
      * @param \SprykerEco\Yves\Payone\PayoneConfig $payoneConfig
      */
     public function __construct(
         PayoneClientInterface $payoneClient,
         PayoneToCartInterface $cartClient,
-        QuoteHydrator $quoteHydrator,
+        QuoteHydratorInterface $quoteHydrator,
         PayoneConfig $payoneConfig
     ) {
         $this->payoneClient = $payoneClient;

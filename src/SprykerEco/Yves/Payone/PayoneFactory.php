@@ -52,8 +52,11 @@ use SprykerEco\Yves\Payone\Form\PrePaymentForm;
 use SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm;
 use SprykerEco\Yves\Payone\Form\SecurityInvoiceSubForm;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator;
+use SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydratorInterface;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
+use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandlerInterface;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
+use SprykerEco\Yves\Payone\Handler\PayoneHandlerInterface;
 use SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
 
@@ -73,7 +76,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\PrePaymentDataProvider
      */
-    public function createPrePaymentFormDataProvider(): PrePaymentDataProvider
+    public function createPrePaymentFormDataProvider(): StepEngineFormDataProviderInterface
     {
         return new PrePaymentDataProvider();
     }
@@ -81,7 +84,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\InvoiceSubForm
      */
-    public function createInvoiceSubForm(): InvoiceSubForm
+    public function createInvoiceSubForm(): AbstractPayoneSubForm
     {
         return new InvoiceSubForm();
     }
@@ -105,7 +108,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider
      */
-    public function createInvoiceSubFormDataProvider(): InvoiceDataProvider
+    public function createInvoiceSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
         return new InvoiceDataProvider();
     }
@@ -143,17 +146,17 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Handler\PayoneHandler
+     * @return \SprykerEco\Yves\Payone\Handler\PayoneHandlerInterface
      */
-    public function createPayoneHandler(): PayoneHandler
+    public function createPayoneHandler(): PayoneHandlerInterface
     {
         return new PayoneHandler();
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler
+     * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandlerInterface
      */
-    public function createExpressCheckoutHandler(): ExpressCheckoutHandler
+    public function createExpressCheckoutHandler(): ExpressCheckoutHandlerInterface
     {
         return new ExpressCheckoutHandler(
             $this->getPayoneClient(),
@@ -412,9 +415,9 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydrator
+     * @return \SprykerEco\Yves\Payone\Handler\ExpressCheckout\QuoteHydratorInterface
      */
-    public function createQuoteHydrator(): QuoteHydrator
+    public function createQuoteHydrator(): QuoteHydratorInterface
     {
         return new QuoteHydrator(
             $this->getShipmentClient(),

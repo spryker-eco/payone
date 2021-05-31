@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -144,11 +143,11 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $errorurl;
 
     /**
-     * @param string $encoding
+     * @param string|null $encoding
      *
      * @return $this
      */
-    public function setEncoding($encoding)
+    public function setEncoding(?string $encoding)
     {
         $this->encoding = $encoding;
 
@@ -168,7 +167,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setKey($key)
+    public function setKey(string $key)
     {
         $this->key = $key;
 
@@ -178,17 +177,17 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
 
     /**
-     * @param string $api_version
+     * @param string|null $api_version
      *
      * @return $this
      */
-    public function setApiVersion($api_version)
+    public function setApiVersion(?string $api_version)
     {
         $this->api_version = $api_version;
 
@@ -204,11 +203,11 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string $mid
+     * @param string|null $mid
      *
      * @return $this
      */
-    public function setMid($mid)
+    public function setMid(?string $mid)
     {
         $this->mid = $mid;
 
@@ -228,7 +227,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setMode($mode)
+    public function setMode(string $mode)
     {
         $this->mode = $mode;
 
@@ -244,11 +243,11 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string $portalid
+     * @param string|null $portalid
      *
      * @return $this
      */
-    public function setPortalid($portalid)
+    public function setPortalid(?string $portalid)
     {
         $this->portalid = $portalid;
 
@@ -268,7 +267,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setRequest($request)
+    public function setRequest(string $request)
     {
         $this->request = $request;
 
@@ -278,7 +277,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getRequest()
+    public function getRequest(): string
     {
         return $this->request;
     }
@@ -286,13 +285,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * set the system-Name
      *
-     * @param string $integrator_name
+     * @param string $integratorName
      *
      * @return $this
      */
-    public function setIntegratorName($integrator_name)
+    public function setIntegratorName(string $integratorName)
     {
-        $this->integrator_name = $integrator_name;
+        $this->integrator_name = $integratorName;
 
         return $this;
     }
@@ -300,7 +299,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getIntegratorName()
+    public function getIntegratorName(): string
     {
         return $this->integrator_name;
     }
@@ -312,7 +311,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setIntegratorVersion($integrator_version)
+    public function setIntegratorVersion(string $integrator_version)
     {
         $this->integrator_version = $integrator_version;
 
@@ -322,7 +321,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getIntegratorVersion()
+    public function getIntegratorVersion(): string
     {
         return $this->integrator_version;
     }
@@ -334,7 +333,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setSolutionName($solution_name)
+    public function setSolutionName(string $solution_name)
     {
         $this->solution_name = $solution_name;
 
@@ -344,7 +343,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getSolutionName()
+    public function getSolutionName(): string
     {
         return $this->solution_name;
     }
@@ -356,7 +355,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setSolutionVersion($solution_version)
+    public function setSolutionVersion(string $solution_version)
     {
         $this->solution_version = $solution_version;
 
@@ -366,7 +365,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getSolutionVersion()
+    public function getSolutionVersion(): string
     {
         return $this->solution_version;
     }
@@ -380,11 +379,11 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string $aid
+     * @param string|null $aid
      *
      * @return $this
      */
-    public function setAid($aid)
+    public function setAid(?string $aid)
     {
         $this->aid = $aid;
 
@@ -400,11 +399,11 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string $language
+     * @param string|null $language
      *
      * @return $this
      */
-    public function setLanguage($language)
+    public function setLanguage(?string $language)
     {
         $this->language = $language;
 
@@ -416,7 +415,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setHash($hash)
+    public function setHash(string $hash)
     {
         $this->hash = $hash;
 
@@ -426,7 +425,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getHash()
+    public function getHash(): string
     {
         return $this->hash;
     }
@@ -440,11 +439,11 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string $responsetype
+     * @param string|null $responsetype
      *
      * @return $this
      */
-    public function setResponsetype($responsetype)
+    public function setResponsetype(?string $responsetype)
     {
         $this->responsetype = $responsetype;
 
@@ -580,54 +579,60 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getBackUrl()
+    public function getBackUrl(): string
     {
         return $this->backurl;
     }
 
     /**
-     * @param string $backUrl
+     * @param string|null $backUrl
      *
-     * @return void
+     * @return $this
      */
-    public function setBackUrl($backUrl)
+    public function setBackUrl(?string $backUrl)
     {
         $this->backurl = $backUrl;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getSuccessUrl()
+    public function getSuccessUrl(): string
     {
         return $this->successurl;
     }
 
     /**
-     * @param string $successUrl
+     * @param string|null $successUrl
      *
-     * @return void
+     * @return $this
      */
-    public function setSuccessUrl($successUrl)
+    public function setSuccessUrl(?string $successUrl)
     {
         $this->successurl = $successUrl;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getErrorUrl()
+    public function getErrorUrl(): string
     {
         return $this->errorurl;
     }
 
     /**
-     * @param string $errorUrl
+     * @param string|null $errorUrl
      *
-     * @return void
+     * @return $this
      */
-    public function setErrorUrl($errorUrl)
+    public function setErrorUrl(?string $errorUrl)
     {
         $this->errorurl = $errorUrl;
+
+        return $this;
     }
 }

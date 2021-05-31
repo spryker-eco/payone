@@ -65,7 +65,7 @@ class GatewayController extends AbstractGatewayController
         if ($cancelRedirectTransfer->getUrlHmac() === $hash) {
             $orderItems = SpySalesOrderItemQuery::create()
                 ->useOrderQuery()
-                ->filterByOrderReference($cancelRedirectTransfer->getOrderReference())
+                    ->filterByOrderReference($cancelRedirectTransfer->getOrderReference())
                 ->endUse()
                 ->find();
 
@@ -111,7 +111,7 @@ class GatewayController extends AbstractGatewayController
         $orderItems = SpySalesOrderItemQuery::create()
             ->useOrderQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByTransactionId($transactionStatusUpdateTransfer->getTxid())
+                ->filterByTransactionId($transactionStatusUpdateTransfer->getTxid())
             ->endUse()
             ->endUse()
             ->find();

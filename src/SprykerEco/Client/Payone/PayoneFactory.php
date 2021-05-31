@@ -9,9 +9,10 @@ namespace SprykerEco\Client\Payone;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Service\UtilEncoding\UtilEncodingService;
+use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheck;
+use SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheckInterface;
 use SprykerEco\Client\Payone\ClientApi\HashGenerator;
 use SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface;
 use SprykerEco\Client\Payone\ClientApi\HashProvider;
@@ -31,7 +32,7 @@ class PayoneFactory extends AbstractFactory
      *
      * @return \SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheck
      */
-    public function createCreditCardCheckCall(array $defaults): CreditCardCheck
+    public function createCreditCardCheckCall(array $defaults): CreditCardCheckInterface
     {
         return new CreditCardCheck(
             $this->createStandardParameter($defaults),
@@ -107,9 +108,9 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Service\UtilEncoding\UtilEncodingService
+     * @return \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
      */
-    public function createUtilEncodingService(): UtilEncodingService
+    public function createUtilEncodingService(): UtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_UTIL_ENCODING);
     }

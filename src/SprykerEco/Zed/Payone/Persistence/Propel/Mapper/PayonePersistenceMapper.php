@@ -45,7 +45,7 @@ class PayonePersistenceMapper
         PayonePaymentTransfer $payonePaymentTransfer
     ): PayonePaymentTransfer {
         $payonePaymentTransfer->fromArray($paymentPayoneEntity->toArray(), true);
-        $paymentDetailTransfer = $this->createPaymentDetailTransfer($paymentPayoneEntity->getSpyPaymentPayoneDetail());
+        $paymentDetailTransfer = $this->mapPaymentPayoneDetailToPaymentDetailTransfer($paymentPayoneEntity->getSpyPaymentPayoneDetail());
         $payonePaymentTransfer->setPaymentDetail($paymentDetailTransfer);
 
         return $payonePaymentTransfer;
@@ -77,7 +77,7 @@ class PayonePersistenceMapper
      *
      * @return \Generated\Shared\Transfer\PaymentDetailTransfer
      */
-    protected function createPaymentDetailTransfer(SpyPaymentPayoneDetail $paymentPayoneDetailEntity): PaymentDetailTransfer
+    public function mapPaymentPayoneDetailToPaymentDetailTransfer(SpyPaymentPayoneDetail $paymentPayoneDetailEntity): PaymentDetailTransfer
     {
         $paymentDetailTransfer = new PaymentDetailTransfer();
 

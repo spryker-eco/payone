@@ -80,10 +80,8 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     {
         $paymentPayoneEntity = $this->createPaymentPayoneQueryByOrderId($idOrder)->findOne();
         $paymentPayoneDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
-        $paymentDetailTransfer = new PaymentDetailTransfer();
-        $paymentDetailTransfer->fromArray($paymentPayoneDetailEntity->toArray(), true);
 
-        return $paymentDetailTransfer;
+        return $this->getFactory()->createPayonePersistenceMapper()->mapPaymentPayoneDetailToPaymentDetailTransfer($paymentPayoneDetailEntity);
     }
 
     /**
@@ -141,7 +139,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     {
         $paymentPayoneApiLogEntity = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByFkSalesOrder($idSalesOrder)
+                ->filterByFkSalesOrder($idSalesOrder)
             ->endUse()
             ->orderByCreatedAt(Criteria::DESC)
             ->orderByIdPaymentPayoneApiLog(Criteria::DESC)
@@ -210,7 +208,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
 
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByFkSalesOrder($ids, Criteria::IN)
+                ->filterByFkSalesOrder($ids, Criteria::IN)
             ->endUse()
             ->orderByCreatedAt();
 
@@ -225,13 +223,13 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     protected function createTransactionStatusLogsByOrderIds(ArrayObject $orderTransfers): SpyPaymentPayoneTransactionStatusLogQuery
     {
         $ids = [];
-        foreach ($orderTransfers as $order) {
-            $ids[] = $order->getIdSalesOrder();
+        foreach ($orderTransfers as $orderTransfer) {
+            $ids[] = $orderTransfer->getIdSalesOrder();
         }
 
         $query = $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByFkSalesOrder($ids, Criteria::IN)
+                ->filterByFkSalesOrder($ids, Criteria::IN)
             ->endUse()
             ->orderByCreatedAt();
 

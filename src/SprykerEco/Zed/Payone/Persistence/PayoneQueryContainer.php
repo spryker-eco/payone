@@ -67,13 +67,13 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneQuery();
         $query->useSpySalesOrderQuery()
-            ->filterByFkCustomer($customerId)
+                ->filterByFkCustomer($customerId)
             ->endUse()
             ->useSpyPaymentPayoneDetailQuery()
-            ->filterByInvoiceTitle($invoiceTitle)
+                ->filterByInvoiceTitle($invoiceTitle)
             ->endUse()
             ->useSpyPaymentPayoneApiLogQuery()
-            ->filterByStatus(PayoneApiConstants::RESPONSE_TYPE_APPROVED)
+                ->filterByStatus(PayoneApiConstants::RESPONSE_TYPE_APPROVED)
             ->endUse();
 
         return $query;
@@ -93,13 +93,13 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneQuery();
         $query->useSpySalesOrderQuery()
-            ->filterByFkCustomer($customerId)
+                ->filterByFkCustomer($customerId)
             ->endUse()
             ->useSpyPaymentPayoneDetailQuery()
-            ->filterByMandateIdentification($fileReference)
+                ->filterByMandateIdentification($fileReference)
             ->endUse()
             ->useSpyPaymentPayoneApiLogQuery()
-            ->filterByStatus(PayoneApiConstants::RESPONSE_TYPE_APPROVED)
+                ->filterByStatus(PayoneApiConstants::RESPONSE_TYPE_APPROVED)
             ->endUse();
 
         return $query;
@@ -155,7 +155,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByFkSalesOrder($idOrder)
+                ->filterByFkSalesOrder($idOrder)
             ->endUse()
             ->filterByRequest($request)
             ->orderByCreatedAt(Criteria::DESC) //TODO: Index?
@@ -194,7 +194,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByFkSalesOrder($idIdSalesOrder)
+                ->filterByFkSalesOrder($idIdSalesOrder)
             ->endUse()
             ->orderByCreatedAt();
 
@@ -233,7 +233,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByFkSalesOrder($idSalesOrder)
+                ->filterByFkSalesOrder($idSalesOrder)
             ->endUse()
             ->orderByCreatedAt(Criteria::DESC)
             ->orderByIdPaymentPayoneApiLog(Criteria::DESC);
@@ -260,7 +260,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
 
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByFkSalesOrder($ids, Criteria::IN)
+                ->filterByFkSalesOrder($ids, Criteria::IN)
             ->endUse()
             ->orderByCreatedAt();
 
@@ -285,7 +285,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
 
         return $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByFkSalesOrder($ids, Criteria::IN)
+                ->filterByFkSalesOrder($ids, Criteria::IN)
             ->endUse()
             ->orderByCreatedAt();
     }

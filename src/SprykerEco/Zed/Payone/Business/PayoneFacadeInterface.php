@@ -39,12 +39,12 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 interface PayoneFacadeInterface
 {
     /**
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::saveOrderPayment()} instead.
-     *
      * Specification:
      * - Saves order payment method data according to quote and checkout response transfer data.
      *
      * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::saveOrderPayment()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -428,12 +428,12 @@ interface PayoneFacadeInterface
     public function orderPostSave(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
 
     /**
+     * Specification:
+     * - Handles redirects and errors after order placement.
+     *
      * @api
      *
      * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
-     *
-     * Specification:
-     * - Handles redirects and errors after order placement.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -443,13 +443,13 @@ interface PayoneFacadeInterface
     public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
 
     /**
-     * @api
-     *
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
-     *
      * Specification:
      * - Executes `authorization` or `pre-authorization` API call depends on payment method.
      * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
+     *
+     * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
