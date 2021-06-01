@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Payment\Reader;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 
 class PayonePaypalExpressCheckoutDetailsReader implements PayonePaypalExpressCheckoutDetailsReaderInterface
@@ -21,13 +21,13 @@ class PayonePaypalExpressCheckoutDetailsReader implements PayonePaypalExpressChe
     protected $paymentMapperReader;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface
+     * @var \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface
      */
     protected $genericRequestMethodSender;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
-     * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface $genericRequestMethodSender
+     * @param \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface $genericRequestMethodSender
      */
     public function __construct(
         PaymentMapperReaderInterface $paymentMapperReader,

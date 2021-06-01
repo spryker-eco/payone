@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\RequestSender;
 
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
@@ -20,13 +20,13 @@ class PayoneInitPaypalExpressCheckoutMethodSender implements PayoneInitPaypalExp
     protected $paymentMapperReader;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface
+     * @var \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface
      */
     protected $genericRequestMethodSender;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
-     * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface $genericRequestMethodSender
+     * @param \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface $genericRequestMethodSender
      */
     public function __construct(
         PaymentMapperReaderInterface $paymentMapperReader,

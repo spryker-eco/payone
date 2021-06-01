@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\RequestSender;
 
 use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface;
@@ -15,7 +15,7 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 class PayonePreAuthorizeRequestSender extends AbstractPayoneRequestSender implements PayonePreAuthorizeRequestSenderInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface
+     * @var \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSenderInterface
      */
     protected $baseAuthorizeSender;
 
@@ -27,7 +27,7 @@ class PayonePreAuthorizeRequestSender extends AbstractPayoneRequestSender implem
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
-     * @param \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
+     * @param \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface $authorizationResponseMapper
      */
     public function __construct(

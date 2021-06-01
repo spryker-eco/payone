@@ -76,30 +76,30 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInter
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneAuthorizeRequestSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneAuthorizeRequestSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCaptureRequestSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCaptureRequestSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneDebitRequestSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneDebitRequestSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneInitPaypalExpressCheckoutMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneInitPaypalExpressCheckoutMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneKlarnaStartSessionMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneKlarnaStartSessionMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneManageMandateMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneManageMandateMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialCaptureRequestSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialCaptureRequestSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialRefundRequestSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialRefundRequestSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePreAuthorizeRequestSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePreAuthorizeRequestSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundRequestSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneAuthorizeRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneAuthorizeRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneCaptureRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneCaptureRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneDebitRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneDebitRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneInitPaypalExpressCheckoutMethodSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneInitPaypalExpressCheckoutMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneKlarnaStartSessionMethodSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneKlarnaStartSessionMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneManageMandateMethodSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneManageMandateMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialCaptureRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialCaptureRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialRefundRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialRefundRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneRefundRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneRefundRequestSenderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
@@ -141,7 +141,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     private $standardParameter;
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePreAuthorizeRequestSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeRequestSenderInterface
      */
     public function createPayonePreAuthorizeRequestSender(): PayonePreAuthorizeRequestSenderInterface
     {
@@ -154,7 +154,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneAuthorizeRequestSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneAuthorizeRequestSenderInterface
      */
     public function createPayoneAuthorizeRequestSender(): PayoneAuthorizeRequestSenderInterface
     {
@@ -168,7 +168,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCaptureRequestSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneCaptureRequestSenderInterface
      */
     public function createPayoneCaptureRequestSender(): PayoneCaptureRequestSenderInterface
     {
@@ -186,7 +186,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialCaptureRequestSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialCaptureRequestSenderInterface
      */
     public function createPayonePartialCaptureRequestSender(): PayonePartialCaptureRequestSenderInterface
     {
@@ -206,7 +206,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneDebitRequestSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneDebitRequestSenderInterface
      */
     public function createPayoneDebitRequestSender(): PayoneDebitRequestSenderInterface
     {
@@ -221,7 +221,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundRequestSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneRefundRequestSenderInterface
      */
     public function createPayoneRefundRequestSender(): PayoneRefundRequestSenderInterface
     {
@@ -238,7 +238,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialRefundRequestSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialRefundRequestSenderInterface
      */
     public function createPayonePartialRefundRequestSender(): PayonePartialRefundRequestSenderInterface
     {
@@ -282,7 +282,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneManageMandateMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneManageMandateMethodSenderInterface
      */
     public function createPayoneManageMandateMethodSender(): PayoneManageMandateMethodSenderInterface
     {
@@ -337,7 +337,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneInitPaypalExpressCheckoutMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneInitPaypalExpressCheckoutMethodSenderInterface
      */
     public function createPayoneInitPaypalExpressCheckoutMethodSender(): PayoneInitPaypalExpressCheckoutMethodSenderInterface
     {
@@ -359,7 +359,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface
      */
     public function createPayoneGenericRequestMethodSender(): PayoneGenericRequestMethodSenderInterface
     {
@@ -371,7 +371,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneKlarnaStartSessionMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneKlarnaStartSessionMethodSenderInterface
      */
     public function createPayoneKlarnaStartSessionMethodSender(): PayoneKlarnaStartSessionMethodSenderInterface
     {
@@ -495,7 +495,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSenderInterface
      */
     public function createPayoneBaseAuthorizeSender(): PayoneBaseAuthorizeSenderInterface
     {

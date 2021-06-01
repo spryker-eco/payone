@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Payment\MethodSender;
+namespace SprykerEco\Zed\Payone\Business\Payment\RequestSender;
 
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
