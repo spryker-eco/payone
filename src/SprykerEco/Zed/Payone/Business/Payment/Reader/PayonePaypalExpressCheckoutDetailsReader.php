@@ -10,8 +10,8 @@ namespace SprykerEco\Zed\Payone\Business\Payment\Reader;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface;
 
 class PayonePaypalExpressCheckoutDetailsReader implements PayonePaypalExpressCheckoutDetailsReaderInterface
 {

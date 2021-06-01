@@ -31,7 +31,7 @@ class NlSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneIdealOnlineTransferSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createPayoneIdealOnlineTransferSubFormPlugin(): SubFormPluginInterface
     {

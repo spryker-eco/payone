@@ -28,7 +28,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContain
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 
-class CreditCardPseudo extends AbstractMapper
+class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterface
 {
     /**
      * @return string
@@ -113,7 +113,7 @@ class CreditCardPseudo extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CreditCardCheckContainer
      */
-    public function mapCreditCardCheck(PayoneCreditCardTransfer $payoneCreditCardTransfer)
+    public function mapCreditCardCheck(PayoneCreditCardTransfer $payoneCreditCardTransfer): CreditCardCheckContainer
     {
         $creditCardCheckContainer = new CreditCardCheckContainer();
 

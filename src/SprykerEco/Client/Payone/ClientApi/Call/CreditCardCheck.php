@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Client\Payone\ClientApi\Call;
 
-use SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest;
 use SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainer;
+use SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainerInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 class CreditCardCheck extends AbstractCall implements CreditCardCheckInterface
@@ -35,9 +35,9 @@ class CreditCardCheck extends AbstractCall implements CreditCardCheckInterface
     }
 
     /**
-     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainer
+     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainerInterface
      */
-    public function mapCreditCardCheckData(): AbstractRequest
+    public function mapCreditCardCheckData(): CreditCardCheckContainerInterface
     {
         $container = new CreditCardCheckContainer($this->utilEncodingService);
         $this->applyStandardParameter($container);

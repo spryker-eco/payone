@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Client\Payone\ClientApi\Call;
 
-use SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest;
+use SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainerInterface;
 
 interface CreditCardCheckInterface extends CallInterface
 {
@@ -22,7 +22,7 @@ interface CreditCardCheckInterface extends CallInterface
     public function setDoNotStoreCardData(): void;
 
     /**
-     * @return \SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest
+     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainerInterface
      */
-    public function mapCreditCardCheckData(): AbstractRequest;
+    public function mapCreditCardCheckData(): CreditCardCheckContainerInterface;
 }

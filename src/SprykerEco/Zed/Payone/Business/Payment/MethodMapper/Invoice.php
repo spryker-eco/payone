@@ -30,7 +30,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContain
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 
-class Invoice extends AbstractMapper
+class Invoice extends AbstractMapper implements InvoiceInterface
 {
     /**
      * @return string
@@ -167,7 +167,7 @@ class Invoice extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GetInvoiceContainer
      */
-    public function mapGetInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
+    public function mapGetInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): GetInvoiceContainer
     {
         $getInvoiceContainer = new GetInvoiceContainer();
         $getInvoiceContainer->setInvoiceTitle($getInvoiceTransfer->getReference());

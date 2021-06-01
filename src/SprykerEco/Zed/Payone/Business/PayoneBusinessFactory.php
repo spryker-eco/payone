@@ -67,15 +67,31 @@ use SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHook;
 use SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHookInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudoInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebitInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\InvoiceInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneFileReader;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneFileReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneInvoiceReader;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneInvoiceReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayonePaypalExpressCheckoutDetailsReader;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayonePaypalExpressCheckoutDetailsReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneSecurityInvoiceReader;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneSecurityInvoiceReaderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneAuthorizeRequestSender;
 use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneAuthorizeRequestSenderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSender;
@@ -100,19 +116,6 @@ use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeReque
 use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeRequestSenderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneRefundRequestSender;
 use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneRefundRequestSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneFileReader;
-use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneFileReaderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneInvoiceReader;
-use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneInvoiceReaderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\Reader\PayonePaypalExpressCheckoutDetailsReader;
-use SprykerEco\Zed\Payone\Business\Payment\Reader\PayonePaypalExpressCheckoutDetailsReaderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneSecurityInvoiceReader;
-use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneSecurityInvoiceReaderInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactory;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapper;
@@ -511,9 +514,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudoInterface
      */
-    public function createCreditCardPseudo(Store $storeConfig): PaymentMethodMapperInterface
+    public function createCreditCardPseudo(Store $storeConfig): CreditCardPseudoInterface
     {
         return new CreditCardPseudo($storeConfig);
     }
@@ -521,9 +524,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebitInterface
      */
-    public function createDirectDebit(Store $storeConfig): PaymentMethodMapperInterface
+    public function createDirectDebit(Store $storeConfig): DirectDebitInterface
     {
         return new DirectDebit($storeConfig);
     }
@@ -531,9 +534,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\InvoiceInterface
      */
-    public function createInvoice(Store $storeConfig): PaymentMethodMapperInterface
+    public function createInvoice(Store $storeConfig): InvoiceInterface
     {
         return new Invoice($storeConfig);
     }
@@ -551,7 +554,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
     public function createOnlineBankTransfer(Store $storeConfig): PaymentMethodMapperInterface
     {
@@ -561,7 +564,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
     public function createEWallet(Store $storeConfig): PaymentMethodMapperInterface
     {
@@ -582,7 +585,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
     public function createPrepayment(Store $storeConfig): PaymentMethodMapperInterface
     {

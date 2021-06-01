@@ -28,7 +28,7 @@ abstract class AbstractSubFormsCreator
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneDirectDebitSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createPayoneDirectDebitSubFormPlugin(): SubFormPluginInterface
     {
@@ -36,7 +36,7 @@ abstract class AbstractSubFormsCreator
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createPayonePrePaymentSubFormPlugin(): SubFormPluginInterface
     {
@@ -44,7 +44,7 @@ abstract class AbstractSubFormsCreator
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneInvoiceSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createPayoneInvoiceSubFormPlugin(): SubFormPluginInterface
     {
@@ -60,7 +60,7 @@ abstract class AbstractSubFormsCreator
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneEWalletSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createEWalletSubFormPlugin(): SubFormPluginInterface
     {
@@ -68,7 +68,7 @@ abstract class AbstractSubFormsCreator
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneInstantOnlineTransferSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createPayoneInstantOnlineTransferSubFormPlugin(): SubFormPluginInterface
     {

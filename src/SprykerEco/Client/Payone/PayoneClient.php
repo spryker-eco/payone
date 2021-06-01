@@ -22,6 +22,7 @@ use Generated\Shared\Transfer\PayonePersonalDataTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
+use SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainerInterface;
 
 /**
  * @api
@@ -35,9 +36,9 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @api
      *
-     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainer
+     * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainerInterface
      */
-    public function getCreditCardCheckRequest()
+    public function getCreditCardCheckRequest(): CreditCardCheckContainerInterface
     {
         $defaults = [];
 

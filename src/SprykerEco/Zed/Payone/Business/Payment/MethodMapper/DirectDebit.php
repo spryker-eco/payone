@@ -30,7 +30,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContain
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 
-class DirectDebit extends AbstractMapper
+class DirectDebit extends AbstractMapper implements DirectDebitInterface
 {
     /**
      * @return string
@@ -123,7 +123,7 @@ class DirectDebit extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\BankAccountCheckContainer
      */
-    public function mapBankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer)
+    public function mapBankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer): BankAccountCheckContainer
     {
         $bankAccountCheckContainer = new BankAccountCheckContainer();
 
@@ -142,7 +142,7 @@ class DirectDebit extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ManageMandateContainer
      */
-    public function mapManageMandate(PayoneManageMandateTransfer $manageMandateTransfer)
+    public function mapManageMandate(PayoneManageMandateTransfer $manageMandateTransfer): ManageMandateContainer
     {
         $manageMandateContainer = new ManageMandateContainer();
 
@@ -214,7 +214,7 @@ class DirectDebit extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GetFileContainer
      */
-    public function mapGetFile(PayoneGetFileTransfer $getFileTransfer)
+    public function mapGetFile(PayoneGetFileTransfer $getFileTransfer): GetFileContainer
     {
         $getFileContainer = new GetFileContainer();
 

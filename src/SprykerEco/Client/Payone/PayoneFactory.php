@@ -30,7 +30,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @param array $defaults
      *
-     * @return \SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheck
+     * @return \SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheckInterface
      */
     public function createCreditCardCheckCall(array $defaults): CreditCardCheckInterface
     {

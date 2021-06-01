@@ -66,7 +66,7 @@ use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
 class PayoneFactory extends AbstractFactory
 {
     /**
-     * @return \SprykerEco\Yves\Payone\Form\PrePaymentForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createPrePaymentForm(): AbstractPayoneSubForm
     {
@@ -74,7 +74,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\PrePaymentDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createPrePaymentFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -82,7 +82,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\InvoiceSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createInvoiceSubForm(): AbstractPayoneSubForm
     {
@@ -106,7 +106,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\InvoiceDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createInvoiceSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -167,7 +167,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     public function createPrePaymentSubFormPlugin(): SubFormPluginInterface
     {
@@ -175,7 +175,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     public function createCreditCardSubFormPlugin(): SubFormPluginInterface
     {
@@ -183,7 +183,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\CreditCardSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createCreditCardSubForm(): AbstractPayoneSubForm
     {
@@ -191,7 +191,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\CreditCardDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createCreditCardSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -199,7 +199,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\EWalletSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createEWalletSubForm(): AbstractPayoneSubForm
     {
@@ -207,7 +207,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\EWalletDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createEWalletSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -215,7 +215,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createDirectDebitSubForm(): AbstractPayoneSubForm
     {
@@ -223,7 +223,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\DirectDebitDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createDirectDebitSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -231,7 +231,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createEpsOnlineTransferSubForm(): AbstractPayoneSubForm
     {
@@ -239,7 +239,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\EpsOnlineTransferDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createEpsOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -247,7 +247,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\GiropayOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createGiropayOnlineTransferSubForm(): AbstractPayoneSubForm
     {
@@ -255,7 +255,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\GiropayOnlineTransferDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createGiropayOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -263,7 +263,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\InstantOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createInstantOnlineTransferSubForm(): AbstractPayoneSubForm
     {
@@ -271,7 +271,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\InstantOnlineTransferDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createInstantOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -279,7 +279,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createIdealOnlineTransferSubForm(): AbstractPayoneSubForm
     {
@@ -287,7 +287,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\IdealOnlineTransferDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createIdealOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -295,7 +295,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\PostfinanceEfinanceOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createPostfinanceEfinanceOnlineTransferSubForm(): AbstractPayoneSubForm
     {
@@ -303,7 +303,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceEfinanceOnlineTransferDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createPostfinanceEfinanceOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -311,7 +311,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\PostfinanceCardOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createPostfinanceCardOnlineTransferSubForm(): AbstractPayoneSubForm
     {
@@ -319,7 +319,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\PostfinanceCardOnlineTransferDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createPostfinanceCardOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -327,7 +327,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\Przelewy24OnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createPrzelewy24OnlineTransferSubForm(): AbstractPayoneSubForm
     {
@@ -335,7 +335,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\Przelewy24OnlineTransferDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createPrzelewy24OnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
@@ -343,7 +343,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createBancontactOnlineTransferSubForm(): AbstractPayoneSubForm
     {
@@ -351,7 +351,7 @@ class PayoneFactory extends AbstractFactory
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DataProvider\BancontactOnlineTransferDataProvider
+     * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createBancontactOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {

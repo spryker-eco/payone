@@ -31,7 +31,7 @@ class DeSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneGiropayOnlineTransferSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createPayoneGiropayOnlineTransferSubFormPlugin(): SubFormPluginInterface
     {
