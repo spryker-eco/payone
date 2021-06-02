@@ -20,7 +20,7 @@ use SprykerEco\Yves\Payone\Plugin\PayoneSecurityInvoiceSubFormPlugin;
 abstract class AbstractSubFormsCreator
 {
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
     protected function createPayoneCreditCardSubFormPlugin(): SubFormPluginInterface
     {

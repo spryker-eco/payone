@@ -93,9 +93,9 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
      */
     public function getPaymentLogs(ArrayObject $orderTransfers): PayonePaymentLogCollectionTransfer
     {
-        $paymentPayoneApiLogEntityCollection = $this->createApiLogsByOrderIds($orderTransfers)->find()->getData();
+        $paymentPayoneApiLogEntityCollection = $this->createPaymentPayoneApiLogQueryByOrderIds($orderTransfers)->find()->getData();
 
-        $paymentPayoneTransactionStatusLogEntityCollection = $this->createTransactionStatusLogsByOrderIds($orderTransfers)->find()->getData();
+        $paymentPayoneTransactionStatusLogEntityCollection = $this->createPaymentPayoneTransactionStatusLogQueryByOrderIds($orderTransfers)->find()->getData();
 
         $payonePaymentLogTransferList = [];
         /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog $paymentPayoneApiLogEntity */
@@ -199,7 +199,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    protected function createApiLogsByOrderIds($orderTransfers): SpyPaymentPayoneApiLogQuery
+    protected function createPaymentPayoneApiLogQueryByOrderIds($orderTransfers): SpyPaymentPayoneApiLogQuery
     {
         $ids = [];
         foreach ($orderTransfers as $orderTransfer) {
@@ -220,7 +220,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
-    protected function createTransactionStatusLogsByOrderIds(ArrayObject $orderTransfers): SpyPaymentPayoneTransactionStatusLogQuery
+    protected function createPaymentPayoneTransactionStatusLogQueryByOrderIds(ArrayObject $orderTransfers): SpyPaymentPayoneTransactionStatusLogQuery
     {
         $ids = [];
         foreach ($orderTransfers as $orderTransfer) {
