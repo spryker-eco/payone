@@ -10,7 +10,9 @@
             form: data.form,
             billingAddressData: vars.billing_address_data,
             customerData: vars.customer_data,
-            klarnaPayMethods: vars.widget_pay_methods,
-        }
+        },
+        attributes: {
+            'klarna-pay-methods': vars.widget_pay_methods | json_encode(),
+        },
     } only %}
 {% endblock %}

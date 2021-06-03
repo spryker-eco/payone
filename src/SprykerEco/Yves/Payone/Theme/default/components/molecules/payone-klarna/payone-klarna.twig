@@ -6,16 +6,16 @@
 } %}
 
 {% define data = {
+    form: required,
+    billingAddressData: data.billingAddressData | default({}),
+    customerData: data.customerData | default({}),
     scriptSrc: 'https://x.klarnacdn.net/kp/lib/v1/api.js',
-    form: data.form,
-    billingAddressData: data.billingAddressData,
-    customerData: data.customerData,
-    klarnaPayMethods: data.klarnaPayMethods,
 } %}
 
 {% set billingAddressData = data.billingAddressData %}
 
 {% define attributes = {
+    'klarna-pay-methods': required,
     'given-name': billingAddressData['given_name'] | default,
     'family-name': billingAddressData['family_name'] | default,
     'email': billingAddressData['email'] | default,
@@ -25,19 +25,18 @@
     'country': billingAddressData['country'] | default,
     'phone': billingAddressData['phone'] | default,
     'date-of-birth': data.customerData['date_of_birth'] | default,
-    'field-class-name': 'js-payone-klarna__select-field',
-    'klarna-pay-methods' : data.klarnaPayMethods | default([]) | json_encode(),
 } %}
 
 {% block body %}
     <div class="payment-subform payone-form payone-klarna-form payment-form" id="payoneKlarna">
         <div class="field">
-            {{ form_widget(data.form.payoneKlarna.payMethod, {'attr': {'class': attributes['field-class-name']}}) }}
+            {{ form_widget(data.form.payoneKlarna.payMethod, {'attr': {'class': config.jsName ~ '__select-field'}}) }}
             {{ form_widget(data.form.payoneKlarna.payMethodToken) }}
         </div>
     </div>
 
     {% include molecule('script-loader') with {
+        class: config.jsName ~ '__script-loader',
         attributes: {
             src: data.scriptSrc,
             async: true,
