@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -12,7 +13,7 @@ abstract class AbstractContainer implements ContainerInterface
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $result = [];
         foreach ($this as $key => $value) {
@@ -33,7 +34,7 @@ abstract class AbstractContainer implements ContainerInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $stringArray = [];
         foreach ($this->toArray() as $key => $value) {

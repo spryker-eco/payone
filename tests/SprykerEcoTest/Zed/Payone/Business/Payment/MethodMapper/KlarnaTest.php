@@ -7,6 +7,8 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Payment\MethodMapper;
 
+use Generated\Shared\DataBuilder\PaymentBuilder;
+use Generated\Shared\DataBuilder\PayoneKlarnaBuilder;
 use Generated\Shared\DataBuilder\PayoneKlarnaStartSessionRequestBuilder;
 use Generated\Shared\DataBuilder\QuoteBuilder;
 use Generated\Shared\Transfer\CurrencyTransfer;
@@ -88,7 +90,7 @@ class KlarnaTest extends AbstractMethodMapperTest
         $paymentMethodMapper = $this->preparePaymentMethodMapper($this->createKlarna());
 
         // Act
-        $requestData = $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity)->toArray();
+        $requestData = $paymentMethodMapper->mapKlarnaPaymentToPreAuthorization($paymentEntity, $this->getQuote())->toArray();
 
         // Assert
         foreach (static::PREAUTHORIZATION_COMMON_REQUIRED_PARAMS as $key => $value) {
@@ -102,37 +104,6 @@ class KlarnaTest extends AbstractMethodMapperTest
         }
 
         foreach (static::PREAUTHORIZATION_KLARNA_REQUIRED_PARAMS as $key => $value) {
-            $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
-        }
-    }
-
-    /**
-     * @return void
-     */
-    public function testMapPaymentToAuthorization(): void
-    {
-        // Arrange
-        $paymentEntity = $this->getPaymentEntityMock();
-        $paymentMethodMapper = $this->preparePaymentMethodMapper($this->createKlarna());
-
-        $orderTransfer = $this->getSalesOrderTransfer();
-
-        // Act
-        $requestData = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer)->toArray();
-
-        // Assert
-        foreach (static::AUTHORIZATION_COMMON_REQUIRED_PARAMS as $key => $value) {
-            $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
-        }
-
-        foreach (static::AUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS as $key => $value) {
-            $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
-        }
-
-        foreach (static::AUTHORIZATION_KLARNA_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
             $this->assertSame($value, $requestData[$key]);
         }
@@ -190,19 +161,6 @@ class KlarnaTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
-    {
-        $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
-
-        $paymentPayoneDetail->method('getPayMethod')->willReturn(static::PAY_METHOD_TYPE);
-        $paymentPayoneDetail->method('getToken')->willReturn('token');
-
-        return $paymentPayoneDetail;
-    }
-
-    /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
      */
     protected function getCurrentRequestMock(): Request
@@ -235,10 +193,20 @@ class KlarnaTest extends AbstractMethodMapperTest
      */
     protected function getQuote(): QuoteTransfer
     {
+        $payoneKlarnaBuilder = new PayoneKlarnaBuilder([
+            'payMethodToken' => 'token',
+            'payMethod' => static::PAY_METHOD_TYPE,
+        ]);
+
+        $paymentBuilder = new PaymentBuilder([
+            'payoneKlarna' => $payoneKlarnaBuilder->build(),
+        ]);
+
         $quoteBuilder = new QuoteBuilder([
             'totals' => $this->getTotals(),
             'currency' => $this->createCurrency(),
             'billingAddress' => $this->getAddressMock(),
+            'payment' => $paymentBuilder->build(),
         ]);
 
         return $quoteBuilder->build();

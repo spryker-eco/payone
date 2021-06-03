@@ -16,7 +16,7 @@ interface StandartParameterMapperInterface
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      *
-     * @return void
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function setStandardParameter(AbstractRequestContainer $container, PayoneStandardParameterTransfer $standardParameter): void;
+    public function setStandardParameter(AbstractRequestContainer $container, PayoneStandardParameterTransfer $standardParameter): AbstractRequestContainer;
 }

@@ -70,7 +70,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return string
      */
-    protected function getPreparedKey($key): string
+    protected function getPreparedKey(string $key): string
     {
         $key = preg_replace(self::ADD_PAYDATA_REPLACEMENT_PATTERN, '$1', $key);
 

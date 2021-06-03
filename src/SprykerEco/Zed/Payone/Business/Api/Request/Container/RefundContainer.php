@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -11,7 +12,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Refund\PaymentMethod\BankAccountContainer;
 
-class RefundContainer extends AbstractRequestContainer
+class RefundContainer extends AbstractRequestContainer implements RefundContainerInterface
 {
     /**
      * @var string
@@ -19,7 +20,7 @@ class RefundContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_REFUND;
 
     /**
-     * @var string
+     * @var int
      */
     protected $txid;
 
@@ -102,7 +103,7 @@ class RefundContainer extends AbstractRequestContainer
      *
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount(int $amount): RefundContainerInterface
     {
         $this->amount = $amount;
 
@@ -112,17 +113,17 @@ class RefundContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return $this->amount;
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return $this
      */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency): RefundContainerInterface
     {
         $this->currency = $currency;
 
@@ -130,19 +131,19 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
     /**
-     * @param string $narrative_text
+     * @param string|null $narrative_text
      *
      * @return $this
      */
-    public function setNarrativeText($narrative_text)
+    public function setNarrativeText(?string $narrative_text): RefundContainerInterface
     {
         $this->narrative_text = $narrative_text;
 
@@ -150,9 +151,9 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNarrativeText()
+    public function getNarrativeText(): ?string
     {
         return $this->narrative_text;
     }
@@ -162,7 +163,7 @@ class RefundContainer extends AbstractRequestContainer
      *
      * @return $this
      */
-    public function setInvoicing(TransactionContainer $invoicing)
+    public function setInvoicing(TransactionContainer $invoicing): RefundContainerInterface
     {
         $this->invoicing = $invoicing;
 
@@ -172,7 +173,7 @@ class RefundContainer extends AbstractRequestContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer
      */
-    public function getInvoicing()
+    public function getInvoicing(): TransactionContainer
     {
         return $this->invoicing;
     }
@@ -182,7 +183,7 @@ class RefundContainer extends AbstractRequestContainer
      *
      * @return $this
      */
-    public function setPaymentMethod(BankAccountContainer $paymentMethod)
+    public function setPaymentMethod(BankAccountContainer $paymentMethod): RefundContainerInterface
     {
         $this->paymentMethod = $paymentMethod;
 
@@ -192,17 +193,17 @@ class RefundContainer extends AbstractRequestContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Refund\PaymentMethod\BankAccountContainer
      */
-    public function getPaymentMethod()
+    public function getPaymentMethod(): BankAccountContainer
     {
         return $this->paymentMethod;
     }
 
     /**
-     * @param int $sequencenumber
+     * @param int|null $sequencenumber
      *
      * @return $this
      */
-    public function setSequenceNumber($sequencenumber)
+    public function setSequenceNumber(?int $sequencenumber): RefundContainerInterface
     {
         $this->sequencenumber = $sequencenumber;
 
@@ -210,19 +211,19 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getSequenceNumber()
+    public function getSequenceNumber(): ?int
     {
         return $this->sequencenumber;
     }
 
     /**
-     * @param string $txid
+     * @param int $txid
      *
      * @return $this
      */
-    public function setTxid($txid)
+    public function setTxid($txid): RefundContainerInterface
     {
         $this->txid = $txid;
 
@@ -230,9 +231,9 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getTxid()
+    public function getTxid(): int
     {
         return $this->txid;
     }
@@ -242,7 +243,7 @@ class RefundContainer extends AbstractRequestContainer
      *
      * @return $this
      */
-    public function setUseCustomerData($use_customerdata)
+    public function setUseCustomerData(string $use_customerdata): RefundContainerInterface
     {
         $this->use_customerdata = $use_customerdata;
 
@@ -252,7 +253,7 @@ class RefundContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getUseCustomerData()
+    public function getUseCustomerData(): string
     {
         return $this->use_customerdata;
     }
@@ -260,17 +261,17 @@ class RefundContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getBankcountry()
+    public function getBankcountry(): string
     {
         return $this->bankcountry;
     }
 
     /**
-     * @param string $bankcountry
+     * @param string|null $bankcountry
      *
      * @return $this
      */
-    public function setBankcountry($bankcountry)
+    public function setBankcountry(?string $bankcountry): RefundContainerInterface
     {
         $this->bankcountry = $bankcountry;
 
@@ -278,19 +279,19 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankaccount()
+    public function getBankaccount(): ?string
     {
         return $this->bankaccount;
     }
 
     /**
-     * @param string $bankaccount
+     * @param string|null $bankaccount
      *
      * @return $this
      */
-    public function setBankaccount($bankaccount)
+    public function setBankaccount(?string $bankaccount): RefundContainerInterface
     {
         $this->bankaccount = $bankaccount;
 
@@ -298,19 +299,19 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankcode()
+    public function getBankcode(): ?string
     {
         return $this->bankcode;
     }
 
     /**
-     * @param string $bankcode
+     * @param string|null $bankcode
      *
      * @return $this
      */
-    public function setBankcode($bankcode)
+    public function setBankcode(?string $bankcode): RefundContainerInterface
     {
         $this->bankcode = $bankcode;
 
@@ -318,19 +319,19 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankbranchcode()
+    public function getBankbranchcode(): ?string
     {
         return $this->bankbranchcode;
     }
 
     /**
-     * @param string $bankbranchcode
+     * @param string|null $bankbranchcode
      *
      * @return $this
      */
-    public function setBankbranchcode($bankbranchcode)
+    public function setBankbranchcode(?string $bankbranchcode): RefundContainerInterface
     {
         $this->bankbranchcode = $bankbranchcode;
 
@@ -338,19 +339,19 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankcheckdigit()
+    public function getBankcheckdigit(): ?string
     {
         return $this->bankcheckdigit;
     }
 
     /**
-     * @param string $bankcheckdigit
+     * @param string|null $bankcheckdigit
      *
      * @return $this
      */
-    public function setBankcheckdigit($bankcheckdigit)
+    public function setBankcheckdigit(?string $bankcheckdigit): RefundContainerInterface
     {
         $this->bankcheckdigit = $bankcheckdigit;
 
@@ -358,19 +359,19 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban()
+    public function getIban(): ?string
     {
         return $this->iban;
     }
 
     /**
-     * @param string $iban
+     * @param string|null $iban
      *
      * @return $this
      */
-    public function setIban($iban)
+    public function setIban(?string $iban): RefundContainerInterface
     {
         $this->iban = $iban;
 
@@ -378,19 +379,19 @@ class RefundContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic()
+    public function getBic(): ?string
     {
         return $this->bic;
     }
 
     /**
-     * @param string $bic
+     * @param string|null $bic
      *
      * @return $this
      */
-    public function setBic($bic)
+    public function setBic(?string $bic): RefundContainerInterface
     {
         $this->bic = $bic;
 

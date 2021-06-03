@@ -8,6 +8,7 @@ use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Oms\OmsConstants;
 use Spryker\Shared\Sales\SalesConstants;
 use Spryker\Zed\Oms\OmsConfig;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\PayoneConfig;
 
@@ -49,6 +50,11 @@ $config[PayoneConstants::PAYONE] = [
     ],
     PayoneConstants::PAYONE_ADDRESS_CHECK_TYPE => PayoneConstants::PAYONE_ADDRESS_CHECK_BASIC,
     PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE => PayoneConstants::PAYONE_ARVATO_CONSUMER_SCORE_HARD_CRITERIA,
+    PayoneConstants::PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA => [
+        PayoneApiConstants::PAYMENT_METHOD_E_WALLET,
+        PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO,
+        PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER,
+    ],
 ];
 
 $config[PayoneConstants::PAYONE][PayoneConstants::HOST_YVES] = $config[ApplicationConstants::BASE_URL_YVES];

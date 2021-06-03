@@ -78,7 +78,7 @@ class PayoneHandler implements PayoneHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(Request $request, QuoteTransfer $quoteTransfer)
+    public function addPaymentToQuote(Request $request, QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
 
@@ -95,7 +95,7 @@ class PayoneHandler implements PayoneHandlerInterface
      *
      * @return void
      */
-    protected function setPaymentProviderAndMethod(QuoteTransfer $quoteTransfer, $paymentSelection)
+    protected function setPaymentProviderAndMethod(QuoteTransfer $quoteTransfer, string $paymentSelection): void
     {
         $quoteTransfer->getPayment()
             ->setPaymentProvider(static::PAYMENT_PROVIDER)
@@ -107,7 +107,7 @@ class PayoneHandler implements PayoneHandlerInterface
      *
      * @return void
      */
-    protected function setPaymentSuccessIncludePath(QuoteTransfer $quoteTransfer)
+    protected function setPaymentSuccessIncludePath(QuoteTransfer $quoteTransfer): void
     {
         $quoteTransfer->requirePayment()->getPayment()->setSummaryIncludePath(self::CHECKOUT_INCLUDE_SUMMARY_PATH);
         $quoteTransfer->requirePayment()->getPayment()->setSuccessIncludePath(self::CHECKOUT_INCLUDE_SUCCESS_PATH);
@@ -120,7 +120,7 @@ class PayoneHandler implements PayoneHandlerInterface
      *
      * @return void
      */
-    protected function setPayonePayment(Request $request, QuoteTransfer $quoteTransfer, $paymentSelection)
+    protected function setPayonePayment(Request $request, QuoteTransfer $quoteTransfer, string $paymentSelection): void
     {
         $payonePaymentTransfer = $this->getPayonePaymentTransfer($quoteTransfer, $paymentSelection);
 
@@ -169,10 +169,6 @@ class PayoneHandler implements PayoneHandlerInterface
         } elseif ($paymentSelection == PaymentTransfer::PAYONE_CASH_ON_DELIVERY) {
             $shippingProvider = $quoteTransfer->getShipment()->getMethod()->getCarrierName();
             $paymentDetailTransfer->setShippingProvider($shippingProvider);
-        } elseif ($paymentSelection == PaymentTransfer::PAYONE_KLARNA) {
-            /** @var \Generated\Shared\Transfer\PayoneKlarnaTransfer $payonePaymentTransfer */
-            $paymentDetailTransfer->setPayMethod($payonePaymentTransfer->getPayMethod());
-            $paymentDetailTransfer->setToken($payonePaymentTransfer->getPayMethodToken());
         }
 
         $payonePaymentTransfer = new PayonePaymentTransfer();
@@ -186,7 +182,7 @@ class PayoneHandler implements PayoneHandlerInterface
     /**
      * @return string
      */
-    protected function getCurrency()
+    protected function getCurrency(): string
     {
         return Store::getInstance()->getCurrencyIsoCode();
     }
@@ -197,7 +193,8 @@ class PayoneHandler implements PayoneHandlerInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaymentTransfer
      */
-    protected function getPayonePaymentTransfer(QuoteTransfer $quoteTransfer, $paymentSelection)
+    //phpcs:ignore
+    protected function getPayonePaymentTransfer(QuoteTransfer $quoteTransfer, string $paymentSelection)
     {
         $method = 'get' . ucfirst($paymentSelection);
         $payonePaymentTransfer = $quoteTransfer->getPayment()->$method();

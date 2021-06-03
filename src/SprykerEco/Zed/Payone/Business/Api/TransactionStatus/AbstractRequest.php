@@ -24,7 +24,7 @@ class AbstractRequest
      *
      * @return void
      */
-    public function init(array $data = [])
+    public function init(array $data = []): void
     {
         foreach ($data as $key => $value) {
             $this->set($key, $value);
@@ -34,7 +34,7 @@ class AbstractRequest
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $stringArray = [];
         foreach ($this->toArray() as $key => $value) {
@@ -48,7 +48,7 @@ class AbstractRequest
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $result = [];
         foreach ($this as $key => $data) {
@@ -68,6 +68,7 @@ class AbstractRequest
      *
      * @return mixed
      */
+    //phpcs:ignore
     public function getValue($key)
     {
         return $this->get($key);
@@ -79,6 +80,7 @@ class AbstractRequest
      *
      * @return bool|null
      */
+    //phpcs:ignore
     public function setValue($key, $name)
     {
         return $this->set($key, $name);
@@ -104,6 +106,7 @@ class AbstractRequest
      *
      * @return bool|null
      */
+    //phpcs:ignoreFile
     public function set($name, $value)
     {
         if (property_exists($this, $name)) {

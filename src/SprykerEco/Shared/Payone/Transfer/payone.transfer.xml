@@ -162,8 +162,6 @@
         <property name="workOrderId" type="string"/>
         <property name="shippingProvider" type="string"/>
         <property name="capturedAmount" type="int"/>
-        <property name="payMethod" type="string"/>
-        <property name="token" type="string"/>
     </transfer>
 
     <transfer name="PayoneBankAccountCheck">
@@ -538,5 +536,50 @@
         <property name="isSuccessful" type="bool"/>
         <property name="errorMessage" type="string"/>
     </transfer>
+
+    <transfer name="PayoneApiLog">
+        <property name="redirectUrl" type="string"/>
+        <property name="errorCode" type="string"/>
+        <property name="errorMessageUser" type="string"/>
+    </transfer>
     <!--Response container replacement related transfers end-->
+
+    <transfer name="Refund">
+    </transfer>
+
+    <transfer name="KeyTranslation">
+    </transfer>
+
+    <transfer name="Locale">
+    </transfer>
+
+    <transfer name="CheckoutResponse">
+    </transfer>
+
+    <transfer name="SaveOrder">
+    </transfer>
+
+    <transfer name="PaymentMethods">
+    </transfer>
+
+    <transfer name="CheckoutError">
+    </transfer>
+
+    <transfer name="PaymentMethod">
+    </transfer>
+
+    <transfer name="Customer">
+    </transfer>
+
+    <transfer name="Address">
+    </transfer>
+
+    <transfer name="ShipmentMethod">
+    </transfer>
+
+    <transfer name="Shipment">
+    </transfer>
+
+    <transfer name="PersonalData">
+    </transfer>
 </transfers>

@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -18,11 +19,15 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalC
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface;
 
 class GenericPayment extends AbstractMapper implements GenericPaymentMethodMapperInterface
@@ -36,7 +41,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     public function mapRequestTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    ) {
+    ): GenericPaymentContainer {
         $quoteTransfer = $requestTransfer->getQuote();
 
         $genericPayment = $this->mapQuoteTransferToGenericPayment($genericPayment, $quoteTransfer);
@@ -56,7 +61,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     public function mapQuoteTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
         QuoteTransfer $quoteTransfer
-    ) {
+    ): GenericPaymentContainer {
         $genericPayment->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $genericPayment->setWorkOrderId(
             $quoteTransfer->getPayment()
@@ -69,7 +74,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer
      */
-    public function createBaseGenericPaymentContainer()
+    public function createBaseGenericPaymentContainer(): GenericPaymentContainer
     {
         $genericPayment = new GenericPaymentContainer();
         $paydataContainer = new PaydataContainer();
@@ -86,7 +91,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT;
     }
@@ -94,9 +99,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
      */
-    public function mapPaymentToPreauthorization(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToPreauthorization(SpyPaymentPayone $paymentEntity): PreAuthorizationContainerInterface
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer $preAuthorizationContainer */
@@ -157,7 +162,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer
      */
-    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer)
+    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): AbstractAuthorizationContainer
     {
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
@@ -168,9 +173,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
     {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
@@ -186,9 +191,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface
      */
-    public function mapPaymentToDebit(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToDebit(SpyPaymentPayone $paymentEntity): DebitContainerInterface
     {
         $debitContainer = new DebitContainer();
 
@@ -203,9 +208,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity): RefundContainerInterface
     {
         $refundContainer = new RefundContainer();
 

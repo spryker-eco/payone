@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -66,7 +67,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return array
      */
-    public function sendRawRequest(array $params)
+    public function sendRawRequest(array $params): array
     {
         $rawResponse = $this->performRequest($params);
         $result = $this->parseResponse($rawResponse);
@@ -80,7 +81,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return array
      */
-    public function sendRequest(AbstractRequestContainer $container, array $additionalParams = [])
+    public function sendRequest(AbstractRequestContainer $container, array $additionalParams = []): array
     {
         try {
             $requestParams = array_merge($container->toArray(), $additionalParams);
@@ -108,7 +109,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      */
     protected function generateUrlArray(array $params)
     {
-        $urlRequest = $this->getUrl() . '?' . http_build_query($params, null, '&');
+        $urlRequest = $this->getUrl() . '?' . http_build_query($params, '', '&');
         $urlArray = parse_url($urlRequest);
 
         return $urlArray;
@@ -151,7 +152,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -177,7 +178,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
     /**
      * @return string
      */
-    public function getRawResponse()
+    public function getRawResponse(): string
     {
         return $this->rawResponse;
     }

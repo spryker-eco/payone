@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -8,7 +9,6 @@
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\AddressCheckResponseTransfer;
-use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
@@ -31,6 +31,7 @@ use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneBusinessFactory getFactory()
@@ -43,12 +44,27 @@ interface PayoneFacadeInterface
      *
      * @api
      *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::saveOrderPayment()} instead.
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
      *
      * @return void
      */
     public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
+
+    /**
+     * Specification:
+     * - Saves order payment method data according to quote and order data.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\SaveOrderTransfer $saveOrderTransfer
+     *
+     * @return void
+     */
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void;
 
     /**
      * Specification:
@@ -68,11 +84,11 @@ interface PayoneFacadeInterface
      *
      * @api
      *
-     * @param int $idPayment
+     * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment(int $idSalesOrder): AuthorizationResponseTransfer;
+    public function preAuthorizePayment($idSalesOrder);
 
     /**
      * Specification:
@@ -110,7 +126,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer): RefundResponseTransfer;
+    public function refundPayment(PayoneRefundTransfer $refundTransfer);
 
     /**
      * Specification:
@@ -399,8 +415,25 @@ interface PayoneFacadeInterface
     /**
      * Specification:
      * - Handles redirects and errors after order placement.
+     * - Executes `authorization` or `pre-authorization` API call depends on payment method.
+     * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
      *
      * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     *
+     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
+     */
+    public function orderPostSave(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
+
+    /**
+     * Specification:
+     * - Handles redirects and errors after order placement.
+     *
+     * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -415,6 +448,8 @@ interface PayoneFacadeInterface
      * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
      *
      * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse

@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -41,7 +42,9 @@ class PayoneToShipmentBridge implements PayoneToShipmentInterface
                 throw new RuntimeException('Split shipping is not supported');
             }
 
-            $shipmentMethodsTransfer = $shipmentMethodsCollectionTransfer->getShipmentMethods()->getIterator()
+            $shipmentMethodsTransfer = $shipmentMethodsCollectionTransfer
+                ->getShipmentMethods()
+                ->getIterator()
                 ->current();
 
             return $shipmentMethodsTransfer;

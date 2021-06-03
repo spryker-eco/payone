@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -12,15 +13,21 @@ use Spryker\Zed\Kernel\Persistence\QueryContainer\QueryContainerInterface;
 interface PayoneQueryContainerInterface extends QueryContainerInterface
 {
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $idPaymentPayone
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createCurrentSequenceNumberQuery($idPaymentPayone);
+    public function createCurrentSequenceNumberQuery(int $idPaymentPayone);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $transactionId
@@ -30,6 +37,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentByTransactionIdQuery($transactionId);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param string $invoiceTitle
@@ -40,6 +50,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param string $fileReference
@@ -50,6 +63,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $fkPayment
@@ -60,6 +76,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createApiLogByPaymentAndRequestTypeQuery($fkPayment, $requestType);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $idOrder
@@ -69,6 +88,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentByOrderId($idOrder);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $orderId
@@ -79,6 +101,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createApiLogsByOrderIdAndRequest($orderId, $request);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $orderId
@@ -88,6 +113,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createPaymentById($orderId);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $idSalesOrder
@@ -97,6 +125,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createTransactionStatusLogsBySalesOrder($idSalesOrder);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $idSalesOrderItem
@@ -107,6 +138,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createTransactionStatusLogOrderItemsByLogIds($idSalesOrderItem, $ids);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param \Propel\Runtime\Collection\ObjectCollection $orders
@@ -116,6 +150,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createApiLogsByOrderIds($orders);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @param int $idSalesOrder
@@ -125,15 +162,21 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
     public function createLastApiLogsByOrderId($idSalesOrder);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
-     * @param \Propel\Runtime\Collection\ObjectCollection $orders
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder[] $orders
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
     public function createTransactionStatusLogsByOrderIds($orders);
 
     /**
+     * Specification:
+     * - TODO: Add method specification.
+     *
      * @api
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery

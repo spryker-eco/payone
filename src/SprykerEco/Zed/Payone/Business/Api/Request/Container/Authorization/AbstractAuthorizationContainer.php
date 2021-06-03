@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -122,24 +123,6 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     public function setBusinessrelation(string $businessrelation): void
     {
         $this->businessrelation = $businessrelation;
-    }
-
-    /**
-     * @param int $aid
-     *
-     * @return void
-     */
-    public function setAid($aid)
-    {
-        $this->aid = $aid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAid()
-    {
-        return $this->aid;
     }
 
     /**

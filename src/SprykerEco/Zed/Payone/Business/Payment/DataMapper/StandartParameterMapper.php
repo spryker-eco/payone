@@ -11,12 +11,12 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
-use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
+use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
 
 class StandartParameterMapper implements StandartParameterMapperInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface|\SprykerEco\Zed\Payone\Business\Key\HashGenerator
+     * @var \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface
      */
     protected $hashGenerator;
 
@@ -26,10 +26,10 @@ class StandartParameterMapper implements StandartParameterMapperInterface
     protected $modeDetector;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Key\HashGenerator $hashGenerator
+     * @param \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface $hashGenerator
      * @param \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface $modeDetector
      */
-    public function __construct(HashGenerator $hashGenerator, ModeDetectorInterface $modeDetector)
+    public function __construct(HashGeneratorInterface $hashGenerator, ModeDetectorInterface $modeDetector)
     {
         $this->hashGenerator = $hashGenerator;
         $this->modeDetector = $modeDetector;
@@ -39,9 +39,9 @@ class StandartParameterMapper implements StandartParameterMapperInterface
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      *
-     * @return void
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function setStandardParameter(AbstractRequestContainer $container, PayoneStandardParameterTransfer $standardParameter): void
+    public function setStandardParameter(AbstractRequestContainer $container, PayoneStandardParameterTransfer $standardParameter): AbstractRequestContainer
     {
         $container->setApiVersion(PayoneApiConstants::API_VERSION_3_9);
         $container->setEncoding($standardParameter->getEncoding());
@@ -53,5 +53,7 @@ class StandartParameterMapper implements StandartParameterMapperInterface
         $container->setIntegratorVersion(PayoneApiConstants::INTEGRATOR_VERSION_3_0_0);
         $container->setSolutionName(PayoneApiConstants::SOLUTION_NAME_SPRYKER);
         $container->setSolutionVersion(PayoneApiConstants::SOLUTION_VERSION_3_0_0);
+
+        return $container;
     }
 }

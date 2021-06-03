@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -115,24 +116,6 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param int $aid
-     *
-     * @return void
-     */
-    public function setAid($aid)
-    {
-        $this->aid = $aid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAid()
-    {
-        return $this->aid;
-    }
-
-    /**
      * @param string $birthday
      *
      * @return void
@@ -238,24 +221,6 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     public function getFirstName()
     {
         return $this->firstname;
-    }
-
-    /**
-     * @param string $language
-     *
-     * @return void
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
     }
 
     /**

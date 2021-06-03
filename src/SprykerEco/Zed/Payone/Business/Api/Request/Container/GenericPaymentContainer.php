@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -67,7 +68,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $shipping_street;
 
     /**
-     * @var string
+     * @var int
      */
     protected $shipping_zip;
 
@@ -374,59 +375,5 @@ class GenericPaymentContainer extends AbstractRequestContainer
     public function setWalletType($walletType)
     {
         $this->wallettype = $walletType;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSuccessUrl()
-    {
-        return $this->successurl;
-    }
-
-    /**
-     * @param string $successUrl
-     *
-     * @return void
-     */
-    public function setSuccessUrl($successUrl)
-    {
-        $this->successurl = $successUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getErrorUrl()
-    {
-        return $this->errorurl;
-    }
-
-    /**
-     * @param string $errorUrl
-     *
-     * @return void
-     */
-    public function setErrorUrl($errorUrl)
-    {
-        $this->errorurl = $errorUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBackUrl()
-    {
-        return $this->backurl;
-    }
-
-    /**
-     * @param string $backUrl
-     *
-     * @return void
-     */
-    public function setBackUrl($backUrl)
-    {
-        $this->backurl = $backUrl;
     }
 }

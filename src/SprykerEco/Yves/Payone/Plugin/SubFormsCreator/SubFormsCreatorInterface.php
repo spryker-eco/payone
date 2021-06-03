@@ -12,5 +12,5 @@ interface SubFormsCreatorInterface
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
      */
-    public function createPaymentMethodsSubForms();
+    public function createPaymentMethodsSubForms(): array;
 }

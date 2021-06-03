@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -57,29 +58,11 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     protected $bic;
 
     /**
-     * @param int $aid
-     *
-     * @return void
-     */
-    public function setAid($aid)
-    {
-        $this->aid = $aid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAid()
-    {
-        return $this->aid;
-    }
-
-    /**
      * @param string $bankaccount
      *
      * @return void
      */
-    public function setBankAccount($bankaccount)
+    public function setBankAccount($bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
@@ -97,7 +80,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode)
+    public function setBankCode($bankcode): void
     {
         $this->bankcode = $bankcode;
     }
@@ -115,7 +98,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry)
+    public function setBankCountry($bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
@@ -133,7 +116,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCheckType($checktype)
+    public function setCheckType($checktype): void
     {
         $this->checktype = $checktype;
     }
@@ -147,29 +130,11 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $language
-     *
-     * @return void
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-
-    /**
      * @param string $iban
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban($iban): void
     {
         $this->iban = $iban;
     }
@@ -187,7 +152,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic($bic): void
     {
         $this->bic = $bic;
     }

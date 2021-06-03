@@ -12,7 +12,7 @@ use SprykerEco\Zed\Payone\Business\Exception\InvalidPaymentMethodException;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 
-class PaymentMapperReader
+class PaymentMapperReader implements PaymentMapperReaderInterface
 {
     /**
      * @var \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface
@@ -60,7 +60,7 @@ class PaymentMapperReader
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    public function getRegisteredPaymentMethodMapper($paymentMethodName)
+    public function getRegisteredPaymentMethodMapper(string $paymentMethodName): PaymentMethodMapperInterface
     {
         $paymentMethodMapper = $this->findPaymentMethodMapperByName($paymentMethodName);
         if ($paymentMethodMapper === null) {
@@ -77,7 +77,7 @@ class PaymentMapperReader
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface|null
      */
-    protected function findPaymentMethodMapperByName($name)
+    protected function findPaymentMethodMapperByName(string $name): ?PaymentMethodMapperInterface
     {
         if (array_key_exists($name, $this->registeredMethodMappers)) {
             return $this->registeredMethodMappers[$name];

@@ -7,21 +7,37 @@
 
 namespace SprykerEco\Zed\Payone\Business;
 
+use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use SprykerEco\Shared\Payone\Dependency\HashInterface;
+use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
+use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\Guzzle;
 use SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriter;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapperInterface;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapperInterface;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapperInterface;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapper;
+use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest;
 use SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinder;
-use SprykerEco\Zed\Payone\Business\ConditionChecker\IsPaymentDataRequiredChecker;
-use SprykerEco\Zed\Payone\Business\ConditionChecker\IsPaymentDataRequiredCheckerInterface;
-use SprykerEco\Zed\Payone\Business\ConditionChecker\IsRefundPossibleChecker;
-use SprykerEco\Zed\Payone\Business\ConditionChecker\IsRefundPossibleCheckerInterface;
+use SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinderInterface;
+use SprykerEco\Zed\Payone\Business\ConditionChecker\PaymentDataChecker;
+use SprykerEco\Zed\Payone\Business\ConditionChecker\PaymentDataCheckerInterface;
+use SprykerEco\Zed\Payone\Business\ConditionChecker\RefundChecker;
+use SprykerEco\Zed\Payone\Business\ConditionChecker\RefundCheckerInterface;
 use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributor;
 use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Key\HashGenerator;
+use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Key\HashProvider;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
@@ -30,10 +46,14 @@ use SprykerEco\Zed\Payone\Business\Order\OrderManager;
 use SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface;
 use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinder;
 use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Checker\PayoneBankAccountChecker;
+use SprykerEco\Zed\Payone\Business\Payment\Checker\PayoneBankAccountCheckerInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Checker\PayoneCreditCardChecker;
+use SprykerEco\Zed\Payone\Business\Payment\Checker\PayoneCreditCardCheckerInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\DiscountMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapper;
-use SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ExpenseMapper;
+use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ExpenseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductMapper;
@@ -42,67 +62,60 @@ use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapper;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\Hook\CheckoutPostSaveHookExecutor;
-use SprykerEco\Zed\Payone\Business\Payment\Hook\CheckoutPostSaveHookExecutorInterface;
+use SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHook;
 use SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHookInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudoInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebitInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\InvoiceInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\SecurityInvoice;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneAuthorizeMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneAuthorizeMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBankAccountCheckMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBankAccountCheckMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCaptureMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCaptureMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCreditCardCheckMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCreditCardCheckMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneDebitMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneDebitMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetFileMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetFileMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetInvoiceMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetInvoiceMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetPaypalExpressCheckoutDetailsMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetPaypalExpressCheckoutDetailsMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetSecurityInvoiceMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetSecurityInvoiceMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneInitPaypalExpressCheckoutMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneInitPaypalExpressCheckoutMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneKlarnaStartSessionMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneKlarnaStartSessionMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneManageMandateMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneManageMandateMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialCaptureMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialCaptureMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialRefundMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialRefundMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePreAuthorizeMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePreAuthorizeMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundMethodSender;
-use SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundMethodSenderInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentDetail;
-use SprykerEco\Zed\Payone\Business\Payment\PaymentDetailInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader;
+use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilter;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodFilterInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface;
-use SprykerEco\Zed\Payone\Business\Payment\PayoneLogsReceiver;
-use SprykerEco\Zed\Payone\Business\Payment\PayoneLogsReceiverInterface;
-use SprykerEco\Zed\Payone\Business\Reader\PayonePaymentReader;
-use SprykerEco\Zed\Payone\Business\Reader\PayonePaymentReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneFileReader;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneFileReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneInvoiceReader;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneInvoiceReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayonePaypalExpressCheckoutDetailsReader;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayonePaypalExpressCheckoutDetailsReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneSecurityInvoiceReader;
+use SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneSecurityInvoiceReaderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneAuthorizeRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneAuthorizeRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneCaptureRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneCaptureRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneDebitRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneDebitRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneInitPaypalExpressCheckoutMethodSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneInitPaypalExpressCheckoutMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneKlarnaStartSessionMethodSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneKlarnaStartSessionMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneManageMandateMethodSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneManageMandateMethodSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialCaptureRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialCaptureRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialRefundRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialRefundRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeRequestSenderInterface;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneRefundRequestSender;
+use SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneRefundRequestSenderInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactory;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapper;
@@ -110,9 +123,12 @@ use SprykerEco\Zed\Payone\Business\RiskManager\Mapper\RiskCheckMapperInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManager;
 use SprykerEco\Zed\Payone\Business\RiskManager\RiskCheckManagerInterface;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
+use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface;
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManager;
+use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManagerInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
@@ -128,40 +144,38 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     private $standardParameter;
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePreAuthorizeMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeRequestSenderInterface
      */
-    public function createPreAuthorizeMethodSender(): PayonePreAuthorizeMethodSenderInterface
+    public function createPayonePreAuthorizeRequestSender(): PayonePreAuthorizeRequestSenderInterface
     {
-        $paymentManager = new PayonePreAuthorizeMethodSender(
+        return new PayonePreAuthorizeRequestSender(
             $this->getQueryContainer(),
             $this->createPaymentMapperReader(),
             $this->createPayoneBaseAuthorizeSender(),
+            $this->createAuthorizationResponseMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneAuthorizeMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneAuthorizeRequestSenderInterface
      */
-    public function createAuthorizeMethodSender(): PayoneAuthorizeMethodSenderInterface
+    public function createPayoneAuthorizeRequestSender(): PayoneAuthorizeRequestSenderInterface
     {
-        $paymentManager = new PayoneAuthorizeMethodSender(
+        return new PayoneAuthorizeRequestSender(
             $this->getQueryContainer(),
             $this->createPaymentMapperReader(),
             $this->createPayoneRequestProductDataMapper(),
             $this->createPayoneBaseAuthorizeSender(),
+            $this->createAuthorizationResponseMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCaptureMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneCaptureRequestSenderInterface
      */
-    public function createCaptureMethodSender(): PayoneCaptureMethodSenderInterface
+    public function createPayoneCaptureRequestSender(): PayoneCaptureRequestSenderInterface
     {
-        $paymentManager = new PayoneCaptureMethodSender(
+        return new PayoneCaptureRequestSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->createPaymentMapperReader(),
@@ -169,55 +183,52 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createOrderPriceDistributor(),
             $this->createStandartParameterMapper(),
             $this->createPayoneRequestProductDataMapper(),
-            $this->createOrderHandlingMapper()
+            $this->createExpenseMapper(),
+            $this->createCaptureResponseMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialCaptureMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialCaptureRequestSenderInterface
      */
-    public function createPartialCaptureMethodSender(): PayonePartialCaptureMethodSenderInterface
+    public function createPayonePartialCaptureRequestSender(): PayonePartialCaptureRequestSenderInterface
     {
-        $paymentManager = new PayonePartialCaptureMethodSender(
+        return new PayonePartialCaptureRequestSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->createPaymentMapperReader(),
-            $this->createOrderHandlingMapper(),
+            $this->createExpenseMapper(),
             $this->getStandardParameter(),
             $this->getRepository(),
             $this->getEntityManager(),
             $this->createOrderPriceDistributor(),
             $this->createStandartParameterMapper(),
             $this->createShipmentMapper(),
+            $this->createCaptureResponseMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneDebitMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneDebitRequestSenderInterface
      */
-    public function createDebitMethodSender(): PayoneDebitMethodSenderInterface
+    public function createPayoneDebitRequestSender(): PayoneDebitRequestSenderInterface
     {
-        $paymentManager = new PayoneDebitMethodSender(
+        return new PayoneDebitRequestSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
             $this->createPaymentMapperReader(),
+            $this->createDebitResponseMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneRefundMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneRefundRequestSenderInterface
      */
-    public function createRefundMethodSender(): PayoneRefundMethodSenderInterface
+    public function createPayoneRefundRequestSender(): PayoneRefundRequestSenderInterface
     {
-        $paymentManager = new PayoneRefundMethodSender(
+        return new PayoneRefundRequestSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->createPaymentMapperReader(),
@@ -225,17 +236,16 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createOrderPriceDistributor(),
             $this->createStandartParameterMapper(),
             $this->createPayoneRequestProductDataMapper(),
+            $this->createRefundResponseMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayonePartialRefundMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePartialRefundRequestSenderInterface
      */
-    public function createPartialRefundMethodSender(): PayonePartialRefundMethodSenderInterface
+    public function createPayonePartialRefundRequestSender(): PayonePartialRefundRequestSenderInterface
     {
-        $paymentManager = new PayonePartialRefundMethodSender(
+        return new PayonePartialRefundRequestSender(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->createPaymentMapperReader(),
@@ -243,158 +253,128 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->getRepository(),
             $this->getEntityManager(),
             $this->createStandartParameterMapper(),
+            $this->createRefundResponseMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBankAccountCheckMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\Checker\PayoneBankAccountCheckerInterface
      */
-    public function createBankAccountCheckMethodSender(): PayoneBankAccountCheckMethodSenderInterface
+    public function createPayoneBankAccountChecker(): PayoneBankAccountCheckerInterface
     {
-        $paymentManager = new PayoneBankAccountCheckMethodSender(
+        return new PayoneBankAccountChecker(
             $this->createExecutionAdapter(),
             $this->createPaymentMapperReader(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneCreditCardCheckMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\Checker\PayoneCreditCardCheckerInterface
      */
-    public function createCreditCardCheckMethodSender(): PayoneCreditCardCheckMethodSenderInterface
+    public function createPayoneCreditCardChecker(): PayoneCreditCardCheckerInterface
     {
-        $paymentManager = new PayoneCreditCardCheckMethodSender(
+        return new PayoneCreditCardChecker(
+            $this->createExecutionAdapter(),
+            $this->getStandardParameter(),
+            $this->createStandartParameterMapper(),
+            $this->createPaymentMapperReader(),
+            $this->createCreditCardCheckResponseMapper(),
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneManageMandateMethodSenderInterface
+     */
+    public function createPayoneManageMandateMethodSender(): PayoneManageMandateMethodSenderInterface
+    {
+        return new PayoneManageMandateMethodSender(
             $this->createExecutionAdapter(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
             $this->createPaymentMapperReader(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneManageMandateMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneFileReaderInterface
      */
-    public function createManageMandateMethodSender(): PayoneManageMandateMethodSenderInterface
+    public function createPayoneFileReader(): PayoneFileReaderInterface
     {
-        $paymentManager = new PayoneManageMandateMethodSender(
-            $this->createExecutionAdapter(),
-            $this->getStandardParameter(),
-            $this->createStandartParameterMapper(),
-            $this->createPaymentMapperReader(),
-        );
-
-        return $paymentManager;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetFileMethodSenderInterface
-     */
-    public function createGetFileMethodSender(): PayoneGetFileMethodSenderInterface
-    {
-        $paymentManager = new PayoneGetFileMethodSender(
+        return new PayoneFileReader(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
             $this->createPaymentMapperReader(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetInvoiceMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneInvoiceReaderInterface
      */
-    public function createGetInvoiceMethodSender(): PayoneGetInvoiceMethodSenderInterface
+    public function createPayoneInvoiceReader(): PayoneInvoiceReaderInterface
     {
-        $paymentManager = new PayoneGetInvoiceMethodSender(
+        return new PayoneInvoiceReader(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
             $this->createPaymentMapperReader(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetSecurityInvoiceMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\Reader\PayoneSecurityInvoiceReaderInterface
      */
-    public function createGetSecurityInvoiceMethodSender(): PayoneGetSecurityInvoiceMethodSenderInterface
+    public function createPayoneSecurityInvoiceReader(): PayoneSecurityInvoiceReaderInterface
     {
-        $paymentManager = new PayoneGetSecurityInvoiceMethodSender(
+        return new PayoneSecurityInvoiceReader(
             $this->createExecutionAdapter(),
             $this->getQueryContainer(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
             $this->createPaymentMapperReader(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PayoneLogsReceiverInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneInitPaypalExpressCheckoutMethodSenderInterface
      */
-    public function createLogsReceiver(): PayoneLogsReceiverInterface
+    public function createPayoneInitPaypalExpressCheckoutMethodSender(): PayoneInitPaypalExpressCheckoutMethodSenderInterface
     {
-        $paymentManager = new PayoneLogsReceiver(
-            $this->getQueryContainer(),
-        );
-
-        return $paymentManager;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneInitPaypalExpressCheckoutMethodSenderInterface
-     */
-    public function createInitPaypalExpressCheckoutMethodSender(): PayoneInitPaypalExpressCheckoutMethodSenderInterface
-    {
-        $paymentManager = new PayoneInitPaypalExpressCheckoutMethodSender(
+        return new PayoneInitPaypalExpressCheckoutMethodSender(
             $this->createPaymentMapperReader(),
-            $this->createGenericRequestMethodSender(),
+            $this->createPayoneGenericRequestMethodSender(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGetPaypalExpressCheckoutDetailsMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\Reader\PayonePaypalExpressCheckoutDetailsReaderInterface
      */
-    public function createGetPaypalExpressCheckoutDetailsMethodSender(): PayoneGetPaypalExpressCheckoutDetailsMethodSenderInterface
+    public function createPayonePaypalExpressCheckoutDetailsReader(): PayonePaypalExpressCheckoutDetailsReaderInterface
     {
-        $paymentManager = new PayoneGetPaypalExpressCheckoutDetailsMethodSender(
+        return new PayonePaypalExpressCheckoutDetailsReader(
             $this->createPaymentMapperReader(),
-            $this->createGenericrequestMethodSender()
+            $this->createPayoneGenericRequestMethodSender()
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneGenericRequestMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneGenericRequestMethodSenderInterface
      */
-    public function createGenericRequestMethodSender(): PayoneGenericRequestMethodSenderInterface
+    public function createPayoneGenericRequestMethodSender(): PayoneGenericRequestMethodSenderInterface
     {
-        $paymentManager = new PayoneGenericRequestMethodSender(
+        return new PayoneGenericRequestMethodSender(
             $this->createExecutionAdapter(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
         );
-
-        return $paymentManager;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneKlarnaStartSessionMethodSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneKlarnaStartSessionMethodSenderInterface
      */
     public function createPayoneKlarnaStartSessionMethodSender(): PayoneKlarnaStartSessionMethodSenderInterface
     {
@@ -420,19 +400,19 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManagerInterface
      */
-    public function createTransactionStatusManager()
+    public function createTransactionStatusManager(): TransactionStatusUpdateManagerInterface
     {
         return new TransactionStatusUpdateManager(
             $this->getQueryContainer(),
             $this->getStandardParameter(),
-            $this->createKeyHashGenerator()
+            $this->createHashGenerator()
         );
     }
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\ApiLog\ApiLogFinderInterface
      */
-    public function createApiLogFinder()
+    public function createApiLogFinder(): ApiLogFinderInterface
     {
         return new ApiLogFinder(
             $this->getQueryContainer()
@@ -442,7 +422,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
      */
-    public function createExecutionAdapter()
+    public function createExecutionAdapter(): AdapterInterface
     {
         return new Guzzle(
             $this->getStandardParameter()->getPaymentGatewayUrl(),
@@ -453,7 +433,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriter
      */
-    public function createApiCallLogWriter()
+    public function createApiCallLogWriter(): ApiCallLogWriter
     {
         return new ApiCallLogWriter(
             $this->getQueryContainer()
@@ -463,7 +443,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface
      */
-    public function createSequenceNumberProvider()
+    public function createSequenceNumberProvider(): SequenceNumberProviderInterface
     {
         $defaultEmptySequenceNumber = $this->getConfig()->getEmptySequenceNumber();
 
@@ -476,17 +456,15 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\HashInterface
      */
-    public function createKeyHashProvider()
+    public function createHashProvider(): HashInterface
     {
-        $hashProvider = new HashProvider();
-
-        return $hashProvider;
+        return new HashProvider();
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Key\HashGenerator
+     * @return \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface
      */
-    public function createKeyHashGenerator()
+    public function createHashGenerator(): HashGeneratorInterface
     {
         return new HashGenerator(
             $this->createHashProvider()
@@ -504,11 +482,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface
      */
-    public function createModeDetector()
+    public function createModeDetector(): ModeDetectorInterface
     {
-        $modeDetector = new ModeDetector($this->getConfig());
-
-        return $modeDetector;
+        return new ModeDetector($this->getConfig());
     }
 
     /**
@@ -516,96 +492,53 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest
      */
-    public function createTransactionStatusUpdateRequest(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer)
+    public function createTransactionStatusRequest(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer): TransactionStatusRequest
     {
         return new TransactionStatusRequest($transactionStatusUpdateTransfer->toArray());
     }
 
     /**
-     * @return array
+     * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSenderInterface
      */
-    public function getAvailablePaymentMethods()
+    public function createPayoneBaseAuthorizeSender(): PayoneBaseAuthorizeSenderInterface
     {
-        $storeConfig = $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
-
-        return [
-            PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO => $this->createCreditCardPseudo($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_INVOICE => $this->createInvoice($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE => $this->createSecurityInvoice($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER => $this->createOnlineBankTransfer($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_E_WALLET => $this->createEWallet($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT => $this->createPrepayment($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT => $this->createDirectDebit($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => $this->createGenericPayment($storeConfig),
-            PayoneApiConstants::PAYMENT_METHOD_CASH_ON_DELIVERY => $this->createCashOnDelivery($storeConfig, $this->getGlossaryFacade()),
-            PayoneApiConstants::PAYMENT_METHOD_KLARNA => $this->createKlarnaPaymentMapper($storeConfig),
-        ];
-    }
-
-    /**
-     * @return \Spryker\Shared\Kernel\Store
-     */
-    public function getStore(): Store
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
-     */
-    public function getStandardParameter()
-    {
-        if ($this->standardParameter === null) {
-            $this->standardParameter = $this->getConfig()->getRequestStandardParameter();
-        }
-
-        return $this->standardParameter;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\Key\HashProvider
-     */
-    public function createHashProvider()
-    {
-        $hashProvider = new HashProvider();
-
-        return $hashProvider;
+        return new PayoneBaseAuthorizeSender(
+            $this->createExecutionAdapter(),
+            $this->getQueryContainer(),
+            $this->createPaymentMapperReader(),
+            $this->getStandardParameter(),
+            $this->createStandartParameterMapper(),
+        );
     }
 
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudoInterface
      */
-    public function createCreditCardPseudo($storeConfig)
+    public function createCreditCardPseudo(Store $storeConfig): CreditCardPseudoInterface
     {
-        $creditCardPseudo = new CreditCardPseudo($storeConfig);
-
-        return $creditCardPseudo;
+        return new CreditCardPseudo($storeConfig);
     }
 
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebitInterface
      */
-    public function createDirectDebit($storeConfig)
+    public function createDirectDebit(Store $storeConfig): DirectDebitInterface
     {
-        $creditCardPseudo = new DirectDebit($storeConfig);
-
-        return $creditCardPseudo;
+        return new DirectDebit($storeConfig);
     }
 
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice
+     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\InvoiceInterface
      */
-    public function createInvoice($storeConfig)
+    public function createInvoice(Store $storeConfig): InvoiceInterface
     {
-        $invoice = new Invoice($storeConfig);
-
-        return $invoice;
+        return new Invoice($storeConfig);
     }
 
     /**
@@ -613,35 +546,29 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    public function createSecurityInvoice($storeConfig): PaymentMethodMapperInterface
+    public function createSecurityInvoice(Store $storeConfig): PaymentMethodMapperInterface
     {
-        $invoice = new SecurityInvoice($storeConfig, $this->getConfig());
-
-        return $invoice;
+        return new SecurityInvoice($storeConfig, $this->getConfig());
     }
 
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    public function createOnlineBankTransfer($storeConfig)
+    public function createOnlineBankTransfer(Store $storeConfig): PaymentMethodMapperInterface
     {
-        $onlineBankTransfer = new OnlineBankTransfer($storeConfig);
-
-        return $onlineBankTransfer;
+        return new OnlineBankTransfer($storeConfig);
     }
 
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    public function createEWallet($storeConfig)
+    public function createEWallet(Store $storeConfig): PaymentMethodMapperInterface
     {
-        $EWallet = new EWallet($storeConfig);
-
-        return $EWallet;
+        return new EWallet($storeConfig);
     }
 
     /**
@@ -658,33 +585,21 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @param \Spryker\Shared\Kernel\Store $storeConfig
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    public function createPrepayment($storeConfig)
+    public function createPrepayment(Store $storeConfig): PaymentMethodMapperInterface
     {
-        $prepayment = new Prepayment($storeConfig);
-
-        return $prepayment;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface
-     */
-    public function getGlossaryFacade()
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_GLOSSARY);
+        return new Prepayment($storeConfig);
     }
 
     /**
      * @param \Spryker\Shared\Kernel\Store $store
      *
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\GenericPayment
+     * @return \SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface
      */
-    public function createGenericPayment(Store $store)
+    public function createGenericPayment(Store $store): GenericPaymentMethodMapperInterface
     {
-        $genericPayment = new GenericPayment($store);
-
-        return $genericPayment;
+        return new GenericPayment($store);
     }
 
     /**
@@ -707,14 +622,6 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createExecutionAdapter(),
             $this->createRiskCheckFactory()
         );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentDetailInterface
-     */
-    public function createPaymentDetail(): PaymentDetailInterface
-    {
-        return new PaymentDetail($this->getQueryContainer());
     }
 
     /**
@@ -767,7 +674,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     public function createStandartParameterMapper(): StandartParameterMapperInterface
     {
-        return new StandartParameterMapper($this->createKeyHashGenerator(), $this->createModeDetector());
+        return new StandartParameterMapper($this->createHashGenerator(), $this->createModeDetector());
     }
 
     /**
@@ -776,7 +683,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createPayoneRequestProductDataMapper(): PayoneRequestProductDataMapperInterface
     {
         return new PayoneRequestProductDataMapper(
-            $this->createProductsMapper(),
+            $this->createProductMapper(),
             $this->createShipmentMapper(),
             $this->createDiscountMapper(),
         );
@@ -785,7 +692,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ProductMapperInterface
      */
-    public function createProductsMapper(): ProductMapperInterface
+    public function createProductMapper(): ProductMapperInterface
     {
         return new ProductMapper();
     }
@@ -799,9 +706,9 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReader
+     * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
      */
-    public function createPaymentMapperReader(): PaymentMapperReader
+    public function createPaymentMapperReader(): PaymentMapperReaderInterface
     {
         $paymentMapperReader = new PaymentMapperReader(
             $this->createSequenceNumberProvider(),
@@ -824,43 +731,27 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\OrderHandlingMapperInterface
+     * @return \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ExpenseMapperInterface
      */
-    public function createOrderHandlingMapper(): OrderHandlingMapperInterface
+    public function createExpenseMapper(): ExpenseMapperInterface
     {
-        return new OrderHandlingMapper();
+        return new ExpenseMapper();
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RequestStack
+     * @return \SprykerEco\Zed\Payone\Business\ConditionChecker\RefundCheckerInterface
      */
-    public function getRequestStack()
+    public function createRefundChecker(): RefundCheckerInterface
     {
-        return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_REQUEST_STACK);
+        return new RefundChecker($this->getRepository(), $this->createPaymentDataChecker());
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Reader\PayonePaymentReaderInterface
+     * @return \SprykerEco\Zed\Payone\Business\ConditionChecker\PaymentDataCheckerInterface
      */
-    public function createPayonePaymentReader(): PayonePaymentReaderInterface
+    public function createPaymentDataChecker(): PaymentDataCheckerInterface
     {
-        return new PayonePaymentReader($this->getQueryContainer());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\ConditionChecker\IsRefundPossibleCheckerInterface
-     */
-    public function createIsRefundPossibleChecker(): IsRefundPossibleCheckerInterface
-    {
-        return new IsRefundPossibleChecker($this->createPayonePaymentReader(), $this->createIsPaymentDataRequiredChecker());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\ConditionChecker\IsPaymentDataRequiredCheckerInterface
-     */
-    public function createIsPaymentDataRequiredChecker(): IsPaymentDataRequiredCheckerInterface
-    {
-        return new IsPaymentDataRequiredChecker($this->createPayonePaymentReader());
+        return new PaymentDataChecker($this->getRepository(), $this->getConfig());
     }
 
     /**
@@ -868,33 +759,108 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     public function createPostSaveHook(): PostSaveHookInterface
     {
-        return new PostSaveHook($this->getQueryContainer());
-    }
-
-    /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\Hook\CheckoutPostSaveHookExecutorInterface
-     */
-    public function createCheckoutPostSaveHookExecutor(): CheckoutPostSaveHookExecutorInterface
-    {
-        return new CheckoutPostSaveHookExecutor(
-            $this->getQueryContainer(),
+        return new PostSaveHook(
+            $this->getRepository(),
             $this->createPaymentMapperReader(),
             $this->createPayoneRequestProductDataMapper(),
-            $this->createPayoneBaseAuthorizeSender(),
+            $this->createPayoneBaseAuthorizeSender()
         );
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Payment\MethodSender\PayoneBaseAuthorizeSenderInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface
      */
-    public function createPayoneBaseAuthorizeSender(): PayoneBaseAuthorizeSenderInterface
+    public function createRefundResponseMapper(): RefundResponseMapperInterface
     {
-        return new PayoneBaseAuthorizeSender(
-            $this->createExecutionAdapter(),
-            $this->getQueryContainer(),
-            $this->createPaymentMapperReader(),
-            $this->getStandardParameter(),
-            $this->createStandartParameterMapper(),
-        );
+        return new RefundResponseMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface
+     */
+    public function createAuthorizationResponseMapper(): AuthorizationResponseMapperInterface
+    {
+        return new AuthorizationResponseMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapperInterface
+     */
+    public function createCaptureResponseMapper(): CaptureResponseMapperInterface
+    {
+        return new CaptureResponseMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapperInterface
+     */
+    public function createCreditCardCheckResponseMapper(): CreditCardCheckResponseMapperInterface
+    {
+        return new CreditCardCheckResponseMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapperInterface
+     */
+    public function createDebitResponseMapper(): DebitResponseMapperInterface
+    {
+        return new DebitResponseMapper();
+    }
+
+    /**
+     * @return array
+     */
+    public function getAvailablePaymentMethods(): array
+    {
+        $storeConfig = $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
+
+        return [
+            PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO => $this->createCreditCardPseudo($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_INVOICE => $this->createInvoice($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE => $this->createSecurityInvoice($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER => $this->createOnlineBankTransfer($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_E_WALLET => $this->createEWallet($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_PREPAYMENT => $this->createPrepayment($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT => $this->createDirectDebit($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => $this->createGenericPayment($storeConfig),
+            PayoneApiConstants::PAYMENT_METHOD_CASH_ON_DELIVERY => $this->createCashOnDelivery($storeConfig, $this->getGlossaryFacade()),
+            PayoneApiConstants::PAYMENT_METHOD_KLARNA => $this->createKlarnaPaymentMapper($storeConfig),
+        ];
+    }
+
+    /**
+     * @return \Spryker\Shared\Kernel\Store
+     */
+    public function getStore(): Store
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
+     */
+    public function getStandardParameter(): PayoneStandardParameterTransfer
+    {
+        if ($this->standardParameter === null) {
+            $this->standardParameter = $this->getConfig()->getRequestStandardParameter();
+        }
+
+        return $this->standardParameter;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface
+     */
+    public function getGlossaryFacade(): PayoneToGlossaryFacadeInterface
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_GLOSSARY);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RequestStack
+     */
+    public function getRequestStack(): RequestStack
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_REQUEST_STACK);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -9,6 +10,7 @@ namespace SprykerEco\Yves\Payone\Plugin;
 
 use Spryker\Yves\Kernel\AbstractPlugin;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
+use SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()
@@ -16,7 +18,7 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayoneInvoiceSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * @return \SprykerEco\Yves\Payone\Form\InvoiceSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm()
     {

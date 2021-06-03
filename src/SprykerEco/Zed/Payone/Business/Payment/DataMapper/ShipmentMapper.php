@@ -23,7 +23,7 @@ class ShipmentMapper implements ShipmentMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function prepareShipment($shipmentContainer, AbstractRequestContainer $container): AbstractRequestContainer
+    public function mapShipment($shipmentContainer, AbstractRequestContainer $container): AbstractRequestContainer
     {
         $arrayIt = $container->getIt() ?? [];
         $arrayId = $container->getId() ?? [];

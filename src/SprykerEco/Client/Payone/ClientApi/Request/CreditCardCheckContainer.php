@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -9,7 +10,7 @@ namespace SprykerEco\Client\Payone\ClientApi\Request;
 
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 
-class CreditCardCheckContainer extends AbstractRequest
+class CreditCardCheckContainer extends AbstractRequest implements CreditCardCheckContainerInterface
 {
     /**
      * @var string
@@ -36,7 +37,7 @@ class CreditCardCheckContainer extends AbstractRequest
      *
      * @return void
      */
-    public function setStorecarddata($storecarddata)
+    public function setStorecarddata(string $storecarddata): void
     {
         $this->storecarddata = $storecarddata;
     }
@@ -44,7 +45,7 @@ class CreditCardCheckContainer extends AbstractRequest
     /**
      * @return string
      */
-    public function getStorecarddata()
+    public function getStorecarddata(): string
     {
         return $this->storecarddata;
     }
@@ -54,7 +55,7 @@ class CreditCardCheckContainer extends AbstractRequest
      *
      * @return void
      */
-    public function setErrorurl($errorurl)
+    public function setErrorurl(string $errorurl): void
     {
         $this->errorurl = $errorurl;
     }
@@ -62,7 +63,7 @@ class CreditCardCheckContainer extends AbstractRequest
     /**
      * @return string
      */
-    public function getErrorurl()
+    public function getErrorurl(): string
     {
         return $this->errorurl;
     }
@@ -72,7 +73,7 @@ class CreditCardCheckContainer extends AbstractRequest
      *
      * @return void
      */
-    public function setSuccessurl($successurl)
+    public function setSuccessurl(string $successurl): void
     {
         $this->successurl = $successurl;
     }
@@ -80,7 +81,7 @@ class CreditCardCheckContainer extends AbstractRequest
     /**
      * @return string
      */
-    public function getSuccessurl()
+    public function getSuccessurl(): string
     {
         return $this->successurl;
     }

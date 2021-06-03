@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -64,7 +65,7 @@ class GatewayController extends AbstractGatewayController
         if ($cancelRedirectTransfer->getUrlHmac() === $hash) {
             $orderItems = SpySalesOrderItemQuery::create()
                 ->useOrderQuery()
-                ->filterByOrderReference($cancelRedirectTransfer->getOrderReference())
+                    ->filterByOrderReference($cancelRedirectTransfer->getOrderReference())
                 ->endUse()
                 ->find();
 
@@ -110,7 +111,7 @@ class GatewayController extends AbstractGatewayController
         $orderItems = SpySalesOrderItemQuery::create()
             ->useOrderQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByTransactionId($transactionStatusUpdateTransfer->getTxid())
+                ->filterByTransactionId($transactionStatusUpdateTransfer->getTxid())
             ->endUse()
             ->endUse()
             ->find();
@@ -215,7 +216,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function startKlarnaSessionAction(
+    public function sendKlarnaStartSessionRequestAction(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
     ): PayoneKlarnaStartSessionResponseTransfer {
         return $this->getFacade()->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);

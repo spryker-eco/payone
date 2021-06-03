@@ -18,6 +18,7 @@ use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
@@ -29,7 +30,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function updateStatus(PayoneTransactionStatusUpdateTransfer $transactionStatus)
+    public function updateStatus(PayoneTransactionStatusUpdateTransfer $transactionStatus): PayoneTransactionStatusUpdateTransfer
     {
         return $this->zedStub->call(
             '/payone/gateway/status-update',
@@ -42,7 +43,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer)
+    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer): PayoneBankAccountCheckTransfer
     {
         return $this->zedStub->call(
             '/payone/gateway/bank-account-check',
@@ -55,7 +56,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
      */
-    public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer)
+    public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer): PayoneManageMandateTransfer
     {
         return $this->zedStub->call(
             '/payone/gateway/manage-mandate',
@@ -68,7 +69,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    public function getFile(PayoneGetFileTransfer $getFileTransfer)
+    public function getFile(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer
     {
         return $this->zedStub->call(
             '/payone/gateway/get-file',
@@ -81,7 +82,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer
      */
-    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer)
+    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer): PayoneGetPaymentDetailTransfer
     {
         return $this->zedStub->call(
             '/payone/gateway/get-payment-detail',
@@ -94,7 +95,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
+    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
     {
         return $this->zedStub->call(
             '/payone/gateway/get-invoice',
@@ -107,7 +108,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayoneCancelRedirectTransfer
      */
-    public function cancelRedirect(PayoneCancelRedirectTransfer $cancelRedirectTransfer)
+    public function cancelRedirect(PayoneCancelRedirectTransfer $cancelRedirectTransfer): PayoneCancelRedirectTransfer
     {
         return $this->zedStub->call(
             '/payone/gateway/cancel-redirect',
@@ -120,8 +121,9 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
-    {
+    public function initPaypalExpressCheckout(
+        PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
+    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
         return $this->zedStub->call(
             '/payone/gateway/init-paypal-express-checkout',
             $requestTransfer
@@ -133,7 +135,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
     {
         return $this->zedStub->call(
             '/payone/gateway/get-paypal-express-checkout-details',
@@ -162,15 +164,15 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
-     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::startKlarnaSessionAction()
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::sendKlarnaStartSessionRequestAction()
      *
      * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
      */
-    public function startKlarnaSession(
+    public function sendKlarnaStartSessionRequest(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
     ): PayoneKlarnaStartSessionResponseTransfer {
-        return $this->zedStub->call('/payone/gateway/start-klarna-session', $payoneKlarnaStartSessionRequestTransfer);
+        return $this->zedStub->call('/payone/gateway/send-klarna-start-session-request', $payoneKlarnaStartSessionRequestTransfer);
     }
 }

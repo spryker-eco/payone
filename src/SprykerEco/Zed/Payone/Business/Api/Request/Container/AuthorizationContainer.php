@@ -28,6 +28,7 @@ class AuthorizationContainer extends AbstractAuthorizationContainer
      *
      * @return $this
      */
+    //phpcs:ignore
     public function setBusiness(BusinessContainer $business)
     {
         $this->business = $business;
@@ -38,7 +39,7 @@ class AuthorizationContainer extends AbstractAuthorizationContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\BusinessContainer
      */
-    public function getBusiness()
+    public function getBusiness(): BusinessContainer
     {
         return $this->business;
     }

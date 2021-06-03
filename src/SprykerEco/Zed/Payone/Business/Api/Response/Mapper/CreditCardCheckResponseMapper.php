@@ -18,7 +18,7 @@ class CreditCardCheckResponseMapper implements CreditCardCheckResponseMapperInte
      *
      * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
-    public function getCreditCardCheckResponseTransfer(CreditCardCheckResponseContainer $responseContainer)
+    public function getCreditCardCheckResponseTransfer(CreditCardCheckResponseContainer $responseContainer): CreditCardCheckResponseTransfer
     {
         $result = new CreditCardCheckResponseTransfer();
         $baseResponse = new BaseResponseTransfer();

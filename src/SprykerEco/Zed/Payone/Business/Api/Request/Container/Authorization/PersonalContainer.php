@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -21,7 +22,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * PAYONE debtor ID
      *
-     * @var int
+     * @var string
      */
     protected $userid;
 
@@ -46,7 +47,7 @@ class PersonalContainer extends AbstractContainer
     protected $lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $company;
 
@@ -95,7 +96,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * Date of birth (YYYYMMDD)
      *
-     * @var int
+     * @var string
      */
     protected $birthday;
 
@@ -181,7 +182,7 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $company
+     * @param string|null $company
      *
      * @return void
      */

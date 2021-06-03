@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -38,9 +39,9 @@ interface AuthorizationContainerInterface
     public function getNarrativeText();
 
     /**
-     * @return int
+     * @return string|null
      */
-    public function getPortalid();
+    public function getPortalid(): ?string;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer $personalData
@@ -71,9 +72,9 @@ interface AuthorizationContainerInterface
      *
      * @param string $integratorName
      *
-     * @return void
+     * @return $this
      */
-    public function setIntegratorName($integratorName);
+    public function setIntegratorName(string $integratorName);
 
     /**
      * @return string
@@ -90,9 +91,9 @@ interface AuthorizationContainerInterface
      *
      * @param string $solutionVersion
      *
-     * @return void
+     * @return $this
      */
-    public function setSolutionVersion($solutionVersion);
+    public function setSolutionVersion(string $solutionVersion);
 
     /**
      * @return array
@@ -115,11 +116,11 @@ interface AuthorizationContainerInterface
     public function get3dsecure();
 
     /**
-     * @param int $portalid
+     * @param string $portalid
      *
-     * @return void
+     * @return $this
      */
-    public function setPortalid($portalid);
+    public function setPortalid(?string $portalid);
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer $delivery
@@ -153,16 +154,16 @@ interface AuthorizationContainerInterface
     /**
      * @param string $encoding
      *
-     * @return void
+     * @return $this
      */
-    public function setEncoding($encoding);
+    public function setEncoding(?string $encoding);
 
     /**
      * @param string $api_version
      *
-     * @return void
+     * @return $this
      */
-    public function setApiVersion($api_version);
+    public function setApiVersion(?string $api_version);
 
     /**
      * @param string $clearingType
@@ -191,9 +192,9 @@ interface AuthorizationContainerInterface
     /**
      * @param string $key
      *
-     * @return void
+     * @return $this
      */
-    public function setKey($key);
+    public function setKey(string $key);
 
     /**
      * @return string
@@ -213,9 +214,16 @@ interface AuthorizationContainerInterface
     public function getPaymentMethod();
 
     /**
-     * @return int
+     * @return string|null
      */
-    public function getMid();
+    public function getMid(): ?string;
+
+    /**
+     * @param string $mid
+     *
+     * @return $this
+     */
+    public function setMid(?string $mid);
 
     /**
      * @return string
@@ -234,30 +242,30 @@ interface AuthorizationContainerInterface
      *
      * @param string $solution_name
      *
-     * @return void
+     * @return $this
      */
-    public function setSolutionName($solution_name);
+    public function setSolutionName(string $solution_name);
 
     /**
      * @param string $request
      *
-     * @return void
+     * @return $this
      */
-    public function setRequest($request);
+    public function setRequest(string $request);
 
     /**
-     * @param int $aid
+     * @param string $aid
      *
-     * @return void
+     * @return $this
      */
-    public function setAid($aid);
+    public function setAid(?string $aid);
 
     /**
      * @param string $mode
      *
-     * @return void
+     * @return $this
      */
-    public function setMode($mode);
+    public function setMode(string $mode);
 
     /**
      * @return string
@@ -282,9 +290,9 @@ interface AuthorizationContainerInterface
     public function getShippingData();
 
     /**
-     * @return int
+     * @return string|null
      */
-    public function getAid();
+    public function getAid(): ?string;
 
     /**
      * @param int $amount

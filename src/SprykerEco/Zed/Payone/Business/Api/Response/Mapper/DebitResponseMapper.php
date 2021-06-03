@@ -18,7 +18,7 @@ class DebitResponseMapper implements DebitResponseMapperInterface
      *
      * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
-    public function getDebitResponseTransfer(DebitResponseContainer $responseContainer)
+    public function getDebitResponseTransfer(DebitResponseContainer $responseContainer): DebitResponseTransfer
     {
         $result = new DebitResponseTransfer();
         $baseResponse = new BaseResponseTransfer();
