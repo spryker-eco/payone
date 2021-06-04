@@ -1,4 +1,3 @@
-/* tslint:disable: no-any */
 /* tslint:disable: max-file-line-count */
 declare var Klarna: any;
 
@@ -10,36 +9,72 @@ const IS_VALID_PARAM = 'is_valid';
 const GET_TOKEN_URL = '/payone/get-token';
 const CONTAINER_ID = '#klarna_container';
 
+interface PaymentData {
+    'client_token': string;
+    'pay_method': string;
+}
+
+interface KlarnaPayMethods {
+    KDD: string;
+    KIS: string;
+    KIV: string;
+}
+
+interface AddressData {
+    'given_name': string;
+    'family_name': string;
+    'email': string;
+    'street_address': string;
+    'postal_code': string;
+    'city': string;
+    'country': string;
+    'phone': string;
+}
+
 export default class PayoneKlarna extends Component {
     protected scriptLoader: ScriptLoader;
     protected selectField: HTMLSelectElement;
-    protected availablePayment = {};
-    protected availablePaymentArray = [];
+    protected availablePayment: PaymentData;
+    protected availablePaymentArray: PaymentData[] = [];
     protected currentPaymentMethodCategory: string;
     protected currentPaymentCompanyToken: string;
-    protected allKlarnaPayMethods: [];
+    protected allKlarnaPayMethods: KlarnaPayMethods;
+    protected addressData: AddressData = {
+        'given_name': this.givenName,
+        'family_name': this.familyName,
+        'email': this.email,
+        'street_address': this.streetAddress,
+        'postal_code': this.postalCode,
+        'city': this.city,
+        'country': this.country,
+        'phone': this.phone,
+    }
 
-    protected readyCallback() {}
+    protected readyCallback(): void {}
 
-    protected init() {
-        this.scriptLoader = <ScriptLoader>this.querySelector('script-loader');
-        this.selectField = <HTMLSelectElement>this.getElementsByClassName(this.selectFieldClassName)[0];
-        this.allKlarnaPayMethods = JSON.parse(this.klarnaPayMethods());
+    protected init(): void {
+        this.scriptLoader = <ScriptLoader>this.getElementsByClassName(`${this.jsName}__script-loader`)[0];
+        this.selectField = <HTMLSelectElement>this.getElementsByClassName(`${this.jsName}__select-field`)[0];
+        this.allKlarnaPayMethods = <KlarnaPayMethods>JSON.parse(this.klarnaPayMethods());
 
         this.mapEvents();
     }
 
     protected mapEvents(): void {
-        this.scriptLoader.addEventListener('scriptload', (event: Event) => this.onScriptLoad(event));
-        this.selectField.addEventListener('change', (event: Event) => this.selectPayMethod(event));
+        this.mapScripLoadEvent();
+        this.mapSelectChangeEvent();
     }
 
-    protected onScriptLoad(event: Event): void {
-        this.getAvailableMethods();
+    protected mapScripLoadEvent(): void {
+        this.scriptLoader.addEventListener('scriptload', () => this.getAvailablePaymentMethods());
     }
 
-    protected getAvailableMethods(): void {
-        Array.from(this.selectField.options).map((option) => {
+    protected mapSelectChangeEvent(): void {
+        this.selectField.addEventListener('change', () => this.selectPaymentMethod());
+    }
+
+    protected getAvailablePaymentMethods(): void {
+        Array.from(this.selectField.options).forEach(option => {
             if (!option.value) {
                 return;
             }
@@ -48,72 +83,57 @@ export default class PayoneKlarna extends Component {
             formData.append('pay_method', option.value);
 
             fetch(GET_TOKEN_URL, {method: 'POST', body: formData})
-                .then((response) => response.json())
-                .then((parsedResponse) => {
-                    if (parsedResponse[IS_VALID_PARAM]) {
-                        this.availablePayment = {
-                            'pay_method': option.value,
-                            'client_token': parsedResponse['client_token'],
-                        };
-
-                        this.availablePaymentArray.push(this.availablePayment);
-
-                        option.removeAttribute('disabled');
+                .then(response => response.json())
+                .then(parsedResponse => {
+                    if (!parsedResponse[IS_VALID_PARAM]) {
                         return;
                     }
 
+                    this.availablePayment = {
+                        'pay_method': option.value,
+                        'client_token': parsedResponse.client_token,
+                    };
+
+                    this.availablePaymentArray.push(this.availablePayment);
+                    option.removeAttribute('disabled');
+
                 })
-                .catch((e: Error) => {
-                    console.log(e.message);
+                .catch((error: Error) => {
+                    console.error(error.message);
                 });
         })
     }
 
-    protected selectPayMethod(event: Event): void {
-        const currentParams = this.availablePaymentArray.filter(payment => {
-            return payment['pay_method'] === this.selectField.value;
-        })
-
-        this.loadKlarna(currentParams[0])
+    protected selectPaymentMethod(): void {
+        const paymentMethod = this.availablePaymentArray.find(payment => payment.pay_method === this.selectField.value);
+        this.loadKlarna(paymentMethod);
     }
 
-    protected loadKlarna(payData: {}): void {
-        const component = this;
-        this.selectField.setAttribute('disabled', 'disabled');
+    protected loadKlarna(paymentData: PaymentData): void {
+        this.toggleSelectFieldDisable(true);
 
-        Klarna.Payments.init({
-            client_token: payData['client_token']
-        })
-
+        Klarna.Payments.init({ client_token: paymentData.client_token });
         Klarna.Payments.load({
             container: CONTAINER_ID,
-            payment_method_category: component.allKlarnaPayMethods[payData['pay_method']],
-        }, function (res) {
-            component.selectField.removeAttribute('disabled');
-
+            payment_method_category: this.allKlarnaPayMethods[paymentData.pay_method],
+        },  response => {
+            this.toggleSelectFieldDisable(false);
             Klarna.Payments.authorize({
-                payment_method_category: component.allKlarnaPayMethods[payData['pay_method']]
+                payment_method_category: this.allKlarnaPayMethods[paymentData.pay_method]
             }, {
-                billing_address: {
-                    given_name: component.givenName,
-                    family_name: component.familyName,
-                    email: component.email,
-                    street_address: component.streetAddress,
-                    postal_code: component.postalCode,
-                    city: component.city,
-                    country: component.country,
-                    phone: component.phone,
-                },
-
+                billing_address: this.addressData,
                 customer: {
-                    date_of_birth: component.dateOfBirth,
+                    date_of_birth: this.dateOfBirth,
                 }
-            }, function(res) {
-
-                var tokenContainer = document.getElementById(TOKEN_CONTAINER_ID);
-                tokenContainer.setAttribute('value', res.authorization_token);
+            }, response => {
+                const tokenContainer = <HTMLInputElement>document.getElementById(TOKEN_CONTAINER_ID);
+                tokenContainer.value = response.authorization_token;
             })
         })
+    }
+
+    protected toggleSelectFieldDisable(isSelectDisabled: boolean): void {
+        this.selectField.disabled = isSelectDisabled;
     }
 
     protected get selectFieldClassName(): string {
