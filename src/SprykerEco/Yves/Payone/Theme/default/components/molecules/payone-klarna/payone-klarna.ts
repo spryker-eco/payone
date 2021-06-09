@@ -96,12 +96,11 @@ export default class PayoneKlarna extends Component {
 
                     this.availablePaymentArray.push(this.availablePayment);
                     option.removeAttribute('disabled');
-
                 })
                 .catch((error: Error) => {
                     console.error(error.message);
                 });
-        })
+        });
     }
 
     protected selectPaymentMethod(): void {
@@ -119,12 +118,12 @@ export default class PayoneKlarna extends Component {
         },  response => {
             this.toggleSelectFieldDisable(false);
             Klarna.Payments.authorize({
-                payment_method_category: this.allKlarnaPayMethods[paymentData.pay_method]
+                payment_method_category: this.allKlarnaPayMethods[paymentData.pay_method],
             }, {
                 billing_address: this.addressData,
                 customer: {
                     date_of_birth: this.dateOfBirth,
-                }
+                },
             }, response => {
                 const tokenContainer = <HTMLInputElement>document.getElementById(TOKEN_CONTAINER_ID);
                 tokenContainer.value = response.authorization_token;
