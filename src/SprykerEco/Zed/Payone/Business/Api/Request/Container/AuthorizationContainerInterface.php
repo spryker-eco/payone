@@ -151,14 +151,14 @@ interface AuthorizationContainerInterface
     public function getAmount();
 
     /**
-     * @param string $encoding
+     * @param string|null $encoding
      *
      * @return $this
      */
     public function setEncoding(?string $encoding);
 
     /**
-     * @param string $api_version
+     * @param string|null $api_version
      *
      * @return $this
      */
@@ -218,7 +218,7 @@ interface AuthorizationContainerInterface
     public function getMid(): ?string;
 
     /**
-     * @param string $mid
+     * @param string|null $mid
      *
      * @return $this
      */
@@ -253,7 +253,7 @@ interface AuthorizationContainerInterface
     public function setRequest(string $request);
 
     /**
-     * @param string $aid
+     * @param string|null $aid
      *
      * @return $this
      */
