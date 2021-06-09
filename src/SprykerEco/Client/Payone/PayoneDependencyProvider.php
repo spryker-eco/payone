@@ -21,7 +21,6 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    //phpcs:ignore
     public function provideServiceLayerDependencies(Container $container)
     {
         $container->set(static::SERVICE_ZED, function (Container $container) {

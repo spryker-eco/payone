@@ -20,7 +20,6 @@ class UrlHmacGenerator implements HmacGeneratorInterface
      *
      * @return string
      */
-    //phpcs:ignore
     public function hash($string, $key)
     {
         return hash_hmac(static::HASH_ALGO, $string, $key);

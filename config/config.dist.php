@@ -31,6 +31,7 @@ $config[PayoneConstants::PAYONE] = [
         '%s/payone/regular-redirect-payment-cancellation',
         $config[ApplicationConstants::BASE_URL_YVES]
     ),
+    PayoneConstants::PAYONE_BUSINESS_RELATION => 'b2c',
     PayoneConstants::PAYONE_MODE => 'test',
     PayoneConstants::PAYONE_EMPTY_SEQUENCE_NUMBER => 0,
     PayoneConstants::PAYONE_GREEN_SCORE_AVAILABLE_PAYMENT_METHODS => [
@@ -95,6 +96,7 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
     PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT => 'PayonePrePayment',
     PayoneConfig::PAYMENT_METHOD_INVOICE => 'PayoneInvoice',
     PayoneConfig::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT => 'PayonePaypalExpressCheckout',
+    PayoneConfig::PAYMENT_METHOD_KLARNA => 'PayoneKlarna',
 ];
 
 $config[OmsConstants::ACTIVE_PROCESSES] = [
@@ -105,4 +107,5 @@ $config[OmsConstants::ACTIVE_PROCESSES] = [
     'PayonePrePayment',
     'PayoneInvoice',
     'PayonePaypalExpressCheckout',
+    'PayoneKlarna',
 ];

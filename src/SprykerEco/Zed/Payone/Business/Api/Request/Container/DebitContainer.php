@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -31,7 +30,7 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
     protected $sequencenumber;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $amount;
 
@@ -76,7 +75,7 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getAmount(): ?int
     {

@@ -193,7 +193,6 @@ class PayoneHandler implements PayoneHandlerInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaymentTransfer
      */
-    //phpcs:ignore
     protected function getPayonePaymentTransfer(QuoteTransfer $quoteTransfer, string $paymentSelection)
     {
         $method = 'get' . ucfirst($paymentSelection);

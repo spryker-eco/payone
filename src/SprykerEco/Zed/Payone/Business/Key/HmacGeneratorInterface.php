@@ -15,6 +15,5 @@ interface HmacGeneratorInterface
      *
      * @return string
      */
-    //phpcs:ignore
     public function hash($string, $key);
 }

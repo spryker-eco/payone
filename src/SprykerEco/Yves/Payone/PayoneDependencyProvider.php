@@ -36,7 +36,6 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    //phpcs:ignore
     public function provideDependencies(Container $container)
     {
         $container->set(static::CLIENT_PAYONE, function (Container $container) {

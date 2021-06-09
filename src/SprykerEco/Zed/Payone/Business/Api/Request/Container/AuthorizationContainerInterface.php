@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -116,7 +115,7 @@ interface AuthorizationContainerInterface
     public function get3dsecure();
 
     /**
-     * @param string $portalid
+     * @param string|null $portalid
      *
      * @return $this
      */

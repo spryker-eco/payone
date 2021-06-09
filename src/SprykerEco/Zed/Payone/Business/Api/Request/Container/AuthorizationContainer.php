@@ -28,7 +28,6 @@ class AuthorizationContainer extends AbstractAuthorizationContainer
      *
      * @return $this
      */
-    //phpcs:ignore
     public function setBusiness(BusinessContainer $business)
     {
         $this->business = $business;

@@ -23,7 +23,6 @@ class AbstractPayonePlugin extends AbstractPlugin
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    //phpcs:ignore
     protected function getOrderTransfer(SpySalesOrder $orderEntity)
     {
         return $this

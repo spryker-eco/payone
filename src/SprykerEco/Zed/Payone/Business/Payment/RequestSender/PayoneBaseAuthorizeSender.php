@@ -142,11 +142,11 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
     }
 
     /**
-     * @param int $transactionId
+     * @param int|null $transactionId
      *
      * @return string
      */
-    public function getInvoiceTitle(int $transactionId): string
+    public function getInvoiceTitle(?int $transactionId): string
     {
         return implode('-', [
             PayoneApiConstants::INVOICE_TITLE_PREFIX_INVOICE,

@@ -28,7 +28,6 @@ class BankAccountValidator extends ConstraintValidator
      *
      * @return void
      */
-    //phpcs:ignore
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof BankAccount) {

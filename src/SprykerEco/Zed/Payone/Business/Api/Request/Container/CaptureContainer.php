@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -65,7 +64,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getAmount(): ?int
     {
@@ -101,7 +100,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getSequenceNumber(): ?int
     {
@@ -119,7 +118,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getTxid(): ?string
     {
@@ -137,7 +136,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer|null
      */
     public function getBusiness(): ?BusinessContainer
     {
