@@ -100,7 +100,7 @@ export default class PayoneKlarna extends Component {
                 .catch((error: Error) => {
                     console.error(error.message);
                 });
-        })
+        });
     }
 
     protected selectPaymentMethod(): void {
