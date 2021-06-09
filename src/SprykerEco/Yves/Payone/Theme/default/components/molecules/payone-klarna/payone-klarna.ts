@@ -96,7 +96,6 @@ export default class PayoneKlarna extends Component {
 
                     this.availablePaymentArray.push(this.availablePayment);
                     option.removeAttribute('disabled');
-
                 })
                 .catch((error: Error) => {
                     console.error(error.message);
