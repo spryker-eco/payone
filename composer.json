@@ -20,10 +20,10 @@
         "spryker/sales": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^10.0.0 || ^11.0.0",
         "spryker/shipment": "^6.0.0 || ^8.0.0",
         "spryker/step-engine": "^3.0.0",
+        "spryker/store": "^1.1.0",
         "spryker/symfony": "^3.1.1",
         "spryker/util-encoding": "^2.0.0",
-        "spryker/zed-request": "^3.2.0",
-        "spryker/store": "^1.1.0"
+        "spryker/zed-request": "^3.2.0"
     },
     "require-dev": {
         "phpstan/phpstan": "*",
@@ -57,8 +57,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/",
-        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/",
+        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/",
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/",
         "stan": "phpstan analyse -c phpstan.neon -l 6 src/",
         "stan-setup": "cp composer.json composer.backup && COMPOSER_MEMORY_LIMIT=-1 composer require --dev phpstan/phpstan:^0.12 && mv composer.backup composer.json"
     },

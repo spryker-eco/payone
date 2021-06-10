@@ -14,7 +14,6 @@ use Generated\Shared\DataBuilder\QuoteBuilder;
 use Generated\Shared\Transfer\CurrencyTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper;
 use Symfony\Component\HttpFoundation\Request;
 
