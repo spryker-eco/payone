@@ -10,6 +10,7 @@
         "spryker/checkout-extension": "^1.3.0",
         "spryker/config": "^3.0.0",
         "spryker/customer": "^7.0.0",
+        "spryker/decimal-object": "^1.0.0",
         "spryker/glossary": "^3.0.0",
         "spryker/guzzle": "^2.1.0",
         "spryker/kernel": "^3.33.0",
@@ -30,6 +31,7 @@
         "spryker/application": "^3.0.0",
         "spryker/checkout": "*",
         "spryker/code-sniffer": "*",
+        "spryker/container": "*",
         "spryker/country": "^3.2.0",
         "spryker/payment": "*",
         "spryker/propel": "*",
@@ -38,8 +40,8 @@
         "spryker/testify": "*"
     },
     "suggest": {
-        "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout.",
         "spryker/application": "If you want to use Application plugins you need to install spryker/application.",
+        "spryker/checkout": "If you want to use Checkout plugins you need to install spryker/checkout.",
         "spryker/payment": "If you want to use Payment plugins you need to install spryker/payment.",
         "spryker/router": "Use this module if you want use the RouterProviderPlugin.",
         "spryker/silex": "If you want to use Silex plugins you need to install spryker/silex."
