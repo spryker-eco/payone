@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -101,7 +100,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
      *   the amount of the corresponding booking.
      *   (Always provide a negative amount)
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setAmount(int $amount): RefundContainerInterface
     {
@@ -121,7 +120,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $currency
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setCurrency(?string $currency): RefundContainerInterface
     {
@@ -141,7 +140,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $narrative_text
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setNarrativeText(?string $narrative_text): RefundContainerInterface
     {
@@ -161,7 +160,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer $invoicing
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setInvoicing(TransactionContainer $invoicing): RefundContainerInterface
     {
@@ -181,7 +180,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Refund\PaymentMethod\BankAccountContainer $paymentMethod
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setPaymentMethod(BankAccountContainer $paymentMethod): RefundContainerInterface
     {
@@ -201,7 +200,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param int|null $sequencenumber
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setSequenceNumber(?int $sequencenumber): RefundContainerInterface
     {
@@ -221,7 +220,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param int $txid
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setTxid($txid): RefundContainerInterface
     {
@@ -241,7 +240,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string $use_customerdata
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setUseCustomerData(string $use_customerdata): RefundContainerInterface
     {
@@ -269,7 +268,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $bankcountry
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setBankcountry(?string $bankcountry): RefundContainerInterface
     {
@@ -289,7 +288,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $bankaccount
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setBankaccount(?string $bankaccount): RefundContainerInterface
     {
@@ -309,7 +308,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $bankcode
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setBankcode(?string $bankcode): RefundContainerInterface
     {
@@ -329,7 +328,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $bankbranchcode
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setBankbranchcode(?string $bankbranchcode): RefundContainerInterface
     {
@@ -349,7 +348,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $bankcheckdigit
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setBankcheckdigit(?string $bankcheckdigit): RefundContainerInterface
     {
@@ -369,7 +368,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $iban
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setIban(?string $iban): RefundContainerInterface
     {
@@ -389,7 +388,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     /**
      * @param string|null $bic
      *
-     * @return $this
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
     public function setBic(?string $bic): RefundContainerInterface
     {

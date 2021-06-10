@@ -68,7 +68,6 @@ class AbstractRequest
      *
      * @return mixed
      */
-    //phpcs:ignore
     public function getValue($key)
     {
         return $this->get($key);
@@ -80,7 +79,6 @@ class AbstractRequest
      *
      * @return bool|null
      */
-    //phpcs:ignore
     public function setValue($key, $name)
     {
         return $this->set($key, $name);
@@ -106,7 +104,6 @@ class AbstractRequest
      *
      * @return bool|null
      */
-    //phpcs:ignoreFile
     public function set($name, $value)
     {
         if (property_exists($this, $name)) {

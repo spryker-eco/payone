@@ -1,5 +1,4 @@
 <?php
-//phpcs:ignoreFile
 
 /**
  * MIT License
@@ -8,7 +7,6 @@
 
 namespace SprykerEco\Client\Payone\ClientApi\Request;
 
-use Spryker\Service\UtilEncoding\UtilEncodingService;
 use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 
 abstract class AbstractContainer implements ContainerInterface
