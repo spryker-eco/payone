@@ -61,7 +61,7 @@ export default class PayoneKlarna extends Component {
     }
 
     protected mapEvents(): void {
-        this.mapScripLoadEvent();
+        this.mapScriptLoadEvent();
         this.mapSelectChangeEvent();
     }
 
