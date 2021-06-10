@@ -1,9 +1,9 @@
 /* tslint:disable: max-file-line-count */
-declare var Klarna: any;
 
 import Component from 'ShopUi/models/component';
 import ScriptLoader from 'ShopUi/components/molecules/script-loader/script-loader';
 
+declare const Klarna;
 const TOKEN_CONTAINER_ID = 'paymentForm_payoneKlarna_payMethodToken';
 const IS_VALID_PARAM = 'is_valid';
 const GET_TOKEN_URL = '/payone/get-token';
@@ -134,10 +134,6 @@ export default class PayoneKlarna extends Component {
 
     protected toggleSelectFieldDisable(isSelectDisabled: boolean): void {
         this.selectField.disabled = isSelectDisabled;
-    }
-
-    protected get selectFieldClassName(): string {
-        return this.getAttribute('field-class-name');
     }
 
     protected get givenName(): string {

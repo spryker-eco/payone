@@ -8,7 +8,6 @@
 {% define data = {
     form: required,
     billingAddressData: data.billingAddressData | default({}),
-    customerData: data.customerData | default({}),
     scriptSrc: 'https://x.klarnacdn.net/kp/lib/v1/api.js',
 } %}
 
@@ -24,7 +23,7 @@
     'city': billingAddressData['city'] | default,
     'country': billingAddressData['country'] | default,
     'phone': billingAddressData['phone'] | default,
-    'date-of-birth': data.customerData['date_of_birth'] | default,
+    'date-of-birth': '',
 } %}
 
 {% block body %}

@@ -2,17 +2,20 @@
 
 {% define data = {
     form: form,
+    billingAddressData: vars.billing_address_data,
+    klarnaPayMethods: vars.widget_pay_methods | json_encode(),
+    dateOfBirth: vars.customer_data['date_of_birth'] | default,
 } %}
 
 {% block body %}
     {% include molecule('payone-klarna', 'Payone') with {
         data: {
             form: data.form,
-            billingAddressData: vars.billing_address_data,
-            customerData: vars.customer_data,
+            billingAddressData: data.billingAddressData,
         },
         attributes: {
-            'klarna-pay-methods': vars.widget_pay_methods | json_encode(),
+            'klarna-pay-methods': data.klarnaPayMethods,
+            'date-of-birth': data.dateOfBirth,
         },
     } only %}
 {% endblock %}
