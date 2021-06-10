@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Payone\Business\ApiLog;
 
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
@@ -32,7 +33,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isPreAuthorizationApproved(OrderTransfer $orderTransfer)
+    public function isPreAuthorizationApproved(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -46,7 +47,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isPreAuthorizationRedirect(OrderTransfer $orderTransfer)
+    public function isPreAuthorizationRedirect(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -60,7 +61,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isPreAuthorizationError(OrderTransfer $orderTransfer)
+    public function isPreAuthorizationError(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -78,7 +79,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isAuthorizationApproved(OrderTransfer $orderTransfer)
+    public function isAuthorizationApproved(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -92,7 +93,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isAuthorizationRedirect(OrderTransfer $orderTransfer)
+    public function isAuthorizationRedirect(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -106,7 +107,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isAuthorizationError(OrderTransfer $orderTransfer)
+    public function isAuthorizationError(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -120,7 +121,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isCaptureApproved(OrderTransfer $orderTransfer)
+    public function isCaptureApproved(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -134,7 +135,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isCaptureError(OrderTransfer $orderTransfer)
+    public function isCaptureError(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -148,7 +149,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isRefundApproved(OrderTransfer $orderTransfer)
+    public function isRefundApproved(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -162,7 +163,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isRefundError(OrderTransfer $orderTransfer)
+    public function isRefundError(OrderTransfer $orderTransfer): bool
     {
         return $this->hasApiLogStatus(
             $orderTransfer,
@@ -178,7 +179,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return bool
      */
-    protected function hasApiLogStatus(OrderTransfer $orderTransfer, $request, $status)
+    protected function hasApiLogStatus(OrderTransfer $orderTransfer, string $request, string $status): bool
     {
         $idSalesOrder = $orderTransfer->getIdSalesOrder();
         $apiLog = $this->queryContainer->createApiLogsByOrderIdAndRequest($idSalesOrder, $request)->filterByStatus($status)->findOne();
@@ -195,7 +196,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByTransactionId($transactionId)
+    protected function findPaymentByTransactionId(int $transactionId): SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
     }
@@ -205,7 +206,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function findPaymentByOrder(OrderTransfer $orderTransfer)
+    protected function findPaymentByOrder(OrderTransfer $orderTransfer): SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByOrderId($orderTransfer->getIdSalesOrder())->findOne();
     }
@@ -216,7 +217,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog
      */
-    protected function findApiLog(SpyPaymentPayone $payment, $authorizationType)
+    protected function findApiLog(SpyPaymentPayone $payment, string $authorizationType): SpyPaymentPayoneApiLog
     {
         return $this->queryContainer->createApiLogByPaymentAndRequestTypeQuery(
             $payment->getPrimaryKey(),

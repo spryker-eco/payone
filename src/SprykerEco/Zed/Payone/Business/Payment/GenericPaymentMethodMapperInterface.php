@@ -22,7 +22,7 @@ interface GenericPaymentMethodMapperInterface
     public function mapRequestTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    );
+    ): GenericPaymentContainer;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer $genericPayment
@@ -33,10 +33,10 @@ interface GenericPaymentMethodMapperInterface
     public function mapQuoteTransferToGenericPayment(
         GenericPaymentContainer $genericPayment,
         QuoteTransfer $quoteTransfer
-    );
+    ): GenericPaymentContainer;
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPaymentContainer
      */
-    public function createBaseGenericPaymentContainer();
+    public function createBaseGenericPaymentContainer(): GenericPaymentContainer;
 }

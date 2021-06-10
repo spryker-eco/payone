@@ -16,7 +16,7 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayoneDirectDebitSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
-     * @return \SprykerEco\Yves\Payone\Form\DirectDebitSubForm
+     * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm()
     {

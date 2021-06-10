@@ -18,7 +18,7 @@ class ManageMandateValidator extends ConstraintValidator
      * {@inheritDoc}
      *
      * @param string $value
-     * @param \Symfony\Component\Validator\Constraint|\Spryker\Zed\Discount\Communication\Form\Constraint\QueryString $constraint
+     * @param \Symfony\Component\Validator\Constraint $constraint
      *
      * @return void
      */
@@ -48,7 +48,7 @@ class ManageMandateValidator extends ConstraintValidator
      *
      * @return string[]
      */
-    protected function manageMandate(QuoteTransfer $data, ManageMandate $constraint)
+    protected function manageMandate(QuoteTransfer $data, ManageMandate $constraint): array
     {
         $response = $constraint->getPayoneClient()->manageMandate($data);
         if ($response->getStatus() === PayoneApiConstants::RESPONSE_TYPE_ERROR) {

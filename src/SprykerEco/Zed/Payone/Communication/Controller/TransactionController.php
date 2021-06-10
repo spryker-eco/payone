@@ -67,7 +67,7 @@ class TransactionController extends AbstractController
 
         $this->triggerEventsOnSuccess($payoneTransactionStatusUpdateTransfer);
 
-        $callback = function () use ($payoneTransactionStatusUpdateTransfer) {
+        $callback = function () use ($payoneTransactionStatusUpdateTransfer): void {
             echo $payoneTransactionStatusUpdateTransfer->getResponse();
         };
 
@@ -79,7 +79,7 @@ class TransactionController extends AbstractController
      *
      * @return void
      */
-    protected function triggerEventsOnSuccess(PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer)
+    protected function triggerEventsOnSuccess(PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer): void
     {
         if (!$payoneTransactionStatusUpdateTransfer->getIsSuccess()) {
             return;
@@ -88,7 +88,7 @@ class TransactionController extends AbstractController
         $orderItems = SpySalesOrderItemQuery::create()
             ->useOrderQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByTransactionId($payoneTransactionStatusUpdateTransfer->getTxid())
+                ->filterByTransactionId($payoneTransactionStatusUpdateTransfer->getTxid())
             ->endUse()
             ->endUse()
             ->find();

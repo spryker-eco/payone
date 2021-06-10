@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Response\Mapper;
 
+use Generated\Shared\Transfer\DebitResponseTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer;
 
 interface DebitResponseMapperInterface extends ResponseMapperInterface
@@ -21,5 +22,5 @@ interface DebitResponseMapperInterface extends ResponseMapperInterface
      *
      * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
-    public function getDebitResponseTransfer(DebitResponseContainer $responseContainer);
+    public function getDebitResponseTransfer(DebitResponseContainer $responseContainer): DebitResponseTransfer;
 }

@@ -14,7 +14,7 @@ class DefaultSubFormsCreator extends AbstractSubFormsCreator implements SubForms
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
      */
-    public function createPaymentMethodsSubForms()
+    public function createPaymentMethodsSubForms(): array
     {
         return [
             PaymentTransfer::PAYONE_CREDIT_CARD => $this->createPayoneCreditCardSubFormPlugin(),
@@ -23,6 +23,7 @@ class DefaultSubFormsCreator extends AbstractSubFormsCreator implements SubForms
             PaymentTransfer::PAYONE_INVOICE => $this->createPayoneInvoiceSubFormPlugin(),
             PaymentTransfer::PAYONE_SECURITY_INVOICE => $this->createPayoneSecurityInvoiceSubFormPlugin(),
             PaymentTransfer::PAYONE_E_WALLET => $this->createEWalletSubFormPlugin(),
+            PaymentTransfer::PAYONE_KLARNA => $this->createPayoneKlarnaSubFormPlugin(),
         ];
     }
 }

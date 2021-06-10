@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Payone\Plugin\SubFormsCreator;
 
 use Generated\Shared\Transfer\PaymentTransfer;
+use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 use SprykerEco\Yves\Payone\Plugin\PayoneIdealOnlineTransferSubFormPlugin;
 
 class NlSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreatorInterface
@@ -15,7 +16,7 @@ class NlSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     /**
      * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
      */
-    public function createPaymentMethodsSubForms()
+    public function createPaymentMethodsSubForms(): array
     {
         return [
             PaymentTransfer::PAYONE_CREDIT_CARD => $this->createPayoneCreditCardSubFormPlugin(),
@@ -30,9 +31,9 @@ class NlSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreat
     }
 
     /**
-     * @return \SprykerEco\Yves\Payone\Plugin\PayoneIdealOnlineTransferSubFormPlugin
+     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface
      */
-    protected function createPayoneIdealOnlineTransferSubFormPlugin()
+    protected function createPayoneIdealOnlineTransferSubFormPlugin(): SubFormPluginInterface
     {
         return new PayoneIdealOnlineTransferSubFormPlugin();
     }

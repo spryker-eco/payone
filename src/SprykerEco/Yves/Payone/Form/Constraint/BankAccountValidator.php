@@ -21,7 +21,7 @@ class BankAccountValidator extends ConstraintValidator
     ];
 
     /**
-     * @param string $value
+     * @param string|null $value
      * @param \Symfony\Component\Validator\Constraint|\SprykerEco\Yves\Payone\Form\Constraint\BankAccount $constraint
      *
      * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
@@ -61,7 +61,7 @@ class BankAccountValidator extends ConstraintValidator
      *
      * @return string[]
      */
-    protected function validateBankAccount(QuoteTransfer $data, BankAccount $constraint)
+    protected function validateBankAccount(QuoteTransfer $data, BankAccount $constraint): array
     {
         $response = $constraint->getPayoneClient()->bankAccountCheck($data);
         if (in_array($response->getStatus(), static::INVALID_STATUSES)) {

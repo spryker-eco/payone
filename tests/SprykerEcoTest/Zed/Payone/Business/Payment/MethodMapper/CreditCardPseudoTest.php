@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\PayoneCreditCardTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
 
 /**
@@ -182,9 +183,9 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     }
 
     /**
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getPaymentPayoneDetailMock()
+    protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
     {
         $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
         $paymentPayoneDetail->method('getPseudoCardPan')->willReturn(static::PSEUDO_CARD_PAN);

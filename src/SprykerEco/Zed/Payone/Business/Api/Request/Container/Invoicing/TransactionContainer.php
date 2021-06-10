@@ -44,7 +44,7 @@ class TransactionContainer extends AbstractContainer
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = parent::toArray();
         $i = 1;

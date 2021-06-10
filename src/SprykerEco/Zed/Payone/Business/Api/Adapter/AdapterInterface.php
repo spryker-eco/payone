@@ -16,7 +16,7 @@ interface AdapterInterface
      *
      * @return array
      */
-    public function sendRawRequest(array $params);
+    public function sendRawRequest(array $params): array;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
@@ -24,15 +24,15 @@ interface AdapterInterface
      *
      * @return array
      */
-    public function sendRequest(AbstractRequestContainer $container, array $additionalParams = []);
+    public function sendRequest(AbstractRequestContainer $container, array $additionalParams = []): array;
 
     /**
      * @return string
      */
-    public function getUrl();
+    public function getUrl(): string;
 
     /**
      * @return string
      */
-    public function getRawResponse();
+    public function getRawResponse(): string;
 }

@@ -14,5 +14,5 @@ interface HashInterface
      *
      * @return string
      */
-    public function hash($value);
+    public function hash(string $value): string;
 }

@@ -49,7 +49,7 @@ abstract class AbstractCall
      *
      * @return void
      */
-    protected function applyStandardParameter(AbstractRequestContainer $container)
+    protected function applyStandardParameter(AbstractRequestContainer $container): void
     {
         if ($container->getPortalid() === null) {
             $container->setPortalid($this->standardParameter->getPortalId());
@@ -80,7 +80,7 @@ abstract class AbstractCall
     /**
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    protected function getStandardParameter()
+    protected function getStandardParameter(): PayoneStandardParameterTransfer
     {
         return $this->standardParameter;
     }
@@ -88,7 +88,7 @@ abstract class AbstractCall
     /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface
      */
-    protected function getHashGenerator()
+    protected function getHashGenerator(): HashGeneratorInterface
     {
         return $this->hashGenerator;
     }
@@ -96,7 +96,7 @@ abstract class AbstractCall
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface
      */
-    protected function getModeDetector()
+    protected function getModeDetector(): ModeDetectorInterface
     {
         return $this->modeDetector;
     }

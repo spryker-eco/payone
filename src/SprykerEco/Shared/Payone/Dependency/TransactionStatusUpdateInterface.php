@@ -20,7 +20,7 @@ interface TransactionStatusUpdateInterface
     public function getAid();
 
     /**
-     * @return string
+     * @return float
      */
     public function getBalance();
 
@@ -95,12 +95,12 @@ interface TransactionStatusUpdateInterface
     public function getProductid();
 
     /**
-     * @return string
+     * @return float
      */
     public function getPrice();
 
     /**
-     * @return string
+     * @return float
      */
     public function getReceivable();
 

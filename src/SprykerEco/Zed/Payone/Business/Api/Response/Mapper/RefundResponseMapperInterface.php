@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Response\Mapper;
 
+use Generated\Shared\Transfer\RefundResponseTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer;
 
 interface RefundResponseMapperInterface extends ResponseMapperInterface
@@ -21,5 +22,5 @@ interface RefundResponseMapperInterface extends ResponseMapperInterface
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function getRefundResponseTransfer(RefundResponseContainer $responseContainer);
+    public function getRefundResponseTransfer(RefundResponseContainer $responseContainer): RefundResponseTransfer;
 }

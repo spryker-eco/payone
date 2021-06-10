@@ -20,7 +20,7 @@ class CaptureResponseMapper implements CaptureResponseMapperInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function getCaptureResponseTransfer(CaptureResponseContainer $responseContainer)
+    public function getCaptureResponseTransfer(CaptureResponseContainer $responseContainer): CaptureResponseTransfer
     {
         $result = new CaptureResponseTransfer();
         $clearing = new ClearingTransfer();

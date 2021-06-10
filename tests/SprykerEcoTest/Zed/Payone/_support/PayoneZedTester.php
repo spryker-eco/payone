@@ -57,9 +57,10 @@ class PayoneZedTester extends Actor
     public function createPaymentPayone(int $idSalesOrder): SpyPaymentPayone
     {
         $paymentPayoneEntity = (new SpyPaymentPayone())
-           ->setFkSalesOrder($idSalesOrder)
-           ->setPaymentMethod(static::FAKE_PAYMENT_METHOD)
-           ->setReference(static::FAKE_REFERENCE);
+            ->setFkSalesOrder($idSalesOrder)
+            ->setPaymentMethod(static::FAKE_PAYMENT_METHOD)
+            ->setTransactionId(1)
+            ->setReference(static::FAKE_REFERENCE);
         $paymentPayoneEntity->save();
 
         return $paymentPayoneEntity;

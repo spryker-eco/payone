@@ -16,6 +16,8 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -62,7 +64,7 @@ class GatewayController extends AbstractGatewayController
         if ($cancelRedirectTransfer->getUrlHmac() === $hash) {
             $orderItems = SpySalesOrderItemQuery::create()
                 ->useOrderQuery()
-                ->filterByOrderReference($cancelRedirectTransfer->getOrderReference())
+                    ->filterByOrderReference($cancelRedirectTransfer->getOrderReference())
                 ->endUse()
                 ->find();
 
@@ -108,7 +110,7 @@ class GatewayController extends AbstractGatewayController
         $orderItems = SpySalesOrderItemQuery::create()
             ->useOrderQuery()
             ->useSpyPaymentPayoneQuery()
-            ->filterByTransactionId($transactionStatusUpdateTransfer->getTxid())
+                ->filterByTransactionId($transactionStatusUpdateTransfer->getTxid())
             ->endUse()
             ->endUse()
             ->find();
@@ -206,5 +208,16 @@ class GatewayController extends AbstractGatewayController
     public function sendConsumerScoreRequestAction(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer
     {
         return $this->getFacade()->sendConsumerScoreRequest($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
+     */
+    public function sendKlarnaStartSessionRequestAction(
+        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+    ): PayoneKlarnaStartSessionResponseTransfer {
+        return $this->getFacade()->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);
     }
 }

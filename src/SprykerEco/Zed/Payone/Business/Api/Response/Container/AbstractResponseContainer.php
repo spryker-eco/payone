@@ -251,7 +251,7 @@ abstract class AbstractResponseContainer
      *
      * @return string
      */
-    protected function getPreparedKey($key)
+    protected function getPreparedKey(string $key): string
     {
         return ucwords(str_replace('_', ' ', $key));
     }

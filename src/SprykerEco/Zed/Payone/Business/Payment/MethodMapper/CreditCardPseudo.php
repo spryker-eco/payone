@@ -18,17 +18,21 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalC
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CreditCardCheckContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 
-class CreditCardPseudo extends AbstractMapper
+class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterface
 {
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO;
     }
@@ -39,7 +43,7 @@ class CreditCardPseudo extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer
      */
-    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer)
+    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): AbstractAuthorizationContainer
     {
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
@@ -50,9 +54,9 @@ class CreditCardPseudo extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
     {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
@@ -68,9 +72,9 @@ class CreditCardPseudo extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity): PreAuthorizationContainerInterface
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
@@ -108,7 +112,7 @@ class CreditCardPseudo extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CreditCardCheckContainer
      */
-    public function mapCreditCardCheck(PayoneCreditCardTransfer $payoneCreditCardTransfer)
+    public function mapCreditCardCheck(PayoneCreditCardTransfer $payoneCreditCardTransfer): CreditCardCheckContainer
     {
         $creditCardCheckContainer = new CreditCardCheckContainer();
 
@@ -127,9 +131,9 @@ class CreditCardPseudo extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface
      */
-    public function mapPaymentToDebit(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToDebit(SpyPaymentPayone $paymentEntity): DebitContainerInterface
     {
         $debitContainer = new DebitContainer();
 
@@ -144,9 +148,9 @@ class CreditCardPseudo extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity)
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity): RefundContainerInterface
     {
         $refundContainer = new RefundContainer();
 

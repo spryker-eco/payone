@@ -18,7 +18,7 @@ class RefundResponseMapper implements RefundResponseMapperInterface
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function getRefundResponseTransfer(RefundResponseContainer $responseContainer)
+    public function getRefundResponseTransfer(RefundResponseContainer $responseContainer): RefundResponseTransfer
     {
         $result = new RefundResponseTransfer();
         $baseResponse = new BaseResponseTransfer();

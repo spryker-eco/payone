@@ -8,7 +8,7 @@
 namespace SprykerEco\Client\Payone\ClientApi\Call;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
-use Spryker\Service\UtilEncoding\UtilEncodingService;
+use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 use SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface;
 use SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
@@ -31,7 +31,7 @@ abstract class AbstractCall implements CallInterface
     protected $modeDetector;
 
     /**
-     * @var \Spryker\Service\UtilEncoding\UtilEncodingService
+     * @var \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
      */
     protected $utilEncodingService;
 
@@ -39,13 +39,13 @@ abstract class AbstractCall implements CallInterface
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameterTransfer
      * @param \SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface $hashGenerator
      * @param \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface $modeDetector
-     * @param \Spryker\Service\UtilEncoding\UtilEncodingService $utilEncodingService
+     * @param \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface $utilEncodingService
      */
     public function __construct(
         PayoneStandardParameterTransfer $standardParameterTransfer,
         HashGeneratorInterface $hashGenerator,
         ModeDetectorInterface $modeDetector,
-        UtilEncodingService $utilEncodingService
+        UtilEncodingServiceInterface $utilEncodingService
     ) {
         $this->standardParameter = $standardParameterTransfer;
         $this->hashGenerator = $hashGenerator;
@@ -58,7 +58,7 @@ abstract class AbstractCall implements CallInterface
      *
      * @return void
      */
-    protected function applyStandardParameter(AbstractRequest $container)
+    protected function applyStandardParameter(AbstractRequest $container): void
     {
         if ($container->getPortalid() === null) {
             $container->setPortalid($this->standardParameter->getPortalId());
@@ -86,7 +86,7 @@ abstract class AbstractCall implements CallInterface
     /**
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    protected function getStandardParameter()
+    protected function getStandardParameter(): PayoneStandardParameterTransfer
     {
         return $this->standardParameter;
     }
@@ -94,7 +94,7 @@ abstract class AbstractCall implements CallInterface
     /**
      * @return \SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface
      */
-    protected function getHashGenerator()
+    protected function getHashGenerator(): HashGeneratorInterface
     {
         return $this->hashGenerator;
     }
@@ -102,7 +102,7 @@ abstract class AbstractCall implements CallInterface
     /**
      * @return \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface
      */
-    protected function getModeDetector()
+    protected function getModeDetector(): ModeDetectorInterface
     {
         return $this->modeDetector;
     }

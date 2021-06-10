@@ -15,6 +15,8 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -163,4 +165,19 @@ interface PayoneClientInterface
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
      */
     public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
+
+    /**
+     * Specification:
+     * - Sends a request to Payone to start Klarna session.
+     * - Returns a client token in case of success, adds an error message otherwise.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
+     */
+    public function sendKlarnaStartSessionRequest(
+        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+    ): PayoneKlarnaStartSessionResponseTransfer;
 }

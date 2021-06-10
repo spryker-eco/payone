@@ -25,7 +25,7 @@ class SequenceNumberProvider implements SequenceNumberProviderInterface
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param int $defaultEmptySequenceNumber
      */
-    public function __construct(PayoneQueryContainerInterface $queryContainer, $defaultEmptySequenceNumber)
+    public function __construct(PayoneQueryContainerInterface $queryContainer, int $defaultEmptySequenceNumber)
     {
         $this->queryContainer = $queryContainer;
 
@@ -33,11 +33,11 @@ class SequenceNumberProvider implements SequenceNumberProviderInterface
     }
 
     /**
-     * @param string $transactionId
+     * @param int $transactionId
      *
      * @return int
      */
-    public function getNextSequenceNumber($transactionId)
+    public function getNextSequenceNumber(int $transactionId): int
     {
         $current = $this->getCurrentSequenceNumber($transactionId);
         if ($current < 0) {
@@ -48,11 +48,11 @@ class SequenceNumberProvider implements SequenceNumberProviderInterface
     }
 
     /**
-     * @param string $transactionId
+     * @param int $transactionId
      *
-     * @return int
+     * @return int|null
      */
-    public function getCurrentSequenceNumber($transactionId)
+    public function getCurrentSequenceNumber(int $transactionId): ?int
     {
         $transactionEntity = $this->queryContainer
             ->createCurrentSequenceNumberQuery($transactionId)
