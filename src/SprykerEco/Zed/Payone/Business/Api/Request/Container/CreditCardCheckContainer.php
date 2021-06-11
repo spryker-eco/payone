@@ -57,29 +57,11 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     protected $language;
 
     /**
-     * @param int $aid
-     *
-     * @return void
-     */
-    public function setAid($aid)
-    {
-        $this->aid = $aid;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAid()
-    {
-        return $this->aid;
-    }
-
-    /**
      * @param int $cardcvc2
      *
      * @return void
      */
-    public function setCardCvc2($cardcvc2)
+    public function setCardCvc2($cardcvc2): void
     {
         $this->cardcvc2 = $cardcvc2;
     }
@@ -97,7 +79,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardExpireDate($cardexpiredate)
+    public function setCardExpireDate($cardexpiredate): void
     {
         $this->cardexpiredate = $cardexpiredate;
     }
@@ -115,7 +97,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardIssueNumber($cardissuenumber)
+    public function setCardIssueNumber($cardissuenumber): void
     {
         $this->cardissuenumber = $cardissuenumber;
     }
@@ -133,7 +115,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardPan($cardpan)
+    public function setCardPan($cardpan): void
     {
         $this->cardpan = $cardpan;
     }
@@ -151,7 +133,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardType($cardtype)
+    public function setCardType($cardtype): void
     {
         $this->cardtype = $cardtype;
     }
@@ -165,37 +147,19 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $language
-     *
-     * @return void
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
-
-    /**
      * @param string $storecarddata
      *
      * @return void
      */
-    public function setStoreCardData($storecarddata)
+    public function setStoreCardData($storecarddata): void
     {
         $this->storecarddata = $storecarddata;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStoreCardData()
+    public function getStoreCardData(): ?string
     {
         return $this->storecarddata;
     }

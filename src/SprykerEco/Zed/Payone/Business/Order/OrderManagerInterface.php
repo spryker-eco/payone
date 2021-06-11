@@ -21,7 +21,7 @@ interface OrderManagerInterface
      *
      * @return void
      */
-    public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
+    public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): void;
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

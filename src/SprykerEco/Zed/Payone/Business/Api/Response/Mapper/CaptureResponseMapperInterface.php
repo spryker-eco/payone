@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Response\Mapper;
 
+use Generated\Shared\Transfer\CaptureResponseTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContainer;
 
 interface CaptureResponseMapperInterface extends ResponseMapperInterface
@@ -21,5 +22,5 @@ interface CaptureResponseMapperInterface extends ResponseMapperInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function getCaptureResponseTransfer(CaptureResponseContainer $responseContainer);
+    public function getCaptureResponseTransfer(CaptureResponseContainer $responseContainer): CaptureResponseTransfer;
 }

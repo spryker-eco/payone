@@ -22,6 +22,8 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
@@ -36,12 +38,12 @@ use Generated\Shared\Transfer\SaveOrderTransfer;
 interface PayoneFacadeInterface
 {
     /**
+     * Specification:
+     * - Saves order payment method data according to quote and checkout response transfer data.
+     *
      * @api
      *
      * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::saveOrderPayment()} instead.
-     *
-     * Specification:
-     * - Saves order payment method data according to quote and checkout response transfer data.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -81,11 +83,11 @@ interface PayoneFacadeInterface
      *
      * @api
      *
-     * @param int $idPayment
+     * @param int $idSalesOrder
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
+     * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment($idPayment);
+    public function preAuthorizePayment($idSalesOrder);
 
     /**
      * Specification:
@@ -108,7 +110,7 @@ interface PayoneFacadeInterface
      *
      * @param int $idPayment
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
+     * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
     public function debitPayment($idPayment);
 
@@ -121,7 +123,7 @@ interface PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContainer
+     * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer);
 
@@ -145,7 +147,7 @@ interface PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneCreditCardTransfer $creditCardData
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer
+     * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData);
 
@@ -425,12 +427,12 @@ interface PayoneFacadeInterface
     public function orderPostSave(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
 
     /**
+     * Specification:
+     * - Handles redirects and errors after order placement.
+     *
      * @api
      *
      * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
-     *
-     * Specification:
-     * - Handles redirects and errors after order placement.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -440,13 +442,13 @@ interface PayoneFacadeInterface
     public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
 
     /**
-     * @api
-     *
-     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
-     *
      * Specification:
      * - Executes `authorization` or `pre-authorization` API call depends on payment method.
      * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
+     *
+     * @api
+     *
+     * @deprecated Use {@link \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface::orderPostSave()} instead.
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
@@ -503,7 +505,7 @@ interface PayoneFacadeInterface
      *
      * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\BankAccountCheckResponseContainer
+     * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
     public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer);
 
@@ -644,4 +646,20 @@ interface PayoneFacadeInterface
     public function executePartialCapture(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
     ): CaptureResponseTransfer;
+
+    /**
+     * Specification:
+     * - Starts Payone Klarna session.
+     * - Returns client token in case session started successfully.
+     * - Returns 'isSuccessful=false' and error message in case of error.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer
+     */
+    public function sendKlarnaStartSessionRequest(
+        PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
+    ): PayoneKlarnaStartSessionResponseTransfer;
 }

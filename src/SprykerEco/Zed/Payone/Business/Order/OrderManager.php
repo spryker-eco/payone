@@ -54,7 +54,7 @@ class OrderManager implements OrderManagerInterface
      *
      * @return void
      */
-    public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
+    public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): void
     {
         $this->doSaveOrderPayment($quoteTransfer, $checkoutResponse->getSaveOrder());
     }
@@ -120,7 +120,7 @@ class OrderManager implements OrderManagerInterface
      *
      * @return void
      */
-    protected function savePaymentDetail(SpyPaymentPayone $payment, PaymentDetailTransfer $paymentDetailTransfer)
+    protected function savePaymentDetail(SpyPaymentPayone $payment, PaymentDetailTransfer $paymentDetailTransfer): void
     {
         $paymentDetailEntity = new SpyPaymentPayoneDetail();
         $paymentDetailEntity->setSpyPaymentPayone($payment);

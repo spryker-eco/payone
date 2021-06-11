@@ -20,7 +20,7 @@ class ModeDetector implements ModeDetectorInterface
      *
      * @return string
      */
-    public function getMode()
+    public function getMode(): string
     {
         if (Environment::isNotProduction()) {
             return self::MODE_TEST;

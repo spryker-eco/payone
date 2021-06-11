@@ -16,68 +16,68 @@ interface ApiLogFinderInterface
      *
      * @return bool
      */
-    public function isPreAuthorizationApproved(OrderTransfer $orderTransfer);
+    public function isPreAuthorizationApproved(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isPreAuthorizationRedirect(OrderTransfer $orderTransfer);
+    public function isPreAuthorizationRedirect(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isPreAuthorizationError(OrderTransfer $orderTransfer);
+    public function isPreAuthorizationError(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isAuthorizationApproved(OrderTransfer $orderTransfer);
+    public function isAuthorizationApproved(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isAuthorizationRedirect(OrderTransfer $orderTransfer);
+    public function isAuthorizationRedirect(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isAuthorizationError(OrderTransfer $orderTransfer);
+    public function isAuthorizationError(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isCaptureApproved(OrderTransfer $orderTransfer);
+    public function isCaptureApproved(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isCaptureError(OrderTransfer $orderTransfer);
+    public function isCaptureError(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isRefundApproved(OrderTransfer $orderTransfer);
+    public function isRefundApproved(OrderTransfer $orderTransfer): bool;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return bool
      */
-    public function isRefundError(OrderTransfer $orderTransfer);
+    public function isRefundError(OrderTransfer $orderTransfer): bool;
 }

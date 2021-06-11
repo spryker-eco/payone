@@ -19,9 +19,9 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @param int $idPaymentPayone
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createCurrentSequenceNumberQuery($idPaymentPayone);
+    public function createCurrentSequenceNumberQuery(int $idPaymentPayone);
 
     /**
      * Specification:
@@ -166,7 +166,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @api
      *
-     * @param \Propel\Runtime\Collection\ObjectCollection $orders
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder[] $orders
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */

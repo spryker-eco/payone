@@ -85,7 +85,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      *
      * @return bool
      */
-    protected function isAvailable(PaymentMethodTransfer $paymentMethodTransfer, $availableMethods): bool
+    protected function isAvailable(PaymentMethodTransfer $paymentMethodTransfer, array $availableMethods): bool
     {
         return in_array($paymentMethodTransfer->getMethodName(), $availableMethods);
     }

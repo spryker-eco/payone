@@ -7,6 +7,7 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Payment\MethodMapper;
 
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Prepayment;
 
 /**
@@ -119,7 +120,7 @@ class PrepaymentTest extends AbstractMethodMapperTest
     /**
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
      */
-    protected function getPaymentPayoneDetailMock()
+    protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
     {
         $paymentPayoneDetail = parent::getPaymentPayoneDetailMock();
 

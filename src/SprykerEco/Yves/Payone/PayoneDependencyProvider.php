@@ -14,6 +14,7 @@ use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentBridge;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -27,6 +28,8 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 
     public const CLIENT_CALCULATION = 'calculation client';
     public const CLIENT_QUOTE = 'CLIENT_QUOTE';
+
+    public const CLIENT_STORE = 'CLIENT_STORE';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -56,6 +59,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         });
 
         $container = $this->addQuoteClient($container);
+        $container = $this->addClientStore($container);
 
         return $container;
     }
@@ -69,6 +73,22 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::CLIENT_QUOTE, function (Container $container) {
             return new PayoneToQuoteClientBridge($container->getLocator()->quote()->client());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function addClientStore(Container $container): Container
+    {
+        $container->set(static::CLIENT_STORE, function (Container $container) {
+            return new PayoneToStoreClientBridge(
+                $container->getLocator()->store()->client()
+            );
         });
 
         return $container;

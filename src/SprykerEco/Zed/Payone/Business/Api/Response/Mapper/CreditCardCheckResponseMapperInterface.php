@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Response\Mapper;
 
+use Generated\Shared\Transfer\CreditCardCheckResponseTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckResponseContainer;
 
 interface CreditCardCheckResponseMapperInterface extends ResponseMapperInterface
@@ -21,5 +22,5 @@ interface CreditCardCheckResponseMapperInterface extends ResponseMapperInterface
      *
      * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
-    public function getCreditCardCheckResponseTransfer(CreditCardCheckResponseContainer $responseContainer);
+    public function getCreditCardCheckResponseTransfer(CreditCardCheckResponseContainer $responseContainer): CreditCardCheckResponseTransfer;
 }

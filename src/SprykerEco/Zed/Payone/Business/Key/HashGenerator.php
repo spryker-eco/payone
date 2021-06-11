@@ -76,11 +76,11 @@ class HashGenerator implements HashGeneratorInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $request
-     * @param string $securityKey
+     * @param string|null $securityKey
      *
      * @return string
      */
-    public function generateParamHash(AbstractRequestContainer $request, $securityKey)
+    public function generateParamHash(AbstractRequestContainer $request, ?string $securityKey): string
     {
         $hashString = '';
         $requestData = $request->toArray();
@@ -101,7 +101,7 @@ class HashGenerator implements HashGeneratorInterface
      *
      * @return string
      */
-    public function hash($string)
+    public function hash(string $string): string
     {
         return $this->hashProvider->hash($string);
     }

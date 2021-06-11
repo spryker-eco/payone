@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Plugin\Oms\Command;
 
-use Orm\Zed\Sales\Persistence\Base\SpySalesOrder;
+use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**

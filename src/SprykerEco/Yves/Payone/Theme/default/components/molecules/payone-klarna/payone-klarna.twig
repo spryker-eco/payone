@@ -1,0 +1,46 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'payone-klarna',
+    tag: 'payone-klarna',
+} %}
+
+{% define data = {
+    form: required,
+    billingAddressData: data.billingAddressData | default({}),
+    scriptSrc: 'https://x.klarnacdn.net/kp/lib/v1/api.js',
+} %}
+
+{% set billingAddressData = data.billingAddressData %}
+
+{% define attributes = {
+    'klarna-pay-methods': required,
+    'given-name': billingAddressData['given_name'] | default,
+    'family-name': billingAddressData['family_name'] | default,
+    'email': billingAddressData['email'] | default,
+    'street-address': billingAddressData['street_address'] | default,
+    'postal-code': billingAddressData['postal_code'] | default,
+    'city': billingAddressData['city'] | default,
+    'country': billingAddressData['country'] | default,
+    'phone': billingAddressData['phone'] | default,
+    'date-of-birth': '',
+} %}
+
+{% block body %}
+    <div class="payment-subform payone-form payone-klarna-form payment-form" id="payoneKlarna">
+        <div class="field">
+            {{ form_widget(data.form.payoneKlarna.payMethod, {'attr': {'class': config.jsName ~ '__select-field'}}) }}
+            {{ form_widget(data.form.payoneKlarna.payMethodToken) }}
+        </div>
+    </div>
+
+    {% include molecule('script-loader') with {
+        class: config.jsName ~ '__script-loader',
+        attributes: {
+            src: data.scriptSrc,
+            async: true,
+        },
+    } only %}
+
+    <div id="klarna_container"></div>
+{% endblock %}

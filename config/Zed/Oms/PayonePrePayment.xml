@@ -28,7 +28,6 @@
             <transition condition="Payone/PreAuthorizationIsApproved" happy="true">
                 <source>new</source>
                 <target>pre-authorization pending</target>
-                <event>pre-authorize</event>
             </transition>
 
             <transition condition="Payone/PaymentIsAppointed" happy="true">
@@ -54,7 +53,6 @@
             <transition>
                 <source>new</source>
                 <target>invalid</target>
-                <event>pre-authorize</event>
             </transition>
 
             <transition>
@@ -136,7 +134,6 @@
         </transitions>
 
         <events>
-            <event name="pre-authorize" onEnter="true" command="Payone/PreAuthorize"/>
             <event name="ship" manual="true" />
             <event name="wait for item return" timeout="14days" />
             <event name="cancel" manual="true" />
