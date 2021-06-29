@@ -100,15 +100,13 @@ export default class PayoneCreditCard extends Component {
     }
 
     protected onSubmit(event: Event): void {
-        event.preventDefault();
-
-        if (typeof this.isCurrentPaymentMethod === null) {
-            this.enableSubmit();
-
+        if (!this.isCurrentPaymentMethod) {
             return;
         }
 
-        if (!this.isCurrentPaymentMethod || this.isPaymentValid) {
+        event.preventDefault();
+
+        if (this.isPaymentValid) {
             this.form.submit();
         }
 
@@ -143,7 +141,18 @@ export default class PayoneCreditCard extends Component {
     }
 
     protected enableSubmit(): void {
-        this.submitButton.forEach(button => {
+        if (this.submitButton.length) {
+            this.submitButton.forEach(button => {
+                button.removeAttribute('disabled');
+            });
+
+            return;
+        }
+
+        const buttons = <HTMLButtonElement[]>Array.from(this.form.getElementsByTagName('button'));
+        buttons.forEach(button => {
+            console.log(button);
+            debugger;
             button.removeAttribute('disabled');
         });
     }
