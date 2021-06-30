@@ -151,8 +151,6 @@ export default class PayoneCreditCard extends Component {
 
         const buttons = <HTMLButtonElement[]>Array.from(this.form.getElementsByTagName('button'));
         buttons.forEach(button => {
-            console.log(button);
-            debugger;
             button.removeAttribute('disabled');
         });
     }
