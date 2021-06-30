@@ -119,7 +119,7 @@ export default class PayoneCreditCard extends Component {
 
     protected async checkCallback(response: any): Promise<void> {
         if (response.status !== CHECK_CALLBACK_VALID_RESPONSE_STATUS) {
-            this.enableSubmit();
+            setTimeout(() => this.enableSubmit(), 0);
 
             return;
         }
@@ -137,7 +137,7 @@ export default class PayoneCreditCard extends Component {
         }
 
         this.errorElement.innerHTML = this.hostedIFramesConfig.language.transactionRejected;
-        this.enableSubmit();
+        setTimeout(() => this.enableSubmit(), 0);
     }
 
     protected enableSubmit(): void {
