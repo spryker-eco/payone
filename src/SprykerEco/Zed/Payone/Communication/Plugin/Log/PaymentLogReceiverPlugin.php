@@ -31,7 +31,9 @@ class PaymentLogReceiverPlugin extends AbstractPlugin implements PaymentLogRecei
     public function getPaymentLogs(ObjectCollection $orders)
     {
         $orderCollectionTransfer = new OrderCollectionTransfer();
-        $orderCollectionTransfer->setOrders($orders->getData());
+        /** @var \Generated\Shared\Transfer\OrderTransfer[] $orderTransfers */
+        $orderTransfers = $orders->getData();
+        $orderCollectionTransfer->setOrders($orderTransfers);
 
         return $this->getFacade()->getPaymentLogs($orderCollectionTransfer);
     }

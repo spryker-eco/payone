@@ -22,6 +22,7 @@ use PHPUnit_Framework_TestCase;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProvider;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @group Unit
@@ -45,6 +46,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     public const PAYMENT_REFERENCE = 'TX1234567890abcd';
     public const DEFAULT_SEQUENCE_NUMBER = 0;
     public const DEFAULT_EMAIL = 'default@email.com';
+    public const STANDARD_PARAMETER_LANGUAGE = 'en';
+    public const DEFAULT_CITY = 'Berlin';
+    protected const CLIENT_IP = '127.0.0.1';
 
     public const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
@@ -112,9 +116,9 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getPaymentPayoneDetailMock()
+    protected function getPaymentPayoneDetailMock(): SpyPaymentPayoneDetail
     {
         $paymentPayoneDetail = $this->getMockBuilder(SpyPaymentPayoneDetail::class)
             ->disableOriginalConstructor()
@@ -135,7 +139,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $salesOrder->method('getBillingAddress')->willReturn($this->getAddressMock());
         $salesOrder->method('getShippingAddress')->willReturn($this->getAddressMock());
         $salesOrder->method('getEmail')->willReturn(static::DEFAULT_EMAIL);
-        $salesOrder->method('getOrderTotals')->willReturn($this->getTotals());
+        $salesOrder->method('getOrderTotals')->willReturn($this->getSalesOrderTotals());
 
         return $salesOrder;
     }
@@ -170,6 +174,8 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $address->method('getCountry')->willReturn($this->getCountryMock());
         $address->method('getFirstName')->willReturn(static::ADDRESS_FIRST_NAME);
         $address->method('getLastName')->willReturn(static::ADDRESS_LAST_NAME);
+        $address->method('getEmail')->willReturn(static::DEFAULT_EMAIL);
+        $address->method('getCity')->willReturn(static::DEFAULT_CITY);
 
         return $address;
     }
@@ -209,6 +215,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $standardParameter = $this->getMockBuilder(PayoneStandardParameterTransfer::class)->getMock();
         $standardParameter->method('getAid')->willReturn(static::STANDARD_PARAMETER_AID);
         $standardParameter->method('getCurrency')->willReturn(static::STANDARD_PARAMETER_CURRENCY);
+        $standardParameter->method('getLanguage')->willReturn(static::STANDARD_PARAMETER_LANGUAGE);
 
         return $standardParameter;
     }
@@ -241,15 +248,43 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\Sales\Persistence\SpySalesOrderTotals
      */
-    protected function getTotals(): SpySalesOrderTotals
+    protected function getSalesOrderTotals(): SpySalesOrderTotals
     {
-        $totals = $this->getMockBuilder(SpySalesOrderTotals::class)
+        $orderTotals = $this->getMockBuilder(SpySalesOrderTotals::class)
             ->disableOriginalConstructor()
             ->setMethods(['get'])
             ->getMock();
 
-        $totals->method('get')->willReturn((new TotalsTransfer())->setSubtotal(100));
+        $orderTotals->method('get')->willReturn($this->getTotals());
+
+        return $orderTotals;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\TotalsTransfer
+     */
+    protected function getTotals(): TotalsTransfer
+    {
+        $totals = new TotalsTransfer();
+
+        $totals->setSubtotal(100);
+        $totals->setGrandTotal(100);
 
         return $totals;
+    }
+
+    /**
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\RequestStack
+     */
+    protected function getRequestStackMock(): RequestStack
+    {
+        $mock = $this->getMockBuilder(RequestStack::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getCurrentRequest'])
+            ->getMock();
+
+        $mock->method('getCurrentRequest')->willReturn($this->getCurrentRequestMock());
+
+        return $mock;
     }
 }

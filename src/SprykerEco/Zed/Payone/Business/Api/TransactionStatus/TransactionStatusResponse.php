@@ -31,7 +31,7 @@ class TransactionStatusResponse
     /**
      * @param bool $isSuccess
      */
-    public function __construct($isSuccess)
+    public function __construct(bool $isSuccess)
     {
         $this->status = $isSuccess ? self::STATUS_OK : self::STATUS_ERROR;
     }
@@ -39,7 +39,7 @@ class TransactionStatusResponse
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $output = $this->getStatus();
         if ($this->isError() && $this->getErrorMessage()) {
@@ -52,7 +52,7 @@ class TransactionStatusResponse
     /**
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -62,7 +62,7 @@ class TransactionStatusResponse
      *
      * @return void
      */
-    public function setErrorMessage($errorMessage)
+    public function setErrorMessage(string $errorMessage): void
     {
         $this->errorMessage = $errorMessage;
     }
@@ -70,7 +70,7 @@ class TransactionStatusResponse
     /**
      * @return string
      */
-    public function getErrorMessage()
+    public function getErrorMessage(): string
     {
         return $this->errorMessage;
     }
@@ -78,7 +78,7 @@ class TransactionStatusResponse
     /**
      * @return bool
      */
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return ($this->getStatus() === self::STATUS_OK);
     }
@@ -86,7 +86,7 @@ class TransactionStatusResponse
     /**
      * @return bool
      */
-    public function isError()
+    public function isError(): bool
     {
         return (!$this->isSuccess());
     }

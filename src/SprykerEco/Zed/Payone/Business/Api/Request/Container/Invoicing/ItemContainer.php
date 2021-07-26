@@ -98,7 +98,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setDe($de)
+    public function setDe($de): void
     {
         $this->de = $de;
     }
@@ -116,7 +116,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setEd($ed)
+    public function setEd($ed): void
     {
         $this->ed = $ed;
     }
@@ -134,7 +134,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -152,7 +152,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setNo($no)
+    public function setNo($no): void
     {
         $this->no = $no;
     }
@@ -170,7 +170,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setPr($pr)
+    public function setPr($pr): void
     {
         $this->pr = $pr;
     }
@@ -188,7 +188,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setSd($sd)
+    public function setSd($sd): void
     {
         $this->sd = $sd;
     }
@@ -206,7 +206,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setVa($va)
+    public function setVa($va): void
     {
         $this->va = $va;
     }
@@ -224,7 +224,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setIt($it)
+    public function setIt($it): void
     {
         $this->it = $it;
     }

@@ -380,6 +380,7 @@
         <property name="payoneInvoice" type="PayonePayment"/>
         <property name="payoneSecurityInvoice" type="PayonePayment"/>
         <property name="payonePaypalExpressCheckout" type="PayonePaypalExpressCheckout"/>
+        <property name="payoneKlarna" type="PayoneKlarna"/>
         <property name="summaryIncludePath" type="string"/>
         <property name="successIncludePath" type="string"/>
         <property name="paymentProvider" type="string"/>
@@ -417,6 +418,17 @@
         <property name="shippingCountry" type="string"/>
     </transfer>
 
+    <transfer name="PayoneKlarna">
+        <property name="token" type="string"/>
+        <property name="paymentMethod" type="string"/>
+        <property name="payMethod" type="string"/>
+        <property name="payMethodToken" type="string"/>
+    </transfer>
+
+    <transfer name="PayoneKlarnaStartSessionRequest">
+        <property name="payMethod" type="string"/>
+        <property name="quote" type="Quote"/>
+    </transfer>
     <!--Response container replacement related transfers start-->
 
     <transfer name="BaseResponse">
@@ -518,5 +530,56 @@
         <property name="customerMessage" type="string"/>
         <property name="gender" type="string"/>
     </transfer>
+
+    <transfer name="PayoneKlarnaStartSessionResponse">
+        <property name="token" type="string"/>
+        <property name="isSuccessful" type="bool"/>
+        <property name="errorMessage" type="string"/>
+    </transfer>
+
+    <transfer name="PayoneApiLog">
+        <property name="redirectUrl" type="string"/>
+        <property name="errorCode" type="string"/>
+        <property name="errorMessageUser" type="string"/>
+    </transfer>
     <!--Response container replacement related transfers end-->
+
+    <transfer name="Refund">
+    </transfer>
+
+    <transfer name="KeyTranslation">
+    </transfer>
+
+    <transfer name="Locale">
+    </transfer>
+
+    <transfer name="CheckoutResponse">
+    </transfer>
+
+    <transfer name="SaveOrder">
+    </transfer>
+
+    <transfer name="PaymentMethods">
+    </transfer>
+
+    <transfer name="CheckoutError">
+    </transfer>
+
+    <transfer name="PaymentMethod">
+    </transfer>
+
+    <transfer name="Customer">
+    </transfer>
+
+    <transfer name="Address">
+    </transfer>
+
+    <transfer name="ShipmentMethod">
+    </transfer>
+
+    <transfer name="Shipment">
+    </transfer>
+
+    <transfer name="PersonalData">
+    </transfer>
 </transfers>

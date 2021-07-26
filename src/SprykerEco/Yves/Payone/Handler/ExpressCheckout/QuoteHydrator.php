@@ -75,7 +75,7 @@ class QuoteHydrator implements QuoteHydratorInterface
     public function getHydratedQuote(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-    ) {
+    ): QuoteTransfer {
         $quoteTransfer = $this->hydrateQuoteWithPayment($quoteTransfer);
         $quoteTransfer = $this->hydrateQuoteWithShipment($quoteTransfer);
         $quoteTransfer = $this->hydrateQuoteWithAddresses($quoteTransfer, $details);
@@ -92,7 +92,7 @@ class QuoteHydrator implements QuoteHydratorInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function hydrateQuoteWithPayment(QuoteTransfer $quoteTransfer)
+    protected function hydrateQuoteWithPayment(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         $paymentTransfer = new PaymentTransfer();
         $payone = new PayonePaymentTransfer();
@@ -123,7 +123,7 @@ class QuoteHydrator implements QuoteHydratorInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function hydrateQuoteWithShipment($quoteTransfer)
+    protected function hydrateQuoteWithShipment(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         if ($quoteTransfer->getShipment()) {
             return $quoteTransfer;
@@ -162,7 +162,7 @@ class QuoteHydrator implements QuoteHydratorInterface
     protected function hydrateQuoteWithCustomer(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-    ) {
+    ): QuoteTransfer {
         $customerEmail = $details->getEmail();
         $customerTransfer = new CustomerTransfer();
         $customerTransfer->setEmail($customerEmail);
@@ -192,7 +192,7 @@ class QuoteHydrator implements QuoteHydratorInterface
     protected function hydrateQuoteWithAddresses(
         QuoteTransfer $quoteTransfer,
         PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $details
-    ) {
+    ): QuoteTransfer {
         $address = new AddressTransfer();
 
         if ($this->customerClient->isLoggedIn()) {

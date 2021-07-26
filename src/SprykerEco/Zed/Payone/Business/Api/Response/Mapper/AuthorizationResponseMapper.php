@@ -20,7 +20,7 @@ class AuthorizationResponseMapper implements AuthorizationResponseMapperInterfac
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function getAuthorizationResponseTransfer(AuthorizationResponseContainer $responseContainer)
+    public function getAuthorizationResponseTransfer(AuthorizationResponseContainer $responseContainer): AuthorizationResponseTransfer
     {
         $result = new AuthorizationResponseTransfer();
         $clearing = new ClearingTransfer();

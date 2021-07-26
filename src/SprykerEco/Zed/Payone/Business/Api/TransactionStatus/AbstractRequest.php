@@ -24,7 +24,7 @@ class AbstractRequest
      *
      * @return void
      */
-    public function init(array $data = [])
+    public function init(array $data = []): void
     {
         foreach ($data as $key => $value) {
             $this->set($key, $value);
@@ -34,7 +34,7 @@ class AbstractRequest
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $stringArray = [];
         foreach ($this->toArray() as $key => $value) {
@@ -48,7 +48,7 @@ class AbstractRequest
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $result = [];
         foreach ($this as $key => $data) {

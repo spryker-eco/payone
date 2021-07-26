@@ -80,7 +80,7 @@ class HashGenerator implements HashGeneratorInterface
      *
      * @return string
      */
-    public function generateHash(AbstractRequest $request, $securityKey)
+    public function generateHash(AbstractRequest $request, string $securityKey): string
     {
         $hashString = '';
         $requestData = $request->toArray();

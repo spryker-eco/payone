@@ -18,5 +18,5 @@ interface PayoneHandlerInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addPaymentToQuote(Request $request, QuoteTransfer $quoteTransfer);
+    public function addPaymentToQuote(Request $request, QuoteTransfer $quoteTransfer): QuoteTransfer;
 }

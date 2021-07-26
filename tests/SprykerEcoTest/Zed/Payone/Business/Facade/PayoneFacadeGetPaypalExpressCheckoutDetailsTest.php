@@ -9,12 +9,27 @@ namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
+use Spryker\Service\Container\Container;
+use Spryker\Shared\Kernel\Container\GlobalContainer;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\GetExpressCheckoutAdapterMock;
 
 class PayoneFacadeGetPaypalExpressCheckoutDetailsTest extends AbstractBusinessTest
 {
+    /**
+     * @return void
+     */
+    public function _before(): void
+    {
+        parent::_before();
+
+        $globalContainer = new GlobalContainer();
+        $globalContainer->setContainer(new Container([
+            'request_stack' => $this->getRequestStackMock(),
+        ]));
+    }
+
     /**
      * @return void
      */

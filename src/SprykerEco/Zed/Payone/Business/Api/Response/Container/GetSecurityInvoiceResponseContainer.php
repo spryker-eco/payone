@@ -19,7 +19,7 @@ class GetSecurityInvoiceResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setResponse($response): void
+    public function setResponse(string $response): void
     {
         $this->response = $response;
     }

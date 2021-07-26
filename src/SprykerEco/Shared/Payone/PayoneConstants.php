@@ -60,4 +60,6 @@ interface PayoneConstants
     public const GLOSSARY_FILE_PATH = 'Business/Internal/glossary.yml';
 
     public const HOST_YVES = 'HOST_YVES';
+
+    public const PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA = 'PAYONE:PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA';
 }

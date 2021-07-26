@@ -41,8 +41,6 @@ class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
      */
     public function testExecutePartialRefund(): void
     {
-        $this->markTestSkipped('Test is not valid. Problems in SalesPaymentHydrator.');
-
         $saveOrderTransfer = $this->tester->createOrder();
         $itemTransfer = $saveOrderTransfer->getOrderItems()->offsetGet(0);
         $paymentPayoneEntity = $this->tester->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
