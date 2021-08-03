@@ -216,12 +216,10 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
-        $authorizationContainer->setFinancingType($paymentDetailEntity->getPayMethod());
 
         $authorizationContainer->setReference($paymentEntity->getReference());
 
         $paydataContainer = new PaydataContainer();
-        $paydataContainer->setAuthorizationToken($paymentDetailEntity->getToken());
         $authorizationContainer->setPaydata($paydataContainer);
 
         $personalContainer = $this->buildPersonalContainer($paymentEntity);
