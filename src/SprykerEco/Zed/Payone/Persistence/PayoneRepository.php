@@ -216,7 +216,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \ArrayObject\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
+     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
