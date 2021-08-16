@@ -69,7 +69,7 @@ jobs:
                     stack-version: 7.6.0
 
             -   name: Install eco-ci
-                run: git clone -b feature/dev-te-7947-add-github-action-and-remove-travis-from-eco https://github.com/spryker-eco/eco-ci.git ecoci #Todo: use proper branch
+                run: git clone https://github.com/spryker-eco/eco-ci.git ecoci
 
             -   name: Execute test script
                 run: ./ecoci/build/ga.sh ${{ matrix.composer_preference }}
