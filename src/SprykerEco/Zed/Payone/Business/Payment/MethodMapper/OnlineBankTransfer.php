@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -169,22 +168,6 @@ class OnlineBankTransfer extends AbstractMapper
         $paymentMethodContainer->setBic($paymentDetailEntity->getBic());
 
         return $paymentMethodContainer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneAuthorizationTransfer $authorizationData
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
-     */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $authorizationData)
-    {
-        $personalContainer = new PersonalContainer();
-
-        $personalContainer->setFirstName($authorizationData->getOrder()->getFirstName());
-        $personalContainer->setLastName($authorizationData->getOrder()->getLastName());
-        $personalContainer->setCountry($this->storeConfig->getCurrentCountry());
-
-        return $personalContainer;
     }
 
     /**

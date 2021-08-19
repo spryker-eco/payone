@@ -9,13 +9,26 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface;
 use SprykerEco\Yves\Payone\Form\InstantOnlineTransferSubForm;
 
 class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
+    /**
+     * @var \SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface
+     */
+    private $storeClient;
+
+    /**
+     * @param \SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface $storeClient
+     */
+    public function __construct(PayoneToStoreClientInterface $storeClient)
+    {
+        $this->storeClient = $storeClient;
+    }
+
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -46,12 +59,12 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
-        return [
-            Store::getInstance()->getCurrentCountry() => Store::getInstance()->getCurrentCountry(),
-        ];
+        $countries = $this->storeClient->getCurrentStore()->getCountries();
+
+        return array_combine($countries, $countries);
     }
 }

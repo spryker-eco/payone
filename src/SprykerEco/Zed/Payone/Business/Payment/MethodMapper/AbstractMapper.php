@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Sales\Persistence\SpySalesOrderAddress;
-use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
@@ -34,19 +33,6 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      * @var \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
     private $urlHmacGenerator;
-
-    /**
-     * @var \Spryker\Shared\Kernel\Store
-     */
-    protected $storeConfig;
-
-    /**
-     * @param \Spryker\Shared\Kernel\Store $storeConfig
-     */
-    public function __construct(Store $storeConfig)
-    {
-        $this->storeConfig = $storeConfig;
-    }
 
     /**
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameterTransfer

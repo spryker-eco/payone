@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -134,7 +133,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
-        $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
+        $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment());
 
         $personalContainer = new PersonalContainer();
         $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
@@ -199,30 +198,12 @@ class Invoice extends AbstractMapper implements InvoiceInterface
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\InvoiceContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
+    protected function createPaymentMethodContainerFromPayment()
     {
         $paymentMethodContainer = new InvoiceContainer();
 
         return $paymentMethodContainer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneAuthorizationTransfer $payoneAuthorizationTransfer
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
-     */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $payoneAuthorizationTransfer)
-    {
-        $personalContainer = new PersonalContainer();
-
-        $personalContainer->setFirstName($payoneAuthorizationTransfer->getOrder()->getFirstName());
-        $personalContainer->setLastName($payoneAuthorizationTransfer->getOrder()->getLastName());
-        $personalContainer->setCountry($this->storeConfig->getCurrentCountry());
-
-        return $personalContainer;
     }
 }

@@ -9,10 +9,8 @@ namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\ExpenseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\SecurityInvoiceContainer;
@@ -39,12 +37,10 @@ class SecurityInvoice extends AbstractMapper
     protected $payoneConfig;
 
     /**
-     * @param \Spryker\Shared\Kernel\Store $storeConfig
      * @param \SprykerEco\Zed\Payone\PayoneConfig $payoneConfig
      */
-    public function __construct(Store $storeConfig, PayoneConfig $payoneConfig)
+    public function __construct(PayoneConfig $payoneConfig)
     {
-        parent::__construct($storeConfig);
         $this->payoneConfig = $payoneConfig;
     }
 
@@ -172,14 +168,12 @@ class SecurityInvoice extends AbstractMapper
         SpyPaymentPayone $paymentEntity,
         AbstractAuthorizationContainer $authorizationContainer
     ): AbstractAuthorizationContainer {
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
-
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_SECURITY_INVOICE);
         $authorizationContainer->setClearingsubtype(PayoneApiConstants::CLEARING_SUBTYPE_SECURITY_INVOICE);
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
-        $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
+        $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment());
 
         $personalContainer = new PersonalContainer();
         $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
@@ -243,30 +237,12 @@ class SecurityInvoice extends AbstractMapper
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\SecurityInvoiceContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity): ContainerInterface
+    protected function createPaymentMethodContainerFromPayment(): SecurityInvoiceContainer
     {
         $paymentMethodContainer = new SecurityInvoiceContainer();
 
         return $paymentMethodContainer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneAuthorizationTransfer $payoneAuthorizationTransfer
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
-     */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $payoneAuthorizationTransfer): ContainerInterface
-    {
-        $personalContainer = new PersonalContainer();
-
-        $personalContainer->setFirstName($payoneAuthorizationTransfer->getOrder()->getFirstName());
-        $personalContainer->setLastName($payoneAuthorizationTransfer->getOrder()->getLastName());
-        $personalContainer->setCountry($this->storeConfig->getCurrentCountry());
-
-        return $personalContainer;
     }
 }

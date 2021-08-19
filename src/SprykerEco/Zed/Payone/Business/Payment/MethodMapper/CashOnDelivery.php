@@ -8,10 +8,8 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\CashOnDeliveryContainer;
@@ -36,12 +34,10 @@ class CashOnDelivery extends AbstractMapper
     protected $glossaryFacade;
 
     /**
-     * @param \Spryker\Shared\Kernel\Store $storeConfig
      * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface $glossaryFacade
      */
-    public function __construct(Store $storeConfig, PayoneToGlossaryFacadeInterface $glossaryFacade)
+    public function __construct(PayoneToGlossaryFacadeInterface $glossaryFacade)
     {
-        parent::__construct($storeConfig);
         $this->glossaryFacade = $glossaryFacade;
     }
 
@@ -215,22 +211,6 @@ class CashOnDelivery extends AbstractMapper
         $paymentMethodContainer->setShippingProvider($translatedShippingProviderName);
 
         return $paymentMethodContainer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneAuthorizationTransfer $authorizationData
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
-     */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $authorizationData): PersonalContainer
-    {
-        $personalContainer = new PersonalContainer();
-
-        $personalContainer->setFirstName($authorizationData->getOrder()->getFirstName());
-        $personalContainer->setLastName($authorizationData->getOrder()->getLastName());
-        $personalContainer->setCountry($this->storeConfig->getCurrentCountry());
-
-        return $personalContainer;
     }
 
     /**
