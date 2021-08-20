@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
-use Spryker\Shared\Kernel\Store;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -98,7 +98,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    public function getRequestStandardParameter()
+    public function getRequestStandardParameter(string $currencyIsoCode, string $countryIsoCode): PayoneStandardParameterTransfer
     {
         $settings = $this->get(PayoneConstants::PAYONE);
         $standardParameter = new PayoneStandardParameterTransfer();
@@ -110,8 +110,8 @@ class PayoneConfig extends AbstractBundleConfig
         $standardParameter->setKey($settings[PayoneConstants::PAYONE_CREDENTIALS_KEY]);
         $standardParameter->setPaymentGatewayUrl($settings[PayoneConstants::PAYONE_PAYMENT_GATEWAY_URL]);
 
-        $standardParameter->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-        $standardParameter->setLanguage(Store::getInstance()->getCurrentLanguage());
+        $standardParameter->setCurrency($currencyIsoCode);
+        $standardParameter->setLanguage($countryIsoCode);
 
         $standardParameter->setRedirectSuccessUrl($settings[PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL]);
         $standardParameter->setRedirectBackUrl($settings[PayoneConstants::PAYONE_REDIRECT_BACK_URL]);

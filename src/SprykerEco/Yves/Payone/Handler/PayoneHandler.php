@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -127,7 +126,7 @@ class PayoneHandler implements PayoneHandlerInterface
         $paymentDetailTransfer = new PaymentDetailTransfer();
         // get it from quotaTransfer
         $paymentDetailTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
-        $paymentDetailTransfer->setCurrency($this->getCurrency());
+        $paymentDetailTransfer->setCurrency($quoteTransfer->getCurrencyOrFail()->getCodeOrFail());
         if ($paymentSelection === PaymentTransfer::PAYONE_CREDIT_CARD) {
             /** @var \Generated\Shared\Transfer\PayonePaymentCreditCardTransfer $payonePaymentTransfer */
             $paymentDetailTransfer->setPseudoCardPan($payonePaymentTransfer->getPseudocardpan());
@@ -177,14 +176,6 @@ class PayoneHandler implements PayoneHandlerInterface
         $paymentTransfer = $quoteTransfer->getPayment();
         $payonePaymentTransfer->setPaymentMethod($paymentTransfer->getPaymentMethod());
         $paymentTransfer->setPayone($payonePaymentTransfer);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCurrency(): string
-    {
-        return Store::getInstance()->getCurrencyIsoCode();
     }
 
     /**

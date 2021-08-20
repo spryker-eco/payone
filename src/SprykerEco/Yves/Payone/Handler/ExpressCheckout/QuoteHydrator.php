@@ -17,12 +17,12 @@ use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use Generated\Shared\Transfer\ShipmentTransfer;
-use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationInterface;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerInterface;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentInterface;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface;
 
 class QuoteHydrator implements QuoteHydratorInterface
 {
@@ -100,7 +100,7 @@ class QuoteHydrator implements QuoteHydratorInterface
         $paymentDetailTransfer
             ->setAmount($quoteTransfer->getTotals()->getGrandTotal())
             ->setType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL)
-            ->setCurrency(Store::getInstance()->getCurrencyIsoCode())
+            ->setCurrency($quoteTransfer->getCurrencyOrFail()->getCodeOrFail())
             ->setWorkOrderId(
                 $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->getWorkOrderId()
             );

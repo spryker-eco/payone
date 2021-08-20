@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Yves\Payone\Plugin;
 
-use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractPlugin;
 
 /**
@@ -30,7 +29,9 @@ class PayoneSubFormsPlugin extends AbstractPlugin
      */
     public function getPaymentMethodsSubForms()
     {
-        $subFormsCreator = $this->pluginCountryFactory->createSubFormsCreator(Store::getInstance()->getCurrentCountry());
+        $subFormsCreator = $this->pluginCountryFactory->createSubFormsCreator(
+            current($this->getFactory()->getClientStore()->getCurrentStore()->getCountries())
+        );
 
         $paymentMethodsSubForms = $subFormsCreator->createPaymentMethodsSubForms();
 
