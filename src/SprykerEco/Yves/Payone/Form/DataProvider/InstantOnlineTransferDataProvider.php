@@ -19,7 +19,7 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     /**
      * @var \SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface
      */
-    private $storeClient;
+    protected $storeClient;
 
     /**
      * @param \SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientInterface $storeClient

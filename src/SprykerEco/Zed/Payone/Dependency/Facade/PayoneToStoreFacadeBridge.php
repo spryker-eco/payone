@@ -12,7 +12,7 @@ class PayoneToStoreFacadeBridge implements PayoneToStoreFacadeInterface
     /**
      * @var \Spryker\Zed\Store\Business\StoreFacadeInterface
      */
-    private $storeFacade;
+    protected $storeFacade;
 
     /**
      * @param \Spryker\Zed\Store\Business\StoreFacadeInterface $storeFacade

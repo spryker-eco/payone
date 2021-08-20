@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\Payone;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -97,7 +98,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    public function getRequestStandardParameter(string $currencyIsoCode, string $countryIsoCode)
+    public function getRequestStandardParameter(string $currencyIsoCode, string $countryIsoCode): PayoneStandardParameterTransfer
     {
         $settings = $this->get(PayoneConstants::PAYONE);
         $standardParameter = new PayoneStandardParameterTransfer();

@@ -809,7 +809,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @deprecated
+     * @deprecated Will be removed without replacement
      *
      * @return \Spryker\Shared\Kernel\Store
      */

@@ -21,6 +21,9 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const FACADE_OMS = 'oms facade';
     public const FACADE_REFUND = 'refund facade';
+    /**
+     * @deprecated Will be removed without replacement
+     */
     public const STORE_CONFIG = 'store config';
     public const FACADE_SALES = 'sales facade';
     public const FACADE_GLOSSARY = 'glossary facade';
@@ -135,7 +138,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @deprecated
+     * @deprecated Will be removed without replacement
      *
      * @param \Spryker\Zed\Kernel\Container $container
      *

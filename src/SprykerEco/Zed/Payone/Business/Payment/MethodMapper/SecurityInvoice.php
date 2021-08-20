@@ -241,8 +241,6 @@ class SecurityInvoice extends AbstractMapper
      */
     protected function createPaymentMethodContainerFromPayment(): SecurityInvoiceContainer
     {
-        $paymentMethodContainer = new SecurityInvoiceContainer();
-
-        return $paymentMethodContainer;
+        return new SecurityInvoiceContainer();
     }
 }

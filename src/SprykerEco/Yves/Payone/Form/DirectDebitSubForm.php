@@ -30,6 +30,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     public const FIELD_BANK_CODE = 'bankcode';
     public const OPTION_BANK_COUNTRIES = 'direct debit bank countries';
     public const OPTION_BANK_ACCOUNT_MODE = 'direct debit bank account mode';
+    protected const COUNTRY_DE = 'DE';
 
     /**
      * @return string
@@ -90,7 +91,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
 
         $currentCountry = $options[DirectDebitSubForm::OPTION_BANK_COUNTRIES];
 
-        if ($currentCountry === 'DE') {
+        if ($currentCountry === static::COUNTRY_DE) {
             $this->addBankAccount($builder)
                 ->addBankCode($builder)
                 ->addBankCountry($builder, $options)

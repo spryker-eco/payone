@@ -60,9 +60,9 @@ class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): string
     {
         $countries = $this->storeClient->getCurrentStore()->getCountries();
 
