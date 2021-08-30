@@ -200,10 +200,8 @@ class Invoice extends AbstractMapper implements InvoiceInterface
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\InvoiceContainer
      */
-    protected function createPaymentMethodContainerFromPayment()
+    protected function createPaymentMethodContainerFromPayment(): InvoiceContainer
     {
-        $paymentMethodContainer = new InvoiceContainer();
-
-        return $paymentMethodContainer;
+        return new InvoiceContainer();
     }
 }
