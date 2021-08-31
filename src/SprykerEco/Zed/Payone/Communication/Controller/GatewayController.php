@@ -58,7 +58,7 @@ class GatewayController extends AbstractGatewayController
         $urlHmacGenerator = $this->getFactory()->createUrlHmacGenerator();
         $hash = $urlHmacGenerator->hash(
             $cancelRedirectTransfer->getOrderReference(),
-            $this->getFactory()->getConfig()->getRequestStandardParameter()->getKey()
+            $this->getFactory()->getStandardParameter()->getKey()
         );
 
         if ($cancelRedirectTransfer->getUrlHmac() === $hash) {

@@ -227,7 +227,9 @@ class PayoneFactory extends AbstractFactory
      */
     public function createDirectDebitSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
-        return new DirectDebitDataProvider();
+        return new DirectDebitDataProvider(
+            $this->getClientStore()
+        );
     }
 
     /**
@@ -275,7 +277,9 @@ class PayoneFactory extends AbstractFactory
      */
     public function createInstantOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
-        return new InstantOnlineTransferDataProvider();
+        return new InstantOnlineTransferDataProvider(
+            $this->getClientStore(),
+        );
     }
 
     /**

@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\MethodMapper;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\PayoneAuthorizationTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
@@ -155,21 +154,5 @@ class EWallet extends AbstractMapper
         $paymentMethodContainer->setWalletType($paymentEntity->getSpyPaymentPayoneDetail()->getType());
 
         return $paymentMethodContainer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\PayoneAuthorizationTransfer $payoneAuthorizationTransfer
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
-     */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $payoneAuthorizationTransfer)
-    {
-        $personalContainer = new PersonalContainer();
-
-        $personalContainer->setFirstName($payoneAuthorizationTransfer->getOrder()->getFirstName());
-        $personalContainer->setLastName($payoneAuthorizationTransfer->getOrder()->getLastName());
-        $personalContainer->setCountry($this->storeConfig->getCurrentCountry());
-
-        return $personalContainer;
     }
 }
