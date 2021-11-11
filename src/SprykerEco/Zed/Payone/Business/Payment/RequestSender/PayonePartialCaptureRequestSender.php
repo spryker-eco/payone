@@ -145,13 +145,14 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $requestContainer = $this->preparePartialCaptureOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
 
-        $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
-        $requestContainer = $this->shipmentMapper->mapShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
-
+        if ($this->checkNessesaryToAddDeliveryCosts($payonePartialOperationRequestTransfer)) {
+            $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
+            $requestContainer = $this->shipmentMapper->mapShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
+        }
+        
         $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
         $requestContainer = $this->expenseMapper->mapExpenses($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
-
         $businessContainer = new BusinessContainer();
         $businessContainer->setSettleAccount(PayoneApiConstants::SETTLE_ACCOUNT_YES);
         $requestContainer->setBusiness($businessContainer);
@@ -265,6 +266,27 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         }
 
         return 0;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
+     *
+     * @return bool
+     */
+    protected function checkNessesaryToAddDeliveryCosts(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): bool
+    {
+        foreach ($payonePartialOperationRequestTransfer->getOrder()->getItems() as $itemTransfer) {
+            if (in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds())) {
+                continue;
+            }
+            foreach ($itemTransfer->getStateHistory() as $itemState) {
+                if ($itemState->getName() === "shipped") {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
