@@ -32,6 +32,8 @@ use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender implements PayonePartialCaptureRequestSenderInterface
 {
+    public const ITEM_STATE_SHIPPED = 'shipped';
+    
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
      */
@@ -145,7 +147,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $requestContainer = $this->preparePartialCaptureOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
 
-        if ($this->checkNessesaryToAddDeliveryCosts($payonePartialOperationRequestTransfer)) {
+        if ($this->isNeedToAddDeliveryCosts($payonePartialOperationRequestTransfer)) {
             $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
             $requestContainer = $this->shipmentMapper->mapShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
         }
@@ -273,14 +275,14 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
      *
      * @return bool
      */
-    protected function checkNessesaryToAddDeliveryCosts(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): bool
+    protected function isNeedToAddDeliveryCosts(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): bool
     {
         foreach ($payonePartialOperationRequestTransfer->getOrder()->getItems() as $itemTransfer) {
             if (in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds())) {
                 continue;
             }
             foreach ($itemTransfer->getStateHistory() as $itemState) {
-                if ($itemState->getName() === "shipped") {
+                if ($itemState->getName() === self::ITEM_STATE_SHIPPED) {
                     return false;
                 }
             }
