@@ -171,8 +171,10 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
-    {
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): AbstractAuthorizationContainer {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
@@ -195,8 +197,9 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\DirectDebitContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createPaymentMethodContainerFromPayment(
+        SpyPaymentPayone $paymentEntity
+    ): DirectDebitContainer {
         $paymentMethodContainer = new DirectDebitContainer();
 
         $paymentMethodContainer->setBankCountry($paymentEntity->getSpyPaymentPayoneDetail()->getBankCountry());

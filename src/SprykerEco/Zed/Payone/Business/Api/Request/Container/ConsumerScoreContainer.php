@@ -101,7 +101,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAddressCheckType($addresschecktype)
+    public function setAddressCheckType($addresschecktype): void
     {
         $this->addresschecktype = $addresschecktype;
     }
@@ -109,7 +109,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getAddressCheckType()
+    public function getAddressCheckType(): string
     {
         return $this->addresschecktype;
     }
@@ -119,7 +119,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBirthday($birthday)
+    public function setBirthday($birthday): void
     {
         $this->birthday = $birthday;
     }
@@ -127,7 +127,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getBirthday()
+    public function getBirthday(): string
     {
         return $this->birthday;
     }
@@ -137,7 +137,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity($city): void
     {
         $this->city = $city;
     }
@@ -145,7 +145,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -155,7 +155,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCompany($company)
+    public function setCompany($company): void
     {
         $this->company = $company;
     }
@@ -163,7 +163,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
@@ -173,7 +173,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setConsumerScoreType($consumerscoretype)
+    public function setConsumerScoreType($consumerscoretype): void
     {
         $this->consumerscoretype = $consumerscoretype;
     }
@@ -181,7 +181,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getConsumerScoreType()
+    public function getConsumerScoreType(): string
     {
         return $this->consumerscoretype;
     }
@@ -191,7 +191,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCountry($country)
+    public function setCountry($country): void
     {
         $this->country = $country;
     }
@@ -199,7 +199,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
@@ -209,7 +209,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFirstName($firstname)
+    public function setFirstName($firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -217,7 +217,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstname;
     }
@@ -227,7 +227,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setLastName($lastname)
+    public function setLastName($lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -235,7 +235,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastname;
     }
@@ -245,7 +245,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreet($street)
+    public function setStreet($street): void
     {
         $this->street = $street;
     }
@@ -253,7 +253,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getStreet()
+    public function getStreet(): string
     {
         return $this->street;
     }
@@ -263,7 +263,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreetName($streetname)
+    public function setStreetName($streetname): void
     {
         $this->streetname = $streetname;
     }
@@ -271,7 +271,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getStreetName()
+    public function getStreetName(): string
     {
         return $this->streetname;
     }
@@ -281,7 +281,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreetNumber($streetnumber)
+    public function setStreetNumber($streetnumber): void
     {
         $this->streetnumber = $streetnumber;
     }
@@ -289,7 +289,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getStreetNumber()
+    public function getStreetNumber(): string
     {
         return $this->streetnumber;
     }
@@ -299,7 +299,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setTelephoneNumber($telephonenumber)
+    public function setTelephoneNumber($telephonenumber): void
     {
         $this->telephonenumber = $telephonenumber;
     }
@@ -307,7 +307,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getTelephoneNumber()
+    public function getTelephoneNumber(): string
     {
         return $this->telephonenumber;
     }
@@ -317,7 +317,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip($zip): void
     {
         $this->zip = $zip;
     }
@@ -325,7 +325,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }

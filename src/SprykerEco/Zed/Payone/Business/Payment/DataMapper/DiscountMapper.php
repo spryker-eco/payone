@@ -12,8 +12,19 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 
 class DiscountMapper implements DiscountMapperInterface
 {
+    /**
+     * @var int
+     */
     protected const ZERRO_ITEM_TAX_RATE = 0;
+
+    /**
+     * @var string
+     */
     protected const DISCOUNT_PRODUCT_DESCRIPTION = 'Discount';
+
+    /**
+     * @var int
+     */
     protected const ONE_ITEM_AMOUNT = 1;
 
     /**

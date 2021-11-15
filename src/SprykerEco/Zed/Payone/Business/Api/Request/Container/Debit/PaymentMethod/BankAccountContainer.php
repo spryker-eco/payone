@@ -59,7 +59,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount)
+    public function setBankAccount($bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
@@ -67,7 +67,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankAccount()
+    public function getBankAccount(): string
     {
         return $this->bankaccount;
     }
@@ -77,7 +77,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankAccountHolder($bankaccountholder)
+    public function setBankAccountHolder($bankaccountholder): void
     {
         $this->bankaccountholder = $bankaccountholder;
     }
@@ -85,7 +85,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankAccountHolder()
+    public function getBankAccountHolder(): string
     {
         return $this->bankaccountholder;
     }
@@ -95,7 +95,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankBranchCode($bankbranchcode)
+    public function setBankBranchCode($bankbranchcode): void
     {
         $this->bankbranchcode = $bankbranchcode;
     }
@@ -103,7 +103,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return int
      */
-    public function getBankBranchCode()
+    public function getBankBranchCode(): int
     {
         return $this->bankbranchcode;
     }
@@ -113,7 +113,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCheckDigit($bankcheckdigit)
+    public function setBankCheckDigit($bankcheckdigit): void
     {
         $this->bankcheckdigit = $bankcheckdigit;
     }
@@ -121,7 +121,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return int
      */
-    public function getBankCheckDigit()
+    public function getBankCheckDigit(): int
     {
         return $this->bankcheckdigit;
     }
@@ -131,7 +131,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode)
+    public function setBankCode($bankcode): void
     {
         $this->bankcode = $bankcode;
     }
@@ -139,7 +139,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return int
      */
-    public function getBankCode()
+    public function getBankCode(): int
     {
         return $this->bankcode;
     }
@@ -149,7 +149,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry)
+    public function setBankCountry($bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
@@ -157,7 +157,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankCountry()
+    public function getBankCountry(): string
     {
         return $this->bankcountry;
     }
@@ -167,7 +167,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban($iban): void
     {
         $this->iban = $iban;
     }
@@ -175,7 +175,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getIban()
+    public function getIban(): string
     {
         return $this->iban;
     }
@@ -185,7 +185,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic($bic): void
     {
         $this->bic = $bic;
     }
@@ -193,7 +193,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBic()
+    public function getBic(): string
     {
         return $this->bic;
     }
@@ -203,7 +203,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandateIdentification)
+    public function setMandateIdentification($mandateIdentification): void
     {
         $this->mandate_identification = $mandateIdentification;
     }
@@ -211,7 +211,7 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getMandateIdentification()
+    public function getMandateIdentification(): string
     {
         return $this->mandate_identification;
     }

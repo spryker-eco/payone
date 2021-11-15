@@ -17,9 +17,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PayoneHandler implements PayoneHandlerInterface
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_PROVIDER = 'Payone';
+
+    /**
+     * @var string
+     */
     public const CHECKOUT_INCLUDE_SUMMARY_PATH = 'Payone/partial/summary';
+
+    /**
+     * @var string
+     */
     public const CHECKOUT_INCLUDE_SUCCESS_PATH = 'Payone/partial/success';
+
+    /**
+     * @var string
+     */
     protected const PAYONE_PAYMENT_REFERENCE_PREFIX = 'TX1';
 
     /**
@@ -109,8 +124,8 @@ class PayoneHandler implements PayoneHandlerInterface
      */
     protected function setPaymentSuccessIncludePath(QuoteTransfer $quoteTransfer): void
     {
-        $quoteTransfer->requirePayment()->getPayment()->setSummaryIncludePath(self::CHECKOUT_INCLUDE_SUMMARY_PATH);
-        $quoteTransfer->requirePayment()->getPayment()->setSuccessIncludePath(self::CHECKOUT_INCLUDE_SUCCESS_PATH);
+        $quoteTransfer->requirePayment()->getPayment()->setSummaryIncludePath(static::CHECKOUT_INCLUDE_SUMMARY_PATH);
+        $quoteTransfer->requirePayment()->getPayment()->setSuccessIncludePath(static::CHECKOUT_INCLUDE_SUCCESS_PATH);
     }
 
     /**
@@ -172,7 +187,7 @@ class PayoneHandler implements PayoneHandlerInterface
         }
 
         $payonePaymentTransfer = new PayonePaymentTransfer();
-        $payonePaymentTransfer->setReference(uniqid(self::PAYONE_PAYMENT_REFERENCE_PREFIX));
+        $payonePaymentTransfer->setReference(uniqid(static::PAYONE_PAYMENT_REFERENCE_PREFIX));
         $payonePaymentTransfer->setPaymentDetail($paymentDetailTransfer);
         $paymentTransfer = $quoteTransfer->getPayment();
         $payonePaymentTransfer->setPaymentMethod($paymentTransfer->getPaymentMethod());
@@ -193,7 +208,7 @@ class PayoneHandler implements PayoneHandlerInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaymentTransfer
      */
-    protected function getPayonePaymentTransfer(QuoteTransfer $quoteTransfer, string $paymentSelection)
+    protected function getPayonePaymentTransfer(QuoteTransfer $quoteTransfer, string $paymentSelection): PayonePaymentTransfer
     {
         $method = 'get' . ucfirst($paymentSelection);
         $payonePaymentTransfer = $quoteTransfer->getPayment()->$method();

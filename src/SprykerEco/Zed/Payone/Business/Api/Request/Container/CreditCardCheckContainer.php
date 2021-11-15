@@ -69,7 +69,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getCardCvc2()
+    public function getCardCvc2(): int
     {
         return $this->cardcvc2;
     }
@@ -87,7 +87,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getCardExpireDate()
+    public function getCardExpireDate(): int
     {
         return $this->cardexpiredate;
     }
@@ -105,7 +105,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getCardIssueNumber()
+    public function getCardIssueNumber(): int
     {
         return $this->cardissuenumber;
     }
@@ -123,7 +123,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCardPan()
+    public function getCardPan(): string
     {
         return $this->cardpan;
     }
@@ -141,7 +141,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCardType()
+    public function getCardType(): string
     {
         return $this->cardtype;
     }

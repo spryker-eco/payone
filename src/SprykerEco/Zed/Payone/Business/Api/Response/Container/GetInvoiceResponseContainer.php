@@ -19,7 +19,7 @@ class GetInvoiceResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setResponse($response)
+    public function setResponse($response): void
     {
         $this->response = $response;
     }
@@ -27,7 +27,7 @@ class GetInvoiceResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getResponse()
+    public function getResponse(): string
     {
         return $this->response;
     }
@@ -35,7 +35,7 @@ class GetInvoiceResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->isError()) {
             $result = parent::__toString();

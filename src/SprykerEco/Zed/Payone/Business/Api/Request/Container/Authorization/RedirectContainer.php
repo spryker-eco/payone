@@ -31,7 +31,7 @@ class RedirectContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setBackUrl($backurl)
+    public function setBackUrl($backurl): void
     {
         $this->backurl = $backurl;
     }
@@ -39,7 +39,7 @@ class RedirectContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getBackUrl()
+    public function getBackUrl(): string
     {
         return $this->backurl;
     }
@@ -49,7 +49,7 @@ class RedirectContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setErrorUrl($errorurl)
+    public function setErrorUrl($errorurl): void
     {
         $this->errorurl = $errorurl;
     }
@@ -57,7 +57,7 @@ class RedirectContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getErrorUrl()
+    public function getErrorUrl(): string
     {
         return $this->errorurl;
     }
@@ -67,7 +67,7 @@ class RedirectContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setSuccessUrl($successurl)
+    public function setSuccessUrl($successurl): void
     {
         $this->successurl = $successurl;
     }
@@ -75,7 +75,7 @@ class RedirectContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getSuccessUrl()
+    public function getSuccessUrl(): string
     {
         return $this->successurl;
     }

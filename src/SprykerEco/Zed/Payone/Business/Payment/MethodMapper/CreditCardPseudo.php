@@ -88,8 +88,10 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
-    {
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): AbstractAuthorizationContainer {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
@@ -166,8 +168,9 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\CreditCardPseudoContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createPaymentMethodContainerFromPayment(
+        SpyPaymentPayone $paymentEntity
+    ): CreditCardPseudoContainer {
         $paymentMethodContainer = new CreditCardPseudoContainer();
 
         $pseudoCardPan = $paymentEntity->getSpyPaymentPayoneDetail()->getPseudoCardPan();
@@ -184,8 +187,9 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $payoneAuthorizationTransfer)
-    {
+    protected function createAuthorizationPersonalData(
+        PayoneAuthorizationTransfer $payoneAuthorizationTransfer
+    ): PersonalContainer {
         $personalContainer = new PersonalContainer();
 
         $personalContainer->setFirstName($payoneAuthorizationTransfer->getOrder()->getFirstName());
@@ -200,8 +204,9 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
      */
-    protected function createThreeDSecureData(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createThreeDSecureData(
+        SpyPaymentPayone $paymentEntity
+    ): ThreeDSecureContainer {
         $threeDContainer = new ThreeDSecureContainer();
 
         $threeDContainer->setRedirect($this->createRedirectContainer($paymentEntity->getSpySalesOrder()->getOrderReference()));

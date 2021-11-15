@@ -17,12 +17,12 @@ interface PayoneToCalculationInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function recalculateQuote(QuoteTransfer $quoteTransfer);
+    public function recalculateQuote(QuoteTransfer $quoteTransfer): QuoteTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function recalculateOrder(OrderTransfer $orderTransfer);
+    public function recalculateOrder(OrderTransfer $orderTransfer): OrderTransfer;
 }

@@ -49,7 +49,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity($city): void
     {
         $this->city = $city;
     }
@@ -57,7 +57,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -67,7 +67,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPersonstatus($personstatus)
+    public function setPersonstatus($personstatus): void
     {
         $this->personstatus = $personstatus;
     }
@@ -75,7 +75,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getPersonstatus()
+    public function getPersonstatus(): string
     {
         return $this->personstatus;
     }
@@ -85,7 +85,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSecstatus($secstatus)
+    public function setSecstatus($secstatus): void
     {
         $this->secstatus = $secstatus;
     }
@@ -93,7 +93,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return int
      */
-    public function getSecstatus()
+    public function getSecstatus(): int
     {
         return $this->secstatus;
     }
@@ -103,7 +103,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreet($street)
+    public function setStreet($street): void
     {
         $this->street = $street;
     }
@@ -111,7 +111,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getStreet()
+    public function getStreet(): string
     {
         return $this->street;
     }
@@ -121,7 +121,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreetname($streetname)
+    public function setStreetname($streetname): void
     {
         $this->streetname = $streetname;
     }
@@ -129,7 +129,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getStreetname()
+    public function getStreetname(): string
     {
         return $this->streetname;
     }
@@ -139,7 +139,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreetnumber($streetnumber)
+    public function setStreetnumber($streetnumber): void
     {
         $this->streetnumber = $streetnumber;
     }
@@ -147,7 +147,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getStreetnumber()
+    public function getStreetnumber(): string
     {
         return $this->streetnumber;
     }
@@ -157,7 +157,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip($zip): void
     {
         $this->zip = $zip;
     }
@@ -165,7 +165,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }

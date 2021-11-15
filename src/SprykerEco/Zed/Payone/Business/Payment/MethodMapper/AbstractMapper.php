@@ -61,7 +61,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     /**
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    protected function getStandardParameter()
+    protected function getStandardParameter(): PayoneStandardParameterTransfer
     {
         return $this->standardParameter;
     }
@@ -79,7 +79,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
-    protected function getUrlHmacGenerator()
+    protected function getUrlHmacGenerator(): HmacGeneratorInterface
     {
         return $this->urlHmacGenerator;
     }
@@ -97,7 +97,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     /**
      * @return \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface
      */
-    protected function getSequenceNumberProvider()
+    protected function getSequenceNumberProvider(): SequenceNumberProviderInterface
     {
         return $this->sequenceNumberProvider;
     }
@@ -107,7 +107,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return int
      */
-    protected function getNextSequenceNumber($transactionId)
+    protected function getNextSequenceNumber($transactionId): int
     {
         $nextSequenceNumber = $this->getSequenceNumberProvider()->getNextSequenceNumber($transactionId);
 
@@ -119,7 +119,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
      */
-    protected function createRedirectContainer($orderReference)
+    protected function createRedirectContainer($orderReference): RedirectContainer
     {
         $redirectContainer = new RedirectContainer();
 
@@ -139,7 +139,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return void
      */
-    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentEntity)
+    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentEntity): void
     {
         $orderEntity = $paymentEntity->getSpySalesOrder();
         $billingAddressEntity = $orderEntity->getBillingAddress();
@@ -164,13 +164,13 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return void
      */
-    protected function mapShippingAddressToShippingContainer(ShippingContainer $shippingContainer, SpySalesOrderAddress $shippingAddressEntity)
+    protected function mapShippingAddressToShippingContainer(ShippingContainer $shippingContainer, SpySalesOrderAddress $shippingAddressEntity): void
     {
         $shippingContainer->setShippingFirstName($shippingAddressEntity->getFirstName());
         $shippingContainer->setShippingLastName($shippingAddressEntity->getLastName());
         $shippingContainer->setShippingCompany($shippingAddressEntity->getCompany());
         $shippingContainer->setShippingStreet(
-            implode(' ', [$shippingAddressEntity->getAddress1(), $shippingAddressEntity->getAddress2()])
+            implode(' ', [$shippingAddressEntity->getAddress1(), $shippingAddressEntity->getAddress2()]),
         );
         $shippingContainer->setShippingZip($shippingAddressEntity->getZipCode());
         $shippingContainer->setShippingCity($shippingAddressEntity->getCity());

@@ -46,12 +46,12 @@ class Guzzle extends AbstractHttpAdapter
      *
      * @return array
      */
-    protected function performRequest(array $params)
+    protected function performRequest(array $params): array
     {
         $urlArray = $this->generateUrlArray($params);
 
         $urlHost = $urlArray['host'];
-        $urlPath = isset($urlArray['path']) ? $urlArray['path'] : '';
+        $urlPath = $urlArray['path'] ?? '';
         $urlScheme = $urlArray['scheme'];
 
         $url = $urlScheme . '://' . $urlHost . $urlPath;

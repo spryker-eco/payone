@@ -26,7 +26,7 @@ class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setPseudoCardPan($pseudoCardPan)
+    public function setPseudoCardPan($pseudoCardPan): void
     {
         $this->pseudocardpan = $pseudoCardPan;
     }
@@ -34,7 +34,7 @@ class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getPseudoCardPan()
+    public function getPseudoCardPan(): string
     {
         return $this->pseudocardpan;
     }
@@ -44,7 +44,7 @@ class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setThreeDSecure(ThreeDSecureContainer $threeDSecure)
+    public function setThreeDSecure(ThreeDSecureContainer $threeDSecure): void
     {
         $this->threedsecure = $threeDSecure;
     }
@@ -52,7 +52,7 @@ class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
      */
-    public function getThreeDSecure()
+    public function getThreeDSecure(): ThreeDSecureContainer
     {
         return $this->threedsecure;
     }

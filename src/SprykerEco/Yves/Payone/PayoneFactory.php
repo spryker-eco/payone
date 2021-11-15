@@ -162,7 +162,7 @@ class PayoneFactory extends AbstractFactory
             $this->getPayoneClient(),
             $this->getCartClient(),
             $this->createQuoteHydrator(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -422,7 +422,7 @@ class PayoneFactory extends AbstractFactory
         return new QuoteHydrator(
             $this->getShipmentClient(),
             $this->getCustomerClient(),
-            $this->getCalculationClient()
+            $this->getCalculationClient(),
         );
     }
 }

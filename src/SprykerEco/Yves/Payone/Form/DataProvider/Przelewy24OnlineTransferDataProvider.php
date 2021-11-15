@@ -20,7 +20,7 @@ class Przelewy24OnlineTransferDataProvider implements StepEngineFormDataProvider
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
@@ -37,7 +37,7 @@ class Przelewy24OnlineTransferDataProvider implements StepEngineFormDataProvider
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             Przelewy24OnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -47,7 +47,7 @@ class Przelewy24OnlineTransferDataProvider implements StepEngineFormDataProvider
     /**
      * @return array
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
         return [
             'PL' => 'Poland',

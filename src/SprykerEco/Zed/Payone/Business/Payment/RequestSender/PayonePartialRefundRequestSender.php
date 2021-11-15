@@ -109,7 +109,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
         $this->updateApiLogAfterRefund($apiLogEntity, $responseContainer);
         $this->updatePaymentPayoneOrderItemsWithStatus(
             $payonePartialOperationRequestTransfer,
-            $this->getPartialRefundStatus($responseContainer)
+            $this->getPartialRefundStatus($responseContainer),
         );
 
         return $this->refundResponseMapper->getRefundResponseTransfer($responseContainer);

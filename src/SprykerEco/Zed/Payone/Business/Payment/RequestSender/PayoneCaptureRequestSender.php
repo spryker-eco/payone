@@ -30,6 +30,8 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
      *
      * @see \Spryker\Shared\Shipment\ShipmentConstants::SHIPMENT_EXPENSE_TYPE
      * @see \Spryker\Shared\Shipment\ShipmentConfig::SHIPMENT_EXPENSE_TYPE
+     *
+     * @var string
      */
     protected const SHIPMENT_EXPENSE_TYPE = 'SHIPMENT_EXPENSE_TYPE';
 
@@ -108,7 +110,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
     public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
         $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
-            $captureTransfer->getOrder()
+            $captureTransfer->getOrder(),
         );
         $captureTransfer->setOrder($distributedPriceOrderTransfer);
         $captureTransfer->setAmount($distributedPriceOrderTransfer->getTotals()->getGrandTotal());

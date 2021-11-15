@@ -18,24 +18,60 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class DirectDebitSubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'direct_debit';
+
+    /**
+     * @var string
+     */
     public const FIELD_IBAN = 'iban';
+
+    /**
+     * @var string
+     */
     public const FIELD_BIC = 'bic';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_COUNTRY = 'bankcountry';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_ACCOUNT = 'bankaccount';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_ACCOUNT_MODE = 'bankaccountmode';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_CODE = 'bankcode';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_COUNTRIES = 'direct debit bank countries';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_ACCOUNT_MODE = 'direct debit bank account mode';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_DIRECT_DEBIT;
     }
@@ -43,7 +79,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_DIRECT_DEBIT;
     }
@@ -51,9 +87,9 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
-        return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**
@@ -61,7 +97,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => PayonePaymentDirectDebitTransfer::class,
@@ -73,7 +109,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): void
     {
         $this->configureOptions($resolver);
     }
@@ -84,7 +120,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->addIBAN($builder)
             ->addBIC($builder);
@@ -117,7 +153,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
                 'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_ACCOUNT_MODE],
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -138,7 +174,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -159,7 +195,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -180,7 +216,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
                 [
                     'label' => false,
                     'data' => array_keys($options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES])[0],
-                ]
+                ],
             );
         } else {
             $builder->add(
@@ -195,7 +231,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
                     'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES],
                     'constraints' => [
                     ],
-                ]
+                ],
             );
         }
 
@@ -210,14 +246,14 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     protected function addIBAN(FormBuilderInterface $builder)
     {
         $builder->add(
-            self::FIELD_IBAN,
+            static::FIELD_IBAN,
             TextType::class,
             [
                 'label' => false,
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -231,7 +267,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     protected function addBIC(FormBuilderInterface $builder)
     {
         $builder->add(
-            self::FIELD_BIC,
+            static::FIELD_BIC,
             TextType::class,
             [
                 'label' => false,
@@ -239,7 +275,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
                 'constraints' => [
                     $this->createManageMandateConstraint(),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -248,7 +284,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @return \Symfony\Component\Validator\Constraint
      */
-    protected function createNotBlankConstraint()
+    protected function createNotBlankConstraint(): Constraint
     {
         return new NotBlank(['groups' => $this->getPropertyPath()]);
     }
@@ -256,7 +292,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     /**
      * @return \Symfony\Component\Validator\Constraint
      */
-    protected function createManageMandateConstraint()
+    protected function createManageMandateConstraint(): Constraint
     {
         return new ManageMandate(['payoneClient' => $this->getClient(), 'groups' => $this->getPropertyPath()]);
     }

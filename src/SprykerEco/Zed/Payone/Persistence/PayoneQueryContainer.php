@@ -271,7 +271,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @api
      *
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder[] $orders
+     * @param array<\Orm\Zed\Sales\Persistence\SpySalesOrder> $orders
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */

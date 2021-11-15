@@ -14,8 +14,19 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 
 class ExpenseMapper implements ExpenseMapperInterface
 {
+    /**
+     * @var string
+     */
     protected const HANDLING_PRODUCT_DESCRIPTION = 'Handling';
+
+    /**
+     * @var int
+     */
     protected const ZERRO_ITEM_TAX_RATE = 0;
+
+    /**
+     * @var int
+     */
     protected const ONE_ITEM_AMOUNT = 1;
 
     /**

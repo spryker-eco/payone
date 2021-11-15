@@ -29,7 +29,7 @@ class PayoneToSalesBridge implements PayoneToSalesInterface
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function getOrderByIdSalesOrder($idSalesOrder)
+    public function getOrderByIdSalesOrder($idSalesOrder): OrderTransfer
     {
         return $this->salesFacade->getOrderByIdSalesOrder($idSalesOrder);
     }
@@ -40,7 +40,7 @@ class PayoneToSalesBridge implements PayoneToSalesInterface
      *
      * @return bool
      */
-    public function updateOrder(OrderTransfer $orderTransfer, $idSalesOrder)
+    public function updateOrder(OrderTransfer $orderTransfer, $idSalesOrder): bool
     {
         return $this->salesFacade->updateOrder($orderTransfer, $idSalesOrder);
     }

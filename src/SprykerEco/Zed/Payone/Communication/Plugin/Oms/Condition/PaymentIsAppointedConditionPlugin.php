@@ -29,7 +29,7 @@ class PaymentIsAppointedConditionPlugin extends AbstractCondition
     {
         return $this->getFacade()->isPaymentAppointed(
             $orderItem->getFkSalesOrder(),
-            $orderItem->getIdSalesOrderItem()
+            $orderItem->getIdSalesOrderItem(),
         );
     }
 }

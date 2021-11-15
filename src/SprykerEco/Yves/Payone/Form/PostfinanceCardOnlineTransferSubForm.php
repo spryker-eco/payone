@@ -14,13 +14,20 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class PostfinanceCardOnlineTransferSubForm extends OnlineTransferSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'postfinance_card_online_transfer';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_COUNTRIES = 'postfinance card online transfer bank countries';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER;
     }
@@ -28,7 +35,7 @@ class PostfinanceCardOnlineTransferSubForm extends OnlineTransferSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER;
     }
@@ -47,7 +54,7 @@ class PostfinanceCardOnlineTransferSubForm extends OnlineTransferSubForm
             [
                 'label' => false,
                 'data' => PayoneApiConstants::ONLINE_BANK_TRANSFER_TYPE_POSTFINANCE_CARD,
-            ]
+            ],
         );
 
         return $this;

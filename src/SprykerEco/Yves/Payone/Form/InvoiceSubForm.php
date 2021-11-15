@@ -17,12 +17,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InvoiceSubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'invoice';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_INVOICE;
     }
@@ -30,7 +33,7 @@ class InvoiceSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_INVOICE;
     }
@@ -38,9 +41,9 @@ class InvoiceSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
-        return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**
@@ -48,7 +51,7 @@ class InvoiceSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => PayonePaymentTransfer::class,
@@ -60,7 +63,7 @@ class InvoiceSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): void
     {
         $this->configureOptions($resolver);
     }
@@ -71,7 +74,7 @@ class InvoiceSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->addLabel($builder);
     }
@@ -84,13 +87,13 @@ class InvoiceSubForm extends AbstractPayoneSubForm
     protected function addLabel(FormBuilderInterface $builder)
     {
         $builder->add(
-            self::FIELD_PAYMENT_METHOD,
+            static::FIELD_PAYMENT_METHOD,
             HiddenType::class,
             [
                 'label' => false,
                 'required' => false,
                 'data' => [],
-            ]
+            ],
         );
 
         return $this;

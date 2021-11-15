@@ -24,7 +24,7 @@ class DebitResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSettleaccount($settleaccount)
+    public function setSettleaccount($settleaccount): void
     {
         $this->settleaccount = $settleaccount;
     }
@@ -32,7 +32,7 @@ class DebitResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getSettleaccount()
+    public function getSettleaccount(): string
     {
         return $this->settleaccount;
     }
@@ -42,7 +42,7 @@ class DebitResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTxid($txid)
+    public function setTxid($txid): void
     {
         $this->txid = $txid;
     }
@@ -50,7 +50,7 @@ class DebitResponseContainer extends AbstractResponseContainer
     /**
      * @return int
      */
-    public function getTxid()
+    public function getTxid(): int
     {
         return $this->txid;
     }

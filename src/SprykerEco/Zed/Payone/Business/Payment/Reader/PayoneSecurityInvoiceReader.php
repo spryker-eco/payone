@@ -19,6 +19,9 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterface
 {
+    /**
+     * @var string
+     */
     protected const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
@@ -77,7 +80,7 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
         $responseContainer = new GetSecurityInvoiceResponseContainer();
         $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
             $getSecurityInvoiceTransfer->getReference(),
-            $getSecurityInvoiceTransfer->getCustomerId()
+            $getSecurityInvoiceTransfer->getCustomerId(),
         );
 
         if (!$paymentEntity) {

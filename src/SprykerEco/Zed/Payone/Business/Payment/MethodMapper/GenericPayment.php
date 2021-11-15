@@ -64,7 +64,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $genericPayment->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $genericPayment->setWorkOrderId(
             $quoteTransfer->getPayment()
-                ->getPayonePaypalExpressCheckout()->getWorkOrderId()
+                ->getPayonePaypalExpressCheckout()->getWorkOrderId(),
         );
 
         return $genericPayment;
@@ -117,8 +117,10 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
-    {
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): AbstractAuthorizationContainer {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
@@ -145,8 +147,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\ExpressCheckoutContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createPaymentMethodContainerFromPayment(
+        SpyPaymentPayone $paymentEntity
+    ): ExpressCheckoutContainer {
         $paymentMethodContainer = new ExpressCheckoutContainer();
         $paymentMethodContainer->setRedirect($this->createRedirectContainer($paymentEntity->getSpySalesOrder()->getOrderReference()));
 

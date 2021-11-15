@@ -26,7 +26,7 @@ class EWalletContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setWalletType($wallettype)
+    public function setWalletType($wallettype): void
     {
         $this->wallettype = $wallettype;
     }
@@ -34,7 +34,7 @@ class EWalletContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getWalletType()
+    public function getWalletType(): string
     {
         return $this->wallettype;
     }
@@ -44,7 +44,7 @@ class EWalletContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setRedirect(RedirectContainer $redirect)
+    public function setRedirect(RedirectContainer $redirect): void
     {
         $this->redirect = $redirect;
     }
@@ -52,7 +52,7 @@ class EWalletContainer extends AbstractPaymentMethodContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
      */
-    public function getRedirect()
+    public function getRedirect(): RedirectContainer
     {
         return $this->redirect;
     }

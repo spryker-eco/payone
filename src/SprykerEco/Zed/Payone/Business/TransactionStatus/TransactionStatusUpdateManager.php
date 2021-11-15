@@ -139,7 +139,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     /**
      * @param \SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface $request
      *
-     * @return bool|\SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse
+     * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse|bool
      */
     protected function validate(TransactionStatusUpdateInterface $request)
     {
@@ -379,7 +379,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      * @param int $idSalesOrder
      * @param int $idSalesOrderItem
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog[]
+     * @return array<\Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog>
      */
     protected function getUnprocessedTransactionStatusLogs(int $idSalesOrder, int $idSalesOrderItem): array
     {

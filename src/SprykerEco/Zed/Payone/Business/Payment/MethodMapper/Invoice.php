@@ -58,7 +58,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer
      */
-    public function mapOrderItemToItemContainer(ItemTransfer $orderItem)
+    public function mapOrderItemToItemContainer(ItemTransfer $orderItem): ItemContainer
     {
         $itemContainer = new ItemContainer();
         $itemContainer->setIt(PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS);
@@ -76,7 +76,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer
      */
-    public function mapExpenseToItemContainer(ExpenseTransfer $expense)
+    public function mapExpenseToItemContainer(ExpenseTransfer $expense): ItemContainer
     {
         $itemContainer = new ItemContainer();
         $itemContainer->setIt(PayoneApiConstants::INVOICING_ITEM_TYPE_SHIPMENT);
@@ -125,8 +125,10 @@ class Invoice extends AbstractMapper implements InvoiceInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
-    {
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): AbstractAuthorizationContainer {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
@@ -203,8 +205,9 @@ class Invoice extends AbstractMapper implements InvoiceInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\InvoiceContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createPaymentMethodContainerFromPayment(
+        SpyPaymentPayone $paymentEntity
+    ): InvoiceContainer {
         $paymentMethodContainer = new InvoiceContainer();
 
         return $paymentMethodContainer;
@@ -215,8 +218,9 @@ class Invoice extends AbstractMapper implements InvoiceInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $payoneAuthorizationTransfer)
-    {
+    protected function createAuthorizationPersonalData(
+        PayoneAuthorizationTransfer $payoneAuthorizationTransfer
+    ): PersonalContainer {
         $personalContainer = new PersonalContainer();
 
         $personalContainer->setFirstName($payoneAuthorizationTransfer->getOrder()->getFirstName());

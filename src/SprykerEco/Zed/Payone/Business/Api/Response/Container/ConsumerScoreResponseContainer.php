@@ -84,7 +84,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity($city): void
     {
         $this->city = $city;
     }
@@ -92,7 +92,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -102,7 +102,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setDivergence($divergence)
+    public function setDivergence($divergence): void
     {
         $this->divergence = $divergence;
     }
@@ -110,7 +110,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getDivergence()
+    public function getDivergence(): string
     {
         return $this->divergence;
     }
@@ -120,7 +120,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setFirstname($firstname)
+    public function setFirstname($firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -128,7 +128,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getFirstname()
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
@@ -138,7 +138,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setLastname($lastname)
+    public function setLastname($lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -146,7 +146,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getLastname()
+    public function getLastname(): string
     {
         return $this->lastname;
     }
@@ -156,7 +156,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPersonstatus($personstatus)
+    public function setPersonstatus($personstatus): void
     {
         $this->personstatus = $personstatus;
     }
@@ -164,7 +164,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getPersonstatus()
+    public function getPersonstatus(): string
     {
         return $this->personstatus;
     }
@@ -174,7 +174,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setScore($score)
+    public function setScore($score): void
     {
         $this->score = $score;
     }
@@ -182,7 +182,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getScore()
+    public function getScore(): string
     {
         return $this->score;
     }
@@ -192,7 +192,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setScorevalue($scorevalue)
+    public function setScorevalue($scorevalue): void
     {
         $this->scorevalue = $scorevalue;
     }
@@ -200,7 +200,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return int
      */
-    public function getScorevalue()
+    public function getScorevalue(): int
     {
         return $this->scorevalue;
     }
@@ -210,7 +210,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSecscore($secscore)
+    public function setSecscore($secscore): void
     {
         $this->secscore = $secscore;
     }
@@ -218,7 +218,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getSecscore()
+    public function getSecscore(): string
     {
         return $this->secscore;
     }
@@ -228,7 +228,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSecstatus($secstatus)
+    public function setSecstatus($secstatus): void
     {
         $this->secstatus = $secstatus;
     }
@@ -236,7 +236,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return int
      */
-    public function getSecstatus()
+    public function getSecstatus(): int
     {
         return $this->secstatus;
     }
@@ -246,7 +246,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreet($street)
+    public function setStreet($street): void
     {
         $this->street = $street;
     }
@@ -254,7 +254,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getStreet()
+    public function getStreet(): string
     {
         return $this->street;
     }
@@ -264,7 +264,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreetname($streetname)
+    public function setStreetname($streetname): void
     {
         $this->streetname = $streetname;
     }
@@ -272,7 +272,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getStreetname()
+    public function getStreetname(): string
     {
         return $this->streetname;
     }
@@ -282,7 +282,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreetnumber($streetnumber)
+    public function setStreetnumber($streetnumber): void
     {
         $this->streetnumber = $streetnumber;
     }
@@ -290,7 +290,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getStreetnumber()
+    public function getStreetnumber(): string
     {
         return $this->streetnumber;
     }
@@ -300,7 +300,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip($zip): void
     {
         $this->zip = $zip;
     }
@@ -308,7 +308,7 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }

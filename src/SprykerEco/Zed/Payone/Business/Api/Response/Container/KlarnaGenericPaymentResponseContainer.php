@@ -9,6 +9,9 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 
 class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
 {
+    /**
+     * @var string
+     */
     protected const ADD_PAYDATA_REPLACEMENT_PATTERN = '/add_paydata\[(.*)\]/';
 
     /**
@@ -72,7 +75,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
      */
     protected function getPreparedKey(string $key): string
     {
-        $key = preg_replace(self::ADD_PAYDATA_REPLACEMENT_PATTERN, '$1', $key);
+        $key = preg_replace(static::ADD_PAYDATA_REPLACEMENT_PATTERN, '$1', $key);
 
         return ucwords(str_replace('_', ' ', $key));
     }

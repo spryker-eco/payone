@@ -144,7 +144,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param Invoicing\TransactionContainer $invoicing
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer $invoicing
      *
      * @return void
      */

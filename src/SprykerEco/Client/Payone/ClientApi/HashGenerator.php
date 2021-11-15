@@ -75,7 +75,7 @@ class HashGenerator implements HashGeneratorInterface
     }
 
     /**
-     * @param Request\AbstractRequest $request
+     * @param \SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest $request
      * @param string $securityKey
      *
      * @return string

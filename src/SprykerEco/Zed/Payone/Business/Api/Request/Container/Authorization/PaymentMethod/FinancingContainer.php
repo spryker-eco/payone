@@ -28,7 +28,7 @@ class FinancingContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setFinancingType($financingtype)
+    public function setFinancingType($financingtype): void
     {
         $this->financingtype = $financingtype;
     }
@@ -36,7 +36,7 @@ class FinancingContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getFinancingType()
+    public function getFinancingType(): string
     {
         return $this->financingtype;
     }
@@ -46,7 +46,7 @@ class FinancingContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setRedirect(RedirectContainer $redirect)
+    public function setRedirect(RedirectContainer $redirect): void
     {
         $this->redirect = $redirect;
     }
@@ -54,7 +54,7 @@ class FinancingContainer extends AbstractPaymentMethodContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
      */
-    public function getRedirect()
+    public function getRedirect(): RedirectContainer
     {
         return $this->redirect;
     }

@@ -20,7 +20,7 @@ abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataP
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
@@ -37,7 +37,7 @@ abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataP
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             OnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -48,28 +48,28 @@ abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataP
     /**
      * @return array
      */
-    protected function getOnlineBankTransferTypes()
+    protected function getOnlineBankTransferTypes(): array
     {
         return [
-            'Sofortbanking' => 'PNT',           // (DE, AT, CH, NL)
-            'giropay' => 'GPY',                 // (DE)
-            'eps – online transfer' => 'EPS',   // (AT)
-            'PostFinance E-Finance' => 'PFF',   // (CH)
-            'PostFinance Card' => 'PFC',        // (CH)
-            'iDEAL' => 'IDL',                   // (NL)
-            'Przelewy24' => 'P24',              // (P24)
+            'Sofortbanking' => 'PNT', // (DE, AT, CH, NL)
+            'giropay' => 'GPY', // (DE)
+            'eps – online transfer' => 'EPS', // (AT)
+            'PostFinance E-Finance' => 'PFF', // (CH)
+            'PostFinance Card' => 'PFC', // (CH)
+            'iDEAL' => 'IDL', // (NL)
+            'Przelewy24' => 'P24', // (P24)
         ];
     }
 
     /**
      * @return array
      */
-    abstract protected function getBankCountries();
+    abstract protected function getBankCountries(): array;
 
     /**
      * @return array
      */
-    protected function getBankGroupTypes()
+    protected function getBankGroupTypes(): array
     {
         return [];
     }

@@ -221,7 +221,7 @@ class PostSaveHook implements PostSaveHookInterface
         $orderTransfer = (new OrderTransfer())
             ->setTotals(
                 (new TotalsTransfer())
-                    ->setGrandTotal($quoteTransfer->getTotals()->getGrandTotal())
+                    ->setGrandTotal($quoteTransfer->getTotals()->getGrandTotal()),
             );
 
         return $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);

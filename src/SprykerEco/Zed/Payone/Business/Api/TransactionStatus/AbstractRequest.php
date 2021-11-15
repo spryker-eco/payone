@@ -79,7 +79,7 @@ class AbstractRequest
      *
      * @return bool|null
      */
-    public function setValue($key, $name)
+    public function setValue($key, $name): ?bool
     {
         return $this->set($key, $name);
     }
@@ -104,7 +104,7 @@ class AbstractRequest
      *
      * @return bool|null
      */
-    public function set($name, $value)
+    public function set($name, $value): ?bool
     {
         if (property_exists($this, $name)) {
             $this->$name = $value;

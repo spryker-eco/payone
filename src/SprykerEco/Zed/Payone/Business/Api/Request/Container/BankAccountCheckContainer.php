@@ -69,7 +69,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getBankAccount()
+    public function getBankAccount(): string
     {
         return $this->bankaccount;
     }
@@ -87,7 +87,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getBankCode()
+    public function getBankCode(): string
     {
         return $this->bankcode;
     }
@@ -105,7 +105,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getBankCountry()
+    public function getBankCountry(): string
     {
         return $this->bankcountry;
     }
@@ -123,7 +123,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCheckType()
+    public function getCheckType(): string
     {
         return $this->checktype;
     }
@@ -141,7 +141,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getIban()
+    public function getIban(): string
     {
         return $this->iban;
     }
@@ -159,7 +159,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getBic()
+    public function getBic(): string
     {
         return $this->bic;
     }

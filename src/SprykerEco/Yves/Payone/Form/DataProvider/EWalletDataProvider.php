@@ -22,7 +22,7 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
@@ -40,7 +40,7 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             EWalletSubForm::OPTION_WALLET_CHOICES => $this->getEWalletTypes(),
@@ -50,7 +50,7 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @return array
      */
-    protected function getEWalletTypes()
+    protected function getEWalletTypes(): array
     {
         return [
             'PayPal' => PayoneApiConstants::E_WALLET_TYPE_PAYPAL,

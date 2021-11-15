@@ -17,6 +17,9 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
  */
 class IsFullOrderCancelledConditionPlugin extends SprykerAbstractPlugin implements ConditionInterface
 {
+    /**
+     * @var string
+     */
     protected const STATE_MACHINE_FLAG_CANCELLED = 'cancelled';
 
     /**

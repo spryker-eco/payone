@@ -87,8 +87,10 @@ class OnlineBankTransfer extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
-    {
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): AbstractAuthorizationContainer {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
@@ -153,8 +155,9 @@ class OnlineBankTransfer extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\OnlineBankTransferContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createPaymentMethodContainerFromPayment(
+        SpyPaymentPayone $paymentEntity
+    ): OnlineBankTransferContainer {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $paymentMethodContainer = new OnlineBankTransferContainer();
@@ -176,8 +179,9 @@ class OnlineBankTransfer extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $authorizationData)
-    {
+    protected function createAuthorizationPersonalData(
+        PayoneAuthorizationTransfer $authorizationData
+    ): PersonalContainer {
         $personalContainer = new PersonalContainer();
 
         $personalContainer->setFirstName($authorizationData->getOrder()->getFirstName());
@@ -192,8 +196,9 @@ class OnlineBankTransfer extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\BankAccountCheckContainer
      */
-    public function mapBankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer)
-    {
+    public function mapBankAccountCheck(
+        PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
+    ): BankAccountCheckContainer {
         $bankAccountCheckContainer = new BankAccountCheckContainer();
 
         $bankAccountCheckContainer->setAid($this->getStandardParameter()->getAid());

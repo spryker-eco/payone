@@ -84,7 +84,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setEncoding($encoding)
+    public function setEncoding($encoding): void
     {
         $this->encoding = $encoding;
     }
@@ -102,7 +102,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setKey($key)
+    public function setKey($key): void
     {
         $this->key = md5($key);
     }
@@ -110,7 +110,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -120,7 +120,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setMid($mid)
+    public function setMid($mid): void
     {
         $this->mid = $mid;
     }
@@ -138,7 +138,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setAid($aid)
+    public function setAid($aid): void
     {
         $this->aid = $aid;
     }
@@ -156,7 +156,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setMode($mode)
+    public function setMode($mode): void
     {
         $this->mode = $mode;
     }
@@ -174,7 +174,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setPortalid($portalid)
+    public function setPortalid($portalid): void
     {
         $this->portalid = $portalid;
     }
@@ -192,7 +192,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setRequest($request)
+    public function setRequest($request): void
     {
         $this->request = $request;
     }
@@ -200,7 +200,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getRequest()
+    public function getRequest(): string
     {
         return $this->request;
     }
@@ -210,7 +210,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setResponseType($responseType)
+    public function setResponseType($responseType): void
     {
         $this->responsetype = $responseType;
     }
@@ -230,7 +230,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setIntegratorName($integrator_name)
+    public function setIntegratorName($integrator_name): void
     {
         $this->integrator_name = $integrator_name;
     }
@@ -238,7 +238,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getIntegratorName()
+    public function getIntegratorName(): string
     {
         return $this->integrator_name;
     }
@@ -250,7 +250,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setIntegratorVersion($integrator_version)
+    public function setIntegratorVersion($integrator_version): void
     {
         $this->integrator_version = $integrator_version;
     }
@@ -258,7 +258,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getIntegratorVersion()
+    public function getIntegratorVersion(): string
     {
         return $this->integrator_version;
     }
@@ -270,7 +270,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setSolutionName($solution_name)
+    public function setSolutionName($solution_name): void
     {
         $this->solution_name = $solution_name;
     }
@@ -278,7 +278,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getSolutionName()
+    public function getSolutionName(): string
     {
         return $this->solution_name;
     }
@@ -290,7 +290,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setSolutionVersion($solution_version)
+    public function setSolutionVersion($solution_version): void
     {
         $this->solution_version = $solution_version;
     }
@@ -298,7 +298,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getSolutionVersion()
+    public function getSolutionVersion(): string
     {
         return $this->solution_version;
     }
@@ -308,7 +308,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setHash($hash)
+    public function setHash($hash): void
     {
         $this->hash = $hash;
     }
@@ -316,7 +316,7 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * @return string
      */
-    public function getHash()
+    public function getHash(): string
     {
         return $this->hash;
     }
@@ -326,7 +326,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setLanguage($language)
+    public function setLanguage($language): void
     {
         $this->language = $language;
     }

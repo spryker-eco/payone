@@ -49,7 +49,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setAcsurl($acsurl)
+    public function setAcsurl($acsurl): void
     {
         $this->acsurl = $acsurl;
     }
@@ -57,7 +57,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getAcsurl()
+    public function getAcsurl(): string
     {
         return $this->acsurl;
     }
@@ -67,7 +67,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMd($md)
+    public function setMd($md): void
     {
         $this->md = $md;
     }
@@ -75,7 +75,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getMd()
+    public function getMd(): string
     {
         return $this->md;
     }
@@ -85,7 +85,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPareq($pareq)
+    public function setPareq($pareq): void
     {
         $this->pareq = $pareq;
     }
@@ -93,7 +93,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getPareq()
+    public function getPareq(): string
     {
         return $this->pareq;
     }
@@ -103,7 +103,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPseudocardpan($pseudocardpan)
+    public function setPseudocardpan($pseudocardpan): void
     {
         $this->pseudocardpan = $pseudocardpan;
     }
@@ -111,7 +111,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getPseudocardpan()
+    public function getPseudocardpan(): string
     {
         return $this->pseudocardpan;
     }
@@ -121,7 +121,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTermurl($termurl)
+    public function setTermurl($termurl): void
     {
         $this->termurl = $termurl;
     }
@@ -129,7 +129,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getTermurl()
+    public function getTermurl(): string
     {
         return $this->termurl;
     }
@@ -139,7 +139,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTruncatedcardpan($truncatedcardpan)
+    public function setTruncatedcardpan($truncatedcardpan): void
     {
         $this->truncatedcardpan = $truncatedcardpan;
     }
@@ -147,7 +147,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getTruncatedcardpan()
+    public function getTruncatedcardpan(): string
     {
         return $this->truncatedcardpan;
     }
@@ -157,7 +157,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setXid($xid)
+    public function setXid($xid): void
     {
         $this->xid = $xid;
     }
@@ -165,7 +165,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getXid()
+    public function getXid(): string
     {
         return $this->xid;
     }

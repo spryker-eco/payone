@@ -357,7 +357,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     {
         return new PayonePaypalExpressCheckoutDetailsReader(
             $this->createPaymentMapperReader(),
-            $this->createPayoneGenericRequestMethodSender()
+            $this->createPayoneGenericRequestMethodSender(),
         );
     }
 
@@ -405,7 +405,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         return new TransactionStatusUpdateManager(
             $this->getQueryContainer(),
             $this->getStandardParameter(),
-            $this->createHashGenerator()
+            $this->createHashGenerator(),
         );
     }
 
@@ -415,7 +415,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createApiLogFinder(): ApiLogFinderInterface
     {
         return new ApiLogFinder(
-            $this->getQueryContainer()
+            $this->getQueryContainer(),
         );
     }
 
@@ -426,7 +426,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     {
         return new Guzzle(
             $this->getStandardParameter()->getPaymentGatewayUrl(),
-            $this->createApiCallLogWriter()
+            $this->createApiCallLogWriter(),
         );
     }
 
@@ -436,7 +436,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createApiCallLogWriter(): ApiCallLogWriter
     {
         return new ApiCallLogWriter(
-            $this->getQueryContainer()
+            $this->getQueryContainer(),
         );
     }
 
@@ -449,7 +449,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
 
         return new SequenceNumberProvider(
             $this->getQueryContainer(),
-            $defaultEmptySequenceNumber
+            $defaultEmptySequenceNumber,
         );
     }
 
@@ -467,7 +467,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createHashGenerator(): HashGeneratorInterface
     {
         return new HashGenerator(
-            $this->createHashProvider()
+            $this->createHashProvider(),
         );
     }
 
@@ -620,7 +620,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
         return new RiskCheckManager(
             $this->createRiskCheckMapper(),
             $this->createExecutionAdapter(),
-            $this->createRiskCheckFactory()
+            $this->createRiskCheckFactory(),
         );
     }
 
@@ -633,7 +633,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createRiskCheckFactory(),
             $this->getStandardParameter(),
             $this->createModeDetector(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -712,7 +712,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     {
         $paymentMapperReader = new PaymentMapperReader(
             $this->createSequenceNumberProvider(),
-            $this->createUrlHmacGenerator()
+            $this->createUrlHmacGenerator(),
         );
 
         foreach ($this->getAvailablePaymentMethods() as $paymentMethod) {
@@ -763,7 +763,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->getRepository(),
             $this->createPaymentMapperReader(),
             $this->createPayoneRequestProductDataMapper(),
-            $this->createPayoneBaseAuthorizeSender()
+            $this->createPayoneBaseAuthorizeSender(),
         );
     }
 

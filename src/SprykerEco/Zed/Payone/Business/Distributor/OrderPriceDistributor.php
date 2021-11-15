@@ -100,7 +100,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
             $unitPrice = $this->calculateRoundedPrice(
                 $itemTransfer->getUnitGrossPrice(),
                 $priceRatio,
-                $roundingError
+                $roundingError,
             );
 
             $itemTransfer->setSumPriceToPayAggregation($unitPrice)
@@ -132,7 +132,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
             $roundedPrice = $this->calculateRoundedPrice(
                 $expenseTransfer->getSumGrossPrice(),
                 $priceRatio,
-                $roundingError
+                $roundingError,
             );
 
             $expenseTransfer->setSumGrossPrice($roundedPrice);

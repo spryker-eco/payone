@@ -21,7 +21,7 @@ class Simulator extends AbstractHttpAdapter
      *
      * @return void
      */
-    public function setRawResponseAsArray(array $rawResponse)
+    public function setRawResponseAsArray(array $rawResponse): void
     {
         $this->rawResponse = $this->createRawResponseFromArray($rawResponse);
     }
@@ -31,7 +31,7 @@ class Simulator extends AbstractHttpAdapter
      *
      * @return void
      */
-    public function setRawResponseAsString($rawResponse)
+    public function setRawResponseAsString($rawResponse): void
     {
         $this->rawResponse = $rawResponse;
     }
@@ -41,7 +41,7 @@ class Simulator extends AbstractHttpAdapter
      *
      * @return string
      */
-    protected function createRawResponseFromArray(array $request)
+    protected function createRawResponseFromArray(array $request): string
     {
         $rawResponse = '';
         $arrayCount = count($request);
@@ -62,7 +62,7 @@ class Simulator extends AbstractHttpAdapter
      *
      * @return array
      */
-    protected function performRequest(array $params)
+    protected function performRequest(array $params): array
     {
         $this->setRawResponse($this->rawResponse);
         $response = explode("\n", $this->rawResponse);

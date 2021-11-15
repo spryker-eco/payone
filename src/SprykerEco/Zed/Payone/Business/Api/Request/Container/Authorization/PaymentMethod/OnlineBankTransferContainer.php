@@ -56,7 +56,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount)
+    public function setBankAccount($bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
@@ -64,7 +64,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankAccount()
+    public function getBankAccount(): string
     {
         return $this->bankaccount;
     }
@@ -74,7 +74,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode)
+    public function setBankCode($bankcode): void
     {
         $this->bankcode = $bankcode;
     }
@@ -82,7 +82,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankCode()
+    public function getBankCode(): string
     {
         return $this->bankcode;
     }
@@ -92,7 +92,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry)
+    public function setBankCountry($bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
@@ -100,7 +100,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankCountry()
+    public function getBankCountry(): string
     {
         return $this->bankcountry;
     }
@@ -110,7 +110,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankGroupType($bankgrouptype)
+    public function setBankGroupType($bankgrouptype): void
     {
         $this->bankgrouptype = $bankgrouptype;
     }
@@ -118,7 +118,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankGroupType()
+    public function getBankGroupType(): string
     {
         return $this->bankgrouptype;
     }
@@ -128,7 +128,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setOnlineBankTransferType($onlinebanktransfertype)
+    public function setOnlineBankTransferType($onlinebanktransfertype): void
     {
         $this->onlinebanktransfertype = $onlinebanktransfertype;
     }
@@ -136,7 +136,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getOnlineBankTransferType()
+    public function getOnlineBankTransferType(): string
     {
         return $this->onlinebanktransfertype;
     }
@@ -146,7 +146,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setRedirect(RedirectContainer $redirect)
+    public function setRedirect(RedirectContainer $redirect): void
     {
         $this->redirect = $redirect;
     }
@@ -154,7 +154,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
      */
-    public function getRedirect()
+    public function getRedirect(): RedirectContainer
     {
         return $this->redirect;
     }
@@ -164,7 +164,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban($iban): void
     {
         $this->iban = $iban;
     }
@@ -172,7 +172,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getIban()
+    public function getIban(): string
     {
         return $this->iban;
     }
@@ -182,7 +182,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic($bic): void
     {
         $this->bic = $bic;
     }
@@ -190,7 +190,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBic()
+    public function getBic(): string
     {
         return $this->bic;
     }

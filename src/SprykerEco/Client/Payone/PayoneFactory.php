@@ -38,7 +38,7 @@ class PayoneFactory extends AbstractFactory
             $this->createStandardParameter($defaults),
             $this->createHashGenerator(),
             $this->createModeDetector(),
-            $this->createUtilEncodingService()
+            $this->createUtilEncodingService(),
         );
     }
 
@@ -72,7 +72,7 @@ class PayoneFactory extends AbstractFactory
     protected function createHashGenerator(): HashGeneratorInterface
     {
         return new HashGenerator(
-            $this->createHashProvider()
+            $this->createHashProvider(),
         );
     }
 

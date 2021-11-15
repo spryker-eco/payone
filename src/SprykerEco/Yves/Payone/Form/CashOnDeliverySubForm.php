@@ -15,6 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CashOnDeliverySubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'cash_on_delivery';
 
     /**
@@ -38,7 +41,7 @@ class CashOnDeliverySubForm extends AbstractPayoneSubForm
      */
     public function getTemplatePath(): string
     {
-        return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**

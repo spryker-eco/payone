@@ -20,13 +20,44 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class KlarnaSubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAY_METHOD_CHOICES = 'pay_methods';
+
+    /**
+     * @var string
+     */
     public const WIDGET_PAY_METHODS = 'widget_pay_methods';
+
+    /**
+     * @var string
+     */
     public const BILLING_ADDRESS_DATA = 'billing_address_data';
+
+    /**
+     * @var string
+     */
     public const CUSTOMER_DATA = 'customer_data';
+
+    /**
+     * @var string
+     */
     protected const PAYMENT_METHOD = 'klarna';
+
+    /**
+     * @var string
+     */
     protected const FIELD_PAY_METHOD_TYPE = 'payMethod';
+
+    /**
+     * @var string
+     */
     protected const FIELD_PAY_METHOD_TOKEN = 'payMethodToken';
+
+    /**
+     * @var string
+     */
     protected const FORM_TEMPLATE_PATH = '%s/%s';
 
     /**
@@ -55,7 +86,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     {
         $this->addPayMethodField(
             $builder,
-            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES]
+            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES],
         );
         $this->addPayMethodTokenField($builder);
     }
@@ -65,7 +96,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      */
     public function getTemplatePath(): string
     {
-        return sprintf(self::FORM_TEMPLATE_PATH, PayoneConstants::PROVIDER_NAME, self::PAYMENT_METHOD);
+        return sprintf(static::FORM_TEMPLATE_PATH, PayoneConstants::PROVIDER_NAME, static::PAYMENT_METHOD);
     }
 
     /**
@@ -111,7 +142,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
                 'choice_attr' => function ($val) {
                     return $val === '' ? ['disabled' => 'disabled', 'selected' => 'selected'] : ['disabled' => 'disabled'];
                 },
-            ]
+            ],
         );
 
         return $this;
@@ -131,7 +162,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
                 'label' => false,
                 'required' => true,
                 'data' => [],
-            ]
+            ],
         );
 
         return $this;

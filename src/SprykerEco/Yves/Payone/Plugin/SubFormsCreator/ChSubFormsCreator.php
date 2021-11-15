@@ -15,7 +15,7 @@ use SprykerEco\Yves\Payone\Plugin\PayonePostfinanceEfinanceOnlineTransferSubForm
 class ChSubFormsCreator extends AbstractSubFormsCreator implements SubFormsCreatorInterface
 {
     /**
-     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
+     * @return array<\Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface>
      */
     public function createPaymentMethodsSubForms(): array
     {

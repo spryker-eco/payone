@@ -21,7 +21,7 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
@@ -38,7 +38,7 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             InstantOnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -48,7 +48,7 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     /**
      * @return array
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
         return [
             Store::getInstance()->getCurrentCountry() => Store::getInstance()->getCurrentCountry(),

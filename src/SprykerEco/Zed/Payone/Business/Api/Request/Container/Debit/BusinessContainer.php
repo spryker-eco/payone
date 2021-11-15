@@ -36,7 +36,7 @@ class BusinessContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setBookingDate($booking_date)
+    public function setBookingDate($booking_date): void
     {
         $this->booking_date = $booking_date;
     }
@@ -44,7 +44,7 @@ class BusinessContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getBookingDate()
+    public function getBookingDate(): string
     {
         return $this->booking_date;
     }
@@ -54,7 +54,7 @@ class BusinessContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setDocumentDate($document_date)
+    public function setDocumentDate($document_date): void
     {
         $this->document_date = $document_date;
     }
@@ -62,7 +62,7 @@ class BusinessContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getDocumentDate()
+    public function getDocumentDate(): string
     {
         return $this->document_date;
     }
@@ -72,7 +72,7 @@ class BusinessContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setSettleAccount($settleaccount)
+    public function setSettleAccount($settleaccount): void
     {
         $this->settleaccount = $settleaccount;
     }
@@ -80,7 +80,7 @@ class BusinessContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getSettleAccount()
+    public function getSettleAccount(): string
     {
         return $this->settleaccount;
     }
@@ -90,7 +90,7 @@ class BusinessContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setTransactionType($transactiontype)
+    public function setTransactionType($transactiontype): void
     {
         $this->transactiontype = $transactiontype;
     }
@@ -98,7 +98,7 @@ class BusinessContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getTransactionType()
+    public function getTransactionType(): string
     {
         return $this->transactiontype;
     }

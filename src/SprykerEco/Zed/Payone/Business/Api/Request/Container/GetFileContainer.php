@@ -34,7 +34,7 @@ class GetFileContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getFileReference()
+    public function getFileReference(): string
     {
         return $this->file_reference;
     }
@@ -44,7 +44,7 @@ class GetFileContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFileReference($file_reference)
+    public function setFileReference($file_reference): void
     {
         $this->file_reference = $file_reference;
     }
@@ -52,7 +52,7 @@ class GetFileContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getFileType()
+    public function getFileType(): string
     {
         return $this->file_type;
     }
@@ -62,7 +62,7 @@ class GetFileContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFileType($file_type)
+    public function setFileType($file_type): void
     {
         $this->file_type = $file_type;
     }
@@ -70,7 +70,7 @@ class GetFileContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getFileFormat()
+    public function getFileFormat(): string
     {
         return $this->file_format;
     }
@@ -80,7 +80,7 @@ class GetFileContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFileFormat($file_format)
+    public function setFileFormat($file_format): void
     {
         $this->file_format = $file_format;
     }

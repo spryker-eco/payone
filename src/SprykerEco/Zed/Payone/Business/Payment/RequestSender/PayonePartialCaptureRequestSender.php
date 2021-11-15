@@ -32,8 +32,11 @@ use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender implements PayonePartialCaptureRequestSenderInterface
 {
-    public const ITEM_STATE_SHIPPED = 'shipped';
-    
+    /**
+     * @var string
+     */
+    protected const ITEM_STATE_SHIPPED = 'shipped';
+
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface
      */
@@ -136,7 +139,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
     ): CaptureResponseTransfer {
         $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
-            $payonePartialOperationRequestTransfer->getOrder()
+            $payonePartialOperationRequestTransfer->getOrder(),
         );
         $payonePartialOperationRequestTransfer->setOrder($distributedPriceOrderTransfer);
 
@@ -151,7 +154,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
             $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
             $requestContainer = $this->shipmentMapper->mapShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
         }
-        
+
         $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
         $requestContainer = $this->expenseMapper->mapExpenses($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
@@ -170,7 +173,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $this->updateApiLogAfterCapture($apiLogEntity, $responseContainer);
         $this->updatePaymentPayoneOrderItemsWithStatus(
             $payonePartialOperationRequestTransfer,
-            $this->getPartialCaptureStatus($responseContainer)
+            $this->getPartialCaptureStatus($responseContainer),
         );
 
         return $this->captureResponseMapper->getCaptureResponseTransfer($responseContainer);
@@ -282,7 +285,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
                 continue;
             }
             foreach ($itemTransfer->getStateHistory() as $itemState) {
-                if ($itemState->getName() === self::ITEM_STATE_SHIPPED) {
+                if ($itemState->getName() === static::ITEM_STATE_SHIPPED) {
                     return false;
                 }
             }

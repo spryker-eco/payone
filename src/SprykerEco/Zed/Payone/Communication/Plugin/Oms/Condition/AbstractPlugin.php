@@ -17,6 +17,9 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Condition\ConditionInterface;
  */
 abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInterface
 {
+    /**
+     * @var string
+     */
     public const NAME = 'AbstractPlugin';
 
     /**
@@ -37,15 +40,15 @@ abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInt
     {
         $order = $orderItem->getOrder();
 
-        if (isset(self::$resultCache[$this->getName()][$order->getPrimaryKey()])) {
-            return self::$resultCache[$this->getName()][$order->getPrimaryKey()];
+        if (isset(static::$resultCache[$this->getName()][$order->getPrimaryKey()])) {
+            return static::$resultCache[$this->getName()][$order->getPrimaryKey()];
         }
 
         $orderTransfer = new OrderTransfer();
         $orderTransfer->fromArray($order->toArray(), true);
 
         $isSuccess = $this->callFacade($orderTransfer);
-        self::$resultCache[$order->getPrimaryKey()] = $isSuccess;
+        static::$resultCache[$order->getPrimaryKey()] = $isSuccess;
 
         return $isSuccess;
     }
@@ -55,13 +58,13 @@ abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInt
      *
      * @return bool
      */
-    abstract protected function callFacade(OrderTransfer $orderTransfer);
+    abstract protected function callFacade(OrderTransfer $orderTransfer): bool;
 
     /**
      * @return string
      */
-    protected function getName()
+    protected function getName(): string
     {
-        return self::NAME;
+        return static::NAME;
     }
 }

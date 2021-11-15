@@ -20,7 +20,7 @@ class PostfinanceEfinanceOnlineTransferDataProvider implements StepEngineFormDat
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
@@ -37,7 +37,7 @@ class PostfinanceEfinanceOnlineTransferDataProvider implements StepEngineFormDat
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             PostfinanceEfinanceOnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -47,7 +47,7 @@ class PostfinanceEfinanceOnlineTransferDataProvider implements StepEngineFormDat
     /**
      * @return array
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
         return [
             'CH' => 'Switzerland',

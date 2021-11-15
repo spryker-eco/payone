@@ -12,8 +12,14 @@ use Spryker\Client\Kernel\Container;
 
 class PayoneDependencyProvider extends AbstractDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const SERVICE_ZED = 'service zed';
 
+    /**
+     * @var string
+     */
     public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
 
     /**
@@ -21,7 +27,7 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    public function provideServiceLayerDependencies(Container $container)
+    public function provideServiceLayerDependencies(Container $container): Container
     {
         $container->set(static::SERVICE_ZED, function (Container $container) {
             return $container->getLocator()->zedRequest()->client();

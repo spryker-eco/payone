@@ -49,7 +49,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount)
+    public function setBankAccount($bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
@@ -57,7 +57,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankAccount()
+    public function getBankAccount(): string
     {
         return $this->bankaccount;
     }
@@ -67,7 +67,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankAccountHolder($bankaccountholder)
+    public function setBankAccountHolder($bankaccountholder): void
     {
         $this->bankaccountholder = $bankaccountholder;
     }
@@ -75,7 +75,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankAccountHolder()
+    public function getBankAccountHolder(): string
     {
         return $this->bankaccountholder;
     }
@@ -85,7 +85,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode)
+    public function setBankCode($bankcode): void
     {
         $this->bankcode = $bankcode;
     }
@@ -93,7 +93,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankCode()
+    public function getBankCode(): string
     {
         return $this->bankcode;
     }
@@ -103,7 +103,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry)
+    public function setBankCountry($bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
@@ -111,7 +111,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBankCountry()
+    public function getBankCountry(): string
     {
         return $this->bankcountry;
     }
@@ -121,7 +121,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban($iban): void
     {
         $this->iban = $iban;
     }
@@ -129,7 +129,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getIban()
+    public function getIban(): string
     {
         return $this->iban;
     }
@@ -139,7 +139,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic($bic): void
     {
         $this->bic = $bic;
     }
@@ -147,7 +147,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getBic()
+    public function getBic(): string
     {
         return $this->bic;
     }
@@ -157,7 +157,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandateIdentification)
+    public function setMandateIdentification($mandateIdentification): void
     {
         $this->mandate_identification = $mandateIdentification;
     }
@@ -165,7 +165,7 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getMandateIdentification()
+    public function getMandateIdentification(): string
     {
         return $this->mandate_identification;
     }

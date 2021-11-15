@@ -44,7 +44,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandate_identification)
+    public function setMandateIdentification($mandate_identification): void
     {
         $this->mandate_identification = $mandate_identification;
     }
@@ -52,7 +52,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getMandateIdentification()
+    public function getMandateIdentification(): string
     {
         return $this->mandate_identification;
     }
@@ -62,7 +62,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateStatus($mandate_status)
+    public function setMandateStatus($mandate_status): void
     {
         $this->mandate_status = $mandate_status;
     }
@@ -70,7 +70,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getMandateStatus()
+    public function getMandateStatus(): string
     {
         return $this->mandate_status;
     }
@@ -80,7 +80,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateText($mandate_text)
+    public function setMandateText($mandate_text): void
     {
         $this->mandate_text = $mandate_text;
     }
@@ -88,7 +88,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getMandateText()
+    public function getMandateText(): string
     {
         return $this->mandate_text;
     }
@@ -98,7 +98,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorIdentifier($creditor_identifier)
+    public function setCreditorIdentifier($creditor_identifier): void
     {
         $this->creditor_identifier = $creditor_identifier;
     }
@@ -106,7 +106,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getCreditorIdentifier()
+    public function getCreditorIdentifier(): string
     {
         return $this->creditor_identifier;
     }
@@ -116,7 +116,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic($bic): void
     {
         $this->bic = $bic;
     }
@@ -124,7 +124,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getBic()
+    public function getBic(): string
     {
         return $this->bic;
     }
@@ -134,7 +134,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban($iban): void
     {
         $this->iban = $iban;
     }
@@ -142,7 +142,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getIban()
+    public function getIban(): string
     {
         return $this->iban;
     }

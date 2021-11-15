@@ -62,7 +62,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return array
      */
-    public function toArrayByKey($key)
+    public function toArrayByKey($key): array
     {
         $data = [];
         if (isset($this->id)) {
@@ -106,7 +106,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getDe()
+    public function getDe(): string
     {
         return $this->de;
     }
@@ -124,7 +124,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getEd()
+    public function getEd(): string
     {
         return $this->ed;
     }
@@ -142,7 +142,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -160,7 +160,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return int
      */
-    public function getNo()
+    public function getNo(): int
     {
         return $this->no;
     }
@@ -178,7 +178,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return int
      */
-    public function getPr()
+    public function getPr(): int
     {
         return $this->pr;
     }
@@ -196,7 +196,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getSd()
+    public function getSd(): string
     {
         return $this->sd;
     }
@@ -214,7 +214,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return int
      */
-    public function getVa()
+    public function getVa(): int
     {
         return $this->va;
     }
@@ -232,7 +232,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getIt()
+    public function getIt(): string
     {
         return $this->it;
     }

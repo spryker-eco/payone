@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Payone\Controller;
 
 use Spryker\Yves\Kernel\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * @method \SprykerEco\Client\Payone\PayoneClientInterface getClient()
@@ -18,7 +19,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return array
      */
-    public function checkoutWithPaypalButtonAction()
+    public function checkoutWithPaypalButtonAction(): array
     {
         return $this->viewResponse();
     }
@@ -26,7 +27,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function initPaypalExpressCheckoutAction()
+    public function initPaypalExpressCheckoutAction(): RedirectResponse
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
 
@@ -36,7 +37,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function loadPaypalExpressCheckoutDetailsAction()
+    public function loadPaypalExpressCheckoutDetailsAction(): RedirectResponse
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
         $expressCheckoutHandler->loadExpressCheckoutDetails();
@@ -47,7 +48,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function failureAction()
+    public function failureAction(): RedirectResponse
     {
         $this->addErrorMessage('Paypal transaction failed.');
 
@@ -59,7 +60,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function backAction()
+    public function backAction(): RedirectResponse
     {
         return $this->getFactory()
             ->createExpressCheckoutHandler()

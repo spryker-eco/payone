@@ -14,16 +14,20 @@ use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\ChSubFormsCreator;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\DefaultSubFormsCreator;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\DeSubFormsCreator;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\NlSubFormsCreator;
+use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()
  */
 class PluginCountryFactory extends AbstractPlugin
 {
+    /**
+     * @var string
+     */
     public const DEFAULT_COUNTRY = 'default';
 
     /**
-     * @var \SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface[]
+     * @var array<\SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface>
      */
     protected $subFormsCreators = [];
 
@@ -42,7 +46,7 @@ class PluginCountryFactory extends AbstractPlugin
             PayoneConstants::COUNTRY_CH => function () {
                 return new ChSubFormsCreator();
             },
-            self::DEFAULT_COUNTRY => function () {
+            static::DEFAULT_COUNTRY => function () {
                 return new DefaultSubFormsCreator();
             },
         ];
@@ -53,12 +57,12 @@ class PluginCountryFactory extends AbstractPlugin
      *
      * @return \SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface
      */
-    public function createSubFormsCreator($countryIso2Code)
+    public function createSubFormsCreator($countryIso2Code): SubFormsCreatorInterface
     {
         if (isset($this->subFormsCreators[$countryIso2Code])) {
             $subFormsCreator = $this->subFormsCreators[$countryIso2Code]();
         } else {
-            $subFormsCreator = $this->subFormsCreators[self::DEFAULT_COUNTRY]();
+            $subFormsCreator = $this->subFormsCreators[static::DEFAULT_COUNTRY]();
         }
 
         return $subFormsCreator;
