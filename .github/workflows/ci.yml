@@ -21,11 +21,11 @@ env:
 jobs:
     test_pgsql:
         name: "Test / PostgreSQL"
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.3', ]
+                php: [ '7.4', ]
                 product: [ 'suite' ]
                 composer_preference: ['', '--prefer-lowest']
         services:
@@ -75,11 +75,11 @@ jobs:
                 run: ./ecoci/build/ga.sh ${{ matrix.composer_preference }}
     test_mariadb:
         name: "Test / MariaDB"
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.3', ]
+                php: [ '7.4', ]
                 product: [ 'suite' ]
                 composer_preference: [ '', '--prefer-lowest' ]
         services:
