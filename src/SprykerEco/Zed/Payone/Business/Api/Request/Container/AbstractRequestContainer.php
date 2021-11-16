@@ -155,9 +155,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getEncoding(): ?string
+    public function getEncoding(): string
     {
         return $this->encoding;
     }
@@ -195,9 +195,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getApiVersion(): ?string
+    public function getApiVersion(): string
     {
         return $this->api_version;
     }
@@ -237,7 +237,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getMode(): ?string
+    public function getMode(): string
     {
         return $this->mode;
     }
