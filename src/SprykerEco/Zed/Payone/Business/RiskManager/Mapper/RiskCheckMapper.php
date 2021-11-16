@@ -111,7 +111,6 @@ class RiskCheckMapper implements RiskCheckMapperInterface
      */
     protected function mapDefaultContainerParams(ContainerInterface $container): ContainerInterface
     {
-        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container */
         $container->setMid($this->standardParameters->getMid());
         $container->setAid($this->standardParameters->getAid());
         $container->setPortalid($this->standardParameters->getPortalId());

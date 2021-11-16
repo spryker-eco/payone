@@ -118,6 +118,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
         $paymentEntity = $this->getPaymentEntity($captureTransfer->getPayment()->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
 
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
 
         if ($captureTransfer->getAmount()) {
@@ -125,7 +126,6 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
             $requestContainer = $this->expenseMapper->mapExpenses($captureTransfer->getOrder(), $requestContainer);
         }
 
-        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
         if (!empty($captureTransfer->getSettleaccount())) {
             $businnessContainer = new BusinessContainer();
             $businnessContainer->setSettleAccount($captureTransfer->getSettleaccount());

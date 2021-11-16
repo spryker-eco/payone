@@ -144,13 +144,10 @@ class PayoneHandler implements PayoneHandlerInterface
         $paymentDetailTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $paymentDetailTransfer->setCurrency($this->getCurrency());
         if ($paymentSelection === PaymentTransfer::PAYONE_CREDIT_CARD) {
-            /** @var \Generated\Shared\Transfer\PayonePaymentCreditCardTransfer $payonePaymentTransfer */
             $paymentDetailTransfer->setPseudoCardPan($payonePaymentTransfer->getPseudocardpan());
         } elseif ($paymentSelection === PaymentTransfer::PAYONE_E_WALLET) {
-            /** @var \Generated\Shared\Transfer\PayonePaymentEWalletTransfer $payonePaymentTransfer */
             $paymentDetailTransfer->setType($payonePaymentTransfer->getWallettype());
         } elseif ($paymentSelection === PaymentTransfer::PAYONE_DIRECT_DEBIT) {
-            /** @var \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $payonePaymentTransfer */
             $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankcountry());
             $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankaccount());
             $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankcode());
@@ -168,7 +165,6 @@ class PayoneHandler implements PayoneHandlerInterface
             || $paymentSelection === PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER
             || $paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER
         ) {
-            /** @var \Generated\Shared\Transfer\PayonePaymentOnlinetransferTransfer $payonePaymentTransfer */
             $paymentDetailTransfer->setType($payonePaymentTransfer->getOnlineBankTransferType());
             $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankCountry());
             if ($paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER) {

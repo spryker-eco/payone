@@ -122,7 +122,6 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      */
     protected function transformCurrency(TransactionStatusUpdateInterface $request): void
     {
-        /** @var \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest $request */
         $balance = $request->getBalance();
         $balanceAmountInCents = round((float)$balance * 100);
         $request->setBalance($balanceAmountInCents);

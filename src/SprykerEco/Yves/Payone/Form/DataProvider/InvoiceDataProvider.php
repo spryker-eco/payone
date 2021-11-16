@@ -21,7 +21,6 @@ class InvoiceDataProvider implements StepEngineFormDataProviderInterface
      */
     public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());

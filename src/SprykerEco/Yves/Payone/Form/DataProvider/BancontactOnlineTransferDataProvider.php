@@ -36,7 +36,6 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      */
     public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
         if ($quoteTransfer->getPayment() !== null) {
             return $quoteTransfer;
         }

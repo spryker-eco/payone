@@ -14,21 +14,21 @@ interface ApiCallLogWriterInterface
     /**
      * @param string $url
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
+     * @return $this
      */
     public function logUrl($url): LogApiCallLogWriterInterface;
 
     /**
      * @param string $request
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
+     * @return $this
      */
     public function logRequest($request): LogApiCallLogWriterInterface;
 
     /**
      * @param string $response
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
+     * @return $this
      */
     public function logResponse($response): LogApiCallLogWriterInterface;
 
