@@ -8,9 +8,12 @@
 namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\AddressCheckResponseTransfer;
+use Generated\Shared\Transfer\AuthorizationResponseTransfer;
 use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
+use Generated\Shared\Transfer\CreditCardCheckResponseTransfer;
+use Generated\Shared\Transfer\DebitResponseTransfer;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
@@ -26,6 +29,8 @@ use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
+use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -81,7 +86,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function authorizePayment(OrderTransfer $orderTransfer)
+    public function authorizePayment(OrderTransfer $orderTransfer): AuthorizationResponseTransfer
     {
         return $this->getFactory()->createPayoneAuthorizeRequestSender()->authorizePayment($orderTransfer);
     }
@@ -95,7 +100,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment($idSalesOrder)
+    public function preAuthorizePayment($idSalesOrder): AuthorizationResponseTransfer
     {
         return $this->getFactory()->createPayonePreAuthorizeRequestSender()->preAuthorizePayment($idSalesOrder);
     }
@@ -123,7 +128,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
-    public function debitPayment($idPayment)
+    public function debitPayment($idPayment): DebitResponseTransfer
     {
         return $this->getFactory()->createPayoneDebitRequestSender()->debitPayment($idPayment);
     }
@@ -137,7 +142,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer)
+    public function refundPayment(PayoneRefundTransfer $refundTransfer): RefundResponseTransfer
     {
         return $this->getFactory()->createPayoneRefundRequestSender()->refundPayment($refundTransfer);
     }
@@ -165,7 +170,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
-    public function creditCardCheck(PayoneCreditCardTransfer $creditCardData)
+    public function creditCardCheck(PayoneCreditCardTransfer $creditCardData): CreditCardCheckResponseTransfer
     {
         return $this->getFactory()->createPayoneCreditCardChecker()->creditCardCheck($creditCardData);
     }
@@ -179,7 +184,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer)
+    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer): PayoneBankAccountCheckTransfer
     {
         return $this->getFactory()->createPayoneBankAccountChecker()->bankAccountCheck($bankAccountCheckTransfer);
     }
@@ -193,7 +198,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
      */
-    public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer)
+    public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer): PayoneManageMandateTransfer
     {
         return $this->getFactory()->createPayoneManageMandateMethodSender()->manageMandate($manageMandateTransfer);
     }
@@ -207,7 +212,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    public function getFile(PayoneGetFileTransfer $getFileTransfer)
+    public function getFile(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer
     {
         return $this->getFactory()->createPayoneFileReader()->getFile($getFileTransfer);
     }
@@ -221,7 +226,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer)
+    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
     {
         return $this->getFactory()->createPayoneInvoiceReader()->getInvoice($getInvoiceTransfer);
     }
@@ -249,7 +254,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function processTransactionStatusUpdate(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer)
+    public function processTransactionStatusUpdate(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer): PayoneTransactionStatusUpdateTransfer
     {
         $transactionManager = $this->getFactory()->createTransactionStatusManager();
         $transactionTransfer = $this->getFactory()->createTransactionStatusRequest($transactionStatusUpdateTransfer);
@@ -269,7 +274,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isAuthorizationApproved(OrderTransfer $orderTransfer)
+    public function isAuthorizationApproved(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isAuthorizationApproved($orderTransfer);
     }
@@ -283,7 +288,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isAuthorizationRedirect(OrderTransfer $orderTransfer)
+    public function isAuthorizationRedirect(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isAuthorizationRedirect($orderTransfer);
     }
@@ -297,7 +302,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPreauthorizationApproved(OrderTransfer $orderTransfer)
+    public function isPreauthorizationApproved(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isPreAuthorizationApproved($orderTransfer);
     }
@@ -311,7 +316,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPreauthorizationRedirect(OrderTransfer $orderTransfer)
+    public function isPreauthorizationRedirect(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isPreAuthorizationRedirect($orderTransfer);
     }
@@ -325,7 +330,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPreAuthorizationError(OrderTransfer $orderTransfer)
+    public function isPreAuthorizationError(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isPreAuthorizationError($orderTransfer);
     }
@@ -339,7 +344,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isAuthorizationError(OrderTransfer $orderTransfer)
+    public function isAuthorizationError(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isAuthorizationError($orderTransfer);
     }
@@ -353,7 +358,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isCaptureApproved(OrderTransfer $orderTransfer)
+    public function isCaptureApproved(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isCaptureApproved($orderTransfer);
     }
@@ -367,7 +372,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isCaptureError(OrderTransfer $orderTransfer)
+    public function isCaptureError(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isCaptureError($orderTransfer);
     }
@@ -381,7 +386,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isRefundApproved(OrderTransfer $orderTransfer)
+    public function isRefundApproved(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isRefundApproved($orderTransfer);
     }
@@ -395,7 +400,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isRefundError(OrderTransfer $orderTransfer)
+    public function isRefundError(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createApiLogFinder()->isRefundError($orderTransfer);
     }
@@ -409,7 +414,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isRefundPossible(OrderTransfer $orderTransfer)
+    public function isRefundPossible(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createRefundChecker()->isRefundPossible($orderTransfer);
     }
@@ -423,7 +428,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentDataRequired(OrderTransfer $orderTransfer)
+    public function isPaymentDataRequired(OrderTransfer $orderTransfer): bool
     {
         return $this->getFactory()->createPaymentDataChecker()->isPaymentDataRequired($orderTransfer);
     }
@@ -438,7 +443,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentNotificationAvailable($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentNotificationAvailable($idSalesOrder, $idSalesOrderItem): bool
     {
         return $this->getFactory()
             ->createTransactionStatusManager()
@@ -455,7 +460,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentPaid($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentPaid($idSalesOrder, $idSalesOrderItem): bool
     {
         return $this->getFactory()
             ->createTransactionStatusManager()
@@ -472,7 +477,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentOverpaid($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentOverpaid($idSalesOrder, $idSalesOrderItem): bool
     {
         return $this->getFactory()
             ->createTransactionStatusManager()
@@ -489,7 +494,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentUnderpaid($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentUnderpaid($idSalesOrder, $idSalesOrderItem): bool
     {
         return $this->getFactory()
             ->createTransactionStatusManager()
@@ -506,7 +511,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentRefund($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentRefund($idSalesOrder, $idSalesOrderItem): bool
     {
         return $this->getFactory()
             ->createTransactionStatusManager()
@@ -523,7 +528,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentAppointed($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentAppointed($idSalesOrder, $idSalesOrderItem): bool
     {
         return $this->getFactory()
             ->createTransactionStatusManager()
@@ -540,7 +545,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentOther($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentOther($idSalesOrder, $idSalesOrderItem): bool
     {
         return $this->getFactory()
             ->createTransactionStatusManager()
@@ -557,7 +562,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentCapture($idSalesOrder, $idSalesOrderItem)
+    public function isPaymentCapture($idSalesOrder, $idSalesOrderItem): bool
     {
         return $this->getFactory()
             ->createTransactionStatusManager()
@@ -593,7 +598,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
+    public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
     {
         return $this->getFactory()
             ->createPostSaveHook()
@@ -630,7 +635,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs(OrderCollectionTransfer $orderCollectionTransfer)
+    public function getPaymentLogs(OrderCollectionTransfer $orderCollectionTransfer): PayonePaymentLogCollectionTransfer
     {
         $orders = $orderCollectionTransfer->getOrders();
 
@@ -646,7 +651,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PaymentDetailTransfer
      */
-    public function getPaymentDetail($idOrder)
+    public function getPaymentDetail($idOrder): PaymentDetailTransfer
     {
         return $this->getRepository()->getPaymentDetail($idOrder);
     }
@@ -661,7 +666,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return void
      */
-    public function updatePaymentDetail(PaymentDetailTransfer $paymentData, $idOrder)
+    public function updatePaymentDetail(PaymentDetailTransfer $paymentData, $idOrder): void
     {
         $this->getEntityManager()->updatePaymentDetail($paymentData, $idOrder);
     }
@@ -675,7 +680,9 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    public function initPaypalExpressCheckout(
+        PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
+    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
     {
         return $this->getFactory()->createPayoneInitPaypalExpressCheckoutMethodSender()->initPaypalExpressCheckout($requestTransfer);
     }
@@ -689,7 +696,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
     {
         return $this->getFactory()->createPayonePaypalExpressCheckoutDetailsReader()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
