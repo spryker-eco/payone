@@ -235,7 +235,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string|null
+     * @return string
      */
     public function getMode(): string
     {
