@@ -14,7 +14,7 @@ class CreditCardCheckAdapterMock extends AbstractAdapterMock
      */
     protected function getSuccessResponse()
     {
-        $result = 'pseudoCardPan=1111111111111111';
+        $result = 'pseudoCardPan=1111111111111111 status=OK errormessage=OK customermessage=OK errorcode=200 rawresponse=200 truncatedcardpan=200';
 
         return explode(' ', $result);
     }

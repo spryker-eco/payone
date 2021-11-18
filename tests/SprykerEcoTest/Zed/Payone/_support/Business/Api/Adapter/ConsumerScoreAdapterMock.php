@@ -13,11 +13,17 @@ use SprykerEcoTest\Zed\Payone\Business\RiskCheck\RiskCheckManagerTest;
 class ConsumerScoreAdapterMock extends AbstractAdapterMock
 {
     /**
+     * @var int
+     */
+    protected const CONSUMER_SCORE_VALUE = 100;
+
+    /**
      * @return array
      */
     protected function getSuccessResponse(): array
     {
         $result = 'status=' . PayoneApiConstants::RESPONSE_TYPE_VALID .
+            ' scorevalue=' . static::CONSUMER_SCORE_VALUE .
             ' score=' . PayoneApiConstants::CONSUMER_SCORE_GREEN;
 
         return explode(' ', $result);

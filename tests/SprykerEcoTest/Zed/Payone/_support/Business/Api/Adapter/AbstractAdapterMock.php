@@ -35,7 +35,7 @@ abstract class AbstractAdapterMock extends AbstractHttpAdapter implements Adapte
      *
      * @return array
      */
-    protected function performRequest(array $params)
+    protected function performRequest(array $params): array
     {
         if ($this->expectSuccess) {
             return $this->getSuccessResponse();

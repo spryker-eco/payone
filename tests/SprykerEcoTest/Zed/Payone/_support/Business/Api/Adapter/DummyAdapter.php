@@ -26,7 +26,7 @@ class DummyAdapter extends AbstractHttpAdapter
      *
      * @return array
      */
-    protected function performRequest(array $params)
+    protected function performRequest(array $params): array
     {
         return $params;
     }
@@ -36,7 +36,7 @@ class DummyAdapter extends AbstractHttpAdapter
      *
      * @return array
      */
-    protected function parseResponse(array $responseRaw = [])
+    protected function parseResponse(array $responseRaw = []): array
     {
         return json_decode($this->rawResponse, true);
     }

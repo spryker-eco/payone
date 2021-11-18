@@ -14,7 +14,7 @@ class DebitAdapterMock extends AbstractAdapterMock
      */
     protected function getSuccessResponse()
     {
-        $result = 'txid=testtxid';
+        $result = 'txid=120 status=OK errormessage=OK customermessage=OK errorcode=200 rawresponse=200 settleaccount=200';
 
         return explode(' ', $result);
     }

@@ -28,6 +28,7 @@ class RiskCheckManagerTest extends AbstractPayoneTest
     public const RESPONSE_VALUE_ZIP = '12345';
     public const RESPONSE_VALUE_CITY = 'Berlin';
     public const RESPONSE_VALUE_CUSTOMER_MESSAGE = 'CustomerMessage';
+    public const ADDRESS_CHECK_PERSON_STATUS_CORRECT = '10';
 
     /**
      * @return void

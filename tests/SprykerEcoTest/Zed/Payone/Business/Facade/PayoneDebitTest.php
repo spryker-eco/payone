@@ -26,7 +26,7 @@ use SprykerEcoTest\Zed\Payone\PayoneZedTester;
 
 class PayoneDebitTest extends AbstractBusinessTest
 {
-    public const EXPECTED_TXID = 'testtxid';
+    public const EXPECTED_TXID = 120;
     protected const FAKE_PAYMENT_METHOD = 'payment.payone.e_wallet';
     protected const FAKE_REFERENCE = 'reference';
     protected const PAYMENT_AMOUT = 10;

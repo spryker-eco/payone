@@ -18,7 +18,9 @@ use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
 {
-    protected const FAKE_REFUND_RESPONSE = '{"txid":"375461930","status":"APPROVED"}';
+    protected const FAKE_REFUND_RESPONSE = '{"txid":"375461930",
+        "status":"APPROVED","errorcode":"200","errormessage":"OK",
+        "customermessage":"OK","rawresponse":"RawResponse","protectresultavs":"ProtectResultAvs"}';
     protected const ORDER_ITEM_STATUS_REFUND_APPROVED = 'refund approved';
 
     /**
@@ -61,7 +63,7 @@ class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
 
         //Assert
         $this->assertInstanceOf(RefundResponseTransfer::class, $refundResponseTransfer);
-        $this->assertSame('375461930', $refundResponseTransfer->getTxid());
+        $this->assertSame(375461930, $refundResponseTransfer->getTxid());
         $this->assertSame(static::ORDER_ITEM_STATUS_REFUND_APPROVED, $status);
     }
 

@@ -14,7 +14,7 @@ class BankAccountCheckAdapterMock extends AbstractAdapterMock
      */
     protected function getSuccessResponse()
     {
-        $result = 'bankcountry=DE';
+        $result = 'bankcountry=DE errorcode=200 status=OK customermessage=OK errormessage=OK';
 
         return explode(' ', $result);
     }

@@ -22,6 +22,8 @@ class AddressCheckAdapterMock extends AbstractAdapterMock
             ' street_number=' . RiskCheckManagerTest::RESPONSE_VALUE_STREET_NUMBER .
             ' zip=' . RiskCheckManagerTest::RESPONSE_VALUE_ZIP .
             ' city=' . RiskCheckManagerTest::RESPONSE_VALUE_CITY .
+            ' person_status=' . RiskCheckManagerTest::ADDRESS_CHECK_PERSON_STATUS_CORRECT .
+            ' customermessage=' . RiskCheckManagerTest::RESPONSE_VALUE_CUSTOMER_MESSAGE .
             ' secstatus=' . PayoneApiConstants::ADDRESS_CHECK_SECSTATUS_CORRECT;
 
         return explode(' ', $result);
@@ -37,6 +39,8 @@ class AddressCheckAdapterMock extends AbstractAdapterMock
             ' street_number=' . RiskCheckManagerTest::RESPONSE_VALUE_STREET_NUMBER .
             ' zip=' . RiskCheckManagerTest::RESPONSE_VALUE_ZIP .
             ' city=' . RiskCheckManagerTest::RESPONSE_VALUE_CITY .
+            ' person_status=' . RiskCheckManagerTest::ADDRESS_CHECK_PERSON_STATUS_CORRECT .
+            ' customermessage=' . RiskCheckManagerTest::RESPONSE_VALUE_CUSTOMER_MESSAGE .
             ' secstatus=' . PayoneApiConstants::ADDRESS_CHECK_SECSTATUS_NONE_CORRECTABLE;
 
         return explode(' ', $result);

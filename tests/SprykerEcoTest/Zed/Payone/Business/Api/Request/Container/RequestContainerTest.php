@@ -791,17 +791,17 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $container->setIt('it');
         $this->assertEquals('it', $container->getIt());
 
-        $container->setNo('no');
-        $this->assertEquals('no', $container->getNo());
+        $container->setNo(10);
+        $this->assertEquals(10, $container->getNo());
 
-        $container->setPr('pr');
-        $this->assertEquals('pr', $container->getPr());
+        $container->setPr(20);
+        $this->assertEquals(20, $container->getPr());
 
         $container->setSd('sd');
         $this->assertEquals('sd', $container->getSd());
 
-        $container->setVa('va');
-        $this->assertEquals('va', $container->getVa());
+        $container->setVa(30);
+        $this->assertEquals(30, $container->getVa());
 
         $this->assertCount(8, $container->toArray());
     }
@@ -966,14 +966,14 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $container->setBankAccountHolder('holder');
         $this->assertEquals('holder', $container->getBankAccountHolder());
 
-        $container->setBankBranchCode('branchcode');
-        $this->assertEquals('branchcode', $container->getBankBranchCode());
+        $container->setBankBranchCode(10);
+        $this->assertEquals(10, $container->getBankBranchCode());
 
-        $container->setBankCheckDigit('checkdigit');
-        $this->assertEquals('checkdigit', $container->getBankCheckDigit());
+        $container->setBankCheckDigit(20);
+        $this->assertEquals(20, $container->getBankCheckDigit());
 
-        $container->setBankCode('code');
-        $this->assertEquals('code', $container->getBankCode());
+        $container->setBankCode(30);
+        $this->assertEquals(30, $container->getBankCode());
 
         $container->setBankCountry('country');
         $this->assertEquals('country', $container->getBankCountry());
@@ -1010,14 +1010,14 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $container->setBankaccount('bankaccount');
         $this->assertEquals('bankaccount', $container->getBankaccount());
 
-        $container->setBankbranchcode('branchcode');
-        $this->assertEquals('branchcode', $container->getBankbranchcode());
+        $container->setBankbranchcode(10);
+        $this->assertEquals(10, $container->getBankbranchcode());
 
-        $container->setBankcheckdigit('checkdigit');
-        $this->assertEquals('checkdigit', $container->getBankcheckdigit());
+        $container->setBankcheckdigit(20);
+        $this->assertEquals(20, $container->getBankcheckdigit());
 
-        $container->setBankcode('code');
-        $this->assertEquals('code', $container->getBankcode());
+        $container->setBankcode(30);
+        $this->assertEquals(30, $container->getBankcode());
 
         $container->setBankcountry('country');
         $this->assertEquals('country', $container->getBankcountry());

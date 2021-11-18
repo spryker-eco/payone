@@ -153,7 +153,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('mandateidentification', $container->getMandateIdentification());
         $this->assertEquals('settleaccount', $container->getSettleaccount());
-        $this->assertEquals('txid', $container->getTxid());
+        $this->assertEquals(10, $container->getTxid());
     }
 
     /**
@@ -187,7 +187,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
 
             'mandateidentification' => 'mandateidentification',
             'settleaccount' => 'settleaccount',
-            'txid' => 'txid',
+            'txid' => 10,
         ];
     }
 
@@ -203,7 +203,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer', $container);
         $this->assertStandardParams($container);
         $this->assertEquals('settleaccount', $container->getSettleaccount());
-        $this->assertEquals('txid', $container->getTxid());
+        $this->assertEquals(5, $container->getTxid());
     }
 
     /**
@@ -213,7 +213,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     {
         return [
             'settleaccount' => 'settleaccount',
-            'txid' => 'txid',
+            'txid' => 5,
         ];
     }
 
@@ -229,7 +229,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer', $container);
         $this->assertStandardParams($container);
         $this->assertEquals('protectresultavs', $container->getProtectResultAvs());
-        $this->assertEquals('txid', $container->getTxid());
+        $this->assertEquals(5, $container->getTxid());
     }
 
     /**
@@ -239,7 +239,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     {
         return [
             'protectresultavs' => 'protectresultavs',
-            'txid' => 'txid',
+            'txid' => 5,
         ];
     }
 

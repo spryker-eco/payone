@@ -18,7 +18,7 @@ use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\DummyAdapter;
  */
 class PayoneFacadeOrderPostSaveTest extends AbstractPayoneTest
 {
-    protected const FAKE_REFUND_RESPONSE = '{"txid":"375461930","status":"APPROVED"}';
+    protected const FAKE_REFUND_RESPONSE = '{"txid":"375461930","userid":"123","mandateidentification":"","rawresponse":"","creditoremail":"","creditorcountry":"","creditorcity":"","creditorzip":"","creditorstreet":"","creditorname":"","creditoridentifier":"","clearingamount":"","clearinginstructionnote":"","clearingreference":"","clearingduedate":"","clearingdate":"","clearinglegalnote":"","clearingbankname":"","clearingbankcity":"","clearingbankbic":"","clearingbankiban":"","clearingbankcode":"","clearingbankcountry":"","clearingbankaccount":"","clearingbankaccountholder":"","redirecturl":"redirect url","errorcode":"","customermessage":"CustomerMessage","errormessage":"ErrorMessage","status":"APPROVED"}';
 
     /**
      * @return void
@@ -80,7 +80,7 @@ class PayoneFacadeOrderPostSaveTest extends AbstractPayoneTest
 
         // Act
         $newCheckoutResponseTransfer = $this->createFacadeMock(
-            new DummyAdapter('{"txid":"375461930","status":"APPROVED","redirect_url":"http://test.com"}')
+            new DummyAdapter('{"txid":"375461930","userid":"123","mandateidentification":"","rawresponse":"","creditoremail":"","creditorcountry":"","creditorcity":"","creditorzip":"","creditorstreet":"","creditorname":"","creditoridentifier":"","clearingamount":"","clearinginstructionnote":"","clearingreference":"","clearingduedate":"","clearingdate":"","clearinglegalnote":"","clearingbankname":"","clearingbankcity":"","clearingbankbic":"","clearingbankiban":"","clearingbankcode":"","clearingbankcountry":"","clearingbankaccount":"","clearingbankaccountholder":"","customermessage":"CustomerMessage","errormessage":"ErrorMessage","errorcode":"","status":"APPROVED","redirect_url":"http://test.com"}')
         )->orderPostSave($this->quoteTransfer, $checkoutResponseTransfer);
 
         // Assert
@@ -102,7 +102,7 @@ class PayoneFacadeOrderPostSaveTest extends AbstractPayoneTest
 
         // Act
         $newCheckoutResponseTransfer = $this->createFacadeMock(
-            new DummyAdapter('{"txid":"375461930","status":"FAILED","customer_message":"error customer message","error_code":"123"}')
+            new DummyAdapter('{"txid":"375461930","userid":"123","mandateidentification":"","rawresponse":"","creditoremail":"","creditorcountry":"","creditorcity":"","creditorzip":"","creditorstreet":"","creditorname":"","creditoridentifier":"","clearingamount":"","clearinginstructionnote":"","clearingreference":"","clearingduedate":"","clearingdate":"","clearinglegalnote":"","clearingbankname":"","clearingbankcity":"","clearingbankbic":"","clearingbankiban":"","clearingbankcode":"","clearingbankcountry":"","clearingbankaccount":"","clearingbankaccountholder":"","redirecturl":"https://spryker.com","errormessage":"ErrorMessage","status":"FAILED","customer_message":"error customer message","error_code":"123"}')
         )->orderPostSave($this->quoteTransfer, $checkoutResponseTransfer);
 
         // Assert
