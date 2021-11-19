@@ -32,6 +32,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
      * @var string
      */
     protected const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
+
     /**
      * @var string
      */

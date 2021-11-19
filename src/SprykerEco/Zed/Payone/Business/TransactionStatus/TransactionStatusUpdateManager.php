@@ -124,15 +124,24 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     {
         $balance = $request->getBalance();
         $balanceAmountInCents = round((float)$balance * 100);
-        $request->setBalance($balanceAmountInCents);
+
+        if (method_exists($request, 'setBalance')) {
+            $request->setBalance($balanceAmountInCents);
+        }
 
         $receivable = $request->getReceivable();
         $receivableAmountInCents = round((float)$receivable * 100);
-        $request->setReceivable($receivableAmountInCents);
+
+        if (method_exists($request, 'setReceivable')) {
+            $request->setReceivable($receivableAmountInCents);
+        }
 
         $price = $request->getPrice();
         $priceAmountInCents = round((float)$price * 100);
-        $request->setPrice($priceAmountInCents);
+
+        if (method_exists($request, 'setPrice')) {
+            $request->setPrice($priceAmountInCents);
+        }
     }
 
     /**
