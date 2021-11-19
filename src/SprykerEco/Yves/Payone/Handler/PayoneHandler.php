@@ -9,6 +9,10 @@ namespace SprykerEco\Yves\Payone\Handler;
 
 use Generated\Shared\Transfer\PaymentDetailTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
+use Generated\Shared\Transfer\PayonePaymentCreditCardTransfer;
+use Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer;
+use Generated\Shared\Transfer\PayonePaymentEWalletTransfer;
+use Generated\Shared\Transfer\PayonePaymentOnlinetransferTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Store;
@@ -143,11 +147,11 @@ class PayoneHandler implements PayoneHandlerInterface
         // get it from quotaTransfer
         $paymentDetailTransfer->setAmount($quoteTransfer->getTotals()->getGrandTotal());
         $paymentDetailTransfer->setCurrency($this->getCurrency());
-        if ($paymentSelection === PaymentTransfer::PAYONE_CREDIT_CARD) {
+        if ($payonePaymentTransfer instanceof PayonePaymentCreditCardTransfer && $paymentSelection === PaymentTransfer::PAYONE_CREDIT_CARD) {
             $paymentDetailTransfer->setPseudoCardPan($payonePaymentTransfer->getPseudocardpan());
-        } elseif ($paymentSelection === PaymentTransfer::PAYONE_E_WALLET) {
+        } elseif ($payonePaymentTransfer instanceof PayonePaymentEWalletTransfer && $paymentSelection === PaymentTransfer::PAYONE_E_WALLET) {
             $paymentDetailTransfer->setType($payonePaymentTransfer->getWallettype());
-        } elseif ($paymentSelection === PaymentTransfer::PAYONE_DIRECT_DEBIT) {
+        } elseif ($payonePaymentTransfer instanceof PayonePaymentDirectDebitTransfer && $paymentSelection === PaymentTransfer::PAYONE_DIRECT_DEBIT) {
             $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankcountry());
             $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankaccount());
             $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankcode());
@@ -156,14 +160,16 @@ class PayoneHandler implements PayoneHandlerInterface
             $paymentDetailTransfer->setMandateIdentification($payonePaymentTransfer->getMandateIdentification());
             $paymentDetailTransfer->setMandateText($payonePaymentTransfer->getMandateText());
         } elseif (
-            $paymentSelection === PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER
-            || $paymentSelection === PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER
-            || $paymentSelection === PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER
-            || $paymentSelection === PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER
-            || $paymentSelection === PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER
-            || $paymentSelection === PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER
-            || $paymentSelection === PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER
-            || $paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER
+            $payonePaymentTransfer instanceof PayonePaymentOnlinetransferTransfer && (
+                $paymentSelection === PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER
+                || $paymentSelection === PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER
+                || $paymentSelection === PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER
+                || $paymentSelection === PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER
+                || $paymentSelection === PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER
+                || $paymentSelection === PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER
+                || $paymentSelection === PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER
+                || $paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER
+            )
         ) {
             $paymentDetailTransfer->setType($payonePaymentTransfer->getOnlineBankTransferType());
             $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankCountry());
@@ -202,9 +208,9 @@ class PayoneHandler implements PayoneHandlerInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param string $paymentSelection
      *
-     * @return \Generated\Shared\Transfer\PayonePaymentTransfer
+     * @return \Generated\Shared\Transfer\PayonePaymentTransfer|\Generated\Shared\Transfer\PayonePaymentCreditCardTransfer|\Generated\Shared\Transfer\PayonePaymentEWalletTransfer|\Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer|\Generated\Shared\Transfer\PayonePaymentOnlinetransferTransfer
      */
-    protected function getPayonePaymentTransfer(QuoteTransfer $quoteTransfer, string $paymentSelection): PayonePaymentTransfer
+    protected function getPayonePaymentTransfer(QuoteTransfer $quoteTransfer, string $paymentSelection)
     {
         $method = 'get' . ucfirst($paymentSelection);
         $payonePaymentTransfer = $quoteTransfer->getPayment()->$method();

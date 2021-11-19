@@ -25,7 +25,7 @@ abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInt
     /**
      * @var array
      */
-    private static $resultCache = [];
+    protected static $resultCache = [];
 
     /**
      * {@inheritDoc}
@@ -48,7 +48,7 @@ abstract class AbstractPlugin extends BaseAbstractPlugin implements ConditionInt
         $orderTransfer->fromArray($order->toArray(), true);
 
         $isSuccess = $this->callFacade($orderTransfer);
-        static::$resultCache[$order->getPrimaryKey()] = $isSuccess;
+        self::$resultCache[$order->getPrimaryKey()] = $isSuccess;
 
         return $isSuccess;
     }

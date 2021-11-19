@@ -32,6 +32,10 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
      * @var string
      */
     protected const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
+    /**
+     * @var string
+     */
+    protected const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
 
     /**
      * @param \Generated\Shared\Transfer\PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer
