@@ -26,6 +26,7 @@ class PayoneSubFormsPlugin extends AbstractPlugin
     }
 
     /**
+     * {@inheritDoc}
      * @return array<\Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface>
      */
     public function getPaymentMethodsSubForms(): array

@@ -582,4 +582,13 @@
 
     <transfer name="PersonalData">
     </transfer>
+
+    <transfer name="ShipmentMethods">
+    </transfer>
+
+    <transfer name="Store">
+    </transfer>
+
+    <transfer name="Translation">
+    </transfer>
 </transfers>

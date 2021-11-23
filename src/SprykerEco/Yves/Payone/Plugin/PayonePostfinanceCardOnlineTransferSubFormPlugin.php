@@ -18,6 +18,7 @@ use SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm;
 class PayonePostfinanceCardOnlineTransferSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
+     * {@inheritDoc}
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm(): AbstractPayoneSubForm
@@ -26,6 +27,7 @@ class PayonePostfinanceCardOnlineTransferSubFormPlugin extends AbstractPlugin im
     }
 
     /**
+     * {@inheritDoc}
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider(): StepEngineFormDataProviderInterface

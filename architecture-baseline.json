@@ -33,5 +33,1510 @@
         "rule": "BridgeMethodsRule",
         "ruleset": "Spryker",
         "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PROVIDER_NAME'\" but is \"'payone'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:MODE_TEST'\" but is \"'test'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:MODE_LIVE'\" but is \"'live'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:API_VERSION_3_8'\" but is \"'3.8'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:API_VERSION_3_9'\" but is \"'3.9'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INTEGRATOR_NAME_SPRYKER'\" but is \"'spryker'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INTEGRATOR_VERSION_3_0_0'\" but is \"'3.0.0'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:SOLUTION_NAME_SPRYKER'\" but is \"'spryker'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:SOLUTION_VERSION_3_0_0'\" but is \"'3.0.0'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_CREDITCARD'\" but is \"'payment.payone.creditcard'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_CREDITCARD_PSEUDO'\" but is \"'payment.payone.creditcard'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_E_WALLET'\" but is \"'payment.payone.e_wallet'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT'\" but is \"'payment.payone.paypal_external_checkout'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_DIRECT_DEBIT'\" but is \"'payment.payone.direct_debit'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_INVOICE'\" but is \"'payment.payone.invoice'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_SECURITY_INVOICE'\" but is \"'payment.payone.security_invoice'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_PREPAYMENT'\" but is \"'payment.payone.prepayment'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_CASH_ON_DELIVERY'\" but is \"'payment.payone.cash_on_delivery'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_ONLINE_BANK_TRANSFER'\" but is \"'payment.payone.online_bank_transfer'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_KLARNA'\" but is \"'payment.payone.klarna'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_KLARNA_START_SESSION_ACTION'\" but is \"'start_session'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_DIRECT_DEBIT'\" but is \"'elv'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_CREDIT_CARD'\" but is \"'cc'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_PREPAYMENT'\" but is \"'vor'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_INVOICE'\" but is \"'rec'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_SECURITY_INVOICE'\" but is \"'rec'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_ONLINE_BANK_TRANSFER'\" but is \"'sb'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_CASH_ON_DELIVERY'\" but is \"'cod'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_E_WALLET'\" but is \"'wlt'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_TYPE_FINANCING'\" but is \"'fnc'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CLEARING_SUBTYPE_SECURITY_INVOICE'\" but is \"'POV'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:E_WALLET_TYPE_PAYPAL'\" but is \"'PPE'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:E_WALLET_TYPE_PAY_DIRECT'\" but is \"'PDT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:USE_CUSTOMER_DATA_YES'\" but is \"'yes'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:USE_CUSTOMER_DATA_NO'\" but is \"'no'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:STORE_CARD_DATA_YES'\" but is \"'yes'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:STORE_CARD_DATA_NO'\" but is \"'no'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:SHIPPING_PROVIDER_DHL'\" but is \"'DHL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:SHIPPING_PROVIDER_BARTOLINI'\" but is \"'BRT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:SETTLE_ACCOUNT_YES'\" but is \"'yes'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:SETTLE_ACCOUNT_NO'\" but is \"'no'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:SETTLE_ACCOUNT_AUTO'\" but is \"'auto'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_APPROVED'\" but is \"'APPROVED'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_REDIRECT'\" but is \"'REDIRECT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_JSON'\" but is \"'JSON'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_VALID'\" but is \"'VALID'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_INVALID'\" but is \"'INVALID'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_BLOCKED'\" but is \"'BLOCKED'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_ENROLLED'\" but is \"'ENROLLED'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_ERROR'\" but is \"'ERROR'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:RESPONSE_TYPE_TIMEOUT'\" but is \"'TIMEOUT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_ENCODING'\" but is \"'UTF-8'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_PREAUTHORIZATION'\" but is \"'preauthorization'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_AUTHORIZATION'\" but is \"'authorization'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_CAPTURE'\" but is \"'capture'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_REFUND'\" but is \"'refund'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_DEBIT'\" but is \"'debit'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_3DSECURE_CHECK'\" but is \"'3dscheck'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_ADDRESSCHECK'\" but is \"'addresscheck'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_CONSUMERSCORE'\" but is \"'consumerscore'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_BANKACCOUNTCHECK'\" but is \"'bankaccountcheck'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_CREDITCARDCHECK'\" but is \"'creditcardcheck'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_GETINVOICE'\" but is \"'getinvoice'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_GETSECURITYINVOICE'\" but is \"'getsecurityinvoice'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_MANAGEMANDATE'\" but is \"'managemandate'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_GETFILE'\" but is \"'getfile'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REQUEST_TYPE_GENERICPAYMENT'\" but is \"'genericpayment'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ONLINE_BANK_TRANSFER_TYPE_INSTANT_MONEY_TRANSFER'\" but is \"'PNT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ONLINE_BANK_TRANSFER_TYPE_GIROPAY'\" but is \"'GPY'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ONLINE_BANK_TRANSFER_TYPE_EPS_ONLINE_BANK_TRANSFER'\" but is \"'EPS'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ONLINE_BANK_TRANSFER_TYPE_POSTFINANCE_EFINANCE'\" but is \"'PFF'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ONLINE_BANK_TRANSFER_TYPE_POSTFINANCE_CARD'\" but is \"'PFC'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ONLINE_BANK_TRANSFER_TYPE_IDEAL'\" but is \"'IDL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ONLINE_BANK_TRANSFER_TYPE_PRZELEWY24'\" but is \"'P24'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ONLINE_BANK_TRANSFER_TYPE_BANCONTACT'\" but is \"'BCT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_INSUFFICIENT_FUNDS'\" but is \"'soc'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_ACCOUNT_EXPIRED'\" but is \"'cka'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_UNKNOWN_ACCOUNT_NAME'\" but is \"'uan'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_NO_DIRECT_DEBIT'\" but is \"'ndd'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_RECALL'\" but is \"'rcl'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_OBJECTION'\" but is \"'obj'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_RETURNS'\" but is \"'ret'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_DEBIT_NOT_COLLECTABLE'\" but is \"'nelv'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_CREDITCARD_CHARGEBACK'\" but is \"'cb'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FAILED_CAUSE_CREDITCARD_NOT_COLLECTABLE'\" but is \"'ncc'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INVOICING_ITEM_TYPE_GOODS'\" but is \"'goods'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INVOICING_ITEM_TYPE_SHIPMENT'\" but is \"'shipment'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INVOICING_ITEM_TYPE_HANDLING'\" but is \"'handling'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INVOICING_ITEM_TYPE_VOUCHER'\" but is \"'voucher'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DELIVERY_MODE_POST'\" but is \"'M'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DELIVERY_MODE_PDF'\" but is \"'P'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DELIVERY_MODE_NONE'\" but is \"'N'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FINANCING_TYPE_BSV'\" but is \"'BSV'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FINANCING_TYPE_CFR'\" but is \"'CFR'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ECOMMERCE_MODE_INTERNET'\" but is \"'internet'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ECOMMERCE_MODE_SECURE3D'\" but is \"'3dsecure'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ECOMMERCE_MODE_MOTO'\" but is \"'moto'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DEBIT_TRANSACTION_TYPE_DIRECT_DEBIT_REFUND_FEE'\" but is \"'RL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DEBIT_TRANSACTION_TYPE_DUNNING_CHARGE'\" but is \"'MG'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DEBIT_TRANSACTION_TYPE_DEFAULT_INTEREST'\" but is \"'VZ'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DEBIT_TRANSACTION_TYPE_SHIPPING_COSTS'\" but is \"'VD'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DEBIT_TRANSACTION_TYPE_PAYMENT_REQUEST'\" but is \"'FD'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DEBIT_TRANSACTION_TYPE_CREDIT'\" but is \"'GT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:DEBIT_TRANSACTION_TYPE_RETURNS'\" but is \"'RT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PERSONAL_GENDER_MALE'\" but is \"'m'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PERSONAL_GENDER_FEMALE'\" but is \"'f'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_VISA'\" but is \"'V'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_MASTERCARD'\" but is \"'M'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_AMEX'\" but is \"'A'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_DINERS'\" but is \"'D'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_JCB'\" but is \"'J'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_MAESTRO_INTERNATIONAL'\" but is \"'O'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_MAESTRO_UK'\" but is \"'U'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_DISCOVER'\" but is \"'C'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CREDITCARD_TYPE_CARTE_BLEUE'\" but is \"'B'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CONSUMER_SCORE_GREEN'\" but is \"'G'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CONSUMER_SCORE_YELLOW'\" but is \"'Y'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CONSUMER_SCORE_RED'\" but is \"'R'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CONSUMER_SCORE_TYPE_INFOSCORE_HARD'\" but is \"'IH'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CONSUMER_SCORE_TYPE_INFOSCORE_ALL'\" but is \"'IA'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CONSUMER_SCORE_TYPE_INFOSCORE_ALL_BONI'\" but is \"'IB'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CAPTURE_MODE_COMPLETED'\" but is \"'completed'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:CAPTURE_MODE_NOTCOMPLETED'\" but is \"'notcompleted'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:AVS_RESULT_A'\" but is \"'A'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:AVS_RESULT_F'\" but is \"'F'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:AVS_RESULT_N'\" but is \"'N'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:AVS_RESULT_U'\" but is \"'U'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:AVS_RESULT_Z'\" but is \"'Z'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:BANK_ACCOUNT_CHECK_TYPE_REGULAR'\" but is \"'0'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:BANK_ACCOUNT_CHECK_TYPE_POS_BLACKLIST'\" but is \"'1'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_1'\" but is \"'1'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_2'\" but is \"'2'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_3'\" but is \"'3'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_4'\" but is \"'4'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_5'\" but is \"'5'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_A'\" but is \"'A'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_S'\" but is \"'S'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_M'\" but is \"'M'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:REMINDER_LEVEL_LVL_I'\" but is \"'I'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_DIVERGENCE_DEVIANT_SURNAME'\" but is \"'L'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_DIVERGENCE_DEVIANT_FIRSTNAME'\" but is \"'F'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_DIVERGENCE_DEVIANT_ADDRESS'\" but is \"'A'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_DIVERGENCE_DEVIANT_DATE_OF_BIRTH'\" but is \"'B'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_PERSONSTATUS_NONE'\" but is \"'NONE'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_PERSONSTATUS_PPB'\" but is \"'PPB'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_PERSONSTATUS_PHB'\" but is \"'PHB'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_PERSONSTATUS_PAB'\" but is \"'PAB'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_PERSONSTATUS_PKI'\" but is \"'PKI'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_PERSONSTATUS_PNZ'\" but is \"'PNZ'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_PERSONSTATUS_PPV'\" but is \"'PPV'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_PERSONSTATUS_PPF'\" but is \"'PPF'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_SCORE_GREEN'\" but is \"'G'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_SCORE_YELLOW'\" but is \"'Y'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_SCORE_RED'\" but is \"'R'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_SECSTATUS_CORRECT'\" but is \"'10'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_SECSTATUS_CORRECTABLE'\" but is \"'20'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_SECSTATUS_NONE_CORRECTABLE'\" but is \"'30'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_TYPE_NONE'\" but is \"'NO'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_TYPE_BASIC'\" but is \"'BA'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:ADDRESS_CHECK_TYPE_PERSON'\" but is \"'PE'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FILE_TYPE_MANDATE'\" but is \"'SEPA_MANDATE'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:FILE_FORMAT_PDF'\" but is \"'PDF'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INVOICE_TITLE_PREFIX_INVOICE'\" but is \"'RG'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INVOICE_TITLE_PREFIX_SECURITY_INVOICE'\" but is \"'RG'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:INVOICE_TITLE_PREFIX_CREDIT_NOTE'\" but is \"'GT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYONE_EXPRESS_CHECKOUT_SET_ACTION'\" but is \"'setexpresscheckout'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION'\" but is \"'getexpresscheckoutdetails'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneApiConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_API:PAYMENT_METHOD_CASH_ON_DELIVERY_OMS'\" but is \"'payoneCashOnDelivery'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:COUNTRY_AT'\" but is \"'AT'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:COUNTRY_DE'\" but is \"'DE'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:COUNTRY_NL'\" but is \"'NL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:COUNTRY_CH'\" but is \"'CH'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PROVIDER_NAME'\" but is \"'Payone'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE'\" but is \"'PAYONE'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_CREDENTIALS'\" but is \"'PAYONE_CREDENTIALS'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_CREDENTIALS_ENCODING'\" but is \"'PAYONE_CREDENTIALS_ENCODING'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_PAYMENT_GATEWAY_URL'\" but is \"'PAYONE_PAYMENT_GATEWAY_URL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_CREDENTIALS_KEY'\" but is \"'PAYONE_CREDENTIALS_KEY'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_CREDENTIALS_MID'\" but is \"'PAYONE_CREDENTIALS_MID'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_CREDENTIALS_AID'\" but is \"'PAYONE_CREDENTIALS_AID'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_CREDENTIALS_PORTAL_ID'\" but is \"'PAYONE_CREDENTIALS_PORTAL_ID'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_REDIRECT_SUCCESS_URL'\" but is \"'PAYONE_REDIRECT_SUCCESS_URL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_REDIRECT_ERROR_URL'\" but is \"'PAYONE_REDIRECT_ERROR_URL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_REDIRECT_BACK_URL'\" but is \"'PAYONE_REDIRECT_BACK_URL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_GREEN_SCORE_AVAILABLE_PAYMENT_METHODS'\" but is \"'PAYONE:PAYONE_GREEN_AVAILABLE_PAYMENT_METHODS'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_YELLOW_SCORE_AVAILABLE_PAYMENT_METHODS'\" but is \"'PAYONE:PAYONE_YELLOW_AVAILABLE_PAYMENT_METHODS'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_RED_SCORE_AVAILABLE_PAYMENT_METHODS'\" but is \"'PAYONE:PAYONE_RED_AVAILABLE_PAYMENT_METHODS'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE'\" but is \"'payonePaypalExpressCheckout'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL'\" but is \"'PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_EXPRESS_CHECKOUT_FAILURE_URL'\" but is \"'PAYONE_EXPRESS_CHECKOUT_PROJECT_FAILURE_URL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_EXPRESS_CHECKOUT_BACK_URL'\" but is \"'PAYONE_EXPRESS_CHECKOUT_PROJECT_BACK_URL'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_EMPTY_SEQUENCE_NUMBER'\" but is \"'PAYONE_EMPTY_SEQUENCE_NUMBER'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_TXACTION_APPOINTED'\" but is \"'appointed'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_MODE'\" but is \"'MODE'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_MODE_TEST'\" but is \"'test'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:PAYONE_MODE_LIVE'\" but is \"'live'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:GLOSSARY_FILE_PATH'\" but is \"'Business/Internal/glossary.yml'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE:HOST_YVES'\" but is \"'HOST_YVES'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_APPOINTED'\" but is \"'appointed'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_CAPTURE'\" but is \"'capture'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_PAID'\" but is \"'paid'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_UNDERPAID'\" but is \"'underpaid'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_CANCELATION'\" but is \"'cancelation'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_REFUND'\" but is \"'refund'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_DEBIT'\" but is \"'debit'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_REMINDER'\" but is \"'reminder'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_VAUTHORIZATION'\" but is \"'vauthorization'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_VSETTLEMENT'\" but is \"'vsettlement'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_TRANSFER'\" but is \"'transfer'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:TXACTION_INVOICE'\" but is \"'invoice'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:STATUS_NEW'\" but is \"'new'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:STATUS_REFUND_APPROVED'\" but is \"'refund approved'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:STATUS_REFUND_FAILED'\" but is \"'refund failed'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:STATUS_CAPTURE_APPROVED'\" but is \"'capture approved'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Shared/Payone/PayoneTransactionStatusConstants.php",
+        "description": "\n      Shared Module Constants: The constant value is expected to be \"'PAYONE_TRANSACTION_STATUS:STATUS_CAPTURE_FAILED'\" but is \"'capture failed'\". This violates the rule \"The modules' *Constants interfaces must only contain constants to be used with env config. Their values must be exactly the same as the const key prefixed with module name.\"\n    ",
+        "rule": "ModuleConstantsFormingConstantValuesRule",
+        "ruleset": "Spryker",
+        "priority": "2"
     }
 ]
