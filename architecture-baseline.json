@@ -28,8 +28,29 @@
         "priority": "2"
     },
     {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Zed/Payone/Dependency/Facade/PayoneToGlossaryFacadeBridge.php",
+        "description": "\n      Bridges: The bridge has incorrect method 'createTranslation' signature. That violates the rule \"All bridge methods must have exactly the same signature as their interface\"\n    ",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
         "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Zed/Payone/Dependency/Facade/PayoneToGlossaryFacadeInterface.php",
-        "description": "\n      Bridges: The bridge interface has incorrect method 'createTranslation' signature. That violates the rule \"All bridge methods must have exactly the same signature as their interface\"\n    ",
+        "description": "\n      Bridges: The bridge interface has incorrect method 'createAndTouchTranslation' signature. That violates the rule \"All bridge methods must have exactly the same signature as their interface\"\n    ",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Zed/Payone/Dependency/Facade/PayoneToGlossaryFacadeInterface.php",
+        "description": "\n      Bridges: The bridge interface has incorrect method 'hasTranslation' signature. That violates the rule \"All bridge methods must have exactly the same signature as their interface\"\n    ",
+        "rule": "BridgeMethodsRule",
+        "ruleset": "Spryker",
+        "priority": "2"
+    },
+    {
+        "fileName": "/vendor/spryker-eco/payone/src/SprykerEco/Zed/Payone/Dependency/Facade/PayoneToGlossaryFacadeInterface.php",
+        "description": "\n      Bridges: The bridge interface has incorrect method 'updateAndTouchTranslation' signature. That violates the rule \"All bridge methods must have exactly the same signature as their interface\"\n    ",
         "rule": "BridgeMethodsRule",
         "ruleset": "Spryker",
         "priority": "2"
