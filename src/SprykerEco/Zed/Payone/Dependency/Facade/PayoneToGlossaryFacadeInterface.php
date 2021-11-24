@@ -61,7 +61,7 @@ interface PayoneToGlossaryFacadeInterface
 
     /**
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param string $value
      * @param bool $isActive
      *
@@ -71,7 +71,7 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createAndTouchTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true): TranslationTransfer;
+    public function createAndTouchTranslation($keyName, LocaleTransfer $localeTransfer, $value, $isActive = true): TranslationTransfer;
 
     /**
      * @param string $keyName
@@ -93,11 +93,11 @@ interface PayoneToGlossaryFacadeInterface
      * @api
      *
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer|null $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
      *
      * @return bool
      */
-    public function hasTranslation($keyName, ?LocaleTransfer $locale = null): bool;
+    public function hasTranslation($keyName, ?LocaleTransfer $localeTransfer = null): bool;
 
     /**
      * @param string $keyName
@@ -131,7 +131,7 @@ interface PayoneToGlossaryFacadeInterface
      * @api
      *
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param string $value
      * @param bool $isActive
      *
@@ -139,5 +139,5 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function updateAndTouchTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true): TranslationTransfer;
+    public function updateAndTouchTranslation($keyName, LocaleTransfer $localeTransfer, $value, $isActive = true): TranslationTransfer;
 }
