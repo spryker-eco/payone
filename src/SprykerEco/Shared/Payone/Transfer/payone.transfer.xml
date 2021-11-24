@@ -254,6 +254,8 @@
         <property name="payments" type="Payment[]" singular="payment"/>
         <property name="items" type="Item[]" singular="item"/>
         <property name="expenses" type="Expense[]" singular="expense"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
     </transfer>
 
     <transfer name="Item">
@@ -261,14 +263,28 @@
         <property name="sumPriceToPayAggregation" type="int"/>
         <property name="unitPriceToPayAggregation" type="int"/>
         <property name="unitGrossPrice" type="int"/>
+        <property name="sku" type="string"/>
+        <property name="name" type="string"/>
+        <property name="taxRate" type="float"/>
+        <property name="idSalesOrderItem" type="int"/>
+        <property name="stateHistory" type="ItemState[]" singular="stateHistory"/>
+        <property name="refundableAmount" type="int"/>
+        <property name="canceledAmount" type="int"/>
     </transfer>
 
     <transfer name="Expense">
         <property name="sumGrossPrice" type="int"/>
+        <property name="type" type="string"/>
+        <property name="unitGrossPrice" type="int"/>
+        <property name="quantity" type="int"/>
+        <property name="name" type="string"/>
+        <property name="taxRate" type="float"/>
+        <property name="refundableAmount" type="int"/>
     </transfer>
 
     <transfer name="Totals">
         <property name="grandTotal" type="int"/>
+        <property name="discountTotal" type="int"/>
     </transfer>
 
     <transfer name="CheckoutRequest">
@@ -385,6 +401,8 @@
         <property name="successIncludePath" type="string"/>
         <property name="paymentProvider" type="string"/>
         <property name="amount" type="int"/>
+        <property name="paymentSelection" type="string"/>
+        <property name="paymentMethod" type="string"/>
     </transfer>
 
     <transfer name="PayonePaypalExpressCheckout">
@@ -510,6 +528,16 @@
         <property name="isGuestExpressCheckout" type="bool"/>
         <property name="consumerScore" type="string"/>
         <property name="isAddressValid" type="bool"/>
+        <property name="payment" type="Payment"/>
+        <property name="customer" type="Customer"/>
+        <property name="billingAddress" type="Address"/>
+        <property name="orderReference" type="string"/>
+        <property name="totals" type="Totals"/>
+        <property name="shipment" type="Shipment"/>
+        <property name="shippingAddress" type="Address"/>
+        <property name="billingSameAsShipping" type="bool"/>
+        <property name="items" type="Item[]" singular="Item"/>
+        <property name="currency" type="Currency"/>
     </transfer>
 
     <transfer name="AddressCheckResponse">
@@ -545,6 +573,8 @@
     <!--Response container replacement related transfers end-->
 
     <transfer name="Refund">
+        <property name="amount" type="int"/>
+        <property name="expenses" type="Expense[]" singular="Expense"/>
     </transfer>
 
     <transfer name="KeyTranslation">
@@ -554,41 +584,91 @@
     </transfer>
 
     <transfer name="CheckoutResponse">
+        <property name="saveOrder" type="SaveOrder"/>
+        <property name="isExternalRedirect" type="bool"/>
+        <property name="redirectUrl" type="string"/>
+        <property name="errors" type="CheckoutError[]" singular="error"/>
+        <property name="isSuccess" type="bool"/>
     </transfer>
 
     <transfer name="SaveOrder">
+        <property name="idSalesOrder" type="int"/>
+        <property name="orderItems" type="Item[]" singular="orderItem"/>
     </transfer>
 
     <transfer name="PaymentMethods">
+        <property name="methods" type="PaymentMethod[]" singular="PaymentMethod"/>
     </transfer>
 
     <transfer name="CheckoutError">
+        <property name="message" type="string"/>
+        <property name="errorCode" type="int"/>
     </transfer>
 
     <transfer name="PaymentMethod">
+        <property name="methodName" type="string"/>
     </transfer>
 
     <transfer name="Customer">
+        <property name="idCustomer" type="int"/>
+        <property name="email" type="string"/>
+        <property name="dateOfBirth" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="isGuest" type="bool"/>
+        <property name="lastName" type="string"/>
+        <property name="company" type="string"/>
     </transfer>
 
     <transfer name="Address">
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="address1" type="string"/>
+        <property name="address2" type="string"/>
+        <property name="address3" type="string"/>
+        <property name="company" type="string"/>
+        <property name="city" type="string"/>
+        <property name="zipCode" type="string"/>
+        <property name="state" type="string"/>
+        <property name="iso2Code" type="string"/>
+        <property name="email" type="string"/>
+        <property name="phone" type="string"/>
+        <property name="salutation" type="string"/>
     </transfer>
 
     <transfer name="ShipmentMethod">
+        <property name="carrierName" type="string"/>
+        <property name="storeCurrencyPrice" type="int"/>
+        <property name="idShipmentMethod" type="int"/>
     </transfer>
 
     <transfer name="Shipment">
+        <property name="method" type="ShipmentMethod"/>
+        <property name="shipmentSelection" type="string"/>
     </transfer>
 
     <transfer name="PersonalData">
     </transfer>
 
     <transfer name="ShipmentMethods">
+        <property name="methods" type="ShipmentMethod[]" singular="method"/>
     </transfer>
 
     <transfer name="Store">
+        <property name="countries" type="array" singular="country"/>
     </transfer>
 
     <transfer name="Translation">
+    </transfer>
+
+    <transfer name="ShipmentMethodsCollection">
+        <property name="shipmentMethods" type="ShipmentMethods[]" singular="shipmentMethods"/>
+    </transfer>
+
+    <transfer name="Currency">
+        <property name="code" type="string"/>
+    </transfer>
+
+    <transfer name="ItemState">
+        <property name="name" type="string"/>
     </transfer>
 </transfers>

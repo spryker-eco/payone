@@ -106,23 +106,21 @@ class RiskCheckMapper implements RiskCheckMapperInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface $container
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    protected function mapDefaultContainerParams(ContainerInterface $container): ContainerInterface
+    protected function mapDefaultContainerParams(AbstractRequestContainer $container): AbstractRequestContainer
     {
-        if ($container instanceof AbstractRequestContainer) {
-            $container->setMid($this->standardParameters->getMid());
-            $container->setAid($this->standardParameters->getAid());
-            $container->setPortalid($this->standardParameters->getPortalId());
-            $container->setKey(md5($this->standardParameters->getKey()));
-            $container->setMode($this->modeDetector->getMode());
-            $container->setIntegratorName(PayoneApiConstants::INTEGRATOR_NAME_SPRYKER);
-            $container->setIntegratorVersion(PayoneApiConstants::INTEGRATOR_VERSION_3_0_0);
-            $container->setSolutionName(PayoneApiConstants::SOLUTION_NAME_SPRYKER);
-            $container->setSolutionVersion(PayoneApiConstants::SOLUTION_VERSION_3_0_0);
-        }
+        $container->setMid($this->standardParameters->getMid());
+        $container->setAid($this->standardParameters->getAid());
+        $container->setPortalid($this->standardParameters->getPortalId());
+        $container->setKey(md5($this->standardParameters->getKey()));
+        $container->setMode($this->modeDetector->getMode());
+        $container->setIntegratorName(PayoneApiConstants::INTEGRATOR_NAME_SPRYKER);
+        $container->setIntegratorVersion(PayoneApiConstants::INTEGRATOR_VERSION_3_0_0);
+        $container->setSolutionName(PayoneApiConstants::SOLUTION_NAME_SPRYKER);
+        $container->setSolutionVersion(PayoneApiConstants::SOLUTION_VERSION_3_0_0);
 
         return $container;
     }
