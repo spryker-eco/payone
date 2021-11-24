@@ -253,9 +253,9 @@
         <property name="totals" type="Totals"/>
         <property name="payments" type="Payment[]" singular="payment"/>
         <property name="items" type="Item[]" singular="item"/>
-        <property name="expenses" type="Expense[]" singular="expense"/>
         <property name="firstName" type="string"/>
         <property name="lastName" type="string"/>
+        <property name="expenses" type="Expense[]" singular="expense"/>
     </transfer>
 
     <transfer name="Item">
@@ -536,7 +536,6 @@
         <property name="shipment" type="Shipment"/>
         <property name="shippingAddress" type="Address"/>
         <property name="billingSameAsShipping" type="bool"/>
-        <property name="items" type="Item[]" singular="Item"/>
         <property name="currency" type="Currency"/>
     </transfer>
 
@@ -597,7 +596,6 @@
     </transfer>
 
     <transfer name="PaymentMethods">
-        <property name="methods" type="PaymentMethod[]" singular="PaymentMethod"/>
     </transfer>
 
     <transfer name="CheckoutError">
