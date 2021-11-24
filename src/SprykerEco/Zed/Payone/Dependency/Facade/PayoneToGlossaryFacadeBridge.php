@@ -63,28 +63,28 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
 
     /**
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param string $value
      * @param bool $isActive
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true): TranslationTransfer
+    public function createTranslation($keyName, LocaleTransfer $localeTransfer, $value, $isActive = true): TranslationTransfer
     {
-        return $this->glossaryFacade->createTranslation($keyName, $locale, $value, $isActive);
+        return $this->glossaryFacade->createTranslation($keyName, $localeTransfer, $value, $isActive);
     }
 
     /**
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param string $value
      * @param bool $isActive
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createAndTouchTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true): TranslationTransfer
+    public function createAndTouchTranslation($keyName, LocaleTransfer $localeTransfer, $value, $isActive = true): TranslationTransfer
     {
-        return $this->glossaryFacade->createAndTouchTranslation($keyName, $locale, $value, $isActive);
+        return $this->glossaryFacade->createAndTouchTranslation($keyName, $localeTransfer, $value, $isActive);
     }
 
     /**
@@ -111,13 +111,13 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      * @api
      *
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer|null $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
      *
      * @return bool
      */
-    public function hasTranslation($keyName, ?LocaleTransfer $locale = null): bool
+    public function hasTranslation($keyName, ?LocaleTransfer $localeTransfer = null): bool
     {
-        return $this->glossaryFacade->hasTranslation($keyName, $locale);
+        return $this->glossaryFacade->hasTranslation($keyName, $localeTransfer);
     }
 
     /**
@@ -164,14 +164,14 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      * @api
      *
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param string $value
      * @param bool $isActive
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function updateAndTouchTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true): TranslationTransfer
+    public function updateAndTouchTranslation($keyName, LocaleTransfer $localeTransfer, $value, $isActive = true): TranslationTransfer
     {
-        return $this->glossaryFacade->updateAndTouchTranslation($keyName, $locale, $value, $isActive);
+        return $this->glossaryFacade->updateAndTouchTranslation($keyName, $localeTransfer, $value, $isActive);
     }
 }
