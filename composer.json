@@ -40,7 +40,8 @@
         "spryker/testify": "*",
         "spryker/monolog": "^2.0.4",
         "spryker/queue": "^1.5.0",
-        "spryker/transfer": "^3.25.0"
+        "spryker/transfer": "^3.25.0",
+        "codeception/module-asserts": "*"
     },
     "suggest": {
         "spryker/application": "If you want to use Application plugins you need to install spryker/application.",
