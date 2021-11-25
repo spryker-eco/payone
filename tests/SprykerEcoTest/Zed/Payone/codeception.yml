@@ -24,7 +24,8 @@ suites:
                 - \SprykerTest\Shared\Config\Helper\ConfigInit
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                     projectNamespaces:
-                        - SprykerEcoTest
+                        - 'SprykerEco'
+                        - 'SprykerEcoTest'
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
                 - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
