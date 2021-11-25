@@ -7,17 +7,6 @@ on:
             - master
     workflow_dispatch:
 
-env:
-    SPRYKER_TESTING_ENABLED: 1
-    APPLICATION_STORE: DE
-    POSTGRES_PORT: 5433
-    DB_USER: postgres
-    DB_NAME: DE_test_zed
-    DB_PASSWORD: pwd
-    MODULE_DIR: module
-    SHOP_DIR: current
-    MODULE_NAME: payone
-
 jobs:
     validation:
         name: "Validation"
