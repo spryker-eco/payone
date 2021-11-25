@@ -32,7 +32,7 @@ jobs:
         env:
             APPLICATION_ENV: devtest
             APPLICATION_STORE: DE
-            PROJECT: ${{ env.MODULE_NAME }}
+            PROJECT: payone
 
         steps:
             -   uses: actions/checkout@v2
