@@ -1,4 +1,9 @@
 parameters:
+    level: 8
+    paths:
+        - src/
+    bootstrapFiles:
+        - tests/bootstrap.php
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
     ignoreErrors:
@@ -19,4 +24,3 @@ parameters:
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
         - src/SprykerEco/Yves/Payone/Form/Constraint
-
