@@ -11,6 +11,7 @@ env:
     SPRYKER_TESTING_ENABLED: 1
     APPLICATION_STORE: DE
     POSTGRES_PORT: 5433
+    SPRYKER_DB_HOST: localhost
     DB_USER: postgres
     DB_NAME: DE_test_zed
     DB_PASSWORD: pwd
