@@ -124,13 +124,36 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
-            -   name: Validate composer.json and composer.lock
-                run: composer validate
-
-            -   name: Get Composer Cache Directory
+            -   name: Configure sysctl limits
+                run: |
+                    sudo swapoff -a
+                    sudo sysctl -w vm.swappiness=1
+                    sudo sysctl -w fs.file-max=262144
+                    sudo sysctl -w vm.max_map_count=262144
+            -   name: Composer get cache directory
                 id: composer-cache
                 run: |
                     echo "::set-output name=dir::$(composer config cache-files-dir)"
+            -   name: Composer cache
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-composer-
+            -   name: Composer validate
+                run: composer validate
+
+            -   name: Composer install
+                run: |
+                    composer --version
+                    composer install
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: mbstring, intl
+                    tools: composer:v2
 
             -   uses: actions/cache@v2
                 with:
