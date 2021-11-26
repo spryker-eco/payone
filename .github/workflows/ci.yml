@@ -18,13 +18,42 @@ env:
     SHOP_DIR: current
     MODULE_NAME: payone
     SPRYKER_DB_ENGINE: mysql
-    SPRYKER_DB_HOST: database
+    SPRYKER_DB_HOST: 127.0.0.1
     SPRYKER_DB_PORT: 3306
-    SPRYKER_DB_DATABASE: DE_test_zed
-    SPRYKER_DB_USERNAME: spryker
+    SPRYKER_DB_DATABASE: eu-docker
+    SPRYKER_DB_USERNAME: root
     SPRYKER_DB_PASSWORD: secret
+    APPLICATION_ENV: 'development'
+    PROJECT: 'Braintree'
+    DATABASE_VERSION: 10.2
+    DATABASE_HOST: 127.0.0.1
+    DATABASE_PORT: 3306
+    DATABASE_NAME: eu-docker
+    DATABASE_USERNAME: root
+    DATABASE_PASSWORD: secret
+    DATABASE_ROOT_PASSWORD: secret
+    DATABASE_ALLOW_EMPTY_PASSWORD: false
+    DATABASE_CHARACTER_SET: utf8
+    DATABASE_COLLATE: utf8_general_ci
 
 jobs:
+    setup:
+        name: Setup MariaDB
+        runs-on: ubuntu-18.04
+
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: getong/mariadb-action@v1.1
+                with:
+                    host port: ${{ env.DATABASE_PORT }}
+                    container port: ${{ env.DATABASE_PORT }}
+                    character set server: ${{ env.DATABASE_CHARACTER_SET }}
+                    collation server: ${{ env.DATABASE_COLLATE }}
+                    mariadb version: ${{ env.DATABASE_VERSION }}
+                    mysql database: ${{ env.DATABASE_NAME }}
+                    mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
+                    mysql user: ${{ env.DATABASE_USERNAME }}
+                    mysql password: ${{ env.DATABASE_PASSWORD }}
     test_pgsql:
         name: "Test / PostgreSQL"
         runs-on: ubuntu-20.04
