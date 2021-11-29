@@ -7,6 +7,8 @@ parameters:
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
     ignoreErrors:
+        - '#Expression on left side of ?? is not nullable#'
+        - '#Parameter .+ of method .+ has invalid type .+#'
         - '#.+Generated\\Shared\\Transfer.+#'
         - '#Parameter .+ of method .+ has invalid typehint type Orm\\Zed\\Payone\\Persistence\\.+#'
         - '#Return typehint of method .+ has invalid type Orm\\Zed\\Payone\\Persistence\\.+#'
