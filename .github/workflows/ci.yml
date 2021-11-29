@@ -16,9 +16,11 @@ env:
     DATABASE_COLLATE: utf8_general_ci
 
 on:
+    pull_request:
     push:
         branches:
-            - 'master'
+            - master
+    workflow_dispatch:
 
 jobs:
     setup:
