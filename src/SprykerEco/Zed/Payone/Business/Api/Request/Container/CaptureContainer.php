@@ -90,7 +90,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param ?int $sequencenumber
+     * @param int|null $sequencenumber
      *
      * @return void
      */
