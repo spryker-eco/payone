@@ -97,7 +97,7 @@ jobs:
                   extensions: mbstring, intl, pdo_mysql
 
             - name: Composer prefer lowest
-              run: composer lowest-setup
+              run: composer lowest-update-setup
 
             - name: Run PHPStan (currently not running properly)
               run: composer stan || true
