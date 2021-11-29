@@ -12,7 +12,7 @@ coverage:
     remote: false
     whitelist: { include: ['../../../../src/*'] }
 
-bootstrap: ../../../bootstrap.php
+#bootstrap: ../../../bootstrap.php
 
 suites:
     Zed:
