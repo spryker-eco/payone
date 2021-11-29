@@ -90,11 +90,11 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param int $sequencenumber
+     * @param ?int $sequencenumber
      *
      * @return void
      */
-    public function setSequenceNumber(int $sequencenumber): void
+    public function setSequenceNumber(?int $sequencenumber): void
     {
         $this->sequencenumber = $sequencenumber;
     }
