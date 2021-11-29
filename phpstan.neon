@@ -14,7 +14,7 @@ parameters:
         - '#Property .+ does not accept .+#'
         - '#PHPDoc type .+ of property .+ is not covariant with PHPDoc type .+ of overridden property .+#'
         - '#Property .+ does not accept .+#'
-        - '#Property .+ in isset() is not nullable#'
+        - '#Property .+ in .+ is not nullable#'
         - '#Strict comparison using === between string and null will always evaluate to false\.#'
         - '#.+Generated\\Shared\\Transfer.+#'
         - '#Parameter .+ of method .+ has invalid typehint type Orm\\Zed\\Payone\\Persistence\\.+#'
