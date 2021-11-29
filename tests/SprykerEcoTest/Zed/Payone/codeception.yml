@@ -12,8 +12,6 @@ coverage:
     remote: false
     whitelist: { include: ['../../../../src/*'] }
 
-#bootstrap: ../../../bootstrap.php
-
 suites:
     Zed:
         path: .
