@@ -17,43 +17,8 @@ env:
     MODULE_DIR: module
     SHOP_DIR: current
     MODULE_NAME: payone
-    SPRYKER_DB_ENGINE: mysql
-    SPRYKER_DB_HOST: 127.0.0.1
-    SPRYKER_DB_PORT: 3306
-    SPRYKER_DB_DATABASE: eu-docker
-    SPRYKER_DB_USERNAME: root
-    SPRYKER_DB_PASSWORD: secret
-    APPLICATION_ENV: 'development'
-    PROJECT: 'Braintree'
-    DATABASE_VERSION: 10.2
-    DATABASE_HOST: 127.0.0.1
-    DATABASE_PORT: 3306
-    DATABASE_NAME: eu-docker
-    DATABASE_USERNAME: root
-    DATABASE_PASSWORD: secret
-    DATABASE_ROOT_PASSWORD: secret
-    DATABASE_ALLOW_EMPTY_PASSWORD: false
-    DATABASE_CHARACTER_SET: utf8
-    DATABASE_COLLATE: utf8_general_ci
 
 jobs:
-    setup:
-        name: Setup MariaDB
-        runs-on: ubuntu-18.04
-
-        steps:
-            -   uses: actions/checkout@v2
-            -   uses: getong/mariadb-action@v1.1
-                with:
-                    host port: ${{ env.DATABASE_PORT }}
-                    container port: ${{ env.DATABASE_PORT }}
-                    character set server: ${{ env.DATABASE_CHARACTER_SET }}
-                    collation server: ${{ env.DATABASE_COLLATE }}
-                    mariadb version: ${{ env.DATABASE_VERSION }}
-                    mysql database: ${{ env.DATABASE_NAME }}
-                    mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
-                    mysql user: ${{ env.DATABASE_USERNAME }}
-                    mysql password: ${{ env.DATABASE_PASSWORD }}
     test_pgsql:
         name: "Test / PostgreSQL"
         runs-on: ubuntu-20.04
@@ -72,38 +37,25 @@ jobs:
                 image: redis
                 ports:
                     - 6379:6379
-            mariadb:
-                image: mariadb:10.5
+            postgres:
+                image: postgres:12
+                env:
+                    POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
+                    DB_USER: ${{ env.DB_USER }}
+                    DB_NAME: ${{ env.DB_NAME }}
+                ports:
+                    - 5433:5432
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
         env:
             PRODUCT_NAME: ${{ matrix.product }}
             APPLICATION_ENV: ci.pgsql
         steps:
             -   uses: actions/checkout@v2
 
-            -   name: Configure sysctl limits
-                run: |
-                    sudo swapoff -a
-                    sudo sysctl -w vm.swappiness=1
-                    sudo sysctl -w fs.file-max=262144
-                    sudo sysctl -w vm.max_map_count=262144
-            -   name: Composer get cache directory
-                id: composer-cache
-                run: |
-                    echo "::set-output name=dir::$(composer config cache-files-dir)"
-            -   name: Composer cache
-                uses: actions/cache@v2
-                with:
-                    path: ${{ steps.composer-cache.outputs.dir }}
-                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: |
-                        ${{ runner.os }}-composer-
-            -   name: Composer validate
-                run: composer validate
-
-            -   name: Composer install
-                run: |
-                    composer --version
-                    composer install
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
@@ -116,11 +68,57 @@ jobs:
                 with:
                     stack-version: 7.6.0
 
-            -   name: Run tests
-                run: composer test
+            -   name: Install eco-ci
+                run: git clone https://github.com/spryker-eco/eco-ci.git ecoci
 
-            -   name: Run PHPStan
-                run: composer stan
+            -   name: Execute test script
+                run: ./ecoci/build/ga.sh ${{ matrix.composer_preference }}
+    test_mariadb:
+        name: "Test / MariaDB"
+        runs-on: ubuntu-20.04
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [ '7.4', ]
+                product: [ 'suite' ]
+                composer_preference: [ '', '--prefer-lowest' ]
+        services:
+            rabbitmq:
+                image: rabbitmq
+                ports:
+                    - 5672:5672
+            redis:
+                image: redis
+                ports:
+                    - 6379:6379
+        env:
+            PRODUCT_NAME: ${{ matrix.product }}
+            APPLICATION_ENV: ci.mysql
+        steps:
+            -   uses: actions/checkout@v2
 
-            -   name: Run CodeStyle checks
-                run: composer cs-check
+            -   uses: getong/mariadb-action@v1.1
+                with:
+                    character set server: 'utf8'
+                    collation server: 'utf8_general_ci'
+                    mariadb version: '10.3'
+                    mysql database: ${{ env.DB_NAME }}
+                    mysql root password: ${{ env.DB_PASSWORD }}
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: mbstring, intl
+                    tools: composer:v2
+
+            -   name: 'Run Elasticsearch'
+                uses: elastic/elastic-github-actions/elasticsearch@master
+                with:
+                    stack-version: 7.6.0
+
+            -   name: Install eco-ci
+                run: git clone https://github.com/spryker-eco/eco-ci.git ecoci
+
+            -   name: Execute test script
+                run: ./ecoci/build/ga.sh ${{ matrix.composer_preference }}

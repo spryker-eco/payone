@@ -22,4 +22,4 @@ coverage:
     whitelist:
         include:
             - 'src/*'
-bootstrap: bootstrap.php
+#bootstrap: bootstrap.php
