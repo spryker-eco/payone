@@ -27,7 +27,7 @@ class GetFileResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setDATA($DATA): void
+    public function setDATA(string $DATA): void
     {
         $this->DATA = $DATA;
     }

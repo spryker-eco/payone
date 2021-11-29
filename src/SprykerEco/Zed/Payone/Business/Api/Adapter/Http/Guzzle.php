@@ -29,7 +29,7 @@ class Guzzle extends AbstractHttpAdapter
      * @param string $paymentGatewayUrl
      * @param \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface $logger
      */
-    public function __construct($paymentGatewayUrl, ApiCallLogWriterInterface $logger)
+    public function __construct(string $paymentGatewayUrl, ApiCallLogWriterInterface $logger)
     {
         parent::__construct($paymentGatewayUrl);
 

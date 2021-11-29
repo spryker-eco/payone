@@ -44,7 +44,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandate_identification): void
+    public function setMandateIdentification(string $mandate_identification): void
     {
         $this->mandate_identification = $mandate_identification;
     }
@@ -62,7 +62,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateStatus($mandate_status): void
+    public function setMandateStatus(string $mandate_status): void
     {
         $this->mandate_status = $mandate_status;
     }
@@ -80,7 +80,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateText($mandate_text): void
+    public function setMandateText(string $mandate_text): void
     {
         $this->mandate_text = $mandate_text;
     }
@@ -98,7 +98,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorIdentifier($creditor_identifier): void
+    public function setCreditorIdentifier(string $creditor_identifier): void
     {
         $this->creditor_identifier = $creditor_identifier;
     }
@@ -116,7 +116,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBic($bic): void
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }
@@ -134,7 +134,7 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setIban($iban): void
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }

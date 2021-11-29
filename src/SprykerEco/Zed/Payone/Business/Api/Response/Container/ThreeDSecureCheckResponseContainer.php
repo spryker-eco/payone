@@ -49,7 +49,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setAcsurl($acsurl): void
+    public function setAcsurl(string $acsurl): void
     {
         $this->acsurl = $acsurl;
     }
@@ -67,7 +67,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMd($md): void
+    public function setMd(string $md): void
     {
         $this->md = $md;
     }
@@ -85,7 +85,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPareq($pareq): void
+    public function setPareq(string $pareq): void
     {
         $this->pareq = $pareq;
     }
@@ -103,7 +103,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPseudocardpan($pseudocardpan): void
+    public function setPseudocardpan(string $pseudocardpan): void
     {
         $this->pseudocardpan = $pseudocardpan;
     }
@@ -121,7 +121,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTermurl($termurl): void
+    public function setTermurl(string $termurl): void
     {
         $this->termurl = $termurl;
     }
@@ -139,7 +139,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTruncatedcardpan($truncatedcardpan): void
+    public function setTruncatedcardpan(string $truncatedcardpan): void
     {
         $this->truncatedcardpan = $truncatedcardpan;
     }
@@ -157,7 +157,7 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setXid($xid): void
+    public function setXid(string $xid): void
     {
         $this->xid = $xid;
     }

@@ -65,7 +65,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testAuthorizationResponseContainer()
+    public function testAuthorizationResponseContainer(): void
     {
         $params = array_merge($this->getStandardResponseParams(), $this->getAuthorizationResponseParams());
         $container = new AuthorizationResponseContainer($params);
@@ -94,7 +94,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    protected function getAuthorizationResponseParams()
+    protected function getAuthorizationResponseParams(): array
     {
         return [
             'clearingamount' => 'clearingamount',
@@ -121,7 +121,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testCaptureResponseContainer()
+    public function testCaptureResponseContainer(): void
     {
         $params = array_merge($this->getStandardResponseParams(), $this->getCaptureResponseParams());
         $container = new CaptureResponseContainer($params);
@@ -159,7 +159,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    protected function getCaptureResponseParams()
+    protected function getCaptureResponseParams(): array
     {
         return [
             'clearingamount' => 'clearingamount',
@@ -194,7 +194,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testDebitResponseContainer()
+    public function testDebitResponseContainer(): void
     {
         $params = array_merge($this->getStandardResponseParams(), $this->getDebitResponseParams());
 
@@ -209,7 +209,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    protected function getDebitResponseParams()
+    protected function getDebitResponseParams(): array
     {
         return [
             'settleaccount' => 'settleaccount',
@@ -220,7 +220,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testRefundResponseContainer()
+    public function testRefundResponseContainer(): void
     {
         $params = array_merge($this->getStandardResponseParams(), $this->getRefundResponseParams());
 
@@ -235,7 +235,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    protected function getRefundResponseParams()
+    protected function getRefundResponseParams(): array
     {
         return [
             'protectresultavs' => 'protectresultavs',
@@ -246,7 +246,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    protected function getStandardResponseParams()
+    protected function getStandardResponseParams(): array
     {
         $params = [
             'customermessage' => 'customermessage',
@@ -264,7 +264,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    protected function assertStandardParams(AbstractResponseContainer $container)
+    protected function assertStandardParams(AbstractResponseContainer $container): void
     {
         $this->assertEquals('customermessage', $container->getCustomermessage());
         $this->assertEquals('errorcode', $container->getErrorcode());

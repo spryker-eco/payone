@@ -61,7 +61,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount): void
+    public function setBankAccount(string $bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
@@ -79,7 +79,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode): void
+    public function setBankCode(string $bankcode): void
     {
         $this->bankcode = $bankcode;
     }
@@ -97,7 +97,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry): void
+    public function setBankCountry(string $bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
@@ -115,7 +115,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCheckType($checktype): void
+    public function setCheckType(string $checktype): void
     {
         $this->checktype = $checktype;
     }
@@ -133,7 +133,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setIban($iban): void
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
@@ -151,7 +151,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBic($bic): void
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }

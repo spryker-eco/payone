@@ -9,6 +9,7 @@ namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
 use Generated\Shared\DataBuilder\PayoneInitPaypalExpressCheckoutRequestBuilder;
 use Generated\Shared\Transfer\PaymentTransfer;
+use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\PayoneConfig;
@@ -20,7 +21,7 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    public function testInitPaypalExpressCheckoutWithSuccessResponse()
+    public function testInitPaypalExpressCheckoutWithSuccessResponse(): void
     {
         $adapter = new SetExpressCheckoutAdapterMock();
         $facadeMock = $this->createFacadeMock($adapter);
@@ -29,7 +30,7 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
 
         $this->assertInstanceOf(
             '\Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer',
-            $response
+            $response,
         );
 
         $this->assertNotEmpty($response->getWorkOrderId());
@@ -38,14 +39,14 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
         $this->assertEmpty($response->getErrorMessage());
         $this->assertEquals(
             $response->getStatus(),
-            PayoneApiConstants::RESPONSE_TYPE_REDIRECT
+            PayoneApiConstants::RESPONSE_TYPE_REDIRECT,
         );
     }
 
     /**
      * @return void
      */
-    public function testInitPaypalExpressCheckoutWithFailureResponse()
+    public function testInitPaypalExpressCheckoutWithFailureResponse(): void
     {
         $adapter = new SetExpressCheckoutAdapterMock();
         $adapter->setExpectSuccess(false);
@@ -56,7 +57,7 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
 
         $this->assertInstanceOf(
             '\Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer',
-            $response
+            $response,
         );
 
         $this->assertNotEmpty($response->getErrorCode());
@@ -66,7 +67,7 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
     /**
      * @return \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer
      */
-    protected function createExpressCheckoutRequestTransfer()
+    protected function createExpressCheckoutRequestTransfer(): PayoneInitPaypalExpressCheckoutRequestTransfer
     {
         $requestTransfer = (new PayoneInitPaypalExpressCheckoutRequestBuilder())->build();
 

@@ -92,7 +92,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment($idSalesOrder): AuthorizationResponseTransfer;
+    public function preAuthorizePayment(int $idSalesOrder): AuthorizationResponseTransfer;
 
     /**
      * Specification:
@@ -117,7 +117,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
-    public function debitPayment($idPayment): DebitResponseTransfer;
+    public function debitPayment(int $idPayment): DebitResponseTransfer;
 
     /**
      * Specification:
@@ -325,7 +325,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentNotificationAvailable($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentNotificationAvailable(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * Specification:
@@ -338,7 +338,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentPaid($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentPaid(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * Specification:
@@ -351,7 +351,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentOverpaid($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentOverpaid(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * Specification:
@@ -364,7 +364,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentUnderpaid($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentUnderpaid(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * Specification:
@@ -377,7 +377,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentRefund($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentRefund(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * Specification:
@@ -390,7 +390,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentAppointed($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentAppointed(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * Specification:
@@ -403,7 +403,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentOther($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentOther(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * Specification:
@@ -416,7 +416,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentCapture($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentCapture(int $idSalesOrder, int $idSalesOrderItem): bool;
 
     /**
      * Specification:
@@ -489,7 +489,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PaymentDetailTransfer
      */
-    public function getPaymentDetail($idOrder): PaymentDetailTransfer;
+    public function getPaymentDetail(int $idOrder): PaymentDetailTransfer;
 
     /**
      * Specification:
@@ -502,7 +502,7 @@ interface PayoneFacadeInterface
      *
      * @return void
      */
-    public function updatePaymentDetail(PaymentDetailTransfer $paymentData, $idOrder): void;
+    public function updatePaymentDetail(PaymentDetailTransfer $paymentData, int $idOrder): void;
 
     /**
      * Specification:

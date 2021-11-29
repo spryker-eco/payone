@@ -120,7 +120,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setClearingType($clearingType): void
+    public function setClearingType(string $clearingType): void
     {
         $this->clearingtype = $clearingType;
     }
@@ -138,7 +138,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAmount($amount): void
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
@@ -156,7 +156,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCurrency($currency): void
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -174,7 +174,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setNarrativeText($narrativeText): void
+    public function setNarrativeText(string $narrativeText): void
     {
         $this->narrative_text = $narrativeText;
     }
@@ -192,7 +192,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setPaydata($paydata): void
+    public function setPaydata(PaydataContainer $paydata): void
     {
         $this->paydata = $paydata;
     }
@@ -210,7 +210,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setWorkOrderId($workOrderId): void
+    public function setWorkOrderId(string $workOrderId): void
     {
         $this->workorderid = $workOrderId;
     }
@@ -228,7 +228,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingFirstName($shippingFirstName): void
+    public function setShippingFirstName(string $shippingFirstName): void
     {
         $this->shipping_firstname = $shippingFirstName;
     }
@@ -246,7 +246,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingLastName($shippingLastName): void
+    public function setShippingLastName(string $shippingLastName): void
     {
         $this->shipping_lastname = $shippingLastName;
     }
@@ -264,7 +264,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingCompany($shippingCompany): void
+    public function setShippingCompany(string $shippingCompany): void
     {
         $this->shipping_company = $shippingCompany;
     }
@@ -282,7 +282,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingStreet($shippingStreet): void
+    public function setShippingStreet(string $shippingStreet): void
     {
         $this->shipping_street = $shippingStreet;
     }
@@ -300,7 +300,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingZip($shippingZip): void
+    public function setShippingZip(int $shippingZip): void
     {
         $this->shipping_zip = $shippingZip;
     }
@@ -318,7 +318,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingCity($shippingCity): void
+    public function setShippingCity(string $shippingCity): void
     {
         $this->shipping_city = $shippingCity;
     }
@@ -336,7 +336,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingState($shippingState): void
+    public function setShippingState(string $shippingState): void
     {
         $this->shipping_state = $shippingState;
     }
@@ -354,7 +354,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingCountry($shippingCountry): void
+    public function setShippingCountry(string $shippingCountry): void
     {
         $this->shipping_country = $shippingCountry;
     }
@@ -372,7 +372,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setWalletType($walletType): void
+    public function setWalletType(string $walletType): void
     {
         $this->wallettype = $walletType;
     }

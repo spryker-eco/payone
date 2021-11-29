@@ -14,7 +14,7 @@ class DummyAdapter extends AbstractHttpAdapter
     /**
      * @param string $response
      */
-    public function __construct($response)
+    public function __construct(string $response)
     {
         parent::__construct('');
 

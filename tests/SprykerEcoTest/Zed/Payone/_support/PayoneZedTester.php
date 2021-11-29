@@ -35,10 +35,24 @@ class PayoneZedTester extends Actor
 {
     use _generated\PayoneZedTesterActions;
 
+    /**
+     * @var string
+     */
     public const TEST_STATE_MACHINE_NAME = 'Test01';
 
+    /**
+     * @var string
+     */
     protected const FAKE_PAYMENT_METHOD = 'payment.payone.e_wallet';
+
+    /**
+     * @var string
+     */
     protected const FAKE_REFERENCE = 'reference';
+
+    /**
+     * @var string
+     */
     protected const FAKE_PAYONE_ORDER_ITEM_STATUS = 'new';
 
     /**

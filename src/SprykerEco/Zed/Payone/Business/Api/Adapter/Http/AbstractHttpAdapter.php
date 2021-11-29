@@ -41,7 +41,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
     /**
      * @param string $paymentGatewayUrl
      */
-    public function __construct($paymentGatewayUrl)
+    public function __construct(string $paymentGatewayUrl)
     {
         $this->url = $paymentGatewayUrl;
     }
@@ -51,7 +51,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return void
      */
-    public function setTimeout($timeout): void
+    public function setTimeout(int $timeout): void
     {
         $this->timeout = $timeout;
     }
@@ -190,7 +190,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return void
      */
-    protected function setRawResponse($rawResponse): void
+    protected function setRawResponse(string $rawResponse): void
     {
         $this->rawResponse = $rawResponse;
     }

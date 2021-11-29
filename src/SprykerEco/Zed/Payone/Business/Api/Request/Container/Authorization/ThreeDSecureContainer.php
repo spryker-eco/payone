@@ -36,7 +36,7 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setCavv($cavv): void
+    public function setCavv(string $cavv): void
     {
         $this->cavv = $cavv;
     }
@@ -54,7 +54,7 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setEci($eci): void
+    public function setEci(string $eci): void
     {
         $this->eci = $eci;
     }
@@ -72,7 +72,7 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setXid($xid): void
+    public function setXid(string $xid): void
     {
         $this->xid = $xid;
     }

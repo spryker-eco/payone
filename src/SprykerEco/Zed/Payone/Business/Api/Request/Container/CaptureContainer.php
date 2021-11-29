@@ -58,7 +58,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
      *
      * @return void
      */
-    public function setAmount($amount): void
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
@@ -76,7 +76,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
      *
      * @return void
      */
-    public function setCurrency($currency): void
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -94,7 +94,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
      *
      * @return void
      */
-    public function setSequenceNumber($sequencenumber): void
+    public function setSequenceNumber(int $sequencenumber): void
     {
         $this->sequencenumber = $sequencenumber;
     }
@@ -112,7 +112,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
      *
      * @return void
      */
-    public function setTxid($txid): void
+    public function setTxid(string $txid): void
     {
         $this->txid = $txid;
     }

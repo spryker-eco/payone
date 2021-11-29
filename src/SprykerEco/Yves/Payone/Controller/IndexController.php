@@ -235,7 +235,7 @@ class IndexController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    protected function streamedResponse($callback = null, $status = 200, $headers = []): StreamedResponse
+    protected function streamedResponse(?callable $callback = null, int $status = 200, array $headers = []): StreamedResponse
     {
         $streamedResponse = new StreamedResponse($callback, $status, $headers);
         $streamedResponse->send();

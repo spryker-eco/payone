@@ -26,7 +26,7 @@ class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setPseudoCardPan($pseudoCardPan): void
+    public function setPseudoCardPan(string $pseudoCardPan): void
     {
         $this->pseudocardpan = $pseudoCardPan;
     }

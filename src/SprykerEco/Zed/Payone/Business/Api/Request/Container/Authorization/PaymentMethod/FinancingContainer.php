@@ -28,7 +28,7 @@ class FinancingContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setFinancingType($financingtype): void
+    public function setFinancingType(string $financingtype): void
     {
         $this->financingtype = $financingtype;
     }

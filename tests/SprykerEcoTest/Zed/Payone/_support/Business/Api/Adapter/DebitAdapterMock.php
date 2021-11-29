@@ -12,7 +12,7 @@ class DebitAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getSuccessResponse()
+    protected function getSuccessResponse(): array
     {
         $result = 'txid=120 status=OK errormessage=OK customermessage=OK errorcode=200 rawresponse=200 settleaccount=200';
 
@@ -22,7 +22,7 @@ class DebitAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getFailureResponse()
+    protected function getFailureResponse(): array
     {
         $result = 'status=ERROR';
 

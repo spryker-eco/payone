@@ -49,7 +49,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardCvc2($cardcvc2): void
+    public function setCardCvc2(int $cardcvc2): void
     {
         $this->cardcvc2 = $cardcvc2;
     }
@@ -67,7 +67,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardExpireDate($cardexpiredate): void
+    public function setCardExpireDate(int $cardexpiredate): void
     {
         $this->cardexpiredate = $cardexpiredate;
     }
@@ -85,7 +85,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardHolder($cardholder): void
+    public function setCardHolder(string $cardholder): void
     {
         $this->cardholder = $cardholder;
     }
@@ -103,7 +103,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardIssueNumber($cardissuenumber): void
+    public function setCardIssueNumber(int $cardissuenumber): void
     {
         $this->cardissuenumber = $cardissuenumber;
     }
@@ -121,7 +121,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardPan($cardpan): void
+    public function setCardPan(string $cardpan): void
     {
         $this->cardpan = $cardpan;
     }
@@ -139,7 +139,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardType($cardtype): void
+    public function setCardType(string $cardtype): void
     {
         $this->cardtype = $cardtype;
     }
@@ -157,7 +157,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setPseudoCardPan($pseudocardpan): void
+    public function setPseudoCardPan(string $pseudocardpan): void
     {
         $this->pseudocardpan = $pseudocardpan;
     }

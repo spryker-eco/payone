@@ -25,7 +25,7 @@ class HookTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testPostSaveHook()
+    public function testPostSaveHook(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_APPROVED);

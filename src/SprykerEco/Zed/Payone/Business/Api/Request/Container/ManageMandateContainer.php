@@ -121,7 +121,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount): void
+    public function setBankAccount(string $bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
@@ -139,7 +139,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode): void
+    public function setBankCode(string $bankcode): void
     {
         $this->bankcode = $bankcode;
     }
@@ -157,7 +157,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry): void
+    public function setBankCountry(string $bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
@@ -175,7 +175,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setClearingType($clearingtype): void
+    public function setClearingType(string $clearingtype): void
     {
         $this->clearingtype = $clearingtype;
     }
@@ -193,7 +193,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandate_identification): void
+    public function setMandateIdentification(string $mandate_identification): void
     {
         $this->mandate_identification = $mandate_identification;
     }
@@ -211,7 +211,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCurrency($currency): void
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -229,7 +229,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCustomerid($customerid): void
+    public function setCustomerid(string $customerid): void
     {
         $this->customerid = $customerid;
     }
@@ -247,7 +247,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setUserid($userid): void
+    public function setUserid(string $userid): void
     {
         $this->userid = $userid;
     }
@@ -265,7 +265,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFirstname($firstname): void
+    public function setFirstname(string $firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -283,7 +283,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setLastname($lastname): void
+    public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -301,7 +301,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCompany($company): void
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
@@ -319,7 +319,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreet($street): void
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
@@ -337,7 +337,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setZip($zip): void
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -355,7 +355,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCity($city): void
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -373,7 +373,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCountry($country): void
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -409,7 +409,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setIban($iban): void
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
@@ -427,7 +427,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBic($bic): void
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }

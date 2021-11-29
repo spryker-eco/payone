@@ -136,7 +136,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankaccount($clearing_bankaccount): void
+    public function setClearingBankaccount(string $clearing_bankaccount): void
     {
         $this->clearing_bankaccount = $clearing_bankaccount;
     }
@@ -154,7 +154,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankaccountholder($clearing_bankaccountholder): void
+    public function setClearingBankaccountholder(string $clearing_bankaccountholder): void
     {
         $this->clearing_bankaccountholder = $clearing_bankaccountholder;
     }
@@ -172,7 +172,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankbic($clearing_bankbic): void
+    public function setClearingBankbic(string $clearing_bankbic): void
     {
         $this->clearing_bankbic = $clearing_bankbic;
     }
@@ -190,7 +190,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcity($clearing_bankcity): void
+    public function setClearingBankcity(string $clearing_bankcity): void
     {
         $this->clearing_bankcity = $clearing_bankcity;
     }
@@ -208,7 +208,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcode($clearing_bankcode): void
+    public function setClearingBankcode(string $clearing_bankcode): void
     {
         $this->clearing_bankcode = $clearing_bankcode;
     }
@@ -226,7 +226,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcountry($clearing_bankcountry): void
+    public function setClearingBankcountry(string $clearing_bankcountry): void
     {
         $this->clearing_bankcountry = $clearing_bankcountry;
     }
@@ -244,7 +244,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankiban($clearing_bankiban): void
+    public function setClearingBankiban(string $clearing_bankiban): void
     {
         $this->clearing_bankiban = $clearing_bankiban;
     }
@@ -262,7 +262,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankname($clearing_bankname): void
+    public function setClearingBankname(string $clearing_bankname): void
     {
         $this->clearing_bankname = $clearing_bankname;
     }
@@ -280,7 +280,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSettleaccount($settleaccount): void
+    public function setSettleaccount(string $settleaccount): void
     {
         $this->settleaccount = $settleaccount;
     }
@@ -298,7 +298,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTxid($txid): void
+    public function setTxid(int $txid): void
     {
         $this->txid = $txid;
     }
@@ -316,7 +316,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingDuedate($clearing_duedate): void
+    public function setClearingDuedate(string $clearing_duedate): void
     {
         $this->clearing_duedate = $clearing_duedate;
     }
@@ -334,7 +334,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingInstructionnote($clearing_instructionnote): void
+    public function setClearingInstructionnote(string $clearing_instructionnote): void
     {
         $this->clearing_instructionnote = $clearing_instructionnote;
     }
@@ -352,7 +352,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingLegalnote($clearing_legalnote): void
+    public function setClearingLegalnote(string $clearing_legalnote): void
     {
         $this->clearing_legalnote = $clearing_legalnote;
     }
@@ -370,7 +370,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingReference($clearing_reference): void
+    public function setClearingReference(string $clearing_reference): void
     {
         $this->clearing_reference = $clearing_reference;
     }
@@ -388,7 +388,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorCity($creditorCity): void
+    public function setCreditorCity(string $creditorCity): void
     {
         $this->creditor_city = $creditorCity;
     }
@@ -406,7 +406,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorCountry($creditorCountry): void
+    public function setCreditorCountry(string $creditorCountry): void
     {
         $this->creditor_country = $creditorCountry;
     }
@@ -424,7 +424,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorEmail($creditorEmail): void
+    public function setCreditorEmail(string $creditorEmail): void
     {
         $this->creditor_email = $creditorEmail;
     }
@@ -442,7 +442,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorIdentifier($creditorIdentifier): void
+    public function setCreditorIdentifier(string $creditorIdentifier): void
     {
         $this->creditor_identifier = $creditorIdentifier;
     }
@@ -460,7 +460,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorName($creditorName): void
+    public function setCreditorName(string $creditorName): void
     {
         $this->creditor_name = $creditorName;
     }
@@ -478,7 +478,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorStreet($creditorStreet): void
+    public function setCreditorStreet(string $creditorStreet): void
     {
         $this->creditor_street = $creditorStreet;
     }
@@ -496,7 +496,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorZip($creditorZip): void
+    public function setCreditorZip(string $creditorZip): void
     {
         $this->creditor_zip = $creditorZip;
     }
@@ -514,7 +514,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandateIdentification): void
+    public function setMandateIdentification(string $mandateIdentification): void
     {
         $this->mandate_identification = $mandateIdentification;
     }
@@ -532,7 +532,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingAmount($clearingAmount): void
+    public function setClearingAmount(string $clearingAmount): void
     {
         $this->clearing_amount = $clearingAmount;
     }
@@ -550,7 +550,7 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingDate($clearingDate): void
+    public function setClearingDate(string $clearingDate): void
     {
         $this->clearing_date = $clearingDate;
     }

@@ -222,7 +222,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
-    public function setTxid($txid): RefundContainerInterface
+    public function setTxid(int $txid): RefundContainerInterface
     {
         $this->txid = $txid;
 

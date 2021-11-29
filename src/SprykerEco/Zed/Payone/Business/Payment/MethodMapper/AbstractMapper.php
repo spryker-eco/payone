@@ -107,7 +107,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return int
      */
-    protected function getNextSequenceNumber($transactionId): int
+    protected function getNextSequenceNumber(int $transactionId): int
     {
         $nextSequenceNumber = $this->getSequenceNumberProvider()->getNextSequenceNumber($transactionId);
 
@@ -119,7 +119,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
      */
-    protected function createRedirectContainer($orderReference): RedirectContainer
+    protected function createRedirectContainer(string $orderReference): RedirectContainer
     {
         $redirectContainer = new RedirectContainer();
 

@@ -26,7 +26,7 @@ class GetInvoiceContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setInvoiceTitle($invoice_title): void
+    public function setInvoiceTitle(string $invoice_title): void
     {
         $this->invoice_title = $invoice_title;
     }

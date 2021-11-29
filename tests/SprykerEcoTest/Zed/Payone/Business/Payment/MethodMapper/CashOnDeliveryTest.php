@@ -22,14 +22,26 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
  */
 class CashOnDeliveryTest extends AbstractMethodMapperTest
 {
+    /**
+     * @var string
+     */
     protected const STANDARD_PARAMETER_CLEARING_TYPE = 'cod';
 
+    /**
+     * @var array
+     */
     protected const AUTHORIZATION_CASH_ON_DELIVERY_REQUIRED_PARAMS = [
     ];
 
+    /**
+     * @var array
+     */
     protected const PREAUTHORIZATION_CASH_ON_DELIVERY_REQUIRED_PARAMS = [
     ];
 
+    /**
+     * @var array
+     */
     protected const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -38,6 +50,9 @@ class CashOnDeliveryTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
+    /**
+     * @var array
+     */
     protected const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,

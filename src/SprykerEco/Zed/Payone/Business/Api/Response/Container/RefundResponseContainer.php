@@ -24,7 +24,7 @@ class RefundResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setProtectResultAvs($protect_result_avs): void
+    public function setProtectResultAvs(string $protect_result_avs): void
     {
         $this->protect_result_avs = $protect_result_avs;
     }
@@ -42,7 +42,7 @@ class RefundResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTxid($txid): void
+    public function setTxid(int $txid): void
     {
         $this->txid = $txid;
     }

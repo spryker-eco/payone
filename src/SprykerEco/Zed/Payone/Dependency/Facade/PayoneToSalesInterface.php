@@ -16,7 +16,7 @@ interface PayoneToSalesInterface
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function getOrderByIdSalesOrder($idSalesOrder): OrderTransfer;
+    public function getOrderByIdSalesOrder(int $idSalesOrder): OrderTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -24,5 +24,5 @@ interface PayoneToSalesInterface
      *
      * @return bool
      */
-    public function updateOrder(OrderTransfer $orderTransfer, $idSalesOrder): bool;
+    public function updateOrder(OrderTransfer $orderTransfer, int $idSalesOrder): bool;
 }

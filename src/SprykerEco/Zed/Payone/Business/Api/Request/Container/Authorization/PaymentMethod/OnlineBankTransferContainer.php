@@ -56,7 +56,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount): void
+    public function setBankAccount(string $bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
@@ -74,7 +74,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode): void
+    public function setBankCode(string $bankcode): void
     {
         $this->bankcode = $bankcode;
     }
@@ -92,7 +92,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry): void
+    public function setBankCountry(string $bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
@@ -110,7 +110,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankGroupType($bankgrouptype): void
+    public function setBankGroupType(string $bankgrouptype): void
     {
         $this->bankgrouptype = $bankgrouptype;
     }
@@ -128,7 +128,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setOnlineBankTransferType($onlinebanktransfertype): void
+    public function setOnlineBankTransferType(string $onlinebanktransfertype): void
     {
         $this->onlinebanktransfertype = $onlinebanktransfertype;
     }
@@ -164,7 +164,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setIban($iban): void
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
@@ -182,7 +182,7 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBic($bic): void
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }

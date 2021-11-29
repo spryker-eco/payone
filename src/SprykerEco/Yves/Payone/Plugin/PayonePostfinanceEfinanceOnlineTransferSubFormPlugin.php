@@ -19,6 +19,7 @@ class PayonePostfinanceEfinanceOnlineTransferSubFormPlugin extends AbstractPlugi
 {
     /**
      * {@inheritDoc}
+     *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm(): AbstractPayoneSubForm
@@ -28,6 +29,7 @@ class PayonePostfinanceEfinanceOnlineTransferSubFormPlugin extends AbstractPlugi
 
     /**
      * {@inheritDoc}
+     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider(): StepEngineFormDataProviderInterface

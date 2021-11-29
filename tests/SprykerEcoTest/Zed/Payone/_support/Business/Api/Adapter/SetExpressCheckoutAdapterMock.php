@@ -12,7 +12,7 @@ class SetExpressCheckoutAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getSuccessResponse()
+    protected function getSuccessResponse(): array
     {
         $result = 'status=REDIRECT' .
             ' customermessage=CustomerMessage' .
@@ -37,7 +37,7 @@ class SetExpressCheckoutAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getFailureResponse()
+    protected function getFailureResponse(): array
     {
         $result = 'status=ERROR' .
             ' errorcode=916' .

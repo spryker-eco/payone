@@ -101,7 +101,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAddressCheckType($addresschecktype): void
+    public function setAddressCheckType(string $addresschecktype): void
     {
         $this->addresschecktype = $addresschecktype;
     }
@@ -119,7 +119,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCity($city): void
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -137,7 +137,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCompany($company): void
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
@@ -155,7 +155,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCountry($country): void
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -173,7 +173,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFirstName($firstname): void
+    public function setFirstName(string $firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -191,7 +191,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setLastName($lastname): void
+    public function setLastName(string $lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -209,7 +209,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setState($state): void
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
@@ -227,7 +227,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreet($street): void
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
@@ -245,7 +245,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreetName($streetname): void
+    public function setStreetName(string $streetname): void
     {
         $this->streetname = $streetname;
     }
@@ -263,7 +263,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreetNumber($streetnumber): void
+    public function setStreetNumber(string $streetnumber): void
     {
         $this->streetnumber = $streetnumber;
     }
@@ -281,7 +281,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setTelephoneNumber($telephonenumber): void
+    public function setTelephoneNumber(string $telephonenumber): void
     {
         $this->telephonenumber = $telephonenumber;
     }
@@ -299,7 +299,7 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setZip($zip): void
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }

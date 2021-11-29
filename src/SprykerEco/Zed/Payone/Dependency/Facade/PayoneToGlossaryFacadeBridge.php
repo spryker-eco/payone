@@ -32,7 +32,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return string
      */
-    public function translateByKeyId($idKey, array $data = []): string
+    public function translateByKeyId(int $idKey, array $data = []): string
     {
         return $this->glossaryFacade->translateByKeyId($idKey, $data);
     }
@@ -44,7 +44,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return string
      */
-    public function translate($keyName, array $data = [], ?LocaleTransfer $localeTransfer = null): string
+    public function translate(string $keyName, array $data = [], ?LocaleTransfer $localeTransfer = null): string
     {
         return $this->glossaryFacade->translate($keyName, $data, $localeTransfer);
     }
@@ -56,7 +56,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createTranslationForCurrentLocale($keyName, $value, $isActive = true): TranslationTransfer
+    public function createTranslationForCurrentLocale(string $keyName, string $value, bool $isActive = true): TranslationTransfer
     {
         return $this->glossaryFacade->createTranslationForCurrentLocale($keyName, $value, $isActive);
     }
@@ -69,7 +69,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createTranslation($keyName, LocaleTransfer $localeTransfer, $value, $isActive = true): TranslationTransfer
+    public function createTranslation(string $keyName, LocaleTransfer $localeTransfer, string $value, bool $isActive = true): TranslationTransfer
     {
         return $this->glossaryFacade->createTranslation($keyName, $localeTransfer, $value, $isActive);
     }
@@ -82,7 +82,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createAndTouchTranslation($keyName, LocaleTransfer $localeTransfer, $value, $isActive = true): TranslationTransfer
+    public function createAndTouchTranslation(string $keyName, LocaleTransfer $localeTransfer, string $value, bool $isActive = true): TranslationTransfer
     {
         return $this->glossaryFacade->createAndTouchTranslation($keyName, $localeTransfer, $value, $isActive);
     }
@@ -92,7 +92,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return int
      */
-    public function createKey($keyName): int
+    public function createKey(string $keyName): int
     {
         return $this->glossaryFacade->createKey($keyName);
     }
@@ -102,7 +102,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return bool
      */
-    public function hasKey($keyName): bool
+    public function hasKey(string $keyName): bool
     {
         return $this->glossaryFacade->hasKey($keyName);
     }
@@ -115,7 +115,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return bool
      */
-    public function hasTranslation($keyName, ?LocaleTransfer $localeTransfer = null): bool
+    public function hasTranslation(string $keyName, ?LocaleTransfer $localeTransfer = null): bool
     {
         return $this->glossaryFacade->hasTranslation($keyName, $localeTransfer);
     }
@@ -125,7 +125,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return int
      */
-    public function getKeyIdentifier($keyName): int
+    public function getKeyIdentifier(string $keyName): int
     {
         return $this->glossaryFacade->getKeyIdentifier($keyName);
     }
@@ -135,7 +135,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return void
      */
-    public function touchCurrentTranslationForKeyId($idKey): void
+    public function touchCurrentTranslationForKeyId(int $idKey): void
     {
         $this->glossaryFacade->touchCurrentTranslationForKeyId($idKey);
     }
@@ -145,7 +145,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return int
      */
-    public function getOrCreateKey($keyName): int
+    public function getOrCreateKey(string $keyName): int
     {
         return $this->glossaryFacade->getOrCreateKey($keyName);
     }
@@ -170,7 +170,7 @@ class PayoneToGlossaryFacadeBridge implements PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function updateAndTouchTranslation($keyName, LocaleTransfer $localeTransfer, $value, $isActive = true): TranslationTransfer
+    public function updateAndTouchTranslation(string $keyName, LocaleTransfer $localeTransfer, string $value, bool $isActive = true): TranslationTransfer
     {
         return $this->glossaryFacade->updateAndTouchTranslation($keyName, $localeTransfer, $value, $isActive);
     }

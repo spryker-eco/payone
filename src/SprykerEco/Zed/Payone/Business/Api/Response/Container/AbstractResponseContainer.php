@@ -97,7 +97,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setStatus($status): void
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
@@ -115,7 +115,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setCustomermessage($customermessage): void
+    public function setCustomermessage(string $customermessage): void
     {
         $this->customermessage = $customermessage;
     }
@@ -133,7 +133,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setErrorcode($errorcode): void
+    public function setErrorcode(string $errorcode): void
     {
         $this->errorcode = $errorcode;
     }
@@ -163,7 +163,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setErrormessage($errormessage): void
+    public function setErrormessage(string $errormessage): void
     {
         $this->errormessage = $errormessage;
     }
@@ -181,7 +181,7 @@ abstract class AbstractResponseContainer
      *
      * @return mixed
      */
-    public function getValue($key)
+    public function getValue(string $key)
     {
         return $this->get($key);
     }
@@ -192,7 +192,7 @@ abstract class AbstractResponseContainer
      *
      * @return bool|null
      */
-    public function setValue($key, $name): ?bool
+    public function setValue(string $key, string $name): ?bool
     {
         return $this->set($key, $name);
     }
@@ -202,7 +202,7 @@ abstract class AbstractResponseContainer
      *
      * @return mixed|null
      */
-    protected function get($name)
+    protected function get(string $name)
     {
         if (property_exists($this, $name)) {
             return $this->$name;
@@ -217,7 +217,7 @@ abstract class AbstractResponseContainer
      *
      * @return bool|null
      */
-    protected function set($name, $value): ?bool
+    protected function set(string $name, $value): ?bool
     {
         if (property_exists($this, $name)) {
             $this->$name = $value;
@@ -233,7 +233,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setRawResponse($rawResponse): void
+    public function setRawResponse(string $rawResponse): void
     {
         $this->rawResponse = $rawResponse;
     }

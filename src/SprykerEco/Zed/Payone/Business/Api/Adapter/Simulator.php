@@ -31,7 +31,7 @@ class Simulator extends AbstractHttpAdapter
      *
      * @return void
      */
-    public function setRawResponseAsString($rawResponse): void
+    public function setRawResponseAsString(string $rawResponse): void
     {
         $this->rawResponse = $rawResponse;
     }

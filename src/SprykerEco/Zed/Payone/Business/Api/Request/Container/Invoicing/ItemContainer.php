@@ -62,7 +62,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return array
      */
-    public function toArrayByKey($key): array
+    public function toArrayByKey(int $key): array
     {
         $data = [];
         if (isset($this->id)) {
@@ -98,7 +98,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setDe($de): void
+    public function setDe(string $de): void
     {
         $this->de = $de;
     }
@@ -116,7 +116,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setEd($ed): void
+    public function setEd(string $ed): void
     {
         $this->ed = $ed;
     }
@@ -134,7 +134,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setId($id): void
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -152,7 +152,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setNo($no): void
+    public function setNo(int $no): void
     {
         $this->no = $no;
     }
@@ -170,7 +170,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setPr($pr): void
+    public function setPr(int $pr): void
     {
         $this->pr = $pr;
     }
@@ -188,7 +188,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setSd($sd): void
+    public function setSd(string $sd): void
     {
         $this->sd = $sd;
     }
@@ -206,7 +206,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setVa($va): void
+    public function setVa(int $va): void
     {
         $this->va = $va;
     }
@@ -224,7 +224,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setIt($it): void
+    public function setIt(string $it): void
     {
         $this->it = $it;
     }

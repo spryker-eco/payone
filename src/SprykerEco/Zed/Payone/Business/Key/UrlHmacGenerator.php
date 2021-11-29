@@ -22,7 +22,7 @@ class UrlHmacGenerator implements HmacGeneratorInterface
      *
      * @return string
      */
-    public function hash($string, $key): string
+    public function hash(string $string, string $key): string
     {
         return hash_hmac(static::HASH_ALGO, $string, $key);
     }

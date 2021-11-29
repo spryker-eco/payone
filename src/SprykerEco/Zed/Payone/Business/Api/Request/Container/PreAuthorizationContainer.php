@@ -44,7 +44,7 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer implement
      *
      * @return void
      */
-    public function setWorkOrderId($workorderid): void
+    public function setWorkOrderId(string $workorderid): void
     {
         $this->workorderid = $workorderid;
     }

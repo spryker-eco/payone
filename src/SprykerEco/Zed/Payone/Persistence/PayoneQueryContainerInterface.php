@@ -12,6 +12,7 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery;
+use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\QueryContainer\QueryContainerInterface;
 
 interface PayoneQueryContainerInterface extends QueryContainerInterface
@@ -38,7 +39,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentByTransactionIdQuery($transactionId): SpyPaymentPayoneQuery;
+    public function createPaymentByTransactionIdQuery(int $transactionId): SpyPaymentPayoneQuery;
 
     /**
      * Specification:
@@ -51,7 +52,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId): SpyPaymentPayoneQuery;
+    public function createPaymentByInvoiceTitleAndCustomerIdQuery(string $invoiceTitle, int $customerId): SpyPaymentPayoneQuery;
 
     /**
      * Specification:
@@ -64,7 +65,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId): SpyPaymentPayoneQuery;
+    public function createPaymentByFileReferenceAndCustomerIdQuery(string $fileReference, int $customerId): SpyPaymentPayoneQuery;
 
     /**
      * Specification:
@@ -77,7 +78,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createApiLogByPaymentAndRequestTypeQuery($fkPayment, $requestType): SpyPaymentPayoneApiLogQuery;
+    public function createApiLogByPaymentAndRequestTypeQuery(int $fkPayment, string $requestType): SpyPaymentPayoneApiLogQuery;
 
     /**
      * Specification:
@@ -89,7 +90,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentByOrderId($idOrder): SpyPaymentPayoneQuery;
+    public function createPaymentByOrderId(int $idOrder): SpyPaymentPayoneQuery;
 
     /**
      * Specification:
@@ -102,7 +103,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createApiLogsByOrderIdAndRequest($orderId, $request): SpyPaymentPayoneApiLogQuery;
+    public function createApiLogsByOrderIdAndRequest(int $orderId, string $request): SpyPaymentPayoneApiLogQuery;
 
     /**
      * Specification:
@@ -114,7 +115,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentById($orderId): SpyPaymentPayoneQuery;
+    public function createPaymentById(int $orderId): SpyPaymentPayoneQuery;
 
     /**
      * Specification:
@@ -126,7 +127,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
-    public function createTransactionStatusLogsBySalesOrder($idSalesOrder): SpyPaymentPayoneTransactionStatusLogQuery;
+    public function createTransactionStatusLogsBySalesOrder(int $idSalesOrder): SpyPaymentPayoneTransactionStatusLogQuery;
 
     /**
      * Specification:
@@ -140,8 +141,8 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery
      */
     public function createTransactionStatusLogOrderItemsByLogIds(
-        $idSalesOrderItem,
-        $ids
+        int $idSalesOrderItem,
+        array $ids
     ): SpyPaymentPayoneTransactionStatusLogOrderItemQuery;
 
     /**
@@ -154,7 +155,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createApiLogsByOrderIds($orders): SpyPaymentPayoneApiLogQuery;
+    public function createApiLogsByOrderIds(ObjectCollection $orders): SpyPaymentPayoneApiLogQuery;
 
     /**
      * Specification:
@@ -166,7 +167,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createLastApiLogsByOrderId($idSalesOrder): SpyPaymentPayoneApiLogQuery;
+    public function createLastApiLogsByOrderId(int $idSalesOrder): SpyPaymentPayoneApiLogQuery;
 
     /**
      * Specification:
@@ -178,7 +179,7 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
-    public function createTransactionStatusLogsByOrderIds($orders): SpyPaymentPayoneTransactionStatusLogQuery;
+    public function createTransactionStatusLogsByOrderIds(array $orders): SpyPaymentPayoneTransactionStatusLogQuery;
 
     /**
      * Specification:

@@ -129,7 +129,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setAmount($amount): void
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
@@ -147,7 +147,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setClearingType($clearingType): void
+    public function setClearingType(string $clearingType): void
     {
         $this->clearingtype = $clearingType;
     }
@@ -165,7 +165,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setCurrency($currency): void
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -183,7 +183,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setNarrativeText($narrative_text): void
+    public function setNarrativeText(string $narrative_text): void
     {
         $this->narrative_text = $narrative_text;
     }
@@ -201,7 +201,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setParam($param): void
+    public function setParam(string $param): void
     {
         $this->param = $param;
     }
@@ -219,7 +219,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setReference($reference): void
+    public function setReference(string $reference): void
     {
         $this->reference = $reference;
     }
@@ -335,7 +335,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setOnlinebanktransfertype($onlinebanktransfertype): void
+    public function setOnlinebanktransfertype(string $onlinebanktransfertype): void
     {
         $this->onlinebanktransfertype = $onlinebanktransfertype;
     }

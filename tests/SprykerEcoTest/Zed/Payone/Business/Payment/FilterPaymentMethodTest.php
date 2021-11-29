@@ -24,19 +24,31 @@ use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
  */
 class FilterPaymentMethodTest extends AbstractPayoneTest
 {
+    /**
+     * @var array
+     */
     public const GREEN_RESULT_PAYMENT_METHODS = [
         PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
         PayoneConfig::PAYMENT_METHOD_INVOICE,
     ];
 
+    /**
+     * @var array
+     */
     public const YELLOW_RESULT_PAYMENT_METHODS = [
         PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
     ];
 
+    /**
+     * @var array
+     */
     public const RED_RESULT_PAYMENT_METHODS = [
         PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
     ];
 
+    /**
+     * @var array
+     */
     public const UNKNOWN_RESULT_PAYMENT_METHODS = [
         PayoneConfig::PAYMENT_METHOD_CREDIT_CARD,
         PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,

@@ -49,7 +49,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCity($city): void
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -67,7 +67,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPersonstatus($personstatus): void
+    public function setPersonstatus(string $personstatus): void
     {
         $this->personstatus = $personstatus;
     }
@@ -85,7 +85,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSecstatus($secstatus): void
+    public function setSecstatus(int $secstatus): void
     {
         $this->secstatus = $secstatus;
     }
@@ -103,7 +103,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreet($street): void
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
@@ -121,7 +121,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreetname($streetname): void
+    public function setStreetname(string $streetname): void
     {
         $this->streetname = $streetname;
     }
@@ -139,7 +139,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreetnumber($streetnumber): void
+    public function setStreetnumber(string $streetnumber): void
     {
         $this->streetnumber = $streetnumber;
     }
@@ -157,7 +157,7 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setZip($zip): void
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }

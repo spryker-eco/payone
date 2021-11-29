@@ -124,7 +124,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankaccount($clearing_bankaccount): void
+    public function setClearingBankaccount(string $clearing_bankaccount): void
     {
         $this->clearing_bankaccount = $clearing_bankaccount;
     }
@@ -142,7 +142,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankaccountholder($clearing_bankaccountholder): void
+    public function setClearingBankaccountholder(string $clearing_bankaccountholder): void
     {
         $this->clearing_bankaccountholder = $clearing_bankaccountholder;
     }
@@ -160,7 +160,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankbic($clearing_bankbic): void
+    public function setClearingBankbic(string $clearing_bankbic): void
     {
         $this->clearing_bankbic = $clearing_bankbic;
     }
@@ -178,7 +178,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcity($clearing_bankcity): void
+    public function setClearingBankcity(string $clearing_bankcity): void
     {
         $this->clearing_bankcity = $clearing_bankcity;
     }
@@ -196,7 +196,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcode($clearing_bankcode): void
+    public function setClearingBankcode(string $clearing_bankcode): void
     {
         $this->clearing_bankcode = $clearing_bankcode;
     }
@@ -214,7 +214,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcountry($clearing_bankcountry): void
+    public function setClearingBankcountry(string $clearing_bankcountry): void
     {
         $this->clearing_bankcountry = $clearing_bankcountry;
     }
@@ -232,7 +232,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankiban($clearing_bankiban): void
+    public function setClearingBankiban(string $clearing_bankiban): void
     {
         $this->clearing_bankiban = $clearing_bankiban;
     }
@@ -250,7 +250,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankname($clearing_bankname): void
+    public function setClearingBankname(string $clearing_bankname): void
     {
         $this->clearing_bankname = $clearing_bankname;
     }
@@ -268,7 +268,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setProtectResultAvs($protect_result_avs): void
+    public function setProtectResultAvs(string $protect_result_avs): void
     {
         $this->protect_result_avs = $protect_result_avs;
     }
@@ -286,7 +286,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTxid($txid): void
+    public function setTxid(int $txid): void
     {
         $this->txid = $txid;
     }
@@ -304,7 +304,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setUserid($userid): void
+    public function setUserid(int $userid): void
     {
         $this->userid = $userid;
     }
@@ -322,7 +322,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setRedirecturl($redirecturl): void
+    public function setRedirecturl(string $redirecturl): void
     {
         $this->redirecturl = $redirecturl;
     }
@@ -340,7 +340,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorCity($creditorCity): void
+    public function setCreditorCity(string $creditorCity): void
     {
         $this->creditor_city = $creditorCity;
     }
@@ -358,7 +358,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorCountry($creditorCountry): void
+    public function setCreditorCountry(string $creditorCountry): void
     {
         $this->creditor_country = $creditorCountry;
     }
@@ -376,7 +376,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorEmail($creditorEmail): void
+    public function setCreditorEmail(string $creditorEmail): void
     {
         $this->creditor_email = $creditorEmail;
     }
@@ -394,7 +394,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorIdentifier($creditorIdentifier): void
+    public function setCreditorIdentifier(string $creditorIdentifier): void
     {
         $this->creditor_identifier = $creditorIdentifier;
     }
@@ -412,7 +412,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorName($creditorName): void
+    public function setCreditorName(string $creditorName): void
     {
         $this->creditor_name = $creditorName;
     }
@@ -430,7 +430,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorStreet($creditorStreet): void
+    public function setCreditorStreet(string $creditorStreet): void
     {
         $this->creditor_street = $creditorStreet;
     }
@@ -448,7 +448,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorZip($creditorZip): void
+    public function setCreditorZip(string $creditorZip): void
     {
         $this->creditor_zip = $creditorZip;
     }
@@ -466,7 +466,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandateIdentification): void
+    public function setMandateIdentification(string $mandateIdentification): void
     {
         $this->mandate_identification = $mandateIdentification;
     }
@@ -484,7 +484,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingAmount($clearingAmount): void
+    public function setClearingAmount(string $clearingAmount): void
     {
         $this->clearing_amount = $clearingAmount;
     }
@@ -502,7 +502,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingDate($clearingDate): void
+    public function setClearingDate(string $clearingDate): void
     {
         $this->clearing_date = $clearingDate;
     }

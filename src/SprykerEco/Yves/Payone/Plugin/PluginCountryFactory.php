@@ -57,7 +57,7 @@ class PluginCountryFactory extends AbstractPlugin
      *
      * @return \SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface
      */
-    public function createSubFormsCreator($countryIso2Code): SubFormsCreatorInterface
+    public function createSubFormsCreator(string $countryIso2Code): SubFormsCreatorInterface
     {
         if (isset($this->subFormsCreators[$countryIso2Code])) {
             $subFormsCreator = $this->subFormsCreators[$countryIso2Code]();

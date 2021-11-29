@@ -31,7 +31,7 @@ class BankAccountValidator extends ConstraintValidator
      *
      * @return void
      */
-    public function validate($value, Constraint $constraint): void
+    public function validate(?string $value, Constraint $constraint): void
     {
         if (!$constraint instanceof BankAccount) {
             throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\BankAccount');

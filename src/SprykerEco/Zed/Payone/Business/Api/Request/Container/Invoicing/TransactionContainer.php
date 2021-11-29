@@ -80,7 +80,7 @@ class TransactionContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setItems($items): void
+    public function setItems(array $items): void
     {
         $this->items = $items;
     }
@@ -98,7 +98,7 @@ class TransactionContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setInvoiceDeliverydate($invoice_deliverydate): void
+    public function setInvoiceDeliverydate(string $invoice_deliverydate): void
     {
         $this->invoice_deliverydate = $invoice_deliverydate;
     }
@@ -116,7 +116,7 @@ class TransactionContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setInvoiceDeliveryenddate($invoice_deliveryenddate): void
+    public function setInvoiceDeliveryenddate(string $invoice_deliveryenddate): void
     {
         $this->invoice_deliveryenddate = $invoice_deliveryenddate;
     }
@@ -134,7 +134,7 @@ class TransactionContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setInvoiceDeliverymode($invoice_deliverymode): void
+    public function setInvoiceDeliverymode(string $invoice_deliverymode): void
     {
         $this->invoice_deliverymode = $invoice_deliverymode;
     }
@@ -152,7 +152,7 @@ class TransactionContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setInvoiceappendix($invoiceappendix): void
+    public function setInvoiceappendix(string $invoiceappendix): void
     {
         $this->invoiceappendix = $invoiceappendix;
     }
@@ -170,7 +170,7 @@ class TransactionContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setInvoiceid($invoiceid): void
+    public function setInvoiceid(string $invoiceid): void
     {
         $this->invoiceid = $invoiceid;
     }

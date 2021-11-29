@@ -26,7 +26,7 @@ class EWalletContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setWalletType($wallettype): void
+    public function setWalletType(string $wallettype): void
     {
         $this->wallettype = $wallettype;
     }

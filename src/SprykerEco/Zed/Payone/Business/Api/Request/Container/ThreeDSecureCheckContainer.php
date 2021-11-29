@@ -76,7 +76,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAmount($amount): void
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
@@ -94,7 +94,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardCvc2($cardcvc2): void
+    public function setCardCvc2(int $cardcvc2): void
     {
         $this->cardcvc2 = $cardcvc2;
     }
@@ -112,7 +112,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardExpireDate($cardexpiredate): void
+    public function setCardExpireDate(string $cardexpiredate): void
     {
         $this->cardexpiredate = $cardexpiredate;
     }
@@ -130,7 +130,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardPan($cardpan): void
+    public function setCardPan(string $cardpan): void
     {
         $this->cardpan = $cardpan;
     }
@@ -148,7 +148,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardType($cardtype): void
+    public function setCardType(string $cardtype): void
     {
         $this->cardtype = $cardtype;
     }
@@ -166,7 +166,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setClearingType($clearingtype): void
+    public function setClearingType(string $clearingtype): void
     {
         $this->clearingtype = $clearingtype;
     }
@@ -184,7 +184,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCurrency($currency): void
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -202,7 +202,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setExitUrl($exiturl): void
+    public function setExitUrl(string $exiturl): void
     {
         $this->exiturl = $exiturl;
     }
@@ -220,7 +220,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStoreCardData($storecarddata): void
+    public function setStoreCardData(string $storecarddata): void
     {
         $this->storecarddata = $storecarddata;
     }

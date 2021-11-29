@@ -31,7 +31,14 @@ use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\DummyAdapter;
  */
 class OrderPriceDistributorTest extends AbstractBusinessTest
 {
+    /**
+     * @var string
+     */
     protected const PAYMENT_PROVIDER_PAYONE = 'Payone';
+
+    /**
+     * @var string
+     */
     protected const PAYMENT_PROVIDER_DUMMY = 'Dummy';
 
     /**
@@ -42,9 +49,9 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     /**
      * @dataProvider orderPriceForDistributionDataProvider
      *
-     * @param \Generated\Shared\Transfer\ItemTransfer[] $orderItemTransfers
-     * @param \Generated\Shared\Transfer\ExpenseTransfer[] $expenseTransfers
-     * @param \Generated\Shared\Transfer\PaymentTransfer[] $paymentTransfers
+     * @param array<\Generated\Shared\Transfer\ItemTransfer> $orderItemTransfers
+     * @param array<\Generated\Shared\Transfer\ExpenseTransfer> $expenseTransfers
+     * @param array<\Generated\Shared\Transfer\PaymentTransfer> $paymentTransfers
      * @param \Generated\Shared\Transfer\TotalsTransfer $totalsTransfer
      * @param int $expectedTotalPrice
      *
@@ -77,32 +84,32 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
         $this->assertSame(
             $expectedTotalPrice,
             $distributedPriceOrderTransfer->getTotals()->getGrandTotal(),
-            'Grand total should be equals to the expected price.'
+            'Grand total should be equals to the expected price.',
         );
 
         $this->assertSame(
             $expectedTotalPrice,
             $itemsPrices[ItemTransfer::SUM_PRICE_TO_PAY_AGGREGATION] + $expensesPrices,
-            'Items and expenses total price should be equal to the expected price.'
+            'Items and expenses total price should be equal to the expected price.',
         );
 
         $this->assertSame(
             $expectedTotalPrice,
             $itemsPrices[ItemTransfer::UNIT_PRICE_TO_PAY_AGGREGATION] + $expensesPrices,
-            'Items unit to aggregation and expenses total price should be equals to the expected price.'
+            'Items unit to aggregation and expenses total price should be equals to the expected price.',
         );
 
         $this->assertSame(
             $expectedTotalPrice,
             $itemsPrices[ItemTransfer::UNIT_GROSS_PRICE] + $expensesPrices,
-            'Items unit gross and expenses total price should be equals to the expected price.'
+            'Items unit gross and expenses total price should be equals to the expected price.',
         );
     }
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return int[]
+     * @return array<int>
      */
     protected function getOrderItemsPrices(OrderTransfer $orderTransfer): array
     {
@@ -137,7 +144,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @param mixed[] $seedData
+     * @param array<mixed> $seedData
      *
      * @return \Generated\Shared\Transfer\ItemTransfer
      */
@@ -147,7 +154,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @param mixed[] $seedData
+     * @param array<mixed> $seedData
      *
      * @return \Generated\Shared\Transfer\ExpenseTransfer
      */
@@ -157,7 +164,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @param mixed[] $seedData
+     * @param array<mixed> $seedData
      *
      * @return \Generated\Shared\Transfer\PaymentTransfer
      */
@@ -167,7 +174,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @param mixed[] $seedData
+     * @param array<mixed> $seedData
      *
      * @return \Generated\Shared\Transfer\TotalsTransfer
      */
@@ -177,7 +184,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      */
     public function orderPriceForDistributionDataProvider(): array
     {
@@ -190,7 +197,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      */
     protected function provideOrderDataWithoutExpenses(): array
     {
@@ -228,7 +235,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      */
     protected function provideOrderDataWithoutItems(): array
     {
@@ -263,7 +270,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      */
     protected function provideOrderDataWithItemsAndExpenses(): array
     {
@@ -311,7 +318,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     }
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      */
     protected function provideOrderDataWithOnlyPayonePayment(): array
     {

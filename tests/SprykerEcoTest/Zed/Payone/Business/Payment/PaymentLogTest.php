@@ -26,7 +26,7 @@ class PaymentLogTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testGetPaymentLogs()
+    public function testGetPaymentLogs(): void
     {
         $apiLogs = [];
         $this->createPayonePayment();
@@ -51,7 +51,7 @@ class PaymentLogTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testGetPaymentLogsEmpty()
+    public function testGetPaymentLogsEmpty(): void
     {
         $this->createPayonePayment();
 

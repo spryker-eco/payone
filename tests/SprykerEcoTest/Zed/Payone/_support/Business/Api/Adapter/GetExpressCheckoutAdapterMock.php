@@ -12,7 +12,7 @@ class GetExpressCheckoutAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getSuccessResponse()
+    protected function getSuccessResponse(): array
     {
         $result = 'status=OK' .
             ' add_paydata[shipping_street]=sdfsfas' .
@@ -37,7 +37,7 @@ class GetExpressCheckoutAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getFailureResponse()
+    protected function getFailureResponse(): array
     {
         $result = 'status=ERROR' .
             ' errorcode=1011' .

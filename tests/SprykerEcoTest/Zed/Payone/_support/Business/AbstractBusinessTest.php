@@ -7,6 +7,7 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business;
 
+use Codeception\Module;
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -50,6 +51,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 abstract class AbstractBusinessTest extends Test
 {
+    /**
+     * @var string
+     */
     protected const CLIENT_IP = '127.0.0.1';
 
     /**
@@ -120,7 +124,7 @@ abstract class AbstractBusinessTest extends Test
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $adapter
-     * @param string[]|null $onlyMethods
+     * @param array<string>|null $onlyMethods
      *
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Payone\Business\PayoneBusinessFactory
      */
@@ -161,7 +165,7 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return void
      */
-    protected function setupConfig()
+    protected function setupConfig(): void
     {
         $this->getConfigHelper()->setConfig(
             PayoneConstants::PAYONE,
@@ -197,14 +201,14 @@ abstract class AbstractBusinessTest extends Test
                     PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
                     PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
                 ],
-            ]
+            ],
         );
     }
 
     /**
      * @return \Codeception\Module
      */
-    protected function getConfigHelper()
+    protected function getConfigHelper(): Module
     {
         return $this->getModule('\\' . ConfigHelper::class);
     }
@@ -212,7 +216,7 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return void
      */
-    protected function setUpSalesOrderTestData()
+    protected function setUpSalesOrderTestData(): void
     {
         $country = SpyCountryQuery::create()->findOneByIso2Code('DE');
         $billingAddress = new SpySalesOrderAddress();
@@ -259,7 +263,7 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    protected function getOrderTransfer()
+    protected function getOrderTransfer(): OrderTransfer
     {
         $orderTransfer = (new OrderTransfer())
             ->setOrderReference('TEST--1')
@@ -276,7 +280,7 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return \Generated\Shared\Transfer\TotalsTransfer
      */
-    protected function getTotalsTransfer()
+    protected function getTotalsTransfer(): TotalsTransfer
     {
         $totalsTransfer = new TotalsTransfer();
         $totalsTransfer
@@ -293,7 +297,7 @@ abstract class AbstractBusinessTest extends Test
      *
      * @return \Generated\Shared\Transfer\AddressTransfer
      */
-    protected function getAddressTransfer($itemPrefix)
+    protected function getAddressTransfer(string $itemPrefix): AddressTransfer
     {
         $addressTransfer = new AddressTransfer();
         $addressTransfer
@@ -316,7 +320,7 @@ abstract class AbstractBusinessTest extends Test
      *
      * @return \Generated\Shared\Transfer\ItemTransfer
      */
-    protected function getItemTransfer($itemPrefix)
+    protected function getItemTransfer(string $itemPrefix): ItemTransfer
     {
         $itemTransfer = new ItemTransfer();
         $itemTransfer
@@ -335,7 +339,7 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
-    protected function getCustomerTransfer()
+    protected function getCustomerTransfer(): CustomerTransfer
     {
         $customerTransfer = new CustomerTransfer();
         $customerTransfer
@@ -353,7 +357,7 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return \Orm\Zed\Oms\Persistence\SpyOmsOrderItemState
      */
-    protected function createOrderItemStateEntity()
+    protected function createOrderItemStateEntity(): SpyOmsOrderItemState
     {
         $stateEntity = new SpyOmsOrderItemState();
         $stateEntity->setName('test item state');
@@ -365,7 +369,7 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return \Orm\Zed\Oms\Persistence\SpyOmsOrderProcess
      */
-    protected function createOrderProcessEntity()
+    protected function createOrderProcessEntity(): SpyOmsOrderProcess
     {
         $processEntity = new SpyOmsOrderProcess();
         $processEntity->setName('test process');
@@ -377,7 +381,7 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function setupQuoteTransfer()
+    protected function setupQuoteTransfer(): QuoteTransfer
     {
         $this->quoteTransfer = (new QuoteTransfer())
             ->setTotals($this->getTotalsTransfer())
@@ -394,11 +398,11 @@ abstract class AbstractBusinessTest extends Test
     /**
      * @return \Generated\Shared\Transfer\PaymentTransfer
      */
-    protected function getPaymentTransfer()
+    protected function getPaymentTransfer(): PaymentTransfer
     {
         return (new PaymentTransfer())
             ->setPayone(
-                (new PayonePaymentTransfer())
+                (new PayonePaymentTransfer()),
             )
             ->setPaymentProvider(PayoneConfig::PROVIDER_NAME);
     }
@@ -428,7 +432,7 @@ abstract class AbstractBusinessTest extends Test
             ->setMethods(['getClientIp'])
             ->getMock();
 
-        $mock->method('getClientIp')->willReturn(self::CLIENT_IP);
+        $mock->method('getClientIp')->willReturn(static::CLIENT_IP);
 
         return $mock;
     }

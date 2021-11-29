@@ -20,7 +20,7 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setNarrativeText($narrative_text): void;
+    public function setNarrativeText(string $narrative_text): void;
 
     /**
      * @return string
@@ -64,7 +64,7 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setCurrency($currency): void;
+    public function setCurrency(string $currency): void;
 
     /**
      * set the system-Name
@@ -143,7 +143,7 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setParam($param): void;
+    public function setParam(string $param): void;
 
     /**
      * @return int
@@ -169,14 +169,14 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setClearingType($clearingType): void;
+    public function setClearingType(string $clearingType): void;
 
     /**
      * @param string $reference
      *
      * @return void
      */
-    public function setReference($reference): void;
+    public function setReference(string $reference): void;
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
@@ -298,5 +298,5 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setAmount($amount): void;
+    public function setAmount(int $amount): void;
 }

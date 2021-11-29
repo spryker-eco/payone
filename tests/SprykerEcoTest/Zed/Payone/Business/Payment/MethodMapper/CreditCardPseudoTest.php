@@ -23,19 +23,43 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
  */
 class CreditCardPseudoTest extends AbstractMethodMapperTest
 {
+    /**
+     * @var string
+     */
     public const PSEUDO_CARD_PAN = '1234567890123456';
+
+    /**
+     * @var string
+     */
     public const CARD_TYPE = 'V';
+
+    /**
+     * @var string
+     */
     public const CARD_EXPIRE_DATE = '1609';
+
+    /**
+     * @var string
+     */
     public const STANDARD_PARAMETER_CLEARING_TYPE = 'cc';
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_CREDIT_CARD_PSEUDO_REQUIRED_PARAMS = [
         'pseudocardpan' => self::PSEUDO_CARD_PAN,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_CREDIT_CARD_PSEUDO_REQUIRED_PARAMS = [
         'pseudocardpan' => self::PSEUDO_CARD_PAN,
     ];
 
+    /**
+     * @var array
+     */
     public const CREDIT_CARD_CHECK_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'cardpan' => self::PSEUDO_CARD_PAN,
@@ -43,6 +67,9 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
         'cardexpiredate' => self::CARD_EXPIRE_DATE,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -51,6 +78,9 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -62,7 +92,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToPreauthorization()
+    public function testMapPaymentToPreauthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CreditCardPseudo($this->getStoreConfigMock()));
@@ -88,7 +118,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToAuthorization()
+    public function testMapPaymentToAuthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CreditCardPseudo($this->getStoreConfigMock()));
@@ -116,7 +146,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToCapture()
+    public function testMapPaymentToCapture(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CreditCardPseudo($this->getStoreConfigMock()));
@@ -132,7 +162,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToRefund()
+    public function testMapPaymentToRefund(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CreditCardPseudo($this->getStoreConfigMock()));
@@ -148,7 +178,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToDebit()
+    public function testMapPaymentToDebit(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CreditCardPseudo($this->getStoreConfigMock()));
@@ -164,7 +194,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapCreditCardCheck()
+    public function testMapCreditCardCheck(): void
     {
         $creditCardTransfer = new PayoneCreditCardTransfer();
         $creditCardTransfer->setAid(static::STANDARD_PARAMETER_AID);

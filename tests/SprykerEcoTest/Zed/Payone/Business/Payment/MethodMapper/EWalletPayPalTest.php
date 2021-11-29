@@ -22,18 +22,33 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
  */
 class EWalletPayPalTest extends AbstractMethodMapperTest
 {
+    /**
+     * @var string
+     */
     public const STANDARD_PARAMETER_CLEARING_TYPE = 'wlt';
 
+    /**
+     * @var string
+     */
     public const WALLET_TYPE = 'PPE';
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_E_WALLET_REQUIRED_PARAMS = [
         'wallettype' => self::WALLET_TYPE,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_E_WALLET_REQUIRED_PARAMS = [
         'wallettype' => self::WALLET_TYPE,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -42,6 +57,9 @@ class EWalletPayPalTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -53,7 +71,7 @@ class EWalletPayPalTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToPreauthorization()
+    public function testMapPaymentToPreauthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -79,7 +97,7 @@ class EWalletPayPalTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToAuthorization()
+    public function testMapPaymentToAuthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -107,7 +125,7 @@ class EWalletPayPalTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToCapture()
+    public function testMapPaymentToCapture(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -123,7 +141,7 @@ class EWalletPayPalTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToRefund()
+    public function testMapPaymentToRefund(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -139,7 +157,7 @@ class EWalletPayPalTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToDebit()
+    public function testMapPaymentToDebit(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
