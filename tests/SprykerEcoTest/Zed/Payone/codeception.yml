@@ -12,6 +12,8 @@ coverage:
     remote: false
     whitelist: { include: ['../../../../src/*'] }
 
+bootstrap: ../../bootstrap.php
+
 suites:
     Zed:
         path: .
@@ -19,7 +21,7 @@ suites:
         modules:
             enabled:
                 - Asserts
-                - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\Environment:
                     isolated: true
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Config\Helper\ConfigInit

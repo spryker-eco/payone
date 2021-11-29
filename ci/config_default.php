@@ -1,114 +1,63 @@
 <?php
-/**
- * Copyright © 2021-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- */
 
+use Monolog\Logger;
+use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
+use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
+use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\Kernel\KernelConstants;
+use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Propel\PropelConstants;
+use Spryker\Shared\Queue\QueueConstants;
 use Spryker\Zed\Propel\PropelConfig;
-use Spryker\Zed\PropelOrm\Business\Builder\ExtensionObjectBuilder;
-use Spryker\Zed\PropelOrm\Business\Builder\ExtensionQueryBuilder;
-use Spryker\Zed\PropelOrm\Business\Builder\ObjectBuilder;
-use Spryker\Zed\PropelOrm\Business\Builder\QueryBuilder;
 
-$config[KernelConstants::ENABLE_CONTAINER_OVERRIDING] = true;
+// ----------------------------------------------------------------------------
+// ------------------------------ CODEBASE: TO REMOVE -------------------------
+// ----------------------------------------------------------------------------
+$config[KernelConstants::SPRYKER_ROOT] = APPLICATION_ROOT_DIR . '../../vendor/spryker/spryker/Bundles';
+$config[KernelConstants::RESOLVABLE_CLASS_NAMES_CACHE_ENABLED] = false;
+$config[KernelConstants::RESOLVED_INSTANCE_CACHE_ENABLED] = true;
 $config[KernelConstants::PROJECT_NAMESPACE] = 'Pyz';
 $config[KernelConstants::PROJECT_NAMESPACES] = [
     'Pyz',
 ];
 $config[KernelConstants::CORE_NAMESPACES] = [
+    'SprykerShop',
+    'SprykerEco',
     'Spryker',
+    'SprykerSdk',
 ];
-$config[PropelConstants::ZED_DB_ENGINE]
-    = strtolower(getenv('SPRYKER_DB_ENGINE') ?: '') ?: PropelConfig::DB_ENGINE_MYSQL;
-$config[PropelConstants::ZED_DB_HOST] = getenv('SPRYKER_DB_HOST');
-$config[PropelConstants::ZED_DB_PORT] = getenv('SPRYKER_DB_PORT');
-$config[PropelConstants::ZED_DB_USERNAME] = getenv('SPRYKER_DB_USERNAME');
-$config[PropelConstants::ZED_DB_PASSWORD] = getenv('SPRYKER_DB_PASSWORD');
-$config[PropelConstants::ZED_DB_DATABASE] = getenv('SPRYKER_DB_DATABASE');
+
+// ----------------------------------------------------------------------------
+// ------------------------------- LOGGING ------------------------------------
+// ----------------------------------------------------------------------------
+// >>> LOGGING
+$config[ErrorHandlerConstants::ERROR_LEVEL] = E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED;
+$config[ErrorHandlerConstants::ERROR_LEVEL_LOG_ONLY] = E_DEPRECATED | E_USER_DEPRECATED;
+$config[LogConstants::LOGGER_CONFIG] = SprykerLoggerConfig::class;
+$config[LogConstants::LOG_LEVEL] = Logger::INFO;
+$config[PropelConstants::LOG_FILE_PATH]
+    = $config[EventConstants::LOG_FILE_PATH]
+    = $config[LogConstants::LOG_FILE_PATH_YVES]
+    = $config[LogConstants::LOG_FILE_PATH_ZED]
+    = $config[LogConstants::LOG_FILE_PATH_GLUE]
+    = $config[LogConstants::LOG_FILE_PATH]
+    = $config[QueueConstants::QUEUE_WORKER_OUTPUT_FILE_NAME]
+    = getenv('SPRYKER_LOG_STDOUT') ?: 'php://stderr';
+$config[LogConstants::EXCEPTION_LOG_FILE_PATH_YVES]
+    = $config[LogConstants::EXCEPTION_LOG_FILE_PATH_ZED]
+    = $config[LogConstants::EXCEPTION_LOG_FILE_PATH_GLUE]
+    = $config[LogConstants::EXCEPTION_LOG_FILE_PATH]
+    = getenv('SPRYKER_LOG_STDERR') ?: 'php://stderr';
+
+// ----------------------------------------------------------------------------
+// ------------------------------ DATABASE ------------------------------------
+// ----------------------------------------------------------------------------
+
+$config[PropelConstants::ZED_DB_ENGINE] = PropelConfig::DB_ENGINE_MYSQL;
+$config[PropelConstants::ZED_DB_HOST] = '127.0.0.1';
+$config[PropelConstants::ZED_DB_PORT] = '3306';
+$config[PropelConstants::ZED_DB_USERNAME] = 'root'; //getenv('SPRYKER_DB_USERNAME');
+$config[PropelConstants::ZED_DB_PASSWORD] = 'secret'; //getenv('SPRYKER_DB_PASSWORD');
+$config[PropelConstants::ZED_DB_DATABASE] = 'eu-docker';
+$config[PropelConstants::ZED_DB_REPLICAS] = json_decode(getenv('SPRYKER_DB_REPLICAS') ?: '[]', true);
 $config[PropelConstants::USE_SUDO_TO_MANAGE_DATABASE] = false;
-
-$placeholder = '%s:host=%s;port=%d;dbname=%s';
-
-$dsn = sprintf(
-    $placeholder,
-    $config[PropelConstants::ZED_DB_ENGINE],
-    $config[PropelConstants::ZED_DB_HOST],
-    $config[PropelConstants::ZED_DB_PORT],
-    $config[PropelConstants::ZED_DB_DATABASE],
-);
-
-$slaves = [];
-foreach ($config[PropelConstants::ZED_DB_REPLICAS] ?? [] as $slaveData) {
-    $slaves[] = [
-        'dsn' => sprintf(
-            $placeholder,
-            $config[PropelConstants::ZED_DB_ENGINE],
-            $slaveData[PropelConstants::ZED_DB_HOST],
-            $slaveData[PropelConstants::ZED_DB_PORT],
-            $config[PropelConstants::ZED_DB_DATABASE],
-        ),
-        'user' => $config[PropelConstants::ZED_DB_USERNAME],
-        'password' => $config[PropelConstants::ZED_DB_PASSWORD],
-    ];
-}
-
-$connections = [
-    'pgsql' => [
-        'adapter' => PropelConfig::DB_ENGINE_PGSQL,
-        'dsn' => $dsn,
-        'user' => $config[PropelConstants::ZED_DB_USERNAME],
-        'password' => $config[PropelConstants::ZED_DB_PASSWORD],
-        'slaves' => $slaves,
-        'settings' => [],
-    ],
-    'mysql' => [
-        'adapter' => PropelConfig::DB_ENGINE_MYSQL,
-        'dsn' => $dsn,
-        'user' => $config[PropelConstants::ZED_DB_USERNAME],
-        'password' => $config[PropelConstants::ZED_DB_PASSWORD],
-        'slaves' => $slaves,
-        'settings' => [
-            'charset' => 'utf8',
-            'queries' => [
-                'utf8' => 'SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci',
-            ],
-        ],
-    ],
-];
-
-$config[PropelConstants::PROPEL] = [
-    'database' => [
-        'connections' => [],
-    ],
-    'runtime' => [
-        'defaultConnection' => 'default',
-        'connections' => ['default', 'zed'],
-    ],
-    'generator' => [
-        'defaultConnection' => 'default',
-        'connections' => ['default', 'zed'],
-        'objectModel' => [
-            'defaultKeyType' => 'fieldName',
-            'builders' => [
-                // If you need full entity logging on Create/Update/Delete, then switch to
-                // Spryker\Zed\PropelOrm\Business\Builder\ObjectBuilderWithLogger instead.
-                'object' => ObjectBuilder::class,
-                'objectstub' => ExtensionObjectBuilder::class,
-                'query' => QueryBuilder::class,
-                'querystub' => ExtensionQueryBuilder::class,
-            ],
-        ],
-    ],
-    'paths' => [
-        'phpDir' => APPLICATION_ROOT_DIR,
-        'sqlDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/Sql/',
-        'migrationDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/Migration_' . $config[PropelConstants::ZED_DB_ENGINE] . '/',
-        'schemaDir' => APPLICATION_ROOT_DIR . '/src/Orm/Propel/Schema/',
-    ],
-];
-
-$ENGINE = $config[PropelConstants::ZED_DB_ENGINE];
-$config[PropelConstants::PROPEL]['database']['connections']['default'] = $connections[$ENGINE];
-$config[PropelConstants::PROPEL]['database']['connections']['zed'] = $connections[$ENGINE];
