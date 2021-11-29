@@ -7,9 +7,15 @@ parameters:
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
     ignoreErrors:
-        - '#Expression on left side of ?? is not nullable\.#'
+        - '#Expression on left side of \?\? is not nullable\.#'
         - '#Parameter .+ of method .+ has invalid type .+#'
         - '#Method .+ has invalid return type .+#'
+        - '#Method .+ should return .+ but returns .+#'
+        - '#Property .+ does not accept .+#'
+        - '#PHPDoc type .+ of property .+ is not covariant with PHPDoc type .+ of overridden property .+#'
+        - '#Property .+ does not accept .+#'
+        - '#Property .+ in isset() is not nullable#'
+        - '#Strict comparison using === between string and null will always evaluate to false\.#'
         - '#.+Generated\\Shared\\Transfer.+#'
         - '#Parameter .+ of method .+ has invalid typehint type Orm\\Zed\\Payone\\Persistence\\.+#'
         - '#Return typehint of method .+ has invalid type Orm\\Zed\\Payone\\Persistence\\.+#'
