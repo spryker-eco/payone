@@ -63,6 +63,9 @@ jobs:
             - name: Run CodeStyle checks
               run: composer cs-check
 
+            - name: Run CodeStyle checks
+              run: composer test
+
     prefer-lowest:
         runs-on: ubuntu-20.04
         strategy:
