@@ -3,7 +3,7 @@ name: CI
 env:
     APPLICATION_ENV: 'development'
     APPLICATION_STORE: 'DE'
-    PROJECT: 'Braintree'
+    PROJECT: 'Payone'
     DATABASE_VERSION: 10.2
     DATABASE_HOST: 127.0.0.1
     DATABASE_PORT: 3306
@@ -90,13 +90,18 @@ jobs:
                   extensions: mbstring, intl
                   tools: composer:v2
 
+            - name: Prepare for tests
+              run: |
+                "$GITHUB_WORKSPACE/$SHOP_DIR/vendor/bin/install" DE -r ci -x frontend -x fixtures -v
+                "$GITHUB_WORKSPACE/$SHOP_DIR/vendor/bin/codecept" build -c "vendor/spryker-eco/$MODULE_NAME/"
+
             - name: Run PHPStan
               run: composer stan
 
             - name: Run CodeStyle checks
               run: composer cs-check
 
-            - name: Run codeception tests
+            - name: Run Codeception tests
               run: composer test
 
     prefer-lowest:
