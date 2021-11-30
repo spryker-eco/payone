@@ -96,7 +96,7 @@ jobs:
             - name: Run CodeStyle checks
               run: composer cs-check
 
-            - name: Run CodeStyle checks
+            - name: Run codeception tests
               run: composer test
 
     prefer-lowest:
