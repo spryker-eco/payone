@@ -58,6 +58,7 @@ class ProductMapper implements ProductMapperInterface
      */
     protected function getTaxRateFromItemTransfer(ItemTransfer $itemTransfer): int
     {
+        /** @var \Spryker\DecimalObject\Decimal|float|null $taxRateValue */
         $taxRateValue = $itemTransfer->getTaxRate();
         if ($taxRateValue instanceof Decimal) {
             return $taxRateValue->toInt();
