@@ -92,8 +92,8 @@ jobs:
 
             - name: Prepare for tests
               run: |
-                "$GITHUB_WORKSPACE/$SHOP_DIR/vendor/bin/install" DE -r ci -x frontend -x fixtures -v
-                "$GITHUB_WORKSPACE/$SHOP_DIR/vendor/bin/codecept" build -c "vendor/spryker-eco/$MODULE_NAME/"
+                "$GITHUB_WORKSPACE/vendor/bin/install" DE -r ci -x frontend -x fixtures -v
+                "$GITHUB_WORKSPACE/vendor/bin/codecept" build -c "vendor/spryker-eco/$MODULE_NAME/"
 
             - name: Run PHPStan
               run: composer stan
