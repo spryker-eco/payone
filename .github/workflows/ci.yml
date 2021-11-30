@@ -79,10 +79,10 @@ jobs:
             - name: Composer validate
               run: composer validate
 
-            - name: Composer install
+            - name: Composer update
               run: |
                   composer --version
-                  composer install
+                  composer update
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
