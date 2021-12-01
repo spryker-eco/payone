@@ -90,19 +90,14 @@ jobs:
                   extensions: mbstring, intl
                   tools: composer:v2
 
-            - name: Prepare for tests
-              run: |
-                "$GITHUB_WORKSPACE/vendor/bin/install" DE -r ci -x frontend -x fixtures -v
-                "$GITHUB_WORKSPACE/vendor/bin/codecept" build -c "vendor/spryker-eco/$MODULE_NAME/"
+            - name: Run tests
+              run: composer test
 
             - name: Run PHPStan
               run: composer stan
 
             - name: Run CodeStyle checks
               run: composer cs-check
-
-            - name: Run Codeception tests
-              run: composer test
 
     prefer-lowest:
         runs-on: ubuntu-20.04
