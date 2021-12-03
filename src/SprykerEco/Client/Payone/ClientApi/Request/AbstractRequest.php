@@ -226,13 +226,13 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * set the system-Name
      *
-     * @param string $integrator_name
+     * @param string $integratorName
      *
      * @return void
      */
-    public function setIntegratorName(string $integrator_name): void
+    public function setIntegratorName(string $integratorName): void
     {
-        $this->integrator_name = $integrator_name;
+        $this->integrator_name = $integratorName;
     }
 
     /**
@@ -246,13 +246,13 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * set the system-version
      *
-     * @param string $integrator_version
+     * @param string $integratorVersion
      *
      * @return void
      */
-    public function setIntegratorVersion(string $integrator_version): void
+    public function setIntegratorVersion(string $integratorVersion): void
     {
-        $this->integrator_version = $integrator_version;
+        $this->integrator_version = $integratorVersion;
     }
 
     /**
@@ -266,13 +266,13 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * set the name of the solution-partner (company)
      *
-     * @param string $solution_name
+     * @param string $solutionName
      *
      * @return void
      */
-    public function setSolutionName(string $solution_name): void
+    public function setSolutionName(string $solutionName): void
     {
-        $this->solution_name = $solution_name;
+        $this->solution_name = $solutionName;
     }
 
     /**
@@ -286,13 +286,13 @@ abstract class AbstractRequest extends AbstractContainer
     /**
      * set the version of the solution-partner's app / extension / plugin / etc..
      *
-     * @param string $solution_version
+     * @param string $solutionVersion
      *
      * @return void
      */
-    public function setSolutionVersion(string $solution_version): void
+    public function setSolutionVersion(string $solutionVersion): void
     {
-        $this->solution_version = $solution_version;
+        $this->solution_version = $solutionVersion;
     }
 
     /**
