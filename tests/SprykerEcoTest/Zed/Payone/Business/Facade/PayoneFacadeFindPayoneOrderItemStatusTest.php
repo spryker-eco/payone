@@ -8,12 +8,12 @@
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
 use Codeception\Test\Unit;
-use SprykerEcoTest\Zed\Payone\PayoneZedTester;
+use SprykerEcoTest\Zed\Payone\PayoneBusinessTester;
 
 class PayoneFacadeFindPayoneOrderItemStatusTest extends Unit
 {
     /**
-     * @var \SprykerEcoTest\Zed\Payone\PayoneZedTester
+     * @var \SprykerEcoTest\Zed\Payone\PayoneBusinessTester
      */
     protected $tester;
 
@@ -24,7 +24,7 @@ class PayoneFacadeFindPayoneOrderItemStatusTest extends Unit
     {
         parent::setUp();
 
-        $this->tester->configureTestStateMachine([PayoneZedTester::TEST_STATE_MACHINE_NAME]);
+        $this->tester->configureTestStateMachine([PayoneBusinessTester::TEST_STATE_MACHINE_NAME]);
     }
 
     /**
