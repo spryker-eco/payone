@@ -5,7 +5,7 @@ env:
     APPLICATION_STORE: 'DE'
     PROJECT: 'Payone'
     DATABASE_VERSION: 10.2
-    DATABASE_HOST: mysql
+    DATABASE_HOST: 127.0.0.1
     DATABASE_PORT: 3306
     DATABASE_NAME: eu-docker
     DATABASE_USERNAME: root
@@ -14,6 +14,9 @@ env:
     DATABASE_ALLOW_EMPTY_PASSWORD: false
     DATABASE_CHARACTER_SET: utf8
     DATABASE_COLLATE: utf8_general_ci
+    MYSQL_ALLOW_EMPTY_PASSWORD: false
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_DATABASE: eu-docker
 
 on:
     pull_request:
@@ -45,6 +48,17 @@ jobs:
         name: Payone
         needs: setup
         runs-on: ubuntu-18.04
+
+        services:
+            mariadb:
+                image: mariadb:10.2
+                env:
+                    MYSQL_ALLOW_EMPTY_PASSWORD: false
+                    MYSQL_ROOT_PASSWORD: secret
+                    MYSQL_DATABASE: eu-docker
+                ports:
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
         strategy:
             fail-fast: false
