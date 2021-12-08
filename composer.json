@@ -42,7 +42,7 @@
         "spryker/queue": "^1.5.0",
         "spryker/transfer": "^3.25.0",
         "codeception/module-asserts": "^1.3.0",
-        "spryker/testify": "^3.0.0"
+        "spryker/testify": "dev-standalone-testing-fix as 3.43.0"
     },
     "suggest": {
         "spryker/application": "If you want to use Application plugins you need to install spryker/application.",
