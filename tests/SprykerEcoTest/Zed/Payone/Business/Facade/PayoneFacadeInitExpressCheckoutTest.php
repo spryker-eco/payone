@@ -76,6 +76,7 @@ class PayoneFacadeInitExpressCheckoutTest extends AbstractBusinessTest
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setPaymentProvider(PayoneConfig::PROVIDER_NAME);
         $paypalExpressCheckoutPayment = new PayonePaypalExpressCheckoutTransfer();
+        $paypalExpressCheckoutPayment->setWorkOrderId('WX1A1SE57Y8D1XNR');
         $paymentTransfer->setPayonePaypalExpressCheckout($paypalExpressCheckoutPayment);
         $quote->setPayment($paymentTransfer);
 

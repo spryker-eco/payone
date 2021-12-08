@@ -171,7 +171,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
 
         foreach (static::REFUND_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
@@ -201,6 +201,9 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
         $creditCardTransfer->setCardPan(static::PSEUDO_CARD_PAN);
         $creditCardTransfer->setCardType(static::CARD_TYPE);
         $creditCardTransfer->setCardExpireDate(static::CARD_EXPIRE_DATE);
+        $creditCardTransfer->setCardCvc2('123');
+        $creditCardTransfer->setCardIssueNumber('1234123412341234');
+        $creditCardTransfer->setStoreCardData('10.10.2030');
 
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new CreditCardPseudo($this->getStoreConfigMock()));
 
@@ -208,7 +211,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
 
         foreach (static::CREDIT_CARD_CHECK_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 

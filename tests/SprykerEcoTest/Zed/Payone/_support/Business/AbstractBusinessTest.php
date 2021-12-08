@@ -218,7 +218,11 @@ abstract class AbstractBusinessTest extends Test
      */
     protected function setUpSalesOrderTestData(): void
     {
-        $country = SpyCountryQuery::create()->findOneByIso2Code('DE');
+        $country = (new SpyCountryQuery())
+            ->filterByIso2Code('DE')
+            ->findOneOrCreate();
+        $country->save();
+
         $billingAddress = new SpySalesOrderAddress();
         $billingAddress->fromArray($this->getAddressTransfer('billing')->toArray());
         $billingAddress->setFkCountry($country->getIdCountry())->save();
@@ -310,6 +314,8 @@ abstract class AbstractBusinessTest extends Test
             ->setAddress3($itemPrefix . '135')
             ->setZipCode($itemPrefix . '10623')
             ->setSalutation('Mr')
+            ->setEmail('John@Doe.com')
+            ->setCompany('John Doe Company')
             ->setPhone($itemPrefix . '12345678');
 
         return $addressTransfer;

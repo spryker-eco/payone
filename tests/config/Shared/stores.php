@@ -13,10 +13,6 @@ $stores['DE'] = [
     ],
     'countries' => [
         'DE',
-        'AT',
-        'NO',
-        'CH',
-        'ES',
         'GB'
     ],
 ];

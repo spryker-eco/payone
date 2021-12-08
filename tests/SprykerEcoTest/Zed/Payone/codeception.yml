@@ -12,9 +12,9 @@ coverage:
     whitelist: { include: [ '../../../../src/*' ] }
 
 suites:
-    Business:
-        path: Business
-        class_name: PayoneBusinessTester
+    Zed:
+        path: .
+        class_name: PayoneZedTester
         modules:
             enabled:
                 - Asserts
@@ -28,6 +28,9 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Shared\Config\Helper\ConfigInit
+                - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
+                - \SprykerTest\Zed\Oms\Helper\OmsHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                     projectNamespaces:
                         - 'Spryker'

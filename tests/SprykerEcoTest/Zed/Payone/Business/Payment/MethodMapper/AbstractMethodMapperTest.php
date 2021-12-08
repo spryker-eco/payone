@@ -45,6 +45,11 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     /**
      * @var string
      */
+    public const STANDARD_PARAMETER_KEY = 'key';
+
+    /**
+     * @var string
+     */
     public const STANDARD_PARAMETER_CURRENCY = 'EUR';
 
     /**
@@ -100,7 +105,38 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     /**
      * @var string
      */
+    public const DEFAULT_SALUTATION = 'Mr';
+
+    /**
+     * @var string
+     */
+    public const DEFAULT_ADDRESS_3 = 'Address 3';
+
+    /**
+     * @var string
+     */
+    public const DEFAULT_ZIP = '123456';
+
+    /**
+     * @var string
+     */
+    public const DEFAULT_PHONE = '777-555-333';
+
+    /**
+     * @var string
+     */
+    public const DEFAULT_PERSONAL_ID = '3lkn534';
+
+    /**
+     * @var string
+     */
+    public const DEFAULT_ORDER_REFERENCE_ID = '456j4nk56';
+
+    /**
+     * @var string
+     */
     protected const CLIENT_IP = '127.0.0.1';
+
 
     /**
      * @var array
@@ -192,6 +228,13 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $paymentPayoneDetail->method('getAmount')->willReturn(static::AMOUNT_FULL);
+        $paymentPayoneDetail->method('getBankCountry')->willReturn('Germany');
+        $paymentPayoneDetail->method('getBankAccount')->willReturn('BankAccount');
+        $paymentPayoneDetail->method('getBankCode')->willReturn('BankCode');
+        $paymentPayoneDetail->method('getBankGroupType')->willReturn('BankGroupType');
+        $paymentPayoneDetail->method('getIban')->willReturn('Iban');
+        $paymentPayoneDetail->method('getBic')->willReturn('Bic');
+        $paymentPayoneDetail->method('getShippingProvider')->willReturn('ShippingProvider');
 
         return $paymentPayoneDetail;
     }
@@ -208,6 +251,8 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $salesOrder->method('getShippingAddress')->willReturn($this->getAddressMock());
         $salesOrder->method('getEmail')->willReturn(static::DEFAULT_EMAIL);
         $salesOrder->method('getOrderTotals')->willReturn($this->getSalesOrderTotals());
+        $salesOrder->method('getCustomerReference')->willReturn(static::DEFAULT_PERSONAL_ID);
+        $salesOrder->method('getOrderReference')->willReturn(static::DEFAULT_ORDER_REFERENCE_ID);
 
         return $salesOrder;
     }
@@ -244,6 +289,11 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $address->method('getLastName')->willReturn(static::ADDRESS_LAST_NAME);
         $address->method('getEmail')->willReturn(static::DEFAULT_EMAIL);
         $address->method('getCity')->willReturn(static::DEFAULT_CITY);
+        $address->method('getSalutation')->willReturn(static::DEFAULT_SALUTATION);
+        $address->method('getAddress3')->willReturn(static::DEFAULT_ADDRESS_3);
+        $address->method('getZipCode')->willReturn(static::DEFAULT_ZIP);
+        $address->method('getPhone')->willReturn(static::DEFAULT_PHONE);
+        $address->method('getCompany')->willReturn('Company');
 
         return $address;
     }
@@ -284,6 +334,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $standardParameter->method('getAid')->willReturn(static::STANDARD_PARAMETER_AID);
         $standardParameter->method('getCurrency')->willReturn(static::STANDARD_PARAMETER_CURRENCY);
         $standardParameter->method('getLanguage')->willReturn(static::STANDARD_PARAMETER_LANGUAGE);
+        $standardParameter->method('getKey')->willReturn(static::STANDARD_PARAMETER_KEY);
 
         return $standardParameter;
     }
