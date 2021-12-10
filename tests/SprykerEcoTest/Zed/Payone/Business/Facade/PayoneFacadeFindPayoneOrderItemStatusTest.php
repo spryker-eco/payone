@@ -7,33 +7,23 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
-use Codeception\Test\Unit;
-use SprykerEcoTest\Zed\Payone\PayoneZedTester;
+use ArrayObject;
+use Generated\Shared\Transfer\SaveOrderTransfer;
+use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
 
-class PayoneFacadeFindPayoneOrderItemStatusTest extends Unit
+class PayoneFacadeFindPayoneOrderItemStatusTest extends AbstractPayoneTest
 {
-    /**
-     * @var \SprykerEcoTest\Zed\Payone\PayoneZedTester
-     */
-    protected $tester;
-
-    /**
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->tester->configureTestStateMachine([PayoneZedTester::TEST_STATE_MACHINE_NAME]);
-    }
-
     /**
      * @return void
      */
     public function testFindPayoneOrderItemStatusWithExistingOrderAndOrderItem(): void
     {
         //Arrange
-        $saveOrderTransfer = $this->tester->createOrder();
+        $saveOrderTransfer = new SaveOrderTransfer();
+        $saveOrderTransfer->setIdSalesOrder($this->orderEntity->getIdSalesOrder());
+        $items = new ArrayObject();
+        $items->append($this->orderEntity->getItems()->offsetGet(0));
+        $saveOrderTransfer->setOrderItems($items);
         $paymentPayoneEntity = $this->tester->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
         $itemTransfer = $saveOrderTransfer->getOrderItems()->offsetGet(0);
         $this->tester->createPaymentPayoneOrderItem($paymentPayoneEntity->getIdPaymentPayone(), $itemTransfer->getIdSalesOrderItem());

@@ -60,7 +60,9 @@ class PayoneZedTester extends Actor
      */
     public function createOrder(): SaveOrderTransfer
     {
-        return $this->haveOrder([], static::TEST_STATE_MACHINE_NAME);
+        return $this->haveOrder([
+
+        ], static::TEST_STATE_MACHINE_NAME);
     }
 
     /**

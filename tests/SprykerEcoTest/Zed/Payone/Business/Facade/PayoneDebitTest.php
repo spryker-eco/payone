@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
 use Generated\Shared\Transfer\DebitResponseTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Spryker\Shared\Kernel\Container\GlobalContainer;
@@ -137,7 +138,8 @@ class PayoneDebitTest extends AbstractBusinessTest
     {
         $persistenceFactory = new PayonePersistenceFactory();
 
-        $saveOrderTransfer = $this->tester->createOrder();
+        $saveOrderTransfer = new SaveOrderTransfer();
+        $saveOrderTransfer->setIdSalesOrder($this->orderEntity->getIdSalesOrder());
         $this->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
 
         $paymentPayoneQuery = $persistenceFactory->createPaymentPayoneQuery()->lastCreatedFirst();

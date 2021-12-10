@@ -47,8 +47,22 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
     protected $tester;
 
     /**
-     * @dataProvider orderPriceForDistributionDataProvider
-     *
+     * @return void
+     */
+    public function testDistributePricesShouldReturnOrderTransferWithDistributedPrices(): void
+    {
+        foreach ($this->orderPriceForDistributionDataProvider() as $dataSet) {
+            $this->distributePricesShouldReturnOrderTransferWithDistributedPrices(
+                $dataSet['itemTransfers'],
+                $dataSet['expenseTransfers'],
+                $dataSet['paymentTransfers'],
+                $dataSet['totalsTransfer'],
+                $dataSet['expectedTotalPrice'],
+            );
+        }
+    }
+
+    /**
      * @param array<\Generated\Shared\Transfer\ItemTransfer> $orderItemTransfers
      * @param array<\Generated\Shared\Transfer\ExpenseTransfer> $expenseTransfers
      * @param array<\Generated\Shared\Transfer\PaymentTransfer> $paymentTransfers
@@ -57,7 +71,7 @@ class OrderPriceDistributorTest extends AbstractBusinessTest
      *
      * @return void
      */
-    public function testDistributePricesShouldReturnOrderTransferWithDistributedPrices(
+    protected function distributePricesShouldReturnOrderTransferWithDistributedPrices(
         array $orderItemTransfers,
         array $expenseTransfers,
         array $paymentTransfers,

@@ -1,6 +1,5 @@
 <?php
 
-use Spryker\Shared\Config\Config;
 
 if (!defined('APPLICATION')) {
     define('APPLICATION', 'Payone');

@@ -8,7 +8,6 @@ parameters:
     checkMissingIterableValueType: false
     ignoreErrors:
         - '#Expression on left side of \?\? is not nullable\.#'
-        - '#Parameter .+ of method .+ has invalid type .+#'
         - '#PHPDoc type .+ of property .+ is not covariant with PHPDoc type .+ of overridden property .+#'
         - '#Property .+ does not accept .+#'
         - '#Property .+ in .+ is not nullable#'
@@ -18,13 +17,10 @@ parameters:
         - '#Parameter .+ of .+ expects .+ given\.#'
         - '#Cannot call method .+ on .+#'
         - '#Variable .+ in .+ is never defined.#'
-        - '#Property .+ has unknown class .+ as its type\.#'
-        - '#Call to static method create\(\) on an unknown class Orm\\Zed\\.+\\Persistence\\.+#'
-        - '#Instantiated class Orm\\Zed\\Payone\\Persistence\\.+ not found.+#'
-        - '#Call to method .+ on an unknown class Orm\\Zed\\.+\\Persistence\\.+#'
-        - '#PHPDoc tag @var for variable .+ contains unknown class Orm\\Zed\\.+\\Persistence\\.+#'
         - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
         - '#Argument of an invalid type .+ supplied for foreach, only iterables are supported\.#'
+        - '#Method .+ should return .+ but returns .+\.#'
+        - '#Call to an undefined method .+\.#'
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
         - src/SprykerEco/Yves/Payone/Form/Constraint

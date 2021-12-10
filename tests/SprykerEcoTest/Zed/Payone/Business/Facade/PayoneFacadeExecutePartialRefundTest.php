@@ -7,9 +7,11 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
+use ArrayObject;
 use Codeception\Module;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
@@ -51,7 +53,11 @@ class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
      */
     public function testExecutePartialRefund(): void
     {
-        $saveOrderTransfer = $this->tester->createOrder();
+        $saveOrderTransfer = new SaveOrderTransfer();
+        $saveOrderTransfer->setIdSalesOrder($this->orderEntity->getIdSalesOrder());
+        $items = new ArrayObject();
+        $items->append($this->orderEntity->getItems()->offsetGet(0));
+        $saveOrderTransfer->setOrderItems($items);
         $itemTransfer = $saveOrderTransfer->getOrderItems()->offsetGet(0);
         $paymentPayoneEntity = $this->tester->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
         $this->tester->createPaymentPayoneOrderItem($paymentPayoneEntity->getIdPaymentPayone(), $itemTransfer->getIdSalesOrderItem());
