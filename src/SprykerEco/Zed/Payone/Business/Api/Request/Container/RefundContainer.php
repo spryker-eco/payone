@@ -24,7 +24,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     protected $txid;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $sequencenumber;
 
@@ -34,12 +34,12 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $narrative_text;
 
@@ -59,37 +59,37 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     protected $invoicing;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankbranchcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcheckdigit;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 

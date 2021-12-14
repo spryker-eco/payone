@@ -27,7 +27,7 @@ class PluginCountryFactory extends AbstractPlugin
     public const DEFAULT_COUNTRY = 'default';
 
     /**
-     * @var array<\SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface>
+     * @var array
      */
     protected $subFormsCreators = [];
 

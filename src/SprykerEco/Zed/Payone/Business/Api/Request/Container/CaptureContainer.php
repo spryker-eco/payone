@@ -24,7 +24,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     protected $txid;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $sequencenumber;
 

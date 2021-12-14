@@ -35,7 +35,7 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
