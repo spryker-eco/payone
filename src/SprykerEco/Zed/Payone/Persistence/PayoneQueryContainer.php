@@ -61,12 +61,12 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @api
      *
-     * @param string $invoiceTitle
-     * @param int $customerId
+     * @param string|null $invoiceTitle
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId): SpyPaymentPayoneQuery
+    public function createPaymentByInvoiceTitleAndCustomerIdQuery(?string $invoiceTitle, ?int $customerId): SpyPaymentPayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneQuery();
         $query->useSpySalesOrderQuery()
@@ -87,12 +87,12 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @api
      *
-     * @param string $fileReference
-     * @param int $customerId
+     * @param string|null $fileReference
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId): SpyPaymentPayoneQuery
+    public function createPaymentByFileReferenceAndCustomerIdQuery(?string $fileReference, ?int $customerId): SpyPaymentPayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneQuery();
         $query->useSpySalesOrderQuery()

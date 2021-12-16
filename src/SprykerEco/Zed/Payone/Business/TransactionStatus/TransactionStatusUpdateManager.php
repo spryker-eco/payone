@@ -151,7 +151,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      */
     protected function validate(TransactionStatusUpdateInterface $request)
     {
-        $systemHashedKey = $this->hashGenerator->hash($this->standardParameter->getKey());
+        $systemHashedKey = $this->hashGenerator->hash($this->standardParameter->getKey() ?? '');
         if ($request->getKey() !== $systemHashedKey) {
             return $this->createErrorResponse('Payone transaction status update: Given and internal key do not match!');
         }
@@ -353,7 +353,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     {
         $records = $this->getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
 
-        return !empty($transactionStatusLogs);
+        return !empty($records);
     }
 
     /**

@@ -72,7 +72,7 @@ class PayoneCreditCardChecker implements PayoneCreditCardCheckerInterface
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData): CreditCardCheckResponseTransfer
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo $paymentMethodMapper */
-        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($creditCardData->getPayment()->getPaymentMethod());
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($creditCardData->getPayment()->getPaymentMethod() ?? '');
         $requestContainer = $paymentMethodMapper->mapCreditCardCheck($creditCardData);
 
         $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);

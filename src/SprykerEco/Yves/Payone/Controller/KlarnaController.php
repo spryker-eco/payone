@@ -67,7 +67,7 @@ class KlarnaController extends AbstractController
 
         $payoneKlarnaStartSessionRequestTransfer = new PayoneKlarnaStartSessionRequestTransfer();
         $payoneKlarnaStartSessionRequestTransfer->setQuote($quoteTransfer);
-        $payoneKlarnaStartSessionRequestTransfer->setPayMethod($payMethod);
+        $payoneKlarnaStartSessionRequestTransfer->setPayMethod((string)$payMethod);
 
         return $payoneKlarnaStartSessionRequestTransfer;
     }

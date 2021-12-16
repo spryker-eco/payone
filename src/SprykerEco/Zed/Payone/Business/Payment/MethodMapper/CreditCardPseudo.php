@@ -119,12 +119,12 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
         $creditCardCheckContainer = new CreditCardCheckContainer();
 
         $creditCardCheckContainer->setAid($this->getStandardParameter()->getAid());
-        $creditCardCheckContainer->setCardPan($payoneCreditCardTransfer->getCardPan());
-        $creditCardCheckContainer->setCardType($payoneCreditCardTransfer->getCardType());
-        $creditCardCheckContainer->setCardExpireDate($payoneCreditCardTransfer->getCardExpireDate());
-        $creditCardCheckContainer->setCardCvc2($payoneCreditCardTransfer->getCardCvc2());
-        $creditCardCheckContainer->setCardIssueNumber($payoneCreditCardTransfer->getCardIssueNumber());
-        $creditCardCheckContainer->setStoreCardData($payoneCreditCardTransfer->getStoreCardData());
+        $creditCardCheckContainer->setCardPan($payoneCreditCardTransfer->getCardPan() ?? '');
+        $creditCardCheckContainer->setCardType($payoneCreditCardTransfer->getCardType() ?? '');
+        $creditCardCheckContainer->setCardExpireDate((int)$payoneCreditCardTransfer->getCardExpireDate());
+        $creditCardCheckContainer->setCardCvc2((int)$payoneCreditCardTransfer->getCardCvc2());
+        $creditCardCheckContainer->setCardIssueNumber((int)$payoneCreditCardTransfer->getCardIssueNumber());
+        $creditCardCheckContainer->setStoreCardData($payoneCreditCardTransfer->getStoreCardData() ?? '');
         $creditCardCheckContainer->setLanguage($this->getStandardParameter()->getLanguage());
 
         return $creditCardCheckContainer;
@@ -173,7 +173,7 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
     ): CreditCardPseudoContainer {
         $paymentMethodContainer = new CreditCardPseudoContainer();
 
-        $pseudoCardPan = $paymentEntity->getSpyPaymentPayoneDetail()->getPseudoCardPan();
+        $pseudoCardPan = $paymentEntity->getSpyPaymentPayoneDetail()->getPseudoCardPan() ?? '';
         $paymentMethodContainer->setPseudoCardPan($pseudoCardPan);
 
         $threeDSecure = $this->createThreeDSecureData($paymentEntity);

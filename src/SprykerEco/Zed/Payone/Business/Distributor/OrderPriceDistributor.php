@@ -14,12 +14,16 @@ use SprykerEco\Zed\Payone\PayoneConfig;
 class OrderPriceDistributor implements OrderPriceDistributorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function distributeOrderPrice(OrderTransfer $orderTransfer): OrderTransfer
+    public function distributeOrderPrice(?OrderTransfer $orderTransfer): OrderTransfer
     {
+        if (empty($orderTransfer)) {
+            return $orderTransfer;
+        }
+
         if ($orderTransfer->getPayments()->count() <= 1) {
             return $orderTransfer;
         }
@@ -41,12 +45,12 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
     }
 
     /**
-     * @param int $paymentAmount
-     * @param int $grandTotalAmount
+     * @param int|null $paymentAmount
+     * @param int|null $grandTotalAmount
      *
      * @return float
      */
-    protected function calculatePriceRatio(int $paymentAmount, int $grandTotalAmount): float
+    protected function calculatePriceRatio(?int $paymentAmount, ?int $grandTotalAmount): float
     {
         return $paymentAmount / $grandTotalAmount;
     }
@@ -70,13 +74,13 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
     }
 
     /**
-     * @param int $unitPrice
+     * @param int|null $unitPrice
      * @param float $priceRatio
      * @param float $roundingError
      *
      * @return int
      */
-    protected function calculateRoundedPrice(int $unitPrice, float $priceRatio, float &$roundingError): int
+    protected function calculateRoundedPrice(?int $unitPrice, float $priceRatio, float &$roundingError): int
     {
         $priceBeforeRound = ($unitPrice * $priceRatio) + $roundingError;
         $priceRounded = (int)round($priceBeforeRound);

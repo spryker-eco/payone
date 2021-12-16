@@ -13,11 +13,11 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataC
 interface PreAuthorizationContainerInterface extends AuthorizationContainerInterface
 {
     /**
-     * @param string $financingType
+     * @param string|null $financingType
      *
      * @return void
      */
-    public function setFinancingtype(string $financingType): void;
+    public function setFinancingtype(?string $financingType): void;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $payData

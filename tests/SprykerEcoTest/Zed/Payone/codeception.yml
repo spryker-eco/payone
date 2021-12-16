@@ -42,11 +42,7 @@ suites:
                     schemaDirectories:
                         - src/*/Shared/*/Transfer/
                         - vendor/spryker/*/src/Spryker/Shared/*/Transfer/
-                - \SprykerTest\Shared\Propel\Helper\PropelDiffHelper:
-                    isolated: true
-                - \SprykerTest\Shared\Propel\Helper\PropelMigrateHelper:
-                    isolated: true
-                - \SprykerTest\Shared\Propel\Helper\PropelBuildModelHelper:
+                - \SprykerTest\Shared\Propel\Helper\PropelHelper:
                     isolated: true
                     schemaSourceDirectoryList:
                         - src/*/Zed/*/Persistence/Propel/Schema

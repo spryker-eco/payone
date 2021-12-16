@@ -125,7 +125,7 @@ class IndexController extends AbstractController
         }
 
         $getFileTransfer = new PayoneGetFileTransfer();
-        $getFileTransfer->setReference($request->query->get('id'));
+        $getFileTransfer->setReference((string)$request->query->get('id'));
         $getFileTransfer->setCustomerId($customerTransfer->getIdCustomer());
 
         $response = $this->getClient()->getFile($getFileTransfer);
@@ -156,7 +156,7 @@ class IndexController extends AbstractController
         }
 
         $getInvoiceTransfer = new PayoneGetInvoiceTransfer();
-        $getInvoiceTransfer->setReference($request->query->get('id'));
+        $getInvoiceTransfer->setReference((string)$request->query->get('id'));
         $getInvoiceTransfer->setCustomerId($customerTransfer->getIdCustomer());
 
         $response = $this->getClient()->getInvoice($getInvoiceTransfer);
@@ -187,7 +187,7 @@ class IndexController extends AbstractController
         }
 
         $getInvoiceTransfer = new PayoneGetInvoiceTransfer();
-        $getInvoiceTransfer->setReference($request->query->get('id'));
+        $getInvoiceTransfer->setReference((string)$request->query->get('id'));
         $getInvoiceTransfer->setCustomerId($customerTransfer->getIdCustomer());
 
         $response = $this->getClient()->getInvoice($getInvoiceTransfer);
@@ -210,8 +210,8 @@ class IndexController extends AbstractController
      */
     public function cancelRedirectAction(Request $request): Response
     {
-        $orderReference = $request->query->get('orderReference');
-        $urlHmac = $request->query->get('sig');
+        $orderReference = (string)$request->query->get('orderReference');
+        $urlHmac = (string)$request->query->get('sig');
 
         if ($orderReference) {
             $cancelRedirectTransfer = new PayoneCancelRedirectTransfer();

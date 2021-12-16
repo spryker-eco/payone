@@ -19,7 +19,7 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     protected $request = PayoneApiConstants::REQUEST_TYPE_REFUND;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $txid;
 
@@ -218,11 +218,11 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     }
 
     /**
-     * @param int $txid
+     * @param int|null $txid
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
-    public function setTxid(int $txid): RefundContainerInterface
+    public function setTxid(?int $txid): RefundContainerInterface
     {
         $this->txid = $txid;
 
@@ -230,9 +230,9 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxid(): int
+    public function getTxid(): ?int
     {
         return $this->txid;
     }

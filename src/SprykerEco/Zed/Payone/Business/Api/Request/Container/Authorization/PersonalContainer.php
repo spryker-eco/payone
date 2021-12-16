@@ -26,7 +26,7 @@ class PersonalContainer extends AbstractContainer
     protected $userid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $salutation;
 
@@ -36,12 +36,12 @@ class PersonalContainer extends AbstractContainer
     protected $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastname;
 
@@ -66,7 +66,7 @@ class PersonalContainer extends AbstractContainer
     protected $zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
@@ -83,12 +83,12 @@ class PersonalContainer extends AbstractContainer
     protected $state;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $telephonenumber;
 
@@ -102,7 +102,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * Language indicator (ISO639)
      *
-     * @var string
+     * @var string|null
      */
     protected $language;
 
@@ -122,7 +122,7 @@ class PersonalContainer extends AbstractContainer
     protected $personalId;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $ip;
 
@@ -163,11 +163,11 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $city
+     * @param string|null $city
      *
      * @return void
      */
-    public function setCity(string $city): void
+    public function setCity(?string $city): void
     {
         $this->city = $city;
     }
@@ -235,11 +235,11 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
      * @return void
      */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
@@ -253,11 +253,11 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $firstname
+     * @param string|null $firstname
      *
      * @return void
      */
-    public function setFirstName(string $firstname): void
+    public function setFirstName(?string $firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -271,11 +271,11 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $ip
+     * @param string|null $ip
      *
      * @return void
      */
-    public function setIp(string $ip): void
+    public function setIp(?string $ip): void
     {
         $this->ip = $ip;
     }
@@ -289,11 +289,11 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $language
+     * @param string|null $language
      *
      * @return void
      */
-    public function setLanguage(string $language): void
+    public function setLanguage(?string $language): void
     {
         $this->language = $language;
     }
@@ -307,11 +307,11 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $lastname
+     * @param string|null $lastname
      *
      * @return void
      */
-    public function setLastName(string $lastname): void
+    public function setLastName(?string $lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -325,11 +325,11 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $salutation
+     * @param string|null $salutation
      *
      * @return void
      */
-    public function setSalutation(string $salutation): void
+    public function setSalutation(?string $salutation): void
     {
         $this->salutation = $salutation;
     }
@@ -379,11 +379,11 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @param string $telephonenumber
+     * @param string|null $telephonenumber
      *
      * @return void
      */
-    public function setTelephoneNumber(string $telephonenumber): void
+    public function setTelephoneNumber(?string $telephonenumber): void
     {
         $this->telephonenumber = $telephonenumber;
     }

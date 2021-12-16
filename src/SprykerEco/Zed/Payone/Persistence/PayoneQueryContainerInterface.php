@@ -47,12 +47,12 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @api
      *
-     * @param string $invoiceTitle
-     * @param int $customerId
+     * @param string|null $invoiceTitle
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentByInvoiceTitleAndCustomerIdQuery(string $invoiceTitle, int $customerId): SpyPaymentPayoneQuery;
+    public function createPaymentByInvoiceTitleAndCustomerIdQuery(?string $invoiceTitle, ?int $customerId): SpyPaymentPayoneQuery;
 
     /**
      * Specification:
@@ -60,12 +60,12 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @api
      *
-     * @param string $fileReference
-     * @param int $customerId
+     * @param string|null $fileReference
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentByFileReferenceAndCustomerIdQuery(string $fileReference, int $customerId): SpyPaymentPayoneQuery;
+    public function createPaymentByFileReferenceAndCustomerIdQuery(?string $fileReference, ?int $customerId): SpyPaymentPayoneQuery;
 
     /**
      * Specification:
@@ -111,11 +111,11 @@ interface PayoneQueryContainerInterface extends QueryContainerInterface
      *
      * @api
      *
-     * @param int $orderId
+     * @param int|null $orderId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentById(int $orderId): SpyPaymentPayoneQuery;
+    public function createPaymentById(?int $orderId): SpyPaymentPayoneQuery;
 
     /**
      * Specification:

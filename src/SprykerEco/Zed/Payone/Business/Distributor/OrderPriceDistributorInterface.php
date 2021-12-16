@@ -12,9 +12,9 @@ use Generated\Shared\Transfer\OrderTransfer;
 interface OrderPriceDistributorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function distributeOrderPrice(OrderTransfer $orderTransfer): OrderTransfer;
+    public function distributeOrderPrice(?OrderTransfer $orderTransfer): OrderTransfer;
 }

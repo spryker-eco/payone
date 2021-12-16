@@ -19,7 +19,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     protected $request = PayoneApiConstants::REQUEST_TYPE_CAPTURE;
 
     /**
-     * @var string
+     * @var int|null
      */
     protected $txid;
 
@@ -34,7 +34,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
@@ -72,11 +72,11 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return void
      */
-    public function setCurrency(string $currency): void
+    public function setCurrency(?string $currency): void
     {
         $this->currency = $currency;
     }
@@ -108,19 +108,19 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param string $txid
+     * @param int|null $txid
      *
      * @return void
      */
-    public function setTxid(string $txid): void
+    public function setTxid(?int $txid): void
     {
         $this->txid = $txid;
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getTxid(): ?string
+    public function getTxid(): ?int
     {
         return $this->txid;
     }

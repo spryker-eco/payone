@@ -12,22 +12,22 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class ItemContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $pr;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $no;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $de;
 
@@ -39,7 +39,7 @@ class ItemContainer extends AbstractContainer
     protected $it;
 
     /**
-     * @var int
+     * @var float|null
      */
     protected $va;
 
@@ -94,19 +94,19 @@ class ItemContainer extends AbstractContainer
     }
 
     /**
-     * @param string $de
+     * @param string|null $de
      *
      * @return void
      */
-    public function setDe(string $de): void
+    public function setDe(?string $de): void
     {
         $this->de = $de;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDe(): string
+    public function getDe(): ?string
     {
         return $this->de;
     }
@@ -130,55 +130,55 @@ class ItemContainer extends AbstractContainer
     }
 
     /**
-     * @param string $id
+     * @param string|null $id
      *
      * @return void
      */
-    public function setId(string $id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
     /**
-     * @param int $no
+     * @param int|null $no
      *
      * @return void
      */
-    public function setNo(int $no): void
+    public function setNo(?int $no): void
     {
         $this->no = $no;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getNo(): int
+    public function getNo(): ?int
     {
         return $this->no;
     }
 
     /**
-     * @param int $pr
+     * @param int|null $pr
      *
      * @return void
      */
-    public function setPr(int $pr): void
+    public function setPr(?int $pr): void
     {
         $this->pr = $pr;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPr(): int
+    public function getPr(): ?int
     {
         return $this->pr;
     }
@@ -202,19 +202,19 @@ class ItemContainer extends AbstractContainer
     }
 
     /**
-     * @param int $va
+     * @param float|null $va
      *
      * @return void
      */
-    public function setVa(int $va): void
+    public function setVa(?float $va): void
     {
         $this->va = $va;
     }
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getVa(): int
+    public function getVa(): ?float
     {
         return $this->va;
     }

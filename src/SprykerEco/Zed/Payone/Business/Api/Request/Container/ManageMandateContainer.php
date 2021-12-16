@@ -17,7 +17,7 @@ class ManageMandateContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_MANAGEMANDATE;
 
     /**
-     * @var int
+     * @var string
      */
     protected $aid;
 
@@ -37,7 +37,7 @@ class ManageMandateContainer extends AbstractRequestContainer
     protected $currency;
 
     /**
-     * @var string
+     * @var int|null
      */
     protected $customerid;
 
@@ -82,7 +82,7 @@ class ManageMandateContainer extends AbstractRequestContainer
     protected $country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
@@ -225,19 +225,19 @@ class ManageMandateContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $customerid
+     * @param int|null $customerid
      *
      * @return void
      */
-    public function setCustomerid(string $customerid): void
+    public function setCustomerid(?int $customerid): void
     {
         $this->customerid = $customerid;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getCustomerid(): string
+    public function getCustomerid(): ?int
     {
         return $this->customerid;
     }
@@ -387,19 +387,19 @@ class ManageMandateContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
      * @return void
      */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

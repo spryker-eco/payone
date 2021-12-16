@@ -10,16 +10,16 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\Pay
 class CashOnDeliveryContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $shippingprovider;
 
     /**
-     * @param string $shippingprovider
+     * @param string|null $shippingprovider
      *
      * @return void
      */
-    public function setShippingProvider(string $shippingprovider): void
+    public function setShippingProvider(?string $shippingprovider): void
     {
         $this->shippingprovider = $shippingprovider;
     }

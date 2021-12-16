@@ -70,9 +70,12 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
         $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->setWorkOrderId(
             $response->getWorkOrderId(),
         );
-        $this->cartClient->storeQuote($quoteTransfer);
 
-        return new RedirectResponse($response->getRedirectUrl());
+        if ($quoteTransfer !== null) {
+            $this->cartClient->storeQuote($quoteTransfer);
+        }
+
+        return new RedirectResponse($response->getRedirectUrl() ?? '');
     }
 
     /**

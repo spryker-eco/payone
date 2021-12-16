@@ -101,8 +101,8 @@ class PayoneHandler implements PayoneHandlerInterface
     {
         $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
 
-        $this->setPaymentProviderAndMethod($quoteTransfer, $paymentSelection);
-        $this->setPayonePayment($request, $quoteTransfer, $paymentSelection);
+        $this->setPaymentProviderAndMethod($quoteTransfer, $paymentSelection ?? '');
+        $this->setPayonePayment($request, $quoteTransfer, $paymentSelection ?? '');
         $this->setPaymentSuccessIncludePath($quoteTransfer);
 
         return $quoteTransfer;

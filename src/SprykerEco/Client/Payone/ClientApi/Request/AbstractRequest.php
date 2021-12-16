@@ -80,11 +80,11 @@ abstract class AbstractRequest extends AbstractContainer
     protected $hash;
 
     /**
-     * @param string $encoding
+     * @param string|null $encoding
      *
      * @return void
      */
-    public function setEncoding(string $encoding): void
+    public function setEncoding(?string $encoding): void
     {
         $this->encoding = $encoding;
     }
@@ -116,11 +116,11 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @param string $mid
+     * @param string|null $mid
      *
      * @return void
      */
-    public function setMid(string $mid): void
+    public function setMid(?string $mid): void
     {
         $this->mid = $mid;
     }
@@ -134,11 +134,11 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @param string $aid
+     * @param string|null $aid
      *
      * @return void
      */
-    public function setAid(string $aid): void
+    public function setAid(?string $aid): void
     {
         $this->aid = $aid;
     }
@@ -170,11 +170,11 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @param string $portalid
+     * @param string|null $portalid
      *
      * @return void
      */
-    public function setPortalid(string $portalid): void
+    public function setPortalid(?string $portalid): void
     {
         $this->portalid = $portalid;
     }
@@ -206,11 +206,11 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @param string $responseType
+     * @param string|null $responseType
      *
      * @return void
      */
-    public function setResponseType(string $responseType): void
+    public function setResponseType(?string $responseType): void
     {
         $this->responsetype = $responseType;
     }
@@ -322,11 +322,11 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @param string $language
+     * @param string|null $language
      *
      * @return void
      */
-    public function setLanguage(string $language): void
+    public function setLanguage(?string $language): void
     {
         $this->language = $language;
     }

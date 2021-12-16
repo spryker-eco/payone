@@ -171,7 +171,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
     public function mapGetInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): GetInvoiceContainer
     {
         $getInvoiceContainer = new GetInvoiceContainer();
-        $getInvoiceContainer->setInvoiceTitle($getInvoiceTransfer->getReference());
+        $getInvoiceContainer->setInvoiceTitle($getInvoiceTransfer->getReference() ?? '');
 
         return $getInvoiceContainer;
     }

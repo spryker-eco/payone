@@ -82,7 +82,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
         $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentEntity);
         $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
-        $paymentEntity = $this->findPaymentByTransactionId($paymentEntity->getTransactionId());
+        $paymentEntity = $this->findPaymentByTransactionId($paymentEntity->getTransactionId() ?? 0);
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
@@ -94,13 +94,13 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
     }
 
     /**
-     * @param int $transactionId
+     * @param int|null $transactionId
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByTransactionId(int $transactionId): SpyPaymentPayone
+    protected function findPaymentByTransactionId(?int $transactionId): ?SpyPaymentPayone
     {
-        return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
+        return !empty($transactionId) ? $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne() : null;
     }
 
     /**

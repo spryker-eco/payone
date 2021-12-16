@@ -42,7 +42,7 @@ class CreditCardCheck extends AbstractCall implements CallInterface
         $this->applyStandardParameter($container);
 
         if ($container->getStoreCardData() === null) {
-            $container->setStoreCardData($this->standardParameter->getStoreCardData());
+            $container->setStoreCardData($this->standardParameter->getStoreCardData() ?? '');
         }
 
         $securityKey = $this->standardParameter->getKey();

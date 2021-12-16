@@ -199,13 +199,13 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
 
     /**
      * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer|\SprykerEco\Zed\Payone\Business\Payment\RequestSender\CaptureContainerInterface $container
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
     protected function preparePartialCaptureOrderItems(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer,
-        AbstractRequestContainer $container
+        $container
     ): AbstractRequestContainer {
         $arrayIt = [];
         $arrayId = [];
@@ -258,11 +258,11 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
      *
      * @return int
      */
-    protected function getDeliveryCosts(OrderTransfer $orderTransfer): int
+    protected function getDeliveryCosts(?OrderTransfer $orderTransfer): int
     {
         foreach ($orderTransfer->getExpenses() as $expense) {
             if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
@@ -295,11 +295,11 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
      *
      * @return int
      */
-    protected function calculateExpensesCost(OrderTransfer $orderTransfer): int
+    protected function calculateExpensesCost(?OrderTransfer $orderTransfer): int
     {
         $expensesCostAmount = 0;
 

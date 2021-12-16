@@ -45,7 +45,7 @@ class StandartParameterMapper implements StandartParameterMapperInterface
     {
         $container->setApiVersion(PayoneApiConstants::API_VERSION_3_9);
         $container->setEncoding($standardParameter->getEncoding());
-        $container->setKey($this->hashGenerator->hash($standardParameter->getKey()));
+        $container->setKey($this->hashGenerator->hash($standardParameter->getKey() ?? ''));
         $container->setMid($standardParameter->getMid());
         $container->setPortalid($standardParameter->getPortalId());
         $container->setMode($this->modeDetector->getMode());

@@ -14,7 +14,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataC
 class KlarnaGenericPaymentContainer extends AbstractRequestContainer
 {
     /**
-     * @var string|null
+     * @var string
      */
     protected $request = PayoneApiConstants::REQUEST_TYPE_GENERICPAYMENT;
 
@@ -110,11 +110,11 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param int $amount
+     * @param int|null $amount
      *
      * @return void
      */
-    public function setAmount(int $amount): void
+    public function setAmount(?int $amount): void
     {
         $this->amount = $amount;
     }
@@ -128,11 +128,11 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return void
      */
-    public function setCurrency(string $currency): void
+    public function setCurrency(?string $currency): void
     {
         $this->currency = $currency;
     }
@@ -254,11 +254,11 @@ class KlarnaGenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $financingType
+     * @param string|null $financingType
      *
      * @return void
      */
-    public function setFinancingType(string $financingType): void
+    public function setFinancingType(?string $financingType): void
     {
         $this->financingtype = $financingType;
     }

@@ -59,8 +59,8 @@ class GatewayController extends AbstractGatewayController
     {
         $urlHmacGenerator = $this->getFactory()->createUrlHmacGenerator();
         $hash = $urlHmacGenerator->hash(
-            $cancelRedirectTransfer->getOrderReference(),
-            $this->getFactory()->getConfig()->getRequestStandardParameter()->getKey(),
+            $cancelRedirectTransfer->getOrderReference() ?? '',
+            $this->getFactory()->getConfig()->getRequestStandardParameter()->getKey() ?? '',
         );
 
         if ($cancelRedirectTransfer->getUrlHmac() === $hash) {
@@ -186,9 +186,9 @@ class GatewayController extends AbstractGatewayController
             $order = SpySalesOrderQuery::create()
                 ->filterByOrderReference($getPaymentDetailTransfer->getOrderReference())
                 ->findOne();
-            $getPaymentDetailTransfer->setOrderId($order->getIdSalesOrder());
+            $getPaymentDetailTransfer->setOrderId((string)$order->getIdSalesOrder());
         }
-        $response = $this->getFacade()->getPaymentDetail($getPaymentDetailTransfer->getOrderId());
+        $response = $this->getFacade()->getPaymentDetail((int)$getPaymentDetailTransfer->getOrderId());
         $getPaymentDetailTransfer->setPaymentDetail($response);
 
         return $getPaymentDetailTransfer;

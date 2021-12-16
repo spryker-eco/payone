@@ -17,7 +17,7 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_3DSECURE_CHECK;
 
     /**
-     * @var int
+     * @var string
      */
     protected $aid;
 

@@ -162,14 +162,14 @@ class OnlineBankTransfer extends AbstractMapper
 
         $paymentMethodContainer = new OnlineBankTransferContainer();
 
-        $paymentMethodContainer->setOnlineBankTransferType($paymentDetailEntity->getType());
+        $paymentMethodContainer->setOnlineBankTransferType($paymentDetailEntity->getType() ?? '');
         $paymentMethodContainer->setRedirect($this->createRedirectContainer($paymentEntity->getSpySalesOrder()->getOrderReference()));
-        $paymentMethodContainer->setBankCountry($paymentDetailEntity->getBankCountry());
-        $paymentMethodContainer->setBankAccount($paymentDetailEntity->getBankAccount());
-        $paymentMethodContainer->setBankCode($paymentDetailEntity->getBankCode());
-        $paymentMethodContainer->setBankGroupType($paymentDetailEntity->getBankGroupType());
-        $paymentMethodContainer->setIban($paymentDetailEntity->getIban());
-        $paymentMethodContainer->setBic($paymentDetailEntity->getBic());
+        $paymentMethodContainer->setBankCountry($paymentDetailEntity->getBankCountry() ?? '');
+        $paymentMethodContainer->setBankAccount($paymentDetailEntity->getBankAccount() ?? '');
+        $paymentMethodContainer->setBankCode($paymentDetailEntity->getBankCode() ?? '');
+        $paymentMethodContainer->setBankGroupType($paymentDetailEntity->getBankGroupType() ?? '');
+        $paymentMethodContainer->setIban($paymentDetailEntity->getIban() ?? '');
+        $paymentMethodContainer->setBic($paymentDetailEntity->getBic() ?? '');
 
         return $paymentMethodContainer;
     }

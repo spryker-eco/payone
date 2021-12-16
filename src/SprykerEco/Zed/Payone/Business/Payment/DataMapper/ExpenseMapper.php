@@ -30,19 +30,19 @@ class ExpenseMapper implements ExpenseMapperInterface
     protected const ONE_ITEM_AMOUNT = 1;
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function mapExpenses(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
+    public function mapExpenses(?OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
+        $arrayIt = $container->getIt();
+        $arrayId = $container->getId();
+        $arrayPr = $container->getPr();
+        $arrayNo = $container->getNo();
+        $arrayDe = $container->getDe();
+        $arrayVa = $container->getVa();
 
         $key = count($arrayId) + 1;
 

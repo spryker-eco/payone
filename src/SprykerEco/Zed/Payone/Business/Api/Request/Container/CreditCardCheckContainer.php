@@ -17,7 +17,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_CREDITCARDCHECK;
 
     /**
-     * @var int
+     * @var string
      */
     protected $aid;
 

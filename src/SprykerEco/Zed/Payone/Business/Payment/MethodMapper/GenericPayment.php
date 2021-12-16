@@ -61,10 +61,10 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         GenericPaymentContainer $genericPayment,
         QuoteTransfer $quoteTransfer
     ): GenericPaymentContainer {
-        $genericPayment->setAmount($quoteTransfer->getTotals()->getGrandTotal());
+        $genericPayment->setAmount((int)$quoteTransfer->getTotals()->getGrandTotal());
         $genericPayment->setWorkOrderId(
             $quoteTransfer->getPayment()
-                ->getPayonePaypalExpressCheckout()->getWorkOrderId(),
+                ->getPayonePaypalExpressCheckout()->getWorkOrderId() ?? '',
         );
 
         return $genericPayment;
@@ -81,7 +81,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
 
         $genericPayment->setAid($this->getStandardParameter()->getAid());
         $genericPayment->setClearingType(PayoneApiConstants::CLEARING_TYPE_E_WALLET);
-        $genericPayment->setCurrency($this->getStandardParameter()->getCurrency());
+        $genericPayment->setCurrency($this->getStandardParameter()->getCurrency() ?? '');
         $genericPayment->setWalletType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL);
 
         return $genericPayment;
@@ -106,7 +106,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer $preAuthorizationContainer */
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
 
-        $preAuthorizationContainer->setWorkOrderId($paymentEntity->getSpyPaymentPayoneDetail()->getWorkOrderId());
+        $preAuthorizationContainer->setWorkOrderId($paymentEntity->getSpyPaymentPayoneDetail()->getWorkOrderId() ?? '');
 
         return $preAuthorizationContainer;
     }
@@ -153,7 +153,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $paymentMethodContainer = new ExpressCheckoutContainer();
         $paymentMethodContainer->setRedirect($this->createRedirectContainer($paymentEntity->getSpySalesOrder()->getOrderReference()));
 
-        $paymentMethodContainer->setWalletType($paymentEntity->getSpyPaymentPayoneDetail()->getType());
+        $paymentMethodContainer->setWalletType($paymentEntity->getSpyPaymentPayoneDetail()->getType() ?? '');
 
         return $paymentMethodContainer;
     }

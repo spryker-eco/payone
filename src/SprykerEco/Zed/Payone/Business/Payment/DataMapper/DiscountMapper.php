@@ -35,12 +35,12 @@ class DiscountMapper implements DiscountMapperInterface
      */
     public function mapDiscounts($discountContainer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
+        $arrayIt = $container->getIt();
+        $arrayId = $container->getId();
+        $arrayPr = $container->getPr();
+        $arrayNo = $container->getNo();
+        $arrayDe = $container->getDe();
+        $arrayVa = $container->getVa();
 
         $key = count($arrayId) + 1;
 

@@ -181,7 +181,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      */
     protected function hasApiLogStatus(OrderTransfer $orderTransfer, string $request, string $status): bool
     {
-        $idSalesOrder = $orderTransfer->getIdSalesOrder();
+        $idSalesOrder = (int)$orderTransfer->getIdSalesOrder();
         $apiLog = $this->queryContainer->createApiLogsByOrderIdAndRequest($idSalesOrder, $request)->filterByStatus($status)->findOne();
 
         if ($apiLog === null) {
@@ -208,7 +208,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      */
     protected function findPaymentByOrder(OrderTransfer $orderTransfer): SpyPaymentPayone
     {
-        return $this->queryContainer->createPaymentByOrderId($orderTransfer->getIdSalesOrder())->findOne();
+        return $this->queryContainer->createPaymentByOrderId((int)$orderTransfer->getIdSalesOrder())->findOne();
     }
 
     /**

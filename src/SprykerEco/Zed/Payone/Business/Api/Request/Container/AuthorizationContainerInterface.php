@@ -60,11 +60,11 @@ interface AuthorizationContainerInterface
     public function getRequest(): string;
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return void
      */
-    public function setCurrency(string $currency): void;
+    public function setCurrency(?string $currency): void;
 
     /**
      * set the system-Name
@@ -146,9 +146,9 @@ interface AuthorizationContainerInterface
     public function setParam(string $param): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount(): int;
+    public function getAmount(): ?int;
 
     /**
      * @param string|null $encoding
@@ -294,9 +294,9 @@ interface AuthorizationContainerInterface
     public function getAid(): ?string;
 
     /**
-     * @param int $amount
+     * @param int|null $amount
      *
      * @return void
      */
-    public function setAmount(int $amount): void;
+    public function setAmount(?int $amount): void;
 }

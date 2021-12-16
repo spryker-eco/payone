@@ -17,7 +17,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * Sub account ID
      *
-     * @var int
+     * @var string|null
      */
     protected $aid;
 
@@ -41,14 +41,14 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * Total amount (in smallest currency unit! e.g. cent)
      *
-     * @var int
+     * @var int|null
      */
     protected $amount;
 
     /**
      * Currency (ISO-4217)
      *
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
@@ -125,19 +125,19 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @param int $amount
+     * @param int|null $amount
      *
      * @return void
      */
-    public function setAmount(int $amount): void
+    public function setAmount(?int $amount): void
     {
         $this->amount = $amount;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -161,11 +161,11 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return void
      */
-    public function setCurrency(string $currency): void
+    public function setCurrency(?string $currency): void
     {
         $this->currency = $currency;
     }

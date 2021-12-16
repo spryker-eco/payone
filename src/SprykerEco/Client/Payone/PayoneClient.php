@@ -124,7 +124,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
         $personalData = new PayonePersonalDataTransfer();
         $customer = $quoteTransfer->getCustomer();
         $billingAddress = $quoteTransfer->getBillingAddress();
-        $personalData->setCustomerId($customer->getIdCustomer());
+        $personalData->setCustomerId((string)$customer->getIdCustomer());
         $personalData->setLastName($billingAddress->getLastName());
         $personalData->setFirstName($billingAddress->getFirstName());
         $personalData->setCompany($billingAddress->getCompany());

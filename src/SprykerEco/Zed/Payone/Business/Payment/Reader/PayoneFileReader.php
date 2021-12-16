@@ -103,12 +103,12 @@ class PayoneFileReader implements PayoneFileReaderInterface
     }
 
     /**
-     * @param string $fileReference
-     * @param int $customerId
+     * @param string|null $fileReference
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByFileReferenceAndCustomerId(string $fileReference, int $customerId): ?SpyPaymentPayone
+    protected function findPaymentByFileReferenceAndCustomerId(?string $fileReference, ?int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId)->findOne();
     }
