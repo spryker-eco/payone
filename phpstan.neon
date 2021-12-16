@@ -19,7 +19,7 @@ parameters:
         - '#Parameter .+ of function ucfirst expects string, string\|null given\.#'
         - '#Parameter .+ of function strpos expects string, string\|null given\.#'
         - '#Parameter .+ of function base64_decode expects string, string\|null given\.#'
-        - '#Parameter \#1 \$str of function md5 expects string, string\|null given\.#'
+        - '#Parameter .+ of function md5 expects string, string\|null given\.#'
         - '#Parameter .+ of method .+ expects Orm\\Zed\\Payone\\Persistence\\SpyPaymentPayone, Orm\\Zed\\Payone\\Persistence\\SpyPaymentPayone\|null given\.#'
         - '#Parameter .+ of method .+ expects .+Interface, .+AbstractRequestContainer given\.#'
         - '#Parameter .+ of method .+ expects .+AbstractRequestContainer, .+Interface given\.#'
