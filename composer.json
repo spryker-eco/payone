@@ -88,12 +88,6 @@
         "sort-packages": true,
         "platform-check": false
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:spryker/spryker.git"
-        }
-    ],
     "replace": {
         "spryker/payone": "*"
     }
