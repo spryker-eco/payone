@@ -49,7 +49,7 @@ class AuthorizationResponseMapper implements AuthorizationResponseMapperInterfac
         $creditor->setEmail($responseContainer->getCreditorEmail());
 
         // Fill base response transfer
-        $baseResponse->setErrorCode($responseContainer->getErrorcode());
+        $baseResponse->setErrorCode((string)$responseContainer->getErrorcode());
         $baseResponse->setErrorMessage($responseContainer->getErrormessage());
         $baseResponse->setCustomerMessage($responseContainer->getCustomermessage());
         $baseResponse->setStatus($responseContainer->getStatus());

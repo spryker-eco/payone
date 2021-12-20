@@ -23,14 +23,26 @@ use SprykerEco\Zed\Payone\PayoneConfig;
  */
 class SecurityInvoiceTest extends AbstractMethodMapperTest
 {
+    /**
+     * @var string
+     */
     protected const STANDARD_PARAMETER_CLEARING_TYPE = 'rec';
 
+    /**
+     * @var array
+     */
     protected const AUTHORIZATION__SECURITY_INVOICE_REQUIRED_PARAMS = [
     ];
 
+    /**
+     * @var array
+     */
     protected const PREAUTHORIZATION_INVOICE_REQUIRED_PARAMS = [
     ];
 
+    /**
+     * @var array
+     */
     protected const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -40,6 +52,9 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
         'email' => self::DEFAULT_EMAIL,
     ];
 
+    /**
+     * @var array
+     */
     protected const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -52,7 +67,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToPreauthorization()
+    public function testMapPaymentToPreauthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
@@ -78,7 +93,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToAuthorization()
+    public function testMapPaymentToAuthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
@@ -106,7 +121,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToCapture()
+    public function testMapPaymentToCapture(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
@@ -115,14 +130,14 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
 
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
     /**
      * @return void
      */
-    public function testMapPaymentToRefund()
+    public function testMapPaymentToRefund(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
@@ -131,14 +146,14 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
 
         foreach (static::REFUND_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
     /**
      * @return void
      */
-    public function testMapPaymentToDebit()
+    public function testMapPaymentToDebit(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new SecurityInvoice($this->getStoreConfigMock(), $this->getPayoneZedConfigMock()));
@@ -147,7 +162,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
 
         foreach (static::DEBIT_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 

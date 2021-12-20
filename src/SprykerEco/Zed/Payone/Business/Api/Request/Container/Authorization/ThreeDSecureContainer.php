@@ -36,7 +36,7 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setCavv($cavv)
+    public function setCavv(string $cavv): void
     {
         $this->cavv = $cavv;
     }
@@ -44,7 +44,7 @@ class ThreeDSecureContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getCavv()
+    public function getCavv(): string
     {
         return $this->cavv;
     }
@@ -54,7 +54,7 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setEci($eci)
+    public function setEci(string $eci): void
     {
         $this->eci = $eci;
     }
@@ -62,7 +62,7 @@ class ThreeDSecureContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getEci()
+    public function getEci(): string
     {
         return $this->eci;
     }
@@ -72,7 +72,7 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setXid($xid)
+    public function setXid(string $xid): void
     {
         $this->xid = $xid;
     }
@@ -80,7 +80,7 @@ class ThreeDSecureContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getXid()
+    public function getXid(): string
     {
         return $this->xid;
     }
@@ -90,7 +90,7 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setRedirect(RedirectContainer $redirect)
+    public function setRedirect(RedirectContainer $redirect): void
     {
         $this->redirect = $redirect;
     }
@@ -98,7 +98,7 @@ class ThreeDSecureContainer extends AbstractContainer
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
      */
-    public function getRedirect()
+    public function getRedirect(): RedirectContainer
     {
         return $this->redirect;
     }

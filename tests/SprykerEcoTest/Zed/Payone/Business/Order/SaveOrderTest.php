@@ -30,7 +30,7 @@ class SaveOrderTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testSaveOrder()
+    public function testSaveOrder(): void
     {
         // Arrange
         $checkoutResponseTransfer = $this->hydrateCheckoutResponseTransfer();
@@ -59,7 +59,7 @@ class SaveOrderTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testSaveOrderPaymentStoresCorrectOrderPayment()
+    public function testSaveOrderPaymentStoresCorrectOrderPayment(): void
     {
         // Arrange
         $checkoutResponseTransfer = $this->hydrateCheckoutResponseTransfer();
@@ -88,12 +88,12 @@ class SaveOrderTest extends AbstractPayoneTest
     /**
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    protected function hydrateCheckoutResponseTransfer()
+    protected function hydrateCheckoutResponseTransfer(): CheckoutResponseTransfer
     {
         $checkoutResponseTransfer = (new CheckoutResponseTransfer())
             ->setSaveOrder(
                 (new SaveOrderTransfer())
-                    ->setIdSalesOrder($this->orderEntity->getIdSalesOrder())
+                    ->setIdSalesOrder($this->orderEntity->getIdSalesOrder()),
             );
 
         return $checkoutResponseTransfer;
@@ -102,7 +102,7 @@ class SaveOrderTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    protected function preparePayonePaymentTransfer()
+    protected function preparePayonePaymentTransfer(): void
     {
         $this->quoteTransfer->getPayment()
             ->getPayone()
@@ -113,7 +113,7 @@ class SaveOrderTest extends AbstractPayoneTest
                     ->setAmount(12345)
                     ->setIban('iban')
                     ->setBic('bic')
-                    ->setCurrency('EUR')
+                    ->setCurrency('EUR'),
             );
     }
 }

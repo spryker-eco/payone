@@ -12,10 +12,10 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 interface PayoneRequestProductDataMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer $itemsContainer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer
+     * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer|null $itemsContainer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\RefundContainerInterface|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\CaptureContainerInterface|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\DebitContainerInterface $requestContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function mapProductData($itemsContainer, AbstractRequestContainer $requestContainer): AbstractRequestContainer;
+    public function mapProductData($itemsContainer, $requestContainer): AbstractRequestContainer;
 }

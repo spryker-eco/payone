@@ -22,18 +22,33 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\EWallet;
  */
 class EWalletPayDirectTest extends AbstractMethodMapperTest
 {
+    /**
+     * @var string
+     */
     public const STANDARD_PARAMETER_CLEARING_TYPE = 'wlt';
 
+    /**
+     * @var string
+     */
     public const WALLET_TYPE = 'PDT';
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_E_WALLET_REQUIRED_PARAMS = [
         'wallettype' => self::WALLET_TYPE,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_E_WALLET_REQUIRED_PARAMS = [
         'wallettype' => self::WALLET_TYPE,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -42,6 +57,9 @@ class EWalletPayDirectTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -53,7 +71,7 @@ class EWalletPayDirectTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToPreauthorization()
+    public function testMapPaymentToPreauthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -79,7 +97,7 @@ class EWalletPayDirectTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToAuthorization()
+    public function testMapPaymentToAuthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -107,7 +125,7 @@ class EWalletPayDirectTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToCapture()
+    public function testMapPaymentToCapture(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -116,14 +134,14 @@ class EWalletPayDirectTest extends AbstractMethodMapperTest
 
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
     /**
      * @return void
      */
-    public function testMapPaymentToRefund()
+    public function testMapPaymentToRefund(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -132,14 +150,14 @@ class EWalletPayDirectTest extends AbstractMethodMapperTest
 
         foreach (static::REFUND_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
     /**
      * @return void
      */
-    public function testMapPaymentToDebit()
+    public function testMapPaymentToDebit(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new EWallet($this->getStoreConfigMock()));
@@ -148,7 +166,7 @@ class EWalletPayDirectTest extends AbstractMethodMapperTest
 
         foreach (static::DEBIT_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 

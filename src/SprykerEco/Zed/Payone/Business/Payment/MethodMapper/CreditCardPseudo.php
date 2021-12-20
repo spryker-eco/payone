@@ -88,8 +88,10 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
-    {
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): AbstractAuthorizationContainer {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
@@ -117,12 +119,12 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
         $creditCardCheckContainer = new CreditCardCheckContainer();
 
         $creditCardCheckContainer->setAid($this->getStandardParameter()->getAid());
-        $creditCardCheckContainer->setCardPan($payoneCreditCardTransfer->getCardPan());
-        $creditCardCheckContainer->setCardType($payoneCreditCardTransfer->getCardType());
-        $creditCardCheckContainer->setCardExpireDate($payoneCreditCardTransfer->getCardExpireDate());
-        $creditCardCheckContainer->setCardCvc2($payoneCreditCardTransfer->getCardCvc2());
-        $creditCardCheckContainer->setCardIssueNumber($payoneCreditCardTransfer->getCardIssueNumber());
-        $creditCardCheckContainer->setStoreCardData($payoneCreditCardTransfer->getStoreCardData());
+        $creditCardCheckContainer->setCardPan($payoneCreditCardTransfer->getCardPan() ?? '');
+        $creditCardCheckContainer->setCardType($payoneCreditCardTransfer->getCardType() ?? '');
+        $creditCardCheckContainer->setCardExpireDate((int)$payoneCreditCardTransfer->getCardExpireDate());
+        $creditCardCheckContainer->setCardCvc2((int)$payoneCreditCardTransfer->getCardCvc2());
+        $creditCardCheckContainer->setCardIssueNumber((int)$payoneCreditCardTransfer->getCardIssueNumber());
+        $creditCardCheckContainer->setStoreCardData($payoneCreditCardTransfer->getStoreCardData() ?? '');
         $creditCardCheckContainer->setLanguage($this->getStandardParameter()->getLanguage());
 
         return $creditCardCheckContainer;
@@ -166,11 +168,12 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\CreditCardPseudoContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createPaymentMethodContainerFromPayment(
+        SpyPaymentPayone $paymentEntity
+    ): CreditCardPseudoContainer {
         $paymentMethodContainer = new CreditCardPseudoContainer();
 
-        $pseudoCardPan = $paymentEntity->getSpyPaymentPayoneDetail()->getPseudoCardPan();
+        $pseudoCardPan = $paymentEntity->getSpyPaymentPayoneDetail()->getPseudoCardPan() ?? '';
         $paymentMethodContainer->setPseudoCardPan($pseudoCardPan);
 
         $threeDSecure = $this->createThreeDSecureData($paymentEntity);
@@ -184,8 +187,9 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $payoneAuthorizationTransfer)
-    {
+    protected function createAuthorizationPersonalData(
+        PayoneAuthorizationTransfer $payoneAuthorizationTransfer
+    ): PersonalContainer {
         $personalContainer = new PersonalContainer();
 
         $personalContainer->setFirstName($payoneAuthorizationTransfer->getOrder()->getFirstName());
@@ -200,8 +204,9 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
      */
-    protected function createThreeDSecureData(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createThreeDSecureData(
+        SpyPaymentPayone $paymentEntity
+    ): ThreeDSecureContainer {
         $threeDContainer = new ThreeDSecureContainer();
 
         $threeDContainer->setRedirect($this->createRedirectContainer($paymentEntity->getSpySalesOrder()->getOrderReference()));

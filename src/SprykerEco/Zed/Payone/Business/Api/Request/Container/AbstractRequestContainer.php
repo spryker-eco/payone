@@ -93,12 +93,12 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $responsetype;
 
     /**
-     * @var array
+     * @var array|null
      */
     protected $it;
 
     /**
-     * @var array
+     * @var array|null
      */
     protected $id;
 
@@ -123,7 +123,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $va;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
@@ -155,9 +155,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getEncoding(): ?string
+    public function getEncoding(): string
     {
         return $this->encoding;
     }
@@ -195,9 +195,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getApiVersion(): ?string
+    public function getApiVersion(): string
     {
         return $this->api_version;
     }
@@ -235,9 +235,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getMode(): ?string
+    public function getMode(): string
     {
         return $this->mode;
     }
@@ -451,37 +451,37 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getIt(): array
+    public function getIt(): ?array
     {
         return $this->it;
     }
 
     /**
-     * @param array $it
+     * @param array|null $it
      *
      * @return void
      */
-    public function setIt(array $it): void
+    public function setIt(?array $it): void
     {
         $this->it = $it;
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getId(): array
+    public function getId(): ?array
     {
         return $this->id;
     }
 
     /**
-     * @param array $id
+     * @param array|null $id
      *
      * @return void
      */
-    public function setId(array $id): void
+    public function setId(?array $id): void
     {
         $this->id = $id;
     }
@@ -559,27 +559,27 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
      * @return void
      */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBackUrl(): string
+    public function getBackUrl(): ?string
     {
         return $this->backurl;
     }

@@ -26,9 +26,11 @@ class PayoneSubFormsPlugin extends AbstractPlugin
     }
 
     /**
-     * @return \Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface[]
+     * {@inheritDoc}
+     *
+     * @return array<\Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface>
      */
-    public function getPaymentMethodsSubForms()
+    public function getPaymentMethodsSubForms(): array
     {
         $subFormsCreator = $this->pluginCountryFactory->createSubFormsCreator(Store::getInstance()->getCurrentCountry());
 

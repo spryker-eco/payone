@@ -12,7 +12,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 interface ShipmentMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer $shipmentContainer
+     * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer|null $shipmentContainer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer

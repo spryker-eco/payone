@@ -62,7 +62,7 @@ class PayonePersistenceMapper
         SpyPaymentPayoneOrderItem $paymentPayoneOrderItemEntity
     ): SpyPaymentPayoneOrderItem {
         $paymentPayoneOrderItemEntity->fromArray(
-            $paymentPayoneOrderItemTransfer->modifiedToArray()
+            $paymentPayoneOrderItemTransfer->modifiedToArray(),
         );
 
         $paymentPayoneOrderItemEntity

@@ -15,6 +15,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class BankAccountValidator extends ConstraintValidator
 {
+    /**
+     * @var array
+     */
     public const INVALID_STATUSES = [
         PayoneApiConstants::RESPONSE_TYPE_ERROR,
         PayoneApiConstants::RESPONSE_TYPE_INVALID,
@@ -28,7 +31,7 @@ class BankAccountValidator extends ConstraintValidator
      *
      * @return void
      */
-    public function validate($value, Constraint $constraint)
+    public function validate(?string $value, Constraint $constraint): void
     {
         if (!$constraint instanceof BankAccount) {
             throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\BankAccount');
@@ -59,7 +62,7 @@ class BankAccountValidator extends ConstraintValidator
      * @param \Generated\Shared\Transfer\QuoteTransfer $data
      * @param \SprykerEco\Yves\Payone\Form\Constraint\BankAccount $constraint
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function validateBankAccount(QuoteTransfer $data, BankAccount $constraint): array
     {

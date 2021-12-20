@@ -37,7 +37,7 @@ class BusinessContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setBookingDate($booking_date)
+    public function setBookingDate(string $booking_date): void
     {
         $this->booking_date = $booking_date;
     }
@@ -45,7 +45,7 @@ class BusinessContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getBookingDate()
+    public function getBookingDate(): string
     {
         return $this->booking_date;
     }
@@ -55,7 +55,7 @@ class BusinessContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setDocumentDate($document_date)
+    public function setDocumentDate(string $document_date): void
     {
         $this->document_date = $document_date;
     }
@@ -63,7 +63,7 @@ class BusinessContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getDocumentDate()
+    public function getDocumentDate(): string
     {
         return $this->document_date;
     }
@@ -73,7 +73,7 @@ class BusinessContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setDueTime($due_time)
+    public function setDueTime(string $due_time): void
     {
         $this->due_time = $due_time;
     }
@@ -81,7 +81,7 @@ class BusinessContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getDueTime()
+    public function getDueTime(): string
     {
         return $this->due_time;
     }

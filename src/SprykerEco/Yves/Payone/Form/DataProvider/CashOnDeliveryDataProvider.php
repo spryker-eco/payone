@@ -22,7 +22,7 @@ class CashOnDeliveryDataProvider implements StepEngineFormDataProviderInterface
      */
     public function getData(AbstractTransfer $quoteTransfer): QuoteTransfer
     {
-        if ($quoteTransfer->getPayment() === null) {
+        if ($quoteTransfer instanceof QuoteTransfer && $quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);

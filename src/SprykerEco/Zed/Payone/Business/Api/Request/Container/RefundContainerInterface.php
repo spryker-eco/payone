@@ -85,16 +85,16 @@ interface RefundContainerInterface
     public function getSequenceNumber(): ?int;
 
     /**
-     * @param int $txid
+     * @param int|null $txid
      *
      * @return $this
      */
-    public function setTxid(int $txid): self;
+    public function setTxid(?int $txid): self;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxid(): int;
+    public function getTxid(): ?int;
 
     /**
      * @param string $use_customerdata

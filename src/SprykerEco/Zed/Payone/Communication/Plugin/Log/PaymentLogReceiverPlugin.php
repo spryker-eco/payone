@@ -7,7 +7,9 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Plugin\Log;
 
+use ArrayObject;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
+use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
@@ -28,12 +30,13 @@ class PaymentLogReceiverPlugin extends AbstractPlugin implements PaymentLogRecei
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs(ObjectCollection $orders)
+    public function getPaymentLogs(ObjectCollection $orders): PayonePaymentLogCollectionTransfer
     {
         $orderCollectionTransfer = new OrderCollectionTransfer();
-        /** @var \Generated\Shared\Transfer\OrderTransfer[] $orderTransfers */
+        /** @var array<\Generated\Shared\Transfer\OrderTransfer> $orderTransfers */
         $orderTransfers = $orders->getData();
-        $orderCollectionTransfer->setOrders($orderTransfers);
+        $orderTransfersArrayObject = new ArrayObject($orderTransfers);
+        $orderCollectionTransfer->setOrders($orderTransfersArrayObject);
 
         return $this->getFacade()->getPaymentLogs($orderCollectionTransfer);
     }

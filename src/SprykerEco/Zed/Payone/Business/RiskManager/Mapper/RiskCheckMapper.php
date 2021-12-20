@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface;
 use SprykerEco\Zed\Payone\Business\RiskManager\Factory\RiskCheckFactoryInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
@@ -105,13 +106,12 @@ class RiskCheckMapper implements RiskCheckMapperInterface
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface $container
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    protected function mapDefaultContainerParams(ContainerInterface $container): ContainerInterface
+    protected function mapDefaultContainerParams(AbstractRequestContainer $container): AbstractRequestContainer
     {
-        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container */
         $container->setMid($this->standardParameters->getMid());
         $container->setAid($this->standardParameters->getAid());
         $container->setPortalid($this->standardParameters->getPortalId());

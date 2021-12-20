@@ -89,7 +89,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
     public function refundPayment(PayoneRefundTransfer $refundTransfer): RefundResponseTransfer
     {
         $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
-            $refundTransfer->getOrder()
+            $refundTransfer->getOrder(),
         );
         $refundTransfer->setOrder($distributedPriceOrderTransfer);
 

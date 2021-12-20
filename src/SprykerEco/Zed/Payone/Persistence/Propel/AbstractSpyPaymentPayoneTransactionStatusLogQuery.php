@@ -20,5 +20,8 @@ use Orm\Zed\Payone\Persistence\Base\SpyPaymentPayoneTransactionStatusLogQuery as
  */
 abstract class AbstractSpyPaymentPayoneTransactionStatusLogQuery extends BaseSpyPaymentPayoneTransactionStatusLogQuery
 {
+    /**
+     * @var string
+     */
     public const SEQUENCE_NUMBER = 'sequence_number';
 }

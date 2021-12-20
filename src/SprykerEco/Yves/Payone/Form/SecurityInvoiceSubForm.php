@@ -17,6 +17,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SecurityInvoiceSubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'security_invoice';
 
     /**
@@ -40,7 +43,7 @@ class SecurityInvoiceSubForm extends AbstractPayoneSubForm
      */
     public function getTemplatePath(): string
     {
-        return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**
@@ -84,13 +87,13 @@ class SecurityInvoiceSubForm extends AbstractPayoneSubForm
     protected function addLabel(FormBuilderInterface $builder): SubFormInterface
     {
         $builder->add(
-            self::FIELD_PAYMENT_METHOD,
+            static::FIELD_PAYMENT_METHOD,
             HiddenType::class,
             [
                 'label' => false,
                 'required' => false,
                 'data' => [],
-            ]
+            ],
         );
 
         return $this;

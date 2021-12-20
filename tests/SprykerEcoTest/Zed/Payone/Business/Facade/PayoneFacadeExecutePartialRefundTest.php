@@ -7,8 +7,11 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
+use ArrayObject;
+use Codeception\Module;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\RefundResponseTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEcoTest\Zed\Payone\Business\AbstractBusinessTest;
@@ -18,7 +21,16 @@ use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
 {
-    protected const FAKE_REFUND_RESPONSE = '{"txid":"375461930","status":"APPROVED"}';
+    /**
+     * @var string
+     */
+    protected const FAKE_REFUND_RESPONSE = '{"txid":"375461930",
+        "status":"APPROVED","errorcode":"200","errormessage":"OK",
+        "customermessage":"OK","rawresponse":"RawResponse","protectresultavs":"ProtectResultAvs"}';
+
+    /**
+     * @var string
+     */
     protected const ORDER_ITEM_STATUS_REFUND_APPROVED = 'refund approved';
 
     /**
@@ -41,7 +53,11 @@ class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
      */
     public function testExecutePartialRefund(): void
     {
-        $saveOrderTransfer = $this->tester->createOrder();
+        $saveOrderTransfer = new SaveOrderTransfer();
+        $saveOrderTransfer->setIdSalesOrder($this->orderEntity->getIdSalesOrder());
+        $items = new ArrayObject();
+        $items->append($this->orderEntity->getItems()->offsetGet(0));
+        $saveOrderTransfer->setOrderItems($items);
         $itemTransfer = $saveOrderTransfer->getOrderItems()->offsetGet(0);
         $paymentPayoneEntity = $this->tester->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
         $this->tester->createPaymentPayoneOrderItem($paymentPayoneEntity->getIdPaymentPayone(), $itemTransfer->getIdSalesOrderItem());
@@ -55,20 +71,20 @@ class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
 
         //Act
         $refundResponseTransfer = $this->createFacadeMock(
-            new DummyAdapter(static::FAKE_REFUND_RESPONSE)
+            new DummyAdapter(static::FAKE_REFUND_RESPONSE),
         )->executePartialRefund($payonePartialOperationTransfer);
         $status = $this->tester->getFacade()->findPayoneOrderItemStatus($saveOrderTransfer->getIdSalesOrder(), $itemTransfer->getIdSalesOrderItem());
 
         //Assert
         $this->assertInstanceOf(RefundResponseTransfer::class, $refundResponseTransfer);
-        $this->assertSame('375461930', $refundResponseTransfer->getTxid());
+        $this->assertSame(375461930, $refundResponseTransfer->getTxid());
         $this->assertSame(static::ORDER_ITEM_STATUS_REFUND_APPROVED, $status);
     }
 
     /**
      * @return \Codeception\Module
      */
-    protected function getConfigHelper()
+    protected function getConfigHelper(): Module
     {
         return $this->getModule('\\' . ConfigHelper::class);
     }
@@ -76,7 +92,7 @@ class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    protected function setupConfig()
+    protected function setupConfig(): void
     {
         $this->getConfigHelper()->setConfig(
             PayoneConstants::PAYONE,
@@ -112,7 +128,7 @@ class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
                     PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
                     PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
                 ],
-            ]
+            ],
         );
     }
 }

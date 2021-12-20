@@ -61,7 +61,7 @@ class ShippingContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setShippingCity($shipping_city)
+    public function setShippingCity(string $shipping_city): void
     {
         $this->shipping_city = $shipping_city;
     }
@@ -69,7 +69,7 @@ class ShippingContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getShippingCity()
+    public function getShippingCity(): string
     {
         return $this->shipping_city;
     }
@@ -79,7 +79,7 @@ class ShippingContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setShippingCompany($shipping_company)
+    public function setShippingCompany(string $shipping_company): void
     {
         $this->shipping_company = $shipping_company;
     }
@@ -87,7 +87,7 @@ class ShippingContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getShippingCompany()
+    public function getShippingCompany(): string
     {
         return $this->shipping_company;
     }
@@ -97,7 +97,7 @@ class ShippingContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setShippingCountry($shipping_country)
+    public function setShippingCountry(string $shipping_country): void
     {
         $this->shipping_country = $shipping_country;
     }
@@ -105,7 +105,7 @@ class ShippingContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getShippingCountry()
+    public function getShippingCountry(): string
     {
         return $this->shipping_country;
     }
@@ -115,7 +115,7 @@ class ShippingContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setShippingFirstName($shipping_firstname)
+    public function setShippingFirstName(string $shipping_firstname): void
     {
         $this->shipping_firstname = $shipping_firstname;
     }
@@ -123,7 +123,7 @@ class ShippingContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getShippingFirstName()
+    public function getShippingFirstName(): string
     {
         return $this->shipping_firstname;
     }
@@ -133,7 +133,7 @@ class ShippingContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setShippingLastName($shipping_lastname)
+    public function setShippingLastName(string $shipping_lastname): void
     {
         $this->shipping_lastname = $shipping_lastname;
     }
@@ -141,7 +141,7 @@ class ShippingContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getShippingLastName()
+    public function getShippingLastName(): string
     {
         return $this->shipping_lastname;
     }
@@ -151,7 +151,7 @@ class ShippingContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setShippingState($shipping_state)
+    public function setShippingState(string $shipping_state): void
     {
         $this->shipping_state = $shipping_state;
     }
@@ -159,7 +159,7 @@ class ShippingContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getShippingState()
+    public function getShippingState(): string
     {
         return $this->shipping_state;
     }
@@ -169,7 +169,7 @@ class ShippingContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setShippingStreet($shipping_street)
+    public function setShippingStreet(string $shipping_street): void
     {
         $this->shipping_street = $shipping_street;
     }
@@ -177,7 +177,7 @@ class ShippingContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getShippingStreet()
+    public function getShippingStreet(): string
     {
         return $this->shipping_street;
     }
@@ -187,7 +187,7 @@ class ShippingContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setShippingZip($shipping_zip)
+    public function setShippingZip(string $shipping_zip): void
     {
         $this->shipping_zip = $shipping_zip;
     }
@@ -195,7 +195,7 @@ class ShippingContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getShippingZip()
+    public function getShippingZip(): string
     {
         return $this->shipping_zip;
     }

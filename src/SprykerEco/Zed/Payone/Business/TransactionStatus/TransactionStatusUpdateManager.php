@@ -122,28 +122,36 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      */
     protected function transformCurrency(TransactionStatusUpdateInterface $request): void
     {
-        /** @var \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest $request */
         $balance = $request->getBalance();
         $balanceAmountInCents = round((float)$balance * 100);
-        $request->setBalance($balanceAmountInCents);
+
+        if (method_exists($request, 'setBalance')) {
+            $request->setBalance($balanceAmountInCents);
+        }
 
         $receivable = $request->getReceivable();
         $receivableAmountInCents = round((float)$receivable * 100);
-        $request->setReceivable($receivableAmountInCents);
+
+        if (method_exists($request, 'setReceivable')) {
+            $request->setReceivable($receivableAmountInCents);
+        }
 
         $price = $request->getPrice();
         $priceAmountInCents = round((float)$price * 100);
-        $request->setPrice($priceAmountInCents);
+
+        if (method_exists($request, 'setPrice')) {
+            $request->setPrice($priceAmountInCents);
+        }
     }
 
     /**
      * @param \SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface $request
      *
-     * @return bool|\SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse
+     * @return \SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse|bool
      */
     protected function validate(TransactionStatusUpdateInterface $request)
     {
-        $systemHashedKey = $this->hashGenerator->hash($this->standardParameter->getKey());
+        $systemHashedKey = $this->hashGenerator->hash($this->standardParameter->getKey() ?? '');
         if ($request->getKey() !== $systemHashedKey) {
             return $this->createErrorResponse('Payone transaction status update: Given and internal key do not match!');
         }
@@ -345,7 +353,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     {
         $records = $this->getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
 
-        return !empty($transactionStatusLogs);
+        return !empty($records);
     }
 
     /**
@@ -379,7 +387,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      * @param int $idSalesOrder
      * @param int $idSalesOrderItem
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog[]
+     * @return array<\Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog>
      */
     protected function getUnprocessedTransactionStatusLogs(int $idSalesOrder, int $idSalesOrderItem): array
     {

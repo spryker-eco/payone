@@ -19,6 +19,9 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneFileReader implements PayoneFileReaderInterface
 {
+    /**
+     * @var string
+     */
     protected const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
@@ -81,7 +84,7 @@ class PayoneFileReader implements PayoneFileReaderInterface
     {
         $paymentEntity = $this->findPaymentByFileReferenceAndCustomerId(
             $getFileTransfer->getReference(),
-            $getFileTransfer->getCustomerId()
+            $getFileTransfer->getCustomerId(),
         );
 
         if (!$paymentEntity) {
@@ -100,12 +103,12 @@ class PayoneFileReader implements PayoneFileReaderInterface
     }
 
     /**
-     * @param string $fileReference
-     * @param int $customerId
+     * @param string|null $fileReference
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByFileReferenceAndCustomerId(string $fileReference, int $customerId): ?SpyPaymentPayone
+    protected function findPaymentByFileReferenceAndCustomerId(?string $fileReference, ?int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId)->findOne();
     }

@@ -23,11 +23,35 @@ use SprykerEcoTest\Zed\Payone\Business\Api\Adapter\ConsumerScoreAdapterMock;
  */
 class RiskCheckManagerTest extends AbstractPayoneTest
 {
+    /**
+     * @var string
+     */
     public const RESPONSE_VALUE_STREET_NAME = 'street_name';
+
+    /**
+     * @var string
+     */
     public const RESPONSE_VALUE_STREET_NUMBER = 'street_number';
+
+    /**
+     * @var string
+     */
     public const RESPONSE_VALUE_ZIP = '12345';
+
+    /**
+     * @var string
+     */
     public const RESPONSE_VALUE_CITY = 'Berlin';
+
+    /**
+     * @var string
+     */
     public const RESPONSE_VALUE_CUSTOMER_MESSAGE = 'CustomerMessage';
+
+    /**
+     * @var string
+     */
+    public const ADDRESS_CHECK_PERSON_STATUS_CORRECT = '10';
 
     /**
      * @return void

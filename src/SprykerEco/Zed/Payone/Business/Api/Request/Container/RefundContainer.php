@@ -19,12 +19,12 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     protected $request = PayoneApiConstants::REQUEST_TYPE_REFUND;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $txid;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $sequencenumber;
 
@@ -34,12 +34,12 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $narrative_text;
 
@@ -59,37 +59,37 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     protected $invoicing;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankbranchcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcheckdigit;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
@@ -218,11 +218,11 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     }
 
     /**
-     * @param int $txid
+     * @param int|null $txid
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
-    public function setTxid($txid): RefundContainerInterface
+    public function setTxid(?int $txid): RefundContainerInterface
     {
         $this->txid = $txid;
 
@@ -230,9 +230,9 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxid(): int
+    public function getTxid(): ?int
     {
         return $this->txid;
     }

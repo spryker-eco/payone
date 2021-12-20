@@ -49,7 +49,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardCvc2($cardcvc2)
+    public function setCardCvc2(int $cardcvc2): void
     {
         $this->cardcvc2 = $cardcvc2;
     }
@@ -57,7 +57,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     /**
      * @return int
      */
-    public function getCardCvc2()
+    public function getCardCvc2(): int
     {
         return $this->cardcvc2;
     }
@@ -67,7 +67,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardExpireDate($cardexpiredate)
+    public function setCardExpireDate(int $cardexpiredate): void
     {
         $this->cardexpiredate = $cardexpiredate;
     }
@@ -75,7 +75,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     /**
      * @return int
      */
-    public function getCardExpireDate()
+    public function getCardExpireDate(): int
     {
         return $this->cardexpiredate;
     }
@@ -85,7 +85,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardHolder($cardholder)
+    public function setCardHolder(string $cardholder): void
     {
         $this->cardholder = $cardholder;
     }
@@ -93,7 +93,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getCardHolder()
+    public function getCardHolder(): string
     {
         return $this->cardholder;
     }
@@ -103,7 +103,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardIssueNumber($cardissuenumber)
+    public function setCardIssueNumber(int $cardissuenumber): void
     {
         $this->cardissuenumber = $cardissuenumber;
     }
@@ -111,7 +111,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     /**
      * @return int
      */
-    public function getCardIssueNumber()
+    public function getCardIssueNumber(): int
     {
         return $this->cardissuenumber;
     }
@@ -121,7 +121,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardPan($cardpan)
+    public function setCardPan(string $cardpan): void
     {
         $this->cardpan = $cardpan;
     }
@@ -129,7 +129,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getCardPan()
+    public function getCardPan(): string
     {
         return $this->cardpan;
     }
@@ -139,7 +139,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setCardType($cardtype)
+    public function setCardType(string $cardtype): void
     {
         $this->cardtype = $cardtype;
     }
@@ -147,7 +147,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getCardType()
+    public function getCardType(): string
     {
         return $this->cardtype;
     }
@@ -157,7 +157,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setPseudoCardPan($pseudocardpan)
+    public function setPseudoCardPan(string $pseudocardpan): void
     {
         $this->pseudocardpan = $pseudocardpan;
     }
@@ -165,7 +165,7 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     /**
      * @return string
      */
-    public function getPseudoCardPan()
+    public function getPseudoCardPan(): string
     {
         return $this->pseudocardpan;
     }

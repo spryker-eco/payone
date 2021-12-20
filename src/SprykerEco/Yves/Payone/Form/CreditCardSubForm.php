@@ -19,26 +19,70 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreditCardSubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'credit_card';
 
+    /**
+     * @var string
+     */
     public const FIELD_CARD_TYPE = 'cardtype';
+
+    /**
+     * @var string
+     */
     public const FIELD_CARD_NUMBER = 'cardpan';
+
+    /**
+     * @var string
+     */
     public const FIELD_NAME_ON_CARD = 'cardholder';
+
+    /**
+     * @var string
+     */
     public const FIELD_CARD_EXPIRES_MONTH = 'cardexpiredate_month';
+
+    /**
+     * @var string
+     */
     public const FIELD_CARD_EXPIRES_YEAR = 'cardexpiredate_year';
+
+    /**
+     * @var string
+     */
     public const FIELD_CARD_SECURITY_CODE = 'cardcvc2';
+
+    /**
+     * @var string
+     */
     public const FIELD_PSEUDO_CARD_NUMBER = 'pseudocardpan';
 
+    /**
+     * @var string
+     */
     public const OPTION_CARD_EXPIRES_CHOICES_MONTH = 'month choices';
+
+    /**
+     * @var string
+     */
     public const OPTION_CARD_EXPIRES_CHOICES_YEAR = 'year choices';
+
+    /**
+     * @var string
+     */
     public const OPTION_CARD_TYPES = 'card types';
 
+    /**
+     * @var string
+     */
     public const OPTION_PAYONE_SETTINGS = 'payone settings';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_CREDIT_CARD;
     }
@@ -46,7 +90,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_CREDIT_CARD;
     }
@@ -54,9 +98,9 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     /**
      * @return string
      */
-    public function getTemplatePath()
+    public function getTemplatePath(): string
     {
-        return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
+        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**
@@ -64,7 +108,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => PayonePaymentCreditCardTransfer::class,
@@ -76,7 +120,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): void
     {
         $this->configureOptions($resolver);
     }
@@ -87,7 +131,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->addNameOnCard($builder)
             ->addHiddenInputs($builder);
@@ -104,10 +148,10 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     public function addCardType(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            self::FIELD_CARD_TYPE,
+            static::FIELD_CARD_TYPE,
             ChoiceType::class,
             [
-                'choices' => $options[self::OPTIONS_FIELD_NAME][self::OPTION_CARD_TYPES],
+                'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_CARD_TYPES],
                 'label' => false,
                 'required' => true,
                 'expanded' => false,
@@ -116,7 +160,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
                 'constraints' => [
                     $this->createNotBlankConstraint(),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -130,12 +174,12 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     protected function addCardNumber(FormBuilderInterface $builder)
     {
         $builder->add(
-            self::FIELD_CARD_NUMBER,
+            static::FIELD_CARD_NUMBER,
             TextType::class,
             [
                 'label' => false,
                 'required' => false,
-            ]
+            ],
         );
 
         return $this;
@@ -149,7 +193,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     protected function addNameOnCard(FormBuilderInterface $builder)
     {
         $builder->add(
-            self::FIELD_NAME_ON_CARD,
+            static::FIELD_NAME_ON_CARD,
             TextType::class,
             [
                 'label' => false,
@@ -157,7 +201,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
                 'constraints' => [
                     $this->createNotBlankConstraint(),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -172,16 +216,16 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     protected function addCardExpiresMonth(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            self::FIELD_CARD_EXPIRES_MONTH,
+            static::FIELD_CARD_EXPIRES_MONTH,
             ChoiceType::class,
             [
                 'label' => false,
-                'choices' => $options[self::OPTIONS_FIELD_NAME][self::OPTION_CARD_EXPIRES_CHOICES_MONTH],
+                'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_CARD_EXPIRES_CHOICES_MONTH],
                 'required' => true,
                 'constraints' => [
                     $this->createNotBlankConstraint(),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -196,11 +240,11 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     protected function addCardExpiresYear(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            self::FIELD_CARD_EXPIRES_YEAR,
+            static::FIELD_CARD_EXPIRES_YEAR,
             ChoiceType::class,
             [
                 'label' => false,
-                'choices' => $options[self::OPTIONS_FIELD_NAME][self::OPTION_CARD_EXPIRES_CHOICES_YEAR],
+                'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_CARD_EXPIRES_CHOICES_YEAR],
                 'required' => true,
                 'attr' => [
                     'placeholder' => 'Expires year',
@@ -208,7 +252,7 @@ class CreditCardSubForm extends AbstractPayoneSubForm
                 'constraints' => [
                     $this->createNotBlankConstraint(),
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -222,12 +266,12 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     protected function addCardSecurityCode(FormBuilderInterface $builder)
     {
         $builder->add(
-            self::FIELD_CARD_SECURITY_CODE,
+            static::FIELD_CARD_SECURITY_CODE,
             TextType::class,
             [
                 'label' => false,
                 'required' => false,
-            ]
+            ],
         );
 
         return $this;
@@ -243,11 +287,11 @@ class CreditCardSubForm extends AbstractPayoneSubForm
         parent::addHiddenInputs($builder);
 
         $builder->add(
-            self::FIELD_PSEUDO_CARD_NUMBER,
+            static::FIELD_PSEUDO_CARD_NUMBER,
             HiddenType::class,
             [
                 'label' => false,
-            ]
+            ],
         );
 
         return $this;

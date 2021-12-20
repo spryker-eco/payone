@@ -172,7 +172,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testRefundContainer()
+    public function testRefundContainer(): void
     {
         $container = new RefundContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -193,7 +193,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyRefundContainer()
+    public function testEmptyRefundContainer(): void
     {
         $container = new RefundContainer();
         $this->assertCount(1, $container->toArray()); // request set in container
@@ -202,7 +202,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testDebitContainer()
+    public function testDebitContainer(): void
     {
         $container = new DebitContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -225,7 +225,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyDebitContainer()
+    public function testEmptyDebitContainer(): void
     {
         $container = new DebitContainer();
         $this->assertCount(1, $container->toArray()); // request set in container
@@ -234,7 +234,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testCaptureContainer()
+    public function testCaptureContainer(): void
     {
         $container = new CaptureContainer();
 
@@ -256,7 +256,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyCaptureContainer()
+    public function testEmptyCaptureContainer(): void
     {
         $container = new CaptureContainer();
         $this->assertCount(1, $container->toArray()); // request set in container
@@ -265,7 +265,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testAuthorizationContainer()
+    public function testAuthorizationContainer(): void
     {
         $container = new AuthorizationContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -300,7 +300,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyAuthorizationContainer()
+    public function testEmptyAuthorizationContainer(): void
     {
         $container = new AuthorizationContainer();
         $this->assertCount(1, $container->toArray()); // request set in container
@@ -309,7 +309,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testPreAuthorizationContainer()
+    public function testPreAuthorizationContainer(): void
     {
         $container = new PreAuthorizationContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -342,7 +342,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyPreAuthorizationContainer()
+    public function testEmptyPreAuthorizationContainer(): void
     {
         $container = new PreAuthorizationContainer();
         $this->assertCount(1, $container->toArray()); // request set in container
@@ -351,7 +351,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testBankAccountCheckContainer()
+    public function testBankAccountCheckContainer(): void
     {
         $container = new BankAccountCheckContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -388,7 +388,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyBankAccountCheckContainer()
+    public function testEmptyBankAccountCheckContainer(): void
     {
         $container = new BankAccountCheckContainer();
         $this->assertCount(1, $container->toArray()); // request set in container
@@ -397,7 +397,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testGetInvoiceContainer()
+    public function testGetInvoiceContainer(): void
     {
         $container = new GetInvoiceContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -413,7 +413,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyGetInvoiceContainer()
+    public function testEmptyGetInvoiceContainer(): void
     {
         $container = new GetInvoiceContainer();
         $this->assertCount(1, $container->toArray()); // request set in container
@@ -447,7 +447,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testPersonalContainer()
+    public function testPersonalContainer(): void
     {
         $container = new PersonalContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -515,7 +515,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testPrepaymentContainer()
+    public function testPrepaymentContainer(): void
     {
         $container = new PrepaymentContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer', $container);
@@ -549,7 +549,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEWalletContainer()
+    public function testEWalletContainer(): void
     {
         $container = new EWalletContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer', $container);
@@ -567,7 +567,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testOnlineBankTransferContainer()
+    public function testOnlineBankTransferContainer(): void
     {
         $container = new OnlineBankTransferContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer', $container);
@@ -603,7 +603,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testCashOnDeliveryContainer()
+    public function testCashOnDeliveryContainer(): void
     {
         $container = new CashOnDeliveryContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer', $container);
@@ -618,7 +618,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testDirectDebitContainer()
+    public function testDirectDebitContainer(): void
     {
         $container = new DirectDebitContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer', $container);
@@ -651,7 +651,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testFinancingContainer()
+    public function testFinancingContainer(): void
     {
         $container = new FinancingContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer', $container);
@@ -669,7 +669,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyFinancingContainer()
+    public function testEmptyFinancingContainer(): void
     {
         $container = new FinancingContainer();
         $this->assertCount(0, $container->toArray());
@@ -678,7 +678,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function test3DSecureContainer()
+    public function test3DSecureContainer(): void
     {
         $container = new ThreeDSecureContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -698,7 +698,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmpty3DSecureContainer()
+    public function testEmpty3DSecureContainer(): void
     {
         $container = new ThreeDSecureContainer();
         $this->assertCount(0, $container->toArray());
@@ -707,7 +707,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testRedirectContainer()
+    public function testRedirectContainer(): void
     {
         $container = new RedirectContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -727,7 +727,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyRedirectContainer()
+    public function testEmptyRedirectContainer(): void
     {
         $container = new RedirectContainer();
         $this->assertCount(0, $container->toArray());
@@ -736,7 +736,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testInvoicingTransactionContainer()
+    public function testInvoicingTransactionContainer(): void
     {
         $container = new TransactionContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -765,7 +765,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyInvoicingTransactionContainer()
+    public function testEmptyInvoicingTransactionContainer(): void
     {
         $container = new TransactionContainer();
         $this->assertCount(1, $container->toArray()); // 1 empty array
@@ -774,7 +774,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testInvoicingItemContainer()
+    public function testInvoicingItemContainer(): void
     {
         $container = new ItemContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -791,17 +791,17 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $container->setIt('it');
         $this->assertEquals('it', $container->getIt());
 
-        $container->setNo('no');
-        $this->assertEquals('no', $container->getNo());
+        $container->setNo(10);
+        $this->assertEquals(10, $container->getNo());
 
-        $container->setPr('pr');
-        $this->assertEquals('pr', $container->getPr());
+        $container->setPr(20);
+        $this->assertEquals(20, $container->getPr());
 
         $container->setSd('sd');
         $this->assertEquals('sd', $container->getSd());
 
-        $container->setVa('va');
-        $this->assertEquals('va', $container->getVa());
+        $container->setVa(30);
+        $this->assertEquals(30, $container->getVa());
 
         $this->assertCount(8, $container->toArray());
     }
@@ -809,7 +809,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyInvoicingItemContainer()
+    public function testEmptyInvoicingItemContainer(): void
     {
         $container = new ItemContainer();
         $this->assertCount(0, $container->toArray());
@@ -818,7 +818,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testAuthorizationBusinessContainer()
+    public function testAuthorizationBusinessContainer(): void
     {
         $container = new AuthorizationBusinessContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -838,7 +838,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyAuthorizationBusinessContainer()
+    public function testEmptyAuthorizationBusinessContainer(): void
     {
         $container = new AuthorizationBusinessContainer();
         $this->assertCount(0, $container->toArray());
@@ -847,7 +847,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testCaptureBusinessContainer()
+    public function testCaptureBusinessContainer(): void
     {
         $container = new CaptureBusinessContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -870,7 +870,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyCaptureBusinessContainer()
+    public function testEmptyCaptureBusinessContainer(): void
     {
         $container = new CaptureBusinessContainer();
         $this->assertCount(0, $container->toArray());
@@ -879,7 +879,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testDebitBusinessContainer()
+    public function testDebitBusinessContainer(): void
     {
         $container = new DebitBusinessContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -902,7 +902,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyDebitBusinessContainer()
+    public function testEmptyDebitBusinessContainer(): void
     {
         $container = new DebitBusinessContainer();
         $this->assertCount(0, $container->toArray());
@@ -911,7 +911,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testAuthorizationShippingContainer()
+    public function testAuthorizationShippingContainer(): void
     {
         $container = new ShippingContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -946,7 +946,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyAuthorizationShippingContainer()
+    public function testEmptyAuthorizationShippingContainer(): void
     {
         $container = new ShippingContainer();
         $this->assertCount(0, $container->toArray());
@@ -955,7 +955,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testDebitBankAccountContainer()
+    public function testDebitBankAccountContainer(): void
     {
         $container = new DebitBankAccountContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -966,14 +966,14 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $container->setBankAccountHolder('holder');
         $this->assertEquals('holder', $container->getBankAccountHolder());
 
-        $container->setBankBranchCode('branchcode');
-        $this->assertEquals('branchcode', $container->getBankBranchCode());
+        $container->setBankBranchCode(10);
+        $this->assertEquals(10, $container->getBankBranchCode());
 
-        $container->setBankCheckDigit('checkdigit');
-        $this->assertEquals('checkdigit', $container->getBankCheckDigit());
+        $container->setBankCheckDigit(20);
+        $this->assertEquals(20, $container->getBankCheckDigit());
 
-        $container->setBankCode('code');
-        $this->assertEquals('code', $container->getBankCode());
+        $container->setBankCode(30);
+        $this->assertEquals(30, $container->getBankCode());
 
         $container->setBankCountry('country');
         $this->assertEquals('country', $container->getBankCountry());
@@ -993,7 +993,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyDebitBankAccountContainer()
+    public function testEmptyDebitBankAccountContainer(): void
     {
         $container = new DebitBankAccountContainer();
         $this->assertCount(0, $container->toArray());
@@ -1002,7 +1002,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testRefundBankAccountContainer()
+    public function testRefundBankAccountContainer(): void
     {
         $container = new RefundBankAccountContainer();
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface', $container);
@@ -1010,14 +1010,14 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $container->setBankaccount('bankaccount');
         $this->assertEquals('bankaccount', $container->getBankaccount());
 
-        $container->setBankbranchcode('branchcode');
-        $this->assertEquals('branchcode', $container->getBankbranchcode());
+        $container->setBankbranchcode(10);
+        $this->assertEquals(10, $container->getBankbranchcode());
 
-        $container->setBankcheckdigit('checkdigit');
-        $this->assertEquals('checkdigit', $container->getBankcheckdigit());
+        $container->setBankcheckdigit(20);
+        $this->assertEquals(20, $container->getBankcheckdigit());
 
-        $container->setBankcode('code');
-        $this->assertEquals('code', $container->getBankcode());
+        $container->setBankcode(30);
+        $this->assertEquals(30, $container->getBankcode());
 
         $container->setBankcountry('country');
         $this->assertEquals('country', $container->getBankcountry());
@@ -1034,7 +1034,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testEmptyRefundBankAccountContainer()
+    public function testEmptyRefundBankAccountContainer(): void
     {
         $container = new RefundBankAccountContainer();
         $this->assertCount(0, $container->toArray());
@@ -1045,7 +1045,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    protected function setStandardParams(AbstractRequestContainer $container)
+    protected function setStandardParams(AbstractRequestContainer $container): void
     {
         $container->setEncoding($this->encoding);
         $container->setMode($this->mode);
@@ -1063,7 +1063,7 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    protected function assertStandardParams(AbstractRequestContainer $container)
+    protected function assertStandardParams(AbstractRequestContainer $container): void
     {
         $this->assertEquals($this->encoding, $container->getEncoding());
         $this->assertEquals($this->mode, $container->getMode());

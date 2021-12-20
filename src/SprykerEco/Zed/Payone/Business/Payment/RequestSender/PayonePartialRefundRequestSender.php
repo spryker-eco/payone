@@ -109,7 +109,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
         $this->updateApiLogAfterRefund($apiLogEntity, $responseContainer);
         $this->updatePaymentPayoneOrderItemsWithStatus(
             $payonePartialOperationRequestTransfer,
-            $this->getPartialRefundStatus($responseContainer)
+            $this->getPartialRefundStatus($responseContainer),
         );
 
         return $this->refundResponseMapper->getRefundResponseTransfer($responseContainer);
@@ -168,12 +168,12 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer,
         AbstractRequestContainer $container
     ): AbstractRequestContainer {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
+        $arrayIt = $container->getIt();
+        $arrayId = $container->getId();
+        $arrayPr = $container->getPr();
+        $arrayNo = $container->getNo();
+        $arrayDe = $container->getDe();
+        $arrayVa = $container->getVa();
 
         $key = count($arrayId) + 1;
 

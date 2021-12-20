@@ -17,7 +17,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * Sub account ID
      *
-     * @var int
+     * @var string|null
      */
     protected $aid;
 
@@ -41,14 +41,14 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * Total amount (in smallest currency unit! e.g. cent)
      *
-     * @var int
+     * @var int|null
      */
     protected $amount;
 
     /**
      * Currency (ISO-4217)
      *
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
@@ -125,19 +125,19 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @param int $amount
+     * @param int|null $amount
      *
      * @return void
      */
-    public function setAmount($amount)
+    public function setAmount(?int $amount): void
     {
         $this->amount = $amount;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -147,7 +147,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setClearingType($clearingType)
+    public function setClearingType(string $clearingType): void
     {
         $this->clearingtype = $clearingType;
     }
@@ -155,17 +155,17 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return string
      */
-    public function getClearingType()
+    public function getClearingType(): string
     {
         return $this->clearingtype;
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return void
      */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency): void
     {
         $this->currency = $currency;
     }
@@ -173,7 +173,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -183,7 +183,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setNarrativeText($narrative_text)
+    public function setNarrativeText(string $narrative_text): void
     {
         $this->narrative_text = $narrative_text;
     }
@@ -191,7 +191,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return string
      */
-    public function getNarrativeText()
+    public function getNarrativeText(): string
     {
         return $this->narrative_text;
     }
@@ -201,7 +201,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setParam($param)
+    public function setParam(string $param): void
     {
         $this->param = $param;
     }
@@ -209,7 +209,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return string
      */
-    public function getParam()
+    public function getParam(): string
     {
         return $this->param;
     }
@@ -219,7 +219,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setReference($reference)
+    public function setReference(string $reference): void
     {
         $this->reference = $reference;
     }
@@ -227,7 +227,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return string
      */
-    public function getReference()
+    public function getReference(): string
     {
         return $this->reference;
     }
@@ -237,7 +237,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setPersonalData(PersonalContainer $personalData)
+    public function setPersonalData(PersonalContainer $personalData): void
     {
         $this->personalData = $personalData;
     }
@@ -245,7 +245,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    public function getPersonalData()
+    public function getPersonalData(): PersonalContainer
     {
         return $this->personalData;
     }
@@ -255,7 +255,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setShippingData(ShippingContainer $delivery)
+    public function setShippingData(ShippingContainer $delivery): void
     {
         $this->shippingData = $delivery;
     }
@@ -263,17 +263,17 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer
      */
-    public function getShippingData()
+    public function getShippingData(): ShippingContainer
     {
         return $this->shippingData;
     }
 
     /**
-     * @param PaymentMethod\AbstractPaymentMethodContainer $paymentMethod
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer $paymentMethod
      *
      * @return void
      */
-    public function setPaymentMethod(AbstractPaymentMethodContainer $paymentMethod)
+    public function setPaymentMethod(AbstractPaymentMethodContainer $paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
     }
@@ -281,7 +281,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer
      */
-    public function getPaymentMethod()
+    public function getPaymentMethod(): AbstractPaymentMethodContainer
     {
         return $this->paymentMethod;
     }
@@ -291,7 +291,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function set3dsecure(ThreeDSecureContainer $secure)
+    public function set3dsecure(ThreeDSecureContainer $secure): void
     {
         $this->threeDSecure = $secure;
     }
@@ -299,7 +299,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
      */
-    public function get3dsecure()
+    public function get3dsecure(): ThreeDSecureContainer
     {
         return $this->threeDSecure;
     }
@@ -309,7 +309,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setInvoicing(TransactionContainer $invoicing)
+    public function setInvoicing(TransactionContainer $invoicing): void
     {
         $this->invoicing = $invoicing;
     }
@@ -317,7 +317,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer
      */
-    public function getInvoicing()
+    public function getInvoicing(): TransactionContainer
     {
         return $this->invoicing;
     }
@@ -325,7 +325,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return string
      */
-    public function getOnlinebanktransfertype()
+    public function getOnlinebanktransfertype(): string
     {
         return $this->onlinebanktransfertype;
     }
@@ -335,7 +335,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setOnlinebanktransfertype($onlinebanktransfertype)
+    public function setOnlinebanktransfertype(string $onlinebanktransfertype): void
     {
         $this->onlinebanktransfertype = $onlinebanktransfertype;
     }

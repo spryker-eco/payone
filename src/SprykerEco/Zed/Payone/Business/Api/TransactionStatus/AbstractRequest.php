@@ -68,7 +68,7 @@ class AbstractRequest
      *
      * @return mixed
      */
-    public function getValue($key)
+    public function getValue(string $key)
     {
         return $this->get($key);
     }
@@ -79,7 +79,7 @@ class AbstractRequest
      *
      * @return bool|null
      */
-    public function setValue($key, $name)
+    public function setValue(string $key, string $name): ?bool
     {
         return $this->set($key, $name);
     }
@@ -89,7 +89,7 @@ class AbstractRequest
      *
      * @return mixed|null
      */
-    public function get($name)
+    public function get(string $name)
     {
         if (property_exists($this, $name)) {
             return $this->$name;
@@ -104,7 +104,7 @@ class AbstractRequest
      *
      * @return bool|null
      */
-    public function set($name, $value)
+    public function set(string $name, $value): ?bool
     {
         if (property_exists($this, $name)) {
             $this->$name = $value;

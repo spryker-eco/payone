@@ -15,5 +15,5 @@ interface HmacGeneratorInterface
      *
      * @return string
      */
-    public function hash($string, $key);
+    public function hash(string $string, string $key): string;
 }

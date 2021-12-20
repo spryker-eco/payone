@@ -22,14 +22,26 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
  */
 class DirectDebitTest extends AbstractMethodMapperTest
 {
+    /**
+     * @var string
+     */
     public const STANDARD_PARAMETER_CLEARING_TYPE = 'elv';
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_DIRECT_DEBIT_REQUIRED_PARAMS = [
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_DIRECT_DEBIT_REQUIRED_PARAMS = [
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -38,6 +50,9 @@ class DirectDebitTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -49,7 +64,7 @@ class DirectDebitTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToPreauthorization()
+    public function testMapPaymentToPreauthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new DirectDebit($this->getStoreConfigMock()));
@@ -75,7 +90,7 @@ class DirectDebitTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToAuthorization()
+    public function testMapPaymentToAuthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new DirectDebit($this->getStoreConfigMock()));
@@ -103,7 +118,7 @@ class DirectDebitTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToCapture()
+    public function testMapPaymentToCapture(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new DirectDebit($this->getStoreConfigMock()));
@@ -112,14 +127,14 @@ class DirectDebitTest extends AbstractMethodMapperTest
 
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
     /**
      * @return void
      */
-    public function testMapPaymentToRefund()
+    public function testMapPaymentToRefund(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new DirectDebit($this->getStoreConfigMock()));
@@ -128,14 +143,14 @@ class DirectDebitTest extends AbstractMethodMapperTest
 
         foreach (static::REFUND_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
     /**
      * @return void
      */
-    public function testMapPaymentToDebit()
+    public function testMapPaymentToDebit(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new DirectDebit($this->getStoreConfigMock()));
@@ -144,7 +159,7 @@ class DirectDebitTest extends AbstractMethodMapperTest
 
         foreach (static::DEBIT_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 

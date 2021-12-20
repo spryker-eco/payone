@@ -13,6 +13,9 @@ use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 
 class PayoneConfig extends AbstractBundleConfig
 {
+    /**
+     * @var array
+     */
     protected const PAYONE_BANCONTACT_AVAILABLE_COUNTRIES = [
         'BE' => 'Belgium',
     ];
@@ -32,7 +35,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getStandardCheckoutEntryPoint()
+    public function getStandardCheckoutEntryPoint(): string
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -44,7 +47,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getSuccessUrl()
+    public function getSuccessUrl(): string
     {
         return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_LOAD_DETAILS_PATH;
     }
@@ -54,7 +57,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getBackUrl()
+    public function getBackUrl(): string
     {
         return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_BACK_PATH;
     }
@@ -64,7 +67,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getFailureUrl()
+    public function getFailureUrl(): string
     {
         return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE_PATH;
     }
@@ -74,7 +77,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getFailureProjectUrl()
+    public function getFailureProjectUrl(): string
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -86,7 +89,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getBackProjectUrl()
+    public function getBackProjectUrl(): string
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -96,7 +99,7 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * @return string
      */
-    protected function getYvesBaseUrl()
+    protected function getYvesBaseUrl(): string
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 

@@ -85,8 +85,10 @@ class Prepayment extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
-    {
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ): AbstractAuthorizationContainer {
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
@@ -148,10 +150,11 @@ class Prepayment extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\CreditCardPseudoContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\PrepaymentContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createPaymentMethodContainerFromPayment(
+        SpyPaymentPayone $paymentEntity
+    ): PrepaymentContainer {
         $paymentMethodContainer = new PrepaymentContainer();
 
         return $paymentMethodContainer;
@@ -162,8 +165,9 @@ class Prepayment extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    protected function createAuthorizationPersonalData(PayoneAuthorizationTransfer $payoneAuthorizationTransfer)
-    {
+    protected function createAuthorizationPersonalData(
+        PayoneAuthorizationTransfer $payoneAuthorizationTransfer
+    ): PersonalContainer {
         $personalContainer = new PersonalContainer();
 
         $personalContainer->setFirstName($payoneAuthorizationTransfer->getOrder()->getFirstName());

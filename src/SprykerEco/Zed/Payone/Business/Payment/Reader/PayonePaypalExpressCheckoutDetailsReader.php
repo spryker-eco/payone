@@ -46,16 +46,16 @@ class PayonePaypalExpressCheckoutDetailsReader implements PayonePaypalExpressChe
     {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface $paymentMethodMapper */
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(
-            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT,
         );
 
         $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();
         $baseGenericPaymentContainer->getPaydata()->setAction(
-            PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION
+            PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION,
         );
         $requestContainer = $paymentMethodMapper->mapQuoteTransferToGenericPayment(
             $baseGenericPaymentContainer,
-            $quoteTransfer
+            $quoteTransfer,
         );
         $responseTransfer = $this->genericRequestMethodSender->performGenericRequest($requestContainer);
 

@@ -24,7 +24,7 @@ class PaydataContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getAction()
+    public function getAction(): string
     {
         return $this->action;
     }
@@ -34,7 +34,7 @@ class PaydataContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setAction($action)
+    public function setAction(string $action): void
     {
         $this->action = $action;
     }
@@ -48,11 +48,11 @@ class PaydataContainer extends AbstractContainer
     }
 
     /**
-     * @param string $authorizationToken
+     * @param string|null $authorizationToken
      *
      * @return void
      */
-    public function setAuthorizationToken(string $authorizationToken): void
+    public function setAuthorizationToken(?string $authorizationToken): void
     {
         $this->authorization_token = $authorizationToken;
     }
@@ -62,7 +62,7 @@ class PaydataContainer extends AbstractContainer
      *
      * @return string
      */
-    protected function getPreparedKey($key)
+    protected function getPreparedKey(string $key): string
     {
         $preparedKey = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $key));
         $template = 'add_paydata[KEY]';

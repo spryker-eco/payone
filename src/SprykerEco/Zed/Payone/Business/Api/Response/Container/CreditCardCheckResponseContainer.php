@@ -24,7 +24,7 @@ class CreditCardCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTruncatedcardpan($truncatedcardpan)
+    public function setTruncatedcardpan(string $truncatedcardpan): void
     {
         $this->truncatedcardpan = $truncatedcardpan;
     }
@@ -32,7 +32,7 @@ class CreditCardCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getTruncatedcardpan()
+    public function getTruncatedcardpan(): string
     {
         return $this->truncatedcardpan;
     }
@@ -42,7 +42,7 @@ class CreditCardCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPseudocardpan($pseudocardpan)
+    public function setPseudocardpan(string $pseudocardpan): void
     {
         $this->pseudocardpan = $pseudocardpan;
     }
@@ -50,7 +50,7 @@ class CreditCardCheckResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getPseudocardpan()
+    public function getPseudocardpan(): string
     {
         return $this->pseudocardpan;
     }

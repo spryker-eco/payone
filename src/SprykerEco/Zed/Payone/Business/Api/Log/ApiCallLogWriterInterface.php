@@ -7,28 +7,30 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Log;
 
+use SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface as LogApiCallLogWriterInterface;
+
 interface ApiCallLogWriterInterface
 {
     /**
      * @param string $url
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
+     * @return $this
      */
-    public function logUrl($url);
+    public function logUrl(string $url): LogApiCallLogWriterInterface;
 
     /**
      * @param string $request
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
+     * @return $this
      */
-    public function logRequest($request);
+    public function logRequest(string $request): LogApiCallLogWriterInterface;
 
     /**
      * @param string $response
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
+     * @return $this
      */
-    public function logResponse($response);
+    public function logResponse(string $response): LogApiCallLogWriterInterface;
 
     /**
      * @return $this

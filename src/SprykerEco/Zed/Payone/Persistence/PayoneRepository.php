@@ -28,20 +28,27 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
  */
 class PayoneRepository extends AbstractRepository implements PayoneRepositoryInterface
 {
+    /**
+     * @var string
+     */
     protected const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
+
+    /**
+     * @var string
+     */
     protected const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
 
     /**
      * @param \Generated\Shared\Transfer\PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer
      *
-     * @return \Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer>
      */
     public function findPaymentPayoneOrderItemByFilter(PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer): array
     {
         $paymentPayoneOrderItemQuery = $this->getFactory()->createPaymentPayoneOrderItemQuery();
         $paymentPayoneOrderItemQuery = $this->setPayoneOrderItemFilters(
             $paymentPayoneOrderItemQuery,
-            $payoneOrderItemFilerTransfer
+            $payoneOrderItemFilerTransfer,
         );
 
         $paymentPayoneOrderItemEntities = $paymentPayoneOrderItemQuery->find();
@@ -87,7 +94,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     /**
      * Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
-     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
+     * @param \Generated\Shared\Transfer\OrderTransfer[]|\ArrayObject $orderTransfers
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
@@ -131,11 +138,11 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param int $idSalesOrder
+     * @param int|null $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\PayoneApiLogTransfer|null
      */
-    public function findLastApiLogByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer
+    public function findLastApiLogByOrderId(?int $idSalesOrder): ?PayoneApiLogTransfer
     {
         $paymentPayoneApiLogEntity = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
@@ -156,14 +163,17 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param int $idOrder
+     * @param int|null $idOrder
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentPayoneQueryByOrderId(int $idOrder): SpyPaymentPayoneQuery
+    public function createPaymentPayoneQueryByOrderId(?int $idOrder): SpyPaymentPayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneQuery();
-        $query->findByFkSalesOrder($idOrder);
+
+        if ($idOrder !== null) {
+            $query->findByFkSalesOrder($idOrder);
+        }
 
         return $query;
     }
@@ -187,7 +197,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
 
         if (count($payoneOrderItemFilerTransfer->getSalesOrderItemIds())) {
             $paymentPayoneOrderItemQuery->filterByFkSalesOrderItem_In(
-                $payoneOrderItemFilerTransfer->getSalesOrderItemIds()
+                $payoneOrderItemFilerTransfer->getSalesOrderItemIds(),
             );
         }
 
@@ -195,7 +205,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
+     * @param \Generated\Shared\Transfer\OrderTransfer[]|\ArrayObject $orderTransfers
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
@@ -216,7 +226,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
+     * @param \Generated\Shared\Transfer\OrderTransfer[]|\ArrayObject $orderTransfers
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */

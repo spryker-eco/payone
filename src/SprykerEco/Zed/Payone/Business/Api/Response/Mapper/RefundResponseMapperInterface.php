@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\RefundResponseContaine
 interface RefundResponseMapperInterface extends ResponseMapperInterface
 {
     /**
-     * @const string NAME
+     * @var string NAME
      */
     public const NAME = 'REFUND';
 

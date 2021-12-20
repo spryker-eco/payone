@@ -14,7 +14,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'bancontact_online_transfer';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_COUNTRIES = 'bancontact online transfer bank countries';
 
     /**
@@ -47,7 +54,7 @@ class BancontactOnlineTransferSubForm extends OnlineTransferSubForm
             [
                 'label' => false,
                 'data' => PayoneApiConstants::ONLINE_BANK_TRANSFER_TYPE_BANCONTACT,
-            ]
+            ],
         );
 
         return $this;

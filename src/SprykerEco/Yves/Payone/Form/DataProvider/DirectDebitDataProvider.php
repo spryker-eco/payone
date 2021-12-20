@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
@@ -21,10 +22,9 @@ class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() === null) {
+        if ($quoteTransfer instanceof QuoteTransfer && $quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
@@ -38,7 +38,7 @@ class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             DirectDebitSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -49,7 +49,7 @@ class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @return array
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
         return [
             Store::getInstance()->getCurrentCountry() => Store::getInstance()->getCurrentCountry(),
@@ -59,7 +59,7 @@ class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @return array
      */
-    protected function getBankAccountModes()
+    protected function getBankAccountModes(): array
     {
         return [
             'BBAN' => 'BBAN',

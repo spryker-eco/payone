@@ -19,6 +19,9 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterface
 {
+    /**
+     * @var string
+     */
     protected const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
@@ -77,7 +80,7 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
         $responseContainer = new GetSecurityInvoiceResponseContainer();
         $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
             $getSecurityInvoiceTransfer->getReference(),
-            $getSecurityInvoiceTransfer->getCustomerId()
+            $getSecurityInvoiceTransfer->getCustomerId(),
         );
 
         if (!$paymentEntity) {
@@ -101,12 +104,12 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
     }
 
     /**
-     * @param string $invoiceTitle
-     * @param int $customerId
+     * @param string|null $invoiceTitle
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): ?SpyPaymentPayone
+    protected function findPaymentByInvoiceTitleAndCustomerId(?string $invoiceTitle, ?int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
     }

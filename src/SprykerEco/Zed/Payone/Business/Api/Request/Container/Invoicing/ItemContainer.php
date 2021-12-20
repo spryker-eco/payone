@@ -12,22 +12,22 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class ItemContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $pr;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $no;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $de;
 
@@ -39,7 +39,7 @@ class ItemContainer extends AbstractContainer
     protected $it;
 
     /**
-     * @var int
+     * @var float|null
      */
     protected $va;
 
@@ -62,7 +62,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return array
      */
-    public function toArrayByKey($key)
+    public function toArrayByKey(int $key): array
     {
         $data = [];
         if (isset($this->id)) {
@@ -94,19 +94,19 @@ class ItemContainer extends AbstractContainer
     }
 
     /**
-     * @param string $de
+     * @param string|null $de
      *
      * @return void
      */
-    public function setDe($de): void
+    public function setDe(?string $de): void
     {
         $this->de = $de;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDe()
+    public function getDe(): ?string
     {
         return $this->de;
     }
@@ -116,7 +116,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setEd($ed): void
+    public function setEd(string $ed): void
     {
         $this->ed = $ed;
     }
@@ -124,61 +124,61 @@ class ItemContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getEd()
+    public function getEd(): string
     {
         return $this->ed;
     }
 
     /**
-     * @param string $id
+     * @param string|null $id
      *
      * @return void
      */
-    public function setId($id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
 
     /**
-     * @param int $no
+     * @param int|null $no
      *
      * @return void
      */
-    public function setNo($no): void
+    public function setNo(?int $no): void
     {
         $this->no = $no;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getNo()
+    public function getNo(): ?int
     {
         return $this->no;
     }
 
     /**
-     * @param int $pr
+     * @param int|null $pr
      *
      * @return void
      */
-    public function setPr($pr): void
+    public function setPr(?int $pr): void
     {
         $this->pr = $pr;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPr()
+    public function getPr(): ?int
     {
         return $this->pr;
     }
@@ -188,7 +188,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setSd($sd): void
+    public function setSd(string $sd): void
     {
         $this->sd = $sd;
     }
@@ -196,25 +196,25 @@ class ItemContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getSd()
+    public function getSd(): string
     {
         return $this->sd;
     }
 
     /**
-     * @param int $va
+     * @param float|null $va
      *
      * @return void
      */
-    public function setVa($va): void
+    public function setVa(?float $va): void
     {
         $this->va = $va;
     }
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getVa()
+    public function getVa(): ?float
     {
         return $this->va;
     }
@@ -224,7 +224,7 @@ class ItemContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setIt($it): void
+    public function setIt(string $it): void
     {
         $this->it = $it;
     }
@@ -232,7 +232,7 @@ class ItemContainer extends AbstractContainer
     /**
      * @return string
      */
-    public function getIt()
+    public function getIt(): string
     {
         return $this->it;
     }

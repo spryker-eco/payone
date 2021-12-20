@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\Payone\Dependency\Facade;
 
 use Generated\Shared\Transfer\KeyTranslationTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
+use Generated\Shared\Transfer\TranslationTransfer;
 
 interface PayoneToGlossaryFacadeInterface
 {
@@ -20,7 +21,7 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return string
      */
-    public function translateByKeyId($idKey, array $data = []);
+    public function translateByKeyId(int $idKey, array $data = []): string;
 
     /**
      * @param string $keyName
@@ -29,7 +30,7 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return string
      */
-    public function translate($keyName, array $data = [], ?LocaleTransfer $localeTransfer = null);
+    public function translate(string $keyName, array $data = [], ?LocaleTransfer $localeTransfer = null): string;
 
     /**
      * @param string $keyName
@@ -42,11 +43,11 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createTranslationForCurrentLocale($keyName, $value, $isActive = true);
+    public function createTranslationForCurrentLocale(string $keyName, string $value, bool $isActive = true): TranslationTransfer;
 
     /**
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param string $value
      * @param bool $isActive
      *
@@ -56,11 +57,11 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true);
+    public function createTranslation(string $keyName, LocaleTransfer $localeTransfer, string $value, bool $isActive = true): TranslationTransfer;
 
     /**
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param string $value
      * @param bool $isActive
      *
@@ -70,7 +71,7 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function createAndTouchTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true);
+    public function createAndTouchTranslation(string $keyName, LocaleTransfer $localeTransfer, string $value, bool $isActive = true): TranslationTransfer;
 
     /**
      * @param string $keyName
@@ -79,58 +80,58 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return int
      */
-    public function createKey($keyName);
+    public function createKey(string $keyName): int;
 
     /**
      * @param string $keyName
      *
      * @return bool
      */
-    public function hasKey($keyName);
+    public function hasKey(string $keyName): bool;
 
     /**
      * @api
      *
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer|null $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer|null $localeTransfer
      *
      * @return bool
      */
-    public function hasTranslation($keyName, ?LocaleTransfer $locale = null);
+    public function hasTranslation(string $keyName, ?LocaleTransfer $localeTransfer = null): bool;
 
     /**
      * @param string $keyName
      *
      * @return int
      */
-    public function getKeyIdentifier($keyName);
+    public function getKeyIdentifier(string $keyName): int;
 
     /**
      * @param int $idKey
      *
      * @return void
      */
-    public function touchCurrentTranslationForKeyId($idKey);
+    public function touchCurrentTranslationForKeyId(int $idKey): void;
 
     /**
      * @param string $keyName
      *
      * @return int
      */
-    public function getOrCreateKey($keyName);
+    public function getOrCreateKey(string $keyName): int;
 
     /**
      * @param \Generated\Shared\Transfer\KeyTranslationTransfer $keyTranslationTransfer
      *
      * @return bool
      */
-    public function saveGlossaryKeyTranslations(KeyTranslationTransfer $keyTranslationTransfer);
+    public function saveGlossaryKeyTranslations(KeyTranslationTransfer $keyTranslationTransfer): bool;
 
     /**
      * @api
      *
      * @param string $keyName
-     * @param \Generated\Shared\Transfer\LocaleTransfer $locale
+     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
      * @param string $value
      * @param bool $isActive
      *
@@ -138,5 +139,5 @@ interface PayoneToGlossaryFacadeInterface
      *
      * @return \Generated\Shared\Transfer\TranslationTransfer
      */
-    public function updateAndTouchTranslation($keyName, LocaleTransfer $locale, $value, $isActive = true);
+    public function updateAndTouchTranslation(string $keyName, LocaleTransfer $localeTransfer, string $value, bool $isActive = true): TranslationTransfer;
 }

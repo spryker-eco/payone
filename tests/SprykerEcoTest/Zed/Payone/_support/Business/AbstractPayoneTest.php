@@ -35,7 +35,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
      *
      * @return void
      */
-    protected function createPayonePayment($method = PayoneApiConstants::PAYMENT_METHOD_INVOICE)
+    protected function createPayonePayment(string $method = PayoneApiConstants::PAYMENT_METHOD_INVOICE): void
     {
         $this->spyPaymentPayone = (new SpyPaymentPayone())
             ->setSpySalesOrder($this->orderEntity)
@@ -52,9 +52,9 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog
      */
     protected function createPayoneApiLog(
-        $request = PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
-        $status = PayoneApiConstants::RESPONSE_TYPE_APPROVED
-    ) {
+        string $request = PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
+        string $status = PayoneApiConstants::RESPONSE_TYPE_APPROVED
+    ): SpyPaymentPayoneApiLog {
         $paymentApiLog = (new SpyPaymentPayoneApiLog())
             ->setRequest($request)
             ->setStatus($status)
@@ -77,9 +77,9 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog
      */
     protected function createPayoneApiLogWithError(
-        $request = PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
-        $status = PayoneApiConstants::RESPONSE_TYPE_APPROVED
-    ) {
+        string $request = PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
+        string $status = PayoneApiConstants::RESPONSE_TYPE_APPROVED
+    ): SpyPaymentPayoneApiLog {
         $paymentApiLog = (new SpyPaymentPayoneApiLog())
             ->setRequest($request)
             ->setStatus($status)
@@ -103,7 +103,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail
      */
-    protected function createPayonePaymentDetail($iban = '', $bic = '')
+    protected function createPayonePaymentDetail(string $iban = '', string $bic = ''): SpyPaymentPayoneDetail
     {
         $paymentDetail = (new SpyPaymentPayoneDetail())
             ->setAmount(12345)
@@ -122,7 +122,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
      *
      * @return void
      */
-    protected function createPayoneTransactionStatusLog($status = PayoneApiConstants::RESPONSE_TYPE_APPROVED, $balance = 0)
+    protected function createPayoneTransactionStatusLog(string $status = PayoneApiConstants::RESPONSE_TYPE_APPROVED, int $balance = 0): void
     {
         $this->spyPayoneTransactionStatusLog = (new SpyPaymentPayoneTransactionStatusLog())
             ->setSpyPaymentPayone($this->spyPaymentPayone)
@@ -137,7 +137,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem
      */
-    protected function createPayoneTransactionStatusLogItem($idOrderItem)
+    protected function createPayoneTransactionStatusLogItem(int $idOrderItem): SpyPaymentPayoneTransactionStatusLogOrderItem
     {
         $transactionStatusLogOrderItem = (new SpyPaymentPayoneTransactionStatusLogOrderItem())
             ->setSpyPaymentPayoneTransactionStatusLog($this->spyPayoneTransactionStatusLog)

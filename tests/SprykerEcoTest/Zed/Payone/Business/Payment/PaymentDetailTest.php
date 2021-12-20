@@ -26,7 +26,7 @@ class PaymentDetailTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testGetPaymentDetail()
+    public function testGetPaymentDetail(): void
     {
         $this->createPayonePayment();
         $spyPaymentDetail = $this->createPayonePaymentDetail('12345', '123');
@@ -42,7 +42,7 @@ class PaymentDetailTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testUpdatePaymentDetail()
+    public function testUpdatePaymentDetail(): void
     {
         $this->createPayonePayment();
         $spyPaymentDetailOld = $this->createPayonePaymentDetail('12345', '123');

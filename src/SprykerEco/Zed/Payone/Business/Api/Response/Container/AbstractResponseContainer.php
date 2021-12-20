@@ -49,7 +49,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function init(array $data = [])
+    public function init(array $data = []): void
     {
         foreach ($data as $key => $value) {
             $key = $this->getPreparedKey($key);
@@ -64,7 +64,7 @@ abstract class AbstractResponseContainer
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $result = [];
         foreach ($this as $key => $data) {
@@ -81,7 +81,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $stringArray = [];
         foreach ($this->toArray() as $key => $value) {
@@ -97,7 +97,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setStatus($status)
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
@@ -105,7 +105,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -115,7 +115,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setCustomermessage($customermessage)
+    public function setCustomermessage(string $customermessage): void
     {
         $this->customermessage = $customermessage;
     }
@@ -123,7 +123,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getCustomermessage()
+    public function getCustomermessage(): string
     {
         return $this->customermessage;
     }
@@ -133,7 +133,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setErrorcode($errorcode)
+    public function setErrorcode(string $errorcode): void
     {
         $this->errorcode = $errorcode;
     }
@@ -141,7 +141,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getErrorcode()
+    public function getErrorcode(): string
     {
         return $this->errorcode;
     }
@@ -149,7 +149,7 @@ abstract class AbstractResponseContainer
     /**
      * @return bool
      */
-    public function isError()
+    public function isError(): bool
     {
         if ($this->errorcode === null) {
             return false;
@@ -163,7 +163,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setErrormessage($errormessage)
+    public function setErrormessage(string $errormessage): void
     {
         $this->errormessage = $errormessage;
     }
@@ -171,7 +171,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getErrormessage()
+    public function getErrormessage(): string
     {
         return $this->errormessage;
     }
@@ -181,7 +181,7 @@ abstract class AbstractResponseContainer
      *
      * @return mixed
      */
-    public function getValue($key)
+    public function getValue(string $key)
     {
         return $this->get($key);
     }
@@ -192,7 +192,7 @@ abstract class AbstractResponseContainer
      *
      * @return bool|null
      */
-    public function setValue($key, $name)
+    public function setValue(string $key, string $name): ?bool
     {
         return $this->set($key, $name);
     }
@@ -202,7 +202,7 @@ abstract class AbstractResponseContainer
      *
      * @return mixed|null
      */
-    protected function get($name)
+    protected function get(string $name)
     {
         if (property_exists($this, $name)) {
             return $this->$name;
@@ -217,7 +217,7 @@ abstract class AbstractResponseContainer
      *
      * @return bool|null
      */
-    protected function set($name, $value)
+    protected function set(string $name, $value): ?bool
     {
         if (property_exists($this, $name)) {
             $this->$name = $value;
@@ -233,7 +233,7 @@ abstract class AbstractResponseContainer
      *
      * @return void
      */
-    public function setRawResponse($rawResponse)
+    public function setRawResponse(string $rawResponse): void
     {
         $this->rawResponse = $rawResponse;
     }
@@ -241,7 +241,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getRawResponse()
+    public function getRawResponse(): string
     {
         return $this->rawResponse;
     }

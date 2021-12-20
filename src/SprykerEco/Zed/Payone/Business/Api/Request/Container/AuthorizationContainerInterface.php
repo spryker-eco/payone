@@ -20,22 +20,22 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setNarrativeText($narrative_text);
+    public function setNarrativeText(string $narrative_text): void;
 
     /**
      * @return string
      */
-    public function getKey();
+    public function getKey(): string;
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer
      */
-    public function getInvoicing();
+    public function getInvoicing(): TransactionContainer;
 
     /**
      * @return string
      */
-    public function getNarrativeText();
+    public function getNarrativeText(): string;
 
     /**
      * @return string|null
@@ -47,24 +47,24 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setPersonalData(PersonalContainer $personalData);
+    public function setPersonalData(PersonalContainer $personalData): void;
 
     /**
      * @return string
      */
-    public function getParam();
+    public function getParam(): string;
 
     /**
      * @return string
      */
-    public function getRequest();
+    public function getRequest(): string;
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return void
      */
-    public function setCurrency($currency);
+    public function setCurrency(?string $currency): void;
 
     /**
      * set the system-Name
@@ -78,12 +78,12 @@ interface AuthorizationContainerInterface
     /**
      * @return string
      */
-    public function getIntegratorName();
+    public function getIntegratorName(): string;
 
     /**
      * @return string
      */
-    public function getCurrency();
+    public function getCurrency(): string;
 
     /**
      * set the version of the solution-partner's app / extension / plugin / etc..
@@ -97,22 +97,22 @@ interface AuthorizationContainerInterface
     /**
      * @return array
      */
-    public function toArray();
+    public function toArray(): array;
 
     /**
      * @return string
      */
-    public function getReference();
+    public function getReference(): string;
 
     /**
      * @return string
      */
-    public function getSolutionVersion();
+    public function getSolutionVersion(): string;
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
      */
-    public function get3dsecure();
+    public function get3dsecure(): ThreeDSecureContainer;
 
     /**
      * @param string|null $portalid
@@ -126,29 +126,29 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setShippingData(ShippingContainer $delivery);
+    public function setShippingData(ShippingContainer $delivery): void;
 
     /**
      * @return string
      */
-    public function getEncoding();
+    public function getEncoding(): string;
 
     /**
      * @return string
      */
-    public function getSolutionName();
+    public function getSolutionName(): string;
 
     /**
      * @param string $param
      *
      * @return void
      */
-    public function setParam($param);
+    public function setParam(string $param): void;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount();
+    public function getAmount(): ?int;
 
     /**
      * @param string|null $encoding
@@ -169,24 +169,24 @@ interface AuthorizationContainerInterface
      *
      * @return void
      */
-    public function setClearingType($clearingType);
+    public function setClearingType(string $clearingType): void;
 
     /**
      * @param string $reference
      *
      * @return void
      */
-    public function setReference($reference);
+    public function setReference(string $reference): void;
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    public function getPersonalData();
+    public function getPersonalData(): PersonalContainer;
 
     /**
      * @return string
      */
-    public function getClearingType();
+    public function getClearingType(): string;
 
     /**
      * @param string $key
@@ -198,19 +198,19 @@ interface AuthorizationContainerInterface
     /**
      * @return string
      */
-    public function getIntegratorVersion();
+    public function getIntegratorVersion(): string;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer $paymentMethod
      *
      * @return void
      */
-    public function setPaymentMethod(AbstractPaymentMethodContainer $paymentMethod);
+    public function setPaymentMethod(AbstractPaymentMethodContainer $paymentMethod): void;
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer
      */
-    public function getPaymentMethod();
+    public function getPaymentMethod(): AbstractPaymentMethodContainer;
 
     /**
      * @return string|null
@@ -227,14 +227,14 @@ interface AuthorizationContainerInterface
     /**
      * @return string
      */
-    public function getMode();
+    public function getMode(): string;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer $secure
      *
      * @return void
      */
-    public function set3dsecure(ThreeDSecureContainer $secure);
+    public function set3dsecure(ThreeDSecureContainer $secure): void;
 
     /**
      * set the name of the solution-partner (company)
@@ -269,24 +269,24 @@ interface AuthorizationContainerInterface
     /**
      * @return string
      */
-    public function __toString();
+    public function __toString(): string;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer $invoicing
      *
      * @return void
      */
-    public function setInvoicing(TransactionContainer $invoicing);
+    public function setInvoicing(TransactionContainer $invoicing): void;
 
     /**
      * @return string
      */
-    public function getApiVersion();
+    public function getApiVersion(): string;
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer
      */
-    public function getShippingData();
+    public function getShippingData(): ShippingContainer;
 
     /**
      * @return string|null
@@ -294,9 +294,9 @@ interface AuthorizationContainerInterface
     public function getAid(): ?string;
 
     /**
-     * @param int $amount
+     * @param int|null $amount
      *
      * @return void
      */
-    public function setAmount($amount);
+    public function setAmount(?int $amount): void;
 }

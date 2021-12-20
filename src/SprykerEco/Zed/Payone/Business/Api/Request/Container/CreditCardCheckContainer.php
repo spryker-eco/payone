@@ -17,7 +17,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_CREDITCARDCHECK;
 
     /**
-     * @var int
+     * @var string
      */
     protected $aid;
 
@@ -61,7 +61,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardCvc2($cardcvc2): void
+    public function setCardCvc2(int $cardcvc2): void
     {
         $this->cardcvc2 = $cardcvc2;
     }
@@ -69,7 +69,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getCardCvc2()
+    public function getCardCvc2(): int
     {
         return $this->cardcvc2;
     }
@@ -79,7 +79,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardExpireDate($cardexpiredate): void
+    public function setCardExpireDate(int $cardexpiredate): void
     {
         $this->cardexpiredate = $cardexpiredate;
     }
@@ -87,7 +87,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getCardExpireDate()
+    public function getCardExpireDate(): int
     {
         return $this->cardexpiredate;
     }
@@ -97,7 +97,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardIssueNumber($cardissuenumber): void
+    public function setCardIssueNumber(int $cardissuenumber): void
     {
         $this->cardissuenumber = $cardissuenumber;
     }
@@ -105,7 +105,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return int
      */
-    public function getCardIssueNumber()
+    public function getCardIssueNumber(): int
     {
         return $this->cardissuenumber;
     }
@@ -115,7 +115,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardPan($cardpan): void
+    public function setCardPan(string $cardpan): void
     {
         $this->cardpan = $cardpan;
     }
@@ -123,7 +123,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCardPan()
+    public function getCardPan(): string
     {
         return $this->cardpan;
     }
@@ -133,7 +133,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCardType($cardtype): void
+    public function setCardType(string $cardtype): void
     {
         $this->cardtype = $cardtype;
     }
@@ -141,7 +141,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     /**
      * @return string
      */
-    public function getCardType()
+    public function getCardType(): string
     {
         return $this->cardtype;
     }
@@ -151,7 +151,7 @@ class CreditCardCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStoreCardData($storecarddata): void
+    public function setStoreCardData(string $storecarddata): void
     {
         $this->storecarddata = $storecarddata;
     }

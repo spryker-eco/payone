@@ -46,13 +46,13 @@ class PayoneInitPaypalExpressCheckoutMethodSender implements PayoneInitPaypalExp
     ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
         /** @var \SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface $paymentMethodMapper */
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(
-            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT
+            PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT,
         );
         $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();
         $baseGenericPaymentContainer->getPaydata()->setAction(PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_SET_ACTION);
         $requestContainer = $paymentMethodMapper->mapRequestTransferToGenericPayment(
             $baseGenericPaymentContainer,
-            $requestTransfer
+            $requestTransfer,
         );
         $responseTransfer = $this->genericRequestMethodSender->performGenericRequest($requestContainer);
 

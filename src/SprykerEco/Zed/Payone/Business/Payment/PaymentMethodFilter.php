@@ -15,12 +15,39 @@ use SprykerEco\Zed\Payone\PayoneConfig;
 
 class PaymentMethodFilter implements PaymentMethodFilterInterface
 {
+    /**
+     * @var string
+     */
     protected const PAYONE_PAYMENT_METHOD = 'payone';
+
+    /**
+     * @var string
+     */
     protected const PAYONE_SCORE_GREEN = 'G';
+
+    /**
+     * @var string
+     */
     protected const PAYONE_SCORE_YELLOW = 'Y';
+
+    /**
+     * @var string
+     */
     protected const PAYONE_SCORE_RED = 'R';
+
+    /**
+     * @var string
+     */
     protected const PAYONE_SCORE_UNKNOWN = 'U';
+
+    /**
+     * @var string
+     */
     protected const CONFIG_METHOD_PART_GET = 'get';
+
+    /**
+     * @var string
+     */
     protected const CONFIG_METHOD_PART_AVAILABLE_PAYMENT_METHODS = 'ScoreAvailablePaymentMethods';
 
     /**
@@ -62,7 +89,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function getAvailablePaymentMethods(QuoteTransfer $quoteTransfer): array
     {
@@ -81,7 +108,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
 
     /**
      * @param \Generated\Shared\Transfer\PaymentMethodTransfer $paymentMethodTransfer
-     * @param string[] $availableMethods
+     * @param array<string> $availableMethods
      *
      * @return bool
      */

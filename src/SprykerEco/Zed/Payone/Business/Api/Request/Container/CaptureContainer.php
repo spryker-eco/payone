@@ -19,12 +19,12 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     protected $request = PayoneApiConstants::REQUEST_TYPE_CAPTURE;
 
     /**
-     * @var string
+     * @var int|null
      */
     protected $txid;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $sequencenumber;
 
@@ -34,7 +34,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
@@ -58,7 +58,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
      *
      * @return void
      */
-    public function setAmount($amount): void
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
@@ -72,11 +72,11 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
      * @return void
      */
-    public function setCurrency($currency): void
+    public function setCurrency(?string $currency): void
     {
         $this->currency = $currency;
     }
@@ -90,11 +90,11 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param int $sequencenumber
+     * @param int|null $sequencenumber
      *
      * @return void
      */
-    public function setSequenceNumber($sequencenumber): void
+    public function setSequenceNumber(?int $sequencenumber): void
     {
         $this->sequencenumber = $sequencenumber;
     }
@@ -108,19 +108,19 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param string $txid
+     * @param int|null $txid
      *
      * @return void
      */
-    public function setTxid($txid): void
+    public function setTxid(?int $txid): void
     {
         $this->txid = $txid;
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getTxid(): ?string
+    public function getTxid(): ?int
     {
         return $this->txid;
     }
@@ -144,7 +144,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param Invoicing\TransactionContainer $invoicing
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer $invoicing
      *
      * @return void
      */

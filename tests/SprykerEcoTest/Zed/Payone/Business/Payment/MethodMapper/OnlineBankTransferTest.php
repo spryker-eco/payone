@@ -22,17 +22,33 @@ use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\OnlineBankTransfer;
  */
 class OnlineBankTransferTest extends AbstractMethodMapperTest
 {
+    /**
+     * @var string
+     */
     public const STANDARD_PARAMETER_CLEARING_TYPE = 'sb';
+
+    /**
+     * @var string
+     */
     public const ONLINE_BANK_TRANSFER_TYPE = 'PNT';
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_ONLINE_BANK_TRANSFER_REQUIRED_PARAMS = [
         'onlinebanktransfertype' => self::ONLINE_BANK_TRANSFER_TYPE,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_ONLINE_BANK_TRANSFER_REQUIRED_PARAMS = [
         'onlinebanktransfertype' => self::ONLINE_BANK_TRANSFER_TYPE,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -41,6 +57,9 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
+    /**
+     * @var array
+     */
     public const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -52,7 +71,7 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToPreauthorization()
+    public function testMapPaymentToPreauthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new OnlineBankTransfer($this->getStoreConfigMock()));
@@ -78,7 +97,7 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToAuthorization()
+    public function testMapPaymentToAuthorization(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new OnlineBankTransfer($this->getStoreConfigMock()));
@@ -106,7 +125,7 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
     /**
      * @return void
      */
-    public function testMapPaymentToCapture()
+    public function testMapPaymentToCapture(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new OnlineBankTransfer($this->getStoreConfigMock()));
@@ -115,14 +134,14 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
 
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
     /**
      * @return void
      */
-    public function testMapPaymentToRefund()
+    public function testMapPaymentToRefund(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new OnlineBankTransfer($this->getStoreConfigMock()));
@@ -131,14 +150,14 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
 
         foreach (static::REFUND_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
     /**
      * @return void
      */
-    public function testMapPaymentToDebit()
+    public function testMapPaymentToDebit(): void
     {
         $paymentEntity = $this->getPaymentEntityMock();
         $paymentMethodMapper = $this->preparePaymentMethodMapper(new OnlineBankTransfer($this->getStoreConfigMock()));
@@ -147,7 +166,7 @@ class OnlineBankTransferTest extends AbstractMethodMapperTest
 
         foreach (static::DEBIT_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 

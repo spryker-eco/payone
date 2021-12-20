@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\CaptureResponseContain
 interface CaptureResponseMapperInterface extends ResponseMapperInterface
 {
     /**
-     * @const string NAME
+     * @var string NAME
      */
     public const NAME = 'CAPTURE';
 

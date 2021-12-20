@@ -25,7 +25,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsAuthorizationApproved()
+    public function testIsAuthorizationApproved(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -37,7 +37,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsAuthorizationRedirect()
+    public function testIsAuthorizationRedirect(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_REDIRECT);
@@ -49,7 +49,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsAuthorizationError()
+    public function testIsAuthorizationError(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_ERROR);
@@ -61,7 +61,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPreAuthorizationApproved()
+    public function testIsPreAuthorizationApproved(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -73,7 +73,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPreauthorizationRedirect()
+    public function testIsPreauthorizationRedirect(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_REDIRECT);
@@ -85,7 +85,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPreAuthorizationError()
+    public function testIsPreAuthorizationError(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_ERROR);
@@ -97,7 +97,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPreAuthorizationErrorTimeout()
+    public function testIsPreAuthorizationErrorTimeout(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_TIMEOUT);
@@ -109,7 +109,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsCaptureApproved()
+    public function testIsCaptureApproved(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_CAPTURE, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -121,7 +121,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsCaptureError()
+    public function testIsCaptureError(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_CAPTURE, PayoneApiConstants::RESPONSE_TYPE_ERROR);
@@ -133,7 +133,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsRefundApproved()
+    public function testIsRefundApproved(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -145,7 +145,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsRefundError()
+    public function testIsRefundError(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_ERROR);
@@ -157,7 +157,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsRefundPossible()
+    public function testIsRefundPossible(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -170,7 +170,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsRefundImpossible()
+    public function testIsRefundImpossible(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -183,7 +183,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentDataRequiredInvoice()
+    public function testIsPaymentDataRequiredInvoice(): void
     {
         $this->createPayonePayment();
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -196,7 +196,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentDataRequiredEWallet()
+    public function testIsPaymentDataRequiredEWallet(): void
     {
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_E_WALLET);
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -209,7 +209,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentDataRequiredCreditCardPseudo()
+    public function testIsPaymentDataRequiredCreditCardPseudo(): void
     {
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO);
         $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_REFUND, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -224,7 +224,7 @@ class OmsConditionTest extends AbstractPayoneTest
      *
      * @return void
      */
-    public function testIsPaymentNotificationAvailable()
+    public function testIsPaymentNotificationAvailable(): void
     {
         /////////
     }
@@ -232,7 +232,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentPaid()
+    public function testIsPaymentPaid(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -245,7 +245,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsNotPaymentPaid()
+    public function testIsNotPaymentPaid(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -258,7 +258,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentOverpaid()
+    public function testIsPaymentOverpaid(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -271,7 +271,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentNotOverpaid()
+    public function testIsPaymentNotOverpaid(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -284,7 +284,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentUnderpaid()
+    public function testIsPaymentUnderpaid(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -297,7 +297,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentNotUnderpaid()
+    public function testIsPaymentNotUnderpaid(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -311,7 +311,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentRefund()
+    public function testIsPaymentRefund(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -324,7 +324,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentNotRefund()
+    public function testIsPaymentNotRefund(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -338,7 +338,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentAppointed()
+    public function testIsPaymentAppointed(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -351,7 +351,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentNotAppointed()
+    public function testIsPaymentNotAppointed(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -365,7 +365,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentCapture()
+    public function testIsPaymentCapture(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -378,7 +378,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentNotCapture()
+    public function testIsPaymentNotCapture(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -392,7 +392,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentOther()
+    public function testIsPaymentOther(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
@@ -405,7 +405,7 @@ class OmsConditionTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testIsPaymentNotOther()
+    public function testIsPaymentNotOther(): void
     {
         $idOrderItem = $this->orderEntity->getItems()->getFirst()->getIdSalesOrderItem();
         $this->createPayonePayment(PayoneApiConstants::PAYMENT_METHOD_INVOICE);

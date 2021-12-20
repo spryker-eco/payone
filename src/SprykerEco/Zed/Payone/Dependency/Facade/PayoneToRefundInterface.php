@@ -18,12 +18,12 @@ interface PayoneToRefundInterface
      *
      * @return \Generated\Shared\Transfer\RefundTransfer
      */
-    public function calculateRefund(array $orderItems, SpySalesOrder $orderEntity);
+    public function calculateRefund(array $orderItems, SpySalesOrder $orderEntity): RefundTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\RefundTransfer $refundTransfer
      *
      * @return bool
      */
-    public function saveRefund(RefundTransfer $refundTransfer);
+    public function saveRefund(RefundTransfer $refundTransfer): bool;
 }

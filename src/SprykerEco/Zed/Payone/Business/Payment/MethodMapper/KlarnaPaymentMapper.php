@@ -32,6 +32,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperInterface
 {
+    /**
+     * @var string
+     */
     protected const STREET_ADDRESS_SEPARATOR = ' ';
 
     /**

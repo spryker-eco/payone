@@ -8,6 +8,7 @@
 namespace SprykerEco\Yves\Payone\Dependency\Client;
 
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\ShipmentMethodsTransfer;
 use RuntimeException;
 
 class PayoneToShipmentBridge implements PayoneToShipmentInterface
@@ -32,7 +33,7 @@ class PayoneToShipmentBridge implements PayoneToShipmentInterface
      *
      * @return \Generated\Shared\Transfer\ShipmentMethodsTransfer
      */
-    public function getAvailableMethods(QuoteTransfer $quoteTransfer)
+    public function getAvailableMethods(QuoteTransfer $quoteTransfer): ShipmentMethodsTransfer
     {
         if (method_exists($this->shipmentClient, 'getAvailableMethodsByShipment') === true) {
             $shipmentMethodsCollectionTransfer = $this->shipmentClient->getAvailableMethodsByShipment($quoteTransfer);

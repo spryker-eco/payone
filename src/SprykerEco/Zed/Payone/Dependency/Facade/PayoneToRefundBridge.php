@@ -31,7 +31,7 @@ class PayoneToRefundBridge implements PayoneToRefundInterface
      *
      * @return \Generated\Shared\Transfer\RefundTransfer
      */
-    public function calculateRefund(array $orderItems, SpySalesOrder $orderEntity)
+    public function calculateRefund(array $orderItems, SpySalesOrder $orderEntity): RefundTransfer
     {
         return $this->refundFacade->calculateRefund($orderItems, $orderEntity);
     }
@@ -41,7 +41,7 @@ class PayoneToRefundBridge implements PayoneToRefundInterface
      *
      * @return bool
      */
-    public function saveRefund(RefundTransfer $refundTransfer)
+    public function saveRefund(RefundTransfer $refundTransfer): bool
     {
         return $this->refundFacade->saveRefund($refundTransfer);
     }

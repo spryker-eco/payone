@@ -240,7 +240,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setAccessid($accessid)
+    public function setAccessid(int $accessid): void
     {
         $this->accessid = $accessid;
     }
@@ -248,7 +248,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return int
      */
-    public function getAccessid()
+    public function getAccessid(): int
     {
         return $this->accessid;
     }
@@ -258,7 +258,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setAid($aid)
+    public function setAid(int $aid): void
     {
         $this->aid = $aid;
     }
@@ -266,7 +266,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return int
      */
-    public function getAid()
+    public function getAid(): int
     {
         return $this->aid;
     }
@@ -276,7 +276,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setBalance($balance)
+    public function setBalance(float $balance): void
     {
         $this->balance = $balance;
     }
@@ -284,7 +284,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return float
      */
-    public function getBalance()
+    public function getBalance(): float
     {
         return $this->balance;
     }
@@ -294,7 +294,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingtype($clearingtype)
+    public function setClearingtype(string $clearingtype): void
     {
         $this->clearingtype = $clearingtype;
     }
@@ -302,7 +302,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingtype()
+    public function getClearingtype(): string
     {
         return $this->clearingtype;
     }
@@ -312,7 +312,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -320,7 +320,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -330,7 +330,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setCustomerid($customerid)
+    public function setCustomerid(int $customerid): void
     {
         $this->customerid = $customerid;
     }
@@ -338,7 +338,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return int
      */
-    public function getCustomerid()
+    public function getCustomerid(): int
     {
         return $this->customerid;
     }
@@ -348,7 +348,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setFailedcause($failedcause)
+    public function setFailedcause(string $failedcause): void
     {
         $this->failedcause = $failedcause;
     }
@@ -356,7 +356,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getFailedcause()
+    public function getFailedcause(): string
     {
         return $this->failedcause;
     }
@@ -366,7 +366,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setInvoiceDate($invoice_date)
+    public function setInvoiceDate(string $invoice_date): void
     {
         $this->invoice_date = $invoice_date;
     }
@@ -374,7 +374,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getInvoiceDate()
+    public function getInvoiceDate(): string
     {
         return $this->invoice_date;
     }
@@ -384,7 +384,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setInvoiceDeliverydate($invoice_deliverydate)
+    public function setInvoiceDeliverydate(string $invoice_deliverydate): void
     {
         $this->invoice_deliverydate = $invoice_deliverydate;
     }
@@ -392,7 +392,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getInvoiceDeliverydate()
+    public function getInvoiceDeliverydate(): string
     {
         return $this->invoice_deliverydate;
     }
@@ -402,7 +402,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setInvoiceDeliveryenddate($invoice_deliveryenddate)
+    public function setInvoiceDeliveryenddate(string $invoice_deliveryenddate): void
     {
         $this->invoice_deliveryenddate = $invoice_deliveryenddate;
     }
@@ -410,7 +410,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getInvoiceDeliveryenddate()
+    public function getInvoiceDeliveryenddate(): string
     {
         return $this->invoice_deliveryenddate;
     }
@@ -420,7 +420,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setInvoiceGrossamount($invoice_grossamount)
+    public function setInvoiceGrossamount(string $invoice_grossamount): void
     {
         $this->invoice_grossamount = $invoice_grossamount;
     }
@@ -428,7 +428,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getInvoiceGrossamount()
+    public function getInvoiceGrossamount(): string
     {
         return $this->invoice_grossamount;
     }
@@ -438,7 +438,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setInvoiceid($invoiceid)
+    public function setInvoiceid(string $invoiceid): void
     {
         $this->invoiceid = $invoiceid;
     }
@@ -446,7 +446,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getInvoiceid()
+    public function getInvoiceid(): string
     {
         return $this->invoiceid;
     }
@@ -456,7 +456,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setKey($key)
+    public function setKey(string $key): void
     {
         $this->key = $key;
     }
@@ -464,7 +464,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -474,7 +474,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setMode($mode)
+    public function setMode(string $mode): void
     {
         $this->mode = $mode;
     }
@@ -482,7 +482,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getMode()
+    public function getMode(): string
     {
         return $this->mode;
     }
@@ -492,7 +492,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setParam($param)
+    public function setParam(string $param): void
     {
         $this->param = $param;
     }
@@ -500,7 +500,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getParam()
+    public function getParam(): string
     {
         return $this->param;
     }
@@ -510,7 +510,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setPortalid($portalid)
+    public function setPortalid(int $portalid): void
     {
         $this->portalid = $portalid;
     }
@@ -518,7 +518,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return int
      */
-    public function getPortalid()
+    public function getPortalid(): int
     {
         return $this->portalid;
     }
@@ -528,7 +528,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setProductid($productid)
+    public function setProductid(int $productid): void
     {
         $this->productid = $productid;
     }
@@ -536,7 +536,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return int
      */
-    public function getProductid()
+    public function getProductid(): int
     {
         return $this->productid;
     }
@@ -546,7 +546,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setReceivable($receivable)
+    public function setReceivable(float $receivable): void
     {
         $this->receivable = $receivable;
     }
@@ -554,7 +554,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return float
      */
-    public function getReceivable()
+    public function getReceivable(): float
     {
         return $this->receivable;
     }
@@ -564,7 +564,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setReference($reference)
+    public function setReference(string $reference): void
     {
         $this->reference = $reference;
     }
@@ -572,7 +572,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getReference()
+    public function getReference(): string
     {
         return $this->reference;
     }
@@ -582,7 +582,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setReminderlevel($reminderlevel)
+    public function setReminderlevel(string $reminderlevel): void
     {
         $this->reminderlevel = $reminderlevel;
     }
@@ -590,7 +590,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getReminderlevel()
+    public function getReminderlevel(): string
     {
         return $this->reminderlevel;
     }
@@ -600,7 +600,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setSequencenumber($sequencenumber)
+    public function setSequencenumber(string $sequencenumber): void
     {
         $this->sequencenumber = $sequencenumber;
     }
@@ -608,7 +608,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getSequencenumber()
+    public function getSequencenumber(): string
     {
         return $this->sequencenumber;
     }
@@ -618,7 +618,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setTxaction($txaction)
+    public function setTxaction(string $txaction): void
     {
         $this->txaction = $txaction;
     }
@@ -626,7 +626,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getTxaction()
+    public function getTxaction(): string
     {
         return $this->txaction;
     }
@@ -636,7 +636,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setTxid($txid)
+    public function setTxid(int $txid): void
     {
         $this->txid = $txid;
     }
@@ -644,7 +644,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return int
      */
-    public function getTxid()
+    public function getTxid(): int
     {
         return $this->txid;
     }
@@ -654,7 +654,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setTxtime($txtime)
+    public function setTxtime(int $txtime): void
     {
         $this->txtime = $txtime;
     }
@@ -662,7 +662,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return int
      */
-    public function getTxtime()
+    public function getTxtime(): int
     {
         return $this->txtime;
     }
@@ -672,7 +672,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setUserid($userid)
+    public function setUserid(int $userid): void
     {
         $this->userid = $userid;
     }
@@ -680,7 +680,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return int
      */
-    public function getUserid()
+    public function getUserid(): int
     {
         return $this->userid;
     }
@@ -690,7 +690,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingBankaccount($clearing_bankaccount)
+    public function setClearingBankaccount(string $clearing_bankaccount): void
     {
         $this->clearing_bankaccount = $clearing_bankaccount;
     }
@@ -698,7 +698,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingBankaccount()
+    public function getClearingBankaccount(): string
     {
         return $this->clearing_bankaccount;
     }
@@ -708,7 +708,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingBankaccountholder($clearing_bankaccountholder)
+    public function setClearingBankaccountholder(string $clearing_bankaccountholder): void
     {
         $this->clearing_bankaccountholder = $clearing_bankaccountholder;
     }
@@ -716,7 +716,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingBankaccountholder()
+    public function getClearingBankaccountholder(): string
     {
         return $this->clearing_bankaccountholder;
     }
@@ -726,7 +726,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingBankbic($clearing_bankbic)
+    public function setClearingBankbic(string $clearing_bankbic): void
     {
         $this->clearing_bankbic = $clearing_bankbic;
     }
@@ -734,7 +734,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingBankbic()
+    public function getClearingBankbic(): string
     {
         return $this->clearing_bankbic;
     }
@@ -744,7 +744,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingBankcity($clearing_bankcity)
+    public function setClearingBankcity(string $clearing_bankcity): void
     {
         $this->clearing_bankcity = $clearing_bankcity;
     }
@@ -752,7 +752,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingBankcity()
+    public function getClearingBankcity(): string
     {
         return $this->clearing_bankcity;
     }
@@ -762,7 +762,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingBankcode($clearing_bankcode)
+    public function setClearingBankcode(string $clearing_bankcode): void
     {
         $this->clearing_bankcode = $clearing_bankcode;
     }
@@ -770,7 +770,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingBankcode()
+    public function getClearingBankcode(): string
     {
         return $this->clearing_bankcode;
     }
@@ -780,7 +780,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingBankcountry($clearing_bankcountry)
+    public function setClearingBankcountry(string $clearing_bankcountry): void
     {
         $this->clearing_bankcountry = $clearing_bankcountry;
     }
@@ -788,7 +788,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingBankcountry()
+    public function getClearingBankcountry(): string
     {
         return $this->clearing_bankcountry;
     }
@@ -798,7 +798,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingBankiban($clearing_bankiban)
+    public function setClearingBankiban(string $clearing_bankiban): void
     {
         $this->clearing_bankiban = $clearing_bankiban;
     }
@@ -806,7 +806,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingBankiban()
+    public function getClearingBankiban(): string
     {
         return $this->clearing_bankiban;
     }
@@ -816,7 +816,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingBankname($clearing_bankname)
+    public function setClearingBankname(string $clearing_bankname): void
     {
         $this->clearing_bankname = $clearing_bankname;
     }
@@ -824,7 +824,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingBankname()
+    public function getClearingBankname(): string
     {
         return $this->clearing_bankname;
     }
@@ -834,7 +834,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
@@ -842,7 +842,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getIban()
+    public function getIban(): string
     {
         return $this->iban;
     }
@@ -852,7 +852,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }
@@ -860,7 +860,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getBic()
+    public function getBic(): string
     {
         return $this->bic;
     }
@@ -870,7 +870,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setMandateIdentification($mandateIdentification)
+    public function setMandateIdentification(string $mandateIdentification): void
     {
         $this->mandate_identification = $mandateIdentification;
     }
@@ -878,7 +878,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getMandateIdentification()
+    public function getMandateIdentification(): string
     {
         return $this->mandate_identification;
     }
@@ -888,7 +888,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingDuedate($clearing_duedate)
+    public function setClearingDuedate(string $clearing_duedate): void
     {
         $this->clearing_duedate = $clearing_duedate;
     }
@@ -896,7 +896,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingDuedate()
+    public function getClearingDuedate(): string
     {
         return $this->clearing_duedate;
     }
@@ -906,7 +906,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingAmount($clearingAmount)
+    public function setClearingAmount(string $clearingAmount): void
     {
         $this->clearing_amount = $clearingAmount;
     }
@@ -914,7 +914,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingAmount()
+    public function getClearingAmount(): string
     {
         return $this->clearing_amount;
     }
@@ -924,7 +924,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setCreditorIdentifier($creditorIdentifier)
+    public function setCreditorIdentifier(string $creditorIdentifier): void
     {
         $this->creditor_identifier = $creditorIdentifier;
     }
@@ -932,7 +932,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getCreditorIdentifier()
+    public function getCreditorIdentifier(): string
     {
         return $this->creditor_identifier;
     }
@@ -942,7 +942,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingDate($clearingDate)
+    public function setClearingDate(string $clearingDate): void
     {
         $this->clearing_date = $clearingDate;
     }
@@ -950,7 +950,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingDate()
+    public function getClearingDate(): string
     {
         return $this->clearing_date;
     }
@@ -960,7 +960,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingInstructionnote($clearing_instructionnote)
+    public function setClearingInstructionnote(string $clearing_instructionnote): void
     {
         $this->clearing_instructionnote = $clearing_instructionnote;
     }
@@ -968,7 +968,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingInstructionnote()
+    public function getClearingInstructionnote(): string
     {
         return $this->clearing_instructionnote;
     }
@@ -978,7 +978,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingLegalnote($clearing_legalnote)
+    public function setClearingLegalnote(string $clearing_legalnote): void
     {
         $this->clearing_legalnote = $clearing_legalnote;
     }
@@ -986,7 +986,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingLegalnote()
+    public function getClearingLegalnote(): string
     {
         return $this->clearing_legalnote;
     }
@@ -996,7 +996,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setClearingReference($clearing_reference)
+    public function setClearingReference(string $clearing_reference): void
     {
         $this->clearing_reference = $clearing_reference;
     }
@@ -1004,7 +1004,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getClearingReference()
+    public function getClearingReference(): string
     {
         return $this->clearing_reference;
     }
@@ -1012,7 +1012,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return float
      */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
@@ -1022,7 +1022,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
      *
      * @return void
      */
-    public function setPrice($price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }

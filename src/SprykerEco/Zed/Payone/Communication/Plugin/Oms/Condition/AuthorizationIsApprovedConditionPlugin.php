@@ -17,6 +17,9 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class AuthorizationIsApprovedConditionPlugin extends AbstractPlugin
 {
+    /**
+     * @var string
+     */
     public const NAME = 'AuthorizationIsApprovedPlugin';
 
     /**
@@ -24,7 +27,7 @@ class AuthorizationIsApprovedConditionPlugin extends AbstractPlugin
      *
      * @return bool
      */
-    protected function callFacade(OrderTransfer $orderTransfer)
+    protected function callFacade(OrderTransfer $orderTransfer): bool
     {
         return $this->getFacade()->isAuthorizationApproved($orderTransfer);
     }

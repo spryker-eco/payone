@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
 class PayoneHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

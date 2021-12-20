@@ -1,5 +1,23 @@
 name: CI
 
+env:
+    APPLICATION_ENV: 'development'
+    APPLICATION_STORE: 'DE'
+    PROJECT: 'Payone'
+    DATABASE_VERSION: 10.2
+    DATABASE_HOST: 127.0.0.1
+    DATABASE_PORT: 3306
+    DATABASE_NAME: eu-docker
+    DATABASE_USERNAME: root
+    DATABASE_PASSWORD: secret
+    DATABASE_ROOT_PASSWORD: secret
+    DATABASE_ALLOW_EMPTY_PASSWORD: false
+    DATABASE_CHARACTER_SET: utf8
+    DATABASE_COLLATE: utf8_general_ci
+    MYSQL_ALLOW_EMPTY_PASSWORD: false
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_DATABASE: eu-docker
+
 on:
     pull_request:
     push:
@@ -7,118 +25,135 @@ on:
             - master
     workflow_dispatch:
 
-env:
-    SPRYKER_TESTING_ENABLED: 1
-    APPLICATION_STORE: DE
-    POSTGRES_PORT: 5433
-    DB_USER: postgres
-    DB_NAME: DE_test_zed
-    DB_PASSWORD: pwd
-    MODULE_DIR: module
-    SHOP_DIR: current
-    MODULE_NAME: payone
-
 jobs:
-    test_pgsql:
-        name: "Test / PostgreSQL"
+    setup:
+        name: Setup MariaDB
         runs-on: ubuntu-18.04
-        strategy:
-            fail-fast: false
-            matrix:
-                php: [ '7.3', '8.1' ]
-                product: [ 'suite' ]
-                composer_preference: ['', '--prefer-lowest']
+
+        steps:
+            - uses: actions/checkout@v2
+            - uses: getong/mariadb-action@v1.1
+              with:
+                  host port: ${{ env.DATABASE_PORT }}
+                  container port: ${{ env.DATABASE_PORT }}
+                  character set server: ${{ env.DATABASE_CHARACTER_SET }}
+                  collation server: ${{ env.DATABASE_COLLATE }}
+                  mariadb version: ${{ env.DATABASE_VERSION }}
+                  mysql database: ${{ env.DATABASE_NAME }}
+                  mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
+                  mysql user: ${{ env.DATABASE_USERNAME }}
+                  mysql password: ${{ env.DATABASE_PASSWORD }}
+
+    ci:
+        name: Payone
+        needs: setup
+        runs-on: ubuntu-18.04
+
         services:
-            rabbitmq:
-                image: rabbitmq
-                ports:
-                    - 5672:5672
-            redis:
-                image: redis
-                ports:
-                    - 6379:6379
-            postgres:
-                image: postgres:12
+            mariadb:
+                image: mariadb:10.2
                 env:
-                    POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
-                    DB_USER: ${{ env.DB_USER }}
-                    DB_NAME: ${{ env.DB_NAME }}
+                    MYSQL_ALLOW_EMPTY_PASSWORD: false
+                    MYSQL_ROOT_PASSWORD: secret
+                    MYSQL_DATABASE: eu-docker
                 ports:
-                    - 5433:5432
-                options: >-
-                    --health-cmd pg_isready
-                    --health-interval 10s
-                    --health-timeout 5s
-                    --health-retries 5
-        env:
-            PRODUCT_NAME: ${{ matrix.product }}
-            APPLICATION_ENV: ci.pgsql
-        steps:
-            -   uses: actions/checkout@v2
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    extensions: mbstring, intl
-                    tools: composer:v2
-
-            -   name: 'Run Elasticsearch'
-                uses: elastic/elastic-github-actions/elasticsearch@master
-                with:
-                    stack-version: 7.6.0
-
-            -   name: Install eco-ci
-                run: git clone https://github.com/spryker-eco/eco-ci.git ecoci
-
-            -   name: Execute test script
-                run: ./ecoci/build/ga.sh ${{ matrix.composer_preference }}
-    test_mariadb:
-        name: "Test / MariaDB"
-        runs-on: ubuntu-18.04
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.3', '8.1' ]
-                product: [ 'suite' ]
-                composer_preference: [ '', '--prefer-lowest' ]
-        services:
-            rabbitmq:
-                image: rabbitmq
-                ports:
-                    - 5672:5672
-            redis:
-                image: redis
-                ports:
-                    - 6379:6379
-        env:
-            PRODUCT_NAME: ${{ matrix.product }}
-            APPLICATION_ENV: ci.mysql
+                php-versions:
+                    - '7.4'
+                    - '8.0'
+
         steps:
-            -   uses: actions/checkout@v2
+            - name: Checkout@v2
+              uses: actions/checkout@v2
 
-            -   uses: getong/mariadb-action@v1.1
-                with:
-                    character set server: 'utf8'
-                    collation server: 'utf8_general_ci'
-                    mariadb version: '10.3'
-                    mysql database: ${{ env.DB_NAME }}
-                    mysql root password: ${{ env.DB_PASSWORD }}
+            - name: Setup PHP ${{ matrix.php-versions }}
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-versions }}
+                  extensions: mbstring, intl, bcmath, pdo_mysql
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    extensions: mbstring, intl
-                    tools: composer:v2
+            - name: Configure sysctl limits
+              run: |
+                  sudo swapoff -a
+                  sudo sysctl -w vm.swappiness=1
+                  sudo sysctl -w fs.file-max=262144
+                  sudo sysctl -w vm.max_map_count=262144
+            - name: Composer get cache directory
+              id: composer-cache
+              run: |
+                  echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - name: Composer cache
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
 
-            -   name: 'Run Elasticsearch'
-                uses: elastic/elastic-github-actions/elasticsearch@master
-                with:
-                    stack-version: 7.6.0
+            - name: Composer validate
+              run: composer validate
 
-            -   name: Install eco-ci
-                run: git clone https://github.com/spryker-eco/eco-ci.git ecoci
+            - name: Composer version
+              run: composer --version
 
-            -   name: Execute test script
-                run: ./ecoci/build/ga.sh ${{ matrix.composer_preference }}
+            - name: Composer install
+              run: composer install --prefer-dist --no-interaction --optimize-autoloader
+
+            - name: PHP syntax validation
+              run: find ./src -path src -prune -o -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected" )
+
+            - name: Run codeception tests
+              run: composer test
+
+            - name: Run PHPStan checks
+              run: composer stan
+
+            - name: Check codestyle checks
+              run: composer cs-check
+
+    prefer-lowest:
+        runs-on: ubuntu-20.04
+        strategy:
+            fail-fast: false
+            matrix:
+                php-version: [
+                        '7.4'
+                ]
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Validate composer.json and composer.lock
+              run: composer validate
+
+            - name: Get Composer Cache Directory
+              id: composer-cache
+              run: |
+                  echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-version }}
+                  extensions: mbstring, intl, pdo_mysql
+
+            - name: Composer prefer lowest
+              run: composer lowest-setup
+
+            - name: Run PHPStan (currently not running properly)
+              run: composer stan || true
+
+            - name: Validate prefer lowest
+              run: vendor/bin/validate-prefer-lowest -m

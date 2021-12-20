@@ -1,8 +1,8 @@
 namespace: Payone
 
 include:
-    - tests/SprykerEcoTest/Yves/Payone
     - tests/SprykerEcoTest/Zed/Payone
+    - tests/SprykerEcoTest/Yves/Payone
 
 paths:
     tests: tests
@@ -23,3 +23,4 @@ coverage:
         include:
             - 'src/*'
 
+bootstrap: bootstrap.php

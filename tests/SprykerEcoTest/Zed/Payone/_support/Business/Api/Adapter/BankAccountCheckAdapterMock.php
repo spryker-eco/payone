@@ -12,9 +12,9 @@ class BankAccountCheckAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getSuccessResponse()
+    protected function getSuccessResponse(): array
     {
-        $result = 'bankcountry=DE';
+        $result = 'bankcountry=DE errorcode=200 status=OK customermessage=OK errormessage=OK';
 
         return explode(' ', $result);
     }
@@ -22,7 +22,7 @@ class BankAccountCheckAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getFailureResponse()
+    protected function getFailureResponse(): array
     {
         $result = 'status=ERROR';
 

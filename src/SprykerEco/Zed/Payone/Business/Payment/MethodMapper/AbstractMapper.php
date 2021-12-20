@@ -61,7 +61,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     /**
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    protected function getStandardParameter()
+    protected function getStandardParameter(): PayoneStandardParameterTransfer
     {
         return $this->standardParameter;
     }
@@ -79,7 +79,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     /**
      * @return \SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface
      */
-    protected function getUrlHmacGenerator()
+    protected function getUrlHmacGenerator(): HmacGeneratorInterface
     {
         return $this->urlHmacGenerator;
     }
@@ -97,19 +97,19 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     /**
      * @return \SprykerEco\Zed\Payone\Business\SequenceNumber\SequenceNumberProviderInterface
      */
-    protected function getSequenceNumberProvider()
+    protected function getSequenceNumberProvider(): SequenceNumberProviderInterface
     {
         return $this->sequenceNumberProvider;
     }
 
     /**
-     * @param int $transactionId
+     * @param int|null $transactionId
      *
-     * @return int
+     * @return int|null
      */
-    protected function getNextSequenceNumber($transactionId)
+    protected function getNextSequenceNumber(?int $transactionId): ?int
     {
-        $nextSequenceNumber = $this->getSequenceNumberProvider()->getNextSequenceNumber($transactionId);
+        $nextSequenceNumber = !empty($transactionId) ? $this->getSequenceNumberProvider()->getNextSequenceNumber($transactionId) : null;
 
         return $nextSequenceNumber;
     }
@@ -119,11 +119,11 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
      */
-    protected function createRedirectContainer($orderReference)
+    protected function createRedirectContainer(string $orderReference): RedirectContainer
     {
         $redirectContainer = new RedirectContainer();
 
-        $sig = $this->getUrlHmacGenerator()->hash($orderReference, $this->getStandardParameter()->getKey());
+        $sig = $this->getUrlHmacGenerator()->hash($orderReference, $this->getStandardParameter()->getKey() ?? '');
         $params = '?orderReference=' . $orderReference . '&sig=' . $sig;
 
         $redirectContainer->setSuccessUrl($this->getStandardParameter()->getRedirectSuccessUrl() . $params);
@@ -139,7 +139,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
      *
      * @return void
      */
-    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentEntity)
+    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentEntity): void
     {
         $orderEntity = $paymentEntity->getSpySalesOrder();
         $billingAddressEntity = $orderEntity->getBillingAddress();
@@ -149,31 +149,33 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
         $personalContainer->setSalutation($billingAddressEntity->getSalutation());
         $personalContainer->setCompany($billingAddressEntity->getCompany());
         $personalContainer->setStreet(implode(' ', [$billingAddressEntity->getAddress1(), $billingAddressEntity->getAddress2()]));
-        $personalContainer->setAddressAddition($billingAddressEntity->getAddress3());
+        $personalContainer->setAddressAddition($billingAddressEntity->getAddress3() ?? '');
         $personalContainer->setZip($billingAddressEntity->getZipCode());
         $personalContainer->setCity($billingAddressEntity->getCity());
         $personalContainer->setEmail($billingAddressEntity->getEmail());
         $personalContainer->setTelephoneNumber($billingAddressEntity->getPhone());
         $personalContainer->setLanguage($this->getStandardParameter()->getLanguage());
-        $personalContainer->setPersonalId($orderEntity->getCustomerReference());
+        $personalContainer->setPersonalId($orderEntity->getCustomerReference() ?? '');
     }
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer $shippingContainer
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderAddress $shippingAddressEntity
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderAddress|null $shippingAddressEntity
      *
      * @return void
      */
-    protected function mapShippingAddressToShippingContainer(ShippingContainer $shippingContainer, SpySalesOrderAddress $shippingAddressEntity)
+    protected function mapShippingAddressToShippingContainer(ShippingContainer $shippingContainer, ?SpySalesOrderAddress $shippingAddressEntity): void
     {
-        $shippingContainer->setShippingFirstName($shippingAddressEntity->getFirstName());
-        $shippingContainer->setShippingLastName($shippingAddressEntity->getLastName());
-        $shippingContainer->setShippingCompany($shippingAddressEntity->getCompany());
-        $shippingContainer->setShippingStreet(
-            implode(' ', [$shippingAddressEntity->getAddress1(), $shippingAddressEntity->getAddress2()])
-        );
-        $shippingContainer->setShippingZip($shippingAddressEntity->getZipCode());
-        $shippingContainer->setShippingCity($shippingAddressEntity->getCity());
-        $shippingContainer->setShippingCountry($shippingAddressEntity->getCountry()->getIso2Code());
+        if ($shippingAddressEntity !== null) {
+            $shippingContainer->setShippingFirstName($shippingAddressEntity->getFirstName());
+            $shippingContainer->setShippingLastName($shippingAddressEntity->getLastName());
+            $shippingContainer->setShippingCompany($shippingAddressEntity->getCompany() ?? '');
+            $shippingContainer->setShippingStreet(
+                implode(' ', [$shippingAddressEntity->getAddress1(), $shippingAddressEntity->getAddress2()]),
+            );
+            $shippingContainer->setShippingZip($shippingAddressEntity->getZipCode());
+            $shippingContainer->setShippingCity($shippingAddressEntity->getCity());
+            $shippingContainer->setShippingCountry($shippingAddressEntity->getCountry()->getIso2Code());
+        }
     }
 }

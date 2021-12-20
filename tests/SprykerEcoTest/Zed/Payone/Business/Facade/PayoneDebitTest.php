@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
 use Generated\Shared\Transfer\DebitResponseTransfer;
+use Generated\Shared\Transfer\SaveOrderTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneDetail;
 use Spryker\Shared\Kernel\Container\GlobalContainer;
@@ -26,10 +27,29 @@ use SprykerEcoTest\Zed\Payone\PayoneZedTester;
 
 class PayoneDebitTest extends AbstractBusinessTest
 {
-    public const EXPECTED_TXID = 'testtxid';
+    /**
+     * @var int
+     */
+    public const EXPECTED_TXID = 120;
+
+    /**
+     * @var string
+     */
     protected const FAKE_PAYMENT_METHOD = 'payment.payone.e_wallet';
+
+    /**
+     * @var string
+     */
     protected const FAKE_REFERENCE = 'reference';
+
+    /**
+     * @var int
+     */
     protected const PAYMENT_AMOUT = 10;
+
+    /**
+     * @var string
+     */
     protected const PAYMENT_CURRENCY = 'EUR';
 
     /**
@@ -67,12 +87,12 @@ class PayoneDebitTest extends AbstractBusinessTest
 
         //Assert
         $this->assertInstanceOf(DebitResponseTransfer::class, $debitResponse);
-        $this->assertSame(self::EXPECTED_TXID, $debitResponse->getTxid());
+        $this->assertSame(static::EXPECTED_TXID, $debitResponse->getTxid());
     }
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $adapter
-     * @param string[]|null $onlyMethods
+     * @param array<string>|null $onlyMethods
      *
      * @return \PHPUnit\Framework\MockObject\MockObject|\SprykerEco\Zed\Payone\Business\PayoneBusinessFactory
      */
@@ -118,14 +138,15 @@ class PayoneDebitTest extends AbstractBusinessTest
     {
         $persistenceFactory = new PayonePersistenceFactory();
 
-        $saveOrderTransfer = $this->tester->createOrder();
+        $saveOrderTransfer = new SaveOrderTransfer();
+        $saveOrderTransfer->setIdSalesOrder($this->orderEntity->getIdSalesOrder());
         $this->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
 
         $paymentPayoneQuery = $persistenceFactory->createPaymentPayoneQuery()->lastCreatedFirst();
 
         $queryContainerMock = $this->createPartialMock(
             PayoneQueryContainer::class,
-            ['createPaymentById', 'createPaymentByTransactionIdQuery', 'getFactory']
+            ['createPaymentById', 'createPaymentByTransactionIdQuery', 'getFactory'],
         );
 
         $queryContainerMock->method('createPaymentById')->willReturn($paymentPayoneQuery);

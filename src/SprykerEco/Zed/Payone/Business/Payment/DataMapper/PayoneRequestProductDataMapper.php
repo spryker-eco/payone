@@ -43,11 +43,11 @@ class PayoneRequestProductDataMapper implements PayoneRequestProductDataMapperIn
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer $itemsContainer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\RefundContainerInterface|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\CaptureContainerInterface|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\DebitContainerInterface $requestContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function mapProductData($itemsContainer, AbstractRequestContainer $requestContainer): AbstractRequestContainer
+    public function mapProductData($itemsContainer, $requestContainer): AbstractRequestContainer
     {
         $this->productMapper->mapProductItems($itemsContainer, $requestContainer);
         $this->shipmentMapper->mapShipment($itemsContainer, $requestContainer);

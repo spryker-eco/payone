@@ -17,6 +17,9 @@ use Generated\Shared\Transfer\OrderTransfer;
  */
 class CaptureIsApprovedConditionPlugin extends AbstractPlugin
 {
+    /**
+     * @var string
+     */
     public const NAME = 'CaptureIsApprovedPlugin';
 
     /**
@@ -24,7 +27,7 @@ class CaptureIsApprovedConditionPlugin extends AbstractPlugin
      *
      * @return bool
      */
-    protected function callFacade(OrderTransfer $orderTransfer)
+    protected function callFacade(OrderTransfer $orderTransfer): bool
     {
         return $this->getFacade()->isCaptureApproved($orderTransfer);
     }

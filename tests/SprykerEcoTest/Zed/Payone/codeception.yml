@@ -5,12 +5,11 @@ paths:
     data: ../../../_data
     support: _support
     log: ../../../_output
-    output: ../../../_output
 
 coverage:
     enabled: true
     remote: false
-    whitelist: { include: ['../../../../src/*'] }
+    whitelist: { include: [ '../../../../src/*' ] }
 
 suites:
     Zed:
@@ -19,15 +18,32 @@ suites:
         modules:
             enabled:
                 - Asserts
-                - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Zed\Testify\Helper\Business\DependencyProviderHelper
+                - \SprykerTest\Shared\Testify\Helper\Environment:
+                    isolated: true
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
-                - \SprykerTest\Shared\Config\Helper\ConfigInit
-                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
-                    projectNamespaces:
-                        - 'SprykerEco'
-                        - 'SprykerEcoTest'
+                - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
+                - \SprykerTest\Service\Container\Helper\ContainerHelper
+                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
-                - \SprykerTest\Shared\Testify\Helper\DataCleanupHelper
+                - \SprykerTest\Shared\Config\Helper\ConfigInit
                 - \SprykerTest\Shared\Sales\Helper\SalesDataHelper
                 - \SprykerTest\Zed\Oms\Helper\OmsHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                    projectNamespaces:
+                        - 'Spryker'
+                        - 'SprykerTest'
+                        - 'SprykerEco'
+                        - 'SprykerEcoTest'
+                - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
+                    isolated: true
+                    schemaDirectories:
+                        - src/*/Shared/*/Transfer/
+                        - vendor/spryker/*/src/Spryker/Shared/*/Transfer/
+                - \SprykerTest\Shared\Propel\Helper\PropelHelper:
+                    isolated: true
+                    schemaSourceDirectoryList:
+                        - src/*/Zed/*/Persistence/Propel/Schema
+                        - vendor/*/*/src/*/Zed/*/Persistence/Propel/Schema

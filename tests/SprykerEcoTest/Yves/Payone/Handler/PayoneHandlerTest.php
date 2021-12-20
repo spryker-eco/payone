@@ -30,7 +30,7 @@ class PayoneHandlerTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testAddPaymentToQuoteShouldReturnQuoteTransfer()
+    public function testAddPaymentToQuoteShouldReturnQuoteTransfer(): void
     {
         $paymentHandler = new PayoneHandler();
 

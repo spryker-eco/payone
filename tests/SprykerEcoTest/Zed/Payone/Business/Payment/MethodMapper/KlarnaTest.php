@@ -29,18 +29,33 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class KlarnaTest extends AbstractMethodMapperTest
 {
+    /**
+     * @var string
+     */
     protected const PAY_METHOD_TYPE = 'KIV';
 
+    /**
+     * @var string
+     */
     protected const STANDARD_PARAMETER_CLEARING_TYPE = 'fnc';
 
+    /**
+     * @var array
+     */
     protected const AUTHORIZATION_KLARNA_REQUIRED_PARAMS = [
         'financingtype' => self::PAY_METHOD_TYPE,
     ];
 
+    /**
+     * @var array
+     */
     protected const PREAUTHORIZATION_KLARNA_REQUIRED_PARAMS = [
         'financingtype' => self::PAY_METHOD_TYPE,
     ];
 
+    /**
+     * @var array
+     */
     protected const PREAUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -50,6 +65,9 @@ class KlarnaTest extends AbstractMethodMapperTest
         'email' => self::DEFAULT_EMAIL,
     ];
 
+    /**
+     * @var array
+     */
     protected const AUTHORIZATION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -58,6 +76,9 @@ class KlarnaTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
+    /**
+     * @var array
+     */
     public const PREAUTHORIZATION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
         'country' => self::COUNTRY_ISO2CODE,
@@ -65,6 +86,9 @@ class KlarnaTest extends AbstractMethodMapperTest
         'email' => self::DEFAULT_EMAIL,
     ];
 
+    /**
+     * @var array
+     */
     protected const START_SESSION_COMMON_REQUIRED_PARAMS = [
         'aid' => self::STANDARD_PARAMETER_AID,
         'clearingtype' => self::STANDARD_PARAMETER_CLEARING_TYPE,
@@ -72,6 +96,9 @@ class KlarnaTest extends AbstractMethodMapperTest
         'currency' => self::STANDARD_PARAMETER_CURRENCY,
     ];
 
+    /**
+     * @var array
+     */
     protected const START_SESSION_PERSONAL_DATA_REQUIRED_PARAMS = [
         'lastname' => self::ADDRESS_LAST_NAME,
         'country' => self::COUNTRY_ISO2CODE,
@@ -123,7 +150,7 @@ class KlarnaTest extends AbstractMethodMapperTest
         // Assert
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertSame($value, $requestData[$key]);
+            $this->assertEquals($value, $requestData[$key]);
         }
     }
 
@@ -169,7 +196,7 @@ class KlarnaTest extends AbstractMethodMapperTest
             ->setMethods(['getClientIp'])
             ->getMock();
 
-        $mock->method('getClientIp')->willReturn(self::CLIENT_IP);
+        $mock->method('getClientIp')->willReturn(static::CLIENT_IP);
 
         return $mock;
     }
@@ -181,7 +208,7 @@ class KlarnaTest extends AbstractMethodMapperTest
     {
         $payoneKlarnaStartSessionRequestBuilder = new PayoneKlarnaStartSessionRequestBuilder([
             'quote' => $this->getQuote(),
-            'payMethod' => self::PAY_METHOD_TYPE,
+            'payMethod' => static::PAY_METHOD_TYPE,
         ]);
 
         return $payoneKlarnaStartSessionRequestBuilder->build();

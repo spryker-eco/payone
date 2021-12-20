@@ -34,7 +34,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     {
         return $this->zedStub->call(
             '/payone/gateway/status-update',
-            $transactionStatus
+            $transactionStatus,
         );
     }
 
@@ -47,7 +47,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     {
         return $this->zedStub->call(
             '/payone/gateway/bank-account-check',
-            $bankAccountCheckTransfer
+            $bankAccountCheckTransfer,
         );
     }
 
@@ -60,7 +60,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     {
         return $this->zedStub->call(
             '/payone/gateway/manage-mandate',
-            $manageMandateTransfer
+            $manageMandateTransfer,
         );
     }
 
@@ -73,7 +73,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     {
         return $this->zedStub->call(
             '/payone/gateway/get-file',
-            $getFileTransfer
+            $getFileTransfer,
         );
     }
 
@@ -86,7 +86,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     {
         return $this->zedStub->call(
             '/payone/gateway/get-payment-detail',
-            $getPaymentDetailTransfer
+            $getPaymentDetailTransfer,
         );
     }
 
@@ -99,7 +99,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     {
         return $this->zedStub->call(
             '/payone/gateway/get-invoice',
-            $getInvoiceTransfer
+            $getInvoiceTransfer,
         );
     }
 
@@ -112,7 +112,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     {
         return $this->zedStub->call(
             '/payone/gateway/cancel-redirect',
-            $cancelRedirectTransfer
+            $cancelRedirectTransfer,
         );
     }
 
@@ -126,7 +126,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
         return $this->zedStub->call(
             '/payone/gateway/init-paypal-express-checkout',
-            $requestTransfer
+            $requestTransfer,
         );
     }
 
@@ -139,7 +139,7 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     {
         return $this->zedStub->call(
             '/payone/gateway/get-paypal-express-checkout-details',
-            $quoteTransfer
+            $quoteTransfer,
         );
     }
 

@@ -11,10 +11,15 @@ class TransactionStatusResponse
 {
     /**
      * part of payone specification
+     *
+     * @var string
      */
     public const STATUS_OK = 'TSOK';
+
     /**
      * not in payone specification, for the purpose if payone should queue transaction status and resend again
+     *
+     * @var string
      */
     public const STATUS_ERROR = 'TSERROR';
 
@@ -33,7 +38,7 @@ class TransactionStatusResponse
      */
     public function __construct(bool $isSuccess)
     {
-        $this->status = $isSuccess ? self::STATUS_OK : self::STATUS_ERROR;
+        $this->status = $isSuccess ? static::STATUS_OK : static::STATUS_ERROR;
     }
 
     /**
@@ -80,7 +85,7 @@ class TransactionStatusResponse
      */
     public function isSuccess(): bool
     {
-        return ($this->getStatus() === self::STATUS_OK);
+        return ($this->getStatus() === static::STATUS_OK);
     }
 
     /**

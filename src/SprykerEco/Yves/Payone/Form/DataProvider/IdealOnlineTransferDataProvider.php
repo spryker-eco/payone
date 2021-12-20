@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Payone\Form\IdealOnlineTransferSubForm;
@@ -20,10 +21,9 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() === null) {
+        if ($quoteTransfer instanceof QuoteTransfer && $quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
@@ -37,7 +37,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             IdealOnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -48,7 +48,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
     /**
      * @return array
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
         return [
             'NL' => 'Netherlands',
@@ -58,7 +58,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
     /**
      * @return array
      */
-    protected function getBankGroupTypes()
+    protected function getBankGroupTypes(): array
     {
         return [
             'ABN Amro' => 'ABN_AMRO_BANK',

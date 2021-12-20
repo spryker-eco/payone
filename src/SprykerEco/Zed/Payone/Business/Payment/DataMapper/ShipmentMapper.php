@@ -13,8 +13,19 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 
 class ShipmentMapper implements ShipmentMapperInterface
 {
+    /**
+     * @var string
+     */
     protected const SHIPMENT_PRODUCT_DESCRIPTION = 'Shipment';
+
+    /**
+     * @var int
+     */
     protected const ZERRO_ITEM_TAX_RATE = 0;
+
+    /**
+     * @var int
+     */
     protected const ONE_ITEM_AMOUNT = 1;
 
     /**
@@ -25,12 +36,12 @@ class ShipmentMapper implements ShipmentMapperInterface
      */
     public function mapShipment($shipmentContainer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
+        $arrayIt = $container->getIt();
+        $arrayId = $container->getId();
+        $arrayPr = $container->getPr();
+        $arrayNo = $container->getNo();
+        $arrayDe = $container->getDe();
+        $arrayVa = $container->getVa();
 
         $key = count($arrayId) + 1;
 

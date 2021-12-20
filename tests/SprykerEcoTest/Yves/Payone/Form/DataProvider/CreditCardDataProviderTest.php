@@ -28,7 +28,7 @@ class CreditCardDataProviderTest extends PHPUnit_Framework_TestCase
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function getQuoteTransfer()
+    protected function getQuoteTransfer(): QuoteTransfer
     {
         $quoteTransfer = new QuoteTransfer();
         $billingAddress = new AddressTransfer();
@@ -40,7 +40,7 @@ class CreditCardDataProviderTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testGetDataShouldAddTransferIfNotSet()
+    public function testGetDataShouldAddTransferIfNotSet(): void
     {
         $creditCardDataProvider = new CreditCardDataProvider();
         $quoteTransfer = $this->getQuoteTransfer();

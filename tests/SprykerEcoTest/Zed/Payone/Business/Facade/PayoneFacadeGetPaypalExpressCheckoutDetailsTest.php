@@ -9,6 +9,7 @@ namespace SprykerEcoTest\Zed\Payone\Business\Facade;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaypalExpressCheckoutTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Service\Container\Container;
 use Spryker\Shared\Kernel\Container\GlobalContainer;
 use SprykerEco\Zed\Payone\PayoneConfig;
@@ -33,7 +34,7 @@ class PayoneFacadeGetPaypalExpressCheckoutDetailsTest extends AbstractBusinessTe
     /**
      * @return void
      */
-    public function testGetPaypalExpressCheckoutDetailsWithSuccessResponse()
+    public function testGetPaypalExpressCheckoutDetailsWithSuccessResponse(): void
     {
         $adapter = new GetExpressCheckoutAdapterMock();
         $facadeMock = $this->createFacadeMock($adapter);
@@ -41,7 +42,7 @@ class PayoneFacadeGetPaypalExpressCheckoutDetailsTest extends AbstractBusinessTe
 
         $this->assertInstanceOf(
             '\Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer',
-            $response
+            $response,
         );
         $this->assertNotEmpty($response->getEmail());
         $this->assertNotEmpty($response->getShippingFirstName());
@@ -55,7 +56,7 @@ class PayoneFacadeGetPaypalExpressCheckoutDetailsTest extends AbstractBusinessTe
     /**
      * @return void
      */
-    public function testGetPaypalExpressCheckoutDetailsWithFailureResponse()
+    public function testGetPaypalExpressCheckoutDetailsWithFailureResponse(): void
     {
         $adapter = new GetExpressCheckoutAdapterMock();
         $adapter->setExpectSuccess(false);
@@ -64,7 +65,7 @@ class PayoneFacadeGetPaypalExpressCheckoutDetailsTest extends AbstractBusinessTe
 
         $this->assertInstanceOf(
             '\Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer',
-            $response
+            $response,
         );
         $this->assertNotEmpty($response->getErrorCode());
         $this->assertNotEmpty($response->getErrorMessage());
@@ -73,7 +74,7 @@ class PayoneFacadeGetPaypalExpressCheckoutDetailsTest extends AbstractBusinessTe
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function getFilledQuote()
+    protected function getFilledQuote(): QuoteTransfer
     {
         $quote = clone $this->quoteTransfer;
 

@@ -37,7 +37,7 @@ class PayoneOrderItemStatusFinder implements PayoneOrderItemStatusFinderInterfac
             ->findPaymentPayoneOrderItemByFilter(
                 (new PayoneOrderItemFilterTransfer())
                     ->setIdSalesOrder($idSalesOrder)
-                    ->setSalesOrderItemIds([$idSalesOrderItem])
+                    ->setSalesOrderItemIds([$idSalesOrderItem]),
             );
 
         if (count($payoneOrderItemTransfers) === 0) {
