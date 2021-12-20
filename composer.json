@@ -21,6 +21,7 @@
         "spryker/sales": "^8.2.1 || ^10.0.0 || ^11.0.0",
         "spryker/shipment": "^6.0.0 || ^8.0.0",
         "spryker/silex": "^2.2.0",
+        "spryker/spryker": "dev-bugfix/te-10379-fix-transfer-generate-helper",
         "spryker/step-engine": "^3.0.0",
         "spryker/store": "^1.1.0",
         "spryker/symfony": "^3.1.1",
@@ -88,6 +89,12 @@
         "sort-packages": true,
         "platform-check": false
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:spryker/spryker.git"
+        }
+    ],
     "replace": {
         "spryker/payone": "*"
     }
