@@ -30,7 +30,7 @@
         "symfony/string": "^5.4.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "~1.2.0",
+        "phpstan/phpstan": "^1.2.0",
         "spryker/application": "^3.0.0",
         "spryker/checkout": "*",
         "spryker/code-sniffer": "*",

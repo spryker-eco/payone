@@ -117,14 +117,7 @@ jobs:
               run: composer cs-check
 
     prefer-lowest:
-        runs-on: ubuntu-20.04
-        strategy:
-            fail-fast: false
-            matrix:
-                php-version: [
-                        '7.4'
-                ]
-
+        runs-on: ubuntu-18.04
         steps:
             - uses: actions/checkout@v2
 
@@ -146,7 +139,7 @@ jobs:
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: ${{ matrix.php-version }}
+                  php-version: 7.4
                   extensions: mbstring, intl, pdo_mysql
 
             - name: Composer prefer lowest
