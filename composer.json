@@ -41,7 +41,7 @@
         "spryker/router": "*",
         "spryker/monolog": "^2.0.4",
         "spryker/queue": "^1.5.0",
-        "spryker/transfer": "^3.30.0",
+        "spryker/transfer": "^3.30.1",
         "codeception/module-asserts": "^1.3.0",
         "spryker/testify": "^3.43.0"
     },
