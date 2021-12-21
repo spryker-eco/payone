@@ -23,7 +23,6 @@ use Generated\Shared\Transfer\PayonePersonalDataTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
-use SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainer;
 
 /**
  * PayoneHandler.php
