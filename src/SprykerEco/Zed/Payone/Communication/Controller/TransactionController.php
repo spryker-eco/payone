@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -12,7 +13,6 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()

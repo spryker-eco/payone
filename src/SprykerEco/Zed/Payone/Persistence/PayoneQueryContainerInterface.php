@@ -1,4 +1,6 @@
 <?php
+// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
+// phpcs:disable SprykerStrict.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -7,12 +9,6 @@
 
 namespace SprykerEco\Zed\Payone\Persistence;
 
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLogQuery;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery;
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery;
-use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\QueryContainer\QueryContainerInterface;
 
 interface PayoneQueryContainerInterface extends QueryContainerInterface

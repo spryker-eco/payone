@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable SprykerStrict.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -6,8 +7,6 @@
  */
 
 namespace SprykerEco\Zed\Payone\Business\Api\Log;
-
-use SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface as LogApiCallLogWriterInterface;
 
 interface ApiCallLogWriterInterface
 {

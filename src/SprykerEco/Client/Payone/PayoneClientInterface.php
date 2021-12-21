@@ -1,4 +1,6 @@
 <?php
+// phpcs:disable SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse
+// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License

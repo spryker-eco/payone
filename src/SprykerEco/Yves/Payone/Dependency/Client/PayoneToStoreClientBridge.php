@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -6,8 +7,6 @@
  */
 
 namespace SprykerEco\Yves\Payone\Dependency\Client;
-
-use Generated\Shared\Transfer\StoreTransfer;
 
 class PayoneToStoreClientBridge implements PayoneToStoreClientInterface
 {

@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -8,7 +9,6 @@
 namespace SprykerEco\Yves\Payone\Dependency\Client;
 
 use Generated\Shared\Transfer\QuoteTransfer;
-use Generated\Shared\Transfer\ShipmentMethodsTransfer;
 
 interface PayoneToShipmentInterface
 {

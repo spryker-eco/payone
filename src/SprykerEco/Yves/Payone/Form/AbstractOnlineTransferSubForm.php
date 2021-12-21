@@ -318,7 +318,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
 
         $response = $this->getClient()->bankAccountCheck($bankAccountCheckTransfer);
         if ($response->getStatus() == 'ERROR' || $response->getStatus() == 'INVALID') {
-            $context->addViolation((string) $response->getCustomerErrorMessage());
+            $context->addViolation((string)$response->getCustomerErrorMessage());
         }
     }
 

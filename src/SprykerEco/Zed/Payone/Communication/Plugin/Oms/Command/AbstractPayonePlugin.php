@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -7,7 +8,6 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Plugin\Oms\Command;
 
-use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 

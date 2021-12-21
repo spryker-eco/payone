@@ -1,4 +1,6 @@
 <?php
+// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
+// phpcs:disable SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -7,7 +9,6 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Plugin\Log;
 
-use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Propel\Runtime\Collection\ObjectCollection;
 
 interface PaymentLogReceiverPluginInterface

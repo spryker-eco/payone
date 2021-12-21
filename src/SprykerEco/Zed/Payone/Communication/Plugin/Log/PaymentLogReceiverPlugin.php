@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Communication\Plugin\Log;
 
 use ArrayObject;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
-use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
