@@ -17,7 +17,7 @@ use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 class CreditCardDataProvider implements StepEngineFormDataProviderInterface
 {
     /**
-     * @var int YEAR_CHOICES_AMOUNT
+     * @var int
      */
     public const YEAR_CHOICES_AMOUNT = 20;
 
@@ -40,7 +40,7 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {

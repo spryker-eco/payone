@@ -22,6 +22,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_PROVIDER = PayoneConstants::PROVIDER_NAME;
 
     /**

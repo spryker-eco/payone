@@ -27,7 +27,7 @@ class PayoneToCustomerBridge implements PayoneToCustomerInterface
     /**
      * @return \Generated\Shared\Transfer\CustomerTransfer|null
      */
-    public function getCustomer(): ?CustomerTransfer
+    public function getCustomer()
     {
         return $this->customerClient->getCustomer();
     }
@@ -35,7 +35,7 @@ class PayoneToCustomerBridge implements PayoneToCustomerInterface
     /**
      * @return bool
      */
-    public function isLoggedIn(): bool
+    public function isLoggedIn()
     {
         return $this->customerClient->isLoggedIn();
     }
@@ -45,7 +45,7 @@ class PayoneToCustomerBridge implements PayoneToCustomerInterface
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
-    public function getCustomerByEmail(CustomerTransfer $customerTransfer): CustomerTransfer
+    public function getCustomerByEmail(CustomerTransfer $customerTransfer)
     {
         return $this->customerClient->getCustomerByEmail($customerTransfer);
     }

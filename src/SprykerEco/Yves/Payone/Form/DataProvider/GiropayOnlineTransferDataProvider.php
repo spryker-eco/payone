@@ -35,7 +35,7 @@ class GiropayOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {

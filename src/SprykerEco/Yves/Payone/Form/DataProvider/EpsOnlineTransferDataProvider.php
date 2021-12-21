@@ -46,7 +46,7 @@ class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterfa
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBankCountries(): array
     {

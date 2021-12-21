@@ -49,11 +49,11 @@ interface PayoneRepositoryInterface
     /**
      * Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
-     * @param \Generated\Shared\Transfer\OrderTransfer[]|\ArrayObject $orders
+     * @param \ArrayObject<array-key, \Generated\Shared\Transfer\OrderTransfer> $orderTransfers
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs(ArrayObject $orders): PayonePaymentLogCollectionTransfer;
+    public function getPaymentLogs(ArrayObject $orderTransfers): PayonePaymentLogCollectionTransfer;
 
     /**
      * @param int $orderId

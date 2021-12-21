@@ -14,7 +14,7 @@ use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 class PayoneConfig extends AbstractBundleConfig
 {
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected const PAYONE_BANCONTACT_AVAILABLE_COUNTRIES = [
         'BE' => 'Belgium',

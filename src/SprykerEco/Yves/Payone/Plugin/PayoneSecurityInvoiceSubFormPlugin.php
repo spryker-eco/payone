@@ -19,6 +19,7 @@ class PayoneSecurityInvoiceSubFormPlugin extends AbstractPlugin implements SubFo
 {
     /**
      * {@inheritDoc}
+     * - Creates `SecurityInvoiceSubForm` subform.
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
@@ -29,6 +30,7 @@ class PayoneSecurityInvoiceSubFormPlugin extends AbstractPlugin implements SubFo
 
     /**
      * {@inheritDoc}
+     * - Creates subform data provider.
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */

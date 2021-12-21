@@ -29,7 +29,7 @@ class PayoneToQuoteClientBridge implements PayoneToQuoteClientInterface
      *
      * @return void
      */
-    public function setQuote(QuoteTransfer $quoteTransfer): void
+    public function setQuote(QuoteTransfer $quoteTransfer)
     {
         $this->quoteClient->setQuote($quoteTransfer);
     }
@@ -37,7 +37,7 @@ class PayoneToQuoteClientBridge implements PayoneToQuoteClientInterface
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getQuote(): QuoteTransfer
+    public function getQuote()
     {
         return $this->quoteClient->getQuote();
     }

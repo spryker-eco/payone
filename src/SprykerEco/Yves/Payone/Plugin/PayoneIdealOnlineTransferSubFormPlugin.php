@@ -19,20 +19,22 @@ class PayoneIdealOnlineTransferSubFormPlugin extends AbstractPlugin implements S
 {
     /**
      * {@inheritDoc}
+     * - Creates `IdealOnlineTransferSubForm` subform.
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createIdealOnlineTransferSubForm();
     }
 
     /**
      * {@inheritDoc}
+     * - Creates subform data provider.
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createIdealOnlineTransferSubFormDataProvider();
     }

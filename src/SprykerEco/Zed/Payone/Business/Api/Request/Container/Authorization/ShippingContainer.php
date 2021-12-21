@@ -57,13 +57,13 @@ class ShippingContainer extends AbstractContainer
     protected $shipping_country;
 
     /**
-     * @param string $shipping_city
+     * @param string $shippingCity
      *
      * @return void
      */
-    public function setShippingCity(string $shipping_city): void
+    public function setShippingCity(string $shippingCity): void
     {
-        $this->shipping_city = $shipping_city;
+        $this->shipping_city = $shippingCity;
     }
 
     /**
@@ -75,13 +75,13 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @param string $shipping_company
+     * @param string $shippingCompany
      *
      * @return void
      */
-    public function setShippingCompany(string $shipping_company): void
+    public function setShippingCompany(string $shippingCompany): void
     {
-        $this->shipping_company = $shipping_company;
+        $this->shipping_company = $shippingCompany;
     }
 
     /**
@@ -93,13 +93,13 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @param string $shipping_country
+     * @param string $shippingCountry
      *
      * @return void
      */
-    public function setShippingCountry(string $shipping_country): void
+    public function setShippingCountry(string $shippingCountry): void
     {
-        $this->shipping_country = $shipping_country;
+        $this->shipping_country = $shippingCountry;
     }
 
     /**
@@ -111,13 +111,13 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @param string $shipping_firstname
+     * @param string $shippingFirstname
      *
      * @return void
      */
-    public function setShippingFirstName(string $shipping_firstname): void
+    public function setShippingFirstName(string $shippingFirstname): void
     {
-        $this->shipping_firstname = $shipping_firstname;
+        $this->shipping_firstname = $shippingFirstname;
     }
 
     /**
@@ -129,13 +129,13 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @param string $shipping_lastname
+     * @param string $shippingLastname
      *
      * @return void
      */
-    public function setShippingLastName(string $shipping_lastname): void
+    public function setShippingLastName(string $shippingLastname): void
     {
-        $this->shipping_lastname = $shipping_lastname;
+        $this->shipping_lastname = $shippingLastname;
     }
 
     /**
@@ -147,13 +147,13 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @param string $shipping_state
+     * @param string $shippingState
      *
      * @return void
      */
-    public function setShippingState(string $shipping_state): void
+    public function setShippingState(string $shippingState): void
     {
-        $this->shipping_state = $shipping_state;
+        $this->shipping_state = $shippingState;
     }
 
     /**
@@ -165,13 +165,13 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @param string $shipping_street
+     * @param string $shippingStreet
      *
      * @return void
      */
-    public function setShippingStreet(string $shipping_street): void
+    public function setShippingStreet(string $shippingStreet): void
     {
-        $this->shipping_street = $shipping_street;
+        $this->shipping_street = $shippingStreet;
     }
 
     /**
@@ -183,13 +183,13 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @param string $shipping_zip
+     * @param string $shippingZip
      *
      * @return void
      */
-    public function setShippingZip(string $shipping_zip): void
+    public function setShippingZip(string $shippingZip): void
     {
-        $this->shipping_zip = $shipping_zip;
+        $this->shipping_zip = $shippingZip;
     }
 
     /**

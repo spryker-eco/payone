@@ -29,7 +29,7 @@ class PayoneToCartBridge implements PayoneToCartInterface
      *
      * @return void
      */
-    public function storeQuote(QuoteTransfer $quoteTransfer): void
+    public function storeQuote(QuoteTransfer $quoteTransfer)
     {
         $this->cartClient->storeQuote($quoteTransfer);
     }
@@ -37,7 +37,7 @@ class PayoneToCartBridge implements PayoneToCartInterface
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getQuote(): QuoteTransfer
+    public function getQuote()
     {
         return $this->cartClient->getQuote();
     }

@@ -19,20 +19,22 @@ class PayonePostfinanceEfinanceOnlineTransferSubFormPlugin extends AbstractPlugi
 {
     /**
      * {@inheritDoc}
+     * - Creates `PostfinanceEfinanceOnlineTransferSubForm` subform.
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createPostfinanceEfinanceOnlineTransferSubForm();
     }
 
     /**
      * {@inheritDoc}
+     * - Creates subform data provider.
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createPostfinanceEfinanceOnlineTransferSubFormDataProvider();
     }

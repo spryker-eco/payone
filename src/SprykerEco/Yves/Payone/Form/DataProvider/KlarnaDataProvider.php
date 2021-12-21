@@ -178,7 +178,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
-     * @return array<string>
+     * @return array<string, string>
      */
     protected function getPayMethods(): array
     {
@@ -188,7 +188,7 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
-     * @return array<string>
+     * @return array<string, string>
      */
     protected function getKlarnaPayMethods(): array
     {

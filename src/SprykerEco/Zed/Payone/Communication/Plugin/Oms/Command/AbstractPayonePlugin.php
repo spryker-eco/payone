@@ -24,7 +24,7 @@ class AbstractPayonePlugin extends AbstractPlugin
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    protected function getOrderTransfer(SpySalesOrder $orderEntity): OrderTransfer
+    protected function getOrderTransfer(SpySalesOrder $orderEntity)
     {
         return $this
             ->getFactory()

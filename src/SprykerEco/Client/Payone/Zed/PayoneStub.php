@@ -26,6 +26,8 @@ use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 class PayoneStub extends ZedRequestStub implements PayoneStubInterface
 {
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::statusUpdateAction()
+     *
      * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $transactionStatus
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
@@ -39,6 +41,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::bankAccountCheckAction()
+     *
      * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
@@ -52,6 +56,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::manageMandateAction()
+     *
      * @param \Generated\Shared\Transfer\PayoneManageMandateTransfer $manageMandateTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
@@ -65,6 +71,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::getFileAction()
+     *
      * @param \Generated\Shared\Transfer\PayoneGetFileTransfer $getFileTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
@@ -78,6 +86,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::getPaymentDetailAction()
+     *
      * @param \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer
@@ -91,6 +101,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::getInvoiceAction()
+     *
      * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $getInvoiceTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
@@ -104,6 +116,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::cancelRedirectAction()
+     *
      * @param \Generated\Shared\Transfer\PayoneCancelRedirectTransfer $cancelRedirectTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneCancelRedirectTransfer
@@ -117,6 +131,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::initPaypalExpressCheckoutAction()
+     *
      * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
@@ -131,6 +147,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::getPaypalExpressCheckoutDetailsAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
@@ -144,6 +162,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::sendAddressCheckRequestAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
@@ -154,6 +174,8 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     }
 
     /**
+     * @uses \SprykerEco\Zed\Payone\Communication\Controller\GatewayController::sendConsumerScoreRequestAction()
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer

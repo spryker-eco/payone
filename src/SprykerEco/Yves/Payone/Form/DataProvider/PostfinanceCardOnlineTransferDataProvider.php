@@ -35,7 +35,7 @@ class PostfinanceCardOnlineTransferDataProvider implements StepEngineFormDataPro
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
@@ -45,7 +45,7 @@ class PostfinanceCardOnlineTransferDataProvider implements StepEngineFormDataPro
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBankCountries(): array
     {

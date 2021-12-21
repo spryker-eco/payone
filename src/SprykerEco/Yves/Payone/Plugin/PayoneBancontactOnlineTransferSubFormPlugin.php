@@ -19,20 +19,22 @@ class PayoneBancontactOnlineTransferSubFormPlugin extends AbstractPlugin impleme
 {
     /**
      * {@inheritDoc}
+     * - Creates `BancontactOnlineTransferSubForm` subform.
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createBancontactOnlineTransferSubForm();
     }
 
     /**
      * {@inheritDoc}
+     * - Creates subform data provider.
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createBancontactOnlineTransferSubFormDataProvider();
     }

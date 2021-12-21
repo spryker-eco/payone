@@ -16,21 +16,21 @@ interface ApiCallLogWriterInterface
      *
      * @return $this
      */
-    public function logUrl(string $url): LogApiCallLogWriterInterface;
+    public function logUrl($url);
 
     /**
      * @param string $request
      *
      * @return $this
      */
-    public function logRequest(string $request): LogApiCallLogWriterInterface;
+    public function logRequest($request);
 
     /**
      * @param string $response
      *
      * @return $this
      */
-    public function logResponse(string $response): LogApiCallLogWriterInterface;
+    public function logResponse($response);
 
     /**
      * @return $this

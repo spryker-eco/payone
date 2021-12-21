@@ -33,7 +33,7 @@ class PayoneToShipmentBridge implements PayoneToShipmentInterface
      *
      * @return \Generated\Shared\Transfer\ShipmentMethodsTransfer
      */
-    public function getAvailableMethods(QuoteTransfer $quoteTransfer): ShipmentMethodsTransfer
+    public function getAvailableMethods(QuoteTransfer $quoteTransfer)
     {
         if (method_exists($this->shipmentClient, 'getAvailableMethodsByShipment') === true) {
             $shipmentMethodsCollectionTransfer = $this->shipmentClient->getAvailableMethodsByShipment($quoteTransfer);

@@ -33,13 +33,13 @@ class BusinessContainer extends AbstractContainer
     protected $due_time;
 
     /**
-     * @param string $booking_date
+     * @param string $bookingDate
      *
      * @return void
      */
-    public function setBookingDate(string $booking_date): void
+    public function setBookingDate(string $bookingDate): void
     {
-        $this->booking_date = $booking_date;
+        $this->booking_date = $bookingDate;
     }
 
     /**
@@ -51,13 +51,13 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @param string $document_date
+     * @param string $documentDate
      *
      * @return void
      */
-    public function setDocumentDate(string $document_date): void
+    public function setDocumentDate(string $documentDate): void
     {
-        $this->document_date = $document_date;
+        $this->document_date = $documentDate;
     }
 
     /**
@@ -69,13 +69,13 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @param string $due_time
+     * @param string $dueTime
      *
      * @return void
      */
-    public function setDueTime(string $due_time): void
+    public function setDueTime(string $dueTime): void
     {
-        $this->due_time = $due_time;
+        $this->due_time = $dueTime;
     }
 
     /**

@@ -19,20 +19,22 @@ class PayoneGiropayOnlineTransferSubFormPlugin extends AbstractPlugin implements
 {
     /**
      * {@inheritDoc}
+     * - Creates `GiropayOnlineTransferSubForm` subform.
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createGiropayOnlineTransferSubForm();
     }
 
     /**
      * {@inheritDoc}
+     * - Creates subform data provider.
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createGiropayOnlineTransferSubFormDataProvider();
     }

@@ -38,9 +38,8 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function statusUpdateAction(
-        PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
-    ): PayoneTransactionStatusUpdateTransfer {
+    public function statusUpdateAction($transactionStatusUpdateTransfer)
+    {
         $transactionStatusUpdateTransfer = $this
             ->getFacade()
             ->processTransactionStatusUpdate($transactionStatusUpdateTransfer);

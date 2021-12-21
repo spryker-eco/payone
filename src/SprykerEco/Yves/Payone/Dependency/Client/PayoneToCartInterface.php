@@ -16,10 +16,10 @@ interface PayoneToCartInterface
      *
      * @return void
      */
-    public function storeQuote(QuoteTransfer $quoteTransfer): void;
+    public function storeQuote(QuoteTransfer $quoteTransfer);
 
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getQuote(): QuoteTransfer;
+    public function getQuote();
 }

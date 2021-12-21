@@ -19,20 +19,22 @@ class PayoneInvoiceSubFormPlugin extends AbstractPlugin implements SubFormPlugin
 {
     /**
      * {@inheritDoc}
+     * - Creates `InvoiceSubForm` subform.
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createInvoiceSubForm();
     }
 
     /**
      * {@inheritDoc}
+     * - Creates subform data provider.
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createInvoiceSubFormDataProvider();
     }

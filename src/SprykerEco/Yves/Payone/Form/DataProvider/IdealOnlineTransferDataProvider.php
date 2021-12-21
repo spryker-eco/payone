@@ -35,7 +35,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
@@ -46,7 +46,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBankCountries(): array
     {
@@ -56,7 +56,7 @@ class IdealOnlineTransferDataProvider implements StepEngineFormDataProviderInter
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBankGroupTypes(): array
     {

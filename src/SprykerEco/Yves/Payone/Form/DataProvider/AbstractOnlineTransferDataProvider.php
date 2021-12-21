@@ -46,7 +46,7 @@ abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataP
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getOnlineBankTransferTypes(): array
     {

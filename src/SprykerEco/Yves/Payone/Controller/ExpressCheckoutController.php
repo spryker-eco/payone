@@ -19,7 +19,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return array
      */
-    public function checkoutWithPaypalButtonAction(): array
+    public function checkoutWithPaypalButtonAction()
     {
         return $this->viewResponse();
     }

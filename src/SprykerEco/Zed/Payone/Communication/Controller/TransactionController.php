@@ -27,7 +27,7 @@ class TransactionController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    public function statusUpdateAction(Request $request): StreamedResponse
+    public function statusUpdateAction(Request $request)
     {
         //Payone always sends status updates in ISO-8859-1. We transform them to utf8.
         $requestParameters = $request->request->all();

@@ -36,7 +36,7 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
      */
-    public function logUrl(string $url): ApiCallLogWriterInterface
+    public function logUrl($url)
     {
         $this->logEntity->setUrl($url);
 
@@ -48,7 +48,7 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
      */
-    public function logRequest(string $request): ApiCallLogWriterInterface
+    public function logRequest($request)
     {
         $this->logEntity->setRequest($request);
 
@@ -60,7 +60,7 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
      */
-    public function logResponse(string $response): ApiCallLogWriterInterface
+    public function logResponse($response)
     {
         $this->logEntity->setResponse($response);
 
@@ -70,7 +70,7 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
      */
-    public function flush(): ApiCallLogWriterInterface
+    public function flush()
     {
         $this->logEntity->save();
 

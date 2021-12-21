@@ -102,6 +102,10 @@ class PayoneConfig extends AbstractBundleConfig
      * @var string
      */
     public const PAYMENT_METHOD_CASH_ON_DELIVERY = 'payoneCashOnDelivery';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE;
 
     /**
@@ -175,7 +179,7 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYONE_SCHUFA_CONSUMER_SCORE_MIDDLE = 'SFM';
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected const DEFAULT_PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA = [
         PayoneApiConstants::PAYMENT_METHOD_E_WALLET,
@@ -190,7 +194,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getMode(): string
+    public function getMode()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 

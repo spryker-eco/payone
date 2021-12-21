@@ -100,7 +100,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
      */
     protected function findPaymentByTransactionId(?int $transactionId): ?SpyPaymentPayone
     {
-        return !empty($transactionId) ? $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne() : null;
+        return $transactionId ? $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne() : null;
     }
 
     /**

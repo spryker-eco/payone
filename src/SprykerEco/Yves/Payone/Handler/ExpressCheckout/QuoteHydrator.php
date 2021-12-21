@@ -27,12 +27,12 @@ use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentInterface;
 class QuoteHydrator implements QuoteHydratorInterface
 {
     /**
-     * @var string CARRIER_NAME
+     * @var string
      */
     public const CARRIER_NAME = 'Paypal';
 
     /**
-     * @var int DEFAULT_SHIPPING_PRICE
+     * @var int
      */
     public const DEFAULT_SHIPPING_PRICE = 0;
 

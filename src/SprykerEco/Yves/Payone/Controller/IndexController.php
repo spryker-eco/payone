@@ -58,7 +58,7 @@ class IndexController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    public function indexAction(Request $request): StreamedResponse
+    public function indexAction(Request $request)
     {
         $statusUpdateTransfer = new PayoneTransactionStatusUpdateTransfer();
         $statusUpdateTransfer->fromArray($request->request->all(), true);

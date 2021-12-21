@@ -20,13 +20,14 @@ class PayoneHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInt
 {
     /**
      * {@inheritDoc}
+     * - Adds payment to quote.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function addToDataClass(Request $request, AbstractTransfer $quoteTransfer): QuoteTransfer
+    public function addToDataClass(Request $request, AbstractTransfer $quoteTransfer)
     {
         return $this->getFactory()->createPayoneHandler()->addPaymentToQuote($request, $quoteTransfer);
     }

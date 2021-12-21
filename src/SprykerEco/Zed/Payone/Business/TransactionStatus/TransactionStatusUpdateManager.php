@@ -13,6 +13,7 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItem;
 use SprykerEco\Shared\Payone\Dependency\TransactionStatusUpdateInterface;
 use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
+use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse;
 use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
@@ -125,21 +126,21 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
         $balance = $request->getBalance();
         $balanceAmountInCents = round((float)$balance * 100);
 
-        if (method_exists($request, 'setBalance')) {
+        if ($request instanceof TransactionStatusRequest) {
             $request->setBalance($balanceAmountInCents);
         }
 
         $receivable = $request->getReceivable();
         $receivableAmountInCents = round((float)$receivable * 100);
 
-        if (method_exists($request, 'setReceivable')) {
+        if ($request instanceof TransactionStatusRequest) {
             $request->setReceivable($receivableAmountInCents);
         }
 
         $price = $request->getPrice();
         $priceAmountInCents = round((float)$price * 100);
 
-        if (method_exists($request, 'setPrice')) {
+        if ($request instanceof TransactionStatusRequest) {
             $request->setPrice($priceAmountInCents);
         }
     }

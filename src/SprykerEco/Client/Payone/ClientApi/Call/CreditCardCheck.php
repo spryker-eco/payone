@@ -41,7 +41,7 @@ class CreditCardCheck extends AbstractCall implements CreditCardCheckInterface
     {
         $container = new CreditCardCheckContainer($this->utilEncodingService);
         $this->applyStandardParameter($container);
-        $securityKey = $this->standardParameter->getKey() ?? '';
+        $securityKey = (string) $this->standardParameter->getKey();
         $hash = $this->hashGenerator->generateHash($container, $securityKey);
 
         $container->setHash($hash);

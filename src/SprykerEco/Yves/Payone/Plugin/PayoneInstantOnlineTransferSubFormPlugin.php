@@ -19,20 +19,22 @@ class PayoneInstantOnlineTransferSubFormPlugin extends AbstractPlugin implements
 {
     /**
      * {@inheritDoc}
+     * - Creates `InstantOnlineTransferSubForm` subform.
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createInstantOnlineTransferSubForm();
     }
 
     /**
      * {@inheritDoc}
+     * - Creates subform data provider.
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createInstantOnlineTransferSubFormDataProvider();
     }

@@ -33,7 +33,7 @@ abstract class AbstractAdapterMock extends AbstractHttpAdapter implements Adapte
     /**
      * @param array $params
      *
-     * @return array
+     * @return array<string>
      */
     protected function performRequest(array $params): array
     {
@@ -55,12 +55,12 @@ abstract class AbstractAdapterMock extends AbstractHttpAdapter implements Adapte
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
     abstract protected function getSuccessResponse(): array;
 
     /**
-     * @return array
+     * @return array<string>
      */
     abstract protected function getFailureResponse(): array;
 }

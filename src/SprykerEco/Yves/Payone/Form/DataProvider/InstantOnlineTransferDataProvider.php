@@ -36,7 +36,7 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
     public function getOptions(AbstractTransfer $quoteTransfer): array
     {
@@ -46,7 +46,7 @@ class InstantOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBankCountries(): array
     {
