@@ -1,4 +1,6 @@
 <?php
+// phpcs:disable Spryker.ControlStructures.DisallowCloakingCheck.FixableEmpty
+// phpcs:disable Spryker.ControlStructures.DisallowCloakingCheck.InvalidEmpty
 
 /**
  * MIT License
