@@ -123,7 +123,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getCustomermessage(): string
+    public function getCustomermessage()
     {
         return $this->customermessage;
     }
@@ -141,7 +141,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getErrorcode(): string
+    public function getErrorcode()
     {
         return $this->errorcode;
     }
@@ -171,7 +171,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getErrormessage(): string
+    public function getErrormessage()
     {
         return $this->errormessage;
     }

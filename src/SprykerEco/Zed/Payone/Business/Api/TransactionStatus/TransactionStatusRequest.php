@@ -590,7 +590,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return string
      */
-    public function getReminderlevel(): string
+    public function getReminderlevel()
     {
         return $this->reminderlevel;
     }

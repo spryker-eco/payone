@@ -112,7 +112,7 @@ interface TransactionStatusUpdateInterface
     /**
      * @return string
      */
-    public function getReminderlevel(): string;
+    public function getReminderlevel();
 
     /**
      * @return string

@@ -132,7 +132,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getClearingBankaccount(): string
+    public function getClearingBankaccount()
     {
         return $this->clearing_bankaccount;
     }
@@ -150,7 +150,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getClearingBankaccountholder(): string
+    public function getClearingBankaccountholder()
     {
         return $this->clearing_bankaccountholder;
     }
@@ -168,7 +168,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getClearingBankbic(): string
+    public function getClearingBankbic()
     {
         return $this->clearing_bankbic;
     }
@@ -186,7 +186,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getClearingBankcity(): string
+    public function getClearingBankcity()
     {
         return $this->clearing_bankcity;
     }
@@ -204,7 +204,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getClearingBankcode(): string
+    public function getClearingBankcode()
     {
         return $this->clearing_bankcode;
     }
@@ -222,7 +222,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getClearingBankcountry(): string
+    public function getClearingBankcountry()
     {
         return $this->clearing_bankcountry;
     }
@@ -240,7 +240,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getClearingBankiban(): string
+    public function getClearingBankiban()
     {
         return $this->clearing_bankiban;
     }
@@ -258,7 +258,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getClearingBankname(): string
+    public function getClearingBankname()
     {
         return $this->clearing_bankname;
     }
@@ -294,7 +294,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return int
      */
-    public function getTxid(): int
+    public function getTxid()
     {
         return $this->txid;
     }
@@ -312,7 +312,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return int
      */
-    public function getUserid(): int
+    public function getUserid()
     {
         return $this->userid;
     }
@@ -330,7 +330,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getRedirecturl(): string
+    public function getRedirecturl()
     {
         return $this->redirecturl;
     }
@@ -474,7 +474,7 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getMandateIdentification(): string
+    public function getMandateIdentification()
     {
         return $this->mandate_identification;
     }
