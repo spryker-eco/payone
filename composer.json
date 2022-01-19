@@ -27,18 +27,18 @@
         "spryker/zed-request": "^3.2.0"
     },
     "require-dev": {
-        "spryker/silex": "^2.2.0",
         "codeception/module-asserts": "^1.3.0",
         "phpstan/phpstan": "^1.2.0",
         "spryker/application": "^3.0.0",
         "spryker/checkout": "*",
         "spryker/code-sniffer": "*",
-        "spryker/error-handler": "*",
         "spryker/container": "*",
         "spryker/country": "^3.2.0",
+        "spryker/error-handler": "*",
         "spryker/payment": "*",
         "spryker/propel": "^3.34.0",
         "spryker/router": "*",
+        "spryker/silex": "^2.2.0",
         "spryker/testify": "^3.43.0",
         "spryker/transfer": "^3.30.1"
     },
@@ -70,8 +70,8 @@
     "prefer-stable": true,
     "scripts": {
         "test": "vendor/bin/codecept run",
-        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml --ignore=/tests/app/ src/ tests/",
-        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml --ignore=/tests/app/ src/ tests/",
+        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml --ignore=/tests/app/ src/ tests/",
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml --ignore=/tests/app/ src/ tests/",
         "stan": "phpstan analyse",
         "lowest": "validate-prefer-lowest",
         "lowest-setup": "composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction && cp composer.json composer.backup && composer require --dev dereuromark/composer-prefer-lowest && mv composer.backup composer.json"
