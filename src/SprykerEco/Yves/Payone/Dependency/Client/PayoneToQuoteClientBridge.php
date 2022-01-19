@@ -1,6 +1,4 @@
 <?php
-// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
-// phpcs:disable SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -31,7 +29,7 @@ class PayoneToQuoteClientBridge implements PayoneToQuoteClientInterface
      *
      * @return void
      */
-    public function setQuote(QuoteTransfer $quoteTransfer)
+    public function setQuote(QuoteTransfer $quoteTransfer): void
     {
         $this->quoteClient->setQuote($quoteTransfer);
     }
@@ -39,7 +37,7 @@ class PayoneToQuoteClientBridge implements PayoneToQuoteClientInterface
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getQuote()
+    public function getQuote(): QuoteTransfer
     {
         return $this->quoteClient->getQuote();
     }

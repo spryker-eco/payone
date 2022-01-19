@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -15,17 +14,17 @@ interface PayoneToCustomerInterface
     /**
      * @return \Generated\Shared\Transfer\CustomerTransfer|null
      */
-    public function getCustomer();
+    public function getCustomer(): ?CustomerTransfer;
 
     /**
      * @return bool
      */
-    public function isLoggedIn();
+    public function isLoggedIn(): bool;
 
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
-    public function getCustomerByEmail(CustomerTransfer $customerTransfer);
+    public function getCustomerByEmail(CustomerTransfer $customerTransfer): CustomerTransfer;
 }

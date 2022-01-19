@@ -1,6 +1,4 @@
 <?php
-// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
-// phpcs:disable SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -18,10 +16,10 @@ interface PayoneToCartInterface
      *
      * @return void
      */
-    public function storeQuote(QuoteTransfer $quoteTransfer);
+    public function storeQuote(QuoteTransfer $quoteTransfer): void;
 
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function getQuote();
+    public function getQuote(): QuoteTransfer;
 }

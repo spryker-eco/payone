@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -28,7 +27,7 @@ class PayoneToCustomerBridge implements PayoneToCustomerInterface
     /**
      * @return \Generated\Shared\Transfer\CustomerTransfer|null
      */
-    public function getCustomer()
+    public function getCustomer(): ?CustomerTransfer
     {
         return $this->customerClient->getCustomer();
     }
@@ -36,7 +35,7 @@ class PayoneToCustomerBridge implements PayoneToCustomerInterface
     /**
      * @return bool
      */
-    public function isLoggedIn()
+    public function isLoggedIn(): bool
     {
         return $this->customerClient->isLoggedIn();
     }
@@ -46,7 +45,7 @@ class PayoneToCustomerBridge implements PayoneToCustomerInterface
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
-    public function getCustomerByEmail(CustomerTransfer $customerTransfer)
+    public function getCustomerByEmail(CustomerTransfer $customerTransfer): CustomerTransfer
     {
         return $this->customerClient->getCustomerByEmail($customerTransfer);
     }

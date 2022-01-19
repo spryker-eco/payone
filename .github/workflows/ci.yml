@@ -26,39 +26,9 @@ on:
     workflow_dispatch:
 
 jobs:
-    setup:
-        name: Setup MariaDB
-        runs-on: ubuntu-18.04
-
-        steps:
-            - uses: actions/checkout@v2
-            - uses: getong/mariadb-action@v1.1
-              with:
-                  host port: ${{ env.DATABASE_PORT }}
-                  container port: ${{ env.DATABASE_PORT }}
-                  character set server: ${{ env.DATABASE_CHARACTER_SET }}
-                  collation server: ${{ env.DATABASE_COLLATE }}
-                  mariadb version: ${{ env.DATABASE_VERSION }}
-                  mysql database: ${{ env.DATABASE_NAME }}
-                  mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
-                  mysql user: ${{ env.DATABASE_USERNAME }}
-                  mysql password: ${{ env.DATABASE_PASSWORD }}
-
     ci:
         name: Payone
-        needs: setup
         runs-on: ubuntu-18.04
-
-        services:
-            mariadb:
-                image: mariadb:10.2
-                env:
-                    MYSQL_ALLOW_EMPTY_PASSWORD: false
-                    MYSQL_ROOT_PASSWORD: secret
-                    MYSQL_DATABASE: eu-docker
-                ports:
-                    - 3306:3306
-                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
         strategy:
             fail-fast: false
@@ -68,8 +38,20 @@ jobs:
                     - '8.0'
 
         steps:
-            - name: Checkout@v2
-              uses: actions/checkout@v2
+            -   uses: actions/checkout@v2
+
+            -   name: Setup Database
+                uses: getong/mariadb-action@v1.1
+                with:
+                    host port: ${{ env.DATABASE_PORT }}
+                    container port: ${{ env.DATABASE_PORT }}
+                    character set server: ${{ env.DATABASE_CHARACTER_SET }}
+                    collation server: ${{ env.DATABASE_COLLATE }}
+                    mariadb version: ${{ env.DATABASE_VERSION }}
+                    mysql database: ${{ env.DATABASE_NAME }}
+                    mysql root password: ${{ env.DATABASE_ROOT_PASSWORD }}
+                    mysql user: ${{ env.DATABASE_USERNAME }}
+                    mysql password: ${{ env.DATABASE_PASSWORD }}
 
             - name: Setup PHP ${{ matrix.php-versions }}
               uses: shivammathur/setup-php@v2

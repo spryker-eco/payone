@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
@@ -30,7 +29,7 @@ class PayoneToCalculationBridge implements PayoneToCalculationInterface
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function recalculate(QuoteTransfer $quoteTransfer)
+    public function recalculate(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->calculationClient->recalculate($quoteTransfer);
     }
