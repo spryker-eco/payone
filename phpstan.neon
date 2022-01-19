@@ -36,7 +36,9 @@ parameters:
         - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
         - '#Argument of an invalid type .+ supplied for foreach, only iterables are supported\.#'
         - '#Method .+ should return .+ but returns .+\.#'
-        - '#Call to an undefined method .+\.#'
+        - '#Call to an undefined method .+SpySalesOrderQuery::orderByIdPaymentPayoneApiLog\(\)\.#'
+        - '#Call to an undefined method .+SpySalesOrderQuery::filterByRequest\(\)\.#'
+        - '#Call to an undefined method .+SpySalesShipmentQuery::useSpyPaymentPayoneDetailQuery\(\)\.#'
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
         - src/SprykerEco/Yves/Payone/Form/Constraint
