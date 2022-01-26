@@ -285,7 +285,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return float
      */
-    public function getBalance(): float
+    public function getBalance()
     {
         return $this->balance;
     }
@@ -555,7 +555,7 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     /**
      * @return float
      */
-    public function getReceivable(): float
+    public function getReceivable()
     {
         return $this->receivable;
     }

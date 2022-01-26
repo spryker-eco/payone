@@ -242,7 +242,7 @@ abstract class AbstractResponseContainer
     /**
      * @return string
      */
-    public function getRawResponse(): string
+    public function getRawResponse()
     {
         return $this->rawResponse;
     }

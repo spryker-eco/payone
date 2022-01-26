@@ -32,7 +32,7 @@ class RefundResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getProtectResultAvs(): string
+    public function getProtectResultAvs()
     {
         return $this->protect_result_avs;
     }
@@ -50,7 +50,7 @@ class RefundResponseContainer extends AbstractResponseContainer
     /**
      * @return int
      */
-    public function getTxid(): int
+    public function getTxid()
     {
         return $this->txid;
     }

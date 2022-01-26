@@ -23,7 +23,7 @@ interface TransactionStatusUpdateInterface
     /**
      * @return float
      */
-    public function getBalance(): float;
+    public function getBalance();
 
     /**
      * @return string
@@ -103,7 +103,7 @@ interface TransactionStatusUpdateInterface
     /**
      * @return float
      */
-    public function getReceivable(): float;
+    public function getReceivable();
 
     /**
      * @return string
