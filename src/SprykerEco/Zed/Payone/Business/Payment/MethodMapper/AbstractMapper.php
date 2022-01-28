@@ -50,13 +50,13 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameterTransfer
+     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $payoneStandardParameterTransfer
      *
      * @return void
      */
-    public function setStandardParameter(PayoneStandardParameterTransfer $standardParameterTransfer): void
+    public function setStandardParameter(PayoneStandardParameterTransfer $payoneStandardParameterTransfer): void
     {
-        $this->standardParameter = $standardParameterTransfer;
+        $this->standardParameter = $payoneStandardParameterTransfer;
     }
 
     /**
