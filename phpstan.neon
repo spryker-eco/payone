@@ -1,4 +1,5 @@
 parameters:
+    level: 2
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
     ignoreErrors:
@@ -19,4 +20,3 @@ parameters:
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
         - src/SprykerEco/Yves/Payone/Form/Constraint
-
