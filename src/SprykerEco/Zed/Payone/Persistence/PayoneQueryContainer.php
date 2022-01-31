@@ -21,14 +21,14 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @api
      *
-     * @param int $idPaymentPayone
+     * @param int $idTransaction
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createCurrentSequenceNumberQuery($idPaymentPayone)
+    public function createCurrentSequenceNumberQuery($idTransaction)
     {
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery();
-        $query->filterByTransactionId($idPaymentPayone)
+        $query->filterByTransactionId($idTransaction)
             ->orderBySequenceNumber(Criteria::DESC);
 
         return $query;
