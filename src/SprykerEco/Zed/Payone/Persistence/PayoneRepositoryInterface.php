@@ -56,9 +56,9 @@ interface PayoneRepositoryInterface
     public function getPaymentLogs(ArrayObject $orderTransfers): PayonePaymentLogCollectionTransfer;
 
     /**
-     * @param int $orderId
+     * @param int $idOrder
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentPayoneQueryByOrderId(int $orderId): SpyPaymentPayoneQuery;
+    public function createPaymentPayoneQueryByOrderId(int $idOrder): SpyPaymentPayoneQuery;
 }
