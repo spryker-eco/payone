@@ -57,8 +57,6 @@
     "autoload-dev": {
         "psr-4": {
             "SprykerEcoTest\\": "tests/SprykerEcoTest/",
-            "Orm\\": "tests/app/src/Orm/",
-            "Generated\\Shared\\": "tests/app/src/Generated/Shared",
             "Config\\Module\\": "vendor/spryker/config/tests/_support/Module",
             "Oms\\Module\\": "vendor/spryker/oms/tests/_support/Module",
             "Propel\\Module\\": "vendor/spryker/propel/tests/_support/Module",

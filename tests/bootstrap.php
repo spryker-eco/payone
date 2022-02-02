@@ -37,6 +37,29 @@ if (!is_dir($configTargetDirectory)) {
     mkdir($configTargetDirectory, 0777, true);
 }
 
+spl_autoload_register(function ($className) {
+    if (
+        strrpos($className, 'Transfer') === false
+        && strrpos($className, 'Builder') === false
+        && strrpos($className, 'Spy') === false
+    ) {
+        return false;
+    }
+
+    $classNameParts = explode('\\', $className);
+
+    $fileName = implode(DIRECTORY_SEPARATOR, $classNameParts) . '.php';
+    $filePath = APPLICATION_ROOT_DIR . 'src' . DIRECTORY_SEPARATOR . $fileName;
+
+    if (!file_exists($filePath)) {
+        return false;
+    }
+
+    require_once $filePath;
+
+    return true;
+});
+
 copy($configSourceDirectory . 'config_local.php', $configTargetDirectory . 'config_local.php');
 copy($configSourceDirectory . 'config_propel.php', $configTargetDirectory . 'config_propel.php');
 copy($configSourceDirectory . 'default_store.php', $configTargetDirectory . 'default_store.php');
