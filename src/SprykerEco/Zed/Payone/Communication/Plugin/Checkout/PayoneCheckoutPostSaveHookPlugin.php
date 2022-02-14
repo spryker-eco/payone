@@ -30,12 +30,12 @@ class PayoneCheckoutPostSaveHookPlugin extends AbstractPlugin implements Checkou
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
      * @return void
      */
-    public function executeHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
+    public function executeHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        $this->getFacade()->executeCheckoutPostSaveHook($quoteTransfer, $checkoutResponse);
+        $this->getFacade()->executeCheckoutPostSaveHook($quoteTransfer, $checkoutResponseTransfer);
     }
 }
