@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Payone\Persistence;
 
-use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 use SprykerEco\Shared\Payone\PayoneApiConstants;

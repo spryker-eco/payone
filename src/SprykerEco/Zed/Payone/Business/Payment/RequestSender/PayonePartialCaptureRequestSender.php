@@ -134,7 +134,6 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
      * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function executePartialCapture(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer

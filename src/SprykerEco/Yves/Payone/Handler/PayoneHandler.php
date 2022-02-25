@@ -96,7 +96,6 @@ class PayoneHandler implements PayoneHandlerInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function addPaymentToQuote(Request $request, QuoteTransfer $quoteTransfer): QuoteTransfer
     {

@@ -68,7 +68,6 @@ class PayoneCreditCardChecker implements PayoneCreditCardCheckerInterface
      * @param \Generated\Shared\Transfer\PayoneCreditCardTransfer $creditCardData
      *
      * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function creditCardCheck(PayoneCreditCardTransfer $creditCardData): CreditCardCheckResponseTransfer
     {

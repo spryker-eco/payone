@@ -176,7 +176,6 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
     {

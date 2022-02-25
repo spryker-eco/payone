@@ -178,7 +178,6 @@ class ApiLogFinder implements ApiLogFinderInterface
      * @param string $status Expected status
      *
      * @return bool
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function hasApiLogStatus(OrderTransfer $orderTransfer, string $request, string $status): bool
     {
@@ -206,7 +205,6 @@ class ApiLogFinder implements ApiLogFinderInterface
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function findPaymentByOrder(OrderTransfer $orderTransfer): SpyPaymentPayone
     {

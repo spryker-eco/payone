@@ -40,7 +40,6 @@ class StandartParameterMapper implements StandartParameterMapperInterface
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function setStandardParameter(AbstractRequestContainer $container, PayoneStandardParameterTransfer $standardParameter): AbstractRequestContainer
     {

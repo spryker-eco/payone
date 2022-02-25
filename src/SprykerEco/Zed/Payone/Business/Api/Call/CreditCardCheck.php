@@ -35,7 +35,6 @@ class CreditCardCheck extends AbstractCall implements CallInterface
 
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CreditCardCheckContainer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function mapCreditCardCheckData(): CreditCardCheckContainer
     {

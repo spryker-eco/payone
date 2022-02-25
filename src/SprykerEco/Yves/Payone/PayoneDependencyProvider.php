@@ -10,11 +10,11 @@ namespace SprykerEco\Yves\Payone;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationBridge;
-use SprykerEco\Yves\Payone\Dependency\Client\PayoneToUtilEncodingServiceBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientBridge;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToUtilEncodingServiceBridge;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneConfig getConfig()

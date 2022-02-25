@@ -459,7 +459,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param array|null $it
+     * @param array $it
      *
      * @return void
      */

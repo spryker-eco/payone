@@ -102,7 +102,6 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
     {
@@ -247,7 +246,6 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface $authorizationContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function mapKlarnaPaymentToAbstractAuthorization(
         SpyPaymentPayone $paymentEntity,

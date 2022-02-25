@@ -51,8 +51,6 @@ class PayoneToUtilEncodingServiceBridge implements PayoneToUtilEncodingServiceIn
      * @param array $data
      * @param string $format
      *
-     * @throws \Spryker\Service\UtilEncoding\Exception\FormatNotSupportedException
-     *
      * @return string|null
      */
     public function encodeToFormat(array $data, string $format): ?string
@@ -63,8 +61,6 @@ class PayoneToUtilEncodingServiceBridge implements PayoneToUtilEncodingServiceIn
     /**
      * @param string $data
      * @param string $format
-     *
-     * @throws \Spryker\Service\UtilEncoding\Exception\FormatNotSupportedException
      *
      * @return array|null
      */

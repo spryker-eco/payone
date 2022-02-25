@@ -107,7 +107,6 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {

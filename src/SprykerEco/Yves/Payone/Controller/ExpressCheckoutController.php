@@ -9,7 +9,6 @@
 namespace SprykerEco\Yves\Payone\Controller;
 
 use Spryker\Yves\Kernel\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * @method \SprykerEco\Client\Payone\PayoneClientInterface getClient()

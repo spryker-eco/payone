@@ -18,7 +18,6 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function distributeOrderPrice(OrderTransfer $orderTransfer): OrderTransfer
     {
@@ -92,7 +91,6 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
      * @param float $priceRatio
      *
      * @return void
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function distributeOrderItemsPrices(OrderTransfer $orderTransfer, float $priceRatio): void
     {
@@ -125,7 +123,6 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
      * @param float $priceRatio
      *
      * @return void
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function distributeOrderExpensesPrices(OrderTransfer $orderTransfer, float $priceRatio): void
     {

@@ -91,7 +91,6 @@ class QuoteHydrator implements QuoteHydratorInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function hydrateQuoteWithPayment(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
