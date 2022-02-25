@@ -102,6 +102,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
     {
@@ -109,7 +110,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $captureContainer = new CaptureContainer();
 
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setCaptureMode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
         $sequenceNumber = $this->getNextSequenceNumber($paymentEntity->getTransactionId());
@@ -246,6 +247,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface $authorizationContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function mapKlarnaPaymentToAbstractAuthorization(
         SpyPaymentPayone $paymentEntity,
@@ -265,7 +267,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $authorizationContainer->setReference($paymentEntity->getReference());
 
         $paydataContainer = new PaydataContainer();
-        $paydataContainer->setAuthorizationToken($payoneKlarnaTransfer->getPayMethodToken());
+        $paydataContainer->setAuthorizationToken($payoneKlarnaTransfer->getPayMethodTokenOrFail());
         $authorizationContainer->setPaydata($paydataContainer);
 
         $personalContainer = $this->buildPersonalContainer($paymentEntity);

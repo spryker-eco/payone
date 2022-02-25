@@ -86,6 +86,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
     {
@@ -93,7 +94,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
 

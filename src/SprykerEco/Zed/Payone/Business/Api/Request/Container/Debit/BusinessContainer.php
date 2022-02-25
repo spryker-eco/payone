@@ -32,13 +32,13 @@ class BusinessContainer extends AbstractContainer
     protected $document_date;
 
     /**
-     * @param string $booking_date
+     * @param string $bookingDate
      *
      * @return void
      */
-    public function setBookingDate(string $booking_date): void
+    public function setBookingDate(string $bookingDate): void
     {
-        $this->booking_date = $booking_date;
+        $this->booking_date = $bookingDate;
     }
 
     /**
@@ -50,13 +50,13 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @param string $document_date
+     * @param string $documentDate
      *
      * @return void
      */
-    public function setDocumentDate(string $document_date): void
+    public function setDocumentDate(string $documentDate): void
     {
-        $this->document_date = $document_date;
+        $this->document_date = $documentDate;
     }
 
     /**
@@ -68,13 +68,13 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @param string $settleaccount
+     * @param string $settleAccount
      *
      * @return void
      */
-    public function setSettleAccount(string $settleaccount): void
+    public function setSettleAccount(string $settleAccount): void
     {
-        $this->settleaccount = $settleaccount;
+        $this->settleaccount = $settleAccount;
     }
 
     /**
@@ -86,13 +86,13 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @param string $transactiontype
+     * @param string $transactionType
      *
      * @return void
      */
-    public function setTransactionType(string $transactiontype): void
+    public function setTransactionType(string $transactionType): void
     {
-        $this->transactiontype = $transactiontype;
+        $this->transactiontype = $transactionType;
     }
 
     /**

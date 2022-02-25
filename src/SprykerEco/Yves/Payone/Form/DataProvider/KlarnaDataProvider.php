@@ -139,9 +139,8 @@ class KlarnaDataProvider implements StepEngineFormDataProviderInterface
         $paymentTransfer = new PaymentTransfer();
         $paymentTransfer->setPayone(new PayonePaymentTransfer());
 
-        if ($quoteTransfer instanceof QuoteTransfer) {
-            $quoteTransfer->setPayment($paymentTransfer);
-        }
+        /** @var QuoteTransfer $quoteTransfer */
+        $quoteTransfer->setPayment($paymentTransfer);
 
         return $quoteTransfer;
     }

@@ -178,10 +178,11 @@ class ApiLogFinder implements ApiLogFinderInterface
      * @param string $status Expected status
      *
      * @return bool
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function hasApiLogStatus(OrderTransfer $orderTransfer, string $request, string $status): bool
     {
-        $idSalesOrder = (int)$orderTransfer->getIdSalesOrder();
+        $idSalesOrder = $orderTransfer->getIdSalesOrderOrFail();
         $apiLog = $this->queryContainer->createApiLogsByOrderIdAndRequest($idSalesOrder, $request)->filterByStatus($status)->findOne();
 
         if ($apiLog === null) {
@@ -205,10 +206,11 @@ class ApiLogFinder implements ApiLogFinderInterface
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function findPaymentByOrder(OrderTransfer $orderTransfer): SpyPaymentPayone
     {
-        return $this->queryContainer->createPaymentByOrderId((int)$orderTransfer->getIdSalesOrder())->findOne();
+        return $this->queryContainer->createPaymentByOrderId($orderTransfer->getIdSalesOrderOrFail())->findOne();
     }
 
     /**

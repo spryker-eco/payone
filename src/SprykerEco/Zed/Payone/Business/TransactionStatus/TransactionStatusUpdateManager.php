@@ -358,7 +358,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     {
         $records = $this->getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
 
-        return !empty($records);
+        return (bool)$records;
     }
 
     /**

@@ -25,16 +25,22 @@ class PayoneConfig extends AbstractBundleConfig
     public const PROVIDER_NAME = 'Payone';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_CREDIT_CARD = 'payoneCreditCard';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_E_WALLET = 'payoneEWallet';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_DIRECT_DEBIT = 'payoneDirectDebit';
@@ -45,51 +51,71 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYMENT_METHOD_ONLINE_TRANSFER = 'payoneOnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_EPS_ONLINE_TRANSFER = 'payoneEpsOnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_INSTANT_ONLINE_TRANSFER = 'payoneInstantOnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_GIROPAY_ONLINE_TRANSFER = 'payoneGiropayOnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_IDEAL_ONLINE_TRANSFER = 'payoneIdealOnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_POSTFINANCE_EFINANCE_ONLINE_TRANSFER = 'payonePostfinanceEfinanceOnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_POSTFINANCE_CARD_ONLINE_TRANSFER = 'payonePostfinanceCardOnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_PRZELEWY24_ONLINE_TRANSFER = 'payonePrzelewy24OnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_BANCONTACT_ONLINE_TRANSFER = 'payoneBancontactOnlineTransfer';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_PRE_PAYMENT = 'payonePrePayment';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_INVOICE = 'payoneInvoice';
@@ -105,16 +131,22 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYMENT_METHOD_CASH_ON_DELIVERY = 'payoneCashOnDelivery';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT = PayoneConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT_STATE_MACHINE;
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_KLARNA = 'payoneKlarna';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_ADDRESS_CHECK_BASIC = 'BA';
@@ -145,6 +177,8 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYONE_SCHUFA_ADDRESS_CHECK_BASIC_SHORT = 'BS';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_ARVATO_CONSUMER_SCORE_HARD_CRITERIA = 'IH';

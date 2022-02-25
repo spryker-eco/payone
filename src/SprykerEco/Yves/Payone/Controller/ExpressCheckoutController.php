@@ -28,7 +28,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function initPaypalExpressCheckoutAction(): RedirectResponse
+    public function initPaypalExpressCheckoutAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
 
@@ -38,7 +38,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function loadPaypalExpressCheckoutDetailsAction(): RedirectResponse
+    public function loadPaypalExpressCheckoutDetailsAction()
     {
         $expressCheckoutHandler = $this->getFactory()->createExpressCheckoutHandler();
         $expressCheckoutHandler->loadExpressCheckoutDetails();
@@ -49,7 +49,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function failureAction(): RedirectResponse
+    public function failureAction()
     {
         $this->addErrorMessage('Paypal transaction failed.');
 
@@ -61,7 +61,7 @@ class ExpressCheckoutController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function backAction(): RedirectResponse
+    public function backAction()
     {
         return $this->getFactory()
             ->createExpressCheckoutHandler()

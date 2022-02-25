@@ -177,7 +177,7 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
      *
      * @return void
      */
-    public function setSequenceNumber(?int $sequencenumber): void
+    public function setSequenceNumber(?int $sequencenumber = null): void
     {
         $this->sequencenumber = $sequencenumber;
     }

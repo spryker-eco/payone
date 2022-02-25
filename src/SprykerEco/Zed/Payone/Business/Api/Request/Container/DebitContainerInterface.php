@@ -90,7 +90,7 @@ interface DebitContainerInterface
      *
      * @return void
      */
-    public function setSequenceNumber(?int $sequencenumber): void;
+    public function setSequenceNumber(?int $sequencenumber = null): void;
 
     /**
      * @return int|null

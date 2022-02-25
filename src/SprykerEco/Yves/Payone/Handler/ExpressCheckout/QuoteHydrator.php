@@ -91,6 +91,7 @@ class QuoteHydrator implements QuoteHydratorInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function hydrateQuoteWithPayment(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
@@ -102,7 +103,7 @@ class QuoteHydrator implements QuoteHydratorInterface
             ->setType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL)
             ->setCurrency(Store::getInstance()->getCurrencyIsoCode())
             ->setWorkOrderId(
-                $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->getWorkOrderId(),
+                $quoteTransfer->getPaymentOrFail()->getPayonePaypalExpressCheckoutOrFail()->getWorkOrderId(),
             );
         $payone->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT);
         $payone->setPaymentDetail($paymentDetailTransfer);

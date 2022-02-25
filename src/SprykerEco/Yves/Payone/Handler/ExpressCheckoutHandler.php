@@ -75,7 +75,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
             $this->cartClient->storeQuote($quoteTransfer);
         }
 
-        return new RedirectResponse($response->getRedirectUrl() ?? '');
+        return new RedirectResponse($response->getRedirectUrlOrFail());
     }
 
     /**

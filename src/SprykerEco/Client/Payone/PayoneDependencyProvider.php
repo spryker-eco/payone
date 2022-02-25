@@ -9,6 +9,7 @@ namespace SprykerEco\Client\Payone;
 
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
+use SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceBridge;
 
 class PayoneDependencyProvider extends AbstractDependencyProvider
 {
@@ -29,6 +30,8 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
      */
     public function provideServiceLayerDependencies(Container $container): Container
     {
+        $container = parent::provideServiceLayerDependencies($container);
+
         $this->addZedService($container);
         $this->addUtilEncodingService($container);
 
@@ -57,7 +60,7 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
     protected function addUtilEncodingService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
-            return $container->getLocator()->utilEncoding()->service();
+            return new PayoneToUtilEncodingServiceBridge($container->getLocator()->utilEncoding()->service());
         });
 
         return $container;

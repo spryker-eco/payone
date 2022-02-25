@@ -107,11 +107,12 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
         $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
-            $captureTransfer->getOrder(),
+            $captureTransfer->getOrderOrFail(),
         );
         $captureTransfer->setOrder($distributedPriceOrderTransfer);
         $captureTransfer->setAmount($distributedPriceOrderTransfer->getTotals()->getGrandTotal());
@@ -124,7 +125,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
 
         if ($captureTransfer->getAmount()) {
             $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($captureTransfer->getOrder(), $requestContainer);
-            $requestContainer = $this->expenseMapper->mapExpenses($captureTransfer->getOrder(), $requestContainer);
+            $requestContainer = $this->expenseMapper->mapExpenses($captureTransfer->getOrderOrFail(), $requestContainer);
         }
 
         if ($requestContainer instanceof CaptureContainer) {

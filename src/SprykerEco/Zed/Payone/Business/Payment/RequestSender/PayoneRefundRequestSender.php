@@ -85,11 +85,12 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
      * @param \Generated\Shared\Transfer\PayoneRefundTransfer $refundTransfer
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function refundPayment(PayoneRefundTransfer $refundTransfer): RefundResponseTransfer
     {
         $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
-            $refundTransfer->getOrder(),
+            $refundTransfer->getOrderOrFail(),
         );
         $refundTransfer->setOrder($distributedPriceOrderTransfer);
 

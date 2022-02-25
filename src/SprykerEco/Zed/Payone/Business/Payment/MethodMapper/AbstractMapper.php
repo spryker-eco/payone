@@ -104,13 +104,13 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     }
 
     /**
-     * @param int|null $transactionId
+     * @param int $transactionId
      *
-     * @return int|null
+     * @return int
      */
-    protected function getNextSequenceNumber(?int $transactionId): ?int
+    protected function getNextSequenceNumber(int $transactionId): int
     {
-        $nextSequenceNumber = !empty($transactionId) ? $this->getSequenceNumberProvider()->getNextSequenceNumber($transactionId) : null;
+        $nextSequenceNumber = $this->getSequenceNumberProvider()->getNextSequenceNumber($transactionId);
 
         return $nextSequenceNumber;
     }

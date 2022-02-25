@@ -13,10 +13,10 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 interface ExpenseMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function mapExpenses(?OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer;
+    public function mapExpenses(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer;
 }

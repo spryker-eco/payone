@@ -17,6 +17,11 @@ use SprykerEco\Yves\Payone\Form\OnlineTransferSubForm;
 abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataProviderInterface
 {
     /**
+     * @return array
+     */
+    abstract protected function getBankCountries(): array;
+
+    /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer|\Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
@@ -60,11 +65,6 @@ abstract class AbstractOnlineTransferDataProvider implements StepEngineFormDataP
             'Przelewy24' => 'P24', // (P24)
         ];
     }
-
-    /**
-     * @return array
-     */
-    abstract protected function getBankCountries(): array;
 
     /**
      * @return array

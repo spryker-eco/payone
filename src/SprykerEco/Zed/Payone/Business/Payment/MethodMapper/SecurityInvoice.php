@@ -149,6 +149,7 @@ class SecurityInvoice extends AbstractMapper
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
     {
@@ -156,7 +157,7 @@ class SecurityInvoice extends AbstractMapper
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
 
         return $captureContainer;

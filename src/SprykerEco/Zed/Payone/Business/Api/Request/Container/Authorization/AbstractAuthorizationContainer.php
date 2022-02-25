@@ -17,7 +17,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * Sub account ID
      *
-     * @var string|null
+     * @var string
      */
     protected $aid;
 
@@ -161,11 +161,11 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @param string|null $currency
+     * @param string $currency
      *
      * @return void
      */
-    public function setCurrency(?string $currency): void
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }

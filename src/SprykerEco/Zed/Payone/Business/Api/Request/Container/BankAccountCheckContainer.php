@@ -57,11 +57,11 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     protected $bic;
 
     /**
-     * @param string|null $bankaccount
+     * @param string $bankaccount
      *
      * @return void
      */
-    public function setBankAccount(?string $bankaccount): void
+    public function setBankAccount(string $bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }

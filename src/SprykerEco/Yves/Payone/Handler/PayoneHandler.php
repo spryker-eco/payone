@@ -96,13 +96,14 @@ class PayoneHandler implements PayoneHandlerInterface
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function addPaymentToQuote(Request $request, QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $paymentSelection = $quoteTransfer->getPayment()->getPaymentSelection();
+        $paymentSelection = $quoteTransfer->getPaymentOrFail()->getPaymentSelectionOrFail();
 
-        $this->setPaymentProviderAndMethod($quoteTransfer, $paymentSelection ?? '');
-        $this->setPayonePayment($request, $quoteTransfer, $paymentSelection ?? '');
+        $this->setPaymentProviderAndMethod($quoteTransfer, $paymentSelection);
+        $this->setPayonePayment($request, $quoteTransfer, $paymentSelection);
         $this->setPaymentSuccessIncludePath($quoteTransfer);
 
         return $quoteTransfer;
@@ -160,16 +161,17 @@ class PayoneHandler implements PayoneHandlerInterface
             $paymentDetailTransfer->setMandateIdentification($payonePaymentTransfer->getMandateIdentification());
             $paymentDetailTransfer->setMandateText($payonePaymentTransfer->getMandateText());
         } elseif (
-            $payonePaymentTransfer instanceof PayonePaymentOnlinetransferTransfer && (
-                $paymentSelection === PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER
-                || $paymentSelection === PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER
-                || $paymentSelection === PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER
-                || $paymentSelection === PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER
-                || $paymentSelection === PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER
-                || $paymentSelection === PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER
-                || $paymentSelection === PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER
-                || $paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER
-            )
+            $payonePaymentTransfer instanceof PayonePaymentOnlinetransferTransfer &&
+            in_array($paymentSelection, [
+                PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER,
+                PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER,
+                PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER,
+                PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER,
+                PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER,
+                PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER,
+                PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER,
+                PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER,
+            ])
         ) {
             $paymentDetailTransfer->setType($payonePaymentTransfer->getOnlineBankTransferType());
             $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankCountry());

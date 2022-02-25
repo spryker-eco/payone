@@ -82,6 +82,14 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     public const OPTION_BANK_COUNTRIES = '';
 
     /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     *
+     * @return $this
+     */
+    abstract public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options);
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -325,12 +333,4 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
             $context->addViolation($response->getCustomerErrorMessage() ?? '');
         }
     }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return $this
-     */
-    abstract public function addOnlineBankTransferType(FormBuilderInterface $builder, array $options);
 }

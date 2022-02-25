@@ -57,12 +57,13 @@ class Invoice extends AbstractMapper implements InvoiceInterface
      * @param \Generated\Shared\Transfer\ItemTransfer $orderItem
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\ItemContainer
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function mapOrderItemToItemContainer(ItemTransfer $orderItem): ItemContainer
     {
         $itemContainer = new ItemContainer();
         $itemContainer->setIt(PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS);
-        $itemContainer->setId($orderItem->getSku());
+        $itemContainer->setId($orderItem->getSkuOrFail());
         $itemContainer->setPr($orderItem->getUnitGrossPrice());
         $itemContainer->setNo($orderItem->getQuantity());
         $itemContainer->setDe($orderItem->getName());
@@ -93,6 +94,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
     {
@@ -100,7 +102,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
 
         return $captureContainer;

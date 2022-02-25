@@ -15,16 +15,13 @@ use SprykerEco\Zed\Payone\PayoneConfig;
 class OrderPriceDistributor implements OrderPriceDistributorInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
-    public function distributeOrderPrice(?OrderTransfer $orderTransfer): OrderTransfer
+    public function distributeOrderPrice(OrderTransfer $orderTransfer): OrderTransfer
     {
-        if (empty($orderTransfer)) {
-            return $orderTransfer;
-        }
-
         if ($orderTransfer->getPayments()->count() <= 1) {
             return $orderTransfer;
         }
@@ -35,7 +32,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
         }
 
         $totalsTransfer = $orderTransfer->getTotals();
-        $priceRatio = $this->calculatePriceRatio($payonePayment->getAmount(), $totalsTransfer->getGrandTotal());
+        $priceRatio = $this->calculatePriceRatio($payonePayment->getAmountOrFail(), $totalsTransfer->getGrandTotalOrFail());
 
         $this->distributeOrderItemsPrices($orderTransfer, $priceRatio);
         $this->distributeOrderExpensesPrices($orderTransfer, $priceRatio);
@@ -46,12 +43,12 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
     }
 
     /**
-     * @param int|null $paymentAmount
-     * @param int|null $grandTotalAmount
+     * @param int $paymentAmount
+     * @param int $grandTotalAmount
      *
      * @return float
      */
-    protected function calculatePriceRatio(?int $paymentAmount, ?int $grandTotalAmount): float
+    protected function calculatePriceRatio(int $paymentAmount, int $grandTotalAmount): float
     {
         return $paymentAmount / $grandTotalAmount;
     }
@@ -75,13 +72,13 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
     }
 
     /**
-     * @param int|null $unitPrice
+     * @param int $unitPrice
      * @param float $priceRatio
      * @param float $roundingError
      *
      * @return int
      */
-    protected function calculateRoundedPrice(?int $unitPrice, float $priceRatio, float &$roundingError): int
+    protected function calculateRoundedPrice(int $unitPrice, float $priceRatio, float &$roundingError): int
     {
         $priceBeforeRound = ($unitPrice * $priceRatio) + $roundingError;
         $priceRounded = (int)round($priceBeforeRound);
@@ -95,6 +92,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
      * @param float $priceRatio
      *
      * @return void
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function distributeOrderItemsPrices(OrderTransfer $orderTransfer, float $priceRatio): void
     {
@@ -103,7 +101,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
 
         foreach ($orderTransfer->getItems() as $itemTransfer) {
             $unitPrice = $this->calculateRoundedPrice(
-                $itemTransfer->getUnitGrossPrice(),
+                $itemTransfer->getUnitGrossPriceOrFail(),
                 $priceRatio,
                 $roundingError,
             );
@@ -127,6 +125,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
      * @param float $priceRatio
      *
      * @return void
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     protected function distributeOrderExpensesPrices(OrderTransfer $orderTransfer, float $priceRatio): void
     {
@@ -135,7 +134,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
 
         foreach ($orderTransfer->getExpenses() as $expenseTransfer) {
             $roundedPrice = $this->calculateRoundedPrice(
-                $expenseTransfer->getSumGrossPrice(),
+                $expenseTransfer->getSumGrossPriceOrFail(),
                 $priceRatio,
                 $roundingError,
             );

@@ -76,12 +76,16 @@ interface PayoneApiConstants
     public const PAYMENT_METHOD_CREDITCARD = 'payment.payone.creditcard';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_CREDITCARD_PSEUDO = 'payment.payone.creditcard';
 
     // e-wallet methods
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_E_WALLET = 'payment.payone.e_wallet';
@@ -119,6 +123,8 @@ interface PayoneApiConstants
 
     // online transfer methods
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_ONLINE_BANK_TRANSFER = 'payment.payone.online_bank_transfer';
@@ -432,54 +438,84 @@ interface PayoneApiConstants
     // FAILED CAUSE
 
     /**
+     * Specification:
+     * - soc Insufficient funds.
+     *
      * @var string
      */
-    public const FAILED_CAUSE_INSUFFICIENT_FUNDS = 'soc'; // soc Insufficient funds
+    public const FAILED_CAUSE_INSUFFICIENT_FUNDS = 'soc';
 
     /**
+     * Specification:
+     * - cka Account expired.
+     *
      * @var string
      */
-    public const FAILED_CAUSE_ACCOUNT_EXPIRED = 'cka'; // cka Account expired
+    public const FAILED_CAUSE_ACCOUNT_EXPIRED = 'cka';
 
     /**
+     * Specification:
+     * - uan Account no. / name not idential, incorrect or savings account
+     *
      * @var string
      */
-    public const FAILED_CAUSE_UNKNOWN_ACCOUNT_NAME = 'uan'; // uan Account no. / name not idential, incorrect or savings account
+    public const FAILED_CAUSE_UNKNOWN_ACCOUNT_NAME = 'uan';
 
     /**
+     * Specification:
+     * - ndd No direct debit
+     *
      * @var string
      */
-    public const FAILED_CAUSE_NO_DIRECT_DEBIT = 'ndd'; // ndd No direct debit
+    public const FAILED_CAUSE_NO_DIRECT_DEBIT = 'ndd';
 
     /**
+     * Specification:
+     * - rcl Recall
+     *
      * @var string
      */
-    public const FAILED_CAUSE_RECALL = 'rcl'; // rcl Recall
+    public const FAILED_CAUSE_RECALL = 'rcl';
 
     /**
+     * Specification:
+     * - obj Objection
+     *
      * @var string
      */
-    public const FAILED_CAUSE_OBJECTION = 'obj'; // obj Objection
+    public const FAILED_CAUSE_OBJECTION = 'obj';
 
     /**
+     * Specification:
+     * - ret Return
+     *
      * @var string
      */
-    public const FAILED_CAUSE_RETURNS = 'ret'; // ret Return
+    public const FAILED_CAUSE_RETURNS = 'ret';
 
     /**
+     * Specification:
+     * - nelv Debit cannot be collected
+     *
      * @var string
      */
-    public const FAILED_CAUSE_DEBIT_NOT_COLLECTABLE = 'nelv'; // nelv Debit cannot be collected
+    public const FAILED_CAUSE_DEBIT_NOT_COLLECTABLE = 'nelv';
 
     /**
+     * Specification:
+     * - cb Credit card chargeback
+     *
      * @var string
      */
-    public const FAILED_CAUSE_CREDITCARD_CHARGEBACK = 'cb'; // cb Credit card chargeback
+    public const FAILED_CAUSE_CREDITCARD_CHARGEBACK = 'cb';
 
     /**
+     * Specification:
+     * - ncc Credit card cannot be collected
+     *
      * @var string
      */
-    public const FAILED_CAUSE_CREDITCARD_NOT_COLLECTABLE = 'ncc'; // ncc Credit card cannot be collected
+    public const FAILED_CAUSE_CREDITCARD_NOT_COLLECTABLE = 'ncc';
 
     // INVOICING ITEM TYPE
 
@@ -552,39 +588,60 @@ interface PayoneApiConstants
     // DEBIT TRANSACTION TYPE
 
     /**
+     * Specification:
+     * - RL: Rücklastschriftgebühr
+     *
      * @var string
      */
-    public const DEBIT_TRANSACTION_TYPE_DIRECT_DEBIT_REFUND_FEE = 'RL'; //RL: Rücklastschriftgebühr
+    public const DEBIT_TRANSACTION_TYPE_DIRECT_DEBIT_REFUND_FEE = 'RL';
 
     /**
+     * Specification:
+     * - MG: Mahngebühren
+     *
      * @var string
      */
-    public const DEBIT_TRANSACTION_TYPE_DUNNING_CHARGE = 'MG'; //MG: Mahngebühren
+    public const DEBIT_TRANSACTION_TYPE_DUNNING_CHARGE = 'MG';
 
     /**
+     * Specification:
+     * - VZ: Verzugszinsen
+     *
      * @var string
      */
-    public const DEBIT_TRANSACTION_TYPE_DEFAULT_INTEREST = 'VZ'; //VZ: Verzugszinsen
+    public const DEBIT_TRANSACTION_TYPE_DEFAULT_INTEREST = 'VZ';
 
     /**
+     * Specification:
+     * - VD: Versandkosten
+     *
      * @var string
      */
-    public const DEBIT_TRANSACTION_TYPE_SHIPPING_COSTS = 'VD'; //VD: Versandkosten
+    public const DEBIT_TRANSACTION_TYPE_SHIPPING_COSTS = 'VD';
 
     /**
+     * Specification:
+     * - FD: Forderung (default bei amount >0)
+     *
      * @var string
      */
-    public const DEBIT_TRANSACTION_TYPE_PAYMENT_REQUEST = 'FD'; //FD: Forderung (default bei amount >0)
+    public const DEBIT_TRANSACTION_TYPE_PAYMENT_REQUEST = 'FD';
 
     /**
+     * Specification:
+     * - GT: Gutschrift (default bei amount <0)
+     *
      * @var string
      */
-    public const DEBIT_TRANSACTION_TYPE_CREDIT = 'GT'; //GT: Gutschrift (default bei amount <0)
+    public const DEBIT_TRANSACTION_TYPE_CREDIT = 'GT';
 
     /**
+     * Specification:
+     * - RT: Retoure
+     *
      * @var string
      */
-    public const DEBIT_TRANSACTION_TYPE_RETURNS = 'RT'; //RT: Retoure
+    public const DEBIT_TRANSACTION_TYPE_RETURNS = 'RT';
 
     // PERSONAL DATA
 
@@ -802,44 +859,68 @@ interface PayoneApiConstants
     // ADDRESS CHECK PERSONSTATUS
 
     /**
+     * Specification:
+     * - NONE: no verification of personal data carried out
+     *
      * @var string
      */
-    public const ADDRESS_CHECK_PERSONSTATUS_NONE = 'NONE'; //NONE: no verification of personal data carried out
+    public const ADDRESS_CHECK_PERSONSTATUS_NONE = 'NONE';
 
     /**
+     * Specification:
+     * - PPB: first name & surname unknown
+     *
      * @var string
      */
-    public const ADDRESS_CHECK_PERSONSTATUS_PPB = 'PPB'; //PPB: first name & surname unknown
+    public const ADDRESS_CHECK_PERSONSTATUS_PPB = 'PPB';
 
     /**
+     * Specification:
+     * - PHB: surname known
+     *
      * @var string
      */
-    public const ADDRESS_CHECK_PERSONSTATUS_PHB = 'PHB'; //PHB: surname known
+    public const ADDRESS_CHECK_PERSONSTATUS_PHB = 'PHB';
 
     /**
+     * Specification:
+     * - PAB: first name & surname unknown
+     *
      * @var string
      */
-    public const ADDRESS_CHECK_PERSONSTATUS_PAB = 'PAB'; //PAB: first name & surname unknown
+    public const ADDRESS_CHECK_PERSONSTATUS_PAB = 'PAB';
 
     /**
+     * Specification:
+     * - PKI: ambiguity in name and address
+     *
      * @var string
      */
-    public const ADDRESS_CHECK_PERSONSTATUS_PKI = 'PKI'; //PKI: ambiguity in name and address
+    public const ADDRESS_CHECK_PERSONSTATUS_PKI = 'PKI';
 
     /**
+     * Specification:
+     * - PNZ: cannot be delivered (any longer)
+     *
      * @var string
      */
-    public const ADDRESS_CHECK_PERSONSTATUS_PNZ = 'PNZ'; //PNZ: cannot be delivered (any longer)
+    public const ADDRESS_CHECK_PERSONSTATUS_PNZ = 'PNZ';
 
     /**
+     * Specification:
+     * - PPV: person deceased
+     *
      * @var string
      */
-    public const ADDRESS_CHECK_PERSONSTATUS_PPV = 'PPV'; //PPV: person deceased
+    public const ADDRESS_CHECK_PERSONSTATUS_PPV = 'PPV';
 
     /**
+     * Specification:
+     * - PPF: postal address details incorrect
+     *
      * @var string
      */
-    public const ADDRESS_CHECK_PERSONSTATUS_PPF = 'PPF'; //PPF: postal address details incorrect
+    public const ADDRESS_CHECK_PERSONSTATUS_PPF = 'PPF';
 
     // ADDRESS CHECK SCORE
 

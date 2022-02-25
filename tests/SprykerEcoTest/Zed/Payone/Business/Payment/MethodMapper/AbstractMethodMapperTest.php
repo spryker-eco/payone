@@ -332,6 +332,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
         $standardParameter = $this->getMockBuilder(PayoneStandardParameterTransfer::class)->getMock();
         $standardParameter->method('getAid')->willReturn(static::STANDARD_PARAMETER_AID);
         $standardParameter->method('getCurrency')->willReturn(static::STANDARD_PARAMETER_CURRENCY);
+        $standardParameter->method('getCurrencyOrFail')->willReturn(static::STANDARD_PARAMETER_CURRENCY);
         $standardParameter->method('getLanguage')->willReturn(static::STANDARD_PARAMETER_LANGUAGE);
         $standardParameter->method('getKey')->willReturn(static::STANDARD_PARAMETER_KEY);
 

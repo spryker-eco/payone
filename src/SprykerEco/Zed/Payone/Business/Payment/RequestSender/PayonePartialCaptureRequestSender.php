@@ -134,12 +134,13 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
      * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function executePartialCapture(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
     ): CaptureResponseTransfer {
         $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
-            $payonePartialOperationRequestTransfer->getOrder(),
+            $payonePartialOperationRequestTransfer->getOrderOrFail(),
         );
         $payonePartialOperationRequestTransfer->setOrder($distributedPriceOrderTransfer);
 
@@ -157,7 +158,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
 
         $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
-        $requestContainer = $this->expenseMapper->mapExpenses($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
+        $requestContainer = $this->expenseMapper->mapExpenses($payonePartialOperationRequestTransfer->getOrderOrFail(), $requestContainer);
         $businessContainer = new BusinessContainer();
         $businessContainer->setSettleAccount(PayoneApiConstants::SETTLE_ACCOUNT_YES);
         $requestContainer->setBusiness($businessContainer);

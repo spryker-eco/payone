@@ -139,7 +139,7 @@ class PostSaveHook implements PostSaveHookInterface
         $errorCode = $apiLogTransfer->getErrorCode();
 
         if ($errorCode) {
-            $checkoutResponse->addError($this->createCheckoutErrorTransfer($apiLogTransfer->getErrorMessageUser() ?? '', $errorCode));
+            $checkoutResponse->addError($this->createCheckoutErrorTransfer($apiLogTransfer->getErrorMessageUserOrFail(), $errorCode));
             $checkoutResponse->setIsSuccess(false);
         }
 
@@ -154,7 +154,7 @@ class PostSaveHook implements PostSaveHookInterface
      */
     protected function checkApiAuthorizationRedirectAndError(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
     {
-        $paymentEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId((int)$checkoutResponse->getSaveOrder()->getIdSalesOrder())->findOne();
+        $paymentEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponse->getSaveOrderOrFail()->getIdSalesOrderOrFail())->findOne();
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 

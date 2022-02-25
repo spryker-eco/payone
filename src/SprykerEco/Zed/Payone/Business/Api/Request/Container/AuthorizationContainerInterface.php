@@ -60,11 +60,11 @@ interface AuthorizationContainerInterface
     public function getRequest(): string;
 
     /**
-     * @param string|null $currency
+     * @param string $currency
      *
      * @return void
      */
-    public function setCurrency(?string $currency): void;
+    public function setCurrency(string $currency): void;
 
     /**
      * set the system-Name

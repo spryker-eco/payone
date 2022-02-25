@@ -97,13 +97,13 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     protected $gender;
 
     /**
-     * @param string|null $addresschecktype
+     * @param string $addressCheckType
      *
      * @return void
      */
-    public function setAddressCheckType(?string $addresschecktype): void
+    public function setAddressCheckType(string $addressCheckType): void
     {
-        $this->addresschecktype = $addresschecktype;
+        $this->addresschecktype = $addressCheckType;
     }
 
     /**

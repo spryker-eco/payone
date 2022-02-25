@@ -47,7 +47,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function updateStatus(PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer): PayoneTransactionStatusUpdateTransfer;
+    public function updateStatus(PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer);
 
     /**
      * Specification:
@@ -59,7 +59,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    public function getFile(PayoneGetFileTransfer $payoneGetFileTransfer): PayoneGetFileTransfer;
+    public function getFile(PayoneGetFileTransfer $payoneGetFileTransfer);
 
     /**
      * Specification:
@@ -72,7 +72,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    public function getInvoice(PayoneGetInvoiceTransfer $payoneGetInvoiceTransfer): PayoneGetInvoiceTransfer;
+    public function getInvoice(PayoneGetInvoiceTransfer $payoneGetInvoiceTransfer);
 
     /**
      * Specification:
@@ -84,7 +84,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer
      */
-    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $payoneGetPaymentDetailTransfer): PayoneGetPaymentDetailTransfer;
+    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $payoneGetPaymentDetailTransfer);
 
     /**
      * Specification:
@@ -96,7 +96,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneCancelRedirectTransfer
      */
-    public function cancelRedirect(PayoneCancelRedirectTransfer $payoneCancelRedirectTransfer): PayoneCancelRedirectTransfer;
+    public function cancelRedirect(PayoneCancelRedirectTransfer $payoneCancelRedirectTransfer);
 
     /**
      * Specification:
@@ -108,7 +108,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    public function bankAccountCheck(PayoneBankAccountCheckTransfer $payoneBankAccountCheckTransfer): PayoneBankAccountCheckTransfer;
+    public function bankAccountCheck(PayoneBankAccountCheckTransfer $payoneBankAccountCheckTransfer);
 
     /**
      * Specification:
@@ -120,7 +120,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
      */
-    public function manageMandate(QuoteTransfer $quoteTransfer): PayoneManageMandateTransfer;
+    public function manageMandate(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -135,7 +135,7 @@ interface PayoneClientInterface
      */
     public function initPaypalExpressCheckout(
         PayoneInitPaypalExpressCheckoutRequestTransfer $payoneInitPaypalExpressCheckoutRequestTransfer
-    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
+    );
 
     /**
      * Specification:
@@ -149,7 +149,7 @@ interface PayoneClientInterface
      */
     public function getPaypalExpressCheckoutDetails(
         QuoteTransfer $quoteTransfer
-    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
+    );
 
     /**
      * Specification:
@@ -161,7 +161,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
      */
-    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
+    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -173,7 +173,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
      */
-    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
+    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
@@ -188,5 +188,5 @@ interface PayoneClientInterface
      */
     public function sendKlarnaStartSessionRequest(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
-    ): PayoneKlarnaStartSessionResponseTransfer;
+    );
 }

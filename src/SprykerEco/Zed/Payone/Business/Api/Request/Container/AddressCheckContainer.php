@@ -22,7 +22,7 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $aid;
 
     /**
-     * @var string|null
+     * @var string
      */
     protected $addresschecktype;
 

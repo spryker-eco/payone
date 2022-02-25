@@ -463,7 +463,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setIt(?array $it): void
+    public function setIt(array $it): void
     {
         $this->it = $it;
     }

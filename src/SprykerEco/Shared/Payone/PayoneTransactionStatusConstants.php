@@ -78,16 +78,22 @@ interface PayoneTransactionStatusConstants
     public const STATUS_NEW = 'new';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const STATUS_REFUND_APPROVED = 'refund approved';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const STATUS_REFUND_FAILED = 'refund failed';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const STATUS_CAPTURE_APPROVED = 'capture approved';

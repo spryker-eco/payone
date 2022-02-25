@@ -131,11 +131,11 @@ class ItemContainer extends AbstractContainer
     }
 
     /**
-     * @param string|null $id
+     * @param string $id
      *
      * @return void
      */
-    public function setId(?string $id): void
+    public function setId(string $id): void
     {
         $this->id = $id;
     }

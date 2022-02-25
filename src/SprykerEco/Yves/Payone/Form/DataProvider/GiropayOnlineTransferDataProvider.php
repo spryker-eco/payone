@@ -45,7 +45,7 @@ class GiropayOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBankCountries(): array
     {

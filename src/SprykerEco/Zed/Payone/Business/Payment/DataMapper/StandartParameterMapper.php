@@ -40,12 +40,13 @@ class StandartParameterMapper implements StandartParameterMapperInterface
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
+     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
      */
     public function setStandardParameter(AbstractRequestContainer $container, PayoneStandardParameterTransfer $standardParameter): AbstractRequestContainer
     {
         $container->setApiVersion(PayoneApiConstants::API_VERSION_3_9);
         $container->setEncoding($standardParameter->getEncoding());
-        $container->setKey($this->hashGenerator->hash($standardParameter->getKey() ?? ''));
+        $container->setKey($this->hashGenerator->hash($standardParameter->getKeyOrFail()));
         $container->setMid($standardParameter->getMid());
         $container->setPortalid($standardParameter->getPortalId());
         $container->setMode($this->modeDetector->getMode());

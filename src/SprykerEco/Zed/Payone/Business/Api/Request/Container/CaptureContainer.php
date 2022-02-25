@@ -72,11 +72,11 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @param string|null $currency
+     * @param string $currency
      *
      * @return void
      */
-    public function setCurrency(?string $currency): void
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }

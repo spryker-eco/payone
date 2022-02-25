@@ -57,7 +57,7 @@ class DirectDebitDataProvider implements StepEngineFormDataProviderInterface
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     protected function getBankAccountModes(): array
     {

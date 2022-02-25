@@ -84,7 +84,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setEncoding(?string $encoding): void
+    public function setEncoding(?string $encoding = null): void
     {
         $this->encoding = $encoding;
     }

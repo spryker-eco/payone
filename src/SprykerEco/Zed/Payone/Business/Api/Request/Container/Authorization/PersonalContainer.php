@@ -185,7 +185,7 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setCompany(?string $company): void
+    public function setCompany($company): void
     {
         $this->company = $company;
     }

@@ -40,13 +40,13 @@ class GetFileContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $file_reference
+     * @param string $fileReference
      *
      * @return void
      */
-    public function setFileReference(string $file_reference): void
+    public function setFileReference(string $fileReference): void
     {
-        $this->file_reference = $file_reference;
+        $this->file_reference = $fileReference;
     }
 
     /**
@@ -58,13 +58,13 @@ class GetFileContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $file_type
+     * @param string $fileType
      *
      * @return void
      */
-    public function setFileType(string $file_type): void
+    public function setFileType(string $fileType): void
     {
-        $this->file_type = $file_type;
+        $this->file_type = $fileType;
     }
 
     /**
@@ -76,12 +76,12 @@ class GetFileContainer extends AbstractRequestContainer
     }
 
     /**
-     * @param string $file_format
+     * @param string $fileFormat
      *
      * @return void
      */
-    public function setFileFormat(string $file_format): void
+    public function setFileFormat(string $fileFormat): void
     {
-        $this->file_format = $file_format;
+        $this->file_format = $fileFormat;
     }
 }
