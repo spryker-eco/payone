@@ -351,13 +351,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * set the version of the solution-partner's app / extension / plugin / etc..
      *
-     * @param string $solution_version
+     * @param string $solutionVersion
      *
      * @return $this
      */
-    public function setSolutionVersion(string $solution_version)
+    public function setSolutionVersion(string $solutionVersion)
     {
-        $this->solution_version = $solution_version;
+        $this->solution_version = $solutionVersion;
 
         return $this;
     }

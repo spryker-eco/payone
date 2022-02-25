@@ -33,9 +33,9 @@ interface BasePaymentMethodMapperInterface
     public function setUrlHmacGenerator(HmacGeneratorInterface $urlHmacGenerator): void;
 
     /**
-     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
+     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $payoneStandardParameterTransfer
      *
      * @return void
      */
-    public function setStandardParameter(PayoneStandardParameterTransfer $standardParameter): void;
+    public function setStandardParameter(PayoneStandardParameterTransfer $payoneStandardParameterTransfer): void;
 }
