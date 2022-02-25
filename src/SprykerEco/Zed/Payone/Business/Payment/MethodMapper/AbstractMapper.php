@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable Spryker.ControlStructures.DisallowCloakingCheck.InvalidEmpty
 
 /**
  * MIT License

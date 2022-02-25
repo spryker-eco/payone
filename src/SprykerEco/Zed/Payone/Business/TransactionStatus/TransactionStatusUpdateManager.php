@@ -1,6 +1,4 @@
 <?php
-// phpcs:disable Spryker.ControlStructures.DisallowCloakingCheck.FixableEmpty
-// phpcs:disable Spryker.ControlStructures.DisallowCloakingCheck.InvalidEmpty
 
 /**
  * MIT License
@@ -308,7 +306,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     public function isPaymentOther(int $idSalesOrder, int $idSalesOrderItem): bool
     {
         $statusLogs = $this->getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
-        if (empty($statusLogs)) {
+        if (!$statusLogs) {
             return false;
         }
 
@@ -372,7 +370,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     {
         $transactionStatusLogs = $this->getUnprocessedTransactionStatusLogs($idSalesOrder, $idSalesOrderItem);
 
-        if (empty($transactionStatusLogs)) {
+        if (!$transactionStatusLogs) {
             return null;
         }
 
