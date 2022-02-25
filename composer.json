@@ -23,6 +23,7 @@
         "spryker/step-engine": "^3.0.0",
         "spryker/store": "^1.1.0",
         "spryker/symfony": "^3.1.1",
+        "spryker/transfer": "^3.30.2",
         "spryker/util-encoding": "^2.0.0",
         "spryker/zed-request": "^3.2.0"
     },
@@ -39,8 +40,7 @@
         "spryker/propel": "^3.34.0",
         "spryker/router": "*",
         "spryker/silex": "^2.2.0",
-        "spryker/testify": "^3.43.0",
-        "spryker/transfer": "^3.30.1"
+        "spryker/testify": "^3.43.0"
     },
     "suggest": {
         "spryker/application": "If you want to use Application plugins you need to install spryker/application.",
