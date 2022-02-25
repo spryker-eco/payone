@@ -97,11 +97,11 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $gender;
 
     /**
-     * @param string|null $addresschecktype
+     * @param string $addresschecktype
      *
      * @return void
      */
-    public function setAddressCheckType(?string $addresschecktype): void
+    public function setAddressCheckType(string $addresschecktype): void
     {
         $this->addresschecktype = $addresschecktype;
     }

@@ -63,7 +63,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
         $refundContainer = new RefundContainer();
 
         $refundContainer->setTxid($paymentEntity->getTransactionId());
-        $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
+        $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
 
         return $refundContainer;
@@ -95,7 +95,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
         $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
-        $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
+        $captureContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
 
         return $captureContainer;
     }
@@ -110,7 +110,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
         $debitContainer = new DebitContainer();
 
         $debitContainer->setTxid($paymentEntity->getTransactionId());
-        $debitContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
+        $debitContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
         $debitContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $debitContainer->setAmount($paymentEntity->getSpyPaymentPayoneDetail()->getAmount());
 
@@ -128,7 +128,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
 
         $bankAccountCheckContainer->setAid($this->getStandardParameter()->getAid());
         $bankAccountCheckContainer->setBankCountry($bankAccountCheckTransfer->getBankCountry());
-        $bankAccountCheckContainer->setBankAccount($bankAccountCheckTransfer->getBankAccount());
+        $bankAccountCheckContainer->setBankAccount($bankAccountCheckTransfer->getBankAccountOrFail());
         $bankAccountCheckContainer->setBankCode($bankAccountCheckTransfer->getBankCode());
         $bankAccountCheckContainer->setIban($bankAccountCheckTransfer->getIban());
         $bankAccountCheckContainer->setBic($bankAccountCheckTransfer->getBic());
@@ -181,7 +181,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_DIRECT_DEBIT);
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
         $personalContainer = new PersonalContainer();

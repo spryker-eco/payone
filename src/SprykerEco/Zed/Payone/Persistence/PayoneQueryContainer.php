@@ -25,7 +25,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createCurrentSequenceNumberQuery(int $transactionId)
+    public function createCurrentSequenceNumberQuery($transactionId)
     {
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery();
         $query->filterByTransactionId($transactionId)

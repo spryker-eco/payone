@@ -192,7 +192,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
             $key++;
         }
 
-        $container->setIt($arrayIt);
+        $container->setIt((array)$arrayIt);
         $container->setId($arrayId);
         $container->setPr($arrayPr);
         $container->setNo($arrayNo);

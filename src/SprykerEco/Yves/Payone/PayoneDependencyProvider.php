@@ -10,11 +10,11 @@ namespace SprykerEco\Yves\Payone;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCalculationBridge;
+use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCartBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToCustomerBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToQuoteClientBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentBridge;
 use SprykerEco\Yves\Payone\Dependency\Client\PayoneToStoreClientBridge;
-use SprykerEco\Yves\Payone\Dependency\Client\PayoneToUtilEncodingServiceBridge;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneConfig getConfig()
@@ -72,7 +72,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         });
 
         $container->set(static::CLIENT_CART, function (Container $container) {
-            return new PayoneToUtilEncodingServiceBridge($container->getLocator()->cart()->client());
+            return new PayoneToCartBridge($container->getLocator()->cart()->client());
         });
 
         $container->set(static::CLIENT_SHIPMENT, function (Container $container) {

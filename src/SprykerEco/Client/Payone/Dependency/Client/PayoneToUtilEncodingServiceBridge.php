@@ -31,7 +31,7 @@ class PayoneToUtilEncodingServiceBridge implements PayoneToUtilEncodingServiceIn
      */
     public function encodeJson($value, $options = null, $depth = null)
     {
-        $this->utilEncodingService->encodeJson($value, $options, $depth);
+        return $this->utilEncodingService->encodeJson($value, $options, $depth);
     }
 
     /**
@@ -44,7 +44,7 @@ class PayoneToUtilEncodingServiceBridge implements PayoneToUtilEncodingServiceIn
      */
     public function decodeJson($jsonValue, $assoc = false, $depth = null, $options = null)
     {
-        $this->utilEncodingService->decodeJson($jsonValue, $assoc, $depth, $options);
+        return $this->utilEncodingService->decodeJson($jsonValue, $assoc, $depth, $options);
     }
 
     /**
@@ -55,7 +55,7 @@ class PayoneToUtilEncodingServiceBridge implements PayoneToUtilEncodingServiceIn
      */
     public function encodeToFormat(array $data, string $format): ?string
     {
-        $this->utilEncodingService->encodeToFormat($data, $format);
+        return $this->utilEncodingService->encodeToFormat($data, $format);
     }
 
     /**
@@ -66,6 +66,6 @@ class PayoneToUtilEncodingServiceBridge implements PayoneToUtilEncodingServiceIn
      */
     public function decodeFromFormat(string $data, string $format): ?array
     {
-        $this->utilEncodingService->decodeFromFormat($data, $format);
+        return $this->utilEncodingService->decodeFromFormat($data, $format);
     }
 }
