@@ -23,7 +23,7 @@ class PayoneDirectDebitSubFormPlugin extends AbstractPlugin implements SubFormPl
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createDirectDebitSubForm();
     }
@@ -34,7 +34,7 @@ class PayoneDirectDebitSubFormPlugin extends AbstractPlugin implements SubFormPl
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createDirectDebitSubFormDataProvider();
     }

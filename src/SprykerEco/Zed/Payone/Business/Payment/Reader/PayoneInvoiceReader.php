@@ -78,8 +78,8 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
     {
         $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
-            $getInvoiceTransfer->getReference(),
-            $getInvoiceTransfer->getCustomerId(),
+            $getInvoiceTransfer->getReferenceOrFail(),
+            $getInvoiceTransfer->getCustomerIdOrFail(),
         );
 
         if (!$paymentEntity) {
@@ -97,12 +97,12 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
     }
 
     /**
-     * @param string|null $invoiceTitle
-     * @param int|null $customerId
+     * @param string $invoiceTitle
+     * @param int $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByInvoiceTitleAndCustomerId(?string $invoiceTitle, ?int $customerId): ?SpyPaymentPayone
+    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
     }

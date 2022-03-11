@@ -109,7 +109,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $captureContainer = new CaptureContainer();
 
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setCaptureMode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
         $sequenceNumber = $this->getNextSequenceNumber((int)$paymentEntity->getTransactionId());
@@ -217,7 +217,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
 
         $authorizationContainer->setReference($paymentEntity->getReference());
@@ -258,7 +258,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $payoneKlarnaTransfer = $quoteTransfer->getPayment()->getPayoneKlarna();
 
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
         $authorizationContainer->setFinancingType($payoneKlarnaTransfer->getPayMethod());
 

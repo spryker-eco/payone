@@ -60,7 +60,7 @@ class EWallet extends AbstractMapper
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
 
@@ -96,7 +96,7 @@ class EWallet extends AbstractMapper
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_E_WALLET);
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
         $personalContainer = new PersonalContainer();
@@ -155,7 +155,7 @@ class EWallet extends AbstractMapper
         $paymentMethodContainer = new EWalletContainer();
         $paymentMethodContainer->setRedirect($this->createRedirectContainer($paymentEntity->getSpySalesOrder()->getOrderReference()));
 
-        $paymentMethodContainer->setWalletType($paymentEntity->getSpyPaymentPayoneDetail()->getType() ?? '');
+        $paymentMethodContainer->setWalletType((string)$paymentEntity->getSpyPaymentPayoneDetail()->getType());
 
         return $paymentMethodContainer;
     }

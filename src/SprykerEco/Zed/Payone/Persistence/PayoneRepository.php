@@ -71,7 +71,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
      */
     public function getPayonePaymentByOrder(OrderTransfer $orderTransfer): PayonePaymentTransfer
     {
-        $paymentPayoneEntity = $this->createPaymentPayoneQueryByOrderId($orderTransfer->getIdSalesOrder())->findOne();
+        $paymentPayoneEntity = $this->createPaymentPayoneQueryByOrderId($orderTransfer->getIdSalesOrderOrFail())->findOne();
 
         return $this
             ->getFactory()
@@ -139,11 +139,11 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param int|null $idSalesOrder
+     * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\PayoneApiLogTransfer|null
      */
-    public function findLastApiLogByOrderId(?int $idSalesOrder): ?PayoneApiLogTransfer
+    public function findLastApiLogByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer
     {
         $paymentPayoneApiLogEntity = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
@@ -164,17 +164,14 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param int|null $idOrder
+     * @param int $idOrder
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentPayoneQueryByOrderId(?int $idOrder): SpyPaymentPayoneQuery
+    public function createPaymentPayoneQueryByOrderId(int $idOrder): SpyPaymentPayoneQuery
     {
         $query = $this->getFactory()->createPaymentPayoneQuery();
-
-        if ($idOrder !== null) {
-            $query->findByFkSalesOrder($idOrder);
-        }
+        $query->findByFkSalesOrder($idOrder);
 
         return $query;
     }

@@ -79,8 +79,8 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
     {
         $responseContainer = new GetSecurityInvoiceResponseContainer();
         $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
-            $getSecurityInvoiceTransfer->getReference(),
-            $getSecurityInvoiceTransfer->getCustomerId(),
+            $getSecurityInvoiceTransfer->getReferenceOrFail(),
+            $getSecurityInvoiceTransfer->getCustomerIdOrFail(),
         );
 
         if (!$paymentEntity) {
@@ -104,12 +104,12 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
     }
 
     /**
-     * @param string|null $invoiceTitle
-     * @param int|null $customerId
+     * @param string $invoiceTitle
+     * @param int $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByInvoiceTitleAndCustomerId(?string $invoiceTitle, ?int $customerId): ?SpyPaymentPayone
+    protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
     }

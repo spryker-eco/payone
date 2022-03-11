@@ -62,7 +62,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
     {
         $itemContainer = new ItemContainer();
         $itemContainer->setIt(PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS);
-        $itemContainer->setId($orderItem->getSkuOrFail());
+        $itemContainer->setId((string)$orderItem->getSku());
         $itemContainer->setPr($orderItem->getUnitGrossPrice());
         $itemContainer->setNo($orderItem->getQuantity());
         $itemContainer->setDe($orderItem->getName());
@@ -100,7 +100,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
 
         return $captureContainer;
@@ -135,7 +135,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_INVOICE);
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
         $personalContainer = new PersonalContainer();
@@ -171,7 +171,7 @@ class Invoice extends AbstractMapper implements InvoiceInterface
     public function mapGetInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): GetInvoiceContainer
     {
         $getInvoiceContainer = new GetInvoiceContainer();
-        $getInvoiceContainer->setInvoiceTitle($getInvoiceTransfer->getReference() ?? '');
+        $getInvoiceContainer->setInvoiceTitle((string)$getInvoiceTransfer->getReference());
 
         return $getInvoiceContainer;
     }

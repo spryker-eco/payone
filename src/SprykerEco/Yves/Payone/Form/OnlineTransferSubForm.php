@@ -312,7 +312,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function checkBankAccount(PayonePaymentOnlinetransferTransfer $data, ExecutionContextInterface $context): void
+    public function checkBankAccount(PayonePaymentOnlinetransferTransfer $data, ExecutionContextInterface $context)
     {
         $quoteTransfer = $context->getRoot()->getData();
         if ($quoteTransfer->getPayment()->getPaymentSelection() != $this->getPropertyPath()) {

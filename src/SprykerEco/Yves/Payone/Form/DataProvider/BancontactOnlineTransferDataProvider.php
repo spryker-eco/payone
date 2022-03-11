@@ -41,10 +41,8 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
             return $quoteTransfer;
         }
 
-        $paymentTransfer = (new PaymentTransfer())->setPayone(new PayonePaymentTransfer());
-
         if ($quoteTransfer instanceof QuoteTransfer) {
-            $quoteTransfer->setPayment($paymentTransfer);
+            $quoteTransfer->setPayment((new PaymentTransfer())->setPayone(new PayonePaymentTransfer()));
         }
 
         return $quoteTransfer;

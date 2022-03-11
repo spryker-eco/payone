@@ -62,7 +62,7 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
 
@@ -98,7 +98,7 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_CREDIT_CARD);
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
         $personalContainer = new PersonalContainer();
@@ -119,12 +119,12 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
         $creditCardCheckContainer = new CreditCardCheckContainer();
 
         $creditCardCheckContainer->setAid($this->getStandardParameter()->getAid());
-        $creditCardCheckContainer->setCardPan($payoneCreditCardTransfer->getCardPan() ?? '');
-        $creditCardCheckContainer->setCardType($payoneCreditCardTransfer->getCardType() ?? '');
+        $creditCardCheckContainer->setCardPan((string)$payoneCreditCardTransfer->getCardPan());
+        $creditCardCheckContainer->setCardType((string)$payoneCreditCardTransfer->getCardType());
         $creditCardCheckContainer->setCardExpireDate((int)$payoneCreditCardTransfer->getCardExpireDate());
         $creditCardCheckContainer->setCardCvc2((int)$payoneCreditCardTransfer->getCardCvc2());
         $creditCardCheckContainer->setCardIssueNumber((int)$payoneCreditCardTransfer->getCardIssueNumber());
-        $creditCardCheckContainer->setStoreCardData($payoneCreditCardTransfer->getStoreCardData() ?? '');
+        $creditCardCheckContainer->setStoreCardData((string)$payoneCreditCardTransfer->getStoreCardData());
         $creditCardCheckContainer->setLanguage($this->getStandardParameter()->getLanguage());
 
         return $creditCardCheckContainer;
@@ -172,9 +172,7 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
         SpyPaymentPayone $paymentEntity
     ): CreditCardPseudoContainer {
         $paymentMethodContainer = new CreditCardPseudoContainer();
-
-        $pseudoCardPan = $paymentEntity->getSpyPaymentPayoneDetail()->getPseudoCardPan() ?? '';
-        $paymentMethodContainer->setPseudoCardPan($pseudoCardPan);
+        $paymentMethodContainer->setPseudoCardPan((string)$paymentEntity->getSpyPaymentPayoneDetail()->getPseudoCardPan());
 
         $threeDSecure = $this->createThreeDSecureData($paymentEntity);
         $paymentMethodContainer->setThreeDSecure($threeDSecure);

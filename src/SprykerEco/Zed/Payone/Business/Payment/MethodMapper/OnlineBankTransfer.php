@@ -61,7 +61,7 @@ class OnlineBankTransfer extends AbstractMapper
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
 
@@ -97,7 +97,7 @@ class OnlineBankTransfer extends AbstractMapper
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_ONLINE_BANK_TRANSFER);
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
         $personalContainer = new PersonalContainer();
@@ -162,14 +162,14 @@ class OnlineBankTransfer extends AbstractMapper
 
         $paymentMethodContainer = new OnlineBankTransferContainer();
 
-        $paymentMethodContainer->setOnlineBankTransferType($paymentDetailEntity->getType() ?? '');
+        $paymentMethodContainer->setOnlineBankTransferType((string)$paymentDetailEntity->getType());
         $paymentMethodContainer->setRedirect($this->createRedirectContainer($paymentEntity->getSpySalesOrder()->getOrderReference()));
-        $paymentMethodContainer->setBankCountry($paymentDetailEntity->getBankCountry() ?? '');
-        $paymentMethodContainer->setBankAccount($paymentDetailEntity->getBankAccount() ?? '');
-        $paymentMethodContainer->setBankCode($paymentDetailEntity->getBankCode() ?? '');
-        $paymentMethodContainer->setBankGroupType($paymentDetailEntity->getBankGroupType() ?? '');
-        $paymentMethodContainer->setIban($paymentDetailEntity->getIban() ?? '');
-        $paymentMethodContainer->setBic($paymentDetailEntity->getBic() ?? '');
+        $paymentMethodContainer->setBankCountry((string)$paymentDetailEntity->getBankCountry());
+        $paymentMethodContainer->setBankAccount((string)$paymentDetailEntity->getBankAccount());
+        $paymentMethodContainer->setBankCode((string)$paymentDetailEntity->getBankCode());
+        $paymentMethodContainer->setBankGroupType((string)$paymentDetailEntity->getBankGroupType());
+        $paymentMethodContainer->setIban((string)$paymentDetailEntity->getIban());
+        $paymentMethodContainer->setBic((string)$paymentDetailEntity->getBic());
 
         return $paymentMethodContainer;
     }
@@ -203,7 +203,7 @@ class OnlineBankTransfer extends AbstractMapper
 
         $bankAccountCheckContainer->setAid($this->getStandardParameter()->getAid());
         $bankAccountCheckContainer->setBankCountry($bankAccountCheckTransfer->getBankCountry());
-        $bankAccountCheckContainer->setBankAccount($bankAccountCheckTransfer->getBankAccountOrFail());
+        $bankAccountCheckContainer->setBankAccount((string)$bankAccountCheckTransfer->getBankAccount());
         $bankAccountCheckContainer->setBankCode($bankAccountCheckTransfer->getBankCode());
         $bankAccountCheckContainer->setIban($bankAccountCheckTransfer->getIban());
         $bankAccountCheckContainer->setBic($bankAccountCheckTransfer->getBic());

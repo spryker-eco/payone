@@ -23,7 +23,7 @@ class PayonePostfinanceCardOnlineTransferSubFormPlugin extends AbstractPlugin im
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createPostfinanceCardOnlineTransferSubForm();
     }
@@ -34,7 +34,7 @@ class PayonePostfinanceCardOnlineTransferSubFormPlugin extends AbstractPlugin im
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createPostfinanceCardOnlineTransferSubFormDataProvider();
     }

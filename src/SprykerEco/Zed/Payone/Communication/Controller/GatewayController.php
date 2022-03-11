@@ -42,7 +42,7 @@ class GatewayController extends AbstractGatewayController
      */
     public function statusUpdateAction(
         PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
-    ): PayoneTransactionStatusUpdateTransfer {
+    ) {
         $transactionStatusUpdateTransfer = $this
             ->getFacade()
             ->processTransactionStatusUpdate($transactionStatusUpdateTransfer);
@@ -57,7 +57,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneCancelRedirectTransfer
      */
-    public function cancelRedirectAction(PayoneCancelRedirectTransfer $cancelRedirectTransfer): PayoneCancelRedirectTransfer
+    public function cancelRedirectAction(PayoneCancelRedirectTransfer $cancelRedirectTransfer)
     {
         $urlHmacGenerator = $this->getFactory()->createUrlHmacGenerator();
         $hash = $urlHmacGenerator->hash(
@@ -85,7 +85,7 @@ class GatewayController extends AbstractGatewayController
      */
     public function initPaypalExpressCheckoutAction(
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
+    ) {
         return $this->getFacade()->initPaypalExpressCheckout($requestTransfer);
     }
 
@@ -94,9 +94,8 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetailsAction(
-        QuoteTransfer $quoteTransfer
-    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
+    public function getPaypalExpressCheckoutDetailsAction(QuoteTransfer $quoteTransfer)
+    {
         return $this->getFacade()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
 
@@ -107,7 +106,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return void
      */
-    protected function triggerEventsOnSuccess(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer): void
+    protected function triggerEventsOnSuccess(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer)
     {
         if (!$transactionStatusUpdateTransfer->getIsSuccess()) {
             return;
@@ -132,7 +131,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    public function bankAccountCheckAction(PayoneBankAccountCheckTransfer $bankAccountCheck): PayoneBankAccountCheckTransfer
+    public function bankAccountCheckAction(PayoneBankAccountCheckTransfer $bankAccountCheck)
     {
         return $this->getFacade()->bankAccountCheck($bankAccountCheck);
     }
@@ -142,7 +141,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
      */
-    public function manageMandateAction(PayoneManageMandateTransfer $manageMandateTransfer): PayoneManageMandateTransfer
+    public function manageMandateAction(PayoneManageMandateTransfer $manageMandateTransfer)
     {
         return $this->getFacade()->manageMandate($manageMandateTransfer);
     }
@@ -152,7 +151,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    public function getFileAction(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer
+    public function getFileAction(PayoneGetFileTransfer $getFileTransfer)
     {
         return $this->getFacade()->getFile($getFileTransfer);
     }
@@ -162,7 +161,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    public function getInvoiceAction(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
+    public function getInvoiceAction(PayoneGetInvoiceTransfer $getInvoiceTransfer)
     {
         return $this->getFacade()->getInvoice($getInvoiceTransfer);
     }
@@ -182,7 +181,7 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer
      */
-    public function getPaymentDetailAction(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer): PayoneGetPaymentDetailTransfer
+    public function getPaymentDetailAction(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer)
     {
         if (!empty($getPaymentDetailTransfer->getOrderReference())) {
             $order = SpySalesOrderQuery::create()

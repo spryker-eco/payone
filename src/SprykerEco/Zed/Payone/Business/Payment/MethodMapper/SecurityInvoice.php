@@ -156,7 +156,7 @@ class SecurityInvoice extends AbstractMapper
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
 
         return $captureContainer;
@@ -178,7 +178,7 @@ class SecurityInvoice extends AbstractMapper
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_SECURITY_INVOICE);
         $authorizationContainer->setClearingsubtype(PayoneApiConstants::CLEARING_SUBTYPE_SECURITY_INVOICE);
         $authorizationContainer->setReference($paymentEntity->getReference());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
         $personalContainer = new PersonalContainer();
@@ -230,7 +230,7 @@ class SecurityInvoice extends AbstractMapper
 
         $refundContainer->setTxid($paymentEntity->getTransactionId());
         $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
-        $refundContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $refundContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $refundContainer->setBankcountry($paymentEntity->getSpyPaymentPayoneDetail()->getBankCountry());
         $refundContainer->setBankaccount($paymentEntity->getSpyPaymentPayoneDetail()->getBankAccount());
         $refundContainer->setBankcode($paymentEntity->getSpyPaymentPayoneDetail()->getBankCode());

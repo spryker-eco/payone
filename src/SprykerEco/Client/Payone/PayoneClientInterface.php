@@ -161,7 +161,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
      */
-    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer);
+    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
 
     /**
      * Specification:
@@ -173,7 +173,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
      */
-    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer);
+    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
 
     /**
      * Specification:
@@ -188,5 +188,5 @@ interface PayoneClientInterface
      */
     public function sendKlarnaStartSessionRequest(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
-    );
+    ): PayoneKlarnaStartSessionResponseTransfer;
 }

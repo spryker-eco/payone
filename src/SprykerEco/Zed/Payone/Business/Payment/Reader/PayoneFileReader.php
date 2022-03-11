@@ -83,8 +83,8 @@ class PayoneFileReader implements PayoneFileReaderInterface
     public function getFile(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer
     {
         $paymentEntity = $this->findPaymentByFileReferenceAndCustomerId(
-            $getFileTransfer->getReference(),
-            $getFileTransfer->getCustomerId(),
+            $getFileTransfer->getReferenceOrFail(),
+            $getFileTransfer->getCustomerIdOrFail(),
         );
 
         if (!$paymentEntity) {
@@ -103,12 +103,12 @@ class PayoneFileReader implements PayoneFileReaderInterface
     }
 
     /**
-     * @param string|null $fileReference
-     * @param int|null $customerId
+     * @param string $fileReference
+     * @param int $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByFileReferenceAndCustomerId(?string $fileReference, ?int $customerId): ?SpyPaymentPayone
+    protected function findPaymentByFileReferenceAndCustomerId(string $fileReference, int $customerId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId)->findOne();
     }

@@ -23,7 +23,7 @@ class PayoneEpsOnlineTransferSubFormPlugin extends AbstractPlugin implements Sub
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createEpsOnlineTransferSubForm();
     }
@@ -34,7 +34,7 @@ class PayoneEpsOnlineTransferSubFormPlugin extends AbstractPlugin implements Sub
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
+    public function createSubFormDataProvider()
     {
         return $this->getFactory()->createEpsOnlineTransferSubFormDataProvider();
     }

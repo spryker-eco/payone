@@ -150,7 +150,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $requestContainer = $this->preparePartialCaptureOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
 
-        if ($this->isNeedToAddDeliveryCosts($payonePartialOperationRequestTransfer)) {
+        if ($this->checkThatDeliveryCostsAreRequired($payonePartialOperationRequestTransfer)) {
             $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
             $requestContainer = $this->shipmentMapper->mapShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
         }
@@ -278,7 +278,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
      *
      * @return bool
      */
-    protected function isNeedToAddDeliveryCosts(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): bool
+    protected function checkThatDeliveryCostsAreRequired(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): bool
     {
         foreach ($payonePartialOperationRequestTransfer->getOrder()->getItems() as $itemTransfer) {
             if (in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds())) {

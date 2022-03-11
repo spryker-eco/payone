@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Client\Payone;
 
+use Generated\Shared\Transfer\AddressCheckResponseTransfer;
+use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayoneCancelRedirectTransfer;
 use Generated\Shared\Transfer\PayoneGetFileTransfer;
@@ -14,11 +16,13 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePersonalDataTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
+use SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainerInterface;
 
 /**
  * @api
@@ -34,7 +38,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \SprykerEco\Client\Payone\ClientApi\Request\CreditCardCheckContainerInterface
      */
-    public function getCreditCardCheckRequest()
+    public function getCreditCardCheckRequest(): CreditCardCheckContainerInterface
     {
         $defaults = [];
 
@@ -197,7 +201,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
      */
-    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer)
+    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer
     {
         return $this->getFactory()->createZedStub()->sendAddressCheckRequest($quoteTransfer);
     }
@@ -211,7 +215,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
      */
-    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer)
+    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer
     {
         return $this->getFactory()->createZedStub()->sendConsumerScoreRequest($quoteTransfer);
     }
@@ -227,7 +231,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      */
     public function sendKlarnaStartSessionRequest(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
-    ) {
+    ): PayoneKlarnaStartSessionResponseTransfer {
         return $this->getFactory()->createZedStub()->sendKlarnaStartSessionRequest($payoneKlarnaStartSessionRequestTransfer);
     }
 }

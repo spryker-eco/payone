@@ -33,11 +33,11 @@ interface PayoneRepositoryInterface
     public function getPayonePaymentByOrder(OrderTransfer $orderTransfer): PayonePaymentTransfer;
 
     /**
-     * @param int|null $idSalesOrder
+     * @param int $idSalesOrder
      *
      * @return \Generated\Shared\Transfer\PayoneApiLogTransfer|null
      */
-    public function findLastApiLogByOrderId(?int $idSalesOrder): ?PayoneApiLogTransfer;
+    public function findLastApiLogByOrderId(int $idSalesOrder): ?PayoneApiLogTransfer;
 
     /**
      * @param int $idOrder

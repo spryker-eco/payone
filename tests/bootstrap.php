@@ -65,6 +65,6 @@ copy($configSourceDirectory . 'config_propel.php', $configTargetDirectory . 'con
 copy($configSourceDirectory . 'default_store.php', $configTargetDirectory . 'default_store.php');
 copy($configSourceDirectory . 'stores.php', $configTargetDirectory . 'stores.php');
 
-$config = \Spryker\Shared\Config\Config::getInstance();
+$config = Spryker\Shared\Config\Config::getInstance();
 
 $config->init();

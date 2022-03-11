@@ -243,7 +243,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return int
      */
-    public function getEmptySequenceNumber(): int
+    public function getEmptySequenceNumber()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -257,7 +257,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    public function getRequestStandardParameter(): PayoneStandardParameterTransfer
+    public function getRequestStandardParameter()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
         $standardParameter = new PayoneStandardParameterTransfer();
@@ -289,7 +289,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function generatePayoneReference(PayonePaymentTransfer $paymentTransfer, SpySalesOrder $orderEntity): string
+    public function generatePayoneReference(PayonePaymentTransfer $paymentTransfer, SpySalesOrder $orderEntity)
     {
         return $orderEntity->getOrderReference();
     }
@@ -305,7 +305,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getNarrativeText(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data): string
+    public function getNarrativeText(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
     {
         return $orderEntity->getOrderReference();
     }
@@ -313,7 +313,7 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * @return string
      */
-    protected function getYvesBaseUrl(): string
+    protected function getYvesBaseUrl()
     {
         return $this->get(PayoneConstants::HOST_YVES);
     }
@@ -325,7 +325,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getTranslationFilePath(): string
+    public function getTranslationFilePath()
     {
         return __DIR__ . DIRECTORY_SEPARATOR . PayoneConstants::GLOSSARY_FILE_PATH;
     }

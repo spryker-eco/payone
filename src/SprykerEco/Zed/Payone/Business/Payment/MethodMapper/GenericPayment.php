@@ -63,8 +63,8 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
     ): GenericPaymentContainer {
         $genericPayment->setAmount((int)$quoteTransfer->getTotals()->getGrandTotal());
         $genericPayment->setWorkOrderId(
-            $quoteTransfer->getPayment()
-                ->getPayonePaypalExpressCheckout()->getWorkOrderId() ?? '',
+            (string)$quoteTransfer->getPayment()
+                ->getPayonePaypalExpressCheckout()->getWorkOrderId(),
         );
 
         return $genericPayment;
@@ -81,7 +81,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
 
         $genericPayment->setAid($this->getStandardParameter()->getAid());
         $genericPayment->setClearingType(PayoneApiConstants::CLEARING_TYPE_E_WALLET);
-        $genericPayment->setCurrency($this->getStandardParameter()->getCurrency() ?? '');
+        $genericPayment->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $genericPayment->setWalletType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL);
 
         return $genericPayment;
@@ -106,7 +106,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer $preAuthorizationContainer */
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
 
-        $preAuthorizationContainer->setWorkOrderId($paymentEntity->getSpyPaymentPayoneDetail()->getWorkOrderId() ?? '');
+        $preAuthorizationContainer->setWorkOrderId((string)$paymentEntity->getSpyPaymentPayoneDetail()->getWorkOrderId());
 
         return $preAuthorizationContainer;
     }
@@ -127,7 +127,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_E_WALLET);
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
         $personalContainer = new PersonalContainer();
@@ -153,7 +153,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $paymentMethodContainer = new ExpressCheckoutContainer();
         $paymentMethodContainer->setRedirect($this->createRedirectContainer($paymentEntity->getSpySalesOrder()->getOrderReference()));
 
-        $paymentMethodContainer->setWalletType($paymentEntity->getSpyPaymentPayoneDetail()->getType() ?? '');
+        $paymentMethodContainer->setWalletType((string)$paymentEntity->getSpyPaymentPayoneDetail()->getType());
 
         return $paymentMethodContainer;
     }
@@ -183,7 +183,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
 

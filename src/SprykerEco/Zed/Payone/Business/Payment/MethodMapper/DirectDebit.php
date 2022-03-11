@@ -93,7 +93,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentEntity->getTransactionId());
         $captureContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
 
@@ -128,7 +128,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
 
         $bankAccountCheckContainer->setAid($this->getStandardParameter()->getAid());
         $bankAccountCheckContainer->setBankCountry($bankAccountCheckTransfer->getBankCountry());
-        $bankAccountCheckContainer->setBankAccount($bankAccountCheckTransfer->getBankAccountOrFail());
+        $bankAccountCheckContainer->setBankAccount((string)$bankAccountCheckTransfer->getBankAccount());
         $bankAccountCheckContainer->setBankCode($bankAccountCheckTransfer->getBankCode());
         $bankAccountCheckContainer->setIban($bankAccountCheckTransfer->getIban());
         $bankAccountCheckContainer->setBic($bankAccountCheckTransfer->getBic());
@@ -147,20 +147,20 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
 
         $manageMandateContainer->setAid($this->getStandardParameter()->getAid());
         $manageMandateContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_DIRECT_DEBIT);
-        $manageMandateContainer->setCurrency($this->getStandardParameter()->getCurrency() ?? '');
+        $manageMandateContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $manageMandateContainer->setCustomerid((int)$manageMandateTransfer->getPersonalData()->getCustomerId());
-        $manageMandateContainer->setLastname($manageMandateTransfer->getPersonalData()->getLastName() ?? '');
-        $manageMandateContainer->setFirstname($manageMandateTransfer->getPersonalData()->getFirstName() ?? '');
-        $manageMandateContainer->setCity($manageMandateTransfer->getPersonalData()->getCity() ?? '');
-        $manageMandateContainer->setCountry($manageMandateTransfer->getPersonalData()->getCountry() ?? '');
+        $manageMandateContainer->setLastname((string)$manageMandateTransfer->getPersonalData()->getLastName());
+        $manageMandateContainer->setFirstname((string)$manageMandateTransfer->getPersonalData()->getFirstName());
+        $manageMandateContainer->setCity((string)$manageMandateTransfer->getPersonalData()->getCity());
+        $manageMandateContainer->setCountry((string)$manageMandateTransfer->getPersonalData()->getCountry());
         $manageMandateContainer->setEmail($manageMandateTransfer->getPersonalData()->getEmail());
         $manageMandateContainer->setLanguage($this->getStandardParameter()->getLanguage());
 
-        $manageMandateContainer->setBankCountry($manageMandateTransfer->getBankCountry() ?? '');
-        $manageMandateContainer->setBankAccount($manageMandateTransfer->getBankAccount() ?? '');
-        $manageMandateContainer->setBankCode($manageMandateTransfer->getBankCode() ?? '');
-        $manageMandateContainer->setIban($manageMandateTransfer->getIban() ?? '');
-        $manageMandateContainer->setBic($manageMandateTransfer->getBic() ?? '');
+        $manageMandateContainer->setBankCountry((string)$manageMandateTransfer->getBankCountry());
+        $manageMandateContainer->setBankAccount((string)$manageMandateTransfer->getBankAccount());
+        $manageMandateContainer->setBankCode((string)$manageMandateTransfer->getBankCode());
+        $manageMandateContainer->setIban((string)$manageMandateTransfer->getIban());
+        $manageMandateContainer->setBic((string)$manageMandateTransfer->getBic());
 
         return $manageMandateContainer;
     }
@@ -181,7 +181,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_DIRECT_DEBIT);
         $authorizationContainer->setReference($paymentEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrencyOrFail());
+        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
 
         $personalContainer = new PersonalContainer();
@@ -202,11 +202,11 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
     ): DirectDebitContainer {
         $paymentMethodContainer = new DirectDebitContainer();
 
-        $paymentMethodContainer->setBankCountry($paymentEntity->getSpyPaymentPayoneDetail()->getBankCountry() ?? '');
-        $paymentMethodContainer->setBankAccount($paymentEntity->getSpyPaymentPayoneDetail()->getBankAccount() ?? '');
-        $paymentMethodContainer->setBankCode($paymentEntity->getSpyPaymentPayoneDetail()->getBankCode() ?? '');
-        $paymentMethodContainer->setIban($paymentEntity->getSpyPaymentPayoneDetail()->getIban() ?? '');
-        $paymentMethodContainer->setBic($paymentEntity->getSpyPaymentPayoneDetail()->getBic() ?? '');
+        $paymentMethodContainer->setBankCountry((string)$paymentEntity->getSpyPaymentPayoneDetail()->getBankCountry());
+        $paymentMethodContainer->setBankAccount((string)$paymentEntity->getSpyPaymentPayoneDetail()->getBankAccount());
+        $paymentMethodContainer->setBankCode((string)$paymentEntity->getSpyPaymentPayoneDetail()->getBankCode());
+        $paymentMethodContainer->setIban((string)$paymentEntity->getSpyPaymentPayoneDetail()->getIban());
+        $paymentMethodContainer->setBic((string)$paymentEntity->getSpyPaymentPayoneDetail()->getBic());
 
         return $paymentMethodContainer;
     }
@@ -220,7 +220,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
     {
         $getFileContainer = new GetFileContainer();
 
-        $getFileContainer->setFileReference($getFileTransfer->getReference() ?? '');
+        $getFileContainer->setFileReference((string)$getFileTransfer->getReference());
         $getFileContainer->setFileType(PayoneApiConstants::FILE_TYPE_MANDATE);
         $getFileContainer->setFileFormat(PayoneApiConstants::FILE_FORMAT_PDF);
 

@@ -152,38 +152,9 @@ class PayoneHandler implements PayoneHandlerInterface
         } elseif ($payonePaymentTransfer instanceof PayonePaymentEWalletTransfer && $paymentSelection === PaymentTransfer::PAYONE_E_WALLET) {
             $paymentDetailTransfer->setType($payonePaymentTransfer->getWallettype());
         } elseif ($payonePaymentTransfer instanceof PayonePaymentDirectDebitTransfer && $paymentSelection === PaymentTransfer::PAYONE_DIRECT_DEBIT) {
-            $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankcountry());
-            $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankaccount());
-            $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankcode());
-            $paymentDetailTransfer->setBic($payonePaymentTransfer->getBic());
-            $paymentDetailTransfer->setIban($payonePaymentTransfer->getIban());
-            $paymentDetailTransfer->setMandateIdentification($payonePaymentTransfer->getMandateIdentification());
-            $paymentDetailTransfer->setMandateText($payonePaymentTransfer->getMandateText());
-        } elseif (
-            $payonePaymentTransfer instanceof PayonePaymentOnlinetransferTransfer &&
-            in_array($paymentSelection, [
-                PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER,
-                PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER,
-                PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER,
-                PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER,
-                PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER,
-                PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER,
-                PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER,
-                PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER,
-            ])
-        ) {
-            $paymentDetailTransfer->setType($payonePaymentTransfer->getOnlineBankTransferType());
-            $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankCountry());
-            if ($paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER) {
-                $paymentDetailTransfer->setBankCountry($quoteTransfer->getBillingAddress()->getIso2Code());
-            }
-            $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankAccount());
-            $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankCode());
-            $paymentDetailTransfer->setBankBranchCode($payonePaymentTransfer->getBankBranchCode());
-            $paymentDetailTransfer->setBankCheckDigit($payonePaymentTransfer->getBankCheckDigit());
-            $paymentDetailTransfer->setBankGroupType($payonePaymentTransfer->getBankGroupType());
-            $paymentDetailTransfer->setIban($payonePaymentTransfer->getIban());
-            $paymentDetailTransfer->setBic($payonePaymentTransfer->getBic());
+            $this->setPaymentDetailsFromPayonePaymentDirectDebitTransfer($paymentDetailTransfer, $payonePaymentTransfer);
+        } elseif ($payonePaymentTransfer instanceof PayonePaymentOnlinetransferTransfer && $this->isPaymentInList($paymentSelection)) {
+            $this->setPaymentDetailsFromPayonePaymentOnlinetransferTransfer($paymentDetailTransfer, $payonePaymentTransfer, $quoteTransfer, $paymentSelection);
         } elseif ($paymentSelection == PaymentTransfer::PAYONE_CASH_ON_DELIVERY) {
             $shippingProvider = $quoteTransfer->getShipment()->getMethod()->getCarrierName();
             $paymentDetailTransfer->setShippingProvider($shippingProvider);
@@ -195,6 +166,70 @@ class PayoneHandler implements PayoneHandlerInterface
         $paymentTransfer = $quoteTransfer->getPayment();
         $payonePaymentTransfer->setPaymentMethod($paymentTransfer->getPaymentMethod());
         $paymentTransfer->setPayone($payonePaymentTransfer);
+    }
+
+    /**
+     * @param string $paymentSelection
+     * @return bool
+     */
+    protected function isPaymentInList(string $paymentSelection) {
+        return in_array($paymentSelection, [
+            PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER,
+            PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER,
+            PaymentTransfer::PAYONE_GIROPAY_ONLINE_TRANSFER,
+            PaymentTransfer::PAYONE_IDEAL_ONLINE_TRANSFER,
+            PaymentTransfer::PAYONE_POSTFINANCE_EFINANCE_ONLINE_TRANSFER,
+            PaymentTransfer::PAYONE_POSTFINANCE_CARD_ONLINE_TRANSFER,
+            PaymentTransfer::PAYONE_PRZELEWY24_ONLINE_TRANSFER,
+            PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER,
+        ]);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentDetailTransfer $paymentDetailTransfer
+     * @param \Generated\Shared\Transfer\PayonePaymentOnlinetransferTransfer $payonePaymentTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param string $paymentSelection
+     *
+     * @return void
+     */
+    protected function setPaymentDetailsFromPayonePaymentOnlinetransferTransfer(
+        PaymentDetailTransfer $paymentDetailTransfer,
+        PayonePaymentOnlinetransferTransfer $payonePaymentTransfer,
+        QuoteTransfer $quoteTransfer,
+        string $paymentSelection
+    ) {
+        $paymentDetailTransfer->setType($payonePaymentTransfer->getOnlineBankTransferType());
+        $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankCountry());
+        if ($paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER) {
+            $paymentDetailTransfer->setBankCountry($quoteTransfer->getBillingAddress()->getIso2Code());
+        }
+        $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankAccount());
+        $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankCode());
+        $paymentDetailTransfer->setBankBranchCode($payonePaymentTransfer->getBankBranchCode());
+        $paymentDetailTransfer->setBankCheckDigit($payonePaymentTransfer->getBankCheckDigit());
+        $paymentDetailTransfer->setBankGroupType($payonePaymentTransfer->getBankGroupType());
+        $paymentDetailTransfer->setIban($payonePaymentTransfer->getIban());
+        $paymentDetailTransfer->setBic($payonePaymentTransfer->getBic());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PaymentDetailTransfer $paymentDetailTransfer
+     * @param \Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer $payonePaymentTransfer
+     *
+     * @return void
+     */
+    protected function setPaymentDetailsFromPayonePaymentDirectDebitTransfer(
+        PaymentDetailTransfer $paymentDetailTransfer,
+        PayonePaymentDirectDebitTransfer $payonePaymentTransfer
+    ) {
+        $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankcountry());
+        $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankaccount());
+        $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankcode());
+        $paymentDetailTransfer->setBic($payonePaymentTransfer->getBic());
+        $paymentDetailTransfer->setIban($payonePaymentTransfer->getIban());
+        $paymentDetailTransfer->setMandateIdentification($payonePaymentTransfer->getMandateIdentification());
+        $paymentDetailTransfer->setMandateText($payonePaymentTransfer->getMandateText());
     }
 
     /**
