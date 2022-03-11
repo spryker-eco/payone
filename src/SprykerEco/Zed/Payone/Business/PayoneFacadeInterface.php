@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License

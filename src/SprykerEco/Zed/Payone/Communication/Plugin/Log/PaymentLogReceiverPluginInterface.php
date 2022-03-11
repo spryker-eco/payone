@@ -1,6 +1,4 @@
 <?php
-// phpcs:disable SprykerStrict.TypeHints.ReturnTypeHint.MissingNativeTypeHint
-// phpcs:disable SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License

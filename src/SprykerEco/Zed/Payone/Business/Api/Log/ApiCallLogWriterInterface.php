@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable SprykerStrict.TypeHints.ParameterTypeHint.MissingNativeTypeHint
 
 /**
  * MIT License
