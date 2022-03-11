@@ -170,9 +170,11 @@ class PayoneHandler implements PayoneHandlerInterface
 
     /**
      * @param string $paymentSelection
+     *
      * @return bool
      */
-    protected function isPaymentInList(string $paymentSelection) {
+    protected function isPaymentInList(string $paymentSelection)
+    {
         return in_array($paymentSelection, [
             PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER,
             PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER,
