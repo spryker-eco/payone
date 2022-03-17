@@ -8,7 +8,9 @@
 namespace SprykerEco\Yves\Payone\Plugin;
 
 use Spryker\Yves\Kernel\AbstractPlugin;
+use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
+use SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()
@@ -23,7 +25,7 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm()
+    public function createSubForm(): AbstractPayoneSubForm
     {
         return $this->getFactory()->createKlarnaSubForm();
     }
@@ -36,7 +38,7 @@ class PayoneKlarnaSubFormPlugin extends AbstractPlugin implements SubFormPluginI
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
-    public function createSubFormDataProvider()
+    public function createSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
         return $this->getFactory()->createKlarnaDataProvider();
     }

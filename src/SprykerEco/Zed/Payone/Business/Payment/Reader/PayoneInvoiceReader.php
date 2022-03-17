@@ -78,8 +78,8 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
     {
         $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
-            $getInvoiceTransfer->getReferenceOrFail(),
-            $getInvoiceTransfer->getCustomerIdOrFail(),
+            (string)$getInvoiceTransfer->getReference(),
+            (int)$getInvoiceTransfer->getCustomerId(),
         );
 
         if (!$paymentEntity) {

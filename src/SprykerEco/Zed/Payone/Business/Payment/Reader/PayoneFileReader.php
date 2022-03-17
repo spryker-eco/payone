@@ -83,8 +83,8 @@ class PayoneFileReader implements PayoneFileReaderInterface
     public function getFile(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer
     {
         $paymentEntity = $this->findPaymentByFileReferenceAndCustomerId(
-            $getFileTransfer->getReferenceOrFail(),
-            $getFileTransfer->getCustomerIdOrFail(),
+            (string)$getFileTransfer->getReference(),
+            (int)$getFileTransfer->getCustomerId(),
         );
 
         if (!$paymentEntity) {

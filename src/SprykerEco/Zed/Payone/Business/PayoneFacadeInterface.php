@@ -7,7 +7,10 @@
 
 namespace SprykerEco\Zed\Payone\Business;
 
+use Generated\Shared\Transfer\AddressCheckResponseTransfer;
+use Generated\Shared\Transfer\CaptureResponseTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\ConsumerScoreResponseTransfer;
 use Generated\Shared\Transfer\OrderCollectionTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentDetailTransfer;
@@ -20,11 +23,13 @@ use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
+use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\RefundResponseTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 
 /**
@@ -58,7 +63,7 @@ interface PayoneFacadeInterface
      *
      * @return void
      */
-    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer);
+    public function saveOrderPayment(QuoteTransfer $quoteTransfer, SaveOrderTransfer $saveOrderTransfer): void;
 
     /**
      * Specification:
@@ -95,7 +100,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer);
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer;
 
     /**
      * Specification:
@@ -132,7 +137,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer);
+    public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): RefundResponseTransfer;
 
     /**
      * Specification:
@@ -422,7 +427,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function orderPostSave(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
+    public function orderPostSave(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
 
     /**
      * Specification:
@@ -456,7 +461,7 @@ interface PayoneFacadeInterface
     public function executeCheckoutPostSaveHook(
         QuoteTransfer $quoteTransfer,
         CheckoutResponseTransfer $checkoutResponse
-    );
+    ): CheckoutResponseTransfer;
 
     /**
      * Specification:
@@ -595,7 +600,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AddressCheckResponseTransfer
      */
-    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer);
+    public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer;
 
     /**
      * Specification:
@@ -607,7 +612,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\ConsumerScoreResponseTransfer
      */
-    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer);
+    public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer;
 
     /**
      * Specification:
@@ -620,7 +625,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PaymentMethodsTransfer
      */
-    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer);
+    public function filterPaymentMethods(PaymentMethodsTransfer $paymentMethodsTransfer, QuoteTransfer $quoteTransfer): PaymentMethodsTransfer;
 
     /**
      * Specification:
@@ -634,7 +639,7 @@ interface PayoneFacadeInterface
      *
      * @return string|null
      */
-    public function findPayoneOrderItemStatus(int $idSalesOrder, int $idSalesOrderItem);
+    public function findPayoneOrderItemStatus(int $idSalesOrder, int $idSalesOrderItem): ?string;
 
     /**
      * Specification:
@@ -649,7 +654,7 @@ interface PayoneFacadeInterface
      */
     public function executePartialCapture(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
-    );
+    ): CaptureResponseTransfer;
 
     /**
      * Specification:
@@ -665,5 +670,5 @@ interface PayoneFacadeInterface
      */
     public function sendKlarnaStartSessionRequest(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
-    );
+    ): PayoneKlarnaStartSessionResponseTransfer;
 }

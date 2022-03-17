@@ -148,13 +148,15 @@ class PostSaveHook implements PostSaveHookInterface
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    protected function checkApiAuthorizationRedirectAndError(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
-    {
-        $paymentEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponse->getSaveOrderOrFail()->getIdSalesOrderOrFail())->findOne();
+    protected function checkApiAuthorizationRedirectAndError(
+        QuoteTransfer $quoteTransfer,
+        CheckoutResponseTransfer $checkoutResponseTransfer
+    ): CheckoutResponseTransfer {
+        $paymentEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponseTransfer->getSaveOrderOrFail()->getIdSalesOrderOrFail())->findOne();
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
 
@@ -166,20 +168,20 @@ class PostSaveHook implements PostSaveHookInterface
 
         if ($responseContainer->getErrorcode()) {
             $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage(), $responseContainer->getErrorcode());
-            $checkoutResponse->addError($checkoutErrorTransfer);
-            $checkoutResponse->setIsSuccess(false);
+            $checkoutResponseTransfer->addError($checkoutErrorTransfer);
+            $checkoutResponseTransfer->setIsSuccess(false);
 
-            return $checkoutResponse;
+            return $checkoutResponseTransfer;
         }
 
         if (!$responseContainer->getRedirecturl()) {
-            return $checkoutResponse;
+            return $checkoutResponseTransfer;
         }
 
-        $checkoutResponse->setIsExternalRedirect(true);
-        $checkoutResponse->setRedirectUrl($responseContainer->getRedirecturl());
+        $checkoutResponseTransfer->setIsExternalRedirect(true);
+        $checkoutResponseTransfer->setRedirectUrl($responseContainer->getRedirecturl());
 
-        return $checkoutResponse;
+        return $checkoutResponseTransfer;
     }
 
     /**

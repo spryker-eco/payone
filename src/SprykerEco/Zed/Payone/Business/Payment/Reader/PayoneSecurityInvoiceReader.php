@@ -79,8 +79,8 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
     {
         $responseContainer = new GetSecurityInvoiceResponseContainer();
         $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
-            $getSecurityInvoiceTransfer->getReferenceOrFail(),
-            $getSecurityInvoiceTransfer->getCustomerIdOrFail(),
+            (string)$getSecurityInvoiceTransfer->getReference(),
+            (int)$getSecurityInvoiceTransfer->getCustomerId(),
         );
 
         if (!$paymentEntity) {

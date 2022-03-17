@@ -151,11 +151,11 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
 
         if ($this->checkThatDeliveryCostsAreRequired($payonePartialOperationRequestTransfer)) {
-            $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrder());
+            $captureAmount += $this->getDeliveryCosts($payonePartialOperationRequestTransfer->getOrderOrFail());
             $requestContainer = $this->shipmentMapper->mapShipment($payonePartialOperationRequestTransfer->getOrder(), $requestContainer);
         }
 
-        $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrder());
+        $captureAmount += $this->calculateExpensesCost($payonePartialOperationRequestTransfer->getOrderOrFail());
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
         $requestContainer = $this->expenseMapper->mapExpenses($payonePartialOperationRequestTransfer->getOrderOrFail(), $requestContainer);
         $businessContainer = new BusinessContainer();
@@ -258,11 +258,11 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return int
      */
-    protected function getDeliveryCosts(?OrderTransfer $orderTransfer): int
+    protected function getDeliveryCosts(OrderTransfer $orderTransfer): int
     {
         foreach ($orderTransfer->getExpenses() as $expense) {
             if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
@@ -295,11 +295,11 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer|null $orderTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return int
      */
-    protected function calculateExpensesCost(?OrderTransfer $orderTransfer): int
+    protected function calculateExpensesCost(OrderTransfer $orderTransfer): int
     {
         $expensesCostAmount = 0;
 

@@ -25,7 +25,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return array Countries
      */
-    public function getPayOneBancontactAvailableCountries()
+    public function getPayOneBancontactAvailableCountries(): array
     {
         return static::PAYONE_BANCONTACT_AVAILABLE_COUNTRIES;
     }

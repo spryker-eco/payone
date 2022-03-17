@@ -362,13 +362,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $invoice_date
+     * @param string $invoiceDate
      *
      * @return void
      */
-    public function setInvoiceDate(string $invoice_date): void
+    public function setInvoiceDate(string $invoiceDate): void
     {
-        $this->invoice_date = $invoice_date;
+        $this->invoice_date = $invoiceDate;
     }
 
     /**
@@ -380,13 +380,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $invoice_deliverydate
+     * @param string $invoiceDeliverydate
      *
      * @return void
      */
-    public function setInvoiceDeliverydate(string $invoice_deliverydate): void
+    public function setInvoiceDeliverydate(string $invoiceDeliverydate): void
     {
-        $this->invoice_deliverydate = $invoice_deliverydate;
+        $this->invoice_deliverydate = $invoiceDeliverydate;
     }
 
     /**
@@ -398,13 +398,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $invoice_deliveryenddate
+     * @param string $invoiceDeliveryenddate
      *
      * @return void
      */
-    public function setInvoiceDeliveryenddate(string $invoice_deliveryenddate): void
+    public function setInvoiceDeliveryenddate(string $invoiceDeliveryenddate): void
     {
-        $this->invoice_deliveryenddate = $invoice_deliveryenddate;
+        $this->invoice_deliveryenddate = $invoiceDeliveryenddate;
     }
 
     /**
@@ -416,13 +416,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $invoice_grossamount
+     * @param string $invoiceGrossamount
      *
      * @return void
      */
-    public function setInvoiceGrossamount(string $invoice_grossamount): void
+    public function setInvoiceGrossamount(string $invoiceGrossamount): void
     {
-        $this->invoice_grossamount = $invoice_grossamount;
+        $this->invoice_grossamount = $invoiceGrossamount;
     }
 
     /**
@@ -686,13 +686,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_bankaccount
+     * @param string $clearingBankaccount
      *
      * @return void
      */
-    public function setClearingBankaccount(string $clearing_bankaccount): void
+    public function setClearingBankaccount(string $clearingBankaccount): void
     {
-        $this->clearing_bankaccount = $clearing_bankaccount;
+        $this->clearing_bankaccount = $clearingBankaccount;
     }
 
     /**
@@ -704,13 +704,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_bankaccountholder
+     * @param string $clearingBankaccountholder
      *
      * @return void
      */
-    public function setClearingBankaccountholder(string $clearing_bankaccountholder): void
+    public function setClearingBankaccountholder(string $clearingBankaccountholder): void
     {
-        $this->clearing_bankaccountholder = $clearing_bankaccountholder;
+        $this->clearing_bankaccountholder = $clearingBankaccountholder;
     }
 
     /**
@@ -722,13 +722,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_bankbic
+     * @param string $clearingBankbic
      *
      * @return void
      */
-    public function setClearingBankbic(string $clearing_bankbic): void
+    public function setClearingBankbic(string $clearingBankbic): void
     {
-        $this->clearing_bankbic = $clearing_bankbic;
+        $this->clearing_bankbic = $clearingBankbic;
     }
 
     /**
@@ -740,13 +740,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_bankcity
+     * @param string $clearingBankcity
      *
      * @return void
      */
-    public function setClearingBankcity(string $clearing_bankcity): void
+    public function setClearingBankcity(string $clearingBankcity): void
     {
-        $this->clearing_bankcity = $clearing_bankcity;
+        $this->clearing_bankcity = $clearingBankcity;
     }
 
     /**
@@ -758,13 +758,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_bankcode
+     * @param string $clearingBankcode
      *
      * @return void
      */
-    public function setClearingBankcode(string $clearing_bankcode): void
+    public function setClearingBankcode(string $clearingBankcode): void
     {
-        $this->clearing_bankcode = $clearing_bankcode;
+        $this->clearing_bankcode = $clearingBankcode;
     }
 
     /**
@@ -776,13 +776,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_bankcountry
+     * @param string $clearingBankcountry
      *
      * @return void
      */
-    public function setClearingBankcountry(string $clearing_bankcountry): void
+    public function setClearingBankcountry(string $clearingBankcountry): void
     {
-        $this->clearing_bankcountry = $clearing_bankcountry;
+        $this->clearing_bankcountry = $clearingBankcountry;
     }
 
     /**
@@ -794,13 +794,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_bankiban
+     * @param string $clearingBankiban
      *
      * @return void
      */
-    public function setClearingBankiban(string $clearing_bankiban): void
+    public function setClearingBankiban(string $clearingBankiban): void
     {
-        $this->clearing_bankiban = $clearing_bankiban;
+        $this->clearing_bankiban = $clearingBankiban;
     }
 
     /**
@@ -812,13 +812,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_bankname
+     * @param string $clearingBankname
      *
      * @return void
      */
-    public function setClearingBankname(string $clearing_bankname): void
+    public function setClearingBankname(string $clearingBankname): void
     {
-        $this->clearing_bankname = $clearing_bankname;
+        $this->clearing_bankname = $clearingBankname;
     }
 
     /**
@@ -884,13 +884,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_duedate
+     * @param string $clearingDuedate
      *
      * @return void
      */
-    public function setClearingDuedate(string $clearing_duedate): void
+    public function setClearingDuedate(string $clearingDuedate): void
     {
-        $this->clearing_duedate = $clearing_duedate;
+        $this->clearing_duedate = $clearingDuedate;
     }
 
     /**
@@ -956,13 +956,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_instructionnote
+     * @param string $clearingInstructionnote
      *
      * @return void
      */
-    public function setClearingInstructionnote(string $clearing_instructionnote): void
+    public function setClearingInstructionnote(string $clearingInstructionnote): void
     {
-        $this->clearing_instructionnote = $clearing_instructionnote;
+        $this->clearing_instructionnote = $clearingInstructionnote;
     }
 
     /**
@@ -974,13 +974,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_legalnote
+     * @param string $clearingLegalnote
      *
      * @return void
      */
-    public function setClearingLegalnote(string $clearing_legalnote): void
+    public function setClearingLegalnote(string $clearingLegalnote): void
     {
-        $this->clearing_legalnote = $clearing_legalnote;
+        $this->clearing_legalnote = $clearingLegalnote;
     }
 
     /**
@@ -992,13 +992,13 @@ class TransactionStatusRequest extends AbstractRequest implements TransactionSta
     }
 
     /**
-     * @param string $clearing_reference
+     * @param string $clearingReference
      *
      * @return void
      */
-    public function setClearingReference(string $clearing_reference): void
+    public function setClearingReference(string $clearingReference): void
     {
-        $this->clearing_reference = $clearing_reference;
+        $this->clearing_reference = $clearingReference;
     }
 
     /**
