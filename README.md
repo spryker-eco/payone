@@ -14,4 +14,4 @@ composer require spryker-eco/payone
 
 ## Documentation
 
-[Documentation](https://documentation.spryker.com/docs/payone-v1-1)
+[Documentation](https://docs.spryker.com/docs/payone-v1-1)

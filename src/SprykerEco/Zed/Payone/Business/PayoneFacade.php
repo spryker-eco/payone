@@ -29,6 +29,7 @@ use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
 use Generated\Shared\Transfer\PayoneRefundTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\RefundResponseTransfer;
 use Generated\Shared\Transfer\SaveOrderTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -108,7 +109,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CaptureResponseTransfer
      */
-    public function capturePayment(PayoneCaptureTransfer $captureTransfer)
+    public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
         return $this->getFactory()->createPayoneCaptureRequestSender()->capturePayment($captureTransfer);
     }
@@ -150,7 +151,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer)
+    public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): RefundResponseTransfer
     {
         return $this->getFactory()->createPayonePartialRefundRequestSender()->executePartialRefund($payonePartialOperationRequestTransfer);
     }
