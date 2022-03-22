@@ -15,6 +15,7 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesBridge;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
@@ -181,7 +182,9 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     protected function addRequestStack(Container $container): Container
     {
         $container->set(static::SERVICE_REQUEST_STACK, function (Container $container) {
-            return $container->getApplicationService(static::SERVICE_REQUEST_STACK);
+            return $container->hasApplicationService(static::SERVICE_REQUEST_STACK)
+                ? $container->getApplicationService(static::SERVICE_REQUEST_STACK)
+                : new RequestStack();
         });
 
         return $container;
