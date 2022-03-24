@@ -23,7 +23,7 @@ class PayoneBancontactOnlineTransferSubFormPlugin extends AbstractPlugin impleme
      *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
-    public function createSubForm(): AbstractPayoneSubForm
+    public function createSubForm()
     {
         return $this->getFactory()->createBancontactOnlineTransferSubForm();
     }
