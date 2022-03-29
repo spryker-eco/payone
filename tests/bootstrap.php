@@ -1,5 +1,6 @@
 <?php
 
+use Spryker\Shared\Config\Config;
 
 if (!defined('APPLICATION')) {
     define('APPLICATION', 'Payone');
@@ -65,6 +66,6 @@ copy($configSourceDirectory . 'config_propel.php', $configTargetDirectory . 'con
 copy($configSourceDirectory . 'default_store.php', $configTargetDirectory . 'default_store.php');
 copy($configSourceDirectory . 'stores.php', $configTargetDirectory . 'stores.php');
 
-$config = Spryker\Shared\Config\Config::getInstance();
+$config = Config::getInstance();
 
 $config->init();

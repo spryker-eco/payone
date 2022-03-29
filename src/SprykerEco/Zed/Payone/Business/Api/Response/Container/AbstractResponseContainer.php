@@ -190,9 +190,9 @@ abstract class AbstractResponseContainer
      * @param string $key
      * @param string $name
      *
-     * @return bool|null
+     * @return bool
      */
-    public function setValue(string $key, string $name): ?bool
+    public function setValue(string $key, string $name): bool
     {
         return $this->set($key, $name);
     }
@@ -215,9 +215,9 @@ abstract class AbstractResponseContainer
      * @param string $name
      * @param mixed $value
      *
-     * @return bool|null
+     * @return bool
      */
-    protected function set(string $name, $value): ?bool
+    protected function set(string $name, $value): bool
     {
         if (property_exists($this, $name)) {
             $this->$name = $value;
@@ -225,7 +225,7 @@ abstract class AbstractResponseContainer
             return true;
         }
 
-        return null;
+        return false;
     }
 
     /**
