@@ -1,18 +1,10 @@
 <?php
 
-/**
- * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- */
-
-namespace SprykerEco\Zed\Payone\Business\Distributor;
+namespace SprykerEco\Service\Payone;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-/**
- * @deprecated Use service instead!
- */
-interface OrderPriceDistributorInterface
+interface PayoneServiceInterface
 {
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer

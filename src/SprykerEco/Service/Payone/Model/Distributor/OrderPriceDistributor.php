@@ -5,15 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Distributor;
+namespace SprykerEco\Service\Payone\Model\Distributor;
 
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PaymentTransfer;
-use SprykerEco\Zed\Payone\PayoneConfig;
+use SprykerEco\Shared\Payone\PayoneConstants;
 
-/**
- * @deprecated Use service instead!
- */
 class OrderPriceDistributor implements OrderPriceDistributorInterface
 {
     /**
@@ -64,7 +61,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
         $paymentTransfers = $orderTransfer->getPayments();
 
         foreach ($paymentTransfers as $paymentTransfer) {
-            if ($paymentTransfer->getPaymentProvider() === PayoneConfig::PROVIDER_NAME) {
+            if ($paymentTransfer->getPaymentProvider() === PayoneConstants::PROVIDER_NAME) {
                 return $paymentTransfer;
             }
         }

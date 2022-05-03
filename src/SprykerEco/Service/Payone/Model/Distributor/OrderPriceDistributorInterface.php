@@ -5,13 +5,10 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\Payone\Business\Distributor;
+namespace SprykerEco\Service\Payone\Model\Distributor;
 
 use Generated\Shared\Transfer\OrderTransfer;
 
-/**
- * @deprecated Use service instead!
- */
 interface OrderPriceDistributorInterface
 {
     /**
