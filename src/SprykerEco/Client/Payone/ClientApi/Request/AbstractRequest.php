@@ -174,7 +174,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setPortalid(?string $portalid): void
+    public function setPortalid(?string $portalid = null): void
     {
         $this->portalid = $portalid;
     }
