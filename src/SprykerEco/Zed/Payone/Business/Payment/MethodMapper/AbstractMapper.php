@@ -135,13 +135,13 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer $personalContainer
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return void
      */
-    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentEntity): void
+    protected function mapBillingAddressToPersonalContainer(PersonalContainer $personalContainer, SpyPaymentPayone $paymentPayoneEntity): void
     {
-        $orderEntity = $paymentEntity->getSpySalesOrder();
+        $orderEntity = $paymentPayoneEntity->getSpySalesOrder();
         $billingAddressEntity = $orderEntity->getBillingAddress();
         $personalContainer->setCountry($billingAddressEntity->getCountry()->getIso2Code());
         $personalContainer->setFirstName($billingAddressEntity->getFirstName());
@@ -160,22 +160,20 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer $shippingContainer
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderAddress|null $shippingAddressEntity
+     * @param \Orm\Zed\Sales\Persistence\SpySalesOrderAddress $shippingAddressEntity
      *
      * @return void
      */
-    protected function mapShippingAddressToShippingContainer(ShippingContainer $shippingContainer, ?SpySalesOrderAddress $shippingAddressEntity): void
+    protected function mapShippingAddressToShippingContainer(ShippingContainer $shippingContainer, SpySalesOrderAddress $shippingAddressEntity): void
     {
-        if ($shippingAddressEntity !== null) {
-            $shippingContainer->setShippingFirstName($shippingAddressEntity->getFirstName());
-            $shippingContainer->setShippingLastName($shippingAddressEntity->getLastName());
-            $shippingContainer->setShippingCompany($shippingAddressEntity->getCompany() ?? '');
-            $shippingContainer->setShippingStreet(
-                implode(' ', [$shippingAddressEntity->getAddress1(), $shippingAddressEntity->getAddress2()]),
-            );
-            $shippingContainer->setShippingZip($shippingAddressEntity->getZipCode());
-            $shippingContainer->setShippingCity($shippingAddressEntity->getCity());
-            $shippingContainer->setShippingCountry($shippingAddressEntity->getCountry()->getIso2Code());
-        }
+        $shippingContainer->setShippingFirstName($shippingAddressEntity->getFirstName());
+        $shippingContainer->setShippingLastName($shippingAddressEntity->getLastName());
+        $shippingContainer->setShippingCompany($shippingAddressEntity->getCompany() ?? '');
+        $shippingContainer->setShippingStreet(
+            implode(' ', [$shippingAddressEntity->getAddress1(), $shippingAddressEntity->getAddress2()]),
+        );
+        $shippingContainer->setShippingZip($shippingAddressEntity->getZipCode());
+        $shippingContainer->setShippingCity($shippingAddressEntity->getCity());
+        $shippingContainer->setShippingCountry($shippingAddressEntity->getCountry()->getIso2Code());
     }
 }

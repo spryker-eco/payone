@@ -38,7 +38,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapperInterface
@@ -49,7 +49,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapperInterface $debitResponseMapper
      */
@@ -57,7 +57,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader,
         DebitResponseMapperInterface $debitResponseMapper
     ) {
@@ -65,7 +65,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->debitResponseMapper = $debitResponseMapper;
     }
 
@@ -76,14 +76,14 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
      */
     public function debitPayment(int $idPayment): DebitResponseTransfer
     {
-        $paymentEntity = $this->getPaymentEntity($idPayment);
-        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
+        $paymentPayoneEntity = $this->getPaymentEntity($idPayment);
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
 
-        $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentEntity);
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentPayoneEntity);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
-        $paymentEntity = $this->findPaymentByTransactionId($paymentEntity->getTransactionId() ?? 0);
-        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
+        $paymentPayoneEntity = $this->findPaymentByTransactionId($paymentPayoneEntity->getTransactionId() ?? 0);
+        $apiLogEntity = $this->initializeApiLog($paymentPayoneEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new DebitResponseContainer($rawResponse);

@@ -42,7 +42,7 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
@@ -53,20 +53,20 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;
     }
 
@@ -77,12 +77,12 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
      */
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
     {
-        $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
-            (string)$getInvoiceTransfer->getReference(),
-            (int)$getInvoiceTransfer->getCustomerId(),
+        $paymentPayoneEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
+            $getInvoiceTransfer->getReferenceOrFail(),
+            $getInvoiceTransfer->getCustomerIdOrFail(),
         );
 
-        if (!$paymentEntity) {
+        if (!$paymentPayoneEntity) {
             return $this->setAccessDeniedError($getInvoiceTransfer);
         }
 
@@ -133,7 +133,7 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\Invoice $paymentMethodMapper */
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_INVOICE);
         $requestContainer = $paymentMethodMapper->mapGetInvoice($getInvoiceTransfer);
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer->init($rawResponse);
 

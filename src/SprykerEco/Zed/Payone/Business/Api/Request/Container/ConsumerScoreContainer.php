@@ -137,7 +137,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCity(?string $city): void
+    public function setCity(?string $city = null): void
     {
         $this->city = $city;
     }
@@ -155,7 +155,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCompany(?string $company): void
+    public function setCompany(?string $company = null): void
     {
         $this->company = $company;
     }
@@ -173,7 +173,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setConsumerScoreType(?string $consumerscoretype): void
+    public function setConsumerScoreType(?string $consumerscoretype = null): void
     {
         $this->consumerscoretype = $consumerscoretype;
     }
@@ -191,7 +191,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCountry(?string $country): void
+    public function setCountry(?string $country = null): void
     {
         $this->country = $country;
     }
@@ -209,7 +209,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFirstName(?string $firstname): void
+    public function setFirstName(?string $firstname = null): void
     {
         $this->firstname = $firstname;
     }
@@ -227,7 +227,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setLastName(?string $lastname): void
+    public function setLastName(?string $lastname = null): void
     {
         $this->lastname = $lastname;
     }
@@ -263,7 +263,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreetName(?string $streetname): void
+    public function setStreetName(?string $streetname = null): void
     {
         $this->streetname = $streetname;
     }
@@ -281,7 +281,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreetNumber(?string $streetnumber): void
+    public function setStreetNumber(?string $streetnumber = null): void
     {
         $this->streetnumber = $streetnumber;
     }
@@ -317,7 +317,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setZip(?string $zip): void
+    public function setZip(?string $zip = null): void
     {
         $this->zip = $zip;
     }

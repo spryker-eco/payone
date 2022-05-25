@@ -15,6 +15,8 @@ use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  */
 class PartialRefundIsErrorConditionPlugin extends SprykerAbstractPlugin implements ConditionInterface
 {

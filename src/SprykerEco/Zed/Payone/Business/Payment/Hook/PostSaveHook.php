@@ -156,15 +156,15 @@ class PostSaveHook implements PostSaveHookInterface
         QuoteTransfer $quoteTransfer,
         CheckoutResponseTransfer $checkoutResponseTransfer
     ): CheckoutResponseTransfer {
-        $paymentEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponseTransfer->getSaveOrderOrFail()->getIdSalesOrderOrFail())->findOne();
-        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
-        $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
+        $paymentPayoneEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponseTransfer->getSaveOrderOrFail()->getIdSalesOrderOrFail())->findOne();
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentPayoneEntity->getPaymentMethod());
+        $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentPayoneEntity, $quoteTransfer);
 
-        if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
+        if ($paymentPayoneEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
             $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($quoteTransfer, $requestContainer);
         }
 
-        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
+        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentPayoneEntity, $requestContainer);
 
         if ($responseContainer->getErrorcode()) {
             $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage(), $responseContainer->getErrorcode());
@@ -202,22 +202,22 @@ class PostSaveHook implements PostSaveHookInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
     protected function getPostSaveHookRequestContainer(
         PaymentMethodMapperInterface $paymentMethodMapper,
-        SpyPaymentPayone $paymentEntity,
+        SpyPaymentPayone $paymentPayoneEntity,
         QuoteTransfer $quoteTransfer
     ): AuthorizationContainerInterface {
         if (method_exists($paymentMethodMapper, 'mapPaymentToPreAuthorization')) {
             if ($paymentMethodMapper instanceof KlarnaPaymentMapper) {
-                return $paymentMethodMapper->mapKlarnaPaymentToPreAuthorization($paymentEntity, $quoteTransfer);
+                return $paymentMethodMapper->mapKlarnaPaymentToPreAuthorization($paymentPayoneEntity, $quoteTransfer);
             }
 
-            return $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity);
+            return $paymentMethodMapper->mapPaymentToPreAuthorization($paymentPayoneEntity);
         }
 
         $orderTransfer = (new OrderTransfer())
@@ -226,6 +226,6 @@ class PostSaveHook implements PostSaveHookInterface
                     ->setGrandTotal($quoteTransfer->getTotals()->getGrandTotal()),
             );
 
-        return $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
+        return $paymentMethodMapper->mapPaymentToAuthorization($paymentPayoneEntity, $orderTransfer);
     }
 }

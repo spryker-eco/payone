@@ -195,7 +195,7 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
      *
      * @return void
      */
-    public function setTxid(?int $txid): void
+    public function setTxid(?int $txid = null): void
     {
         $this->txid = $txid;
     }

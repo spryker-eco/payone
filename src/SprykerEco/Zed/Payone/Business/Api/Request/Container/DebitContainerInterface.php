@@ -102,7 +102,7 @@ interface DebitContainerInterface
      *
      * @return void
      */
-    public function setTxid(?int $txid): void;
+    public function setTxid(?int $txid = null): void;
 
     /**
      * @return int|null

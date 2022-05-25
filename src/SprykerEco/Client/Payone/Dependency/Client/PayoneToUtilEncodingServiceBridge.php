@@ -29,7 +29,7 @@ class PayoneToUtilEncodingServiceBridge implements PayoneToUtilEncodingServiceIn
      *
      * @return string|null
      */
-    public function encodeJson($value, $options = null, $depth = null)
+    public function encodeJson($value, $options = null, $depth = null): ?string
     {
         return $this->utilEncodingService->encodeJson($value, $options, $depth);
     }

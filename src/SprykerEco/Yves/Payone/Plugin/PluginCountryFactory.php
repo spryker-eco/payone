@@ -14,6 +14,7 @@ use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\ChSubFormsCreator;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\DefaultSubFormsCreator;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\DeSubFormsCreator;
 use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\NlSubFormsCreator;
+use SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface;
 
 /**
  * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()
@@ -56,7 +57,7 @@ class PluginCountryFactory extends AbstractPlugin
      *
      * @return \SprykerEco\Yves\Payone\Plugin\SubFormsCreator\SubFormsCreatorInterface
      */
-    public function createSubFormsCreator(string $countryIso2Code)
+    public function createSubFormsCreator(string $countryIso2Code): SubFormsCreatorInterface
     {
         if (isset($this->subFormsCreators[$countryIso2Code])) {
             $subFormsCreator = $this->subFormsCreators[$countryIso2Code]();

@@ -94,7 +94,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
      *
      * @return void
      */
-    public function setSequenceNumber(?int $sequencenumber): void
+    public function setSequenceNumber(?int $sequencenumber = null): void
     {
         $this->sequencenumber = $sequencenumber;
     }
@@ -112,7 +112,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
      *
      * @return void
      */
-    public function setTxid(?int $txid): void
+    public function setTxid(?int $txid = null): void
     {
         $this->txid = $txid;
     }

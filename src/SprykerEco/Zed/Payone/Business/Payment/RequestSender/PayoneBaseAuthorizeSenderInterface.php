@@ -14,13 +14,13 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseC
 interface PayoneBaseAuthorizeSenderInterface
 {
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface $requestContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
      */
     public function performAuthorizationRequest(
-        SpyPaymentPayone $paymentEntity,
+        SpyPaymentPayone $paymentPayoneEntity,
         AuthorizationContainerInterface $requestContainer
     ): AuthorizationResponseContainer;
 }

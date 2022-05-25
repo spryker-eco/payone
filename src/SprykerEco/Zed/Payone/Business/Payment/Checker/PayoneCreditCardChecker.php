@@ -31,7 +31,7 @@ class PayoneCreditCardChecker implements PayoneCreditCardCheckerInterface
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
@@ -46,20 +46,20 @@ class PayoneCreditCardChecker implements PayoneCreditCardCheckerInterface
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CreditCardCheckResponseMapperInterface $creditCardCheckResponseMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader,
         CreditCardCheckResponseMapperInterface $creditCardCheckResponseMapper
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;
         $this->creditCardCheckResponseMapper = $creditCardCheckResponseMapper;
     }
@@ -75,7 +75,7 @@ class PayoneCreditCardChecker implements PayoneCreditCardCheckerInterface
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($creditCardData->getPaymentOrFail()->getPaymentMethodOrFail());
         $requestContainer = $paymentMethodMapper->mapCreditCardCheck($creditCardData);
 
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new CreditCardCheckResponseContainer($rawResponse);

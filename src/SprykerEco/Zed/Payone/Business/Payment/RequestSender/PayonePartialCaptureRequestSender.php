@@ -70,7 +70,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface
@@ -101,7 +101,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface $shipmentMapper
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\CaptureResponseMapperInterface $captureResponseMapper
      */
@@ -114,7 +114,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         PayoneRepositoryInterface $payoneRepository,
         PayoneEntityManagerInterface $payoneEntityManager,
         OrderPriceDistributorInterface $orderPriceDistributor,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         ShipmentMapperInterface $shipmentMapper,
         CaptureResponseMapperInterface $captureResponseMapper
     ) {
@@ -124,7 +124,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $this->payoneRepository = $payoneRepository;
         $this->payoneEntityManager = $payoneEntityManager;
         $this->orderPriceDistributor = $orderPriceDistributor;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->shipmentMapper = $shipmentMapper;
         $this->expenseMapper = $expenseMapper;
         $this->captureResponseMapper = $captureResponseMapper;
@@ -143,10 +143,10 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         );
         $payonePartialOperationRequestTransfer->setOrder($distributedPriceOrderTransfer);
 
-        $paymentEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
-        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
+        $paymentPayoneEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
 
-        $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentEntity);
+        $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentPayoneEntity);
         $requestContainer = $this->preparePartialCaptureOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
 
@@ -163,9 +163,9 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $requestContainer->setBusiness($businessContainer);
 
         $requestContainer->setAmount($captureAmount);
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
-        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
+        $apiLogEntity = $this->initializeApiLog($paymentPayoneEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new CaptureResponseContainer($rawResponse);

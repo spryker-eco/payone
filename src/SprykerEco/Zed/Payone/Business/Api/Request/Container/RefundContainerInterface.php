@@ -37,11 +37,11 @@ interface RefundContainerInterface
     public function getCurrency(): ?string;
 
     /**
-     * @param string|null $narrative_text
+     * @param string|null $narrativeText
      *
      * @return $this
      */
-    public function setNarrativeText(?string $narrative_text): self;
+    public function setNarrativeText(?string $narrativeText): self;
 
     /**
      * @return string|null

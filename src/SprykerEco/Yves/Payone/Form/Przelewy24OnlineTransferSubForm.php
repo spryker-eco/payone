@@ -12,6 +12,9 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * @method \SprykerEco\Yves\Payone\PayoneConfig getConfig()
+ */
 class Przelewy24OnlineTransferSubForm extends OnlineTransferSubForm
 {
     /**

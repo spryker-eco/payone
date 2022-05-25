@@ -41,7 +41,7 @@ interface CaptureContainerInterface
      *
      * @return void
      */
-    public function setSequenceNumber(?int $sequencenumber): void;
+    public function setSequenceNumber(?int $sequencenumber = null): void;
 
     /**
      * @return int|null
@@ -53,7 +53,7 @@ interface CaptureContainerInterface
      *
      * @return void
      */
-    public function setTxid(?int $txid): void;
+    public function setTxid(?int $txid = null): void;
 
     /**
      * @return int|null

@@ -62,90 +62,90 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity): PreAuthorizationContainerInterface
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentPayoneEntity): PreAuthorizationContainerInterface
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
 
-        return $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
+        return $this->mapPaymentToAbstractAuthorization($paymentPayoneEntity, $preAuthorizationContainer);
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
      */
-    public function mapKlarnaPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity, QuoteTransfer $quoteTransfer): PreAuthorizationContainerInterface
+    public function mapKlarnaPaymentToPreAuthorization(SpyPaymentPayone $paymentPayoneEntity, QuoteTransfer $quoteTransfer): PreAuthorizationContainerInterface
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
-        $this->mapKlarnaPaymentToAbstractAuthorization($paymentEntity, $quoteTransfer, $preAuthorizationContainer);
+        $this->mapKlarnaPaymentToAbstractAuthorization($paymentPayoneEntity, $quoteTransfer, $preAuthorizationContainer);
 
         return $preAuthorizationContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer
      */
-    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): AbstractAuthorizationContainer
+    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentPayoneEntity, OrderTransfer $orderTransfer): AbstractAuthorizationContainer
     {
         return new AuthorizationContainer();
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentPayoneEntity): CaptureContainerInterface
     {
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+        $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
         $captureContainer = new CaptureContainer();
 
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
         $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
-        $captureContainer->setTxid($paymentEntity->getTransactionId());
+        $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
         $captureContainer->setCaptureMode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
-        $sequenceNumber = $this->getNextSequenceNumber((int)$paymentEntity->getTransactionId());
+        $sequenceNumber = $this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId());
         $captureContainer->setSequenceNumber($sequenceNumber);
 
         return $captureContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface
      */
-    public function mapPaymentToDebit(SpyPaymentPayone $paymentEntity): DebitContainerInterface
+    public function mapPaymentToDebit(SpyPaymentPayone $paymentPayoneEntity): DebitContainerInterface
     {
         $debitContainer = new DebitContainer();
 
-        $debitContainer->setTxid($paymentEntity->getTransactionId());
-        $debitContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
+        $debitContainer->setTxid($paymentPayoneEntity->getTransactionId());
+        $debitContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
         $debitContainer->setCurrency($this->getStandardParameter()->getCurrency());
-        $debitContainer->setAmount($paymentEntity->getSpyPaymentPayoneDetail()->getAmount());
+        $debitContainer->setAmount($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());
 
         return $debitContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity): RefundContainerInterface
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentPayoneEntity): RefundContainerInterface
     {
         $refundContainer = new RefundContainer();
 
-        $refundContainer->setTxid($paymentEntity->getTransactionId());
-        $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentEntity->getTransactionId()));
+        $refundContainer->setTxid($paymentPayoneEntity->getTransactionId());
+        $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
 
         return $refundContainer;
@@ -203,34 +203,34 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer $authorizationContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer
      */
     protected function mapPaymentToAbstractAuthorization(
-        SpyPaymentPayone $paymentEntity,
+        SpyPaymentPayone $paymentPayoneEntity,
         AbstractAuthorizationContainer $authorizationContainer
     ): AbstractAuthorizationContainer {
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
 
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+        $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
         $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
 
-        $authorizationContainer->setReference($paymentEntity->getReference());
+        $authorizationContainer->setReference($paymentPayoneEntity->getReference());
 
         $paydataContainer = new PaydataContainer();
         $authorizationContainer->setPaydata($paydataContainer);
 
-        $personalContainer = $this->buildPersonalContainer($paymentEntity);
+        $personalContainer = $this->buildPersonalContainer($paymentPayoneEntity);
         $authorizationContainer->setPersonalData($personalContainer);
-        $orderReference = $paymentEntity->getSpySalesOrder()->getOrderReference();
+        $orderReference = $paymentPayoneEntity->getSpySalesOrder()->getOrderReference();
         $authorizationContainer->setRedirect($this->createRedirectContainer($orderReference));
 
-        $shippingAddressEntity = $paymentEntity->getSpySalesOrder()->getShippingAddress();
+        $shippingAddressEntity = $paymentPayoneEntity->getSpySalesOrder()->getShippingAddress();
 
         if ($shippingAddressEntity) {
             $shippingContainer = new ShippingContainer();
@@ -241,20 +241,20 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface $authorizationContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
      */
     protected function mapKlarnaPaymentToAbstractAuthorization(
-        SpyPaymentPayone $paymentEntity,
+        SpyPaymentPayone $paymentPayoneEntity,
         QuoteTransfer $quoteTransfer,
         PreAuthorizationContainerInterface $authorizationContainer
     ): PreAuthorizationContainerInterface {
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
 
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+        $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
         $payoneKlarnaTransfer = $quoteTransfer->getPayment()->getPayoneKlarna();
 
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
@@ -262,18 +262,18 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
         $authorizationContainer->setFinancingType($payoneKlarnaTransfer->getPayMethod());
 
-        $authorizationContainer->setReference($paymentEntity->getReference());
+        $authorizationContainer->setReference($paymentPayoneEntity->getReference());
 
         $paydataContainer = new PaydataContainer();
         $paydataContainer->setAuthorizationToken($payoneKlarnaTransfer->getPayMethodTokenOrFail());
         $authorizationContainer->setPaydata($paydataContainer);
 
-        $personalContainer = $this->buildPersonalContainer($paymentEntity);
+        $personalContainer = $this->buildPersonalContainer($paymentPayoneEntity);
         $authorizationContainer->setPersonalData($personalContainer);
-        $orderReference = $paymentEntity->getSpySalesOrder()->getOrderReference();
+        $orderReference = $paymentPayoneEntity->getSpySalesOrder()->getOrderReference();
         $authorizationContainer->setRedirect($this->createRedirectContainer($orderReference));
 
-        $shippingAddressEntity = $paymentEntity->getSpySalesOrder()->getShippingAddress();
+        $shippingAddressEntity = $paymentPayoneEntity->getSpySalesOrder()->getShippingAddress();
 
         if ($shippingAddressEntity) {
             $shippingContainer = new ShippingContainer();
@@ -284,17 +284,17 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
      */
-    protected function buildPersonalContainer(SpyPaymentPayone $paymentEntity): ContainerInterface
+    protected function buildPersonalContainer(SpyPaymentPayone $paymentPayoneEntity): ContainerInterface
     {
         $personalContainer = new PersonalContainer();
 
-        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
+        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentPayoneEntity);
         $personalContainer->setCompany(null);
-        $personalContainer->setEmail($paymentEntity->getSpySalesOrder()->getEmail());
+        $personalContainer->setEmail($paymentPayoneEntity->getSpySalesOrder()->getEmail());
 
         $currentRequest = $this->requestStack->getCurrentRequest();
         $personalContainer->setIp($currentRequest->getClientIp());

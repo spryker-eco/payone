@@ -138,13 +138,13 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     }
 
     /**
-     * @param string|null $narrative_text
+     * @param string|null $narrativeText
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
-    public function setNarrativeText(?string $narrative_text): RefundContainerInterface
+    public function setNarrativeText(?string $narrativeText): RefundContainerInterface
     {
-        $this->narrative_text = $narrative_text;
+        $this->narrative_text = $narrativeText;
 
         return $this;
     }

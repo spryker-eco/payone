@@ -147,7 +147,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setEncoding(?string $encoding)
+    public function setEncoding(?string $encoding = null)
     {
         $this->encoding = $encoding;
 
@@ -187,7 +187,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setApiVersion(?string $api_version)
+    public function setApiVersion(?string $api_version = null)
     {
         $this->api_version = $api_version;
 
@@ -207,7 +207,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setMid(?string $mid)
+    public function setMid(?string $mid = null)
     {
         $this->mid = $mid;
 
@@ -247,7 +247,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setPortalid(?string $portalid)
+    public function setPortalid(?string $portalid = null)
     {
         $this->portalid = $portalid;
 
@@ -383,7 +383,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setAid(?string $aid)
+    public function setAid(?string $aid = null)
     {
         $this->aid = $aid;
 
@@ -403,7 +403,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setLanguage(?string $language)
+    public function setLanguage(?string $language = null)
     {
         $this->language = $language;
 
@@ -443,7 +443,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setResponsetype(?string $responsetype)
+    public function setResponsetype(?string $responsetype = null)
     {
         $this->responsetype = $responsetype;
 
@@ -459,11 +459,11 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param array $it
+     * @param array|null $it
      *
      * @return void
      */
-    public function setIt(array $it): void
+    public function setIt(?array $it = null): void
     {
         $this->it = $it;
     }
@@ -481,7 +481,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setId(?array $id): void
+    public function setId(?array $id = null): void
     {
         $this->id = $id;
     }
@@ -571,7 +571,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setEmail(?string $email): void
+    public function setEmail(?string $email = null): void
     {
         $this->email = $email;
     }
@@ -589,7 +589,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setBackUrl(?string $backUrl)
+    public function setBackUrl(?string $backUrl = null)
     {
         $this->backurl = $backUrl;
 
@@ -609,7 +609,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setSuccessUrl(?string $successUrl)
+    public function setSuccessUrl(?string $successUrl = null)
     {
         $this->successurl = $successUrl;
 

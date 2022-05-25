@@ -64,7 +64,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @var string
      */
-    protected $narrative_text;
+    protected $narrativeText;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
@@ -129,7 +129,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      *
      * @return void
      */
-    public function setAmount(?int $amount): void
+    public function setAmount(?int $amount = null): void
     {
         $this->amount = $amount;
     }
@@ -179,13 +179,13 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @param string $narrative_text
+     * @param string $narrativeText
      *
      * @return void
      */
-    public function setNarrativeText(string $narrative_text): void
+    public function setNarrativeText(string $narrativeText): void
     {
-        $this->narrative_text = $narrative_text;
+        $this->narrativeText = $narrativeText;
     }
 
     /**
@@ -193,7 +193,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
      */
     public function getNarrativeText(): string
     {
-        return $this->narrative_text;
+        return $this->narrativeText;
     }
 
     /**

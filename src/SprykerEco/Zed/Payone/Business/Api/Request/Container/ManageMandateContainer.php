@@ -391,7 +391,7 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setEmail(?string $email): void
+    public function setEmail(?string $email = null): void
     {
         $this->email = $email;
     }

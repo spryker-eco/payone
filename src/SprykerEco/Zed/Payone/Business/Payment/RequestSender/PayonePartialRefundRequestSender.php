@@ -50,7 +50,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface
@@ -64,7 +64,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface $refundResponseMapper
      */
     public function __construct(
@@ -74,7 +74,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
         PayoneStandardParameterTransfer $standardParameter,
         PayoneRepositoryInterface $payoneRepository,
         PayoneEntityManagerInterface $payoneEntityManager,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         RefundResponseMapperInterface $refundResponseMapper
     ) {
         parent::__construct($queryContainer, $paymentMapperReader);
@@ -82,7 +82,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
         $this->standardParameter = $standardParameter;
         $this->payoneRepository = $payoneRepository;
         $this->payoneEntityManager = $payoneEntityManager;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->refundResponseMapper = $refundResponseMapper;
     }
 
@@ -93,15 +93,15 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
      */
     public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): RefundResponseTransfer
     {
-        $paymentEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
-        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
-        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
+        $paymentPayoneEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
+        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentPayoneEntity);
 
         $requestContainer->setAmount($payonePartialOperationRequestTransfer->getRefund()->getAmount() * -1);
         $requestContainer = $this->preparePartialRefundOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
         $requestContainer = $this->preparePartialRefundExpenses($payonePartialOperationRequestTransfer, $requestContainer);
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
-        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $apiLogEntity = $this->initializeApiLog($paymentPayoneEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new RefundResponseContainer($rawResponse);

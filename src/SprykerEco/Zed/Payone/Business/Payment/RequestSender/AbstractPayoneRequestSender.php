@@ -42,13 +42,13 @@ abstract class AbstractPayoneRequestSender
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface
      */
-    protected function getPaymentMethodMapper(SpyPaymentPayone $paymentEntity): PaymentMethodMapperInterface
+    protected function getPaymentMethodMapper(SpyPaymentPayone $paymentPayoneEntity): PaymentMethodMapperInterface
     {
-        return $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
+        return $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentPayoneEntity->getPaymentMethod());
     }
 
     /**
@@ -62,16 +62,16 @@ abstract class AbstractPayoneRequestSender
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog
      */
-    protected function initializeApiLog(SpyPaymentPayone $paymentEntity, AbstractRequestContainer $container): SpyPaymentPayoneApiLog
+    protected function initializeApiLog(SpyPaymentPayone $paymentPayoneEntity, AbstractRequestContainer $container): SpyPaymentPayoneApiLog
     {
         $entity = new SpyPaymentPayoneApiLog();
 
-        $entity->setSpyPaymentPayone($paymentEntity);
+        $entity->setSpyPaymentPayone($paymentPayoneEntity);
         $entity->setRequest($container->getRequest());
         $entity->setMode($container->getMode());
         $entity->setMerchantId($container->getMid());
