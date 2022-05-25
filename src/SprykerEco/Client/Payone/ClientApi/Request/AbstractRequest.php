@@ -138,7 +138,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setAid(?string $aid): void
+    public function setAid(?string $aid = null): void
     {
         $this->aid = $aid;
     }
