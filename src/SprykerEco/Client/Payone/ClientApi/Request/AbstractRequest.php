@@ -120,7 +120,7 @@ abstract class AbstractRequest extends AbstractContainer
      *
      * @return void
      */
-    public function setMid(?string $mid): void
+    public function setMid(?string $mid = null): void
     {
         $this->mid = $mid;
     }
