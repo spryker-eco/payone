@@ -674,7 +674,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     public function createStandartParameterMapper(): StandartParameterMapperInterface
     {
-        return new StandartParameterMapper($this->createHashGenerator(), $this->createModeDetector());
+        return new StandartParameterMapper(
+            $this->createHashGenerator(),
+            $this->createModeDetector(),
+            $this->getStandardParameterHydratorPlugins()
+        );
     }
 
     /**
@@ -862,5 +866,14 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function getRequestStack(): RequestStack
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_REQUEST_STACK);
+    }
+
+    /**
+     *
+     * @return \SprykerEco\Zed\Payone\Dependency\Plugin\StandardParameterMapperPluginInterface[]
+     */
+    public function getStandardParameterMapperPlugins(): array
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::PLUGINS_STANDARD_PARAMETER_HYDRATOR);
     }
 }

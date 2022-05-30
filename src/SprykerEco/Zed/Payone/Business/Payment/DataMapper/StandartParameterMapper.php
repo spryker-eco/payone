@@ -26,13 +26,20 @@ class StandartParameterMapper implements StandartParameterMapperInterface
     protected $modeDetector;
 
     /**
+     * @var \SprykerEco\Zed\Payone\Dependency\Plugin\StandardParameterMapperPluginInterface
+     */
+    protected $mapperPlugins;
+
+    /**
      * @param \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface $hashGenerator
      * @param \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface $modeDetector
+     * @param \SprykerEco\Zed\Payone\Dependency\Plugin\StandardParameterMapperPluginInterface[] $mapperPlugins
      */
-    public function __construct(HashGeneratorInterface $hashGenerator, ModeDetectorInterface $modeDetector)
+    public function __construct(HashGeneratorInterface $hashGenerator, ModeDetectorInterface $modeDetector, array $mapperPlugins)
     {
         $this->hashGenerator = $hashGenerator;
         $this->modeDetector = $modeDetector;
+        $this->mapperPlugins = $mapperPlugins;
     }
 
     /**
@@ -53,6 +60,10 @@ class StandartParameterMapper implements StandartParameterMapperInterface
         $container->setIntegratorVersion(PayoneApiConstants::INTEGRATOR_VERSION_3_0_0);
         $container->setSolutionName(PayoneApiConstants::SOLUTION_NAME_SPRYKER);
         $container->setSolutionVersion(PayoneApiConstants::SOLUTION_VERSION_3_0_0);
+
+        foreach ($this->mapperPlugins as $plugin) {
+            $plugin->map($container, $standardParameter);
+        }
 
         return $container;
     }

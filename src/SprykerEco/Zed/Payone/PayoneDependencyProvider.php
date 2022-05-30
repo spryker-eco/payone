@@ -24,6 +24,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     public const FACADE_SALES = 'sales facade';
     public const FACADE_GLOSSARY = 'glossary facade';
     public const FACADE_CALCULATION = 'calculation facade';
+    public const PLUGINS_STANDARD_PARAMETER_MAPPER = 'PLUGINS_STANDARD_PARAMETER_MAPPER';
 
     /**
      * @uses \Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
@@ -57,6 +58,10 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addGlossaryFacade($container);
         $container = $this->addStore($container);
         $container = $this->addRequestStack($container);
+
+        $container[static::PLUGINS_STANDARD_PARAMETER_MAPPER] = function() {
+            return $this->getStandardParameterMapperPlugins();
+        };
 
         return $container;
     }
@@ -157,5 +162,13 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         });
 
         return $container;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Dependency\Plugin\StandardParameterMapperPluginInterface[]
+     */
+    protected function getStandardParameterMapperPlugins()
+    {
+        return [];
     }
 }
