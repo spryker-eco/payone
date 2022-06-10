@@ -19,7 +19,7 @@ interface PayoneToOmsInterface
      *
      * @return array
      */
-    public function triggerEvent(string $eventId, ObjectCollection $orderItems, array $logContext, array $data = []): array;
+    public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = []): array;
 
     /**
      * @param int $idOrder
@@ -27,5 +27,5 @@ interface PayoneToOmsInterface
      *
      * @return bool
      */
-    public function isOrderFlaggedAll(int $idOrder, string $flag): bool;
+    public function isOrderFlaggedAll($idOrder, $flag): bool;
 }

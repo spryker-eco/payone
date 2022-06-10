@@ -32,7 +32,7 @@ class PayoneToOmsBridge implements PayoneToOmsInterface
      *
      * @return array
      */
-    public function triggerEvent(string $eventId, ObjectCollection $orderItems, array $logContext, array $data = []): array
+    public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = []): array
     {
         return $this->omsFacade->triggerEvent($eventId, $orderItems, $logContext, $data);
     }
@@ -43,7 +43,7 @@ class PayoneToOmsBridge implements PayoneToOmsInterface
      *
      * @return bool
      */
-    public function isOrderFlaggedAll(int $idOrder, string $flag): bool
+    public function isOrderFlaggedAll($idOrder, $flag): bool
     {
         return $this->omsFacade->isOrderFlaggedAll($idOrder, $flag);
     }
