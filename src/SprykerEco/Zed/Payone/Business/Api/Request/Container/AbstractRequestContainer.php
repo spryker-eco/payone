@@ -183,13 +183,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string|null $api_version
+     * @param string|null $apiVersion
      *
      * @return $this
      */
-    public function setApiVersion(?string $api_version = null)
+    public function setApiVersion(?string $apiVersion = null)
     {
-        $this->api_version = $api_version;
+        $this->api_version = $apiVersion;
 
         return $this;
     }
