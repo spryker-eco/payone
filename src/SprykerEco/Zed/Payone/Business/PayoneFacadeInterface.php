@@ -91,6 +91,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `PayoneCaptureTransfer.order` to be set.
      * - Distributes the prices for PayoneCaptureTransfer.order items and expenses depending on the payment method.
      * - Performs payment capture request to Payone API.
      *
@@ -116,6 +117,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `PayoneRefundTransfer.order` to be set.
      * - Distributes the prices for PayoneRefundTransfer.order items and expenses depending on the payment method.
      * - Performs payment refund request to Payone API.
      *
@@ -141,7 +143,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
-     * - Requires `PayonePaymentTransfer.paymentMethod`.
+     * - Requires `PayoneCreditCardTransfer.payment.paymentMethod`.
      * - Performs credit card check request to Payone API.
      *
      * @api
@@ -168,6 +170,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'APPROVED' response to authorization request for given order.
      *
      * @api
@@ -180,6 +183,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'REDIRECT' response to authorization request for given order.
      *
      * @api
@@ -192,6 +196,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'APPROVED' response to pre-authorization request for given order.
      *
      * @api
@@ -204,6 +209,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'REDIRECT' response to pre-authorization request for given order.
      *
      * @api
@@ -216,6 +222,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'ERROR' response for pre-authorization request for given order.
      *
      * @api
@@ -228,6 +235,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'ERROR' response to authorization request for given order.
      *
      * @api
@@ -240,6 +248,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'APPROVED' response to capture request for given order.
      *
      * @api
@@ -252,6 +261,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'ERROR' response to capture request for given order.
      *
      * @api
@@ -264,6 +274,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'APPROVED' response to refund request for given order.
      *
      * @api
@@ -276,6 +287,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if API logs contain 'ERROR' response to refund request for given order.
      *
      * @api
@@ -288,6 +300,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if refund is possible for given order.
      *
      * @api
@@ -300,6 +313,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Checks if used payment method references stored iban/bic data for given order.
      *
      * @api
@@ -416,6 +430,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `CheckoutResponseTransfer.saveOrder.idSalesOrder` to be set.
      * - Handles redirects and errors after order placement.
      * - Executes `authorization` or `pre-authorization` API call depends on payment method.
      * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
@@ -446,6 +461,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `CheckoutResponseTransfer.saveOrder.idSalesOrder` to be set.
      * - Executes `authorization` or `pre-authorization` API call depends on payment method.
      * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
      *
@@ -526,6 +542,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `PayoneGetFileTransfer.reference` and `PayoneGetFileTransfer.customerId` to be set.
      * - Performs GetFile request to Payone API for PDF file download.
      *
      * @api
@@ -550,6 +567,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `PayoneGetSecurityInvoiceTransfer.reference` and `PayoneGetSecurityInvoiceTransfer.customerId` to be set.
      * - Performs GetSecurityInvoice request to Payone API for PDF file download.
      *
      * @api
@@ -643,6 +661,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `PayonePartialOperationRequestTransfer.order` to be set.
      * - Distributes the prices for PayonePartialOperationRequestTransfer.order items and expenses depending on the payment method.
      * - Performs partial capture call to Payone API.
      *

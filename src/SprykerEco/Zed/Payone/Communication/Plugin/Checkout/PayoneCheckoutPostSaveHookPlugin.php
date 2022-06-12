@@ -24,6 +24,7 @@ class PayoneCheckoutPostSaveHookPlugin extends AbstractPlugin implements Checkou
 {
     /**
      * {@inheritDoc}
+     * - Requires `CheckoutResponseTransfer.saveOrder.idSalesOrder` to be set.
      * - Executes `authorization` or `pre-authorization` API call depends on payment method.
      * - Updates `CheckoutResponseTransfer` accordingly to API response.
      *
