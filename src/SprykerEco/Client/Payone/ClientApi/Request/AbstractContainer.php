@@ -14,14 +14,14 @@ abstract class AbstractContainer implements ContainerInterface
     /**
      * @var \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface
      */
-    protected $utilEncodingService;
+    protected $payoneToUtilEncodingServiceBridge;
 
     /**
-     * @param \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface $utilEncodingService
+     * @param \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface $payoneToUtilEncodingServiceBridge
      */
-    public function __construct(PayoneToUtilEncodingServiceInterface $utilEncodingService)
+    public function __construct(PayoneToUtilEncodingServiceInterface $payoneToUtilEncodingServiceBridge)
     {
-        $this->utilEncodingService = $utilEncodingService;
+        $this->payoneToUtilEncodingServiceBridge = $payoneToUtilEncodingServiceBridge;
     }
 
     /**
@@ -64,6 +64,6 @@ abstract class AbstractContainer implements ContainerInterface
      */
     public function toJson(): string
     {
-        return $this->utilEncodingService->encodeJson($this->toArray());
+        return $this->payoneToUtilEncodingServiceBridge->encodeJson($this->toArray());
     }
 }

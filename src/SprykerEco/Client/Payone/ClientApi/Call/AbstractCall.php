@@ -33,24 +33,24 @@ abstract class AbstractCall implements CallInterface
     /**
      * @var \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface
      */
-    protected $utilEncodingService;
+    protected $payoneToUtilEncodingServiceBridge;
 
     /**
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameterTransfer
      * @param \SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface $hashGenerator
      * @param \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface $modeDetector
-     * @param \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface $utilEncodingService
+     * @param \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface $payoneToUtilEncodingServiceBridge
      */
     public function __construct(
         PayoneStandardParameterTransfer $standardParameterTransfer,
         HashGeneratorInterface $hashGenerator,
         ModeDetectorInterface $modeDetector,
-        PayoneToUtilEncodingServiceInterface $utilEncodingService
+        PayoneToUtilEncodingServiceInterface $payoneToUtilEncodingServiceBridge
     ) {
         $this->standardParameter = $standardParameterTransfer;
         $this->hashGenerator = $hashGenerator;
         $this->modeDetector = $modeDetector;
-        $this->utilEncodingService = $utilEncodingService;
+        $this->payoneToUtilEncodingServiceBridge = $payoneToUtilEncodingServiceBridge;
     }
 
     /**

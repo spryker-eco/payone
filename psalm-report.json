@@ -633,8 +633,8 @@
             "type": "NullableReturnStatement",
             "message": "The declared return type 'string' for SprykerEco\\Client\\Payone\\ClientApi\\Request\\AbstractContainer::toJson is not nullable, but the function returns 'null|string'",
             "file_name": "vendor/spryker-eco/payone/src/SprykerEco/Client/Payone/ClientApi/Request/AbstractContainer.php",
-            "snippet": "        return $this->utilEncodingService->encodeJson($this->toArray());",
-            "selected_text": "$this->utilEncodingService->encodeJson($this->toArray())",
+            "snippet": "        return $this->payoneToUtilEncodingServiceBridge->encodeJson($this->toArray());",
+            "selected_text": "$this->payoneToUtilEncodingServiceBridge->encodeJson($this->toArray())",
             "error_level": 5,
             "shortcode": 139
         },
