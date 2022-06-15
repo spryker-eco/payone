@@ -43,7 +43,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $paydata;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 
@@ -198,19 +198,19 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWorkOrderId(): string
+    public function getWorkOrderId(): ?string
     {
         return $this->workorderid;
     }
 
     /**
-     * @param string $workOrderId
+     * @param string|null $workOrderId
      *
      * @return void
      */
-    public function setWorkOrderId(string $workOrderId): void
+    public function setWorkOrderId(?string $workOrderId = null): void
     {
         $this->workorderid = $workOrderId;
     }
