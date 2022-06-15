@@ -10,14 +10,14 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class GetFileResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $DATA;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDATA(): string
+    public function getDATA(): ?string
     {
         return $this->DATA;
     }

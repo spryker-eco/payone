@@ -10,72 +10,72 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class ConsumerScoreResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $secstatus;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $score;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $scorevalue;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $secscore;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $divergence;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $personstatus;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $streetname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $streetnumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $gender;
 
@@ -90,9 +90,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -108,9 +108,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDivergence(): string
+    public function getDivergence(): ?string
     {
         return $this->divergence;
     }
@@ -126,9 +126,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstname(): string
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
@@ -144,9 +144,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastname(): string
+    public function getLastname(): ?string
     {
         return $this->lastname;
     }
@@ -162,9 +162,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPersonstatus(): string
+    public function getPersonstatus(): ?string
     {
         return $this->personstatus;
     }
@@ -180,9 +180,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getScore(): string
+    public function getScore(): ?string
     {
         return $this->score;
     }
@@ -198,9 +198,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getScorevalue(): int
+    public function getScorevalue(): ?int
     {
         return $this->scorevalue;
     }
@@ -216,9 +216,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSecscore(): string
+    public function getSecscore(): ?string
     {
         return $this->secscore;
     }
@@ -234,9 +234,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getSecstatus(): int
+    public function getSecstatus(): ?int
     {
         return $this->secstatus;
     }
@@ -252,9 +252,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -270,9 +270,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreetname(): string
+    public function getStreetname(): ?string
     {
         return $this->streetname;
     }
@@ -288,9 +288,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreetnumber(): string
+    public function getStreetnumber(): ?string
     {
         return $this->streetnumber;
     }
@@ -306,9 +306,9 @@ class ConsumerScoreResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZip(): string
+    public function getZip(): ?string
     {
         return $this->zip;
     }

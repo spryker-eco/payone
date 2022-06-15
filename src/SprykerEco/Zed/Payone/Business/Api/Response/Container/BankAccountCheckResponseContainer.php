@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class BankAccountCheckResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankbranchcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcheckdigit;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
@@ -55,9 +55,9 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankAccount(): string
+    public function getBankAccount(): ?string
     {
         return $this->bankaccount;
     }
@@ -73,9 +73,9 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankBranchCode(): string
+    public function getBankBranchCode(): ?string
     {
         return $this->bankbranchcode;
     }
@@ -91,9 +91,9 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCheckDigit(): string
+    public function getBankCheckDigit(): ?string
     {
         return $this->bankcheckdigit;
     }
@@ -109,9 +109,9 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCode(): string
+    public function getBankCode(): ?string
     {
         return $this->bankcode;
     }
@@ -127,9 +127,9 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCountry(): string
+    public function getBankCountry(): ?string
     {
         return $this->bankcountry;
     }
@@ -145,9 +145,9 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic(): string
+    public function getBic(): ?string
     {
         return $this->bic;
     }
@@ -163,9 +163,9 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban(): string
+    public function getIban(): ?string
     {
         return $this->iban;
     }

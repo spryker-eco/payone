@@ -10,112 +10,112 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class AuthorizationResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $txid;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $userid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $protect_result_avs;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankaccountholder;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankiban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankbic;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcity;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $redirecturl;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_identification;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_identifier;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_email;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_date;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_amount;
 
@@ -130,9 +130,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankaccount()
+    public function getClearingBankaccount(): ?string
     {
         return $this->clearing_bankaccount;
     }
@@ -148,9 +148,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankaccountholder()
+    public function getClearingBankaccountholder(): ?string
     {
         return $this->clearing_bankaccountholder;
     }
@@ -166,9 +166,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankbic()
+    public function getClearingBankbic(): ?string
     {
         return $this->clearing_bankbic;
     }
@@ -184,9 +184,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcity()
+    public function getClearingBankcity(): ?string
     {
         return $this->clearing_bankcity;
     }
@@ -202,9 +202,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcode()
+    public function getClearingBankcode(): ?string
     {
         return $this->clearing_bankcode;
     }
@@ -220,9 +220,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcountry()
+    public function getClearingBankcountry(): ?string
     {
         return $this->clearing_bankcountry;
     }
@@ -238,9 +238,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankiban()
+    public function getClearingBankiban(): ?string
     {
         return $this->clearing_bankiban;
     }
@@ -256,9 +256,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankname()
+    public function getClearingBankname(): ?string
     {
         return $this->clearing_bankname;
     }
@@ -274,9 +274,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getProtectResultAvs(): string
+    public function getProtectResultAvs(): ?string
     {
         return $this->protect_result_avs;
     }
@@ -292,9 +292,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxid()
+    public function getTxid(): ?int
     {
         return $this->txid;
     }
@@ -310,9 +310,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getUserid()
+    public function getUserid(): ?int
     {
         return $this->userid;
     }
@@ -328,9 +328,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRedirecturl()
+    public function getRedirecturl(): ?string
     {
         return $this->redirecturl;
     }
@@ -346,9 +346,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorCity(): string
+    public function getCreditorCity(): ?string
     {
         return $this->creditor_city;
     }
@@ -364,9 +364,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorCountry(): string
+    public function getCreditorCountry(): ?string
     {
         return $this->creditor_country;
     }
@@ -382,9 +382,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorEmail(): string
+    public function getCreditorEmail(): ?string
     {
         return $this->creditor_email;
     }
@@ -400,9 +400,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorIdentifier(): string
+    public function getCreditorIdentifier(): ?string
     {
         return $this->creditor_identifier;
     }
@@ -418,9 +418,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorName(): string
+    public function getCreditorName(): ?string
     {
         return $this->creditor_name;
     }
@@ -436,9 +436,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorStreet(): string
+    public function getCreditorStreet(): ?string
     {
         return $this->creditor_street;
     }
@@ -454,9 +454,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorZip(): string
+    public function getCreditorZip(): ?string
     {
         return $this->creditor_zip;
     }
@@ -472,9 +472,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateIdentification()
+    public function getMandateIdentification(): ?string
     {
         return $this->mandate_identification;
     }
@@ -490,9 +490,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingAmount(): string
+    public function getClearingAmount(): ?string
     {
         return $this->clearing_amount;
     }
@@ -508,9 +508,9 @@ class AuthorizationResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingDate(): string
+    public function getClearingDate(): ?string
     {
         return $this->clearing_date;
     }

@@ -10,27 +10,27 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 abstract class AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $status;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $rawResponse;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $errorcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $errormessage;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $customermessage;
 
@@ -103,9 +103,9 @@ abstract class AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -121,9 +121,9 @@ abstract class AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCustomermessage()
+    public function getCustomermessage(): ?string
     {
         return $this->customermessage;
     }
@@ -139,9 +139,9 @@ abstract class AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getErrorcode()
+    public function getErrorcode(): ?string
     {
         return $this->errorcode;
     }
@@ -169,9 +169,9 @@ abstract class AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getErrormessage()
+    public function getErrormessage(): ?string
     {
         return $this->errormessage;
     }
@@ -187,14 +187,14 @@ abstract class AbstractResponseContainer
     }
 
     /**
-     * @param string $key
      * @param string $name
+     * @param string $value
      *
      * @return bool
      */
-    public function setValue(string $key, string $name): bool
+    public function setValue(string $name, $value): bool
     {
-        return $this->set($key, $name);
+        return $this->set($name, $value);
     }
 
     /**
@@ -239,9 +239,9 @@ abstract class AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRawResponse()
+    public function getRawResponse(): ?string
     {
         return $this->rawResponse;
     }

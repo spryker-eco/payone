@@ -15,7 +15,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
     protected const ADD_PAYDATA_REPLACEMENT_PATTERN = '/add_paydata\[(.*)\]/';
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 
@@ -35,7 +35,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function getWorkOrderId(): string
+    public function getWorkOrderId(): ?string
     {
         return $this->workorderid;
     }

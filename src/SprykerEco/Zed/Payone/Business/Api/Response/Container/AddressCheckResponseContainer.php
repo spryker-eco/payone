@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class AddressCheckResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $secstatus;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $personstatus;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $streetname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $streetnumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
@@ -55,9 +55,9 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -73,9 +73,9 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPersonstatus(): string
+    public function getPersonstatus(): ?string
     {
         return $this->personstatus;
     }
@@ -91,9 +91,9 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getSecstatus(): int
+    public function getSecstatus(): ?int
     {
         return $this->secstatus;
     }
@@ -109,9 +109,9 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -127,9 +127,9 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreetname(): string
+    public function getStreetname(): ?string
     {
         return $this->streetname;
     }
@@ -145,9 +145,9 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreetnumber(): string
+    public function getStreetnumber(): ?string
     {
         return $this->streetnumber;
     }
@@ -163,9 +163,9 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZip(): string
+    public function getZip(): ?string
     {
         return $this->zip;
     }

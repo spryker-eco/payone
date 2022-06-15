@@ -10,32 +10,32 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class ManageMandateResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_identification;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_status;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_text;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_identifier;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
@@ -50,9 +50,9 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateIdentification(): string
+    public function getMandateIdentification(): ?string
     {
         return $this->mandate_identification;
     }
@@ -68,9 +68,9 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateStatus(): string
+    public function getMandateStatus(): ?string
     {
         return $this->mandate_status;
     }
@@ -86,9 +86,9 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateText(): string
+    public function getMandateText(): ?string
     {
         return $this->mandate_text;
     }
@@ -104,9 +104,9 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorIdentifier(): string
+    public function getCreditorIdentifier(): ?string
     {
         return $this->creditor_identifier;
     }
@@ -122,9 +122,9 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic(): string
+    public function getBic(): ?string
     {
         return $this->bic;
     }
@@ -140,9 +140,9 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban(): string
+    public function getIban(): ?string
     {
         return $this->iban;
     }

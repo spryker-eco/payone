@@ -10,62 +10,62 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class GenericPaymentResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_state;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_addressaddition;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $redirecturl;
 
@@ -78,9 +78,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWorkOrderId(): string
+    public function getWorkOrderId(): ?string
     {
         return $this->workorderid;
     }
@@ -96,9 +96,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRedirectUrl(): string
+    public function getRedirectUrl(): ?string
     {
         return $this->redirecturl;
     }
@@ -114,9 +114,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingFirstName(): string
+    public function getShippingFirstName(): ?string
     {
         return $this->shipping_firstname;
     }
@@ -132,9 +132,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingLastName(): string
+    public function getShippingLastName(): ?string
     {
         return $this->shipping_lastname;
     }
@@ -150,9 +150,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCompany(): string
+    public function getShippingCompany(): ?string
     {
         return $this->shipping_company;
     }
@@ -168,9 +168,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingStreet(): string
+    public function getShippingStreet(): ?string
     {
         return $this->shipping_street;
     }
@@ -186,9 +186,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingZip(): string
+    public function getShippingZip(): ?string
     {
         return $this->shipping_zip;
     }
@@ -204,9 +204,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCity(): string
+    public function getShippingCity(): ?string
     {
         return $this->shipping_city;
     }
@@ -222,9 +222,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingState(): string
+    public function getShippingState(): ?string
     {
         return $this->shipping_state;
     }
@@ -240,9 +240,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCountry(): string
+    public function getShippingCountry(): ?string
     {
         return $this->shipping_country;
     }
@@ -258,9 +258,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingAddressAddition(): string
+    public function getShippingAddressAddition(): ?string
     {
         return $this->shipping_addressaddition;
     }
@@ -276,9 +276,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $acsurl;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $termurl;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $pareq;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $xid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $md;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $pseudocardpan;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $truncatedcardpan;
 
@@ -55,9 +55,9 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAcsurl(): string
+    public function getAcsurl(): ?string
     {
         return $this->acsurl;
     }
@@ -73,9 +73,9 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMd(): string
+    public function getMd(): ?string
     {
         return $this->md;
     }
@@ -91,9 +91,9 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPareq(): string
+    public function getPareq(): ?string
     {
         return $this->pareq;
     }
@@ -109,9 +109,9 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPseudocardpan(): string
+    public function getPseudocardpan(): ?string
     {
         return $this->pseudocardpan;
     }
@@ -127,9 +127,9 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTermurl(): string
+    public function getTermurl(): ?string
     {
         return $this->termurl;
     }
@@ -145,9 +145,9 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTruncatedcardpan(): string
+    public function getTruncatedcardpan(): ?string
     {
         return $this->truncatedcardpan;
     }
@@ -163,9 +163,9 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getXid(): string
+    public function getXid(): ?string
     {
         return $this->xid;
     }
