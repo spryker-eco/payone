@@ -8,9 +8,9 @@
 namespace SprykerEco\Client\Payone\ClientApi\Call;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
-use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 use SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface;
 use SprykerEco\Client\Payone\ClientApi\Request\AbstractRequest;
+use SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
 
 abstract class AbstractCall implements CallInterface
@@ -31,7 +31,7 @@ abstract class AbstractCall implements CallInterface
     protected $modeDetector;
 
     /**
-     * @var \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
+     * @var \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface
      */
     protected $utilEncodingService;
 
@@ -39,13 +39,13 @@ abstract class AbstractCall implements CallInterface
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameterTransfer
      * @param \SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface $hashGenerator
      * @param \SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface $modeDetector
-     * @param \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface $utilEncodingService
+     * @param \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface $utilEncodingService
      */
     public function __construct(
         PayoneStandardParameterTransfer $standardParameterTransfer,
         HashGeneratorInterface $hashGenerator,
         ModeDetectorInterface $modeDetector,
-        UtilEncodingServiceInterface $utilEncodingService
+        PayoneToUtilEncodingServiceInterface $utilEncodingService
     ) {
         $this->standardParameter = $standardParameterTransfer;
         $this->hashGenerator = $hashGenerator;

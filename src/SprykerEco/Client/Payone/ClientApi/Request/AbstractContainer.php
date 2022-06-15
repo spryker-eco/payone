@@ -7,19 +7,19 @@
 
 namespace SprykerEco\Client\Payone\ClientApi\Request;
 
-use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
+use SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface;
 
 abstract class AbstractContainer implements ContainerInterface
 {
     /**
-     * @var \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
+     * @var \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface
      */
     protected $utilEncodingService;
 
     /**
-     * @param \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface $utilEncodingService
+     * @param \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface $utilEncodingService
      */
-    public function __construct(UtilEncodingServiceInterface $utilEncodingService)
+    public function __construct(PayoneToUtilEncodingServiceInterface $utilEncodingService)
     {
         $this->utilEncodingService = $utilEncodingService;
     }
