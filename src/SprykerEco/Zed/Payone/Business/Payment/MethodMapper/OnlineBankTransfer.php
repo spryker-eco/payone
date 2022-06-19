@@ -203,7 +203,7 @@ class OnlineBankTransfer extends AbstractMapper
 
         $bankAccountCheckContainer->setAid($this->getStandardParameter()->getAid());
         $bankAccountCheckContainer->setBankCountry($bankAccountCheckTransfer->getBankCountry());
-        $bankAccountCheckContainer->setBankAccount((string)$bankAccountCheckTransfer->getBankAccount());
+        $bankAccountCheckContainer->setBankAccount($bankAccountCheckTransfer->getBankAccount());
         $bankAccountCheckContainer->setBankCode($bankAccountCheckTransfer->getBankCode());
         $bankAccountCheckContainer->setIban($bankAccountCheckTransfer->getIban());
         $bankAccountCheckContainer->setBic($bankAccountCheckTransfer->getBic());
