@@ -70,7 +70,7 @@ class PayoneManageMandateMethodSender implements PayoneManageMandateMethodSender
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new ManageMandateResponseContainer($rawResponse);
 
-        $manageMandateTransfer->setErrorCode((string)$responseContainer->getErrorcode());
+        $manageMandateTransfer->setErrorCode($responseContainer->getErrorcode());
         $manageMandateTransfer->setCustomerErrorMessage($responseContainer->getCustomermessage());
         $manageMandateTransfer->setStatus($responseContainer->getStatus());
         $manageMandateTransfer->setInternalErrorMessage($responseContainer->getErrormessage());
