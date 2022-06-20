@@ -22,7 +22,7 @@ class ShippingContainer extends AbstractContainer
     protected $shipping_lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_company;
 
@@ -75,19 +75,19 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @param string $shippingCompany
+     * @param string|null $shippingCompany
      *
      * @return void
      */
-    public function setShippingCompany(string $shippingCompany): void
+    public function setShippingCompany(?string $shippingCompany = null): void
     {
         $this->shipping_company = $shippingCompany;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCompany(): string
+    public function getShippingCompany(): ?string
     {
         return $this->shipping_company;
     }

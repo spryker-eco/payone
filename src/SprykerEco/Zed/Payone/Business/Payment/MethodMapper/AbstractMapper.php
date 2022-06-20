@@ -168,7 +168,7 @@ abstract class AbstractMapper implements PaymentMethodMapperInterface
     {
         $shippingContainer->setShippingFirstName($shippingAddressEntity->getFirstName());
         $shippingContainer->setShippingLastName($shippingAddressEntity->getLastName());
-        $shippingContainer->setShippingCompany($shippingAddressEntity->getCompany() ?? '');
+        $shippingContainer->setShippingCompany($shippingAddressEntity->getCompany());
         $shippingContainer->setShippingStreet(
             implode(' ', [$shippingAddressEntity->getAddress1(), $shippingAddressEntity->getAddress2()]),
         );
