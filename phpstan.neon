@@ -82,7 +82,7 @@ parameters:
         - '#Method .+PayoneQueryContainer::createTransactionStatusLogsByOrderIds\(\) should return .+SpyPaymentPayoneTransactionStatusLogQuery but returns .+SpyPaymentPayoneApiLogQuery\|.+SpyPaymentPayoneDetailQuery\|.+SpyPaymentPayoneOrderItemQuery\|.+SpyPaymentPayoneTransactionStatusLogQuery\|.+SpySalesOrderQuery\.#'
         - '#Call to an undefined method .+SpySalesOrderQuery::orderByIdPaymentPayoneApiLog\(\)\.#'
         - '#Call to an undefined method .+SpySalesOrderQuery::filterByRequest\(\)\.#'
-        - '#Call to an undefined method .+SpySalesShipmentQuery::useSpyPaymentPayoneDetailQuery\(\)\.#'
+        - '#Call to an undefined method .+SpySalesShipmentQuery.+useSpyPaymentPayoneDetailQuery\(\)\.#'
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
         - src/SprykerEco/Yves/Payone/Form/Constraint
