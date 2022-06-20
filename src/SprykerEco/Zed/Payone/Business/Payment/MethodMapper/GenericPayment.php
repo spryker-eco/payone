@@ -187,7 +187,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
         $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $captureContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
 
         return $captureContainer;
     }
@@ -202,7 +204,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $debitContainer = new DebitContainer();
 
         $debitContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $debitContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $debitContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $debitContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $debitContainer->setAmount($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());
 
@@ -219,7 +223,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $refundContainer = new RefundContainer();
 
         $refundContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
 
         return $refundContainer;

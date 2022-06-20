@@ -199,7 +199,9 @@ class SecurityInvoice extends AbstractMapper
         $debitContainer = new DebitContainer();
 
         $debitContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $debitContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $debitContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $debitContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $debitContainer->setAmount($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());
 
@@ -229,7 +231,9 @@ class SecurityInvoice extends AbstractMapper
         $refundContainer = new RefundContainer();
 
         $refundContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $refundContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $refundContainer->setBankcountry($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getBankCountry());
         $refundContainer->setBankaccount($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getBankAccount());

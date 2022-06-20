@@ -156,7 +156,9 @@ class Invoice extends AbstractMapper implements InvoiceInterface
         $debitContainer = new DebitContainer();
 
         $debitContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $debitContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $debitContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $debitContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $debitContainer->setAmount($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());
 
@@ -186,7 +188,9 @@ class Invoice extends AbstractMapper implements InvoiceInterface
         $refundContainer = new RefundContainer();
 
         $refundContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
 
         $refundContainer->setBankcountry($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getBankCountry());

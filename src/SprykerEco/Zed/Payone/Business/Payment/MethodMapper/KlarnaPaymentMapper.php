@@ -112,8 +112,10 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
         $captureContainer->setCaptureMode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
-        $sequenceNumber = $this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId());
-        $captureContainer->setSequenceNumber($sequenceNumber);
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $sequenceNumber = $this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId());
+            $captureContainer->setSequenceNumber($sequenceNumber);
+        }
 
         return $captureContainer;
     }
@@ -128,7 +130,9 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $debitContainer = new DebitContainer();
 
         $debitContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $debitContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $debitContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $debitContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $debitContainer->setAmount($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());
 
@@ -145,7 +149,9 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $refundContainer = new RefundContainer();
 
         $refundContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
 
         return $refundContainer;

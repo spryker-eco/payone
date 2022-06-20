@@ -63,7 +63,9 @@ class OnlineBankTransfer extends AbstractMapper
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
         $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $captureContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
 
         return $captureContainer;
     }
@@ -119,7 +121,9 @@ class OnlineBankTransfer extends AbstractMapper
         $debitContainer = new DebitContainer();
 
         $debitContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $debitContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $debitContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $debitContainer->setCurrency($this->getStandardParameter()->getCurrency());
         $debitContainer->setAmount($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());
 
@@ -136,7 +140,9 @@ class OnlineBankTransfer extends AbstractMapper
         $refundContainer = new RefundContainer();
 
         $refundContainer->setTxid($paymentPayoneEntity->getTransactionId());
-        $refundContainer->setSequenceNumber($this->getNextSequenceNumber((int)$paymentPayoneEntity->getTransactionId()));
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
 
         $refundContainer->setBankcountry($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getBankCountry());
