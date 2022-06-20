@@ -163,6 +163,7 @@ class PostSaveHook implements PostSaveHookInterface
     ): CheckoutResponseTransfer {
         $paymentPayoneEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponseTransfer->getSaveOrderOrFail()->getIdSalesOrderOrFail())->findOne();
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentPayoneEntity->getPaymentMethod());
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $requestContainer */
         $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentPayoneEntity, $quoteTransfer);
 
         if ($paymentPayoneEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {

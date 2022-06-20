@@ -43,7 +43,7 @@ class PayoneRequestProductDataMapper implements PayoneRequestProductDataMapperIn
 
     /**
      * @param \Generated\Shared\Transfer\OrderTransfer|\Generated\Shared\Transfer\QuoteTransfer $itemsContainer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\RefundContainerInterface|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\CaptureContainerInterface|\SprykerEco\Zed\Payone\Business\Payment\DataMapper\DebitContainerInterface $requestContainer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
