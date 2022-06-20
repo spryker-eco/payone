@@ -21,6 +21,11 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerInterface
 {
     /**
+     * @var string
+     */
+    protected const STATUS_UPDATE_ERROR_NO_TXID = 'Payone transaction status update: txid is not provided!';
+
+    /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
      */
     protected $queryContainer;
@@ -62,6 +67,10 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
             return $validationResult;
         }
         $this->transformCurrency($request);
+
+        if ($request->getTxid() === null) {
+            return $this->createErrorResponse(static::STATUS_UPDATE_ERROR_NO_TXID);
+        }
 
         $paymentPayoneEntity = $this->findPaymentByTransactionId($request->getTxid());
 
