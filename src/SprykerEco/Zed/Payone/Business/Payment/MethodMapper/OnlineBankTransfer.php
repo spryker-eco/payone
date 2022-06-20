@@ -61,7 +61,9 @@ class OnlineBankTransfer extends AbstractMapper
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
         if ($paymentPayoneEntity->getTransactionId() !== null) {
             $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
@@ -99,7 +101,9 @@ class OnlineBankTransfer extends AbstractMapper
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_ONLINE_BANK_TRANSFER);
         $authorizationContainer->setReference($paymentPayoneEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentPayoneEntity));
 
         $personalContainer = new PersonalContainer();

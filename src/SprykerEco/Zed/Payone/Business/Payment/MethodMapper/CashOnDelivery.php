@@ -78,7 +78,9 @@ class CashOnDelivery extends AbstractMapper
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrency() ?? '');
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
         if ($paymentPayoneEntity->getTransactionId() !== null) {
             $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
@@ -181,7 +183,9 @@ class CashOnDelivery extends AbstractMapper
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_CASH_ON_DELIVERY);
         $authorizationContainer->setReference($paymentPayoneEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentPayoneEntity));
 
         $personalContainer = $this->buildPersonalContainer($paymentPayoneEntity);

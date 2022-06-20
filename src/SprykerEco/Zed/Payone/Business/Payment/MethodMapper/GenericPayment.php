@@ -81,7 +81,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
 
         $genericPayment->setAid($this->getStandardParameter()->getAid());
         $genericPayment->setClearingType(PayoneApiConstants::CLEARING_TYPE_E_WALLET);
-        $genericPayment->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $genericPayment->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $genericPayment->setWalletType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL);
 
         return $genericPayment;
@@ -127,7 +129,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_E_WALLET);
         $authorizationContainer->setReference($paymentPayoneEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentPayoneEntity));
 
         $personalContainer = new PersonalContainer();
@@ -185,7 +189,9 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
         if ($paymentPayoneEntity->getTransactionId() !== null) {
             $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));

@@ -62,7 +62,9 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
         if ($paymentPayoneEntity->getTransactionId() !== null) {
             $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
@@ -100,7 +102,9 @@ class CreditCardPseudo extends AbstractMapper implements CreditCardPseudoInterfa
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_CREDIT_CARD);
         $authorizationContainer->setReference($paymentPayoneEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency() ?? '');
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentPayoneEntity));
 
         $personalContainer = new PersonalContainer();

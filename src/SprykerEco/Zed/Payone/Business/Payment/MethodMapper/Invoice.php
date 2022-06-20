@@ -100,7 +100,9 @@ class Invoice extends AbstractMapper implements InvoiceInterface
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
 
         return $captureContainer;
@@ -135,7 +137,9 @@ class Invoice extends AbstractMapper implements InvoiceInterface
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_INVOICE);
         $authorizationContainer->setReference($paymentPayoneEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentPayoneEntity));
 
         $personalContainer = new PersonalContainer();

@@ -95,7 +95,9 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
         if ($paymentPayoneEntity->getTransactionId() !== null) {
             $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
@@ -153,7 +155,9 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
 
         $manageMandateContainer->setAid($this->getStandardParameter()->getAid());
         $manageMandateContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_DIRECT_DEBIT);
-        $manageMandateContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $manageMandateContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $manageMandateContainer->setCustomerid((int)$manageMandateTransfer->getPersonalData()->getCustomerId());
         $manageMandateContainer->setLastname((string)$manageMandateTransfer->getPersonalData()->getLastName());
         $manageMandateContainer->setFirstname((string)$manageMandateTransfer->getPersonalData()->getFirstName());
@@ -187,7 +191,9 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_DIRECT_DEBIT);
         $authorizationContainer->setReference($paymentPayoneEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentPayoneEntity));
 
         $personalContainer = new PersonalContainer();

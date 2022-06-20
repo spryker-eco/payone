@@ -109,7 +109,9 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $captureContainer = new CaptureContainer();
 
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
         $captureContainer->setCaptureMode(PayoneApiConstants::CAPTURE_MODE_NOTCOMPLETED);
         if ($paymentPayoneEntity->getTransactionId() !== null) {
@@ -223,7 +225,9 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
 
         $authorizationContainer->setReference($paymentPayoneEntity->getReference());
@@ -264,7 +268,9 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $payoneKlarnaTransfer = $quoteTransfer->getPayment()->getPayoneKlarna();
 
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency((string)$this->getStandardParameter()->getCurrency());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_FINANCING);
         $authorizationContainer->setFinancingType($payoneKlarnaTransfer->getPayMethod());
 
