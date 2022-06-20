@@ -431,6 +431,7 @@ interface PayoneFacadeInterface
     /**
      * Specification:
      * - Requires `CheckoutResponseTransfer.saveOrder.idSalesOrder` to be set.
+     * - Requires `QuoteTransfer.payment.payone.fkSalesOrder` to be set.
      * - Handles redirects and errors after order placement.
      * - Executes `authorization` or `pre-authorization` API call depends on payment method.
      * - Updates `CheckoutResponseTransfer` with errors or/and redirect url accordingly to API response.
@@ -446,6 +447,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `QuoteTransfer.payment.payone.fkSalesOrder` to be set.
      * - Handles redirects and errors after order placement.
      *
      * @api

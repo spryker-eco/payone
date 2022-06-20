@@ -129,7 +129,7 @@ class PostSaveHook implements PostSaveHookInterface
      */
     protected function checkApiLogRedirectAndError(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
     {
-        $apiLogTransfer = $this->payoneRepository->findLastApiLogByOrderId((int)$quoteTransfer->getPayment()->getPayone()->getFkSalesOrder());
+        $apiLogTransfer = $this->payoneRepository->findLastApiLogByOrderId($quoteTransfer->getPaymentOrFail()->getPayoneOrFail()->getFkSalesOrderOrFail());
 
         if (!$apiLogTransfer) {
             return $checkoutResponse;
