@@ -82,6 +82,11 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
     public const OPTION_BANK_COUNTRIES = '';
 
     /**
+     * @var string
+     */
+    protected const BANK_ACCOUNT_UNKNOWN_ERROR_MESSAGE = 'payone.bank_account.unknown_error';
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -318,7 +323,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
 
         $response = $this->getClient()->bankAccountCheck($bankAccountCheckTransfer);
         if ($response->getStatus() == 'ERROR' || $response->getStatus() == 'INVALID') {
-            $context->addViolation((string)$response->getCustomerErrorMessage());
+            $context->addViolation($response->getCustomerErrorMessage() ?? static::BANK_ACCOUNT_UNKNOWN_ERROR_MESSAGE);
         }
     }
 

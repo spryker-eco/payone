@@ -26,6 +26,11 @@ use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 class PostSaveHook implements PostSaveHookInterface
 {
     /**
+     * @var string
+     */
+    protected const PAYONE_API_UNKNOWN_ERROR_MESSAGE = 'payone.payment.unknown_error';
+
+    /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
      */
     protected $payoneRepository;
@@ -139,7 +144,7 @@ class PostSaveHook implements PostSaveHookInterface
         $errorCode = $apiLogTransfer->getErrorCode();
 
         if ($errorCode) {
-            $checkoutResponse->addError($this->createCheckoutErrorTransfer((string)$apiLogTransfer->getErrorMessageUser(), $errorCode));
+            $checkoutResponse->addError($this->createCheckoutErrorTransfer($apiLogTransfer->getErrorMessageUser() ?? static::PAYONE_API_UNKNOWN_ERROR_MESSAGE, $errorCode));
             $checkoutResponse->setIsSuccess(false);
         }
 
@@ -167,7 +172,7 @@ class PostSaveHook implements PostSaveHookInterface
         $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentPayoneEntity, $requestContainer);
 
         if ($responseContainer->getErrorcode()) {
-            $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage(), $responseContainer->getErrorcode());
+            $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage() ?? static::PAYONE_API_UNKNOWN_ERROR_MESSAGE, $responseContainer->getErrorcode());
             $checkoutResponseTransfer->addError($checkoutErrorTransfer);
             $checkoutResponseTransfer->setIsSuccess(false);
 

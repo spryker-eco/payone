@@ -82,6 +82,11 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     public const OPTION_BANK_COUNTRIES = '';
 
     /**
+     * @var string
+     */
+    protected const BANK_ACCOUNT_UNKNOWN_ERROR_MESSAGE = 'payone.bank_account.unknown_error';
+
+    /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
@@ -330,7 +335,7 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
 
         $response = $this->getClient()->bankAccountCheck($bankAccountCheckTransfer);
         if ($response->getStatus() == 'ERROR' || $response->getStatus() == 'INVALID') {
-            $context->addViolation($response->getCustomerErrorMessage() ?? '');
+            $context->addViolation($response->getCustomerErrorMessage() ?? static::BANK_ACCOUNT_UNKNOWN_ERROR_MESSAGE);
         }
     }
 }
