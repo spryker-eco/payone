@@ -168,8 +168,8 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer,
         AbstractRequestContainer $container
     ): AbstractRequestContainer {
-        $arrayIt = $container->getIt();
-        $arrayId = $container->getId();
+        $arrayIt = $container->getIt() ?? [];
+        $arrayId = $container->getId() ?? [];
         $arrayPr = $container->getPr();
         $arrayNo = $container->getNo();
         $arrayDe = $container->getDe();
@@ -192,7 +192,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
             $key++;
         }
 
-        $container->setIt((array)$arrayIt);
+        $container->setIt($arrayIt);
         $container->setId($arrayId);
         $container->setPr($arrayPr);
         $container->setNo($arrayNo);
