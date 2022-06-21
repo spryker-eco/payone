@@ -33,7 +33,7 @@ class KlarnaGenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getWorkOrderId(): ?string
     {

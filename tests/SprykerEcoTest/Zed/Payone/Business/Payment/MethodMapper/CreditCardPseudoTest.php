@@ -34,7 +34,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     public const CARD_TYPE = 'V';
 
     /**
-     * @var string
+     * @var int
      */
     public const CARD_EXPIRE_DATE = 1609;
 

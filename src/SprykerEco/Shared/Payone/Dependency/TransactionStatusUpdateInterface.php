@@ -195,7 +195,7 @@ interface TransactionStatusUpdateInterface
     public function getMandateIdentification(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getClearingDuedate(): ?string;
 

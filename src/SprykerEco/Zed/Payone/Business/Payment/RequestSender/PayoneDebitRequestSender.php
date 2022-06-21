@@ -74,6 +74,9 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
     /**
      * @param int $idPayment
      *
+     * @throws \SprykerEco\Zed\Payone\Business\Exception\PaymentNotFoundException
+     * @throws \SprykerEco\Zed\Payone\Business\Exception\TransactionMissingException
+     *
      * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
     public function debitPayment(int $idPayment): DebitResponseTransfer

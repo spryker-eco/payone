@@ -68,7 +68,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     public const COUNTRY_ISO2CODE = 'de';
 
     /**
-     * @var string
+     * @var int
      */
     public const TRANSACTION_ID = 1234567890;
 
