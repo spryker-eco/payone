@@ -150,7 +150,7 @@ class KlarnaTest extends AbstractMethodMapperTest
         // Assert
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertEquals($value, $requestData[$key]);
+            $this->assertSame($value, $requestData[$key]);
         }
     }
 

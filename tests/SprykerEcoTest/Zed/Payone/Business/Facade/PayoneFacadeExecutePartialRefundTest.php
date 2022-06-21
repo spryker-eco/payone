@@ -55,9 +55,9 @@ class PayoneFacadeExecutePartialRefundTest extends AbstractBusinessTest
     {
         $saveOrderTransfer = new SaveOrderTransfer();
         $saveOrderTransfer->setIdSalesOrder($this->orderEntity->getIdSalesOrder());
-        $items = new ArrayObject();
-        $items->append($this->orderEntity->getItems()->offsetGet(0));
-        $saveOrderTransfer->setOrderItems($items);
+        $itemTransfers = new ArrayObject();
+        $itemTransfers->append($this->orderEntity->getItems()->offsetGet(0));
+        $saveOrderTransfer->setOrderItems($itemTransfers);
         $itemTransfer = $saveOrderTransfer->getOrderItems()->offsetGet(0);
         $paymentPayoneEntity = $this->tester->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
         $this->tester->createPaymentPayoneOrderItem($paymentPayoneEntity->getIdPaymentPayone(), $itemTransfer->getIdSalesOrderItem());

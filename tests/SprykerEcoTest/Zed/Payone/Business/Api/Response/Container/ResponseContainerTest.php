@@ -153,7 +153,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('mandateidentification', $container->getMandateIdentification());
         $this->assertEquals('settleaccount', $container->getSettleaccount());
-        $this->assertEquals(10, $container->getTxid());
+        $this->assertSame(10, $container->getTxid());
     }
 
     /**
@@ -203,7 +203,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer', $container);
         $this->assertStandardParams($container);
         $this->assertEquals('settleaccount', $container->getSettleaccount());
-        $this->assertEquals(5, $container->getTxid());
+        $this->assertSame(5, $container->getTxid());
     }
 
     /**
@@ -229,7 +229,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer', $container);
         $this->assertStandardParams($container);
         $this->assertEquals('protectresultavs', $container->getProtectResultAvs());
-        $this->assertEquals(5, $container->getTxid());
+        $this->assertSame(5, $container->getTxid());
     }
 
     /**

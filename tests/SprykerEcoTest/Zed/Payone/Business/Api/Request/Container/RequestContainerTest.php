@@ -792,16 +792,16 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('it', $container->getIt());
 
         $container->setNo(10);
-        $this->assertEquals(10, $container->getNo());
+        $this->assertSame(10, $container->getNo());
 
         $container->setPr(20);
-        $this->assertEquals(20, $container->getPr());
+        $this->assertSame(20, $container->getPr());
 
         $container->setSd('sd');
         $this->assertEquals('sd', $container->getSd());
 
-        $container->setVa(30);
-        $this->assertEquals(30, $container->getVa());
+        $container->setVa(30.0);
+        $this->assertSame(30.0, $container->getVa());
 
         $this->assertCount(8, $container->toArray());
     }
@@ -967,13 +967,13 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('holder', $container->getBankAccountHolder());
 
         $container->setBankBranchCode(10);
-        $this->assertEquals(10, $container->getBankBranchCode());
+        $this->assertSame(10, $container->getBankBranchCode());
 
         $container->setBankCheckDigit(20);
-        $this->assertEquals(20, $container->getBankCheckDigit());
+        $this->assertSame(20, $container->getBankCheckDigit());
 
         $container->setBankCode(30);
-        $this->assertEquals(30, $container->getBankCode());
+        $this->assertSame(30, $container->getBankCode());
 
         $container->setBankCountry('country');
         $this->assertEquals('country', $container->getBankCountry());
@@ -1011,13 +1011,13 @@ class RequestContainerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bankaccount', $container->getBankaccount());
 
         $container->setBankbranchcode(10);
-        $this->assertEquals(10, $container->getBankbranchcode());
+        $this->assertSame(10, $container->getBankbranchcode());
 
         $container->setBankcheckdigit(20);
-        $this->assertEquals(20, $container->getBankcheckdigit());
+        $this->assertSame(20, $container->getBankcheckdigit());
 
         $container->setBankcode(30);
-        $this->assertEquals(30, $container->getBankcode());
+        $this->assertSame(30, $container->getBankcode());
 
         $container->setBankcountry('country');
         $this->assertEquals('country', $container->getBankcountry());

@@ -118,7 +118,7 @@ class OmsCommandTest extends AbstractPayoneTest
         $captureResponseTransfer = $payoneFacade->capturePayment($captureTransfer);
 
         $this->assertInstanceOf(CaptureResponseTransfer::class, $captureResponseTransfer);
-        $this->assertEquals(213624820, $captureResponseTransfer->getTxid());
+        $this->assertSame(213624820, $captureResponseTransfer->getTxid());
         $this->assertEquals('settlement account', $captureResponseTransfer->getSettleaccount());
     }
 

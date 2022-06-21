@@ -36,7 +36,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
     /**
      * @var string
      */
-    public const CARD_EXPIRE_DATE = '1609';
+    public const CARD_EXPIRE_DATE = 1609;
 
     /**
      * @var string
@@ -155,7 +155,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
 
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertEquals($value, $requestData[$key]);
+            $this->assertSame($value, $requestData[$key]);
         }
     }
 
@@ -171,7 +171,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
 
         foreach (static::REFUND_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertEquals($value, $requestData[$key]);
+            $this->assertSame($value, $requestData[$key]);
         }
     }
 
@@ -187,7 +187,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
 
         foreach (static::DEBIT_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertEquals($value, $requestData[$key]);
+            $this->assertSame($value, $requestData[$key]);
         }
     }
 
@@ -211,7 +211,7 @@ class CreditCardPseudoTest extends AbstractMethodMapperTest
 
         foreach (static::CREDIT_CARD_CHECK_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertEquals($value, $requestData[$key]);
+            $this->assertSame($value, $requestData[$key]);
         }
     }
 

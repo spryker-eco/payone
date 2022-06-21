@@ -130,7 +130,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
 
         foreach (static::CAPTURE_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertEquals($value, $requestData[$key]);
+            $this->assertSame($value, $requestData[$key]);
         }
     }
 
@@ -146,7 +146,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
 
         foreach (static::REFUND_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertEquals($value, $requestData[$key]);
+            $this->assertSame($value, $requestData[$key]);
         }
     }
 
@@ -162,7 +162,7 @@ class SecurityInvoiceTest extends AbstractMethodMapperTest
 
         foreach (static::DEBIT_COMMON_REQUIRED_PARAMS as $key => $value) {
             $this->assertArrayHasKey($key, $requestData);
-            $this->assertEquals($value, $requestData[$key]);
+            $this->assertSame($value, $requestData[$key]);
         }
     }
 

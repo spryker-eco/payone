@@ -70,7 +70,7 @@ class AbstractMethodMapperTest extends PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    public const TRANSACTION_ID = '1234567890';
+    public const TRANSACTION_ID = 1234567890;
 
     /**
      * @var int

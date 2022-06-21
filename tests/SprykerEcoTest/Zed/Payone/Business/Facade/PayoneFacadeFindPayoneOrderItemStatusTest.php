@@ -21,9 +21,9 @@ class PayoneFacadeFindPayoneOrderItemStatusTest extends AbstractPayoneTest
         //Arrange
         $saveOrderTransfer = new SaveOrderTransfer();
         $saveOrderTransfer->setIdSalesOrder($this->orderEntity->getIdSalesOrder());
-        $items = new ArrayObject();
-        $items->append($this->orderEntity->getItems()->offsetGet(0));
-        $saveOrderTransfer->setOrderItems($items);
+        $itemTransfers = new ArrayObject();
+        $itemTransfers->append($this->orderEntity->getItems()->offsetGet(0));
+        $saveOrderTransfer->setOrderItems($itemTransfers);
         $paymentPayoneEntity = $this->tester->createPaymentPayone($saveOrderTransfer->getIdSalesOrder());
         $itemTransfer = $saveOrderTransfer->getOrderItems()->offsetGet(0);
         $this->tester->createPaymentPayoneOrderItem($paymentPayoneEntity->getIdPaymentPayone(), $itemTransfer->getIdSalesOrderItem());
