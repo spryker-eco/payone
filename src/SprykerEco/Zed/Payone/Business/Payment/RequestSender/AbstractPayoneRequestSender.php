@@ -52,11 +52,11 @@ abstract class AbstractPayoneRequestSender
     }
 
     /**
-     * @param int|null $orderId
+     * @param int $orderId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
      */
-    protected function getPaymentEntity(?int $orderId): SpyPaymentPayone
+    protected function getPaymentEntity(int $orderId): SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentById($orderId)->findOne();
     }

@@ -58,7 +58,7 @@ class PayoneAuthorizeRequestSender extends AbstractPayoneRequestSender implement
      */
     public function authorizePayment(OrderTransfer $orderTransfer): AuthorizationResponseTransfer
     {
-        $paymentPayoneEntity = $this->getPaymentEntity($orderTransfer->getIdSalesOrder());
+        $paymentPayoneEntity = $this->getPaymentEntity($orderTransfer->getIdSalesOrderOrFail());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentPayoneEntity, $orderTransfer);
         $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($orderTransfer, $requestContainer);

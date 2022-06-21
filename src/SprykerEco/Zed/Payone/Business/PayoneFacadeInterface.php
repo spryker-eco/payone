@@ -67,6 +67,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      * - Performs payment authorization request to Payone API and updates payment data.
      *
      * @api
@@ -92,6 +93,7 @@ interface PayoneFacadeInterface
     /**
      * Specification:
      * - Requires `PayoneCaptureTransfer.order` to be set.
+     * - Requires `PayoneCaptureTransfer.payment.fkSalesOrder` to be set.
      * - Distributes the prices for PayoneCaptureTransfer.order items and expenses depending on the payment method.
      * - Performs payment capture request to Payone API.
      *
@@ -118,6 +120,7 @@ interface PayoneFacadeInterface
     /**
      * Specification:
      * - Requires `PayoneRefundTransfer.order` to be set.
+     * - Requires `PayoneRefundTransfer.payment.fkSalesOrder` to be set.
      * - Distributes the prices for PayoneRefundTransfer.order items and expenses depending on the payment method.
      * - Performs payment refund request to Payone API.
      *
@@ -131,6 +134,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `PayonePartialOperationRequestTransfer.order.idSalesOrder` to be set.
      * - Performs partial refund request to Payone API.
      *
      * @api
@@ -663,7 +667,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
-     * - Requires `PayonePartialOperationRequestTransfer.order` to be set.
+     * - Requires `PayonePartialOperationRequestTransfer.order.idSalesOrder` to be set.
      * - Distributes the prices for PayonePartialOperationRequestTransfer.order items and expenses depending on the payment method.
      * - Performs partial capture call to Payone API.
      *

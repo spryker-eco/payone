@@ -93,9 +93,9 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
         );
         $refundTransfer->setOrder($distributedPriceOrderTransfer);
 
-        $payonePaymentTransfer = $refundTransfer->getPayment();
+        $payonePaymentTransfer = $refundTransfer->getPaymentOrFail();
 
-        $paymentPayoneEntity = $this->getPaymentEntity($payonePaymentTransfer->getFkSalesOrder());
+        $paymentPayoneEntity = $this->getPaymentEntity($payonePaymentTransfer->getFkSalesOrderOrFail());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentPayoneEntity);
         $requestContainer->setAmount(0 - $paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());

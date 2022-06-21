@@ -93,7 +93,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
      */
     public function executePartialRefund(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): RefundResponseTransfer
     {
-        $paymentPayoneEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
+        $paymentPayoneEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrderOrFail()->getIdSalesOrderOrFail());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
         $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentPayoneEntity);
 

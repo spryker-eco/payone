@@ -143,7 +143,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         );
         $payonePartialOperationRequestTransfer->setOrder($distributedPriceOrderTransfer);
 
-        $paymentPayoneEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrder()->getIdSalesOrder());
+        $paymentPayoneEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrderOrFail()->getIdSalesOrderOrFail());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
 
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentPayoneEntity);

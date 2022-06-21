@@ -116,7 +116,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
         $captureTransfer->setOrder($distributedPriceOrderTransfer);
         $captureTransfer->setAmount($distributedPriceOrderTransfer->getTotals()->getGrandTotal());
 
-        $paymentPayoneEntity = $this->getPaymentEntity($captureTransfer->getPayment()->getFkSalesOrder());
+        $paymentPayoneEntity = $this->getPaymentEntity($captureTransfer->getPaymentOrFail()->getFkSalesOrderOrFail());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
 
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer $requestContainer */
