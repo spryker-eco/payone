@@ -582,9 +582,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
      */
-    public function getSecurityInvoice(
-        PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
-    );
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer);
 
     /**
      * Specification:
@@ -596,9 +594,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function initPaypalExpressCheckout(
-        PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    );
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
      * Specification:
@@ -610,9 +606,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetails(
-        QuoteTransfer $quoteTransfer
-    );
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:

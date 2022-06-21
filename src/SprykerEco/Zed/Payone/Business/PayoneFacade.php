@@ -249,9 +249,8 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function processTransactionStatusUpdate(
-        PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
-    ) {
+    public function processTransactionStatusUpdate(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer)
+    {
         $transactionManager = $this->getFactory()->createTransactionStatusManager();
         $transactionTransfer = $this->getFactory()->createTransactionStatusRequest($transactionStatusUpdateTransfer);
         $response = $transactionManager->processTransactionStatusUpdate($transactionTransfer);
@@ -676,9 +675,8 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function initPaypalExpressCheckout(
-        PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    ) {
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    {
         return $this->getFactory()->createPayoneInitPaypalExpressCheckoutMethodSender()->initPaypalExpressCheckout($requestTransfer);
     }
 
