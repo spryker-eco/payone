@@ -14,6 +14,8 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapperInterface;
+use SprykerEco\Zed\Payone\Business\Exception\PaymentNotFoundException;
+use SprykerEco\Zed\Payone\Business\Exception\TransactionMissingException;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
@@ -82,7 +84,14 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
         $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentPayoneEntity);
         $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
-        $paymentPayoneEntity = $this->findPaymentByTransactionId($paymentPayoneEntity->getTransactionId() ?? 0);
+        if (!$paymentPayoneEntity->getTransactionId()) {
+            throw new TransactionMissingException();
+        }
+        $paymentPayoneEntity = $this->findPaymentByTransactionId($paymentPayoneEntity->getTransactionId());
+        if (!$paymentPayoneEntity) {
+            throw new PaymentNotFoundException();
+        }
+
         $apiLogEntity = $this->initializeApiLog($paymentPayoneEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
@@ -94,13 +103,13 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
     }
 
     /**
-     * @param int|null $transactionId
+     * @param int $transactionId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByTransactionId(?int $transactionId): ?SpyPaymentPayone
+    protected function findPaymentByTransactionId(int $transactionId): ?SpyPaymentPayone
     {
-        return $transactionId ? $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne() : null;
+        return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
     }
 
     /**
