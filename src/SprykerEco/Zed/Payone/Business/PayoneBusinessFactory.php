@@ -425,7 +425,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function createExecutionAdapter(): AdapterInterface
     {
         return new Guzzle(
-            $this->getStandardParameter()->getPaymentGatewayUrl() ?? '',
+            $this->getStandardParameter()->getPaymentGatewayUrlOrFail(),
             $this->createApiCallLogWriter(),
         );
     }

@@ -60,8 +60,8 @@ class GatewayController extends AbstractGatewayController
     {
         $urlHmacGenerator = $this->getFactory()->createUrlHmacGenerator();
         $hash = $urlHmacGenerator->hash(
-            (string)$cancelRedirectTransfer->getOrderReference(),
-            (string)$this->getFactory()->getConfig()->getRequestStandardParameter()->getKey(),
+            $cancelRedirectTransfer->getOrderReferenceOrFail(),
+            $this->getFactory()->getConfig()->getRequestStandardParameter()->getKeyOrFail(),
         );
 
         if ($cancelRedirectTransfer->getUrlHmac() === $hash) {
@@ -188,7 +188,7 @@ class GatewayController extends AbstractGatewayController
                 ->findOne();
             $getPaymentDetailTransfer->setOrderId((string)$order->getIdSalesOrder());
         }
-        $response = $this->getFacade()->getPaymentDetail((int)$getPaymentDetailTransfer->getOrderId());
+        $response = $this->getFacade()->getPaymentDetail((int)$getPaymentDetailTransfer->getOrderIdOrFail());
         $getPaymentDetailTransfer->setPaymentDetail($response);
 
         return $getPaymentDetailTransfer;
