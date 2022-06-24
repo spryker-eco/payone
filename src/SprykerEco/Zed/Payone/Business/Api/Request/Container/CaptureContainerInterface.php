@@ -32,9 +32,9 @@ interface CaptureContainerInterface
     public function setCurrency(string $currency): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string;
+    public function getCurrency(): ?string;
 
     /**
      * @param int|null $sequencenumber

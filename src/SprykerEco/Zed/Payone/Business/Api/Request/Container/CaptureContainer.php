@@ -82,9 +82,9 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
