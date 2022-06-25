@@ -25,7 +25,7 @@ abstract class AbstractRequest extends AbstractContainer
     protected $portalid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $key;
 
@@ -35,7 +35,7 @@ abstract class AbstractRequest extends AbstractContainer
     protected $mode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $request;
 
@@ -50,22 +50,22 @@ abstract class AbstractRequest extends AbstractContainer
     protected $encoding;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $solution_name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $solution_version;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $integrator_name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $integrator_version;
 
@@ -75,7 +75,7 @@ abstract class AbstractRequest extends AbstractContainer
     protected $language;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $hash;
 
@@ -108,9 +108,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getKey(): string
+    public function getKey(): ?string
     {
         return $this->key;
     }
@@ -198,9 +198,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRequest(): string
+    public function getRequest(): ?string
     {
         return $this->request;
     }
@@ -236,9 +236,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIntegratorName(): string
+    public function getIntegratorName(): ?string
     {
         return $this->integrator_name;
     }
@@ -256,9 +256,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIntegratorVersion(): string
+    public function getIntegratorVersion(): ?string
     {
         return $this->integrator_version;
     }
@@ -276,9 +276,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSolutionName(): string
+    public function getSolutionName(): ?string
     {
         return $this->solution_name;
     }
@@ -296,9 +296,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSolutionVersion(): string
+    public function getSolutionVersion(): ?string
     {
         return $this->solution_version;
     }
@@ -314,9 +314,9 @@ abstract class AbstractRequest extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getHash(): string
+    public function getHash(): ?string
     {
         return $this->hash;
     }
