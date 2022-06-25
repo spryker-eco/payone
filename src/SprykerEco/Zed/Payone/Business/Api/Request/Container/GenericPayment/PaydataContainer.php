@@ -12,7 +12,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class PaydataContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $action;
 
@@ -22,9 +22,9 @@ class PaydataContainer extends AbstractContainer
     protected $authorization_token;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAction(): string
+    public function getAction(): ?string
     {
         return $this->action;
     }

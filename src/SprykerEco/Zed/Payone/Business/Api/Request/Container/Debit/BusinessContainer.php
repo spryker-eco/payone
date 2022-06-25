@@ -12,22 +12,22 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class BusinessContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $settleaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $transactiontype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $booking_date;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $document_date;
 
@@ -42,9 +42,9 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBookingDate(): string
+    public function getBookingDate(): ?string
     {
         return $this->booking_date;
     }
@@ -60,9 +60,9 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDocumentDate(): string
+    public function getDocumentDate(): ?string
     {
         return $this->document_date;
     }
@@ -78,9 +78,9 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSettleAccount(): string
+    public function getSettleAccount(): ?string
     {
         return $this->settleaccount;
     }
@@ -96,9 +96,9 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTransactionType(): string
+    public function getTransactionType(): ?string
     {
         return $this->transactiontype;
     }

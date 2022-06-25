@@ -25,9 +25,9 @@ class CashOnDeliveryContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingProvider(): string
+    public function getShippingProvider(): ?string
     {
         return $this->shippingprovider;
     }

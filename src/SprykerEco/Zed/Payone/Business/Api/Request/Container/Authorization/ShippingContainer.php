@@ -12,12 +12,12 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class ShippingContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_lastname;
 
@@ -27,17 +27,17 @@ class ShippingContainer extends AbstractContainer
     protected $shipping_company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_city;
 
@@ -45,14 +45,14 @@ class ShippingContainer extends AbstractContainer
      * ISO-3166-2 Subdivisions
      * only necessary for country US, CA, CN, JP, MX, BR, AR, ID, TH, IN
      *
-     * @var string
+     * @var string|null
      */
     protected $shipping_state;
 
     /**
      * Country (ISO-3166)
      *
-     * @var string
+     * @var string|null
      */
     protected $shipping_country;
 
@@ -67,9 +67,9 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCity(): string
+    public function getShippingCity(): ?string
     {
         return $this->shipping_city;
     }
@@ -103,9 +103,9 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCountry(): string
+    public function getShippingCountry(): ?string
     {
         return $this->shipping_country;
     }
@@ -121,9 +121,9 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingFirstName(): string
+    public function getShippingFirstName(): ?string
     {
         return $this->shipping_firstname;
     }
@@ -139,9 +139,9 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingLastName(): string
+    public function getShippingLastName(): ?string
     {
         return $this->shipping_lastname;
     }
@@ -157,9 +157,9 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingState(): string
+    public function getShippingState(): ?string
     {
         return $this->shipping_state;
     }
@@ -175,9 +175,9 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingStreet(): string
+    public function getShippingStreet(): ?string
     {
         return $this->shipping_street;
     }
@@ -193,9 +193,9 @@ class ShippingContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingZip(): string
+    public function getShippingZip(): ?string
     {
         return $this->shipping_zip;
     }

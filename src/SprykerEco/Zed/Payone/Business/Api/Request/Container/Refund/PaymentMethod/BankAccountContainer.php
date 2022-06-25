@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Refund\PaymentMet
 class BankAccountContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $bankcode;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $bankbranchcode;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $bankcheckdigit;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
@@ -55,9 +55,9 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankaccount(): string
+    public function getBankaccount(): ?string
     {
         return $this->bankaccount;
     }
@@ -73,9 +73,9 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getBankbranchcode(): int
+    public function getBankbranchcode(): ?int
     {
         return $this->bankbranchcode;
     }
@@ -91,9 +91,9 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getBankcheckdigit(): int
+    public function getBankcheckdigit(): ?int
     {
         return $this->bankcheckdigit;
     }
@@ -109,9 +109,9 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getBankcode(): int
+    public function getBankcode(): ?int
     {
         return $this->bankcode;
     }
@@ -127,9 +127,9 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankcountry(): string
+    public function getBankcountry(): ?string
     {
         return $this->bankcountry;
     }
@@ -145,9 +145,9 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban(): string
+    public function getIban(): ?string
     {
         return $this->iban;
     }
@@ -163,9 +163,9 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic(): string
+    public function getBic(): ?string
     {
         return $this->bic;
     }

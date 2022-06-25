@@ -20,7 +20,7 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer implement
     protected $request = PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 

@@ -35,7 +35,7 @@ class ItemContainer extends AbstractContainer
     /**
      * Artikeltyp (Enum)
      *
-     * @var string
+     * @var string|null
      */
     protected $it;
 
@@ -47,14 +47,14 @@ class ItemContainer extends AbstractContainer
     /**
      * DeliveryDate (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $sd;
 
     /**
      * Lieferzeitraums-Ende (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $ed;
 
@@ -123,9 +123,9 @@ class ItemContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEd(): string
+    public function getEd(): ?string
     {
         return $this->ed;
     }
@@ -195,9 +195,9 @@ class ItemContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSd(): string
+    public function getSd(): ?string
     {
         return $this->sd;
     }
@@ -231,9 +231,9 @@ class ItemContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIt(): string
+    public function getIt(): ?string
     {
         return $this->it;
     }

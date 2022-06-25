@@ -18,27 +18,27 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_GENERICPAYMENT;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearingtype;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $narrative_text;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
     protected $paydata;
 
@@ -48,47 +48,47 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $workorderid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_street;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $shipping_zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_state;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $wallettype;
 
@@ -108,9 +108,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $backurl;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingType(): string
+    public function getClearingType(): ?string
     {
         return $this->clearingtype;
     }
@@ -126,9 +126,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -144,9 +144,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -162,9 +162,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNarrativeText(): string
+    public function getNarrativeText(): ?string
     {
         return $this->narrative_text;
     }
@@ -180,9 +180,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
-    public function getPaydata(): PaydataContainer
+    public function getPaydata(): ?PaydataContainer
     {
         return $this->paydata;
     }
@@ -216,9 +216,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingFirstName(): string
+    public function getShippingFirstName(): ?string
     {
         return $this->shipping_firstname;
     }
@@ -234,9 +234,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingLastName(): string
+    public function getShippingLastName(): ?string
     {
         return $this->shipping_lastname;
     }
@@ -252,9 +252,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCompany(): string
+    public function getShippingCompany(): ?string
     {
         return $this->shipping_company;
     }
@@ -270,9 +270,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingStreet(): string
+    public function getShippingStreet(): ?string
     {
         return $this->shipping_street;
     }
@@ -288,9 +288,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getShippingZip(): int
+    public function getShippingZip(): ?int
     {
         return $this->shipping_zip;
     }
@@ -306,9 +306,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCity(): string
+    public function getShippingCity(): ?string
     {
         return $this->shipping_city;
     }
@@ -324,9 +324,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingState(): string
+    public function getShippingState(): ?string
     {
         return $this->shipping_state;
     }
@@ -342,9 +342,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCountry(): string
+    public function getShippingCountry(): ?string
     {
         return $this->shipping_country;
     }
@@ -360,9 +360,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWalletType(): string
+    public function getWalletType(): ?string
     {
         return $this->wallettype;
     }

@@ -14,12 +14,12 @@ class FinancingContainer extends AbstractPaymentMethodContainer
     /**
      * Enum FinancingType
      *
-     * @var string
+     * @var string|null
      */
     protected $financingtype;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
     protected $redirect;
 
@@ -34,9 +34,9 @@ class FinancingContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFinancingType(): string
+    public function getFinancingType(): ?string
     {
         return $this->financingtype;
     }
@@ -52,9 +52,9 @@ class FinancingContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
-    public function getRedirect(): RedirectContainer
+    public function getRedirect(): ?RedirectContainer
     {
         return $this->redirect;
     }

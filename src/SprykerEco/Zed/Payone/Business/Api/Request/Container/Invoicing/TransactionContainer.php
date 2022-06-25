@@ -12,27 +12,27 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class TransactionContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $invoiceid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $invoice_deliverymode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $invoice_deliverydate;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $invoice_deliveryenddate;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $invoiceappendix;
 
@@ -104,9 +104,9 @@ class TransactionContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceDeliverydate(): string
+    public function getInvoiceDeliverydate(): ?string
     {
         return $this->invoice_deliverydate;
     }
@@ -122,9 +122,9 @@ class TransactionContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceDeliveryenddate(): string
+    public function getInvoiceDeliveryenddate(): ?string
     {
         return $this->invoice_deliveryenddate;
     }
@@ -140,9 +140,9 @@ class TransactionContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceDeliverymode(): string
+    public function getInvoiceDeliverymode(): ?string
     {
         return $this->invoice_deliverymode;
     }
@@ -158,9 +158,9 @@ class TransactionContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceappendix(): string
+    public function getInvoiceappendix(): ?string
     {
         return $this->invoiceappendix;
     }
@@ -176,9 +176,9 @@ class TransactionContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceid(): string
+    public function getInvoiceid(): ?string
     {
         return $this->invoiceid;
     }

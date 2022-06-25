@@ -29,7 +29,7 @@ class CaptureContainer extends AbstractRequestContainer implements CaptureContai
     protected $sequencenumber;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $amount;
 

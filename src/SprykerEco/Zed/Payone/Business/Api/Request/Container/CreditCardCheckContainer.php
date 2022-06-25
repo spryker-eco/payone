@@ -17,37 +17,37 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_CREDITCARDCHECK;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $aid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cardpan;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cardtype;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $cardexpiredate;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $cardcvc2;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $cardissuenumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $storecarddata;
 
@@ -67,9 +67,9 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCardCvc2(): int
+    public function getCardCvc2(): ?int
     {
         return $this->cardcvc2;
     }
@@ -85,9 +85,9 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCardExpireDate(): int
+    public function getCardExpireDate(): ?int
     {
         return $this->cardexpiredate;
     }
@@ -103,9 +103,9 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCardIssueNumber(): int
+    public function getCardIssueNumber(): ?int
     {
         return $this->cardissuenumber;
     }
@@ -121,9 +121,9 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCardPan(): string
+    public function getCardPan(): ?string
     {
         return $this->cardpan;
     }
@@ -139,9 +139,9 @@ class CreditCardCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCardType(): string
+    public function getCardType(): ?string
     {
         return $this->cardtype;
     }

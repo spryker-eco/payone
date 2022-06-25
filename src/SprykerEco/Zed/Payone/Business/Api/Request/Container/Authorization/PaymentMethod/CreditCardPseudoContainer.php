@@ -12,12 +12,12 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSec
 class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $pseudocardpan;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer|null
      */
     protected $threedsecure;
 
@@ -32,9 +32,9 @@ class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPseudoCardPan(): string
+    public function getPseudoCardPan(): ?string
     {
         return $this->pseudocardpan;
     }
@@ -50,9 +50,9 @@ class CreditCardPseudoContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer|null
      */
-    public function getThreeDSecure(): ThreeDSecureContainer
+    public function getThreeDSecure(): ?ThreeDSecureContainer
     {
         return $this->threedsecure;
     }

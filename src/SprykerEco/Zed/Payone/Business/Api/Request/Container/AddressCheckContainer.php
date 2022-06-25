@@ -22,7 +22,7 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $aid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $addresschecktype;
 
@@ -42,7 +42,7 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
@@ -67,7 +67,7 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $state;
 
@@ -77,7 +77,7 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $telephonenumber;
 
@@ -87,12 +87,12 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $language;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $birthday;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $gender;
 
@@ -215,9 +215,9 @@ class AddressCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState(): string
+    public function getState(): ?string
     {
         return $this->state;
     }
@@ -233,9 +233,9 @@ class AddressCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -287,9 +287,9 @@ class AddressCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTelephoneNumber(): string
+    public function getTelephoneNumber(): ?string
     {
         return $this->telephonenumber;
     }

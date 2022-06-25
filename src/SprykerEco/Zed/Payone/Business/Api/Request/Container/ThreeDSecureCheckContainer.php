@@ -17,57 +17,57 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_3DSECURE_CHECK;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $aid;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearingtype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $exiturl;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cardpan;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cardtype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cardexpiredate;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $cardcvc2;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $storecarddata;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $language;
 
@@ -82,9 +82,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -100,9 +100,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCardCvc2(): int
+    public function getCardCvc2(): ?int
     {
         return $this->cardcvc2;
     }
@@ -118,9 +118,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCardExpireDate(): string
+    public function getCardExpireDate(): ?string
     {
         return $this->cardexpiredate;
     }
@@ -136,9 +136,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCardPan(): string
+    public function getCardPan(): ?string
     {
         return $this->cardpan;
     }
@@ -154,9 +154,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCardType(): string
+    public function getCardType(): ?string
     {
         return $this->cardtype;
     }
@@ -172,9 +172,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingType(): string
+    public function getClearingType(): ?string
     {
         return $this->clearingtype;
     }
@@ -190,9 +190,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -208,9 +208,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getExitUrl(): string
+    public function getExitUrl(): ?string
     {
         return $this->exiturl;
     }
@@ -226,9 +226,9 @@ class ThreeDSecureCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStoreCardData(): string
+    public function getStoreCardData(): ?string
     {
         return $this->storecarddata;
     }

@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Debit\PaymentMeth
 class CreditCardContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $cardpan;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cardtype;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $cardexpiredate;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $cardcvc2;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $cardissuenumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cardholder;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $pseudocardpan;
 
@@ -55,9 +55,9 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCardCvc2(): int
+    public function getCardCvc2(): ?int
     {
         return $this->cardcvc2;
     }
@@ -73,9 +73,9 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCardExpireDate(): int
+    public function getCardExpireDate(): ?int
     {
         return $this->cardexpiredate;
     }
@@ -91,9 +91,9 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCardHolder(): string
+    public function getCardHolder(): ?string
     {
         return $this->cardholder;
     }
@@ -109,9 +109,9 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCardIssueNumber(): int
+    public function getCardIssueNumber(): ?int
     {
         return $this->cardissuenumber;
     }
@@ -127,9 +127,9 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCardPan(): string
+    public function getCardPan(): ?string
     {
         return $this->cardpan;
     }
@@ -145,9 +145,9 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCardType(): string
+    public function getCardType(): ?string
     {
         return $this->cardtype;
     }
@@ -163,9 +163,9 @@ class CreditCardContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPseudoCardPan(): string
+    public function getPseudoCardPan(): ?string
     {
         return $this->pseudocardpan;
     }

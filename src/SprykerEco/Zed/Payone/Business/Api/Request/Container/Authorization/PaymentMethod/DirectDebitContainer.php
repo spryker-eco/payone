@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\Pay
 class DirectDebitContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccountholder;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_identification;
 
@@ -55,9 +55,9 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankAccount(): string
+    public function getBankAccount(): ?string
     {
         return $this->bankaccount;
     }
@@ -73,9 +73,9 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankAccountHolder(): string
+    public function getBankAccountHolder(): ?string
     {
         return $this->bankaccountholder;
     }
@@ -91,9 +91,9 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCode(): string
+    public function getBankCode(): ?string
     {
         return $this->bankcode;
     }
@@ -109,9 +109,9 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCountry(): string
+    public function getBankCountry(): ?string
     {
         return $this->bankcountry;
     }
@@ -127,9 +127,9 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban(): string
+    public function getIban(): ?string
     {
         return $this->iban;
     }
@@ -145,9 +145,9 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic(): string
+    public function getBic(): ?string
     {
         return $this->bic;
     }
@@ -163,9 +163,9 @@ class DirectDebitContainer extends AbstractPaymentMethodContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateIdentification(): string
+    public function getMandateIdentification(): ?string
     {
         return $this->mandate_identification;
     }

@@ -14,14 +14,14 @@ class PersonalContainer extends AbstractContainer
     /**
      * Merchant's customer ID (Permitted symbols: 0-9, a-z, A-Z, .,-,_,/)
      *
-     * @var string
+     * @var string|null
      */
     protected $customerid;
 
     /**
      * PAYONE debtor ID
      *
-     * @var string
+     * @var string|null
      */
     protected $userid;
 
@@ -31,7 +31,7 @@ class PersonalContainer extends AbstractContainer
     protected $salutation;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $title;
 
@@ -51,17 +51,17 @@ class PersonalContainer extends AbstractContainer
     protected $company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $addressaddition;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $zip;
 
@@ -73,12 +73,12 @@ class PersonalContainer extends AbstractContainer
     /**
      * Country (ISO-3166)
      *
-     * @var string
+     * @var string|null
      */
     protected $country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $state;
 
@@ -95,7 +95,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * Date of birth (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $birthday;
 
@@ -107,17 +107,17 @@ class PersonalContainer extends AbstractContainer
     protected $language;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $vatid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $gender;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $personalId;
 
@@ -155,9 +155,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBirthday(): string
+    public function getBirthday(): ?string
     {
         return $this->birthday;
     }
@@ -209,9 +209,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -227,9 +227,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCustomerId(): string
+    public function getCustomerId(): ?string
     {
         return $this->customerid;
     }
@@ -299,9 +299,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLanguage(): string
+    public function getLanguage(): ?string
     {
         return $this->language;
     }
@@ -407,9 +407,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -425,9 +425,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUserId(): string
+    public function getUserId(): ?string
     {
         return $this->userid;
     }
@@ -443,9 +443,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getVatId(): string
+    public function getVatId(): ?string
     {
         return $this->vatid;
     }
@@ -461,9 +461,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGender(): string
+    public function getGender(): ?string
     {
         return $this->gender;
     }
@@ -479,9 +479,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPersonalId(): string
+    public function getPersonalId(): ?string
     {
         return $this->personalId;
     }
@@ -497,9 +497,9 @@ class PersonalContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZip(): string
+    public function getZip(): ?string
     {
         return $this->zip;
     }

@@ -17,7 +17,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_CONSUMERSCORE;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $aid;
 
@@ -47,7 +47,7 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     protected $company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
@@ -77,22 +77,22 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     protected $country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $birthday;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $telephonenumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $language;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $gender;
 
@@ -125,9 +125,9 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBirthday(): string
+    public function getBirthday(): ?string
     {
         return $this->birthday;
     }
@@ -251,9 +251,9 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -305,9 +305,9 @@ class ConsumerScoreContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTelephoneNumber(): string
+    public function getTelephoneNumber(): ?string
     {
         return $this->telephonenumber;
     }

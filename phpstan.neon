@@ -6,7 +6,6 @@ parameters:
         - tests/bootstrap.php
     checkMissingIterableValueType: false
     ignoreErrors:
-        - '#Property .+ in .+ is not nullable#'
         - '#Strict comparison using === between string and null will always evaluate to false\.#'
         - '#Cannot call method .+ on .+\|null\.#'
         - '#Parameter \#1 \$v of method .+Spy.+ expects .+ given\.#'
@@ -46,20 +45,13 @@ parameters:
         - '#Method .+PayoneStub::sendConsumerScoreRequest\(\) should return Generated\\Shared\\Transfer\\ConsumerScoreResponseTransfer but returns Spryker\\Shared\\Kernel\\Transfer\\TransferInterface\.#'
         - '#Method .+PayoneStub::sendKlarnaStartSessionRequest\(\) should return Generated\\Shared\\Transfer\\PayoneKlarnaStartSessionResponseTransfer but returns Spryker\\Shared\\Kernel\\Transfer\\TransferInterface\.#'
         - '#Method .+AbstractHttpAdapter::generateUrlArray\(\) should return array but returns array\<string, int\|string\>\|false\.#'
-        - '#Method .+AbstractRequestContainer::getEncoding\(\) should return string but returns string\|null\.#'
-        - '#Method .+AbstractRequestContainer::getApiVersion\(\) should return string but returns string\|null\.#'
-        - '#Method .+AbstractRequestContainer::getMode\(\) should return string but returns string\|null\.#'
         - '#Method .+AbstractRequestContainer::getSuccessUrl\(\) should return string but returns string\|null\.#'
         - '#Method .+AbstractRequestContainer::getErrorUrl\(\) should return string but returns string\|null\.#'
         - '#Method .+PayoneRepository::createPaymentPayoneApiLogQueryByOrderIds\(\) should return .+SpyPaymentPayoneApiLogQuery but returns .+SpyPaymentPayoneApiLogQuery\|.+SpyPaymentPayoneDetailQuery|.+SpyPaymentPayoneOrderItemQuery\|.+SpyPaymentPayoneTransactionStatusLogQuery\|.+SpySalesOrderQuery.\.#'
         - '#Method .+PayoneRepository::createPaymentPayoneTransactionStatusLogQueryByOrderIds\(\) should return .+SpyPaymentPayoneTransactionStatusLogQuery but returns .+SpyPaymentPayoneApiLogQuery\|.+SpyPaymentPayoneDetailQuery|.+SpyPaymentPayoneOrderItemQuery\|.+SpyPaymentPayoneTransactionStatusLogQuery\|.+SpySalesOrderQuery.\.#'
         - '#Method .+PayoneToOmsBridge::triggerEvent\(\) should return array but returns array\|null\.#'
         - '#Method .+ShipmentMapper::getDeliveryCosts\(\) should return int but returns int\|null\.#'
-        - '#Method .+CaptureContainer::getCurrency\(\) should return string but returns string\|null\.#'
         - '#Method .+RefundContainer::getBankcountry\(\) should return string but returns string\|null\.#'
-        - '#Method .+PersonalContainer::getLanguage\(\) should return string but returns string\|null\.#'
-        - '#Method .+AbstractAuthorizationContainer::getCurrency\(\) should return string but returns string\|null\.#'
-        - '#Method .+CashOnDeliveryContainer::getShippingProvider\(\) should return string but returns string\|null\.#'
         - '#Method .+CashOnDelivery::mapPaymentToPreAuthorization\(\) should return .+PreAuthorizationContainerInterface but returns .+AbstractAuthorizationContainer\.#'
         - '#Method .+CreditCardPseudo::mapPaymentToAuthorization\(\) should return .+AuthorizationContainer but returns .+AbstractAuthorizationContainer\.#'
         - '#Method .+CreditCardPseudo::mapPaymentToPreAuthorization\(\) should return .+PreAuthorizationContainerInterface but returns .+AbstractAuthorizationContainer\.#'

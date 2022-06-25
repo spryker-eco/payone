@@ -17,12 +17,12 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * Sub account ID
      *
-     * @var string
+     * @var string|null
      */
     protected $aid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearingtype;
 
@@ -34,7 +34,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * Merchant reference number for the payment process. (Permitted symbols: 0-9, a-z, A-Z, .,-,_,/)
      *
-     * @var string
+     * @var string|null
      */
     protected $reference;
 
@@ -55,14 +55,14 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * Individual parameter
      *
-     * @var string
+     * @var string|null
      */
     protected $param;
 
     /**
      * dynamic text for debit and creditcard payments
      *
-     * @var string
+     * @var string|null
      */
     protected $narrative_text;
 
@@ -72,27 +72,27 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     protected $personalData;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer|null
      */
     protected $shippingData;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer|null
      */
     protected $paymentMethod;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer|null
      */
     protected $threeDSecure;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer|null
      */
     protected $invoicing;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $onlinebanktransfertype;
 
@@ -102,7 +102,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $businessrelation;
 
@@ -153,9 +153,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingType(): string
+    public function getClearingType(): ?string
     {
         return $this->clearingtype;
     }
@@ -171,9 +171,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -189,9 +189,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNarrativeText(): string
+    public function getNarrativeText(): ?string
     {
         return $this->narrative_text;
     }
@@ -207,9 +207,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getParam(): string
+    public function getParam(): ?string
     {
         return $this->param;
     }
@@ -225,9 +225,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReference(): string
+    public function getReference(): ?string
     {
         return $this->reference;
     }
@@ -243,9 +243,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer|null
      */
-    public function getPersonalData(): PersonalContainer
+    public function getPersonalData(): ?PersonalContainer
     {
         return $this->personalData;
     }
@@ -261,9 +261,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer|null
      */
-    public function getShippingData(): ShippingContainer
+    public function getShippingData(): ?ShippingContainer
     {
         return $this->shippingData;
     }
@@ -279,9 +279,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer|null
      */
-    public function getPaymentMethod(): AbstractPaymentMethodContainer
+    public function getPaymentMethod(): ?AbstractPaymentMethodContainer
     {
         return $this->paymentMethod;
     }
@@ -297,9 +297,9 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer|null
      */
-    public function get3dsecure(): ThreeDSecureContainer
+    public function get3dsecure(): ?ThreeDSecureContainer
     {
         return $this->threeDSecure;
     }
@@ -315,17 +315,17 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer|null
      */
-    public function getInvoicing(): TransactionContainer
+    public function getInvoicing(): ?TransactionContainer
     {
         return $this->invoicing;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOnlinebanktransfertype(): string
+    public function getOnlinebanktransfertype(): ?string
     {
         return $this->onlinebanktransfertype;
     }

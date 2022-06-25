@@ -17,12 +17,12 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_BANKACCOUNTCHECK;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $aid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $checktype;
 
@@ -42,7 +42,7 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $language;
 
@@ -121,9 +121,9 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCheckType(): string
+    public function getCheckType(): ?string
     {
         return $this->checktype;
     }

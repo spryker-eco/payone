@@ -14,21 +14,21 @@ class BusinessContainer extends AbstractContainer
     /**
      * (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $document_date;
 
     /**
      * (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $booking_date;
 
     /**
      * (Unixtimestamp)
      *
-     * @var string
+     * @var string|null
      */
     protected $due_time;
 
@@ -43,9 +43,9 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBookingDate(): string
+    public function getBookingDate(): ?string
     {
         return $this->booking_date;
     }
@@ -61,9 +61,9 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDocumentDate(): string
+    public function getDocumentDate(): ?string
     {
         return $this->document_date;
     }
@@ -79,9 +79,9 @@ class BusinessContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDueTime(): string
+    public function getDueTime(): ?string
     {
         return $this->due_time;
     }

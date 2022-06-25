@@ -12,22 +12,22 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class ThreeDSecureContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $xid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cavv;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $eci;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
     protected $redirect;
 
@@ -42,9 +42,9 @@ class ThreeDSecureContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCavv(): string
+    public function getCavv(): ?string
     {
         return $this->cavv;
     }
@@ -60,9 +60,9 @@ class ThreeDSecureContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEci(): string
+    public function getEci(): ?string
     {
         return $this->eci;
     }
@@ -78,9 +78,9 @@ class ThreeDSecureContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getXid(): string
+    public function getXid(): ?string
     {
         return $this->xid;
     }
@@ -96,9 +96,9 @@ class ThreeDSecureContainer extends AbstractContainer
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
-    public function getRedirect(): RedirectContainer
+    public function getRedirect(): ?RedirectContainer
     {
         return $this->redirect;
     }

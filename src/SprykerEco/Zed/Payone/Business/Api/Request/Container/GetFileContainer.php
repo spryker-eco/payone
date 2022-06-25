@@ -17,24 +17,24 @@ class GetFileContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_GETFILE;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $file_reference;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $file_type;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $file_format;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFileReference(): string
+    public function getFileReference(): ?string
     {
         return $this->file_reference;
     }
@@ -50,9 +50,9 @@ class GetFileContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFileType(): string
+    public function getFileType(): ?string
     {
         return $this->file_type;
     }
@@ -68,9 +68,9 @@ class GetFileContainer extends AbstractRequestContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFileFormat(): string
+    public function getFileFormat(): ?string
     {
         return $this->file_format;
     }
