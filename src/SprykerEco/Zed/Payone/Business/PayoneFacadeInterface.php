@@ -561,6 +561,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `PayoneGetInvoiceTransfer.reference`  and `PayoneGetInvoiceTransfer.customerId` to be set.
      * - Performs GetInvoice request to Payone API for PDF file download.
      *
      * @api
