@@ -146,6 +146,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $paymentPayoneEntity = $this->getPaymentEntity($payonePartialOperationRequestTransfer->getOrderOrFail()->getIdSalesOrderOrFail());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
 
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer */
         $requestContainer = $paymentMethodMapper->mapPaymentToCapture($paymentPayoneEntity);
         $requestContainer = $this->preparePartialCaptureOrderItems($payonePartialOperationRequestTransfer, $requestContainer);
         $captureAmount = $this->calculatePartialCaptureItemsAmount($payonePartialOperationRequestTransfer);
@@ -199,13 +200,13 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
 
     /**
      * @param \Generated\Shared\Transfer\PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer|\SprykerEco\Zed\Payone\Business\Payment\RequestSender\CaptureContainerInterface $container
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $container
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
     protected function preparePartialCaptureOrderItems(
         PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer,
-        $container
+        AbstractRequestContainer $container
     ): AbstractRequestContainer {
         $arrayIt = [];
         $arrayId = [];
