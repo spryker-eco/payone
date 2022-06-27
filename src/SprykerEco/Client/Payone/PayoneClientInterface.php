@@ -142,9 +142,7 @@ interface PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetails(
-        QuoteTransfer $quoteTransfer
-    );
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:
