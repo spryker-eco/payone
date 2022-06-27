@@ -17,5 +17,5 @@ interface PayoneRequestProductDataMapperInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer
      */
-    public function mapProductData($itemsContainer, $requestContainer): AbstractRequestContainer;
+    public function mapProductData($itemsContainer, AbstractRequestContainer $requestContainer): AbstractRequestContainer;
 }
