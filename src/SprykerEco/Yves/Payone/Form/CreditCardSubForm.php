@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Payone\Form;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentCreditCardTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -96,14 +95,6 @@ class CreditCardSubForm extends AbstractPayoneSubForm
     public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_CREDIT_CARD;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**

@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayonePaymentOnlinetransferTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -100,14 +99,6 @@ abstract class OnlineTransferSubForm extends AbstractPayoneSubForm
     public function getName(): string
     {
         return PaymentTransfer::PAYONE_ONLINE_TRANSFER;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**

@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Form\Constraint\ManageMandate;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -85,14 +84,6 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_DIRECT_DEBIT;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**

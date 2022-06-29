@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Payone\Form;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -46,7 +45,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     /**
      * @var string
      */
-    protected const PAYMENT_METHOD = 'klarna';
+    public const PAYMENT_METHOD = 'klarna';
 
     /**
      * @var string
@@ -57,11 +56,6 @@ class KlarnaSubForm extends AbstractPayoneSubForm
      * @var string
      */
     protected const FIELD_PAY_METHOD_TOKEN = 'payMethodToken';
-
-    /**
-     * @var string
-     */
-    protected const FORM_TEMPLATE_PATH = '%s/%s';
 
     /**
      * @return string
@@ -92,14 +86,6 @@ class KlarnaSubForm extends AbstractPayoneSubForm
             $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES],
         );
         $this->addPayMethodTokenField($builder);
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return sprintf(static::FORM_TEMPLATE_PATH, PayoneConstants::PROVIDER_NAME, static::PAYMENT_METHOD);
     }
 
     /**

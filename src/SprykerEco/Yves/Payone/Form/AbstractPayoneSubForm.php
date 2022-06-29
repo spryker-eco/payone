@@ -25,6 +25,11 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
     /**
      * @var string
      */
+    public const PAYMENT_METHOD = '';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_PROVIDER = PayoneConstants::PROVIDER_NAME;
 
     /**
@@ -68,6 +73,14 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
     public function getProviderName(): string
     {
         return static::PAYMENT_PROVIDER;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplatePath(): string
+    {
+        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**

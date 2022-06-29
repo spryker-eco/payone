@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Payone\Form;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentEWalletTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -49,14 +48,6 @@ class EWalletSubForm extends AbstractPayoneSubForm
     public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_E_WALLET;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**
