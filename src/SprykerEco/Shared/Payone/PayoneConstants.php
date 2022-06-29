@@ -208,11 +208,15 @@ interface PayoneConstants
     public const PAYONE_MODE = 'MODE';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_MODE_TEST = 'test';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_MODE_LIVE = 'live';
