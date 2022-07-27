@@ -9,6 +9,7 @@ parameters:
         - '#Cannot call method .+ on .+\|null\.#'
         - '#Parameter .+ of method .+ expects .+AbstractRequestContainer, .+Interface given\.#'
         - '#Property SprykerEco\\Zed\\Payone\\Business\\Api\\Call\\CreditCardCheck::\$storeCardData is never read, only written\.#'
+        - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
         - '#Argument of an invalid type .+ supplied for foreach, only iterables are supported\.#'
         - '#Method .+AbstractContainer::toJson\(\) should return string but returns string\|null\.#'
         - '#Method .+PayoneStub::updateStatus\(\) should return Generated\\Shared\\Transfer\\PayoneTransactionStatusUpdateTransfer but returns Spryker\\Shared\\Kernel\\Transfer\\TransferInterface\.#'
@@ -29,6 +30,9 @@ parameters:
         - '#Method .+PayoneToOmsBridge::triggerEvent\(\) should return array but returns array\|null\.#'
         - '#Method .+RefundContainer::getBankcountry\(\) should return string but returns string\|null\.#'
         - '#Method .+GenericPaymentContainer::getPaydataOrFail\(\) should return .+\\PaydataContainer but returns .+\\PaydataContainer\|null\.#'
+        - '#Call to an undefined method .+SpySalesOrderQuery::orderByIdPaymentPayoneApiLog\(\)\.#'
+        - '#Call to an undefined method .+SpySalesOrderQuery::filterByRequest\(\)\.#'
+        - '#Call to an undefined method .+SpySalesShipmentQuery.+useSpyPaymentPayoneDetailQuery\(\)\.#'
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
         - src/SprykerEco/Yves/Payone/Form/Constraint

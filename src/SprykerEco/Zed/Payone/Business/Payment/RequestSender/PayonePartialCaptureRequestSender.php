@@ -194,7 +194,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
-        $apiLogEntity->setRawResponse((string) json_encode($responseContainer->toArray()));
+        $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));
         $apiLogEntity->save();
     }
 

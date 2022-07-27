@@ -187,6 +187,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     {
         return $this->paydata;
     }
+
     /**
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      *
@@ -202,8 +203,6 @@ class GenericPaymentContainer extends AbstractRequestContainer
 
         return $paydata;
     }
-
-
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer $paydata
@@ -398,7 +397,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
     /**
      * @param string $propertyName
      *
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\NullValueException
+     * @throws \Exception
      *
      * @return void
      */

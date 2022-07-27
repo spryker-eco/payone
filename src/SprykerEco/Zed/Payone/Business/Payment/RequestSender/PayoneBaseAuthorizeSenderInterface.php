@@ -9,8 +9,6 @@ namespace SprykerEco\Zed\Payone\Business\Payment\RequestSender;
 
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\RequestContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 
 interface PayoneBaseAuthorizeSenderInterface

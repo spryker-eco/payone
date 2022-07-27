@@ -9,11 +9,9 @@ namespace SprykerEco\Zed\Payone\Business\Payment;
 
 use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 
 interface PaymentMethodMapperInterface extends BasePaymentMethodMapperInterface

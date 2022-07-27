@@ -24,7 +24,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterfa
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;

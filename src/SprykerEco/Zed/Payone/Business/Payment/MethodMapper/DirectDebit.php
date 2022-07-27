@@ -26,7 +26,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GetFileContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\ManageMandateContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 

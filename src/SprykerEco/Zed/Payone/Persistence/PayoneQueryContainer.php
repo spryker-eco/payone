@@ -258,6 +258,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
             $ids[] = $order->getIdSalesOrder();
         }
 
+        /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery $query */
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
                 ->filterByFkSalesOrder($ids, Criteria::IN)

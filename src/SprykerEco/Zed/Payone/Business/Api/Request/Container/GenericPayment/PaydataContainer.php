@@ -64,7 +64,7 @@ class PaydataContainer extends AbstractContainer
      */
     protected function getPreparedKey(string $key): string
     {
-        $preparedKey = strtolower((string) preg_replace('/([a-z])([A-Z])/', '$1_$2', $key));
+        $preparedKey = strtolower((string)preg_replace('/([a-z])([A-Z])/', '$1_$2', $key));
         $template = 'add_paydata[KEY]';
 
         return str_replace('KEY', $preparedKey, $template);
