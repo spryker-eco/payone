@@ -17,6 +17,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractA
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\DirectDebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\BankAccountCheckContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface;
@@ -43,9 +44,9 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentPayoneEntity, OrderTransfer $orderTransfer): AbstractAuthorizationContainer
+    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentPayoneEntity, OrderTransfer $orderTransfer): AuthorizationContainerInterface
     {
         $authorizationContainer = new AuthorizationContainer();
         $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentPayoneEntity, $authorizationContainer);
@@ -179,12 +180,12 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $authorizationContainer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface|\SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
      */
     protected function mapPaymentToAbstractAuthorization(
         SpyPaymentPayone $paymentPayoneEntity,
         AbstractAuthorizationContainer $authorizationContainer
-    ): AbstractAuthorizationContainer {
+    ) {
         $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());

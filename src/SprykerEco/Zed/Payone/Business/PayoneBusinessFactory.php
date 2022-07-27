@@ -65,7 +65,6 @@ use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInt
 use SprykerEco\Zed\Payone\Business\Payment\GenericPaymentMethodMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHook;
 use SprykerEco\Zed\Payone\Business\Payment\Hook\PostSaveHookInterface;
-use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudo;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CreditCardPseudoInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit;
@@ -128,6 +127,7 @@ use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateMana
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManagerInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**

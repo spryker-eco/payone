@@ -17,6 +17,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractA
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface;
@@ -91,9 +92,9 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentPayoneEntity, OrderTransfer $orderTransfer): AbstractAuthorizationContainer
+    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentPayoneEntity, OrderTransfer $orderTransfer): AuthorizationContainerInterface
     {
         return new AuthorizationContainer();
     }
@@ -214,12 +215,12 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer $authorizationContainer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface|\SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
      */
     protected function mapPaymentToAbstractAuthorization(
         SpyPaymentPayone $paymentPayoneEntity,
         AbstractAuthorizationContainer $authorizationContainer
-    ): AbstractAuthorizationContainer {
+    ) {
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
 
         $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
