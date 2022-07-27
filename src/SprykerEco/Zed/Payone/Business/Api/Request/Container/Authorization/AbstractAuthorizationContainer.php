@@ -29,7 +29,7 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @var string
      */
-    protected $clearingsubtype;
+    protected $clearingSubType;
 
     /**
      * Merchant reference number for the payment process. (Permitted symbols: 0-9, a-z, A-Z, .,-,_,/)
@@ -104,24 +104,24 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @var string|null
      */
-    protected $businessrelation;
+    protected $businessRelation;
 
     /**
      * @return string|null
      */
-    public function getBusinessrelation(): ?string
+    public function getBusinessRelation(): ?string
     {
-        return $this->businessrelation;
+        return $this->businessRelation;
     }
 
     /**
-     * @param string $businessrelation
+     * @param string $businessRelation
      *
      * @return void
      */
-    public function setBusinessrelation(string $businessrelation): void
+    public function setBusinessRelation(string $businessRelation): void
     {
-        $this->businessrelation = $businessrelation;
+        $this->businessRelation = $businessRelation;
     }
 
     /**
@@ -343,18 +343,18 @@ abstract class AbstractAuthorizationContainer extends AbstractRequestContainer i
     /**
      * @return string
      */
-    public function getClearingsubtype(): string
+    public function getClearingSubType(): string
     {
-        return $this->clearingsubtype;
+        return $this->clearingSubType;
     }
 
     /**
-     * @param string $clearingsubtype
+     * @param string $clearingSubType
      *
      * @return void
      */
-    public function setClearingsubtype(string $clearingsubtype): void
+    public function setClearingSubType(string $clearingSubType): void
     {
-        $this->clearingsubtype = $clearingsubtype;
+        $this->clearingSubType = $clearingSubType;
     }
 }

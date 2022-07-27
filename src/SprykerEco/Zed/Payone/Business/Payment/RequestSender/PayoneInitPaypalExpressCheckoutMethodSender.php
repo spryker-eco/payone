@@ -49,7 +49,7 @@ class PayoneInitPaypalExpressCheckoutMethodSender implements PayoneInitPaypalExp
             PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT,
         );
         $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();
-        $baseGenericPaymentContainer->getPaydata()->setAction(PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_SET_ACTION);
+        $baseGenericPaymentContainer->getPaydataOrFail()->setAction(PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_SET_ACTION);
         $requestContainer = $paymentMethodMapper->mapRequestTransferToGenericPayment(
             $baseGenericPaymentContainer,
             $requestTransfer,

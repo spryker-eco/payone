@@ -6,13 +6,7 @@ parameters:
         - tests/bootstrap.php
     checkMissingIterableValueType: false
     ignoreErrors:
-        - '#Cannot call method .+ on .+\|null\.#'
-        - '#Parameter .+ of function str_replace expects array\|string, string\|null given\.#'
-        - '#Parameter .+ of function strtolower expects string, string\|null given\.#'
-        - '#Parameter .+ of function count expects array\|Countable, array\|null given\.#'
-        - '#Parameter .+ of method .+ expects .+Interface, .+AbstractRequestContainer given\.#'
         - '#Parameter .+ of method .+ expects .+AbstractRequestContainer, .+Interface given\.#'
-        - '#Parameter .+ of method .+ expects .+AbstractPaymentMethodContainer, .+ContainerInterface given\.#'
         - '#Property SprykerEco\\Zed\\Payone\\Business\\Api\\Call\\CreditCardCheck::\$storeCardData is never read, only written\.#'
         - '#Call to method .+ on an unknown class Generated\\.+\\Ide\\AutoCompletion\.#'
         - '#Argument of an invalid type .+ supplied for foreach, only iterables are supported\.#'
@@ -34,6 +28,7 @@ parameters:
         - '#Method .+AbstractRequestContainer::getErrorUrl\(\) should return string but returns string\|null\.#'
         - '#Method .+PayoneToOmsBridge::triggerEvent\(\) should return array but returns array\|null\.#'
         - '#Method .+RefundContainer::getBankcountry\(\) should return string but returns string\|null\.#'
+        - '#Method .+GenericPaymentContainer::getPaydataOrFail\(\) should return .+\\PaydataContainer but returns .+\\PaydataContainer\|null\.#'
     excludePaths:
         - src/SprykerEco/Zed/Payone/Persistence/Propel
         - src/SprykerEco/Yves/Payone/Form/Constraint

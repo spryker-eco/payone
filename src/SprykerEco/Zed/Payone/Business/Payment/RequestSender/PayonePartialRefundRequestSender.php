@@ -169,7 +169,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
         AbstractRequestContainer $container
     ): AbstractRequestContainer {
         $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
+        $arrayId = $container->getId();
         $arrayPr = $container->getPr();
         $arrayNo = $container->getNo();
         $arrayDe = $container->getDe();

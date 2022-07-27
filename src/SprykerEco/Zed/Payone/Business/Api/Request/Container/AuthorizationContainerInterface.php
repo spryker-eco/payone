@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ShippingC
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\ThreeDSecureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Invoicing\TransactionContainer;
 
-interface AuthorizationContainerInterface
+interface AuthorizationContainerInterface extends RequestContainerInterface
 {
     /**
      * @param string $narrativeText
@@ -299,4 +299,18 @@ interface AuthorizationContainerInterface
      * @return void
      */
     public function setAmount(?int $amount = null): void;
+
+    /**
+     * @param string $businessRelation
+     *
+     * @return void
+     */
+    public function setBusinessRelation(string $businessRelation): void;
+
+    /**
+     * @param string $clearingSubType
+     *
+     * @return void
+     */
+    public function setClearingSubType(string $clearingSubType): void;
 }

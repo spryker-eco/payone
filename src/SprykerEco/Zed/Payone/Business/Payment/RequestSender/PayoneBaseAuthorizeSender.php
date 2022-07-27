@@ -12,7 +12,9 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\RequestContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
@@ -57,13 +59,13 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface $requestContainer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
      */
     public function performAuthorizationRequest(
         SpyPaymentPayone $paymentPayoneEntity,
-        AuthorizationContainerInterface $requestContainer
+        AbstractRequestContainer $requestContainer
     ): AuthorizationResponseContainer {
         $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 

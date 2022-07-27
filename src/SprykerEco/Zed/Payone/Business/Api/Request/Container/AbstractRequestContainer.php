@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
-abstract class AbstractRequestContainer extends AbstractContainer
+abstract class AbstractRequestContainer extends AbstractContainer implements RequestContainerInterface
 {
     /**
      * @var string|null merchant id
@@ -469,11 +469,11 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getId(): ?array
+    public function getId(): array
     {
-        return $this->id;
+        return $this->id ?? [];
     }
 
     /**

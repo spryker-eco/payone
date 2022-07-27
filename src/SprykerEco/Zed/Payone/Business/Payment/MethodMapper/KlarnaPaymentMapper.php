@@ -65,9 +65,9 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface|\SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentPayoneEntity): PreAuthorizationContainerInterface
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentPayoneEntity)
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
 
@@ -312,7 +312,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $personalContainer->setEmail($paymentPayoneEntity->getSpySalesOrder()->getEmail());
 
         $currentRequest = $this->requestStack->getCurrentRequest();
-        $personalContainer->setIp($currentRequest->getClientIp());
+        $personalContainer->setIp($currentRequest ? $currentRequest->getClientIp() : null);
 
         return $personalContainer;
     }

@@ -15,6 +15,7 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\SecurityInvoiceContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
@@ -77,9 +78,9 @@ class SecurityInvoice extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface|\SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentPayoneEntity): PreAuthorizationContainerInterface
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentPayoneEntity)
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
         $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentPayoneEntity, $preAuthorizationContainer);
@@ -92,11 +93,11 @@ class SecurityInvoice extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $container
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface $container
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapEmail(SpyPaymentPayone $paymentPayoneEntity, AbstractAuthorizationContainer $container): AbstractAuthorizationContainer
+    public function mapEmail(SpyPaymentPayone $paymentPayoneEntity, $container): AuthorizationContainerInterface
     {
         $container->setEmail($paymentPayoneEntity->getSpySalesOrder()->getEmail());
 
@@ -105,11 +106,11 @@ class SecurityInvoice extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $container
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface $container
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapAmount(SpyPaymentPayone $paymentPayoneEntity, AbstractAuthorizationContainer $container): AbstractAuthorizationContainer
+    public function mapAmount(SpyPaymentPayone $paymentPayoneEntity, $container)
     {
         $container->setAmount($paymentPayoneEntity->getSpySalesOrder()->getOrderTotals()->get(0)->getSubTotal());
 
@@ -117,13 +118,13 @@ class SecurityInvoice extends AbstractMapper
     }
 
     /**
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $container
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface $container
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapBusinessRelation(AbstractAuthorizationContainer $container): AbstractAuthorizationContainer
+    public function mapBusinessRelation(AuthorizationContainerInterface $container): AuthorizationContainerInterface
     {
-        $container->setBusinessrelation($this->payoneConfig->getBusinessRelation());
+        $container->setBusinessRelation($this->payoneConfig->getBusinessRelation());
 
         return $container;
     }
@@ -167,19 +168,19 @@ class SecurityInvoice extends AbstractMapper
 
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $authorizationContainer
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface $authorizationContainer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface|\SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
     protected function mapPaymentToAbstractAuthorization(
         SpyPaymentPayone $paymentPayoneEntity,
-        AbstractAuthorizationContainer $authorizationContainer
-    ) {
+        AuthorizationContainerInterface $authorizationContainer
+    ): AuthorizationContainerInterface {
         $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_SECURITY_INVOICE);
-        $authorizationContainer->setClearingsubtype(PayoneApiConstants::CLEARING_SUBTYPE_SECURITY_INVOICE);
+        $authorizationContainer->setClearingSubType(PayoneApiConstants::CLEARING_SUBTYPE_SECURITY_INVOICE);
         $authorizationContainer->setReference($paymentPayoneEntity->getReference());
         if ($this->getStandardParameter()->getCurrency() !== null) {
             $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
@@ -254,9 +255,9 @@ class SecurityInvoice extends AbstractMapper
     /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\ContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\AbstractPaymentMethodContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentPayoneEntity): ContainerInterface
+    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentPayoneEntity): AbstractPaymentMethodContainer
     {
         $paymentMethodContainer = new SecurityInvoiceContainer();
 
