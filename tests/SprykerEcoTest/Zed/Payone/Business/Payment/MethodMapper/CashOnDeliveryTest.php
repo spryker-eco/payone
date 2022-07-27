@@ -7,6 +7,7 @@
 
 namespace SprykerEcoTest\Zed\Payone\Business\Payment\MethodMapper;
 
+use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\CashOnDelivery;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 
 /**
