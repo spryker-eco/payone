@@ -115,7 +115,7 @@ class RiskCheckMapper implements RiskCheckMapperInterface
         $container->setMid($this->standardParameters->getMid());
         $container->setAid($this->standardParameters->getAid());
         $container->setPortalid($this->standardParameters->getPortalId());
-        $container->setKey(md5($this->standardParameters->getKey()));
+        $container->setKey(md5((string)$this->standardParameters->getKey()));
         $container->setMode($this->modeDetector->getMode());
         $container->setIntegratorName(PayoneApiConstants::INTEGRATOR_NAME_SPRYKER);
         $container->setIntegratorVersion(PayoneApiConstants::INTEGRATOR_VERSION_3_0_0);

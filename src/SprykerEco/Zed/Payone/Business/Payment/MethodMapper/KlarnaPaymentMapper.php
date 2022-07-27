@@ -168,7 +168,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     public function mapPaymentToKlarnaGenericPaymentContainer(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
     ): ContainerInterface {
-        $quoteTransfer = $payoneKlarnaStartSessionRequestTransfer->getQuote();
+        $quoteTransfer = $payoneKlarnaStartSessionRequestTransfer->getQuoteOrFail();
 
         $klarnaGenericPaymentContainer = new KlarnaGenericPaymentContainer();
 

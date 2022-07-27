@@ -134,7 +134,7 @@ class IndexController extends AbstractController
         }
 
         $callback = function () use ($response): void {
-            echo base64_decode($response->getRawResponse());
+            echo base64_decode((string) $response->getRawResponse());
         };
 
         return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);
@@ -165,7 +165,7 @@ class IndexController extends AbstractController
         }
 
         $callback = function () use ($response): void {
-            echo base64_decode($response->getRawResponse());
+            echo base64_decode((string) $response->getRawResponse());
         };
 
         return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);
@@ -196,7 +196,7 @@ class IndexController extends AbstractController
         }
 
         $callback = function () use ($response): void {
-            echo base64_decode($response->getRawResponse());
+            echo base64_decode((string) $response->getRawResponse());
         };
 
         return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);

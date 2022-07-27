@@ -100,7 +100,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
     protected function updateApiLogAfterAuthorization(SpyPaymentPayoneApiLog $apiLogEntity, AuthorizationResponseContainer $responseContainer): void
     {
         $apiLogEntity->setStatus($responseContainer->getStatus());
-        $apiLogEntity->setUserId($responseContainer->getUserid());
+        $apiLogEntity->setUserId((string)$responseContainer->getUserid());
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
         $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
@@ -108,7 +108,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
         $apiLogEntity->setRedirectUrl($responseContainer->getRedirecturl());
         $apiLogEntity->setSequenceNumber(0);
 
-        $apiLogEntity->setRawResponse(json_encode($responseContainer->toArray()));
+        $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));
         $apiLogEntity->save();
     }
 

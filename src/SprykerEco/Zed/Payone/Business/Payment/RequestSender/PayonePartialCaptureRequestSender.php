@@ -194,7 +194,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
-        $apiLogEntity->setRawResponse(json_encode($responseContainer->toArray()));
+        $apiLogEntity->setRawResponse((string) json_encode($responseContainer->toArray()));
         $apiLogEntity->save();
     }
 
@@ -223,7 +223,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
             }
 
             $arrayIt[$key] = PayoneApiConstants::INVOICING_ITEM_TYPE_GOODS;
-            $arrayId[$key] = substr($itemTransfer->getSku(), 0, 32);
+            $arrayId[$key] = substr((string)$itemTransfer->getSku(), 0, 32);
             $arrayPr[$key] = $itemTransfer->getUnitPriceToPayAggregation();
             $arrayNo[$key] = $itemTransfer->getQuantity();
             $arrayDe[$key] = $itemTransfer->getName();
@@ -267,7 +267,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     {
         foreach ($orderTransfer->getExpenses() as $expense) {
             if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                return $expense->getSumGrossPrice();
+                return (int)$expense->getSumGrossPrice();
             }
         }
 

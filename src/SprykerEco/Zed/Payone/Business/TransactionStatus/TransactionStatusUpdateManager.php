@@ -98,18 +98,18 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
         $paymentPayoneTransactionStatusLogEntity = new SpyPaymentPayoneTransactionStatusLog();
         $paymentPayoneTransactionStatusLogEntity->setFkPaymentPayone($paymentPayoneEntity->getIdPaymentPayone());
         $paymentPayoneTransactionStatusLogEntity->setTransactionId($request->getTxid());
-        $paymentPayoneTransactionStatusLogEntity->setReferenceId($request->getReference());
+        $paymentPayoneTransactionStatusLogEntity->setReferenceId((int)$request->getReference());
         $paymentPayoneTransactionStatusLogEntity->setMode($request->getMode());
-        $paymentPayoneTransactionStatusLogEntity->setStatus($request->getTxaction());
+        $paymentPayoneTransactionStatusLogEntity->setStatus((string)$request->getTxaction());
         $paymentPayoneTransactionStatusLogEntity->setTransactionTime($request->getTxtime());
-        $paymentPayoneTransactionStatusLogEntity->setSequenceNumber($request->getSequencenumber());
+        $paymentPayoneTransactionStatusLogEntity->setSequenceNumber((int)$request->getSequencenumber());
         $paymentPayoneTransactionStatusLogEntity->setClearingType($request->getClearingtype());
-        $paymentPayoneTransactionStatusLogEntity->setPortalId($request->getPortalid());
-        $paymentPayoneTransactionStatusLogEntity->setPrice($request->getPrice());
-        $paymentPayoneTransactionStatusLogEntity->setBalance($request->getBalance());
-        $paymentPayoneTransactionStatusLogEntity->setReceivable($request->getReceivable());
+        $paymentPayoneTransactionStatusLogEntity->setPortalId((string)$request->getPortalid());
+        $paymentPayoneTransactionStatusLogEntity->setPrice((int)$request->getPrice());
+        $paymentPayoneTransactionStatusLogEntity->setBalance((int)$request->getBalance());
+        $paymentPayoneTransactionStatusLogEntity->setReceivable((int)$request->getReceivable());
         $paymentPayoneTransactionStatusLogEntity->setReminderLevel($request->getReminderlevel());
-        $paymentPayoneTransactionStatusLogEntity->setRawRequest($request);
+        $paymentPayoneTransactionStatusLogEntity->setRawRequest((string)json_encode($request->toArray()));
 
         $paymentPayoneTransactionStatusLogEntity->save();
     }

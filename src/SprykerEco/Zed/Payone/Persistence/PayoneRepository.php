@@ -213,6 +213,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
             $ids[] = $orderTransfer->getIdSalesOrder();
         }
 
+        /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery $query */
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
                 ->filterByFkSalesOrder($ids, Criteria::IN)
@@ -234,6 +235,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
             $ids[] = $orderTransfer->getIdSalesOrder();
         }
 
+        /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery $query */
         $query = $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
             ->useSpyPaymentPayoneQuery()
                 ->filterByFkSalesOrder($ids, Criteria::IN)

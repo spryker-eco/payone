@@ -93,7 +93,7 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function getAvailablePaymentMethods(QuoteTransfer $quoteTransfer): array
     {
-        $score = $quoteTransfer->getConsumerScore();
+        $score = (string)$quoteTransfer->getConsumerScore();
 
         $method = static::CONFIG_METHOD_PART_GET .
             ucfirst($score) .
@@ -124,6 +124,6 @@ class PaymentMethodFilter implements PaymentMethodFilterInterface
      */
     protected function isPaymentMethodPayone(PaymentMethodTransfer $paymentMethodTransfer): bool
     {
-        return strpos($paymentMethodTransfer->getMethodName(), static::PAYONE_PAYMENT_METHOD) !== false;
+        return strpos((string)$paymentMethodTransfer->getMethodName(), static::PAYONE_PAYMENT_METHOD) !== false;
     }
 }

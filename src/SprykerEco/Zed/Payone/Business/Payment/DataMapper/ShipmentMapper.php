@@ -71,7 +71,7 @@ class ShipmentMapper implements ShipmentMapperInterface
     {
         foreach ($expenseContainer->getExpenses() as $expense) {
             if ($expense->getType() === ShipmentConfig::SHIPMENT_EXPENSE_TYPE) {
-                return $expense->getSumGrossPrice();
+                return (int) $expense->getSumGrossPrice();
             }
         }
 

@@ -42,7 +42,7 @@ class GenericPayment extends AbstractMapper implements GenericPaymentMethodMappe
         GenericPaymentContainer $genericPayment,
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
     ): GenericPaymentContainer {
-        $quoteTransfer = $requestTransfer->getQuote();
+        $quoteTransfer = $requestTransfer->getQuoteOrFail();
 
         $genericPayment = $this->mapQuoteTransferToGenericPayment($genericPayment, $quoteTransfer);
         $genericPayment->setSuccessUrl($requestTransfer->getSuccessUrl());

@@ -228,4 +228,9 @@ interface TransactionStatusUpdateInterface
      * @return string|null
      */
     public function getClearingReference(): ?string;
+
+    /**
+     * @return array
+     */
+    public function toArray(): array;
 }
