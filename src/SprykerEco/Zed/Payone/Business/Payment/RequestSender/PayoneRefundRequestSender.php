@@ -18,7 +18,7 @@ use SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements PayoneRefundRequestSenderInterface
 {
@@ -54,7 +54,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
@@ -64,7 +64,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         OrderPriceDistributorInterface $orderPriceDistributor,
@@ -72,7 +72,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         RefundResponseMapperInterface $refundResponseMapper
     ) {
-        parent::__construct($queryContainer, $paymentMapperReader);
+        parent::__construct($payoneRepository, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->orderPriceDistributor = $orderPriceDistributor;
@@ -126,7 +126,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setStatus($responseContainer->getStatus());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
         $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));

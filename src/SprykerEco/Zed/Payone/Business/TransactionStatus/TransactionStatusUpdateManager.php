@@ -16,7 +16,7 @@ use SprykerEco\Shared\Payone\PayoneTransactionStatusConstants;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusRequest;
 use SprykerEco\Zed\Payone\Business\Api\TransactionStatus\TransactionStatusResponse;
 use SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerInterface
 {
@@ -26,9 +26,9 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     protected const STATUS_UPDATE_ERROR_NO_TXID = 'Payone transaction status update: txid is not provided!';
 
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
      */
-    protected $queryContainer;
+    protected $payoneRepository;
 
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
@@ -41,16 +41,16 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
     protected $hashGenerator;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Key\HashGeneratorInterface $hashGenerator
      */
     public function __construct(
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PayoneStandardParameterTransfer $standardParameter,
         HashGeneratorInterface $hashGenerator
     ) {
-        $this->queryContainer = $queryContainer;
+        $this->payoneRepository = $payoneRepository;
         $this->standardParameter = $standardParameter;
         $this->hashGenerator = $hashGenerator;
     }
@@ -207,7 +207,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      */
     protected function findPaymentByTransactionId(int $transactionId): ?SpyPaymentPayone
     {
-        return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
+        return $this->payoneRepository->createPaymentByTransactionIdQuery($transactionId)->findOne();
     }
 
     /**
@@ -403,7 +403,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
      */
     protected function getUnprocessedTransactionStatusLogs(int $idSalesOrder, int $idSalesOrderItem): array
     {
-        $transactionStatusLogs = $this->queryContainer->createTransactionStatusLogsBySalesOrder($idSalesOrder)->find();
+        $transactionStatusLogs = $this->payoneRepository->createTransactionStatusLogsBySalesOrder($idSalesOrder)->find();
 
         $ids = [];
 
@@ -412,7 +412,7 @@ class TransactionStatusUpdateManager implements TransactionStatusUpdateManagerIn
             $ids[$transactionStatusLog->getIdPaymentPayoneTransactionStatusLog()] = $transactionStatusLog;
         }
 
-        $relations = $this->queryContainer
+        $relations = $this->payoneRepository
             ->createTransactionStatusLogOrderItemsByLogIds($idSalesOrderItem, array_keys($ids))
             ->find();
 

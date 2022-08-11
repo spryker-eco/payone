@@ -228,7 +228,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getMode()
+    public function getMode(): string
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -242,7 +242,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return int
      */
-    public function getEmptySequenceNumber()
+    public function getEmptySequenceNumber(): int
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -256,7 +256,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    public function getRequestStandardParameter()
+    public function getRequestStandardParameter(): PayoneStandardParameterTransfer
     {
         $settings = $this->get(PayoneConstants::PAYONE);
         $standardParameter = new PayoneStandardParameterTransfer();
@@ -288,7 +288,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function generatePayoneReference(PayonePaymentTransfer $paymentTransfer, SpySalesOrder $orderEntity)
+    public function generatePayoneReference(PayonePaymentTransfer $paymentTransfer, SpySalesOrder $orderEntity): string
     {
         return $orderEntity->getOrderReference();
     }
@@ -304,7 +304,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getNarrativeText(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data)
+    public function getNarrativeText(array $orderItems, SpySalesOrder $orderEntity, ReadOnlyArrayObject $data): string
     {
         return $orderEntity->getOrderReference();
     }
@@ -312,7 +312,7 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * @return string
      */
-    protected function getYvesBaseUrl()
+    protected function getYvesBaseUrl(): string
     {
         return $this->get(PayoneConstants::HOST_YVES);
     }
@@ -324,7 +324,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getTranslationFilePath()
+    public function getTranslationFilePath(): string
     {
         return __DIR__ . DIRECTORY_SEPARATOR . PayoneConstants::GLOSSARY_FILE_PATH;
     }

@@ -77,7 +77,7 @@ class PayoneGenericRequestMethodSender implements PayoneGenericRequestMethodSend
         $responseTransfer->setWorkOrderId($responseContainer->getWorkOrderId());
         $responseTransfer->setRawResponse(json_encode($rawResponse) ?: '');
         $responseTransfer->setStatus($responseContainer->getStatus());
-        $responseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
+        $responseTransfer->setCustomerMessage($responseContainer->getCustomerMessage());
         $responseTransfer->setErrorMessage($responseContainer->getErrormessage());
         if ($responseContainer->getErrorcode()) {
             $responseTransfer->setErrorCode((int)$responseContainer->getErrorcode());

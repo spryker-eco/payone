@@ -17,7 +17,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  *
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
- * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
  */
 class PayoneCheckoutPostSaveHookPlugin extends AbstractPlugin implements CheckoutPostSaveHookInterface

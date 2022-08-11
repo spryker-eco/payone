@@ -23,6 +23,8 @@ class PayoneHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInt
      * - Requires `QuoteTransfer.payment.paymentSelection` to be set.
      * - Adds payment to quote.
      *
+     * @api
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

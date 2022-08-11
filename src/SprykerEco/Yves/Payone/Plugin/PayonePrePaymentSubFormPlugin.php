@@ -19,6 +19,8 @@ class PayonePrePaymentSubFormPlugin extends AbstractPlugin implements SubFormPlu
      * {@inheritDoc}
      * - Creates `PrePaymentForm` subform.
      *
+     * @api
+     *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm()
@@ -29,6 +31,8 @@ class PayonePrePaymentSubFormPlugin extends AbstractPlugin implements SubFormPlu
     /**
      * {@inheritDoc}
      * - Creates subform data provider.
+     *
+     * @api
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */

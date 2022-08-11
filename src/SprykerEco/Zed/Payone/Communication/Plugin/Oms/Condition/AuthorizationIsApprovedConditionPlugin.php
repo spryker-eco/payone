@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\OrderTransfer;
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
- * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
  */
 class AuthorizationIsApprovedConditionPlugin extends AbstractPlugin

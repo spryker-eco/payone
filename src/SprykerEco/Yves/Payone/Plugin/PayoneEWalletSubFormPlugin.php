@@ -19,6 +19,8 @@ class PayoneEWalletSubFormPlugin extends AbstractPlugin implements SubFormPlugin
      * {@inheritDoc}
      * - Creates `EWalletSubForm` subform.
      *
+     * @api
+     *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm()
@@ -29,6 +31,8 @@ class PayoneEWalletSubFormPlugin extends AbstractPlugin implements SubFormPlugin
     /**
      * {@inheritDoc}
      * - Creates subform data provider.
+     *
+     * @api
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */

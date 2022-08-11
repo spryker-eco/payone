@@ -173,7 +173,7 @@ class PostSaveHook implements PostSaveHookInterface
         $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentPayoneEntity, $requestContainer);
 
         if ($responseContainer->getErrorcode()) {
-            $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage() ?? static::PAYONE_API_UNKNOWN_ERROR_MESSAGE, $responseContainer->getErrorcode());
+            $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomerMessage() ?? static::PAYONE_API_UNKNOWN_ERROR_MESSAGE, $responseContainer->getErrorcode());
             $checkoutResponseTransfer->addError($checkoutErrorTransfer);
             $checkoutResponseTransfer->setIsSuccess(false);
 

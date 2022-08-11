@@ -597,9 +597,9 @@ abstract class AbstractRequestContainer extends AbstractContainer implements Req
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSuccessUrl(): string
+    public function getSuccessUrl(): ?string
     {
         return $this->successurl;
     }
@@ -617,9 +617,9 @@ abstract class AbstractRequestContainer extends AbstractContainer implements Req
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getErrorUrl(): string
+    public function getErrorUrl(): ?string
     {
         return $this->errorurl;
     }

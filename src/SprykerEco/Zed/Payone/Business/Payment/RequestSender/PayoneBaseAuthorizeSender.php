@@ -16,7 +16,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements PayoneBaseAuthorizeSenderInterface
 {
@@ -37,19 +37,19 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standardParameterMapper
     ) {
-        parent::__construct($queryContainer, $paymentMapperReader);
+        parent::__construct($payoneRepository, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->standardParameterMapper = $standardParameterMapper;
@@ -101,7 +101,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
         $apiLogEntity->setUserId((string)$responseContainer->getUserid());
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
         $apiLogEntity->setRedirectUrl($responseContainer->getRedirecturl());
         $apiLogEntity->setSequenceNumber(0);

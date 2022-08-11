@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\RequestSender;
 
 use Generated\Shared\Transfer\CaptureResponseTransfer;
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
@@ -27,7 +28,6 @@ use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ShipmentMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender implements PayonePartialCaptureRequestSenderInterface
@@ -43,19 +43,9 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     protected $executionAdapter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
-     */
-    protected $queryContainer;
-
-    /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
     protected $standardParameter;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
-     */
-    protected $payoneRepository;
 
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface
@@ -94,11 +84,10 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\ExpenseMapperInterface $expenseMapper
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
@@ -107,21 +96,19 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PaymentMapperReaderInterface $paymentMapperReader,
         ExpenseMapperInterface $expenseMapper,
         PayoneStandardParameterTransfer $standardParameter,
-        PayoneRepositoryInterface $payoneRepository,
         PayoneEntityManagerInterface $payoneEntityManager,
         OrderPriceDistributorInterface $orderPriceDistributor,
         StandartParameterMapperInterface $standardParameterMapper,
         ShipmentMapperInterface $shipmentMapper,
         CaptureResponseMapperInterface $captureResponseMapper
     ) {
-        parent::__construct($queryContainer, $paymentMapperReader);
+        parent::__construct($payoneRepository, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
-        $this->payoneRepository = $payoneRepository;
         $this->payoneEntityManager = $payoneEntityManager;
         $this->orderPriceDistributor = $orderPriceDistributor;
         $this->standardParameterMapper = $standardParameterMapper;
@@ -191,7 +178,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $apiLogEntity->setStatus($responseContainer->getStatus());
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
         $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));
@@ -282,17 +269,31 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     protected function checkThatDeliveryCostsAreRequired(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): bool
     {
         foreach ($payonePartialOperationRequestTransfer->getOrder()->getItems() as $itemTransfer) {
-            if (in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds())) {
+            if (in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds(), true)) {
                 continue;
             }
-            foreach ($itemTransfer->getStateHistory() as $itemState) {
-                if ($itemState->getName() === static::ITEM_STATE_SHIPPED) {
-                    return false;
-                }
+            if ($this->isItemTransferWasShipped($itemTransfer)) {
+                return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
+     *
+     * @return bool
+     */
+    protected function isItemTransferWasShipped(ItemTransfer $itemTransfer): bool
+    {
+        foreach ($itemTransfer->getStateHistory() as $itemState) {
+            if ($itemState->getName() === static::ITEM_STATE_SHIPPED) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

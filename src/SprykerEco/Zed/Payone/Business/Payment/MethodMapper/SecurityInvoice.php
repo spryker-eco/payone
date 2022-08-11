@@ -108,8 +108,10 @@ class SecurityInvoice extends AbstractMapper
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapAmount(SpyPaymentPayone $paymentPayoneEntity, $container)
-    {
+    public function mapAmount(
+        SpyPaymentPayone $paymentPayoneEntity,
+        $container
+    ): AuthorizationContainerInterface {
         $container->setAmount($paymentPayoneEntity->getSpySalesOrder()->getOrderTotals()->get(0)->getSubTotal());
 
         return $container;

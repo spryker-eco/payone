@@ -258,9 +258,9 @@ class RefundContainer extends AbstractRequestContainer implements RefundContaine
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankcountry(): string
+    public function getBankcountry(): ?string
     {
         return $this->bankcountry;
     }

@@ -64,6 +64,6 @@ abstract class AbstractContainer implements ContainerInterface
      */
     public function toJson(): string
     {
-        return $this->payoneToUtilEncodingServiceBridge->encodeJson($this->toArray());
+        return (string)$this->payoneToUtilEncodingServiceBridge->encodeJson($this->toArray());
     }
 }

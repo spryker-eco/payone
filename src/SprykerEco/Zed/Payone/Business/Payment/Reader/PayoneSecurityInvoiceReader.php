@@ -15,7 +15,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetSecurityInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterface
 {
@@ -30,7 +30,7 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
     protected $executionAdapter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
      */
     protected $queryContainer;
 
@@ -51,20 +51,20 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
-        $this->queryContainer = $queryContainer;
+        $this->queryContainer = $payoneRepository;
         $this->standardParameter = $standardParameter;
         $this->standardParameterMapper = $standardParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;

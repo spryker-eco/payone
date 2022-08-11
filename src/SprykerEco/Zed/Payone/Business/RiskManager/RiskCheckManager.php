@@ -68,8 +68,8 @@ class RiskCheckManager implements RiskCheckManagerInterface
         }
         $addressCheckResponseTransfer->setPersonStatus($responseContainer->getPersonstatus());
 
-        if ($responseContainer->getCustomermessage() !== null) {
-            $addressCheckResponseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
+        if ($responseContainer->getCustomerMessage() !== null) {
+            $addressCheckResponseTransfer->setCustomerMessage($responseContainer->getCustomerMessage());
         }
 
         return $addressCheckResponseTransfer;
@@ -100,7 +100,7 @@ class RiskCheckManager implements RiskCheckManagerInterface
             return $consumerScoreResponseTransfer;
         }
 
-        $consumerScoreResponseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
+        $consumerScoreResponseTransfer->setCustomerMessage($responseContainer->getCustomerMessage());
 
         return $consumerScoreResponseTransfer;
     }

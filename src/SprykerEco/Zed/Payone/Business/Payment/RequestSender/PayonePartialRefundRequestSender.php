@@ -22,7 +22,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInter
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender implements PayonePartialRefundRequestSenderInterface
@@ -36,11 +35,6 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
     protected $standardParameter;
-
-    /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
-     */
-    protected $payoneRepository;
 
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface
@@ -59,28 +53,25 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneEntityManagerInterface $payoneEntityManager
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface $refundResponseMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
-        PayoneRepositoryInterface $payoneRepository,
         PayoneEntityManagerInterface $payoneEntityManager,
         StandartParameterMapperInterface $standardParameterMapper,
         RefundResponseMapperInterface $refundResponseMapper
     ) {
-        parent::__construct($queryContainer, $paymentMapperReader);
+        parent::__construct($payoneRepository, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
-        $this->payoneRepository = $payoneRepository;
         $this->payoneEntityManager = $payoneEntityManager;
         $this->standardParameterMapper = $standardParameterMapper;
         $this->refundResponseMapper = $refundResponseMapper;
@@ -213,7 +204,7 @@ class PayonePartialRefundRequestSender extends AbstractPayoneRequestSender imple
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setStatus($responseContainer->getStatus());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
         $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));

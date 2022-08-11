@@ -8,14 +8,14 @@
 namespace SprykerEco\Zed\Payone\Business\Api\Log;
 
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLog;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class ApiCallLogWriter implements ApiCallLogWriterInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
      */
-    protected $payoneQueryContainer;
+    protected $payoneRepository;
 
     /**
      * @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLog
@@ -23,11 +23,11 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
     protected $logEntity;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $payoneQueryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      */
-    public function __construct(PayoneQueryContainerInterface $payoneQueryContainer)
+    public function __construct(PayoneRepositoryInterface $payoneRepository)
     {
-        $this->payoneQueryContainer = $payoneQueryContainer;
+        $this->payoneRepository = $payoneRepository;
         $this->logEntity = new SpyPaymentPayoneApiCallLog();
     }
 
@@ -36,7 +36,7 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
      */
-    public function logUrl($url)
+    public function logUrl($url): ApiCallLogWriterInterface
     {
         $this->logEntity->setUrl($url);
 
@@ -48,7 +48,7 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
      */
-    public function logRequest($request)
+    public function logRequest($request): ApiCallLogWriterInterface
     {
         $this->logEntity->setRequest($request);
 
@@ -60,7 +60,7 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
      */
-    public function logResponse($response)
+    public function logResponse($response): ApiCallLogWriterInterface
     {
         $this->logEntity->setResponse($response);
 
@@ -70,7 +70,7 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
     /**
      * @return \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface
      */
-    public function flush()
+    public function flush(): ApiCallLogWriterInterface
     {
         $this->logEntity->save();
 

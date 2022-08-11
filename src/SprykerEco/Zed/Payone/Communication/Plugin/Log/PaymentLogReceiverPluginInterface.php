@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Communication\Plugin\Log;
 
+use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Propel\Runtime\Collection\ObjectCollection;
 
 interface PaymentLogReceiverPluginInterface
@@ -18,5 +19,5 @@ interface PaymentLogReceiverPluginInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs(ObjectCollection $orders);
+    public function getPaymentLogs(ObjectCollection $orders): PayonePaymentLogCollectionTransfer;
 }

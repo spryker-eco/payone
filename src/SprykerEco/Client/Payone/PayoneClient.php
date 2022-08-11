@@ -18,6 +18,7 @@ use Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer;
 use Generated\Shared\Transfer\PayoneManageMandateTransfer;
+use Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
 use Generated\Shared\Transfer\PayonePersonalDataTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -54,7 +55,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function updateStatus(PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer)
+    public function updateStatus(PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer): PayoneTransactionStatusUpdateTransfer
     {
         return $this->getFactory()->createZedStub()->updateStatus($payoneTransactionStatusUpdateTransfer);
     }
@@ -68,7 +69,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    public function getFile(PayoneGetFileTransfer $payoneGetFileTransfer)
+    public function getFile(PayoneGetFileTransfer $payoneGetFileTransfer): PayoneGetFileTransfer
     {
         return $this->getFactory()->createZedStub()->getFile($payoneGetFileTransfer);
     }
@@ -82,7 +83,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneCancelRedirectTransfer
      */
-    public function cancelRedirect(PayoneCancelRedirectTransfer $payoneCancelRedirectTransfer)
+    public function cancelRedirect(PayoneCancelRedirectTransfer $payoneCancelRedirectTransfer): PayoneCancelRedirectTransfer
     {
         return $this->getFactory()->createZedStub()->cancelRedirect($payoneCancelRedirectTransfer);
     }
@@ -96,7 +97,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    public function bankAccountCheck(PayoneBankAccountCheckTransfer $payoneBankAccountCheckTransfer)
+    public function bankAccountCheck(PayoneBankAccountCheckTransfer $payoneBankAccountCheckTransfer): PayoneBankAccountCheckTransfer
     {
         return $this->getFactory()->createZedStub()->bankAccountCheck($payoneBankAccountCheckTransfer);
     }
@@ -110,7 +111,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
      */
-    public function manageMandate(QuoteTransfer $quoteTransfer)
+    public function manageMandate(QuoteTransfer $quoteTransfer): PayoneManageMandateTransfer
     {
         $manageMandateTransfer = new PayoneManageMandateTransfer();
         $manageMandateTransfer->setBankCountry($quoteTransfer->getPayment()->getPayoneDirectDebit()->getBankcountry());
@@ -144,7 +145,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer
      */
-    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $payoneGetPaymentDetailTransfer)
+    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $payoneGetPaymentDetailTransfer): PayoneGetPaymentDetailTransfer
     {
         return $this->getFactory()->createZedStub()->getPaymentDetail($payoneGetPaymentDetailTransfer);
     }
@@ -158,7 +159,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    public function getInvoice(PayoneGetInvoiceTransfer $payoneGetInvoiceTransfer)
+    public function getInvoice(PayoneGetInvoiceTransfer $payoneGetInvoiceTransfer): PayoneGetInvoiceTransfer
     {
         return $this->getFactory()->createZedStub()->getInvoice($payoneGetInvoiceTransfer);
     }
@@ -174,7 +175,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      */
     public function initPaypalExpressCheckout(
         PayoneInitPaypalExpressCheckoutRequestTransfer $payoneInitPaypalExpressCheckoutRequestTransfer
-    ) {
+    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
         return $this->getFactory()->createZedStub()->initPaypalExpressCheckout($payoneInitPaypalExpressCheckoutRequestTransfer);
     }
 
@@ -187,7 +188,7 @@ class PayoneClient extends AbstractClient implements PayoneClientInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer)
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
     {
         return $this->getFactory()->createZedStub()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }

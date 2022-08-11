@@ -26,7 +26,7 @@ class DebitResponseMapper implements DebitResponseMapperInterface
         // Fill base response transfer
         $baseResponse->setErrorCode($responseContainer->getErrorcode());
         $baseResponse->setErrorMessage($responseContainer->getErrormessage());
-        $baseResponse->setCustomerMessage($responseContainer->getCustomermessage());
+        $baseResponse->setCustomerMessage($responseContainer->getCustomerMessage());
         $baseResponse->setStatus($responseContainer->getStatus());
         $baseResponse->setRawResponse($responseContainer->getRawResponse());
 

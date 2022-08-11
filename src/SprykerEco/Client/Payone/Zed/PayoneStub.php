@@ -34,10 +34,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function updateStatus(PayoneTransactionStatusUpdateTransfer $transactionStatus): PayoneTransactionStatusUpdateTransfer
     {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer */
+        $payoneTransactionStatusUpdateTransfer = $this->zedStub->call(
             '/payone/gateway/status-update',
             $transactionStatus,
         );
+
+        return $payoneTransactionStatusUpdateTransfer;
     }
 
     /**
@@ -49,10 +52,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer): PayoneBankAccountCheckTransfer
     {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $payoneBankAccountCheckTransfer */
+        $payoneBankAccountCheckTransfer = $this->zedStub->call(
             '/payone/gateway/bank-account-check',
             $bankAccountCheckTransfer,
         );
+
+        return $payoneBankAccountCheckTransfer;
     }
 
     /**
@@ -64,10 +70,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer): PayoneManageMandateTransfer
     {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayoneManageMandateTransfer $payoneManageMandateTransfer */
+        $payoneManageMandateTransfer = $this->zedStub->call(
             '/payone/gateway/manage-mandate',
             $manageMandateTransfer,
         );
+
+        return $payoneManageMandateTransfer;
     }
 
     /**
@@ -79,10 +88,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function getFile(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer
     {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayoneGetFileTransfer $payoneGetFileTransfer */
+        $payoneGetFileTransfer = $this->zedStub->call(
             '/payone/gateway/get-file',
             $getFileTransfer,
         );
+
+        return $payoneGetFileTransfer;
     }
 
     /**
@@ -94,10 +106,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function getPaymentDetail(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer): PayoneGetPaymentDetailTransfer
     {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer $payoneGetPaymentDetailTransfer */
+        $payoneGetPaymentDetailTransfer = $this->zedStub->call(
             '/payone/gateway/get-payment-detail',
             $getPaymentDetailTransfer,
         );
+
+        return $payoneGetPaymentDetailTransfer;
     }
 
     /**
@@ -109,10 +124,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer
     {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $payoneGetInvoiceTransfer */
+        $payoneGetInvoiceTransfer = $this->zedStub->call(
             '/payone/gateway/get-invoice',
             $getInvoiceTransfer,
         );
+
+        return $payoneGetInvoiceTransfer;
     }
 
     /**
@@ -124,10 +142,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function cancelRedirect(PayoneCancelRedirectTransfer $cancelRedirectTransfer): PayoneCancelRedirectTransfer
     {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayoneCancelRedirectTransfer $payoneCancelRedirectTransfer */
+        $payoneCancelRedirectTransfer = $this->zedStub->call(
             '/payone/gateway/cancel-redirect',
             $cancelRedirectTransfer,
         );
+
+        return $payoneCancelRedirectTransfer;
     }
 
     /**
@@ -140,10 +161,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     public function initPaypalExpressCheckout(
         PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
     ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $payonePaypalExpressCheckoutGenericPaymentResponseTransfer */
+        $payonePaypalExpressCheckoutGenericPaymentResponseTransfer = $this->zedStub->call(
             '/payone/gateway/init-paypal-express-checkout',
             $requestTransfer,
         );
+
+        return $payonePaypalExpressCheckoutGenericPaymentResponseTransfer;
     }
 
     /**
@@ -155,10 +179,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
     {
-        return $this->zedStub->call(
+        /** @var \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer $payonePaypalExpressCheckoutGenericPaymentResponseTransfer */
+        $payonePaypalExpressCheckoutGenericPaymentResponseTransfer = $this->zedStub->call(
             '/payone/gateway/get-paypal-express-checkout-details',
             $quoteTransfer,
         );
+
+        return $payonePaypalExpressCheckoutGenericPaymentResponseTransfer;
     }
 
     /**
@@ -170,7 +197,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function sendAddressCheckRequest(QuoteTransfer $quoteTransfer): AddressCheckResponseTransfer
     {
-        return $this->zedStub->call('/payone/gateway/send-address-check-request', $quoteTransfer);
+        /** @var \Generated\Shared\Transfer\AddressCheckResponseTransfer $addressCheckResponseTransfer */
+        $addressCheckResponseTransfer = $this->zedStub->call(
+            '/payone/gateway/send-address-check-request',
+            $quoteTransfer,
+        );
+
+        return $addressCheckResponseTransfer;
     }
 
     /**
@@ -182,7 +215,13 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
      */
     public function sendConsumerScoreRequest(QuoteTransfer $quoteTransfer): ConsumerScoreResponseTransfer
     {
-        return $this->zedStub->call('/payone/gateway/send-consumer-score-request', $quoteTransfer);
+        /** @var \Generated\Shared\Transfer\ConsumerScoreResponseTransfer $consumerScoreResponseTransfer */
+        $consumerScoreResponseTransfer = $this->zedStub->call(
+            '/payone/gateway/send-consumer-score-request',
+            $quoteTransfer,
+        );
+
+        return $consumerScoreResponseTransfer;
     }
 
     /**
@@ -195,6 +234,12 @@ class PayoneStub extends ZedRequestStub implements PayoneStubInterface
     public function sendKlarnaStartSessionRequest(
         PayoneKlarnaStartSessionRequestTransfer $payoneKlarnaStartSessionRequestTransfer
     ): PayoneKlarnaStartSessionResponseTransfer {
-        return $this->zedStub->call('/payone/gateway/send-klarna-start-session-request', $payoneKlarnaStartSessionRequestTransfer);
+        /** @var \Generated\Shared\Transfer\PayoneKlarnaStartSessionResponseTransfer $payoneKlarnaStartSessionResponseTransfer */
+        $payoneKlarnaStartSessionResponseTransfer = $this->zedStub->call(
+            '/payone/gateway/send-klarna-start-session-request',
+            $payoneKlarnaStartSessionRequestTransfer,
+        );
+
+        return $payoneKlarnaStartSessionResponseTransfer;
     }
 }

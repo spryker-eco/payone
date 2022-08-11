@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
-use Exception;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
 
@@ -186,22 +185,6 @@ class GenericPaymentContainer extends AbstractRequestContainer
     public function getPaydata(): ?PaydataContainer
     {
         return $this->paydata;
-    }
-
-    /**
-     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
-     *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
-     */
-    public function getPaydataOrFail(): PaydataContainer
-    {
-        $paydata = $this->paydata;
-
-        if ($paydata === null) {
-            $this->throwNullValueException('paydata');
-        }
-
-        return $paydata;
     }
 
     /**
@@ -392,19 +375,5 @@ class GenericPaymentContainer extends AbstractRequestContainer
     public function setWalletType(string $walletType): void
     {
         $this->wallettype = $walletType;
-    }
-
-    /**
-     * @param string $propertyName
-     *
-     * @throws \Exception
-     *
-     * @return void
-     */
-    protected function throwNullValueException(string $propertyName): void
-    {
-        throw new Exception(
-            sprintf('Property "%s" of container `%s` is null.', $propertyName, static::class),
-        );
     }
 }

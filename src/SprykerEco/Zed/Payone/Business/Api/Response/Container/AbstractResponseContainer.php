@@ -32,7 +32,7 @@ abstract class AbstractResponseContainer
     /**
      * @var string|null
      */
-    protected $customermessage;
+    protected $customerMessage;
 
     /**
      * @param array $params
@@ -111,21 +111,21 @@ abstract class AbstractResponseContainer
     }
 
     /**
-     * @param string $customermessage
+     * @param string $customerMessage
      *
      * @return void
      */
-    public function setCustomermessage(string $customermessage): void
+    public function setCustomerMessage(string $customerMessage): void
     {
-        $this->customermessage = $customermessage;
+        $this->customerMessage = $customerMessage;
     }
 
     /**
      * @return string|null
      */
-    public function getCustomermessage(): ?string
+    public function getCustomerMessage(): ?string
     {
-        return $this->customermessage;
+        return $this->customerMessage;
     }
 
     /**

@@ -173,7 +173,7 @@ class PayoneHandler implements PayoneHandlerInterface
      *
      * @return bool
      */
-    protected function isPaymentInList(string $paymentSelection)
+    protected function isPaymentInList(string $paymentSelection): bool
     {
         return in_array($paymentSelection, [
             PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER,
@@ -200,7 +200,7 @@ class PayoneHandler implements PayoneHandlerInterface
         PayonePaymentOnlinetransferTransfer $payonePaymentTransfer,
         QuoteTransfer $quoteTransfer,
         string $paymentSelection
-    ) {
+    ): void {
         $paymentDetailTransfer->setType($payonePaymentTransfer->getOnlineBankTransferType());
         $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankCountry());
         if ($paymentSelection === PaymentTransfer::PAYONE_BANCONTACT_ONLINE_TRANSFER) {
@@ -224,7 +224,7 @@ class PayoneHandler implements PayoneHandlerInterface
     protected function setPaymentDetailsFromPayonePaymentDirectDebitTransfer(
         PaymentDetailTransfer $paymentDetailTransfer,
         PayonePaymentDirectDebitTransfer $payonePaymentTransfer
-    ) {
+    ): void {
         $paymentDetailTransfer->setBankCountry($payonePaymentTransfer->getBankcountry());
         $paymentDetailTransfer->setBankAccount($payonePaymentTransfer->getBankaccount());
         $paymentDetailTransfer->setBankCode($payonePaymentTransfer->getBankcode());

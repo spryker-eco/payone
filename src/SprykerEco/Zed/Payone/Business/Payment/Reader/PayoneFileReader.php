@@ -15,7 +15,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetFileResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayoneFileReader implements PayoneFileReaderInterface
 {
@@ -30,9 +30,9 @@ class PayoneFileReader implements PayoneFileReaderInterface
     protected $executionAdapter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
      */
-    protected $queryContainer;
+    protected $payoneRepository;
 
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
@@ -56,20 +56,20 @@ class PayoneFileReader implements PayoneFileReaderInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
-        $this->queryContainer = $queryContainer;
+        $this->payoneRepository = $payoneRepository;
         $this->standardParameter = $standardParameter;
         $this->standardParameterMapper = $standardParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;
@@ -96,7 +96,7 @@ class PayoneFileReader implements PayoneFileReaderInterface
         $getFileTransfer->setRawResponse($responseContainer->getRawResponse());
         $getFileTransfer->setStatus($responseContainer->getStatus());
         $getFileTransfer->setErrorCode($responseContainer->getErrorcode());
-        $getFileTransfer->setCustomerErrorMessage($responseContainer->getCustomermessage());
+        $getFileTransfer->setCustomerErrorMessage($responseContainer->getCustomerMessage());
         $getFileTransfer->setInternalErrorMessage($responseContainer->getErrormessage());
 
         return $getFileTransfer;
@@ -110,7 +110,7 @@ class PayoneFileReader implements PayoneFileReaderInterface
      */
     protected function findPaymentByFileReferenceAndCustomerId(string $fileReference, int $customerId): ?SpyPaymentPayone
     {
-        return $this->queryContainer->createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId)->findOne();
+        return $this->payoneRepository->createPaymentByFileReferenceAndCustomerIdQuery($fileReference, $customerId)->findOne();
     }
 
     /**

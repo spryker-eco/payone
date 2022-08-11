@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayoneAuthorizeRequestSender extends AbstractPayoneRequestSender implements PayoneAuthorizeRequestSenderInterface
 {
@@ -32,20 +32,20 @@ class PayoneAuthorizeRequestSender extends AbstractPayoneRequestSender implement
     protected $authorizationResponseMapper;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\AuthorizationResponseMapperInterface $authorizationResponseMapper
      */
     public function __construct(
-        PayoneQueryContainerInterface $queryContainer,
+        PayoneRepositoryInterface $payoneRepository,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         PayoneBaseAuthorizeSenderInterface $baseAuthorizeSender,
         AuthorizationResponseMapperInterface $authorizationResponseMapper
     ) {
-        parent::__construct($queryContainer, $paymentMapperReader);
+        parent::__construct($payoneRepository, $paymentMapperReader);
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
         $this->baseAuthorizeSender = $baseAuthorizeSender;
         $this->authorizationResponseMapper = $authorizationResponseMapper;

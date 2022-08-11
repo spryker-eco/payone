@@ -76,16 +76,12 @@ interface PayoneApiConstants
     public const PAYMENT_METHOD_CREDITCARD = 'payment.payone.creditcard';
 
     /**
-     * @api
-     *
      * @var string
      */
     public const PAYMENT_METHOD_CREDITCARD_PSEUDO = 'payment.payone.creditcard';
 
     // e-wallet methods
     /**
-     * @api
-     *
      * @var string
      */
     public const PAYMENT_METHOD_E_WALLET = 'payment.payone.e_wallet';
@@ -123,8 +119,6 @@ interface PayoneApiConstants
 
     // online transfer methods
     /**
-     * @api
-     *
      * @var string
      */
     public const PAYMENT_METHOD_ONLINE_BANK_TRANSFER = 'payment.payone.online_bank_transfer';

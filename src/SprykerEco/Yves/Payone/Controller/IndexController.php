@@ -15,6 +15,7 @@ use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -57,7 +58,7 @@ class IndexController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): StreamedResponse
     {
         $statusUpdateTransfer = new PayoneTransactionStatusUpdateTransfer();
         $statusUpdateTransfer->fromArray($request->request->all(), true);
@@ -207,7 +208,7 @@ class IndexController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function cancelRedirectAction(Request $request)
+    public function cancelRedirectAction(Request $request): Response
     {
         $orderReference = (string)$request->query->get('orderReference');
         $urlHmac = (string)$request->query->get('sig');

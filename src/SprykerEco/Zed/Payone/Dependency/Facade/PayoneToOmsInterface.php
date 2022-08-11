@@ -17,9 +17,9 @@ interface PayoneToOmsInterface
      * @param array $logContext
      * @param array $data
      *
-     * @return array
+     * @return array|null
      */
-    public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = []): array;
+    public function triggerEvent($eventId, ObjectCollection $orderItems, array $logContext, array $data = []): ?array;
 
     /**
      * @param int $idOrder
