@@ -92,7 +92,8 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetailsAction(QuoteTransfer $quoteTransfer) {
+    public function getPaypalExpressCheckoutDetailsAction(QuoteTransfer $quoteTransfer)
+    {
         return $this->getFacade()->getPaypalExpressCheckoutDetails($quoteTransfer);
     }
 
