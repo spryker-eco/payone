@@ -143,16 +143,16 @@ class PayoneDebitTest extends AbstractBusinessTest
 
         $paymentPayoneQuery = $persistenceFactory->createPaymentPayoneQuery()->lastCreatedFirst();
 
-        $queryContainerMock = $this->createPartialMock(
+        $payoneRepository = $this->createPartialMock(
             PayoneRepository::class,
             ['createPaymentById', 'createPaymentByTransactionIdQuery', 'getFactory'],
         );
 
-        $queryContainerMock->method('createPaymentById')->willReturn($paymentPayoneQuery);
-        $queryContainerMock->method('createPaymentByTransactionIdQuery')->willReturn($paymentPayoneQuery);
-        $queryContainerMock->method('getFactory')->willReturn($persistenceFactory);
+        $payoneRepository->method('createPaymentById')->willReturn($paymentPayoneQuery);
+        $payoneRepository->method('createPaymentByTransactionIdQuery')->willReturn($paymentPayoneQuery);
+        $payoneRepository->method('getFactory')->willReturn($persistenceFactory);
 
-        return $queryContainerMock;
+        return $payoneRepository;
     }
 
     /**

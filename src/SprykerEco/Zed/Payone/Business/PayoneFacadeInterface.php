@@ -56,7 +56,7 @@ interface PayoneFacadeInterface
      *
      * @return void
      */
-    public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): void;
+    public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
 
     /**
      * Specification:
@@ -82,7 +82,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function authorizePayment(OrderTransfer $orderTransfer): AuthorizationResponseTransfer;
+    public function authorizePayment(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -94,7 +94,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\AuthorizationResponseTransfer
      */
-    public function preAuthorizePayment($idSalesOrder): AuthorizationResponseTransfer;
+    public function preAuthorizePayment($idSalesOrder);
 
     /**
      * Specification:
@@ -114,17 +114,16 @@ interface PayoneFacadeInterface
     /**
      * Specification:
      * - Performs payment debit request to Payone API.
+     * - Throws `PaymentNotFoundException` if SpyPaymentPayone not found
+     * - Throws `TransactionMissingException` if SpyPaymentPayone.transactionId missing
      *
      * @api
      *
      * @param int $idPayment
      *
-     * @throws \SprykerEco\Zed\Payone\Business\Exception\PaymentNotFoundException
-     * @throws \SprykerEco\Zed\Payone\Business\Exception\TransactionMissingException
-     *
      * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
-    public function debitPayment($idPayment): DebitResponseTransfer;
+    public function debitPayment($idPayment);
 
     /**
      * Specification:
@@ -139,7 +138,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\RefundResponseTransfer
      */
-    public function refundPayment(PayoneRefundTransfer $refundTransfer): RefundResponseTransfer;
+    public function refundPayment(PayoneRefundTransfer $refundTransfer);
 
     /**
      * Specification:
@@ -165,7 +164,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CreditCardCheckResponseTransfer
      */
-    public function creditCardCheck(PayoneCreditCardTransfer $creditCardData): CreditCardCheckResponseTransfer;
+    public function creditCardCheck(PayoneCreditCardTransfer $creditCardData);
 
     /**
      * Specification:
@@ -177,9 +176,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function processTransactionStatusUpdate(
-        PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
-    ): PayoneTransactionStatusUpdateTransfer;
+    public function processTransactionStatusUpdate(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer);
 
     /**
      * Specification:
@@ -192,7 +189,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isAuthorizationApproved(OrderTransfer $orderTransfer): bool;
+    public function isAuthorizationApproved(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -205,7 +202,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isAuthorizationRedirect(OrderTransfer $orderTransfer): bool;
+    public function isAuthorizationRedirect(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -218,7 +215,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPreauthorizationApproved(OrderTransfer $orderTransfer): bool;
+    public function isPreauthorizationApproved(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -231,7 +228,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPreauthorizationRedirect(OrderTransfer $orderTransfer): bool;
+    public function isPreauthorizationRedirect(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -244,7 +241,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPreAuthorizationError(OrderTransfer $orderTransfer): bool;
+    public function isPreAuthorizationError(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -257,7 +254,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isAuthorizationError(OrderTransfer $orderTransfer): bool;
+    public function isAuthorizationError(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -270,7 +267,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isCaptureApproved(OrderTransfer $orderTransfer): bool;
+    public function isCaptureApproved(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -283,7 +280,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isCaptureError(OrderTransfer $orderTransfer): bool;
+    public function isCaptureError(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -296,7 +293,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isRefundApproved(OrderTransfer $orderTransfer): bool;
+    public function isRefundApproved(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -309,7 +306,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isRefundError(OrderTransfer $orderTransfer): bool;
+    public function isRefundError(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -322,7 +319,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isRefundPossible(OrderTransfer $orderTransfer): bool;
+    public function isRefundPossible(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -335,7 +332,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentDataRequired(OrderTransfer $orderTransfer): bool;
+    public function isPaymentDataRequired(OrderTransfer $orderTransfer);
 
     /**
      * Specification:
@@ -348,7 +345,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentNotificationAvailable($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentNotificationAvailable($idSalesOrder, $idSalesOrderItem);
 
     /**
      * Specification:
@@ -361,7 +358,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentPaid($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentPaid($idSalesOrder, $idSalesOrderItem);
 
     /**
      * Specification:
@@ -374,7 +371,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentOverpaid($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentOverpaid($idSalesOrder, $idSalesOrderItem);
 
     /**
      * Specification:
@@ -387,7 +384,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentUnderpaid($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentUnderpaid($idSalesOrder, $idSalesOrderItem);
 
     /**
      * Specification:
@@ -400,7 +397,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentRefund($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentRefund($idSalesOrder, $idSalesOrderItem);
 
     /**
      * Specification:
@@ -413,7 +410,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentAppointed($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentAppointed($idSalesOrder, $idSalesOrderItem);
 
     /**
      * Specification:
@@ -426,7 +423,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentOther($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentOther($idSalesOrder, $idSalesOrderItem);
 
     /**
      * Specification:
@@ -439,7 +436,7 @@ interface PayoneFacadeInterface
      *
      * @return bool
      */
-    public function isPaymentCapture($idSalesOrder, $idSalesOrderItem): bool;
+    public function isPaymentCapture($idSalesOrder, $idSalesOrderItem);
 
     /**
      * Specification:
@@ -472,7 +469,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer;
+    public function postSaveHook(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse);
 
     /**
      * Specification:
@@ -504,7 +501,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs(OrderCollectionTransfer $orderCollectionTransfer): PayonePaymentLogCollectionTransfer;
+    public function getPaymentLogs(OrderCollectionTransfer $orderCollectionTransfer);
 
     /**
      * Specification:
@@ -516,7 +513,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PaymentDetailTransfer
      */
-    public function getPaymentDetail($idOrder): PaymentDetailTransfer;
+    public function getPaymentDetail($idOrder);
 
     /**
      * Specification:
@@ -529,7 +526,7 @@ interface PayoneFacadeInterface
      *
      * @return void
      */
-    public function updatePaymentDetail(PaymentDetailTransfer $paymentData, $idOrder): void;
+    public function updatePaymentDetail(PaymentDetailTransfer $paymentData, $idOrder);
 
     /**
      * Specification:
@@ -541,7 +538,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer): PayoneBankAccountCheckTransfer;
+    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer);
 
     /**
      * Specification:
@@ -553,7 +550,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneManageMandateTransfer
      */
-    public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer): PayoneManageMandateTransfer;
+    public function manageMandate(PayoneManageMandateTransfer $manageMandateTransfer);
 
     /**
      * Specification:
@@ -566,7 +563,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    public function getFile(PayoneGetFileTransfer $getFileTransfer): PayoneGetFileTransfer;
+    public function getFile(PayoneGetFileTransfer $getFileTransfer);
 
     /**
      * Specification:
@@ -579,7 +576,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer): PayoneGetInvoiceTransfer;
+    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer);
 
     /**
      * Specification:
@@ -607,9 +604,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function initPaypalExpressCheckout(
-        PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
+    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
 
     /**
      * Specification:
@@ -621,9 +616,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function getPaypalExpressCheckoutDetails(
-        QuoteTransfer $quoteTransfer
-    ): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer;
+    public function getPaypalExpressCheckoutDetails(QuoteTransfer $quoteTransfer);
 
     /**
      * Specification:

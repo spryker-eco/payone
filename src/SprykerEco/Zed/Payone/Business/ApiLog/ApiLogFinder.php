@@ -18,7 +18,7 @@ class ApiLogFinder implements ApiLogFinderInterface
     /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
      */
-    private $payoneRepository;
+    protected PayoneRepositoryInterface $payoneRepository;
 
     /**
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
