@@ -34,6 +34,7 @@ use SprykerEco\Zed\Payone\Business\PayoneFacadeInterface;
 use SprykerEco\Zed\Payone\PayoneConfig;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 use SprykerEco\Zed\Payone\Persistence\PayoneEntityManager;
+use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainer;
 use SprykerEco\Zed\Payone\Persistence\PayoneRepository;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 use Symfony\Component\HttpFoundation\Request;
@@ -144,6 +145,7 @@ abstract class AbstractBusinessTest extends Test
             ->getMock();
 
         $businessFactoryMock->setConfig(new PayoneConfig());
+        $businessFactoryMock->setQueryContainer(new PayoneQueryContainer());
         $businessFactoryMock->setRepository(new PayoneRepository());
         $businessFactoryMock->setEntityManager(new PayoneEntityManager());
 

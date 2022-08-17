@@ -21,7 +21,7 @@ use SprykerEco\Zed\Payone\Business\Payment\DataMapper\ExpenseMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements PayoneCaptureRequestSenderInterface
 {
@@ -73,7 +73,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
@@ -84,7 +84,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneRepositoryInterface $payoneRepository,
+        PayoneQueryContainerInterface $queryContainer,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         OrderPriceDistributorInterface $orderPriceDistributor,
@@ -93,7 +93,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
         ExpenseMapperInterface $expenseMapper,
         CaptureResponseMapperInterface $captureResponseMapper
     ) {
-        parent::__construct($payoneRepository, $paymentMapperReader);
+        parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->orderPriceDistributor = $orderPriceDistributor;
@@ -127,14 +127,16 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
             $requestContainer = $this->expenseMapper->mapExpenses($captureTransfer->getOrderOrFail(), $requestContainer);
         }
 
-        if ($requestContainer instanceof CaptureContainer && !empty($captureTransfer->getSettleaccount())) {
-            $businnessContainer = new BusinessContainer();
-            $businnessContainer->setSettleAccount($captureTransfer->getSettleaccount());
-            $requestContainer->setBusiness($businnessContainer);
-        }
+        if ($requestContainer instanceof CaptureContainer) {
+            if (!empty($captureTransfer->getSettleaccount())) {
+                $businnessContainer = new BusinessContainer();
+                $businnessContainer->setSettleAccount($captureTransfer->getSettleaccount());
+                $requestContainer->setBusiness($businnessContainer);
+            }
 
-        if ($requestContainer instanceof CaptureContainer && $captureTransfer->getAmount() !== null) {
-            $requestContainer->setAmount($captureTransfer->getAmount());
+            if ($captureTransfer->getAmount() !== null) {
+                $requestContainer->setAmount($captureTransfer->getAmount());
+            }
         }
 
         $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
@@ -159,7 +161,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
         $apiLogEntity->setStatus($responseContainer->getStatus());
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
         $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));

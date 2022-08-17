@@ -15,7 +15,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\GetInvoiceResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
 {
@@ -30,9 +30,9 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
     protected $executionAdapter;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
      */
-    protected $payoneRepository;
+    protected $queryContainer;
 
     /**
      * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
@@ -51,20 +51,20 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneRepositoryInterface $payoneRepository,
+        PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
-        $this->payoneRepository = $payoneRepository;
+        $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
         $this->standardParameterMapper = $standardParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;
@@ -104,7 +104,7 @@ class PayoneInvoiceReader implements PayoneInvoiceReaderInterface
      */
     protected function findPaymentByInvoiceTitleAndCustomerId(string $invoiceTitle, int $customerId): ?SpyPaymentPayone
     {
-        return $this->payoneRepository->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
+        return $this->queryContainer->createPaymentByInvoiceTitleAndCustomerIdQuery($invoiceTitle, $customerId)->findOne();
     }
 
     /**

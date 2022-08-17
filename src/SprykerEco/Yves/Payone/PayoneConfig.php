@@ -35,7 +35,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getStandardCheckoutEntryPoint(): string
+    public function getStandardCheckoutEntryPoint()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -47,7 +47,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getSuccessUrl(): string
+    public function getSuccessUrl()
     {
         return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_LOAD_DETAILS_PATH;
     }
@@ -57,7 +57,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getBackUrl(): string
+    public function getBackUrl()
     {
         return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_BACK_PATH;
     }
@@ -67,7 +67,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getFailureUrl(): string
+    public function getFailureUrl()
     {
         return $this->getYvesBaseUrl() . PayoneControllerProvider::EXPRESS_CHECKOUT_FAILURE_PATH;
     }
@@ -77,7 +77,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getFailureProjectUrl(): string
+    public function getFailureProjectUrl()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -89,7 +89,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getBackProjectUrl(): string
+    public function getBackProjectUrl()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 
@@ -99,7 +99,7 @@ class PayoneConfig extends AbstractBundleConfig
     /**
      * @return string
      */
-    protected function getYvesBaseUrl(): string
+    protected function getYvesBaseUrl()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
 

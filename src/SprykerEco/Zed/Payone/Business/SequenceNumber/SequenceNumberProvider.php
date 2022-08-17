@@ -7,14 +7,14 @@
 
 namespace SprykerEco\Zed\Payone\Business\SequenceNumber;
 
-use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class SequenceNumberProvider implements SequenceNumberProviderInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
      */
-    protected $payoneRepository;
+    protected $queryContainer;
 
     /**
      * @var int
@@ -22,12 +22,12 @@ class SequenceNumberProvider implements SequenceNumberProviderInterface
     protected $defaultEmptySequenceNumber;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param int $defaultEmptySequenceNumber
      */
-    public function __construct(PayoneRepositoryInterface $payoneRepository, int $defaultEmptySequenceNumber)
+    public function __construct(PayoneQueryContainerInterface $queryContainer, int $defaultEmptySequenceNumber)
     {
-        $this->payoneRepository = $payoneRepository;
+        $this->queryContainer = $queryContainer;
 
         $this->defaultEmptySequenceNumber = $defaultEmptySequenceNumber;
     }
@@ -54,7 +54,7 @@ class SequenceNumberProvider implements SequenceNumberProviderInterface
      */
     public function getCurrentSequenceNumber(int $transactionId): ?int
     {
-        $transactionEntity = $this->payoneRepository
+        $transactionEntity = $this->queryContainer
             ->createCurrentSequenceNumberQuery($transactionId)
             ->findOne();
 

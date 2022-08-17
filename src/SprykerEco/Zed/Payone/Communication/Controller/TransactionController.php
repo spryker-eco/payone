@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface getRepository()
  */
 class TransactionController extends AbstractController

@@ -16,7 +16,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements PayoneBaseAuthorizeSenderInterface
 {
@@ -37,19 +37,19 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        PayoneRepositoryInterface $payoneRepository,
+        PayoneQueryContainerInterface $queryContainer,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         StandartParameterMapperInterface $standardParameterMapper
     ) {
-        parent::__construct($payoneRepository, $paymentMapperReader);
+        parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->standardParameterMapper = $standardParameterMapper;

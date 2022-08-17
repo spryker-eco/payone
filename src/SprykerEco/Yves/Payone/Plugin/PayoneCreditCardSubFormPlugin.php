@@ -19,8 +19,6 @@ class PayoneCreditCardSubFormPlugin extends AbstractPlugin implements SubFormPlu
      * {@inheritDoc}
      * - Creates `CreditCardSubForm` subform.
      *
-     * @api
-     *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm()
@@ -31,8 +29,6 @@ class PayoneCreditCardSubFormPlugin extends AbstractPlugin implements SubFormPlu
     /**
      * {@inheritDoc}
      * - Creates subform data provider.
-     *
-     * @api
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */

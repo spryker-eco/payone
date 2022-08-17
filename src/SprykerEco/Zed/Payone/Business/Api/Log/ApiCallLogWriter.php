@@ -8,14 +8,14 @@
 namespace SprykerEco\Zed\Payone\Business\Api\Log;
 
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLog;
-use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class ApiCallLogWriter implements ApiCallLogWriterInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
      */
-    protected $payoneRepository;
+    protected $payoneQueryContainer;
 
     /**
      * @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiCallLog
@@ -23,11 +23,11 @@ class ApiCallLogWriter implements ApiCallLogWriterInterface
     protected $logEntity;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $payoneQueryContainer
      */
-    public function __construct(PayoneRepositoryInterface $payoneRepository)
+    public function __construct(PayoneQueryContainerInterface $payoneQueryContainer)
     {
-        $this->payoneRepository = $payoneRepository;
+        $this->payoneQueryContainer = $payoneQueryContainer;
         $this->logEntity = new SpyPaymentPayoneApiCallLog();
     }
 

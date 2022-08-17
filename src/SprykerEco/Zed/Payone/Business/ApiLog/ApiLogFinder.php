@@ -11,21 +11,21 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
-use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
+use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class ApiLogFinder implements ApiLogFinderInterface
 {
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
+     * @var \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface
      */
-    protected PayoneRepositoryInterface $payoneRepository;
+    private $queryContainer;
 
     /**
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $payoneRepository
+     * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      */
-    public function __construct(PayoneRepositoryInterface $payoneRepository)
+    public function __construct(PayoneQueryContainerInterface $queryContainer)
     {
-        $this->payoneRepository = $payoneRepository;
+        $this->queryContainer = $queryContainer;
     }
 
     /**
@@ -182,7 +182,7 @@ class ApiLogFinder implements ApiLogFinderInterface
     protected function hasApiLogStatus(OrderTransfer $orderTransfer, string $request, string $status): bool
     {
         $idSalesOrder = $orderTransfer->getIdSalesOrderOrFail();
-        $apiLog = $this->payoneRepository->createApiLogsByOrderIdAndRequest($idSalesOrder, $request)->filterByStatus($status)->findOne();
+        $apiLog = $this->queryContainer->createApiLogsByOrderIdAndRequest($idSalesOrder, $request)->filterByStatus($status)->findOne();
 
         if ($apiLog === null) {
             return false;
@@ -198,7 +198,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      */
     protected function findPaymentByTransactionId(int $transactionId): SpyPaymentPayone
     {
-        return $this->payoneRepository->createPaymentByTransactionIdQuery($transactionId)->findOne();
+        return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
     }
 
     /**
@@ -208,7 +208,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      */
     protected function findPaymentByOrder(OrderTransfer $orderTransfer): SpyPaymentPayone
     {
-        return $this->payoneRepository->createPaymentByOrderId($orderTransfer->getIdSalesOrderOrFail())->findOne();
+        return $this->queryContainer->createPaymentByOrderId($orderTransfer->getIdSalesOrderOrFail())->findOne();
     }
 
     /**
@@ -219,7 +219,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      */
     protected function findApiLog(SpyPaymentPayone $payment, string $authorizationType): SpyPaymentPayoneApiLog
     {
-        return $this->payoneRepository->createApiLogByPaymentAndRequestTypeQuery(
+        return $this->queryContainer->createApiLogByPaymentAndRequestTypeQuery(
             $payment->getPrimaryKey(),
             $authorizationType,
         )->findOne();
