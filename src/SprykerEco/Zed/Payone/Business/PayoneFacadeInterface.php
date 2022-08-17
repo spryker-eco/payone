@@ -109,8 +109,8 @@ interface PayoneFacadeInterface
     /**
      * Specification:
      * - Performs payment debit request to Payone API.
-     * - Throws `PaymentNotFoundException` if SpyPaymentPayone not found
-     * - Throws `TransactionMissingException` if SpyPaymentPayone.transactionId missing
+     * - Throws `PaymentNotFoundException` if SpyPaymentPayone not found.
+     * - Throws `TransactionMissingException` if SpyPaymentPayone.transactionId is missing.
      *
      * @api
      *
