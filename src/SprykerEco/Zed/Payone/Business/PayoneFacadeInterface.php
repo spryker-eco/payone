@@ -584,9 +584,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
      */
-    public function getSecurityInvoice(
-        PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
-    ): PayoneGetSecurityInvoiceTransfer;
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer);
 
     /**
      * Specification:
