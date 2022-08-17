@@ -16,7 +16,7 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
     /**
      * @var string
      */
-    public const SERVICE_ZED = 'service zed';
+    public const CLIENT_ZED_REQUEST = 'CLIENT_ZED_REQUEST';
 
     /**
      * @var string
@@ -32,7 +32,7 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
     {
         $container = parent::provideServiceLayerDependencies($container);
 
-        $this->addZedService($container);
+        $this->addZedRequestClient($container);
         $this->addUtilEncodingService($container);
 
         return $container;
@@ -43,9 +43,9 @@ class PayoneDependencyProvider extends AbstractDependencyProvider
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    protected function addZedService(Container $container): Container
+    protected function addZedRequestClient(Container $container): Container
     {
-        $container->set(static::SERVICE_ZED, function (Container $container) {
+        $container->set(static::CLIENT_ZED_REQUEST, function (Container $container) {
             return $container->getLocator()->zedRequest()->client();
         });
 

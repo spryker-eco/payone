@@ -39,6 +39,7 @@ interface PayoneFacadeInterface
 {
     /**
      * Specification:
+     * - Requires `CheckoutResponseTransfer.SaveOrder` to be set.
      * - Saves order payment method data according to quote and checkout response transfer data.
      *
      * @api
@@ -108,6 +109,8 @@ interface PayoneFacadeInterface
     /**
      * Specification:
      * - Performs payment debit request to Payone API.
+     * - Throws `PaymentNotFoundException` if SpyPaymentPayone not found.
+     * - Throws `TransactionMissingException` if SpyPaymentPayone.transactionId is missing.
      *
      * @api
      *
@@ -168,9 +171,7 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function processTransactionStatusUpdate(
-        PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
-    );
+    public function processTransactionStatusUpdate(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer);
 
     /**
      * Specification:
@@ -583,10 +584,13 @@ interface PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
      */
-    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer);
+    public function getSecurityInvoice(
+        PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer
+    ): PayoneGetSecurityInvoiceTransfer;
 
     /**
      * Specification:
+     * - Requires `PayoneInitPaypalExpressCheckoutRequestTransfer.quote` to be set.
      * - Performs init express checkout request to Payone API.
      *
      * @api
@@ -678,6 +682,7 @@ interface PayoneFacadeInterface
 
     /**
      * Specification:
+     * - Requires `PayoneKlarnaStartSessionRequestTransfer.quote` to be set.
      * - Starts Payone Klarna session.
      * - Returns client token in case session started successfully.
      * - Returns 'isSuccessful=false' and error message in case of error.

@@ -38,7 +38,7 @@ class PayoneFactory extends AbstractFactory
             $this->createStandardParameter($defaults),
             $this->createHashGenerator(),
             $this->createModeDetector(),
-            $this->createUtilEncodingService(),
+            $this->getUtilEncodingService(),
         );
     }
 
@@ -102,7 +102,7 @@ class PayoneFactory extends AbstractFactory
      */
     public function createZedStub(): PayoneStubInterface
     {
-        $zedStub = $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_ZED);
+        $zedStub = $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_ZED_REQUEST);
 
         return new PayoneStub($zedStub);
     }
@@ -110,7 +110,7 @@ class PayoneFactory extends AbstractFactory
     /**
      * @return \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface
      */
-    public function createUtilEncodingService(): PayoneToUtilEncodingServiceInterface
+    public function getUtilEncodingService(): PayoneToUtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_UTIL_ENCODING);
     }

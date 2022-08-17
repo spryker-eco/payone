@@ -39,9 +39,8 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function statusUpdateAction(
-        PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer
-    ) {
+    public function statusUpdateAction(PayoneTransactionStatusUpdateTransfer $transactionStatusUpdateTransfer)
+    {
         $transactionStatusUpdateTransfer = $this
             ->getFacade()
             ->processTransactionStatusUpdate($transactionStatusUpdateTransfer);
@@ -82,9 +81,8 @@ class GatewayController extends AbstractGatewayController
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function initPaypalExpressCheckoutAction(
-        PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
-    ) {
+    public function initPaypalExpressCheckoutAction(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer)
+    {
         return $this->getFacade()->initPaypalExpressCheckout($requestTransfer);
     }
 

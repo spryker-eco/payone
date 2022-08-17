@@ -101,7 +101,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
         $apiLogEntity->setUserId((string)$responseContainer->getUserid());
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
         $apiLogEntity->setRedirectUrl($responseContainer->getRedirecturl());
         $apiLogEntity->setSequenceNumber(0);

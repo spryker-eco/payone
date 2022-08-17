@@ -96,7 +96,7 @@ class PayoneFileReader implements PayoneFileReaderInterface
         $getFileTransfer->setRawResponse($responseContainer->getRawResponse());
         $getFileTransfer->setStatus($responseContainer->getStatus());
         $getFileTransfer->setErrorCode($responseContainer->getErrorcode());
-        $getFileTransfer->setCustomerErrorMessage($responseContainer->getCustomermessage());
+        $getFileTransfer->setCustomerErrorMessage($responseContainer->getCustomerMessage());
         $getFileTransfer->setInternalErrorMessage($responseContainer->getErrormessage());
 
         return $getFileTransfer;

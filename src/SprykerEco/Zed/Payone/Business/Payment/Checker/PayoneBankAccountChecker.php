@@ -84,7 +84,7 @@ class PayoneBankAccountChecker implements PayoneBankAccountCheckerInterface
         BankAccountCheckResponseContainer $responseContainer
     ): PayoneBankAccountCheckTransfer {
         $bankAccountCheckTransfer->setErrorCode($responseContainer->getErrorcode());
-        $bankAccountCheckTransfer->setCustomerErrorMessage($responseContainer->getCustomermessage());
+        $bankAccountCheckTransfer->setCustomerErrorMessage($responseContainer->getCustomerMessage());
         $bankAccountCheckTransfer->setStatus($responseContainer->getStatus());
         $bankAccountCheckTransfer->setInternalErrorMessage($responseContainer->getErrormessage());
 

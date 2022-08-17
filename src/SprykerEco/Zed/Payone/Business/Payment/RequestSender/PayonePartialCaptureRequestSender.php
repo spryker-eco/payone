@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\Payment\RequestSender;
 
 use Generated\Shared\Transfer\CaptureResponseTransfer;
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePartialOperationRequestTransfer;
@@ -191,7 +192,7 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
         $apiLogEntity->setStatus($responseContainer->getStatus());
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
         $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));
@@ -282,17 +283,31 @@ class PayonePartialCaptureRequestSender extends AbstractPayoneRequestSender impl
     protected function checkThatDeliveryCostsAreRequired(PayonePartialOperationRequestTransfer $payonePartialOperationRequestTransfer): bool
     {
         foreach ($payonePartialOperationRequestTransfer->getOrder()->getItems() as $itemTransfer) {
-            if (in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds())) {
+            if (in_array($itemTransfer->getIdSalesOrderItem(), $payonePartialOperationRequestTransfer->getSalesOrderItemIds(), true)) {
                 continue;
             }
-            foreach ($itemTransfer->getStateHistory() as $itemState) {
-                if ($itemState->getName() === static::ITEM_STATE_SHIPPED) {
-                    return false;
-                }
+            if ($this->isItemTransferWasShipped($itemTransfer)) {
+                return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
+     *
+     * @return bool
+     */
+    protected function isItemTransferWasShipped(ItemTransfer $itemTransfer): bool
+    {
+        foreach ($itemTransfer->getStateHistory() as $itemState) {
+            if ($itemState->getName() === static::ITEM_STATE_SHIPPED) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

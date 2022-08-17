@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable Spryker.ControlStructures.DisallowCloakingCheck.InvalidIsset
 
 /**
  * MIT License
@@ -66,28 +65,28 @@ class ItemContainer extends AbstractContainer
     public function toArrayByKey(int $key): array
     {
         $data = [];
-        if (isset($this->id)) {
+        if ($this->id !== null) {
             $data['id[' . $key . ']'] = $this->getId();
         }
-        if (isset($this->pr)) {
+        if ($this->pr !== null) {
             $data['pr[' . $key . ']'] = $this->getPr();
         }
-        if (isset($this->no)) {
+        if ($this->no !== null) {
             $data['no[' . $key . ']'] = $this->getNo();
         }
-        if (isset($this->de)) {
+        if ($this->de !== null) {
             $data['de[' . $key . ']'] = $this->getDe();
         }
-        if (isset($this->it)) {
+        if ($this->it !== null) {
             $data['it[' . $key . ']'] = $this->getIt();
         }
-        if (isset($this->va)) {
+        if ($this->va !== null) {
             $data['va[' . $key . ']'] = $this->getVa();
         }
-        if (isset($this->sd)) {
+        if ($this->sd !== null) {
             $data['sd[' . $key . ']'] = $this->getSd();
         }
-        if (isset($this->ed)) {
+        if ($this->ed !== null) {
             $data['ed[' . $key . ']'] = $this->getEd();
         }
 

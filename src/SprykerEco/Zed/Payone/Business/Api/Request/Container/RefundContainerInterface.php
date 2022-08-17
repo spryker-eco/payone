@@ -109,9 +109,9 @@ interface RefundContainerInterface
     public function getUseCustomerData(): string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankcountry(): string;
+    public function getBankcountry(): ?string;
 
     /**
      * @param string|null $bankcountry

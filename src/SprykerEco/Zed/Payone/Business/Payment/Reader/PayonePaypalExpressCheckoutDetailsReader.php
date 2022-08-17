@@ -50,9 +50,13 @@ class PayonePaypalExpressCheckoutDetailsReader implements PayonePaypalExpressChe
         );
 
         $baseGenericPaymentContainer = $paymentMethodMapper->createBaseGenericPaymentContainer();
-        $baseGenericPaymentContainer->getPaydataOrFail()->setAction(
-            PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION,
-        );
+
+        $paydata = $baseGenericPaymentContainer->getPaydata();
+
+        if ($paydata !== null) {
+            $paydata->setAction(PayoneApiConstants::PAYONE_EXPRESS_CHECKOUT_GET_DETAILS_ACTION);
+        }
+
         $requestContainer = $paymentMethodMapper->mapQuoteTransferToGenericPayment(
             $baseGenericPaymentContainer,
             $quoteTransfer,

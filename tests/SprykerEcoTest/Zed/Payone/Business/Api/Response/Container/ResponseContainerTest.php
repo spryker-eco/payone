@@ -266,7 +266,7 @@ class ResponseContainerTest extends PHPUnit_Framework_TestCase
      */
     protected function assertStandardParams(AbstractResponseContainer $container): void
     {
-        $this->assertEquals('customermessage', $container->getCustomermessage());
+        $this->assertEquals('customermessage', $container->getCustomerMessage());
         $this->assertEquals('errorcode', $container->getErrorcode());
         $this->assertEquals('errormessage', $container->getErrormessage());
         $this->assertEquals('rawresponse', $container->getRawResponse());

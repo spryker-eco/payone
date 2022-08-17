@@ -126,7 +126,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setStatus($responseContainer->getStatus());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
         $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));
