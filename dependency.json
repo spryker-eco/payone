@@ -1,4 +1,7 @@
 {
+    "include": {
+        "spryker/transfer": "Provides transfer objects decimal property type functionality."
+    },
     "include-dev": {
         "codeception/module-asserts": "Codeception module containing various assertions."
     }
