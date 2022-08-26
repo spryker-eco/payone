@@ -40,7 +40,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface
@@ -58,7 +58,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Distributor\OrderPriceDistributorInterface $orderPriceDistributor
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\RefundResponseMapperInterface $refundResponseMapper
      */
@@ -68,7 +68,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
         OrderPriceDistributorInterface $orderPriceDistributor,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         RefundResponseMapperInterface $refundResponseMapper
     ) {
@@ -76,7 +76,7 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->orderPriceDistributor = $orderPriceDistributor;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
         $this->refundResponseMapper = $refundResponseMapper;
     }
@@ -89,21 +89,21 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
     public function refundPayment(PayoneRefundTransfer $refundTransfer): RefundResponseTransfer
     {
         $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
-            $refundTransfer->getOrder()
+            $refundTransfer->getOrderOrFail(),
         );
         $refundTransfer->setOrder($distributedPriceOrderTransfer);
 
-        $payonePaymentTransfer = $refundTransfer->getPayment();
+        $payonePaymentTransfer = $refundTransfer->getPaymentOrFail();
 
-        $paymentEntity = $this->getPaymentEntity($payonePaymentTransfer->getFkSalesOrder());
-        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
-        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentEntity);
-        $requestContainer->setAmount(0 - $paymentEntity->getSpyPaymentPayoneDetail()->getAmount());
+        $paymentPayoneEntity = $this->getPaymentEntity($payonePaymentTransfer->getFkSalesOrderOrFail());
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
+        $requestContainer = $paymentMethodMapper->mapPaymentToRefund($paymentPayoneEntity);
+        $requestContainer->setAmount(0 - $paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());
         $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($refundTransfer->getOrder(), $requestContainer);
 
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
-        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
+        $apiLogEntity = $this->initializeApiLog($paymentPayoneEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new RefundResponseContainer($rawResponse);
@@ -126,10 +126,10 @@ class PayoneRefundRequestSender extends AbstractPayoneRequestSender implements P
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setStatus($responseContainer->getStatus());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
-        $apiLogEntity->setRawResponse(json_encode($responseContainer->toArray()));
+        $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));
         $apiLogEntity->save();
     }
 }

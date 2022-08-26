@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\CreditCardCheckRespons
 interface CreditCardCheckResponseMapperInterface extends ResponseMapperInterface
 {
     /**
-     * @const string NAME
+     * @var string
      */
     public const NAME = 'CREDIT_CARD_CHECK';
 

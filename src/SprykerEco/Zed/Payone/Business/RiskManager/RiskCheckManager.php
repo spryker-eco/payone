@@ -63,11 +63,13 @@ class RiskCheckManager implements RiskCheckManagerInterface
         $addressCheckResponseTransfer->setStreetNumber($responseContainer->getStreetNumber());
         $addressCheckResponseTransfer->setZip($responseContainer->getZip());
         $addressCheckResponseTransfer->setCity($responseContainer->getCity());
-        $addressCheckResponseTransfer->setSecStatus($responseContainer->getSecstatus());
+        if ($responseContainer->getSecstatus() !== null) {
+            $addressCheckResponseTransfer->setSecStatus((string)$responseContainer->getSecstatus());
+        }
         $addressCheckResponseTransfer->setPersonStatus($responseContainer->getPersonstatus());
 
-        if ($responseContainer->getCustomermessage() !== null) {
-            $addressCheckResponseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
+        if ($responseContainer->getCustomerMessage() !== null) {
+            $addressCheckResponseTransfer->setCustomerMessage($responseContainer->getCustomerMessage());
         }
 
         return $addressCheckResponseTransfer;
@@ -93,12 +95,12 @@ class RiskCheckManager implements RiskCheckManagerInterface
 
         if (!$responseContainer->isError()) {
             $consumerScoreResponseTransfer->setScore($responseContainer->getScore());
-            $consumerScoreResponseTransfer->setScoreValue($responseContainer->getScorevalue());
+            $consumerScoreResponseTransfer->setScoreValue((string)$responseContainer->getScorevalue());
 
             return $consumerScoreResponseTransfer;
         }
 
-        $consumerScoreResponseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
+        $consumerScoreResponseTransfer->setCustomerMessage($responseContainer->getCustomerMessage());
 
         return $consumerScoreResponseTransfer;
     }

@@ -21,7 +21,7 @@ interface PayoneRepositoryInterface
     /**
      * @param \Generated\Shared\Transfer\PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer
      *
-     * @return \Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer>
      */
     public function findPaymentPayoneOrderItemByFilter(PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer): array;
 
@@ -49,16 +49,16 @@ interface PayoneRepositoryInterface
     /**
      * Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
-     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orders
+     * @param \ArrayObject<array-key, \Generated\Shared\Transfer\OrderTransfer> $orderTransfers
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs(ArrayObject $orders): PayonePaymentLogCollectionTransfer;
+    public function getPaymentLogs(ArrayObject $orderTransfers): PayonePaymentLogCollectionTransfer;
 
     /**
-     * @param int $orderId
+     * @param int $idOrder
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
-    public function createPaymentPayoneQueryByOrderId(int $orderId): SpyPaymentPayoneQuery;
+    public function createPaymentPayoneQueryByOrderId(int $idOrder): SpyPaymentPayoneQuery;
 }

@@ -28,12 +28,12 @@ class PayoneSaveOrderPlugin extends AbstractPlugin implements CheckoutSaveOrderP
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
      * @return void
      */
-    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
+    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        $this->getFacade()->saveOrder($quoteTransfer, $checkoutResponse);
+        $this->getFacade()->saveOrder($quoteTransfer, $checkoutResponseTransfer);
     }
 }

@@ -12,12 +12,12 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectC
 class ExpressCheckoutContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $wallettype;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
     protected $redirect;
 
@@ -26,15 +26,15 @@ class ExpressCheckoutContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setWalletType($wallettype)
+    public function setWalletType(string $wallettype): void
     {
         $this->wallettype = $wallettype;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWalletType()
+    public function getWalletType(): ?string
     {
         return $this->wallettype;
     }
@@ -44,15 +44,15 @@ class ExpressCheckoutContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setRedirect(RedirectContainer $redirect)
+    public function setRedirect(RedirectContainer $redirect): void
     {
         $this->redirect = $redirect;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
-    public function getRedirect()
+    public function getRedirect(): ?RedirectContainer
     {
         return $this->redirect;
     }

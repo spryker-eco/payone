@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class BankAccountCheckResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankbranchcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcheckdigit;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
@@ -49,15 +49,15 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount)
+    public function setBankAccount(string $bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankAccount()
+    public function getBankAccount(): ?string
     {
         return $this->bankaccount;
     }
@@ -67,15 +67,15 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBankBranchCode($bankbranchcode)
+    public function setBankBranchCode(string $bankbranchcode): void
     {
         $this->bankbranchcode = $bankbranchcode;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankBranchCode()
+    public function getBankBranchCode(): ?string
     {
         return $this->bankbranchcode;
     }
@@ -85,15 +85,15 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBankCheckDigit($bankcheckdigit)
+    public function setBankCheckDigit(string $bankcheckdigit): void
     {
         $this->bankcheckdigit = $bankcheckdigit;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCheckDigit()
+    public function getBankCheckDigit(): ?string
     {
         return $this->bankcheckdigit;
     }
@@ -103,15 +103,15 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode)
+    public function setBankCode(string $bankcode): void
     {
         $this->bankcode = $bankcode;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCode()
+    public function getBankCode(): ?string
     {
         return $this->bankcode;
     }
@@ -121,15 +121,15 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry)
+    public function setBankCountry(string $bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCountry()
+    public function getBankCountry(): ?string
     {
         return $this->bankcountry;
     }
@@ -139,15 +139,15 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic()
+    public function getBic(): ?string
     {
         return $this->bic;
     }
@@ -157,15 +157,15 @@ class BankAccountCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban()
+    public function getIban(): ?string
     {
         return $this->iban;
     }

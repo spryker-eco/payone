@@ -17,67 +17,67 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_ADDRESSCHECK;
 
     /**
-     * @var int
+     * @var string
      */
     protected $aid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $addresschecktype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $streetname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $streetnumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $state;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $telephonenumber;
 
@@ -87,12 +87,12 @@ class AddressCheckContainer extends AbstractRequestContainer
     protected $language;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $birthday;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $gender;
 
@@ -101,105 +101,105 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAddressCheckType($addresschecktype)
+    public function setAddressCheckType(string $addresschecktype): void
     {
         $this->addresschecktype = $addresschecktype;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAddressCheckType()
+    public function getAddressCheckType(): ?string
     {
         return $this->addresschecktype;
     }
 
     /**
-     * @param string $city
+     * @param string|null $city
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity(?string $city): void
     {
         $this->city = $city;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
     /**
-     * @param string $company
+     * @param string|null $company
      *
      * @return void
      */
-    public function setCompany($company)
+    public function setCompany(?string $company): void
     {
         $this->company = $company;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCompany()
+    public function getCompany(): ?string
     {
         return $this->company;
     }
 
     /**
-     * @param string $country
+     * @param string|null $country
      *
      * @return void
      */
-    public function setCountry($country)
+    public function setCountry(?string $country): void
     {
         $this->country = $country;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
     /**
-     * @param string $firstname
+     * @param string|null $firstname
      *
      * @return void
      */
-    public function setFirstName($firstname)
+    public function setFirstName(?string $firstname): void
     {
         $this->firstname = $firstname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstname;
     }
 
     /**
-     * @param string $lastname
+     * @param string|null $lastname
      *
      * @return void
      */
-    public function setLastName($lastname)
+    public function setLastName(?string $lastname): void
     {
         $this->lastname = $lastname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastname;
     }
@@ -209,15 +209,15 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setState($state)
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState()
+    public function getState(): ?string
     {
         return $this->state;
     }
@@ -227,51 +227,51 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreet($street)
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreet()
+    public function getStreet(): ?string
     {
         return $this->street;
     }
 
     /**
-     * @param string $streetname
+     * @param string|null $streetname
      *
      * @return void
      */
-    public function setStreetName($streetname)
+    public function setStreetName(?string $streetname): void
     {
         $this->streetname = $streetname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreetName()
+    public function getStreetName(): ?string
     {
         return $this->streetname;
     }
 
     /**
-     * @param string $streetnumber
+     * @param string|null $streetnumber
      *
      * @return void
      */
-    public function setStreetNumber($streetnumber)
+    public function setStreetNumber(?string $streetnumber): void
     {
         $this->streetnumber = $streetnumber;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreetNumber()
+    public function getStreetNumber(): ?string
     {
         return $this->streetnumber;
     }
@@ -281,33 +281,33 @@ class AddressCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setTelephoneNumber($telephonenumber)
+    public function setTelephoneNumber(string $telephonenumber): void
     {
         $this->telephonenumber = $telephonenumber;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTelephoneNumber()
+    public function getTelephoneNumber(): ?string
     {
         return $this->telephonenumber;
     }
 
     /**
-     * @param string $zip
+     * @param string|null $zip
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip(?string $zip): void
     {
         $this->zip = $zip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZip()
+    public function getZip(): ?string
     {
         return $this->zip;
     }

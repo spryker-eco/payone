@@ -68,11 +68,14 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
 
         $quoteTransfer = $initExpressCheckoutRequest->getQuote();
         $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->setWorkOrderId(
-            $response->getWorkOrderId()
+            $response->getWorkOrderId(),
         );
-        $this->cartClient->storeQuote($quoteTransfer);
 
-        return new RedirectResponse($response->getRedirectUrl());
+        if ($quoteTransfer !== null) {
+            $this->cartClient->storeQuote($quoteTransfer);
+        }
+
+        return new RedirectResponse($response->getRedirectUrlOrFail());
     }
 
     /**
@@ -97,7 +100,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     public function redirectToCheckoutEntryPoint(): RedirectResponse
     {
         return new RedirectResponse(
-            $this->payoneConfig->getStandardCheckoutEntryPoint()
+            $this->payoneConfig->getStandardCheckoutEntryPoint(),
         );
     }
 
@@ -107,7 +110,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     public function redirectToFailureUrl(): RedirectResponse
     {
         return new RedirectResponse(
-            $this->payoneConfig->getFailureProjectUrl()
+            $this->payoneConfig->getFailureProjectUrl(),
         );
     }
 
@@ -117,7 +120,7 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
     public function redirectToBackUrl(): RedirectResponse
     {
         return new RedirectResponse(
-            $this->payoneConfig->getBackProjectUrl()
+            $this->payoneConfig->getBackProjectUrl(),
         );
     }
 
@@ -132,13 +135,13 @@ class ExpressCheckoutHandler implements ExpressCheckoutHandlerInterface
 
         $initExpressCheckoutRequest->setQuote($quoteTransfer);
         $initExpressCheckoutRequest->setSuccessUrl(
-            $this->payoneConfig->getSuccessUrl()
+            $this->payoneConfig->getSuccessUrl(),
         );
         $initExpressCheckoutRequest->setFailureUrl(
-            $this->payoneConfig->getFailureUrl()
+            $this->payoneConfig->getFailureUrl(),
         );
         $initExpressCheckoutRequest->setBackUrl(
-            $this->payoneConfig->getBackUrl()
+            $this->payoneConfig->getBackUrl(),
         );
 
         return $initExpressCheckoutRequest;

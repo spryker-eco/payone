@@ -12,6 +12,9 @@ use Symfony\Component\Validator\Constraint as SymfonyConstraint;
 
 class ManageMandate extends SymfonyConstraint
 {
+    /**
+     * @var string
+     */
     public const OPTION_PAYONE_CLIENT = 'payoneClient';
 
     /**

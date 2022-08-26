@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
@@ -16,7 +17,7 @@ use SprykerEco\Yves\Payone\Form\CreditCardSubForm;
 class CreditCardDataProvider implements StepEngineFormDataProviderInterface
 {
     /**
-     * @const int YEAR_CHOICES_AMOUNT
+     * @var int
      */
     public const YEAR_CHOICES_AMOUNT = 20;
 
@@ -25,10 +26,9 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() === null) {
+        if ($quoteTransfer instanceof QuoteTransfer && $quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
@@ -40,9 +40,9 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             CreditCardSubForm::OPTION_CARD_EXPIRES_CHOICES_MONTH => $this->getMonthChoices(),
@@ -54,7 +54,7 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @return array
      */
-    protected function getMonthChoices()
+    protected function getMonthChoices(): array
     {
         return [
             '01' => '01',
@@ -75,12 +75,12 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @return array
      */
-    protected function getYearChoices()
+    protected function getYearChoices(): array
     {
         $result = [];
         $currentYear = date('Y');
 
-        for ($i = 0; $i < self::YEAR_CHOICES_AMOUNT; $i++) {
+        for ($i = 0; $i < static::YEAR_CHOICES_AMOUNT; $i++) {
             $result[$currentYear] = $currentYear++;
         }
 
@@ -90,7 +90,7 @@ class CreditCardDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @return array
      */
-    protected function getCardTypes()
+    protected function getCardTypes(): array
     {
         return [
             'Visa' => 'V',

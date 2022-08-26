@@ -8,6 +8,9 @@
 *.AppleDouble
 *.AppleDB
 *.AppleDesktop
+/vendor/*
+/tests/app/*
+/composer.lock
 
 # built client resources
 /src/*/Zed/*/Static/Public

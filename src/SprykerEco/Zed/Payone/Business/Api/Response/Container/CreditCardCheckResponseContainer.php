@@ -10,12 +10,12 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class CreditCardCheckResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $pseudocardpan;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $truncatedcardpan;
 
@@ -24,15 +24,15 @@ class CreditCardCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTruncatedcardpan($truncatedcardpan)
+    public function setTruncatedcardpan(string $truncatedcardpan): void
     {
         $this->truncatedcardpan = $truncatedcardpan;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTruncatedcardpan()
+    public function getTruncatedcardpan(): ?string
     {
         return $this->truncatedcardpan;
     }
@@ -42,15 +42,15 @@ class CreditCardCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPseudocardpan($pseudocardpan)
+    public function setPseudocardpan(string $pseudocardpan): void
     {
         $this->pseudocardpan = $pseudocardpan;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPseudocardpan()
+    public function getPseudocardpan(): ?string
     {
         return $this->pseudocardpan;
     }

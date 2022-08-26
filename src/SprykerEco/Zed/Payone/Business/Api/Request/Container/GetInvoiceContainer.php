@@ -17,7 +17,7 @@ class GetInvoiceContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_GETINVOICE;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $invoice_title;
 
@@ -26,15 +26,15 @@ class GetInvoiceContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setInvoiceTitle($invoice_title)
+    public function setInvoiceTitle(string $invoice_title): void
     {
         $this->invoice_title = $invoice_title;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceTitle()
+    public function getInvoiceTitle(): ?string
     {
         return $this->invoice_title;
     }

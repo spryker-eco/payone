@@ -10,124 +10,124 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class CaptureResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $txid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $settleaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankaccountholder;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankiban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankbic;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcity;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_legalnote;
 
     /**
      * (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $clearing_duedate;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_reference;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_instructionnote;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_identification;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_identifier;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_email;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_date;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_amount;
 
@@ -136,15 +136,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankaccount($clearing_bankaccount)
+    public function setClearingBankaccount(string $clearing_bankaccount): void
     {
         $this->clearing_bankaccount = $clearing_bankaccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankaccount()
+    public function getClearingBankaccount(): ?string
     {
         return $this->clearing_bankaccount;
     }
@@ -154,15 +154,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankaccountholder($clearing_bankaccountholder)
+    public function setClearingBankaccountholder(string $clearing_bankaccountholder): void
     {
         $this->clearing_bankaccountholder = $clearing_bankaccountholder;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankaccountholder()
+    public function getClearingBankaccountholder(): ?string
     {
         return $this->clearing_bankaccountholder;
     }
@@ -172,15 +172,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankbic($clearing_bankbic)
+    public function setClearingBankbic(string $clearing_bankbic): void
     {
         $this->clearing_bankbic = $clearing_bankbic;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankbic()
+    public function getClearingBankbic(): ?string
     {
         return $this->clearing_bankbic;
     }
@@ -190,15 +190,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcity($clearing_bankcity)
+    public function setClearingBankcity(string $clearing_bankcity): void
     {
         $this->clearing_bankcity = $clearing_bankcity;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcity()
+    public function getClearingBankcity(): ?string
     {
         return $this->clearing_bankcity;
     }
@@ -208,15 +208,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcode($clearing_bankcode)
+    public function setClearingBankcode(string $clearing_bankcode): void
     {
         $this->clearing_bankcode = $clearing_bankcode;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcode()
+    public function getClearingBankcode(): ?string
     {
         return $this->clearing_bankcode;
     }
@@ -226,15 +226,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankcountry($clearing_bankcountry)
+    public function setClearingBankcountry(string $clearing_bankcountry): void
     {
         $this->clearing_bankcountry = $clearing_bankcountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcountry()
+    public function getClearingBankcountry(): ?string
     {
         return $this->clearing_bankcountry;
     }
@@ -244,15 +244,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankiban($clearing_bankiban)
+    public function setClearingBankiban(string $clearing_bankiban): void
     {
         $this->clearing_bankiban = $clearing_bankiban;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankiban()
+    public function getClearingBankiban(): ?string
     {
         return $this->clearing_bankiban;
     }
@@ -262,15 +262,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingBankname($clearing_bankname)
+    public function setClearingBankname(string $clearing_bankname): void
     {
         $this->clearing_bankname = $clearing_bankname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankname()
+    public function getClearingBankname(): ?string
     {
         return $this->clearing_bankname;
     }
@@ -280,15 +280,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSettleaccount($settleaccount)
+    public function setSettleaccount(string $settleaccount): void
     {
         $this->settleaccount = $settleaccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSettleaccount()
+    public function getSettleaccount(): ?string
     {
         return $this->settleaccount;
     }
@@ -298,15 +298,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTxid($txid)
+    public function setTxid(int $txid): void
     {
         $this->txid = $txid;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxid()
+    public function getTxid(): ?int
     {
         return $this->txid;
     }
@@ -316,15 +316,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingDuedate($clearing_duedate)
+    public function setClearingDuedate(string $clearing_duedate): void
     {
         $this->clearing_duedate = $clearing_duedate;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingDuedate()
+    public function getClearingDuedate(): ?string
     {
         return $this->clearing_duedate;
     }
@@ -334,15 +334,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingInstructionnote($clearing_instructionnote)
+    public function setClearingInstructionnote(string $clearing_instructionnote): void
     {
         $this->clearing_instructionnote = $clearing_instructionnote;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingInstructionnote()
+    public function getClearingInstructionnote(): ?string
     {
         return $this->clearing_instructionnote;
     }
@@ -352,15 +352,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingLegalnote($clearing_legalnote)
+    public function setClearingLegalnote(string $clearing_legalnote): void
     {
         $this->clearing_legalnote = $clearing_legalnote;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingLegalnote()
+    public function getClearingLegalnote(): ?string
     {
         return $this->clearing_legalnote;
     }
@@ -370,15 +370,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingReference($clearing_reference)
+    public function setClearingReference(string $clearing_reference): void
     {
         $this->clearing_reference = $clearing_reference;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingReference()
+    public function getClearingReference(): ?string
     {
         return $this->clearing_reference;
     }
@@ -388,15 +388,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorCity($creditorCity)
+    public function setCreditorCity(string $creditorCity): void
     {
         $this->creditor_city = $creditorCity;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorCity()
+    public function getCreditorCity(): ?string
     {
         return $this->creditor_city;
     }
@@ -406,15 +406,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorCountry($creditorCountry)
+    public function setCreditorCountry(string $creditorCountry): void
     {
         $this->creditor_country = $creditorCountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorCountry()
+    public function getCreditorCountry(): ?string
     {
         return $this->creditor_country;
     }
@@ -424,15 +424,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorEmail($creditorEmail)
+    public function setCreditorEmail(string $creditorEmail): void
     {
         $this->creditor_email = $creditorEmail;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorEmail()
+    public function getCreditorEmail(): ?string
     {
         return $this->creditor_email;
     }
@@ -442,15 +442,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorIdentifier($creditorIdentifier)
+    public function setCreditorIdentifier(string $creditorIdentifier): void
     {
         $this->creditor_identifier = $creditorIdentifier;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorIdentifier()
+    public function getCreditorIdentifier(): ?string
     {
         return $this->creditor_identifier;
     }
@@ -460,15 +460,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorName($creditorName)
+    public function setCreditorName(string $creditorName): void
     {
         $this->creditor_name = $creditorName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorName()
+    public function getCreditorName(): ?string
     {
         return $this->creditor_name;
     }
@@ -478,15 +478,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorStreet($creditorStreet)
+    public function setCreditorStreet(string $creditorStreet): void
     {
         $this->creditor_street = $creditorStreet;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorStreet()
+    public function getCreditorStreet(): ?string
     {
         return $this->creditor_street;
     }
@@ -496,15 +496,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorZip($creditorZip)
+    public function setCreditorZip(string $creditorZip): void
     {
         $this->creditor_zip = $creditorZip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorZip()
+    public function getCreditorZip(): ?string
     {
         return $this->creditor_zip;
     }
@@ -514,15 +514,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandateIdentification)
+    public function setMandateIdentification(string $mandateIdentification): void
     {
         $this->mandate_identification = $mandateIdentification;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateIdentification()
+    public function getMandateIdentification(): ?string
     {
         return $this->mandate_identification;
     }
@@ -532,15 +532,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingAmount($clearingAmount)
+    public function setClearingAmount(string $clearingAmount): void
     {
         $this->clearing_amount = $clearingAmount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingAmount()
+    public function getClearingAmount(): ?string
     {
         return $this->clearing_amount;
     }
@@ -550,15 +550,15 @@ class CaptureResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setClearingDate($clearingDate)
+    public function setClearingDate(string $clearingDate): void
     {
         $this->clearing_date = $clearingDate;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingDate()
+    public function getClearingDate(): ?string
     {
         return $this->clearing_date;
     }

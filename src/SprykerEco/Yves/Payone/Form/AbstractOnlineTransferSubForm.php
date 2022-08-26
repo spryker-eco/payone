@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneBankAccountCheckTransfer;
 use Generated\Shared\Transfer\PayonePaymentOnlinetransferTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,33 +20,77 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'online_transfer';
+
+    /**
+     * @var string
+     */
     public const FIELD_IBAN = 'iban';
+
+    /**
+     * @var string
+     */
     public const FIELD_BIC = 'bic';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_COUNTRY = 'bankcountry';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_ACCOUNT = 'bankaccount';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_CODE = 'bankcode';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_BRANCH_CODE = 'bankbranchcode';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_CHECK_DIGIT = 'bankcheckdigit';
+
+    /**
+     * @var string
+     */
     public const FIELD_ONLINE_BANK_TRANSFER_TYPE = 'onlinebanktransfertype';
+
+    /**
+     * @var string
+     */
     public const FIELD_BANK_GROUP_TYPE = 'bankgrouptype';
+
+    /**
+     * @var string
+     */
     public const OPTION_ONLINE_BANK_TRANSFER_TYPES = 'online bank transfer types';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_COUNTRIES = '';
 
     /**
-     * @return string
+     * @var string
      */
-    public function getName()
-    {
-        return PaymentTransfer::PAYONE_ONLINE_TRANSFER;
-    }
+    protected const BANK_ACCOUNT_UNKNOWN_ERROR_MESSAGE = 'payone.bank_account.unknown_error';
 
     /**
      * @return string
      */
-    public function getTemplatePath()
+    public function getName(): string
     {
-        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
+        return PaymentTransfer::PAYONE_ONLINE_TRANSFER;
     }
 
     /**
@@ -55,7 +98,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => PayonePaymentOnlinetransferTransfer::class,
@@ -67,7 +110,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolver $resolver): void
     {
         $this->configureOptions($resolver);
     }
@@ -78,7 +121,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this->addOnlineBankTransferType($builder, $options)
             ->addBankCountry($builder, $options);
@@ -99,7 +142,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -120,7 +163,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -141,7 +184,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -162,7 +205,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -183,7 +226,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -204,7 +247,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
                 [
                     'label' => false,
                     'data' => array_keys($options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES])[0],
-                ]
+                ],
             );
         } else {
             $builder->add(
@@ -219,7 +262,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
                     'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_COUNTRIES],
                     'constraints' => [
                     ],
-                ]
+                ],
             );
         }
 
@@ -241,7 +284,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
                 'required' => true,
                 'constraints' => [
                 ],
-            ]
+            ],
         );
 
         return $this;
@@ -253,7 +296,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
      *
      * @return void
      */
-    public function checkBankAccount(PayonePaymentOnlinetransferTransfer $data, ExecutionContextInterface $context)
+    public function checkBankAccount(PayonePaymentOnlinetransferTransfer $data, ExecutionContextInterface $context): void
     {
         $quoteTransfer = $context->getRoot()->getData();
         if ($quoteTransfer->getPayment()->getPaymentSelection() != $this->getPropertyPath()) {
@@ -271,7 +314,7 @@ abstract class AbstractOnlineTransferSubForm extends AbstractPayoneSubForm
 
         $response = $this->getClient()->bankAccountCheck($bankAccountCheckTransfer);
         if ($response->getStatus() == 'ERROR' || $response->getStatus() == 'INVALID') {
-            $context->addViolation($response->getCustomerErrorMessage());
+            $context->addViolation($response->getCustomerErrorMessage() ?? static::BANK_ACCOUNT_UNKNOWN_ERROR_MESSAGE);
         }
     }
 

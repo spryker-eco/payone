@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class GetInvoiceResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $response;
 
@@ -19,15 +19,15 @@ class GetInvoiceResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setResponse($response)
+    public function setResponse(string $response): void
     {
         $this->response = $response;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getResponse()
+    public function getResponse(): ?string
     {
         return $this->response;
     }
@@ -35,7 +35,7 @@ class GetInvoiceResponseContainer extends AbstractResponseContainer
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->isError()) {
             $result = parent::__toString();

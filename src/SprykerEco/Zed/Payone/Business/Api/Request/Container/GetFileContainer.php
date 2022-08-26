@@ -17,71 +17,71 @@ class GetFileContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_GETFILE;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $file_reference;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $file_type;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $file_format;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFileReference()
+    public function getFileReference(): ?string
     {
         return $this->file_reference;
     }
 
     /**
-     * @param string $file_reference
+     * @param string $fileReference
      *
      * @return void
      */
-    public function setFileReference($file_reference)
+    public function setFileReference(string $fileReference): void
     {
-        $this->file_reference = $file_reference;
+        $this->file_reference = $fileReference;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFileType()
+    public function getFileType(): ?string
     {
         return $this->file_type;
     }
 
     /**
-     * @param string $file_type
+     * @param string $fileType
      *
      * @return void
      */
-    public function setFileType($file_type)
+    public function setFileType(string $fileType): void
     {
-        $this->file_type = $file_type;
+        $this->file_type = $fileType;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFileFormat()
+    public function getFileFormat(): ?string
     {
         return $this->file_format;
     }
 
     /**
-     * @param string $file_format
+     * @param string $fileFormat
      *
      * @return void
      */
-    public function setFileFormat($file_format)
+    public function setFileFormat(string $fileFormat): void
     {
-        $this->file_format = $file_format;
+        $this->file_format = $fileFormat;
     }
 }

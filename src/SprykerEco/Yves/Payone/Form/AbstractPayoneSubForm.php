@@ -14,6 +14,7 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Form\Constraint\BankAccount;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -21,22 +22,65 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubFormInterface, SubFormProviderNameInterface
 {
+    /**
+     * @var string
+     */
+    public const PAYMENT_METHOD = '';
+
+    /**
+     * @var string
+     */
     public const PAYMENT_PROVIDER = PayoneConstants::PROVIDER_NAME;
 
+    /**
+     * @var string
+     */
     public const FIELD_PAYMENT_METHOD = 'paymentMethod';
+
+    /**
+     * @var string
+     */
     public const FIELD_PAYONE_CREDENTIALS_MID = 'payone_mid';
+
+    /**
+     * @var string
+     */
     public const FIELD_PAYONE_CREDENTIALS_AID = 'payone_aid';
+
+    /**
+     * @var string
+     */
     public const FIELD_PAYONE_CREDENTIALS_PORTAL_ID = 'payone_portal_id';
+
+    /**
+     * @var string
+     */
     public const FIELD_PAYONE_HASH = 'payone_hash';
+
+    /**
+     * @var string
+     */
     public const FIELD_CLIENT_API_CONFIG = 'payone_client_api_config';
+
+    /**
+     * @var string
+     */
     public const FIELD_CLIENT_LANG_CODE = 'payone_client_lang_code';
 
     /**
      * @return string
      */
-    public function getProviderName()
+    public function getProviderName(): string
     {
         return static::PAYMENT_PROVIDER;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplatePath(): string
+    {
+        return PayoneConstants::PROVIDER_NAME . '/' . static::PAYMENT_METHOD;
     }
 
     /**
@@ -48,12 +92,12 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
     {
         $formData = $this->getClient()->getCreditCardCheckRequest();
         $builder->add(
-            self::FIELD_CLIENT_API_CONFIG,
+            static::FIELD_CLIENT_API_CONFIG,
             HiddenType::class,
             [
                 'label' => false,
                 'data' => $formData->toJson(),
-            ]
+            ],
         );
 
         return $this;
@@ -62,7 +106,7 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
     /**
      * @return \Symfony\Component\Validator\Constraint
      */
-    protected function createNotBlankConstraint()
+    protected function createNotBlankConstraint(): Constraint
     {
         return new NotBlank(['groups' => $this->getPropertyPath()]);
     }
@@ -70,7 +114,7 @@ abstract class AbstractPayoneSubForm extends AbstractSubFormType implements SubF
     /**
      * @return \SprykerEco\Yves\Payone\Form\Constraint\BankAccount
      */
-    protected function createBankAccountConstraint()
+    protected function createBankAccountConstraint(): BankAccount
     {
         return new BankAccount([BankAccount::OPTION_PAYONE_CLIENT => $this->getClient()]);
     }

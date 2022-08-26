@@ -13,16 +13,30 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * @method \SprykerEco\Yves\Payone\PayoneConfig getConfig()
+ */
 class EpsOnlineTransferSubForm extends OnlineTransferSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'eps_online_transfer';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_COUNTRIES = 'eps online transfer bank countries';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_GROUP_TYPES = 'eps online transfer bank group types';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER;
     }
@@ -30,7 +44,7 @@ class EpsOnlineTransferSubForm extends OnlineTransferSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_EPS_ONLINE_TRANSFER;
     }
@@ -41,7 +55,7 @@ class EpsOnlineTransferSubForm extends OnlineTransferSubForm
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
 
@@ -62,7 +76,7 @@ class EpsOnlineTransferSubForm extends OnlineTransferSubForm
             [
                 'label' => false,
                 'data' => PayoneApiConstants::ONLINE_BANK_TRANSFER_TYPE_EPS_ONLINE_BANK_TRANSFER,
-            ]
+            ],
         );
 
         return $this;
@@ -87,7 +101,7 @@ class EpsOnlineTransferSubForm extends OnlineTransferSubForm
                 'placeholder' => false,
                 'choices' => $options[static::OPTIONS_FIELD_NAME][static::OPTION_BANK_GROUP_TYPES],
                 'constraints' => [],
-            ]
+            ],
         );
 
         return $this;

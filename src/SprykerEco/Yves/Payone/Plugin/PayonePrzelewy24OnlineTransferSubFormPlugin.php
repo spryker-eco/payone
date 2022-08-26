@@ -16,6 +16,11 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayonePrzelewy24OnlineTransferSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
+     * {@inheritDoc}
+     * - Creates `Przelewy24OnlineTransferSubForm` subform.
+     *
+     * @api
+     *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm()
@@ -24,6 +29,11 @@ class PayonePrzelewy24OnlineTransferSubFormPlugin extends AbstractPlugin impleme
     }
 
     /**
+     * {@inheritDoc}
+     * - Creates subform data provider.
+     *
+     * @api
+     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider()

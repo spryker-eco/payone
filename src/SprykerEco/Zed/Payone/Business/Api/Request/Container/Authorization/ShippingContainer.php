@@ -12,32 +12,32 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class ShippingContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_city;
 
@@ -45,157 +45,157 @@ class ShippingContainer extends AbstractContainer
      * ISO-3166-2 Subdivisions
      * only necessary for country US, CA, CN, JP, MX, BR, AR, ID, TH, IN
      *
-     * @var string
+     * @var string|null
      */
     protected $shipping_state;
 
     /**
      * Country (ISO-3166)
      *
-     * @var string
+     * @var string|null
      */
     protected $shipping_country;
 
     /**
-     * @param string $shipping_city
+     * @param string $shippingCity
      *
      * @return void
      */
-    public function setShippingCity($shipping_city)
+    public function setShippingCity(string $shippingCity): void
     {
-        $this->shipping_city = $shipping_city;
+        $this->shipping_city = $shippingCity;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCity()
+    public function getShippingCity(): ?string
     {
         return $this->shipping_city;
     }
 
     /**
-     * @param string $shipping_company
+     * @param string|null $shippingCompany
      *
      * @return void
      */
-    public function setShippingCompany($shipping_company)
+    public function setShippingCompany(?string $shippingCompany = null): void
     {
-        $this->shipping_company = $shipping_company;
+        $this->shipping_company = $shippingCompany;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCompany()
+    public function getShippingCompany(): ?string
     {
         return $this->shipping_company;
     }
 
     /**
-     * @param string $shipping_country
+     * @param string $shippingCountry
      *
      * @return void
      */
-    public function setShippingCountry($shipping_country)
+    public function setShippingCountry(string $shippingCountry): void
     {
-        $this->shipping_country = $shipping_country;
+        $this->shipping_country = $shippingCountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCountry()
+    public function getShippingCountry(): ?string
     {
         return $this->shipping_country;
     }
 
     /**
-     * @param string $shipping_firstname
+     * @param string $shippingFirstname
      *
      * @return void
      */
-    public function setShippingFirstName($shipping_firstname)
+    public function setShippingFirstName(string $shippingFirstname): void
     {
-        $this->shipping_firstname = $shipping_firstname;
+        $this->shipping_firstname = $shippingFirstname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingFirstName()
+    public function getShippingFirstName(): ?string
     {
         return $this->shipping_firstname;
     }
 
     /**
-     * @param string $shipping_lastname
+     * @param string $shippingLastname
      *
      * @return void
      */
-    public function setShippingLastName($shipping_lastname)
+    public function setShippingLastName(string $shippingLastname): void
     {
-        $this->shipping_lastname = $shipping_lastname;
+        $this->shipping_lastname = $shippingLastname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingLastName()
+    public function getShippingLastName(): ?string
     {
         return $this->shipping_lastname;
     }
 
     /**
-     * @param string $shipping_state
+     * @param string $shippingState
      *
      * @return void
      */
-    public function setShippingState($shipping_state)
+    public function setShippingState(string $shippingState): void
     {
-        $this->shipping_state = $shipping_state;
+        $this->shipping_state = $shippingState;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingState()
+    public function getShippingState(): ?string
     {
         return $this->shipping_state;
     }
 
     /**
-     * @param string $shipping_street
+     * @param string $shippingStreet
      *
      * @return void
      */
-    public function setShippingStreet($shipping_street)
+    public function setShippingStreet(string $shippingStreet): void
     {
-        $this->shipping_street = $shipping_street;
+        $this->shipping_street = $shippingStreet;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingStreet()
+    public function getShippingStreet(): ?string
     {
         return $this->shipping_street;
     }
 
     /**
-     * @param string $shipping_zip
+     * @param string $shippingZip
      *
      * @return void
      */
-    public function setShippingZip($shipping_zip)
+    public function setShippingZip(string $shippingZip): void
     {
-        $this->shipping_zip = $shipping_zip;
+        $this->shipping_zip = $shippingZip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingZip()
+    public function getShippingZip(): ?string
     {
         return $this->shipping_zip;
     }

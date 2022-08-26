@@ -14,6 +14,8 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapperInterface;
+use SprykerEco\Zed\Payone\Business\Exception\PaymentNotFoundException;
+use SprykerEco\Zed\Payone\Business\Exception\TransactionMissingException;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
@@ -38,7 +40,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapperInterface
@@ -49,7 +51,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Mapper\DebitResponseMapperInterface $debitResponseMapper
      */
@@ -57,7 +59,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader,
         DebitResponseMapperInterface $debitResponseMapper
     ) {
@@ -65,25 +67,35 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->debitResponseMapper = $debitResponseMapper;
     }
 
     /**
      * @param int $idPayment
      *
+     * @throws \SprykerEco\Zed\Payone\Business\Exception\PaymentNotFoundException
+     * @throws \SprykerEco\Zed\Payone\Business\Exception\TransactionMissingException
+     *
      * @return \Generated\Shared\Transfer\DebitResponseTransfer
      */
     public function debitPayment(int $idPayment): DebitResponseTransfer
     {
-        $paymentEntity = $this->getPaymentEntity($idPayment);
-        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
+        $paymentPayoneEntity = $this->getPaymentEntity($idPayment);
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
 
-        $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentEntity);
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $requestContainer = $paymentMethodMapper->mapPaymentToDebit($paymentPayoneEntity);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
-        $paymentEntity = $this->findPaymentByTransactionId($paymentEntity->getTransactionId());
-        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
+        if (!$paymentPayoneEntity->getTransactionId()) {
+            throw new TransactionMissingException();
+        }
+        $paymentPayoneEntity = $this->findPaymentByTransactionId($paymentPayoneEntity->getTransactionId());
+        if (!$paymentPayoneEntity) {
+            throw new PaymentNotFoundException();
+        }
+
+        $apiLogEntity = $this->initializeApiLog($paymentPayoneEntity, $requestContainer);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new DebitResponseContainer($rawResponse);
@@ -96,9 +108,9 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
     /**
      * @param int $transactionId
      *
-     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone
+     * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayone|null
      */
-    protected function findPaymentByTransactionId(int $transactionId): SpyPaymentPayone
+    protected function findPaymentByTransactionId(int $transactionId): ?SpyPaymentPayone
     {
         return $this->queryContainer->createPaymentByTransactionIdQuery($transactionId)->findOne();
     }
@@ -117,7 +129,7 @@ class PayoneDebitRequestSender extends AbstractPayoneRequestSender implements Pa
         $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
 
-        $apiLogEntity->setRawResponse(json_encode($responseContainer->toArray()));
+        $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));
         $apiLogEntity->save();
     }
 }

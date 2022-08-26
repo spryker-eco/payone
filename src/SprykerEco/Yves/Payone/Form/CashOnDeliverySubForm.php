@@ -10,11 +10,16 @@ namespace SprykerEco\Yves\Payone\Form;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentCashOnDeliveryTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method \SprykerEco\Yves\Payone\PayoneConfig getConfig()
+ */
 class CashOnDeliverySubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'cash_on_delivery';
 
     /**
@@ -31,14 +36,6 @@ class CashOnDeliverySubForm extends AbstractPayoneSubForm
     public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_CASH_ON_DELIVERY;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return PayoneConstants::PROVIDER_NAME . '/' . self::PAYMENT_METHOD;
     }
 
     /**

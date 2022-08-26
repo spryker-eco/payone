@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Yves\Payone\Dependency\Client;
 
+use Generated\Shared\Transfer\StoreTransfer;
+
 class PayoneToStoreClientBridge implements PayoneToStoreClientInterface
 {
     /**
@@ -25,7 +27,7 @@ class PayoneToStoreClientBridge implements PayoneToStoreClientInterface
     /**
      * @return \Generated\Shared\Transfer\StoreTransfer
      */
-    public function getCurrentStore()
+    public function getCurrentStore(): StoreTransfer
     {
         return $this->storeClient->getCurrentStore();
     }

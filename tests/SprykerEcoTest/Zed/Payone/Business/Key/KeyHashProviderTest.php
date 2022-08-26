@@ -24,7 +24,7 @@ class KeyHashProviderTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testKeyHash()
+    public function testKeyHash(): void
     {
         $key = 'abcd1efgh2ijklm3nopq4';
         $expectedHashedKey = hash('md5', $key);

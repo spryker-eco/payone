@@ -25,7 +25,7 @@ class PaymentMapperReader implements PaymentMapperReaderInterface
     protected $urlHmacGenerator;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface[]
+     * @var array<\SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface>
      */
     protected $registeredMethodMappers;
 
@@ -65,7 +65,7 @@ class PaymentMapperReader implements PaymentMapperReaderInterface
         $paymentMethodMapper = $this->findPaymentMethodMapperByName($paymentMethodName);
         if ($paymentMethodMapper === null) {
             throw new InvalidPaymentMethodException(
-                sprintf('No registered payment method mapper found for given method name %s', $paymentMethodName)
+                sprintf('No registered payment method mapper found for given method name %s', $paymentMethodName),
             );
         }
 

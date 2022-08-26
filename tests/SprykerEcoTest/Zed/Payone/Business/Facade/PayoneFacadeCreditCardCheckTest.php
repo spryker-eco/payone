@@ -19,10 +19,29 @@ use SprykerEcoTest\Zed\Payone\PayoneZedTester;
 
 class PayoneFacadeCreditCardCheckTest extends AbstractBusinessTest
 {
+    /**
+     * @var string
+     */
     protected const REQUEST_CARD_TYPE_VISA = 'V';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_CARD_PAN = '4111111111111111';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_CARD_CVC2 = '111';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_CARD_EXPIRE_DATE = '2311';
+
+    /**
+     * @var string
+     */
     protected const EXPECTED_PSEUDO_CARD_PAN = '1111111111111111';
 
     /**
@@ -62,6 +81,7 @@ class PayoneFacadeCreditCardCheckTest extends AbstractBusinessTest
         $creditCard->setCardCvc2(static::REQUEST_CARD_CVC2);
         $creditCard->setCardExpireDate(static::REQUEST_CARD_EXPIRE_DATE);
         $creditCard->setStoreCardData(PayoneApiConstants::STORE_CARD_DATA_NO);
+        $creditCard->setCardIssueNumber('1234123412341234');
 
         $creditCardPaymentBuilder = new PayonePaymentBuilder();
         $creditCardPayment = $creditCardPaymentBuilder->build();

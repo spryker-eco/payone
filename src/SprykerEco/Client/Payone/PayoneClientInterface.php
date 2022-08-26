@@ -38,11 +38,11 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $statusUpdateTransfer
+     * @param \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer
      */
-    public function updateStatus(PayoneTransactionStatusUpdateTransfer $statusUpdateTransfer);
+    public function updateStatus(PayoneTransactionStatusUpdateTransfer $payoneTransactionStatusUpdateTransfer);
 
     /**
      * Specification:
@@ -50,11 +50,11 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayoneGetFileTransfer $getFileTransfer
+     * @param \Generated\Shared\Transfer\PayoneGetFileTransfer $payoneGetFileTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetFileTransfer
      */
-    public function getFile(PayoneGetFileTransfer $getFileTransfer);
+    public function getFile(PayoneGetFileTransfer $payoneGetFileTransfer);
 
     /**
      * Specification:
@@ -63,11 +63,11 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $getInvoiceTransfer
+     * @param \Generated\Shared\Transfer\PayoneGetInvoiceTransfer $payoneGetInvoiceTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetInvoiceTransfer
      */
-    public function getInvoice(PayoneGetInvoiceTransfer $getInvoiceTransfer);
+    public function getInvoice(PayoneGetInvoiceTransfer $payoneGetInvoiceTransfer);
 
     /**
      * Specification:
@@ -75,11 +75,11 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer
+     * @param \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer $payoneGetPaymentDetailTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneGetPaymentDetailTransfer
      */
-    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $getPaymentDetailTransfer);
+    public function getPaymentDetail(PayoneGetPaymentDetailTransfer $payoneGetPaymentDetailTransfer);
 
     /**
      * Specification:
@@ -87,11 +87,11 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayoneCancelRedirectTransfer $cancelRedirectTransfer
+     * @param \Generated\Shared\Transfer\PayoneCancelRedirectTransfer $payoneCancelRedirectTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneCancelRedirectTransfer
      */
-    public function cancelRedirect(PayoneCancelRedirectTransfer $cancelRedirectTransfer);
+    public function cancelRedirect(PayoneCancelRedirectTransfer $payoneCancelRedirectTransfer);
 
     /**
      * Specification:
@@ -99,11 +99,11 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $bankAccountCheckTransfer
+     * @param \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer $payoneBankAccountCheckTransfer
      *
      * @return \Generated\Shared\Transfer\PayoneBankAccountCheckTransfer
      */
-    public function bankAccountCheck(PayoneBankAccountCheckTransfer $bankAccountCheckTransfer);
+    public function bankAccountCheck(PayoneBankAccountCheckTransfer $payoneBankAccountCheckTransfer);
 
     /**
      * Specification:
@@ -124,11 +124,13 @@ interface PayoneClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer
+     * @param \Generated\Shared\Transfer\PayoneInitPaypalExpressCheckoutRequestTransfer $payoneInitPaypalExpressCheckoutRequestTransfer
      *
      * @return \Generated\Shared\Transfer\PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
      */
-    public function initPaypalExpressCheckout(PayoneInitPaypalExpressCheckoutRequestTransfer $requestTransfer);
+    public function initPaypalExpressCheckout(
+        PayoneInitPaypalExpressCheckoutRequestTransfer $payoneInitPaypalExpressCheckoutRequestTransfer
+    );
 
     /**
      * Specification:

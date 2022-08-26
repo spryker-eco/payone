@@ -27,12 +27,13 @@ class PayoneToCalculationBridge implements PayoneToCalculationInterface
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param bool $executeQuotePlugins
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function recalculateQuote(QuoteTransfer $quoteTransfer)
+    public function recalculateQuote(QuoteTransfer $quoteTransfer, bool $executeQuotePlugins = true): QuoteTransfer
     {
-        return $this->calculationFacade->recalculateQuote($quoteTransfer);
+        return $this->calculationFacade->recalculateQuote($quoteTransfer, $executeQuotePlugins);
     }
 
     /**
@@ -40,7 +41,7 @@ class PayoneToCalculationBridge implements PayoneToCalculationInterface
      *
      * @return \Generated\Shared\Transfer\OrderTransfer
      */
-    public function recalculateOrder(OrderTransfer $orderTransfer)
+    public function recalculateOrder(OrderTransfer $orderTransfer): OrderTransfer
     {
         return $this->calculationFacade->recalculateOrder($orderTransfer);
     }

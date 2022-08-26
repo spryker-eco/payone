@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Refund\PaymentMet
 class BankAccountContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $bankcode;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $bankbranchcode;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $bankcheckdigit;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
@@ -49,15 +49,15 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankaccount($bankaccount)
+    public function setBankaccount(string $bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankaccount()
+    public function getBankaccount(): ?string
     {
         return $this->bankaccount;
     }
@@ -67,15 +67,15 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankbranchcode($bankbranchcode)
+    public function setBankbranchcode(int $bankbranchcode): void
     {
         $this->bankbranchcode = $bankbranchcode;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getBankbranchcode()
+    public function getBankbranchcode(): ?int
     {
         return $this->bankbranchcode;
     }
@@ -85,15 +85,15 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankcheckdigit($bankcheckdigit)
+    public function setBankcheckdigit(int $bankcheckdigit): void
     {
         $this->bankcheckdigit = $bankcheckdigit;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getBankcheckdigit()
+    public function getBankcheckdigit(): ?int
     {
         return $this->bankcheckdigit;
     }
@@ -103,15 +103,15 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankcode($bankcode)
+    public function setBankcode(int $bankcode): void
     {
         $this->bankcode = $bankcode;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getBankcode()
+    public function getBankcode(): ?int
     {
         return $this->bankcode;
     }
@@ -121,15 +121,15 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankcountry($bankcountry)
+    public function setBankcountry(string $bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankcountry()
+    public function getBankcountry(): ?string
     {
         return $this->bankcountry;
     }
@@ -139,15 +139,15 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban()
+    public function getIban(): ?string
     {
         return $this->iban;
     }
@@ -157,15 +157,15 @@ class BankAccountContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic()
+    public function getBic(): ?string
     {
         return $this->bic;
     }

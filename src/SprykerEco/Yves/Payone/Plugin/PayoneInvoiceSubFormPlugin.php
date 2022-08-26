@@ -16,6 +16,11 @@ use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginInterface;
 class PayoneInvoiceSubFormPlugin extends AbstractPlugin implements SubFormPluginInterface
 {
     /**
+     * {@inheritDoc}
+     * - Creates `InvoiceSubForm` subform.
+     *
+     * @api
+     *
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
     public function createSubForm()
@@ -24,6 +29,11 @@ class PayoneInvoiceSubFormPlugin extends AbstractPlugin implements SubFormPlugin
     }
 
     /**
+     * {@inheritDoc}
+     * - Creates subform data provider.
+     *
+     * @api
+     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
     public function createSubFormDataProvider()

@@ -28,20 +28,27 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
  */
 class PayoneRepository extends AbstractRepository implements PayoneRepositoryInterface
 {
+    /**
+     * @var string
+     */
     protected const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
+
+    /**
+     * @var string
+     */
     protected const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
 
     /**
      * @param \Generated\Shared\Transfer\PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer
      *
-     * @return \Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer[]
+     * @return array<\Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer>
      */
     public function findPaymentPayoneOrderItemByFilter(PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer): array
     {
         $paymentPayoneOrderItemQuery = $this->getFactory()->createPaymentPayoneOrderItemQuery();
         $paymentPayoneOrderItemQuery = $this->setPayoneOrderItemFilters(
             $paymentPayoneOrderItemQuery,
-            $payoneOrderItemFilerTransfer
+            $payoneOrderItemFilerTransfer,
         );
 
         $paymentPayoneOrderItemEntities = $paymentPayoneOrderItemQuery->find();
@@ -63,7 +70,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
      */
     public function getPayonePaymentByOrder(OrderTransfer $orderTransfer): PayonePaymentTransfer
     {
-        $paymentPayoneEntity = $this->createPaymentPayoneQueryByOrderId($orderTransfer->getIdSalesOrder())->findOne();
+        $paymentPayoneEntity = $this->createPaymentPayoneQueryByOrderId($orderTransfer->getIdSalesOrderOrFail())->findOne();
 
         return $this
             ->getFactory()
@@ -87,7 +94,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     /**
      * Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
-     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
+     * @param \ArrayObject<array-key, \Generated\Shared\Transfer\OrderTransfer> $orderTransfers
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
@@ -187,7 +194,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
 
         if (count($payoneOrderItemFilerTransfer->getSalesOrderItemIds())) {
             $paymentPayoneOrderItemQuery->filterByFkSalesOrderItem_In(
-                $payoneOrderItemFilerTransfer->getSalesOrderItemIds()
+                $payoneOrderItemFilerTransfer->getSalesOrderItemIds(),
             );
         }
 
@@ -195,7 +202,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
+     * @param \ArrayObject<array-key, \Generated\Shared\Transfer\OrderTransfer> $orderTransfers
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
@@ -206,6 +213,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
             $ids[] = $orderTransfer->getIdSalesOrder();
         }
 
+        /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery $query */
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
                 ->filterByFkSalesOrder($ids, Criteria::IN)
@@ -216,7 +224,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
+     * @param \ArrayObject<array-key, \Generated\Shared\Transfer\OrderTransfer> $orderTransfers
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
@@ -227,6 +235,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
             $ids[] = $orderTransfer->getIdSalesOrder();
         }
 
+        /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery $query */
         $query = $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
             ->useSpyPaymentPayoneQuery()
                 ->filterByFkSalesOrder($ids, Criteria::IN)

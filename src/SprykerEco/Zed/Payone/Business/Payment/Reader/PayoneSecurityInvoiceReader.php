@@ -19,6 +19,9 @@ use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
 
 class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterface
 {
+    /**
+     * @var string
+     */
     protected const ERROR_ACCESS_DENIED_MESSAGE = 'Access denied';
 
     /**
@@ -39,7 +42,7 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
@@ -50,20 +53,20 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->queryContainer = $queryContainer;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;
     }
 
@@ -75,12 +78,12 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
     public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer): PayoneGetSecurityInvoiceTransfer
     {
         $responseContainer = new GetSecurityInvoiceResponseContainer();
-        $paymentEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
-            $getSecurityInvoiceTransfer->getReference(),
-            $getSecurityInvoiceTransfer->getCustomerId()
+        $paymentPayoneEntity = $this->findPaymentByInvoiceTitleAndCustomerId(
+            $getSecurityInvoiceTransfer->getReferenceOrFail(),
+            $getSecurityInvoiceTransfer->getCustomerIdOrFail(),
         );
 
-        if (!$paymentEntity) {
+        if (!$paymentPayoneEntity) {
             return $this->setAccessDeniedError($getSecurityInvoiceTransfer);
         }
 
@@ -88,7 +91,7 @@ class PayoneSecurityInvoiceReader implements PayoneSecurityInvoiceReaderInterfac
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_SECURITY_INVOICE);
         /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer */
         $requestContainer = $paymentMethodMapper->mapGetSecurityInvoice($getSecurityInvoiceTransfer);
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer->init($rawResponse);
 

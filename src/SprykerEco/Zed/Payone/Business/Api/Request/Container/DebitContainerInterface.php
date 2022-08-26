@@ -86,11 +86,11 @@ interface DebitContainerInterface
     public function getPaymentMethod(): AbstractPaymentMethodContainer;
 
     /**
-     * @param int $sequencenumber
+     * @param int|null $sequencenumber
      *
      * @return void
      */
-    public function setSequenceNumber(int $sequencenumber): void;
+    public function setSequenceNumber(?int $sequencenumber = null): void;
 
     /**
      * @return int|null
@@ -98,16 +98,16 @@ interface DebitContainerInterface
     public function getSequenceNumber(): ?int;
 
     /**
-     * @param string $txid
+     * @param int|null $txid
      *
      * @return void
      */
-    public function setTxid(string $txid): void;
+    public function setTxid(?int $txid = null): void;
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getTxid(): string;
+    public function getTxid(): ?int;
 
     /**
      * @param string $use_customerdata

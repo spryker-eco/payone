@@ -29,7 +29,7 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface
@@ -58,7 +58,7 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapperInterface $klarnaPaymentMapper
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
@@ -67,7 +67,7 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
      */
     public function __construct(
         AdapterInterface $executionAdapter,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         PayoneRequestProductDataMapperInterface $payoneRequestProductDataMapper,
         KlarnaPaymentMapperInterface $klarnaPaymentMapper,
         PayoneStandardParameterTransfer $standardParameter,
@@ -75,7 +75,7 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
         HmacGeneratorInterface $urlHmacGenerator
     ) {
         $this->executionAdapter = $executionAdapter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->payoneRequestProductDataMapper = $payoneRequestProductDataMapper;
         $this->klarnaPaymentMapper = $klarnaPaymentMapper;
         $this->standardParameter = $standardParameter;
@@ -97,7 +97,7 @@ class PayoneKlarnaStartSessionMethodSender implements PayoneKlarnaStartSessionMe
 
         $klarnaGenericPaymentContainer = $this->klarnaPaymentMapper->mapPaymentToKlarnaGenericPaymentContainer($payoneKlarnaStartSessionRequestTransfer);
 
-        $this->standartParameterMapper->setStandardParameter($klarnaGenericPaymentContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($klarnaGenericPaymentContainer, $this->standardParameter);
         $this->payoneRequestProductDataMapper->mapProductData($payoneKlarnaStartSessionRequestTransfer->getQuote(), $klarnaGenericPaymentContainer);
         $rawResponse = $this->executionAdapter->sendRequest($klarnaGenericPaymentContainer);
 

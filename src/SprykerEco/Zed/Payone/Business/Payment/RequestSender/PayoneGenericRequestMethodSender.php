@@ -29,21 +29,21 @@ class PayoneGenericRequestMethodSender implements PayoneGenericRequestMethodSend
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper
+        StandartParameterMapperInterface $standardParameterMapper
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
     }
 
     /**
@@ -53,7 +53,7 @@ class PayoneGenericRequestMethodSender implements PayoneGenericRequestMethodSend
      */
     public function performGenericRequest(GenericPaymentContainer $requestContainer): PayonePaypalExpressCheckoutGenericPaymentResponseTransfer
     {
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new GenericPaymentResponseContainer($rawResponse);
@@ -75,11 +75,13 @@ class PayoneGenericRequestMethodSender implements PayoneGenericRequestMethodSend
 
         $responseTransfer->setRedirectUrl($responseContainer->getRedirectUrl());
         $responseTransfer->setWorkOrderId($responseContainer->getWorkOrderId());
-        $responseTransfer->setRawResponse(json_encode($rawResponse));
+        $responseTransfer->setRawResponse(json_encode($rawResponse) ?: '');
         $responseTransfer->setStatus($responseContainer->getStatus());
-        $responseTransfer->setCustomerMessage($responseContainer->getCustomermessage());
+        $responseTransfer->setCustomerMessage($responseContainer->getCustomerMessage());
         $responseTransfer->setErrorMessage($responseContainer->getErrormessage());
-        $responseTransfer->setErrorCode($responseContainer->getErrorcode());
+        if ($responseContainer->getErrorcode()) {
+            $responseTransfer->setErrorCode((int)$responseContainer->getErrorcode());
+        }
         $responseTransfer->setEmail($responseContainer->getEmail());
         $responseTransfer->setShippingFirstName($responseContainer->getShippingFirstname());
         $responseTransfer->setShippingLastName($responseContainer->getShippingLastname());

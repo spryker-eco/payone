@@ -29,6 +29,8 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface getRepository()
  */
 class GatewayController extends AbstractGatewayController
 {
@@ -57,8 +59,8 @@ class GatewayController extends AbstractGatewayController
     {
         $urlHmacGenerator = $this->getFactory()->createUrlHmacGenerator();
         $hash = $urlHmacGenerator->hash(
-            $cancelRedirectTransfer->getOrderReference(),
-            $this->getFactory()->getConfig()->getRequestStandardParameter()->getKey()
+            $cancelRedirectTransfer->getOrderReferenceOrFail(),
+            $this->getFactory()->getConfig()->getRequestStandardParameter()->getKeyOrFail(),
         );
 
         if ($cancelRedirectTransfer->getUrlHmac() === $hash) {
@@ -182,9 +184,9 @@ class GatewayController extends AbstractGatewayController
             $order = SpySalesOrderQuery::create()
                 ->filterByOrderReference($getPaymentDetailTransfer->getOrderReference())
                 ->findOne();
-            $getPaymentDetailTransfer->setOrderId($order->getIdSalesOrder());
+            $getPaymentDetailTransfer->setOrderId((string)$order->getIdSalesOrder());
         }
-        $response = $this->getFacade()->getPaymentDetail($getPaymentDetailTransfer->getOrderId());
+        $response = $this->getFacade()->getPaymentDetail((int)$getPaymentDetailTransfer->getOrderIdOrFail());
         $getPaymentDetailTransfer->setPaymentDetail($response);
 
         return $getPaymentDetailTransfer;

@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
 use SprykerEco\Shared\Payone\PayoneApiConstants;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer;
 
 class GenericPaymentContainer extends AbstractRequestContainer
 {
@@ -17,77 +18,77 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_GENERICPAYMENT;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearingtype;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $narrative_text;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
     protected $paydata;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_street;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $shipping_zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_state;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $wallettype;
 
@@ -107,9 +108,9 @@ class GenericPaymentContainer extends AbstractRequestContainer
     protected $backurl;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingType()
+    public function getClearingType(): ?string
     {
         return $this->clearingtype;
     }
@@ -119,15 +120,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setClearingType($clearingType)
+    public function setClearingType(string $clearingType): void
     {
         $this->clearingtype = $clearingType;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -137,15 +138,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setAmount($amount)
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -155,15 +156,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNarrativeText()
+    public function getNarrativeText(): ?string
     {
         return $this->narrative_text;
     }
@@ -173,15 +174,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setNarrativeText($narrativeText)
+    public function setNarrativeText(string $narrativeText): void
     {
         $this->narrative_text = $narrativeText;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\GenericPayment\PaydataContainer|null
      */
-    public function getPaydata()
+    public function getPaydata(): ?PaydataContainer
     {
         return $this->paydata;
     }
@@ -191,33 +192,33 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setPaydata($paydata)
+    public function setPaydata(PaydataContainer $paydata): void
     {
         $this->paydata = $paydata;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWorkOrderId()
+    public function getWorkOrderId(): ?string
     {
         return $this->workorderid;
     }
 
     /**
-     * @param string $workOrderId
+     * @param string|null $workOrderId
      *
      * @return void
      */
-    public function setWorkOrderId($workOrderId)
+    public function setWorkOrderId(?string $workOrderId = null): void
     {
         $this->workorderid = $workOrderId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingFirstName()
+    public function getShippingFirstName(): ?string
     {
         return $this->shipping_firstname;
     }
@@ -227,15 +228,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingFirstName($shippingFirstName)
+    public function setShippingFirstName(string $shippingFirstName): void
     {
         $this->shipping_firstname = $shippingFirstName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingLastName()
+    public function getShippingLastName(): ?string
     {
         return $this->shipping_lastname;
     }
@@ -245,15 +246,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingLastName($shippingLastName)
+    public function setShippingLastName(string $shippingLastName): void
     {
         $this->shipping_lastname = $shippingLastName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCompany()
+    public function getShippingCompany(): ?string
     {
         return $this->shipping_company;
     }
@@ -263,15 +264,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingCompany($shippingCompany)
+    public function setShippingCompany(string $shippingCompany): void
     {
         $this->shipping_company = $shippingCompany;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingStreet()
+    public function getShippingStreet(): ?string
     {
         return $this->shipping_street;
     }
@@ -281,15 +282,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingStreet($shippingStreet)
+    public function setShippingStreet(string $shippingStreet): void
     {
         $this->shipping_street = $shippingStreet;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getShippingZip()
+    public function getShippingZip(): ?int
     {
         return $this->shipping_zip;
     }
@@ -299,15 +300,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingZip($shippingZip)
+    public function setShippingZip(int $shippingZip): void
     {
         $this->shipping_zip = $shippingZip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCity()
+    public function getShippingCity(): ?string
     {
         return $this->shipping_city;
     }
@@ -317,15 +318,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingCity($shippingCity)
+    public function setShippingCity(string $shippingCity): void
     {
         $this->shipping_city = $shippingCity;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingState()
+    public function getShippingState(): ?string
     {
         return $this->shipping_state;
     }
@@ -335,15 +336,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingState($shippingState)
+    public function setShippingState(string $shippingState): void
     {
         $this->shipping_state = $shippingState;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCountry()
+    public function getShippingCountry(): ?string
     {
         return $this->shipping_country;
     }
@@ -353,15 +354,15 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setShippingCountry($shippingCountry)
+    public function setShippingCountry(string $shippingCountry): void
     {
         $this->shipping_country = $shippingCountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWalletType()
+    public function getWalletType(): ?string
     {
         return $this->wallettype;
     }
@@ -371,7 +372,7 @@ class GenericPaymentContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setWalletType($walletType)
+    public function setWalletType(string $walletType): void
     {
         $this->wallettype = $walletType;
     }

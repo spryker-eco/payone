@@ -12,7 +12,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class PaydataContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $action;
 
@@ -22,9 +22,9 @@ class PaydataContainer extends AbstractContainer
     protected $authorization_token;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAction()
+    public function getAction(): ?string
     {
         return $this->action;
     }
@@ -34,7 +34,7 @@ class PaydataContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setAction($action)
+    public function setAction(string $action): void
     {
         $this->action = $action;
     }
@@ -62,9 +62,9 @@ class PaydataContainer extends AbstractContainer
      *
      * @return string
      */
-    protected function getPreparedKey($key)
+    protected function getPreparedKey(string $key): string
     {
-        $preparedKey = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $key));
+        $preparedKey = strtolower((string)preg_replace('/([a-z])([A-Z])/', '$1_$2', $key));
         $template = 'add_paydata[KEY]';
 
         return str_replace('KEY', $preparedKey, $template);

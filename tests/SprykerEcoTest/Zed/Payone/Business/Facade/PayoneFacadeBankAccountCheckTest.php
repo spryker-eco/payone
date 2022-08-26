@@ -17,12 +17,40 @@ use SprykerEcoTest\Zed\Payone\PayoneZedTester;
 
 class PayoneFacadeBankAccountCheckTest extends AbstractBusinessTest
 {
+    /**
+     * @var string
+     */
     protected const REQUEST_BANK_COUNTRY = 'DE';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_BANK_ACCOUNT = 'AK001';
+
+    /**
+     * @var string
+     */
     protected const REUEST_BANK_CODE = '001';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_BANK_IBAN = '000000000000000000';
+
+    /**
+     * @var string
+     */
     protected const REQUEST_BIC = '000000000000000001';
+
+    /**
+     * @var string
+     */
     protected const EXPECTED_BANK_COUNTRY = 'DE';
+
+    /**
+     * @var string
+     */
+    protected const ERROR_CODE = '0';
 
     /**
      * @var \SprykerEcoTest\Zed\Payone\PayoneZedTester
@@ -61,6 +89,7 @@ class PayoneFacadeBankAccountCheckTest extends AbstractBusinessTest
         $bankAccountCheck->setBankCode(static::REUEST_BANK_CODE);
         $bankAccountCheck->setIban(static::REQUEST_BANK_IBAN);
         $bankAccountCheck->setBic(static::REQUEST_BIC);
+        $bankAccountCheck->setErrorCode(static::ERROR_CODE);
 
         //Act
         $bankAccountCheckResponse = $facadeMock->bankAccountCheck($bankAccountCheck);

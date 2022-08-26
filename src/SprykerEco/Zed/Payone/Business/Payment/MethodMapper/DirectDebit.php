@@ -17,6 +17,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractA
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\DirectDebitContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\BankAccountCheckContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface;
@@ -25,7 +26,6 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\GetFileContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\ManageMandateContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainer;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
 
@@ -40,79 +40,87 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentEntity, OrderTransfer $orderTransfer): AbstractAuthorizationContainer
+    public function mapPaymentToAuthorization(SpyPaymentPayone $paymentPayoneEntity, OrderTransfer $orderTransfer): AuthorizationContainerInterface
     {
         $authorizationContainer = new AuthorizationContainer();
-        $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $authorizationContainer);
+        $authorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentPayoneEntity, $authorizationContainer);
 
         return $authorizationContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface
      */
-    public function mapPaymentToRefund(SpyPaymentPayone $paymentEntity): RefundContainerInterface
+    public function mapPaymentToRefund(SpyPaymentPayone $paymentPayoneEntity): RefundContainerInterface
     {
         $refundContainer = new RefundContainer();
 
-        $refundContainer->setTxid($paymentEntity->getTransactionId());
-        $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
+        $refundContainer->setTxid($paymentPayoneEntity->getTransactionId());
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $refundContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $refundContainer->setCurrency($this->getStandardParameter()->getCurrency());
 
         return $refundContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface|\SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
-    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentEntity): PreAuthorizationContainerInterface
+    public function mapPaymentToPreAuthorization(SpyPaymentPayone $paymentPayoneEntity)
     {
         $preAuthorizationContainer = new PreAuthorizationContainer();
-        $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentEntity, $preAuthorizationContainer);
+        $preAuthorizationContainer = $this->mapPaymentToAbstractAuthorization($paymentPayoneEntity, $preAuthorizationContainer);
 
         return $preAuthorizationContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\CaptureContainerInterface
      */
-    public function mapPaymentToCapture(SpyPaymentPayone $paymentEntity): CaptureContainerInterface
+    public function mapPaymentToCapture(SpyPaymentPayone $paymentPayoneEntity): CaptureContainerInterface
     {
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+        $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
 
         $captureContainer = new CaptureContainer();
         $captureContainer->setAmount($paymentDetailEntity->getAmount());
-        $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
-        $captureContainer->setTxid($paymentEntity->getTransactionId());
-        $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $captureContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
+        $captureContainer->setTxid($paymentPayoneEntity->getTransactionId());
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $captureContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
 
         return $captureContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\DebitContainerInterface
      */
-    public function mapPaymentToDebit(SpyPaymentPayone $paymentEntity): DebitContainerInterface
+    public function mapPaymentToDebit(SpyPaymentPayone $paymentPayoneEntity): DebitContainerInterface
     {
         $debitContainer = new DebitContainer();
 
-        $debitContainer->setTxid($paymentEntity->getTransactionId());
-        $debitContainer->setSequenceNumber($this->getNextSequenceNumber($paymentEntity->getTransactionId()));
+        $debitContainer->setTxid($paymentPayoneEntity->getTransactionId());
+        if ($paymentPayoneEntity->getTransactionId() !== null) {
+            $debitContainer->setSequenceNumber($this->getNextSequenceNumber($paymentPayoneEntity->getTransactionId()));
+        }
         $debitContainer->setCurrency($this->getStandardParameter()->getCurrency());
-        $debitContainer->setAmount($paymentEntity->getSpyPaymentPayoneDetail()->getAmount());
+        $debitContainer->setAmount($paymentPayoneEntity->getSpyPaymentPayoneDetail()->getAmount());
 
         return $debitContainer;
     }
@@ -147,43 +155,49 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
 
         $manageMandateContainer->setAid($this->getStandardParameter()->getAid());
         $manageMandateContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_DIRECT_DEBIT);
-        $manageMandateContainer->setCurrency($this->getStandardParameter()->getCurrency());
-        $manageMandateContainer->setCustomerid($manageMandateTransfer->getPersonalData()->getCustomerId());
-        $manageMandateContainer->setLastname($manageMandateTransfer->getPersonalData()->getLastName());
-        $manageMandateContainer->setFirstname($manageMandateTransfer->getPersonalData()->getFirstName());
-        $manageMandateContainer->setCity($manageMandateTransfer->getPersonalData()->getCity());
-        $manageMandateContainer->setCountry($manageMandateTransfer->getPersonalData()->getCountry());
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $manageMandateContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
+        $manageMandateContainer->setCustomerid((int)$manageMandateTransfer->getPersonalData()->getCustomerId());
+        $manageMandateContainer->setLastname((string)$manageMandateTransfer->getPersonalData()->getLastName());
+        $manageMandateContainer->setFirstname((string)$manageMandateTransfer->getPersonalData()->getFirstName());
+        $manageMandateContainer->setCity((string)$manageMandateTransfer->getPersonalData()->getCity());
+        $manageMandateContainer->setCountry((string)$manageMandateTransfer->getPersonalData()->getCountry());
         $manageMandateContainer->setEmail($manageMandateTransfer->getPersonalData()->getEmail());
         $manageMandateContainer->setLanguage($this->getStandardParameter()->getLanguage());
 
-        $manageMandateContainer->setBankCountry($manageMandateTransfer->getBankCountry());
-        $manageMandateContainer->setBankAccount($manageMandateTransfer->getBankAccount());
-        $manageMandateContainer->setBankCode($manageMandateTransfer->getBankCode());
-        $manageMandateContainer->setIban($manageMandateTransfer->getIban());
-        $manageMandateContainer->setBic($manageMandateTransfer->getBic());
+        $manageMandateContainer->setBankCountry((string)$manageMandateTransfer->getBankCountry());
+        $manageMandateContainer->setBankAccount((string)$manageMandateTransfer->getBankAccount());
+        $manageMandateContainer->setBankCode((string)$manageMandateTransfer->getBankCode());
+        $manageMandateContainer->setIban((string)$manageMandateTransfer->getIban());
+        $manageMandateContainer->setBic((string)$manageMandateTransfer->getBic());
 
         return $manageMandateContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $authorizationContainer
      *
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface|\SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface
      */
-    protected function mapPaymentToAbstractAuthorization(SpyPaymentPayone $paymentEntity, AbstractAuthorizationContainer $authorizationContainer)
-    {
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+    protected function mapPaymentToAbstractAuthorization(
+        SpyPaymentPayone $paymentPayoneEntity,
+        AbstractAuthorizationContainer $authorizationContainer
+    ) {
+        $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
 
         $authorizationContainer->setAid($this->getStandardParameter()->getAid());
         $authorizationContainer->setClearingType(PayoneApiConstants::CLEARING_TYPE_DIRECT_DEBIT);
-        $authorizationContainer->setReference($paymentEntity->getReference());
+        $authorizationContainer->setReference($paymentPayoneEntity->getReference());
         $authorizationContainer->setAmount($paymentDetailEntity->getAmount());
-        $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
-        $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentEntity));
+        if ($this->getStandardParameter()->getCurrency() !== null) {
+            $authorizationContainer->setCurrency($this->getStandardParameter()->getCurrency());
+        }
+        $authorizationContainer->setPaymentMethod($this->createPaymentMethodContainerFromPayment($paymentPayoneEntity));
 
         $personalContainer = new PersonalContainer();
-        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentEntity);
+        $this->mapBillingAddressToPersonalContainer($personalContainer, $paymentPayoneEntity);
 
         $authorizationContainer->setPersonalData($personalContainer);
 
@@ -191,19 +205,20 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PaymentMethod\DirectDebitContainer
      */
-    protected function createPaymentMethodContainerFromPayment(SpyPaymentPayone $paymentEntity)
-    {
+    protected function createPaymentMethodContainerFromPayment(
+        SpyPaymentPayone $paymentPayoneEntity
+    ): DirectDebitContainer {
         $paymentMethodContainer = new DirectDebitContainer();
 
-        $paymentMethodContainer->setBankCountry($paymentEntity->getSpyPaymentPayoneDetail()->getBankCountry());
-        $paymentMethodContainer->setBankAccount($paymentEntity->getSpyPaymentPayoneDetail()->getBankAccount());
-        $paymentMethodContainer->setBankCode($paymentEntity->getSpyPaymentPayoneDetail()->getBankCode());
-        $paymentMethodContainer->setIban($paymentEntity->getSpyPaymentPayoneDetail()->getIban());
-        $paymentMethodContainer->setBic($paymentEntity->getSpyPaymentPayoneDetail()->getBic());
+        $paymentMethodContainer->setBankCountry((string)$paymentPayoneEntity->getSpyPaymentPayoneDetail()->getBankCountry());
+        $paymentMethodContainer->setBankAccount((string)$paymentPayoneEntity->getSpyPaymentPayoneDetail()->getBankAccount());
+        $paymentMethodContainer->setBankCode((string)$paymentPayoneEntity->getSpyPaymentPayoneDetail()->getBankCode());
+        $paymentMethodContainer->setIban((string)$paymentPayoneEntity->getSpyPaymentPayoneDetail()->getIban());
+        $paymentMethodContainer->setBic((string)$paymentPayoneEntity->getSpyPaymentPayoneDetail()->getBic());
 
         return $paymentMethodContainer;
     }
@@ -217,7 +232,7 @@ class DirectDebit extends AbstractMapper implements DirectDebitInterface
     {
         $getFileContainer = new GetFileContainer();
 
-        $getFileContainer->setFileReference($getFileTransfer->getReference());
+        $getFileContainer->setFileReference((string)$getFileTransfer->getReference());
         $getFileContainer->setFileType(PayoneApiConstants::FILE_TYPE_MANDATE);
         $getFileContainer->setFileFormat(PayoneApiConstants::FILE_FORMAT_PDF);
 

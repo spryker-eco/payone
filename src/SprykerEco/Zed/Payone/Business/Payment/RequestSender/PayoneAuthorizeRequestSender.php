@@ -58,11 +58,12 @@ class PayoneAuthorizeRequestSender extends AbstractPayoneRequestSender implement
      */
     public function authorizePayment(OrderTransfer $orderTransfer): AuthorizationResponseTransfer
     {
-        $paymentEntity = $this->getPaymentEntity($orderTransfer->getIdSalesOrder());
-        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
-        $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
+        $paymentPayoneEntity = $this->getPaymentEntity($orderTransfer->getIdSalesOrderOrFail());
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
+        $requestContainer = $paymentMethodMapper->mapPaymentToAuthorization($paymentPayoneEntity, $orderTransfer);
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer */
         $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($orderTransfer, $requestContainer);
-        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
+        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentPayoneEntity, $requestContainer);
 
         return $this->authorizationResponseMapper->getAuthorizationResponseTransfer($responseContainer);
     }

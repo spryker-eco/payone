@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Payone\Form\GiropayOnlineTransferSubForm;
@@ -20,10 +21,9 @@ class GiropayOnlineTransferDataProvider implements StepEngineFormDataProviderInt
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() === null) {
+        if ($quoteTransfer instanceof QuoteTransfer && $quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
@@ -35,9 +35,9 @@ class GiropayOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             GiropayOnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -45,9 +45,9 @@ class GiropayOnlineTransferDataProvider implements StepEngineFormDataProviderInt
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
         return [
             'DE' => 'Germany',

@@ -32,16 +32,16 @@ interface CaptureContainerInterface
     public function setCurrency(string $currency): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string;
+    public function getCurrency(): ?string;
 
     /**
      * @param int|null $sequencenumber
      *
      * @return void
      */
-    public function setSequenceNumber(?int $sequencenumber): void;
+    public function setSequenceNumber(?int $sequencenumber = null): void;
 
     /**
      * @return int|null
@@ -49,16 +49,16 @@ interface CaptureContainerInterface
     public function getSequenceNumber(): ?int;
 
     /**
-     * @param string $txid
+     * @param int|null $txid
      *
      * @return void
      */
-    public function setTxid(string $txid): void;
+    public function setTxid(?int $txid = null): void;
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getTxid(): ?string;
+    public function getTxid(): ?int;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\Capture\BusinessContainer $business

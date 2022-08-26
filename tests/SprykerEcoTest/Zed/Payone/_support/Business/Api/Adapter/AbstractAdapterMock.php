@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Adapter\Http\AbstractHttpAdapter;
 abstract class AbstractAdapterMock extends AbstractHttpAdapter implements AdapterInterface
 {
     /**
-     * @const DEFAULT_GETEWAY_URL
+     * @var string
      */
     public const DEFAULT_GETEWAY_URL = '';
 
@@ -25,7 +25,7 @@ abstract class AbstractAdapterMock extends AbstractHttpAdapter implements Adapte
     /**
      * @param string $paymentGatewayUrl
      */
-    public function __construct($paymentGatewayUrl = self::DEFAULT_GETEWAY_URL)
+    public function __construct(string $paymentGatewayUrl = self::DEFAULT_GETEWAY_URL)
     {
         parent::__construct($paymentGatewayUrl);
     }
@@ -33,9 +33,9 @@ abstract class AbstractAdapterMock extends AbstractHttpAdapter implements Adapte
     /**
      * @param array $params
      *
-     * @return array
+     * @return array<string>
      */
-    protected function performRequest(array $params)
+    protected function performRequest(array $params): array
     {
         if ($this->expectSuccess) {
             return $this->getSuccessResponse();
@@ -49,18 +49,18 @@ abstract class AbstractAdapterMock extends AbstractHttpAdapter implements Adapte
      *
      * @return void
      */
-    public function setExpectSuccess($expect = true)
+    public function setExpectSuccess(bool $expect = true): void
     {
         $this->expectSuccess = $expect;
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
-    abstract protected function getSuccessResponse();
+    abstract protected function getSuccessResponse(): array;
 
     /**
-     * @return array
+     * @return array<string>
      */
-    abstract protected function getFailureResponse();
+    abstract protected function getFailureResponse(): array;
 }

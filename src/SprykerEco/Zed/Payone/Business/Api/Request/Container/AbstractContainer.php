@@ -49,7 +49,7 @@ abstract class AbstractContainer implements ContainerInterface
      *
      * @return string
      */
-    protected function getPreparedKey($key)
+    protected function getPreparedKey(string $key): string
     {
         return $key;
     }

@@ -38,7 +38,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION,
-            PayoneApiConstants::RESPONSE_TYPE_APPROVED
+            PayoneApiConstants::RESPONSE_TYPE_APPROVED,
         );
     }
 
@@ -52,7 +52,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION,
-            PayoneApiConstants::RESPONSE_TYPE_REDIRECT
+            PayoneApiConstants::RESPONSE_TYPE_REDIRECT,
         );
     }
 
@@ -66,11 +66,11 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION,
-            PayoneApiConstants::RESPONSE_TYPE_ERROR
+            PayoneApiConstants::RESPONSE_TYPE_ERROR,
         ) || $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION,
-            PayoneApiConstants::RESPONSE_TYPE_TIMEOUT
+            PayoneApiConstants::RESPONSE_TYPE_TIMEOUT,
         );
     }
 
@@ -84,7 +84,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
-            PayoneApiConstants::RESPONSE_TYPE_APPROVED
+            PayoneApiConstants::RESPONSE_TYPE_APPROVED,
         );
     }
 
@@ -98,7 +98,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
-            PayoneApiConstants::RESPONSE_TYPE_REDIRECT
+            PayoneApiConstants::RESPONSE_TYPE_REDIRECT,
         );
     }
 
@@ -112,7 +112,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_AUTHORIZATION,
-            PayoneApiConstants::RESPONSE_TYPE_ERROR
+            PayoneApiConstants::RESPONSE_TYPE_ERROR,
         );
     }
 
@@ -126,7 +126,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_CAPTURE,
-            PayoneApiConstants::RESPONSE_TYPE_APPROVED
+            PayoneApiConstants::RESPONSE_TYPE_APPROVED,
         );
     }
 
@@ -140,7 +140,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_CAPTURE,
-            PayoneApiConstants::RESPONSE_TYPE_ERROR
+            PayoneApiConstants::RESPONSE_TYPE_ERROR,
         );
     }
 
@@ -154,7 +154,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_REFUND,
-            PayoneApiConstants::RESPONSE_TYPE_APPROVED
+            PayoneApiConstants::RESPONSE_TYPE_APPROVED,
         );
     }
 
@@ -168,7 +168,7 @@ class ApiLogFinder implements ApiLogFinderInterface
         return $this->hasApiLogStatus(
             $orderTransfer,
             PayoneApiConstants::REQUEST_TYPE_REFUND,
-            PayoneApiConstants::RESPONSE_TYPE_ERROR
+            PayoneApiConstants::RESPONSE_TYPE_ERROR,
         );
     }
 
@@ -181,7 +181,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      */
     protected function hasApiLogStatus(OrderTransfer $orderTransfer, string $request, string $status): bool
     {
-        $idSalesOrder = $orderTransfer->getIdSalesOrder();
+        $idSalesOrder = $orderTransfer->getIdSalesOrderOrFail();
         $apiLog = $this->queryContainer->createApiLogsByOrderIdAndRequest($idSalesOrder, $request)->filterByStatus($status)->findOne();
 
         if ($apiLog === null) {
@@ -208,7 +208,7 @@ class ApiLogFinder implements ApiLogFinderInterface
      */
     protected function findPaymentByOrder(OrderTransfer $orderTransfer): SpyPaymentPayone
     {
-        return $this->queryContainer->createPaymentByOrderId($orderTransfer->getIdSalesOrder())->findOne();
+        return $this->queryContainer->createPaymentByOrderId($orderTransfer->getIdSalesOrderOrFail())->findOne();
     }
 
     /**
@@ -221,7 +221,7 @@ class ApiLogFinder implements ApiLogFinderInterface
     {
         return $this->queryContainer->createApiLogByPaymentAndRequestTypeQuery(
             $payment->getPrimaryKey(),
-            $authorizationType
+            $authorizationType,
         )->findOne();
     }
 }

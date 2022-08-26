@@ -30,7 +30,7 @@ class PayoneManageMandateMethodSender implements PayoneManageMandateMethodSender
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
@@ -40,18 +40,18 @@ class PayoneManageMandateMethodSender implements PayoneManageMandateMethodSender
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper,
+        StandartParameterMapperInterface $standardParameterMapper,
         PaymentMapperReaderInterface $paymentMapperReader
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;
     }
 
@@ -65,13 +65,13 @@ class PayoneManageMandateMethodSender implements PayoneManageMandateMethodSender
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_DIRECT_DEBIT);
         $requestContainer = $paymentMethodMapper->mapManageMandate($manageMandateTransfer);
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new ManageMandateResponseContainer($rawResponse);
 
         $manageMandateTransfer->setErrorCode($responseContainer->getErrorcode());
-        $manageMandateTransfer->setCustomerErrorMessage($responseContainer->getCustomermessage());
+        $manageMandateTransfer->setCustomerErrorMessage($responseContainer->getCustomerMessage());
         $manageMandateTransfer->setStatus($responseContainer->getStatus());
         $manageMandateTransfer->setInternalErrorMessage($responseContainer->getErrormessage());
         $manageMandateTransfer->setMandateIdentification($responseContainer->getMandateIdentification());

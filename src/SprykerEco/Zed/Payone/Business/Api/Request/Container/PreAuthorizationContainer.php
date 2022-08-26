@@ -20,12 +20,12 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer implement
     protected $request = PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $financingtype;
 
@@ -44,7 +44,7 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer implement
      *
      * @return void
      */
-    public function setWorkOrderId($workorderid): void
+    public function setWorkOrderId(string $workorderid): void
     {
         $this->workorderid = $workorderid;
     }
@@ -66,11 +66,11 @@ class PreAuthorizationContainer extends AbstractAuthorizationContainer implement
     }
 
     /**
-     * @param string $financingType
+     * @param string|null $financingType
      *
      * @return void
      */
-    public function setFinancingtype(string $financingType): void
+    public function setFinancingtype(?string $financingType): void
     {
         $this->financingtype = $financingType;
     }

@@ -14,8 +14,19 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContaine
 
 class ExpenseMapper implements ExpenseMapperInterface
 {
+    /**
+     * @var string
+     */
     protected const HANDLING_PRODUCT_DESCRIPTION = 'Handling';
+
+    /**
+     * @var int
+     */
     protected const ZERRO_ITEM_TAX_RATE = 0;
+
+    /**
+     * @var int
+     */
     protected const ONE_ITEM_AMOUNT = 1;
 
     /**
@@ -26,12 +37,12 @@ class ExpenseMapper implements ExpenseMapperInterface
      */
     public function mapExpenses(OrderTransfer $orderTransfer, AbstractRequestContainer $container): AbstractRequestContainer
     {
-        $arrayIt = $container->getIt() ?? [];
-        $arrayId = $container->getId() ?? [];
-        $arrayPr = $container->getPr() ?? [];
-        $arrayNo = $container->getNo() ?? [];
-        $arrayDe = $container->getDe() ?? [];
-        $arrayVa = $container->getVa() ?? [];
+        $arrayIt = $container->getIt();
+        $arrayId = $container->getId();
+        $arrayPr = $container->getPr();
+        $arrayNo = $container->getNo();
+        $arrayDe = $container->getDe();
+        $arrayVa = $container->getVa();
 
         $key = count($arrayId) + 1;
 
@@ -49,7 +60,7 @@ class ExpenseMapper implements ExpenseMapperInterface
             $key++;
         }
 
-        $container->setIt($arrayIt);
+        $container->setIt((array)$arrayIt);
         $container->setId($arrayId);
         $container->setPr($arrayPr);
         $container->setNo($arrayNo);

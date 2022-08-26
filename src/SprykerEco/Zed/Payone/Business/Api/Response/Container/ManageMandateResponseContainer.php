@@ -10,32 +10,32 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class ManageMandateResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_identification;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_status;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_text;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $creditor_identifier;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
@@ -44,15 +44,15 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandate_identification)
+    public function setMandateIdentification(string $mandate_identification): void
     {
         $this->mandate_identification = $mandate_identification;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateIdentification()
+    public function getMandateIdentification(): ?string
     {
         return $this->mandate_identification;
     }
@@ -62,15 +62,15 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateStatus($mandate_status)
+    public function setMandateStatus(string $mandate_status): void
     {
         $this->mandate_status = $mandate_status;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateStatus()
+    public function getMandateStatus(): ?string
     {
         return $this->mandate_status;
     }
@@ -80,15 +80,15 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMandateText($mandate_text)
+    public function setMandateText(string $mandate_text): void
     {
         $this->mandate_text = $mandate_text;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateText()
+    public function getMandateText(): ?string
     {
         return $this->mandate_text;
     }
@@ -98,15 +98,15 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCreditorIdentifier($creditor_identifier)
+    public function setCreditorIdentifier(string $creditor_identifier): void
     {
         $this->creditor_identifier = $creditor_identifier;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorIdentifier()
+    public function getCreditorIdentifier(): ?string
     {
         return $this->creditor_identifier;
     }
@@ -116,15 +116,15 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic()
+    public function getBic(): ?string
     {
         return $this->bic;
     }
@@ -134,15 +134,15 @@ class ManageMandateResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban()
+    public function getIban(): ?string
     {
         return $this->iban;
     }

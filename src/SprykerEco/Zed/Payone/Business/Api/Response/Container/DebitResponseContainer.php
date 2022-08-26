@@ -10,12 +10,12 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class DebitResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $txid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $settleaccount;
 
@@ -24,15 +24,15 @@ class DebitResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSettleaccount($settleaccount)
+    public function setSettleaccount(string $settleaccount): void
     {
         $this->settleaccount = $settleaccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSettleaccount()
+    public function getSettleaccount(): ?string
     {
         return $this->settleaccount;
     }
@@ -42,15 +42,15 @@ class DebitResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTxid($txid)
+    public function setTxid(int $txid): void
     {
         $this->txid = $txid;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxid()
+    public function getTxid(): ?int
     {
         return $this->txid;
     }

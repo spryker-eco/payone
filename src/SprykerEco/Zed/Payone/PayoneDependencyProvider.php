@@ -15,18 +15,47 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesBridge;
+use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
+ */
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const FACADE_OMS = 'oms facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_REFUND = 'refund facade';
+
+    /**
+     * @var string
+     */
     public const STORE_CONFIG = 'store config';
+
+    /**
+     * @var string
+     */
     public const FACADE_SALES = 'sales facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_GLOSSARY = 'glossary facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_CALCULATION = 'calculation facade';
 
     /**
      * @uses \Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
+     *
+     * @var string
      */
     public const SERVICE_REQUEST_STACK = 'request_stack';
 
@@ -35,7 +64,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideCommunicationLayerDependencies(Container $container)
+    public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
         $container = $this->addOmsFacade($container);
@@ -51,7 +80,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideBusinessLayerDependencies(Container $container)
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
         $container = $this->addGlossaryFacade($container);
@@ -153,7 +182,9 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     protected function addRequestStack(Container $container): Container
     {
         $container->set(static::SERVICE_REQUEST_STACK, function (Container $container) {
-            return $container->getApplicationService(static::SERVICE_REQUEST_STACK);
+            return $container->hasApplicationService(static::SERVICE_REQUEST_STACK)
+                ? $container->getApplicationService(static::SERVICE_REQUEST_STACK)
+                : new RequestStack();
         });
 
         return $container;

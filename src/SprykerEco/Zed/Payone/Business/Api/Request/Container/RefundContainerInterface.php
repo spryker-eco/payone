@@ -37,11 +37,11 @@ interface RefundContainerInterface
     public function getCurrency(): ?string;
 
     /**
-     * @param string|null $narrative_text
+     * @param string|null $narrativeText
      *
      * @return $this
      */
-    public function setNarrativeText(?string $narrative_text): self;
+    public function setNarrativeText(?string $narrativeText): self;
 
     /**
      * @return string|null
@@ -85,16 +85,16 @@ interface RefundContainerInterface
     public function getSequenceNumber(): ?int;
 
     /**
-     * @param int $txid
+     * @param int|null $txid
      *
      * @return $this
      */
-    public function setTxid(int $txid): self;
+    public function setTxid(?int $txid): self;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxid(): int;
+    public function getTxid(): ?int;
 
     /**
      * @param string $use_customerdata
@@ -109,9 +109,9 @@ interface RefundContainerInterface
     public function getUseCustomerData(): string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankcountry(): string;
+    public function getBankcountry(): ?string;
 
     /**
      * @param string|null $bankcountry

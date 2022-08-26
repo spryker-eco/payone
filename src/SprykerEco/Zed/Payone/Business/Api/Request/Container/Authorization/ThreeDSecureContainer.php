@@ -12,22 +12,22 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class ThreeDSecureContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $xid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $cavv;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $eci;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
     protected $redirect;
 
@@ -36,15 +36,15 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setCavv($cavv)
+    public function setCavv(string $cavv): void
     {
         $this->cavv = $cavv;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCavv()
+    public function getCavv(): ?string
     {
         return $this->cavv;
     }
@@ -54,15 +54,15 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setEci($eci)
+    public function setEci(string $eci): void
     {
         $this->eci = $eci;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEci()
+    public function getEci(): ?string
     {
         return $this->eci;
     }
@@ -72,15 +72,15 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setXid($xid)
+    public function setXid(string $xid): void
     {
         $this->xid = $xid;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getXid()
+    public function getXid(): ?string
     {
         return $this->xid;
     }
@@ -90,15 +90,15 @@ class ThreeDSecureContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setRedirect(RedirectContainer $redirect)
+    public function setRedirect(RedirectContainer $redirect): void
     {
         $this->redirect = $redirect;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
-    public function getRedirect()
+    public function getRedirect(): ?RedirectContainer
     {
         return $this->redirect;
     }

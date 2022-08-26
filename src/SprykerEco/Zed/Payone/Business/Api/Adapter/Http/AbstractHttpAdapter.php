@@ -13,6 +13,9 @@ use SprykerEco\Zed\Payone\Business\Exception\TimeoutException;
 
 abstract class AbstractHttpAdapter implements AdapterInterface
 {
+    /**
+     * @var int
+     */
     public const DEFAULT_TIMEOUT = 45;
 
     /**
@@ -38,7 +41,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
     /**
      * @param string $paymentGatewayUrl
      */
-    public function __construct($paymentGatewayUrl)
+    public function __construct(string $paymentGatewayUrl)
     {
         $this->url = $paymentGatewayUrl;
     }
@@ -48,7 +51,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return void
      */
-    public function setTimeout($timeout)
+    public function setTimeout(int $timeout): void
     {
         $this->timeout = $timeout;
     }
@@ -56,7 +59,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
     /**
      * @return int
      */
-    public function getTimeout()
+    public function getTimeout(): int
     {
         return $this->timeout;
     }
@@ -99,19 +102,19 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return array
      */
-    abstract protected function performRequest(array $params);
+    abstract protected function performRequest(array $params): array;
 
     /**
      * @param array $params
      *
      * @return array
      */
-    protected function generateUrlArray(array $params)
+    protected function generateUrlArray(array $params): array
     {
         $urlRequest = $this->getUrl() . '?' . http_build_query($params, '', '&');
         $urlArray = parse_url($urlRequest);
 
-        return $urlArray;
+        return $urlArray ?: [];
     }
 
     /**
@@ -119,7 +122,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return array
      */
-    protected function parseResponse(array $responseRaw = [])
+    protected function parseResponse(array $responseRaw = []): array
     {
         $result = [];
 
@@ -161,7 +164,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return void
      */
-    public function setParams(array $params)
+    public function setParams(array $params): void
     {
         $this->params = $params;
     }
@@ -169,7 +172,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
     /**
      * @return array
      */
-    public function getParams()
+    public function getParams(): array
     {
         return $this->params;
     }
@@ -187,7 +190,7 @@ abstract class AbstractHttpAdapter implements AdapterInterface
      *
      * @return void
      */
-    protected function setRawResponse($rawResponse)
+    protected function setRawResponse(string $rawResponse): void
     {
         $this->rawResponse = $rawResponse;
     }

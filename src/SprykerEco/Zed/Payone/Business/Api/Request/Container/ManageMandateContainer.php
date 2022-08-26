@@ -17,72 +17,72 @@ class ManageMandateContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_MANAGEMANDATE;
 
     /**
-     * @var int
+     * @var string|null
      */
     protected $aid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearingtype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $mandate_identification;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
-     * @var string
+     * @var int|null
      */
     protected $customerid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $userid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
@@ -92,27 +92,27 @@ class ManageMandateContainer extends AbstractRequestContainer
     protected $language;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
@@ -121,15 +121,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount)
+    public function setBankAccount(string $bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankAccount()
+    public function getBankAccount(): ?string
     {
         return $this->bankaccount;
     }
@@ -139,15 +139,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode)
+    public function setBankCode(string $bankcode): void
     {
         $this->bankcode = $bankcode;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCode()
+    public function getBankCode(): ?string
     {
         return $this->bankcode;
     }
@@ -157,15 +157,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry)
+    public function setBankCountry(string $bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCountry()
+    public function getBankCountry(): ?string
     {
         return $this->bankcountry;
     }
@@ -175,15 +175,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setClearingType($clearingtype)
+    public function setClearingType(string $clearingtype): void
     {
         $this->clearingtype = $clearingtype;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingType()
+    public function getClearingType(): ?string
     {
         return $this->clearingtype;
     }
@@ -193,15 +193,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setMandateIdentification($mandate_identification)
+    public function setMandateIdentification(string $mandate_identification): void
     {
         $this->mandate_identification = $mandate_identification;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateIdentification()
+    public function getMandateIdentification(): ?string
     {
         return $this->mandate_identification;
     }
@@ -211,33 +211,33 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
     /**
-     * @param string $customerid
+     * @param int|null $customerid
      *
      * @return void
      */
-    public function setCustomerid($customerid)
+    public function setCustomerid(?int $customerid): void
     {
         $this->customerid = $customerid;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getCustomerid()
+    public function getCustomerid(): ?int
     {
         return $this->customerid;
     }
@@ -247,15 +247,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setUserid($userid)
+    public function setUserid(string $userid): void
     {
         $this->userid = $userid;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUserid()
+    public function getUserid(): ?string
     {
         return $this->userid;
     }
@@ -265,15 +265,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setFirstname($firstname)
+    public function setFirstname(string $firstname): void
     {
         $this->firstname = $firstname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstname()
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
@@ -283,15 +283,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setLastname($lastname)
+    public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastname()
+    public function getLastname(): ?string
     {
         return $this->lastname;
     }
@@ -301,15 +301,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCompany($company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCompany()
+    public function getCompany(): ?string
     {
         return $this->company;
     }
@@ -319,15 +319,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setStreet($street)
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreet()
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -337,15 +337,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZip()
+    public function getZip(): ?string
     {
         return $this->zip;
     }
@@ -355,15 +355,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -373,33 +373,33 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCountry($country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
      * @return void
      */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email = null): void
     {
         $this->email = $email;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -409,15 +409,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban()
+    public function getIban(): ?string
     {
         return $this->iban;
     }
@@ -427,15 +427,15 @@ class ManageMandateContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic()
+    public function getBic(): ?string
     {
         return $this->bic;
     }

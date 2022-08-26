@@ -12,93 +12,93 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class BusinessContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $settleaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $transactiontype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $booking_date;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $document_date;
 
     /**
-     * @param string $booking_date
+     * @param string $bookingDate
      *
      * @return void
      */
-    public function setBookingDate($booking_date)
+    public function setBookingDate(string $bookingDate): void
     {
-        $this->booking_date = $booking_date;
+        $this->booking_date = $bookingDate;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBookingDate()
+    public function getBookingDate(): ?string
     {
         return $this->booking_date;
     }
 
     /**
-     * @param string $document_date
+     * @param string $documentDate
      *
      * @return void
      */
-    public function setDocumentDate($document_date)
+    public function setDocumentDate(string $documentDate): void
     {
-        $this->document_date = $document_date;
+        $this->document_date = $documentDate;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDocumentDate()
+    public function getDocumentDate(): ?string
     {
         return $this->document_date;
     }
 
     /**
-     * @param string $settleaccount
+     * @param string $settleAccount
      *
      * @return void
      */
-    public function setSettleAccount($settleaccount)
+    public function setSettleAccount(string $settleAccount): void
     {
-        $this->settleaccount = $settleaccount;
+        $this->settleaccount = $settleAccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSettleAccount()
+    public function getSettleAccount(): ?string
     {
         return $this->settleaccount;
     }
 
     /**
-     * @param string $transactiontype
+     * @param string $transactionType
      *
      * @return void
      */
-    public function setTransactionType($transactiontype)
+    public function setTransactionType(string $transactionType): void
     {
-        $this->transactiontype = $transactiontype;
+        $this->transactiontype = $transactionType;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTransactionType()
+    public function getTransactionType(): ?string
     {
         return $this->transactiontype;
     }

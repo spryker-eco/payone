@@ -7,10 +7,12 @@
 
 namespace SprykerEco\Yves\Payone\Dependency\Client;
 
+use Generated\Shared\Transfer\StoreTransfer;
+
 interface PayoneToStoreClientInterface
 {
     /**
      * @return \Generated\Shared\Transfer\StoreTransfer
      */
-    public function getCurrentStore();
+    public function getCurrentStore(): StoreTransfer;
 }

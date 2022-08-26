@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $acsurl;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $termurl;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $pareq;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $xid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $md;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $pseudocardpan;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $truncatedcardpan;
 
@@ -49,15 +49,15 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setAcsurl($acsurl)
+    public function setAcsurl(string $acsurl): void
     {
         $this->acsurl = $acsurl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAcsurl()
+    public function getAcsurl(): ?string
     {
         return $this->acsurl;
     }
@@ -67,15 +67,15 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setMd($md)
+    public function setMd(string $md): void
     {
         $this->md = $md;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMd()
+    public function getMd(): ?string
     {
         return $this->md;
     }
@@ -85,15 +85,15 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPareq($pareq)
+    public function setPareq(string $pareq): void
     {
         $this->pareq = $pareq;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPareq()
+    public function getPareq(): ?string
     {
         return $this->pareq;
     }
@@ -103,15 +103,15 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPseudocardpan($pseudocardpan)
+    public function setPseudocardpan(string $pseudocardpan): void
     {
         $this->pseudocardpan = $pseudocardpan;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPseudocardpan()
+    public function getPseudocardpan(): ?string
     {
         return $this->pseudocardpan;
     }
@@ -121,15 +121,15 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTermurl($termurl)
+    public function setTermurl(string $termurl): void
     {
         $this->termurl = $termurl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTermurl()
+    public function getTermurl(): ?string
     {
         return $this->termurl;
     }
@@ -139,15 +139,15 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setTruncatedcardpan($truncatedcardpan)
+    public function setTruncatedcardpan(string $truncatedcardpan): void
     {
         $this->truncatedcardpan = $truncatedcardpan;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTruncatedcardpan()
+    public function getTruncatedcardpan(): ?string
     {
         return $this->truncatedcardpan;
     }
@@ -157,15 +157,15 @@ class ThreeDSecureCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setXid($xid)
+    public function setXid(string $xid): void
     {
         $this->xid = $xid;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getXid()
+    public function getXid(): ?string
     {
         return $this->xid;
     }

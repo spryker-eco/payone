@@ -14,74 +14,74 @@ class BusinessContainer extends AbstractContainer
     /**
      * (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $document_date;
 
     /**
      * (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $booking_date;
 
     /**
      * (Unixtimestamp)
      *
-     * @var string
+     * @var string|null
      */
     protected $due_time;
 
     /**
-     * @param string $booking_date
+     * @param string $bookingDate
      *
      * @return void
      */
-    public function setBookingDate($booking_date)
+    public function setBookingDate(string $bookingDate): void
     {
-        $this->booking_date = $booking_date;
+        $this->booking_date = $bookingDate;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBookingDate()
+    public function getBookingDate(): ?string
     {
         return $this->booking_date;
     }
 
     /**
-     * @param string $document_date
+     * @param string $documentDate
      *
      * @return void
      */
-    public function setDocumentDate($document_date)
+    public function setDocumentDate(string $documentDate): void
     {
-        $this->document_date = $document_date;
+        $this->document_date = $documentDate;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDocumentDate()
+    public function getDocumentDate(): ?string
     {
         return $this->document_date;
     }
 
     /**
-     * @param string $due_time
+     * @param string $dueTime
      *
      * @return void
      */
-    public function setDueTime($due_time)
+    public function setDueTime(string $dueTime): void
     {
-        $this->due_time = $due_time;
+        $this->due_time = $dueTime;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDueTime()
+    public function getDueTime(): ?string
     {
         return $this->due_time;
     }

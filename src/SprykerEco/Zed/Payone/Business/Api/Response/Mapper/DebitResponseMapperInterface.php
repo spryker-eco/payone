@@ -13,7 +13,7 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\DebitResponseContainer
 interface DebitResponseMapperInterface extends ResponseMapperInterface
 {
     /**
-     * @const string NAME
+     * @var string
      */
     public const NAME = 'DEBIT';
 

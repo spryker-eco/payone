@@ -12,6 +12,7 @@ use Orm\Zed\Sales\Persistence\SpySalesOrderItemQuery;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
@@ -26,7 +27,7 @@ class TransactionController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    public function statusUpdateAction(Request $request)
+    public function statusUpdateAction(Request $request): StreamedResponse
     {
         //Payone always sends status updates in ISO-8859-1. We transform them to utf8.
         $requestParameters = $request->request->all();

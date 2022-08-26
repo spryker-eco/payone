@@ -57,8 +57,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @api
      *
-     * @param string $invoiceTitle
-     * @param int $customerId
+     * @param string|null $invoiceTitle
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
@@ -83,8 +83,8 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @api
      *
-     * @param string $fileReference
-     * @param int $customerId
+     * @param string|null $fileReference
+     * @param int|null $customerId
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
@@ -110,15 +110,15 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      * @api
      *
      * @param int $fkPayment
-     * @param string $requestName
+     * @param string $requestType
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
-    public function createApiLogByPaymentAndRequestTypeQuery($fkPayment, $requestName)
+    public function createApiLogByPaymentAndRequestTypeQuery($fkPayment, $requestType)
     {
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery();
         $query->filterByFkPaymentPayone($fkPayment)
-              ->filterByRequest($requestName);
+              ->filterByRequest($requestType);
 
         return $query;
     }
@@ -185,15 +185,16 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @api
      *
-     * @param int $idIdSalesOrder
+     * @param int $idSalesOrder
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
-    public function createTransactionStatusLogsBySalesOrder($idIdSalesOrder)
+    public function createTransactionStatusLogsBySalesOrder($idSalesOrder)
     {
+        /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery $query */
         $query = $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
             ->useSpyPaymentPayoneQuery()
-                ->filterByFkSalesOrder($idIdSalesOrder)
+                ->filterByFkSalesOrder($idSalesOrder)
             ->endUse()
             ->orderByCreatedAt();
 
@@ -257,6 +258,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
             $ids[] = $order->getIdSalesOrder();
         }
 
+        /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery $query */
         $query = $this->getFactory()->createPaymentPayoneApiLogQuery()
             ->useSpyPaymentPayoneQuery()
                 ->filterByFkSalesOrder($ids, Criteria::IN)
@@ -271,7 +273,7 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
      *
      * @api
      *
-     * @param \Orm\Zed\Sales\Persistence\SpySalesOrder[] $orders
+     * @param array<\Orm\Zed\Sales\Persistence\SpySalesOrder> $orders
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
@@ -282,11 +284,14 @@ class PayoneQueryContainer extends AbstractQueryContainer implements PayoneQuery
             $ids[] = $order->getIdSalesOrder();
         }
 
-        return $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
+        /** @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery $query */
+        $query = $this->getFactory()->createPaymentPayoneTransactionStatusLogQuery()
             ->useSpyPaymentPayoneQuery()
                 ->filterByFkSalesOrder($ids, Criteria::IN)
             ->endUse()
             ->orderByCreatedAt();
+
+        return $query;
     }
 
     /**

@@ -10,37 +10,37 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class AddressCheckResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $secstatus;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $personstatus;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $streetname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $streetnumber;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
@@ -49,15 +49,15 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -67,15 +67,15 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setPersonstatus($personstatus)
+    public function setPersonstatus(string $personstatus): void
     {
         $this->personstatus = $personstatus;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPersonstatus()
+    public function getPersonstatus(): ?string
     {
         return $this->personstatus;
     }
@@ -85,15 +85,15 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setSecstatus($secstatus)
+    public function setSecstatus(int $secstatus): void
     {
         $this->secstatus = $secstatus;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getSecstatus()
+    public function getSecstatus(): ?int
     {
         return $this->secstatus;
     }
@@ -103,15 +103,15 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreet($street)
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreet()
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -121,15 +121,15 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreetname($streetname)
+    public function setStreetname(string $streetname): void
     {
         $this->streetname = $streetname;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreetname()
+    public function getStreetname(): ?string
     {
         return $this->streetname;
     }
@@ -139,15 +139,15 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setStreetnumber($streetnumber)
+    public function setStreetnumber(string $streetnumber): void
     {
         $this->streetnumber = $streetnumber;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStreetnumber()
+    public function getStreetnumber(): ?string
     {
         return $this->streetnumber;
     }
@@ -157,15 +157,15 @@ class AddressCheckResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZip()
+    public function getZip(): ?string
     {
         return $this->zip;
     }

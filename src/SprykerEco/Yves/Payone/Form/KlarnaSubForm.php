@@ -10,7 +10,6 @@ namespace SprykerEco\Yves\Payone\Form;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
-use SprykerEco\Shared\Payone\PayoneConstants;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,16 +17,45 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method \SprykerEco\Yves\Payone\PayoneConfig getConfig()
+ */
 class KlarnaSubForm extends AbstractPayoneSubForm
 {
+    /**
+     * @var string
+     */
     public const PAY_METHOD_CHOICES = 'pay_methods';
+
+    /**
+     * @var string
+     */
     public const WIDGET_PAY_METHODS = 'widget_pay_methods';
+
+    /**
+     * @var string
+     */
     public const BILLING_ADDRESS_DATA = 'billing_address_data';
+
+    /**
+     * @var string
+     */
     public const CUSTOMER_DATA = 'customer_data';
-    protected const PAYMENT_METHOD = 'klarna';
+
+    /**
+     * @var string
+     */
+    public const PAYMENT_METHOD = 'klarna';
+
+    /**
+     * @var string
+     */
     protected const FIELD_PAY_METHOD_TYPE = 'payMethod';
+
+    /**
+     * @var string
+     */
     protected const FIELD_PAY_METHOD_TOKEN = 'payMethodToken';
-    protected const FORM_TEMPLATE_PATH = '%s/%s';
 
     /**
      * @return string
@@ -55,17 +83,9 @@ class KlarnaSubForm extends AbstractPayoneSubForm
     {
         $this->addPayMethodField(
             $builder,
-            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES]
+            $options[SubFormInterface::OPTIONS_FIELD_NAME][static::PAY_METHOD_CHOICES],
         );
         $this->addPayMethodTokenField($builder);
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatePath(): string
-    {
-        return sprintf(self::FORM_TEMPLATE_PATH, PayoneConstants::PROVIDER_NAME, self::PAYMENT_METHOD);
     }
 
     /**
@@ -111,7 +131,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
                 'choice_attr' => function ($val) {
                     return $val === '' ? ['disabled' => 'disabled', 'selected' => 'selected'] : ['disabled' => 'disabled'];
                 },
-            ]
+            ],
         );
 
         return $this;
@@ -131,7 +151,7 @@ class KlarnaSubForm extends AbstractPayoneSubForm
                 'label' => false,
                 'required' => true,
                 'data' => [],
-            ]
+            ],
         );
 
         return $this;

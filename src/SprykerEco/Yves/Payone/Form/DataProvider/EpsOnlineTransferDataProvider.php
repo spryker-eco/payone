@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Payone\Form\EpsOnlineTransferSubForm;
@@ -20,10 +21,9 @@ class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterfa
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() === null) {
+        if ($quoteTransfer instanceof QuoteTransfer && $quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $quoteTransfer->setPayment($paymentTransfer);
@@ -37,7 +37,7 @@ class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterfa
      *
      * @return array
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             EpsOnlineTransferSubForm::OPTION_BANK_COUNTRIES => $this->getBankCountries(),
@@ -46,9 +46,9 @@ class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterfa
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
-    protected function getBankCountries()
+    protected function getBankCountries(): array
     {
         return [
             'AT' => 'Austria',
@@ -56,9 +56,9 @@ class EpsOnlineTransferDataProvider implements StepEngineFormDataProviderInterfa
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
-    protected function getBankGroupTypes()
+    protected function getBankGroupTypes(): array
     {
         return [
             'Commercial credit cooperatives (Volksbank)' => 'ARZ_OVB',

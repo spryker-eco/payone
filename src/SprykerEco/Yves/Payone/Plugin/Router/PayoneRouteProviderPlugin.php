@@ -12,19 +12,64 @@ use Spryker\Yves\Router\Route\RouteCollection;
 
 class PayoneRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_INDEX = 'payone-index';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_GET_FILE = 'payone-getfile';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_CANCEL_REDIRECT = 'payone-cancel-redirect';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_GET_INVOICE = 'payone-getinvoice';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_PAYMENT_SUCCESS = 'payone-payment-success';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_PAYMENT_FAILURE = 'payone-payment-failure';
 
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_BUTTON = 'payone-checkout-with-paypal-button';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_INIT = 'payone-paypal-express-checkout-init';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_FAILURE = 'payone-paypal-express-checkout-failure';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_BACK = 'payone-paypal-express-checkout-back';
+
+    /**
+     * @var string
+     */
     protected const ROUTE_PAYONE_EXPRESS_CHECKOUT_LOAD_DETAILS = 'payone-paypal-express-checkout-load-details';
 
+    /**
+     * @var string
+     */
     protected const ROUTE_NAME_PAYONE_KLARNA_GET_TOKEN = 'payone-klarna-get-token';
 
     /**

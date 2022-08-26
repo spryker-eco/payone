@@ -10,222 +10,227 @@ namespace SprykerEco\Shared\Payone\Dependency;
 interface TransactionStatusUpdateInterface
 {
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAccessid();
+    public function getAccessid(): ?int;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAid();
+    public function getAid(): ?int;
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getBalance();
+    public function getBalance(): ?float;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingtype();
+    public function getClearingtype(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency();
+    public function getCurrency(): ?string;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getCustomerid();
+    public function getCustomerid(): ?int;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFailedcause();
+    public function getFailedcause(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceDate();
+    public function getInvoiceDate(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceDeliverydate();
+    public function getInvoiceDeliverydate(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceDeliveryenddate();
+    public function getInvoiceDeliveryenddate(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceGrossamount();
+    public function getInvoiceGrossamount(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceid();
+    public function getInvoiceid(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getKey();
+    public function getKey(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMode();
+    public function getMode(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getParam();
+    public function getParam(): ?string;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPortalid();
+    public function getPortalid(): ?int;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getProductid();
+    public function getProductid(): ?int;
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getPrice();
+    public function getPrice(): ?float;
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getReceivable();
+    public function getReceivable(): ?float;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReference();
+    public function getReference(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReminderlevel();
+    public function getReminderlevel(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSequencenumber();
+    public function getSequencenumber(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTxaction();
+    public function getTxaction(): ?string;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxid();
+    public function getTxid(): ?int;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTxtime();
+    public function getTxtime(): ?int;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getUserid();
+    public function getUserid(): ?int;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankaccount();
+    public function getClearingBankaccount(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankaccountholder();
+    public function getClearingBankaccountholder(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankbic();
+    public function getClearingBankbic(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcity();
+    public function getClearingBankcity(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcode();
+    public function getClearingBankcode(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankcountry();
+    public function getClearingBankcountry(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankiban();
+    public function getClearingBankiban(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankname();
+    public function getClearingBankname(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban();
+    public function getIban(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic();
+    public function getBic(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMandateIdentification();
+    public function getMandateIdentification(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingDuedate();
+    public function getClearingDuedate(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingAmount();
+    public function getClearingAmount(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCreditorIdentifier();
+    public function getCreditorIdentifier(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingDate();
+    public function getClearingDate(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingInstructionnote();
+    public function getClearingInstructionnote(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingLegalnote();
+    public function getClearingLegalnote(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingReference();
+    public function getClearingReference(): ?string;
+
+    /**
+     * @return array
+     */
+    public function toArray(): array;
 }

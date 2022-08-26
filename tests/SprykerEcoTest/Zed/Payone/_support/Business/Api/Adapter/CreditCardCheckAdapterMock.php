@@ -12,9 +12,9 @@ class CreditCardCheckAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getSuccessResponse()
+    protected function getSuccessResponse(): array
     {
-        $result = 'pseudoCardPan=1111111111111111';
+        $result = 'pseudoCardPan=1111111111111111 status=OK errormessage=OK customermessage=OK errorcode=200 rawresponse=200 truncatedcardpan=200';
 
         return explode(' ', $result);
     }
@@ -22,7 +22,7 @@ class CreditCardCheckAdapterMock extends AbstractAdapterMock
     /**
      * @return array
      */
-    protected function getFailureResponse()
+    protected function getFailureResponse(): array
     {
         $result = 'status=ERROR';
 

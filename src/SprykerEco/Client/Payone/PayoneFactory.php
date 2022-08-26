@@ -9,13 +9,13 @@ namespace SprykerEco\Client\Payone;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheck;
 use SprykerEco\Client\Payone\ClientApi\Call\CreditCardCheckInterface;
 use SprykerEco\Client\Payone\ClientApi\HashGenerator;
 use SprykerEco\Client\Payone\ClientApi\HashGeneratorInterface;
 use SprykerEco\Client\Payone\ClientApi\HashProvider;
+use SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface;
 use SprykerEco\Client\Payone\Zed\PayoneStub;
 use SprykerEco\Client\Payone\Zed\PayoneStubInterface;
 use SprykerEco\Shared\Payone\Dependency\HashInterface;
@@ -38,7 +38,7 @@ class PayoneFactory extends AbstractFactory
             $this->createStandardParameter($defaults),
             $this->createHashGenerator(),
             $this->createModeDetector(),
-            $this->createUtilEncodingService()
+            $this->getUtilEncodingService(),
         );
     }
 
@@ -72,7 +72,7 @@ class PayoneFactory extends AbstractFactory
     protected function createHashGenerator(): HashGeneratorInterface
     {
         return new HashGenerator(
-            $this->createHashProvider()
+            $this->createHashProvider(),
         );
     }
 
@@ -102,15 +102,15 @@ class PayoneFactory extends AbstractFactory
      */
     public function createZedStub(): PayoneStubInterface
     {
-        $zedStub = $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_ZED);
+        $zedStub = $this->getProvidedDependency(PayoneDependencyProvider::CLIENT_ZED_REQUEST);
 
         return new PayoneStub($zedStub);
     }
 
     /**
-     * @return \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
+     * @return \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface
      */
-    public function createUtilEncodingService(): UtilEncodingServiceInterface
+    public function getUtilEncodingService(): PayoneToUtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_UTIL_ENCODING);
     }

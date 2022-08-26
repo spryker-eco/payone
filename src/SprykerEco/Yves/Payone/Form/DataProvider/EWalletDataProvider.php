@@ -10,6 +10,7 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentEWalletTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -22,10 +23,9 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
      *
      * @return \Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    public function getData(AbstractTransfer $quoteTransfer)
+    public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() === null) {
+        if ($quoteTransfer instanceof QuoteTransfer && $quoteTransfer->getPayment() === null) {
             $paymentTransfer = new PaymentTransfer();
             $paymentTransfer->setPayone(new PayonePaymentTransfer());
             $paymentTransfer->setPayoneEWallet(new PayonePaymentEWalletTransfer());
@@ -38,9 +38,9 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @param \Spryker\Shared\Kernel\Transfer\AbstractTransfer $quoteTransfer
      *
-     * @return array
+     * @return array<string, array<string, string>>
      */
-    public function getOptions(AbstractTransfer $quoteTransfer)
+    public function getOptions(AbstractTransfer $quoteTransfer): array
     {
         return [
             EWalletSubForm::OPTION_WALLET_CHOICES => $this->getEWalletTypes(),
@@ -50,7 +50,7 @@ class EWalletDataProvider implements StepEngineFormDataProviderInterface
     /**
      * @return array
      */
-    protected function getEWalletTypes()
+    protected function getEWalletTypes(): array
     {
         return [
             'PayPal' => PayoneApiConstants::E_WALLET_TYPE_PAYPAL,

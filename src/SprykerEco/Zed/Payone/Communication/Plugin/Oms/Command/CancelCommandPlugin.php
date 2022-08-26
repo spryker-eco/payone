@@ -16,11 +16,15 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\Command\CommandByOrderInterface;
 /**
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  */
 class CancelCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
     /**
      * {@inheritDoc}
+     * - Requires `PayoneCaptureTransfer.order` to be set.
+     * - Requires `PayoneCaptureTransfer.payment.fkSalesOrder` to be set.
      *
      * @api
      *
@@ -36,7 +40,7 @@ class CancelCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
             ->setAmount(0)
             ->setOrder($this->getOrderTransfer($orderEntity))
             ->setPayment(
-                (new PayonePaymentTransfer())->setFkSalesOrder($orderEntity->getIdSalesOrder())
+                (new PayonePaymentTransfer())->setFkSalesOrder($orderEntity->getIdSalesOrder()),
             );
 
         $this->getFacade()->capturePayment($captureTransfer);

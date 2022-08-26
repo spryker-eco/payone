@@ -16,7 +16,7 @@ class CreditCardCheck extends AbstractCall implements CreditCardCheckInterface
     /**
      * @var string
      */
-    private $storeCardData = PayoneApiConstants::STORE_CARD_DATA_YES;
+    protected $storeCardData = PayoneApiConstants::STORE_CARD_DATA_YES;
 
     /**
      * @return void
@@ -39,9 +39,9 @@ class CreditCardCheck extends AbstractCall implements CreditCardCheckInterface
      */
     public function mapCreditCardCheckData(): CreditCardCheckContainerInterface
     {
-        $container = new CreditCardCheckContainer($this->utilEncodingService);
+        $container = new CreditCardCheckContainer($this->payoneToUtilEncodingServiceBridge);
         $this->applyStandardParameter($container);
-        $securityKey = $this->standardParameter->getKey();
+        $securityKey = (string)$this->standardParameter->getKey();
         $hash = $this->hashGenerator->generateHash($container, $securityKey);
 
         $container->setHash($hash);

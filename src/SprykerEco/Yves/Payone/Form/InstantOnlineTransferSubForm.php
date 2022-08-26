@@ -12,16 +12,30 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * @method \SprykerEco\Yves\Payone\PayoneConfig getConfig()
+ */
 class InstantOnlineTransferSubForm extends OnlineTransferSubForm
 {
+    /**
+     * @var string
+     */
     public const PAYMENT_METHOD = 'instant_online_transfer';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_COUNTRIES = 'instant online transfer bank countries';
+
+    /**
+     * @var string
+     */
     public const OPTION_BANK_GROUP_TYPES = 'instant online transfer bank group types';
 
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER;
     }
@@ -29,7 +43,7 @@ class InstantOnlineTransferSubForm extends OnlineTransferSubForm
     /**
      * @return string
      */
-    public function getPropertyPath()
+    public function getPropertyPath(): string
     {
         return PaymentTransfer::PAYONE_INSTANT_ONLINE_TRANSFER;
     }
@@ -48,7 +62,7 @@ class InstantOnlineTransferSubForm extends OnlineTransferSubForm
             [
                 'label' => false,
                 'data' => PayoneApiConstants::ONLINE_BANK_TRANSFER_TYPE_INSTANT_MONEY_TRANSFER,
-            ]
+            ],
         );
 
         return $this;

@@ -25,17 +25,31 @@ class IndexController extends AbstractController
 {
     /**
      * @uses \SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin::CHECKOUT_SUCCESS
+     *
+     * @var string
      */
     protected const ROUTE_CHECKOUT_SUCCESS = 'checkout-success';
 
     /**
      * @uses \SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin::CHECKOUT_ERROR
+     *
+     * @var string
      */
     protected const ROUTE_CHECKOUT_ERROR = 'checkout-error';
 
+    /**
+     * @var string
+     */
     protected const REQUEST_PARAM_ORDER_REFERENCE = 'orderReference';
 
+    /**
+     * @var string
+     */
     protected const GLOSSARY_KEY_CHECKOUT_ERROR = 'checkout.step.error.text';
+
+    /**
+     * @var string
+     */
     protected const GLOSSARY_KEY_PAYMENT_ERROR = 'payone.payment.error';
 
     /**
@@ -50,7 +64,7 @@ class IndexController extends AbstractController
 
         $response = $this->getClient()->updateStatus($statusUpdateTransfer)->getResponse();
 
-        $callback = function () use ($response) {
+        $callback = function () use ($response): void {
             echo $response;
         };
 
@@ -110,7 +124,7 @@ class IndexController extends AbstractController
         }
 
         $getFileTransfer = new PayoneGetFileTransfer();
-        $getFileTransfer->setReference($request->query->get('id'));
+        $getFileTransfer->setReference((string)$request->query->get('id'));
         $getFileTransfer->setCustomerId($customerTransfer->getIdCustomer());
 
         $response = $this->getClient()->getFile($getFileTransfer);
@@ -119,8 +133,8 @@ class IndexController extends AbstractController
             return $this->viewResponse(['errormessage' => $response->getCustomerErrorMessage()]);
         }
 
-        $callback = function () use ($response) {
-            echo base64_decode($response->getRawResponse());
+        $callback = function () use ($response): void {
+            echo base64_decode((string)$response->getRawResponse());
         };
 
         return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);
@@ -141,7 +155,7 @@ class IndexController extends AbstractController
         }
 
         $getInvoiceTransfer = new PayoneGetInvoiceTransfer();
-        $getInvoiceTransfer->setReference($request->query->get('id'));
+        $getInvoiceTransfer->setReference((string)$request->query->get('id'));
         $getInvoiceTransfer->setCustomerId($customerTransfer->getIdCustomer());
 
         $response = $this->getClient()->getInvoice($getInvoiceTransfer);
@@ -150,8 +164,8 @@ class IndexController extends AbstractController
             return $this->viewResponse(['errormessage' => $response->getInternalErrorMessage()]);
         }
 
-        $callback = function () use ($response) {
-            echo base64_decode($response->getRawResponse());
+        $callback = function () use ($response): void {
+            echo base64_decode((string)$response->getRawResponse());
         };
 
         return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);
@@ -172,7 +186,7 @@ class IndexController extends AbstractController
         }
 
         $getInvoiceTransfer = new PayoneGetInvoiceTransfer();
-        $getInvoiceTransfer->setReference($request->query->get('id'));
+        $getInvoiceTransfer->setReference((string)$request->query->get('id'));
         $getInvoiceTransfer->setCustomerId($customerTransfer->getIdCustomer());
 
         $response = $this->getClient()->getInvoice($getInvoiceTransfer);
@@ -181,8 +195,8 @@ class IndexController extends AbstractController
             return $this->viewResponse(['errormessage' => $response->getInternalErrorMessage()]);
         }
 
-        $callback = function () use ($response) {
-            echo base64_decode($response->getRawResponse());
+        $callback = function () use ($response): void {
+            echo base64_decode((string)$response->getRawResponse());
         };
 
         return $this->streamedResponse($callback, 200, ['Content-type' => 'application/pdf']);
@@ -195,8 +209,8 @@ class IndexController extends AbstractController
      */
     public function cancelRedirectAction(Request $request)
     {
-        $orderReference = $request->query->get('orderReference');
-        $urlHmac = $request->query->get('sig');
+        $orderReference = (string)$request->query->get('orderReference');
+        $urlHmac = (string)$request->query->get('sig');
 
         if ($orderReference) {
             $cancelRedirectTransfer = new PayoneCancelRedirectTransfer();
@@ -220,7 +234,7 @@ class IndexController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    protected function streamedResponse($callback = null, $status = 200, $headers = [])
+    protected function streamedResponse(?callable $callback = null, int $status = 200, array $headers = []): StreamedResponse
     {
         $streamedResponse = new StreamedResponse($callback, $status, $headers);
         $streamedResponse->send();

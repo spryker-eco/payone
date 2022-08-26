@@ -31,7 +31,7 @@ class PayoneEntityManager extends AbstractEntityManager implements PayoneEntityM
         $paymentPayoneOrderItemEntity->save();
 
         $paymentPayoneOrderItemTransfer->setIdPaymentPayoneOrderItem(
-            $paymentPayoneOrderItemEntity->getIdPaymentPayoneOrderItem()
+            $paymentPayoneOrderItemEntity->getIdPaymentPayoneOrderItem(),
         );
 
         return $paymentPayoneOrderItemTransfer;
@@ -61,7 +61,7 @@ class PayoneEntityManager extends AbstractEntityManager implements PayoneEntityM
         $paymentPayoneOrderItemEntity->save();
 
         $paymentPayoneOrderItemTransfer->setIdPaymentPayoneOrderItem(
-            $paymentPayoneOrderItemEntity->getIdPaymentPayoneOrderItem()
+            $paymentPayoneOrderItemEntity->getIdPaymentPayoneOrderItem(),
         );
 
         return $paymentPayoneOrderItemTransfer;

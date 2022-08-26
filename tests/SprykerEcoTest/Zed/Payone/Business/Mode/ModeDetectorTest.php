@@ -26,7 +26,7 @@ class ModeDetectorTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    public function testModeDetection()
+    public function testModeDetection(): void
     {
         $modeDetector = new ModeDetector(new PayoneConfig());
         $detectedMode = $modeDetector->getMode();

@@ -14,34 +14,34 @@ class PersonalContainer extends AbstractContainer
     /**
      * Merchant's customer ID (Permitted symbols: 0-9, a-z, A-Z, .,-,_,/)
      *
-     * @var string
+     * @var string|null
      */
     protected $customerid;
 
     /**
      * PAYONE debtor ID
      *
-     * @var string
+     * @var string|null
      */
     protected $userid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $salutation;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $lastname;
 
@@ -51,78 +51,78 @@ class PersonalContainer extends AbstractContainer
     protected $company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $addressaddition;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $city;
 
     /**
      * Country (ISO-3166)
      *
-     * @var string
+     * @var string|null
      */
     protected $country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $state;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $telephonenumber;
 
     /**
      * Date of birth (YYYYMMDD)
      *
-     * @var string
+     * @var string|null
      */
     protected $birthday;
 
     /**
      * Language indicator (ISO639)
      *
-     * @var string
+     * @var string|null
      */
     protected $language;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $vatid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $gender;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $personalId;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $ip;
 
@@ -131,7 +131,7 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setAddressAddition($addressaddition)
+    public function setAddressAddition(string $addressaddition): void
     {
         $this->addressaddition = $addressaddition;
     }
@@ -139,7 +139,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getAddressAddition()
+    public function getAddressAddition(): ?string
     {
         return $this->addressaddition;
     }
@@ -149,25 +149,25 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setBirthday($birthday)
+    public function setBirthday(string $birthday): void
     {
         $this->birthday = $birthday;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBirthday()
+    public function getBirthday(): ?string
     {
         return $this->birthday;
     }
 
     /**
-     * @param string $city
+     * @param string|null $city
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity(?string $city): void
     {
         $this->city = $city;
     }
@@ -175,7 +175,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -185,7 +185,7 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setCompany($company)
+    public function setCompany($company): void
     {
         $this->company = $company;
     }
@@ -193,7 +193,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getCompany()
+    public function getCompany(): ?string
     {
         return $this->company;
     }
@@ -203,15 +203,15 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setCountry($country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -221,25 +221,25 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setCustomerId($customerid)
+    public function setCustomerId(string $customerid): void
     {
         $this->customerid = $customerid;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCustomerId()
+    public function getCustomerId(): ?string
     {
         return $this->customerid;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
      * @return void
      */
-    public function setEmail($email)
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
@@ -247,17 +247,17 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $firstname
+     * @param string|null $firstname
      *
      * @return void
      */
-    public function setFirstName($firstname)
+    public function setFirstName(?string $firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -265,17 +265,17 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstname;
     }
 
     /**
-     * @param string $ip
+     * @param string|null $ip
      *
      * @return void
      */
-    public function setIp($ip)
+    public function setIp(?string $ip): void
     {
         $this->ip = $ip;
     }
@@ -283,35 +283,35 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getIp()
+    public function getIp(): ?string
     {
         return $this->ip;
     }
 
     /**
-     * @param string $language
+     * @param string|null $language
      *
      * @return void
      */
-    public function setLanguage($language)
+    public function setLanguage(?string $language): void
     {
         $this->language = $language;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLanguage()
+    public function getLanguage(): ?string
     {
         return $this->language;
     }
 
     /**
-     * @param string $lastname
+     * @param string|null $lastname
      *
      * @return void
      */
-    public function setLastName($lastname)
+    public function setLastName(?string $lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -319,17 +319,17 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastname;
     }
 
     /**
-     * @param string $salutation
+     * @param string|null $salutation
      *
      * @return void
      */
-    public function setSalutation($salutation)
+    public function setSalutation(?string $salutation): void
     {
         $this->salutation = $salutation;
     }
@@ -337,7 +337,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getSalutation()
+    public function getSalutation(): ?string
     {
         return $this->salutation;
     }
@@ -347,7 +347,7 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setState($state)
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
@@ -355,7 +355,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getState()
+    public function getState(): ?string
     {
         return $this->state;
     }
@@ -365,7 +365,7 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setStreet($street)
+    public function setStreet(string $street): void
     {
         $this->street = $street;
     }
@@ -373,17 +373,17 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getStreet()
+    public function getStreet(): ?string
     {
         return $this->street;
     }
 
     /**
-     * @param string $telephonenumber
+     * @param string|null $telephonenumber
      *
      * @return void
      */
-    public function setTelephoneNumber($telephonenumber)
+    public function setTelephoneNumber(?string $telephonenumber): void
     {
         $this->telephonenumber = $telephonenumber;
     }
@@ -391,7 +391,7 @@ class PersonalContainer extends AbstractContainer
     /**
      * @return string|null
      */
-    public function getTelephoneNumber()
+    public function getTelephoneNumber(): ?string
     {
         return $this->telephonenumber;
     }
@@ -401,15 +401,15 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -419,15 +419,15 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setUserId($userid)
+    public function setUserId(string $userid): void
     {
         $this->userid = $userid;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUserId()
+    public function getUserId(): ?string
     {
         return $this->userid;
     }
@@ -437,15 +437,15 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setVatId($vatid)
+    public function setVatId(string $vatid): void
     {
         $this->vatid = $vatid;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getVatId()
+    public function getVatId(): ?string
     {
         return $this->vatid;
     }
@@ -455,15 +455,15 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setGender($gender)
+    public function setGender(string $gender): void
     {
         $this->gender = $gender;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGender()
+    public function getGender(): ?string
     {
         return $this->gender;
     }
@@ -473,15 +473,15 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setPersonalId($personalId)
+    public function setPersonalId(string $personalId): void
     {
         $this->personalId = $personalId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPersonalId()
+    public function getPersonalId(): ?string
     {
         return $this->personalId;
     }
@@ -491,15 +491,15 @@ class PersonalContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZip()
+    public function getZip(): ?string
     {
         return $this->zip;
     }

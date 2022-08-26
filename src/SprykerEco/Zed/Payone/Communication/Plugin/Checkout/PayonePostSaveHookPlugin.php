@@ -24,16 +24,17 @@ class PayonePostSaveHookPlugin extends AbstractPlugin implements CheckoutPostChe
 {
     /**
      * {@inheritDoc}
+     * - Requires `QuoteTransfer.payment.payone.fkSalesOrder` to be set.
      *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
      * @return void
      */
-    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
+    public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer)
     {
-        $this->getFacade()->postSaveHook($quoteTransfer, $checkoutResponse);
+        $this->getFacade()->postSaveHook($quoteTransfer, $checkoutResponseTransfer);
     }
 }

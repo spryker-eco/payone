@@ -29,7 +29,7 @@ class Guzzle extends AbstractHttpAdapter
      * @param string $paymentGatewayUrl
      * @param \SprykerEco\Zed\Payone\Business\Api\Log\ApiCallLogWriterInterface $logger
      */
-    public function __construct($paymentGatewayUrl, ApiCallLogWriterInterface $logger)
+    public function __construct(string $paymentGatewayUrl, ApiCallLogWriterInterface $logger)
     {
         parent::__construct($paymentGatewayUrl);
 
@@ -46,12 +46,12 @@ class Guzzle extends AbstractHttpAdapter
      *
      * @return array
      */
-    protected function performRequest(array $params)
+    protected function performRequest(array $params): array
     {
         $urlArray = $this->generateUrlArray($params);
 
         $urlHost = $urlArray['host'];
-        $urlPath = isset($urlArray['path']) ? $urlArray['path'] : '';
+        $urlPath = $urlArray['path'] ?? '';
         $urlScheme = $urlArray['scheme'];
 
         $url = $urlScheme . '://' . $urlHost . $urlPath;

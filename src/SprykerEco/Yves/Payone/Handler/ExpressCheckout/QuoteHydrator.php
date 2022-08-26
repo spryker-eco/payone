@@ -27,12 +27,12 @@ use SprykerEco\Yves\Payone\Dependency\Client\PayoneToShipmentInterface;
 class QuoteHydrator implements QuoteHydratorInterface
 {
     /**
-     * @const string CARRIER_NAME
+     * @var string
      */
     public const CARRIER_NAME = 'Paypal';
 
     /**
-     * @const int DEFAULT_SHIPPING_PRICE
+     * @var int
      */
     public const DEFAULT_SHIPPING_PRICE = 0;
 
@@ -102,7 +102,7 @@ class QuoteHydrator implements QuoteHydratorInterface
             ->setType(PayoneApiConstants::E_WALLET_TYPE_PAYPAL)
             ->setCurrency(Store::getInstance()->getCurrencyIsoCode())
             ->setWorkOrderId(
-                $quoteTransfer->getPayment()->getPayonePaypalExpressCheckout()->getWorkOrderId()
+                $quoteTransfer->getPaymentOrFail()->getPayonePaypalExpressCheckoutOrFail()->getWorkOrderId(),
             );
         $payone->setPaymentMethod(PayoneApiConstants::PAYMENT_METHOD_PAYPAL_EXPRESS_CHECKOUT);
         $payone->setPaymentDetail($paymentDetailTransfer);
@@ -137,7 +137,7 @@ class QuoteHydrator implements QuoteHydratorInterface
         if ($shippingMethod) {
             $shippingMethod->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE);
             $shipmentTransfer->setMethod($shippingMethod);
-            $shipmentTransfer->setShipmentSelection($shippingMethod->getIdShipmentMethod());
+            $shipmentTransfer->setShipmentSelection((string)$shippingMethod->getIdShipmentMethod());
             $quoteTransfer->setShipment($shipmentTransfer);
 
             return $quoteTransfer;
@@ -146,7 +146,7 @@ class QuoteHydrator implements QuoteHydratorInterface
         $shipmentTransfer->setMethod(
             (new ShipmentMethodTransfer())
                 ->setCarrierName(static::CARRIER_NAME)
-                ->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE)
+                ->setStoreCurrencyPrice(static::DEFAULT_SHIPPING_PRICE),
         );
         $quoteTransfer->setShipment($shipmentTransfer);
 

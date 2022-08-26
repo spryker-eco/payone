@@ -21,15 +21,15 @@ $config[PayoneConstants::PAYONE] = [
     PayoneConstants::PAYONE_PAYMENT_GATEWAY_URL => 'https://api.pay1.de/post-gateway/',
     PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL => sprintf(
         '%s/checkout/success',
-        $config[ApplicationConstants::BASE_URL_YVES]
+        $config[ApplicationConstants::BASE_URL_YVES],
     ),
     PayoneConstants::PAYONE_REDIRECT_ERROR_URL => sprintf(
         '%s/payone/payment',
-        $config[ApplicationConstants::BASE_URL_YVES]
+        $config[ApplicationConstants::BASE_URL_YVES],
     ),
     PayoneConstants::PAYONE_REDIRECT_BACK_URL => sprintf(
         '%s/payone/regular-redirect-payment-cancellation',
-        $config[ApplicationConstants::BASE_URL_YVES]
+        $config[ApplicationConstants::BASE_URL_YVES],
     ),
     PayoneConstants::PAYONE_BUSINESS_RELATION => 'b2c',
     PayoneConstants::PAYONE_MODE => 'test',
@@ -49,8 +49,8 @@ $config[PayoneConstants::PAYONE] = [
         PayoneConfig::PAYMENT_METHOD_EPS_ONLINE_TRANSFER,
         PayoneConfig::PAYMENT_METHOD_PRE_PAYMENT,
     ],
-    PayoneConstants::PAYONE_ADDRESS_CHECK_TYPE => PayoneConstants::PAYONE_ADDRESS_CHECK_BASIC,
-    PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE => PayoneConstants::PAYONE_ARVATO_CONSUMER_SCORE_HARD_CRITERIA,
+    PayoneConstants::PAYONE_ADDRESS_CHECK_TYPE => PayoneConfig::PAYONE_ADDRESS_CHECK_BASIC,
+    PayoneConstants::PAYONE_CONSUMER_SCORE_TYPE => PayoneConfig::PAYONE_ARVATO_CONSUMER_SCORE_HARD_CRITERIA,
     PayoneConstants::PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA => [
         PayoneApiConstants::PAYMENT_METHOD_E_WALLET,
         PayoneApiConstants::PAYMENT_METHOD_CREDITCARD_PSEUDO,
@@ -62,17 +62,17 @@ $config[PayoneConstants::PAYONE][PayoneConstants::HOST_YVES] = $config[Applicati
 
 $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_STANDARD_CHECKOUT_ENTRY_POINT_URL] = sprintf(
     '%s/cart',
-    $config[ApplicationConstants::BASE_URL_YVES]
+    $config[ApplicationConstants::BASE_URL_YVES],
 );
 
 $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_BACK_URL] = sprintf(
     '%s/cart',
-    $config[ApplicationConstants::BASE_URL_YVES]
+    $config[ApplicationConstants::BASE_URL_YVES],
 );
 
 $config[PayoneConstants::PAYONE][PayoneConstants::PAYONE_EXPRESS_CHECKOUT_FAILURE_URL] = sprintf(
     '%s/cart',
-    $config[ApplicationConstants::BASE_URL_YVES]
+    $config[ApplicationConstants::BASE_URL_YVES],
 );
 
 $config[OmsConstants::PROCESS_LOCATION] = [

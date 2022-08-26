@@ -10,42 +10,42 @@ namespace SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\Pay
 class PrepaymentContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankaccountholder;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankiban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankbic;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankcity;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $clearing_bankname;
 
@@ -54,15 +54,15 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setClearingBankAccountHolder($clearingBankAccountHolder)
+    public function setClearingBankAccountHolder(string $clearingBankAccountHolder): void
     {
         $this->clearing_bankaccountholder = $clearingBankAccountHolder;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankAccountHolder()
+    public function getClearingBankAccountHolder(): ?string
     {
         return $this->clearing_bankaccountholder;
     }
@@ -72,15 +72,15 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setClearingBankCountry($clearingBankCountry)
+    public function setClearingBankCountry(string $clearingBankCountry): void
     {
         $this->clearing_bankcountry = $clearingBankCountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankCountry()
+    public function getClearingBankCountry(): ?string
     {
         return $this->clearing_bankcountry;
     }
@@ -90,15 +90,15 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setClearingBankAccount($clearingBankAccount)
+    public function setClearingBankAccount(string $clearingBankAccount): void
     {
         $this->clearing_bankaccount = $clearingBankAccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankAccount()
+    public function getClearingBankAccount(): ?string
     {
         return $this->clearing_bankaccount;
     }
@@ -108,15 +108,15 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setClearingBankCode($clearingBankCode)
+    public function setClearingBankCode(string $clearingBankCode): void
     {
         $this->clearing_bankcode = $clearingBankCode;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankCode()
+    public function getClearingBankCode(): ?string
     {
         return $this->clearing_bankcode;
     }
@@ -126,15 +126,15 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setClearingBankIban($clearingBankIban)
+    public function setClearingBankIban(string $clearingBankIban): void
     {
         $this->clearing_bankiban = $clearingBankIban;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankIban()
+    public function getClearingBankIban(): ?string
     {
         return $this->clearing_bankiban;
     }
@@ -144,15 +144,15 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setClearingBankBic($clearingBankBic)
+    public function setClearingBankBic(string $clearingBankBic): void
     {
         $this->clearing_bankbic = $clearingBankBic;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankBic()
+    public function getClearingBankBic(): ?string
     {
         return $this->clearing_bankbic;
     }
@@ -162,15 +162,15 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setClearingBankCity($clearingBankCity)
+    public function setClearingBankCity(string $clearingBankCity): void
     {
         $this->clearing_bankcity = $clearingBankCity;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankCity()
+    public function getClearingBankCity(): ?string
     {
         return $this->clearing_bankcity;
     }
@@ -180,15 +180,15 @@ class PrepaymentContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setClearingBankName($clearingBankName)
+    public function setClearingBankName(string $clearingBankName): void
     {
         $this->clearing_bankname = $clearingBankName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getClearingBankName()
+    public function getClearingBankName(): ?string
     {
         return $this->clearing_bankname;
     }

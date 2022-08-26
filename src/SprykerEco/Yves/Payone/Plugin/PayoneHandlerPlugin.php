@@ -19,6 +19,12 @@ use Symfony\Component\HttpFoundation\Request;
 class PayoneHandlerPlugin extends AbstractPlugin implements StepHandlerPluginInterface
 {
     /**
+     * {@inheritDoc}
+     * - Requires `QuoteTransfer.payment.paymentSelection` to be set.
+     * - Adds payment to quote.
+     *
+     * @api
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *

@@ -23,6 +23,7 @@ class PayoneCheckoutDoSaveOrderPlugin extends AbstractPlugin implements Checkout
     /**
      * {@inheritDoc}
      * - If the payment provider is 'Payone' then it saves order payment method data according to the quote and order data.
+     * - Requires `CheckoutResponseTransfer.SaveOrder` to be set.
      *
      * @api
      *

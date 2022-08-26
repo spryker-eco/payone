@@ -12,42 +12,42 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectC
 class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $onlinebanktransfertype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankgrouptype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
     protected $redirect;
 
@@ -56,15 +56,15 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankAccount($bankaccount)
+    public function setBankAccount(string $bankaccount): void
     {
         $this->bankaccount = $bankaccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankAccount()
+    public function getBankAccount(): ?string
     {
         return $this->bankaccount;
     }
@@ -74,15 +74,15 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCode($bankcode)
+    public function setBankCode(string $bankcode): void
     {
         $this->bankcode = $bankcode;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCode()
+    public function getBankCode(): ?string
     {
         return $this->bankcode;
     }
@@ -92,15 +92,15 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankCountry($bankcountry)
+    public function setBankCountry(string $bankcountry): void
     {
         $this->bankcountry = $bankcountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCountry()
+    public function getBankCountry(): ?string
     {
         return $this->bankcountry;
     }
@@ -110,15 +110,15 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBankGroupType($bankgrouptype)
+    public function setBankGroupType(string $bankgrouptype): void
     {
         $this->bankgrouptype = $bankgrouptype;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankGroupType()
+    public function getBankGroupType(): ?string
     {
         return $this->bankgrouptype;
     }
@@ -128,15 +128,15 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setOnlineBankTransferType($onlinebanktransfertype)
+    public function setOnlineBankTransferType(string $onlinebanktransfertype): void
     {
         $this->onlinebanktransfertype = $onlinebanktransfertype;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getOnlineBankTransferType()
+    public function getOnlineBankTransferType(): ?string
     {
         return $this->onlinebanktransfertype;
     }
@@ -146,15 +146,15 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setRedirect(RedirectContainer $redirect)
+    public function setRedirect(RedirectContainer $redirect): void
     {
         $this->redirect = $redirect;
     }
 
     /**
-     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer
+     * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\RedirectContainer|null
      */
-    public function getRedirect()
+    public function getRedirect(): ?RedirectContainer
     {
         return $this->redirect;
     }
@@ -164,15 +164,15 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setIban($iban)
+    public function setIban(string $iban): void
     {
         $this->iban = $iban;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban()
+    public function getIban(): ?string
     {
         return $this->iban;
     }
@@ -182,15 +182,15 @@ class OnlineBankTransferContainer extends AbstractPaymentMethodContainer
      *
      * @return void
      */
-    public function setBic($bic)
+    public function setBic(string $bic): void
     {
         $this->bic = $bic;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic()
+    public function getBic(): ?string
     {
         return $this->bic;
     }

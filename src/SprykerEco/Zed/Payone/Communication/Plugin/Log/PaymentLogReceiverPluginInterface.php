@@ -12,7 +12,10 @@ use Propel\Runtime\Collection\ObjectCollection;
 interface PaymentLogReceiverPluginInterface
 {
     /**
-     * This plugin fetches log entries for given orders.
+     * Specification:
+     * - This plugin fetches log entries for given orders.
+     *
+     * @api
      *
      * @param \Propel\Runtime\Collection\ObjectCollection $orders
      *

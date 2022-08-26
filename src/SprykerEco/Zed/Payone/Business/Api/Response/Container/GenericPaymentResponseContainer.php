@@ -10,62 +10,62 @@ namespace SprykerEco\Zed\Payone\Business\Api\Response\Container;
 class GenericPaymentResponseContainer extends AbstractResponseContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $workorderid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_firstname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_lastname;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_zip;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_city;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_state;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_country;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $shipping_addressaddition;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $redirecturl;
 
@@ -78,9 +78,9 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWorkOrderId()
+    public function getWorkOrderId(): ?string
     {
         return $this->workorderid;
     }
@@ -90,15 +90,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setWorkOrderId(string $workOrderId)
+    public function setWorkOrderId(string $workOrderId): void
     {
         $this->workorderid = $workOrderId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRedirectUrl()
+    public function getRedirectUrl(): ?string
     {
         return $this->redirecturl;
     }
@@ -108,15 +108,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setRedirectUrl(string $redirectUrl)
+    public function setRedirectUrl(string $redirectUrl): void
     {
         $this->redirecturl = $redirectUrl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingFirstName()
+    public function getShippingFirstName(): ?string
     {
         return $this->shipping_firstname;
     }
@@ -126,15 +126,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingFirstname(string $shippingFirstName)
+    public function setShippingFirstname(string $shippingFirstName): void
     {
         $this->shipping_firstname = $shippingFirstName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingLastName()
+    public function getShippingLastName(): ?string
     {
         return $this->shipping_lastname;
     }
@@ -144,15 +144,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingLastName(string $shippingLastName)
+    public function setShippingLastName(string $shippingLastName): void
     {
         $this->shipping_lastname = $shippingLastName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCompany()
+    public function getShippingCompany(): ?string
     {
         return $this->shipping_company;
     }
@@ -162,15 +162,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingCompany(string $shippingCompany)
+    public function setShippingCompany(string $shippingCompany): void
     {
         $this->shipping_company = $shippingCompany;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingStreet()
+    public function getShippingStreet(): ?string
     {
         return $this->shipping_street;
     }
@@ -180,15 +180,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingStreet(string $shippingStreet)
+    public function setShippingStreet(string $shippingStreet): void
     {
         $this->shipping_street = $shippingStreet;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingZip()
+    public function getShippingZip(): ?string
     {
         return $this->shipping_zip;
     }
@@ -198,15 +198,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingZip(string $shippingZip)
+    public function setShippingZip(string $shippingZip): void
     {
         $this->shipping_zip = $shippingZip;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCity()
+    public function getShippingCity(): ?string
     {
         return $this->shipping_city;
     }
@@ -216,15 +216,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingCity(string $shippingCity)
+    public function setShippingCity(string $shippingCity): void
     {
         $this->shipping_city = $shippingCity;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingState()
+    public function getShippingState(): ?string
     {
         return $this->shipping_state;
     }
@@ -234,15 +234,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingState(string $shippingState)
+    public function setShippingState(string $shippingState): void
     {
         $this->shipping_state = $shippingState;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingCountry()
+    public function getShippingCountry(): ?string
     {
         return $this->shipping_country;
     }
@@ -252,15 +252,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingCountry(string $shippingCountry)
+    public function setShippingCountry(string $shippingCountry): void
     {
         $this->shipping_country = $shippingCountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getShippingAddressAddition()
+    public function getShippingAddressAddition(): ?string
     {
         return $this->shipping_addressaddition;
     }
@@ -270,15 +270,15 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setShippingAddressAddition(string $shippingAddressAddition)
+    public function setShippingAddressAddition(string $shippingAddressAddition): void
     {
         $this->shipping_addressaddition = $shippingAddressAddition;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -288,7 +288,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      *
      * @return void
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -300,7 +300,7 @@ class GenericPaymentResponseContainer extends AbstractResponseContainer
      */
     protected function getPreparedKey(string $key): string
     {
-        $key = preg_replace('/add_paydata\[(.*)\]/', '$1', $key);
+        $key = (string)preg_replace('/add_paydata\[(.*)\]/', '$1', $key);
 
         return ucwords(str_replace('_', ' ', $key));
     }

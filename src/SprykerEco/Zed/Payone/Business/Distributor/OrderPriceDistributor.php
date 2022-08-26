@@ -30,7 +30,7 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
         }
 
         $totalsTransfer = $orderTransfer->getTotals();
-        $priceRatio = $this->calculatePriceRatio($payonePayment->getAmount(), $totalsTransfer->getGrandTotal());
+        $priceRatio = $this->calculatePriceRatio($payonePayment->getAmountOrFail(), $totalsTransfer->getGrandTotalOrFail());
 
         $this->distributeOrderItemsPrices($orderTransfer, $priceRatio);
         $this->distributeOrderExpensesPrices($orderTransfer, $priceRatio);
@@ -98,9 +98,9 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
 
         foreach ($orderTransfer->getItems() as $itemTransfer) {
             $unitPrice = $this->calculateRoundedPrice(
-                $itemTransfer->getUnitGrossPrice(),
+                $itemTransfer->getUnitGrossPriceOrFail(),
                 $priceRatio,
-                $roundingError
+                $roundingError,
             );
 
             $itemTransfer->setSumPriceToPayAggregation($unitPrice)
@@ -130,9 +130,9 @@ class OrderPriceDistributor implements OrderPriceDistributorInterface
 
         foreach ($orderTransfer->getExpenses() as $expenseTransfer) {
             $roundedPrice = $this->calculateRoundedPrice(
-                $expenseTransfer->getSumGrossPrice(),
+                $expenseTransfer->getSumGrossPriceOrFail(),
                 $priceRatio,
-                $roundingError
+                $roundingError,
             );
 
             $expenseTransfer->setSumGrossPrice($roundedPrice);

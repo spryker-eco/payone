@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\Payone\Business\Api\Request\Container;
 
-abstract class AbstractRequestContainer extends AbstractContainer
+abstract class AbstractRequestContainer extends AbstractContainer implements RequestContainerInterface
 {
     /**
      * @var string|null merchant id
@@ -93,12 +93,12 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $responsetype;
 
     /**
-     * @var array
+     * @var array|null
      */
     protected $it;
 
     /**
-     * @var array
+     * @var array|null
      */
     protected $id;
 
@@ -123,7 +123,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
     protected $va;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
@@ -147,7 +147,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setEncoding(?string $encoding)
+    public function setEncoding(?string $encoding = null)
     {
         $this->encoding = $encoding;
 
@@ -183,13 +183,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @param string|null $api_version
+     * @param string|null $apiVersion
      *
      * @return $this
      */
-    public function setApiVersion(?string $api_version)
+    public function setApiVersion(?string $apiVersion = null)
     {
-        $this->api_version = $api_version;
+        $this->api_version = $apiVersion;
 
         return $this;
     }
@@ -207,7 +207,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setMid(?string $mid)
+    public function setMid(?string $mid = null)
     {
         $this->mid = $mid;
 
@@ -247,7 +247,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setPortalid(?string $portalid)
+    public function setPortalid(?string $portalid = null)
     {
         $this->portalid = $portalid;
 
@@ -351,13 +351,13 @@ abstract class AbstractRequestContainer extends AbstractContainer
     /**
      * set the version of the solution-partner's app / extension / plugin / etc..
      *
-     * @param string $solution_version
+     * @param string $solutionVersion
      *
      * @return $this
      */
-    public function setSolutionVersion(string $solution_version)
+    public function setSolutionVersion(string $solutionVersion)
     {
-        $this->solution_version = $solution_version;
+        $this->solution_version = $solutionVersion;
 
         return $this;
     }
@@ -383,7 +383,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setAid(?string $aid)
+    public function setAid(?string $aid = null)
     {
         $this->aid = $aid;
 
@@ -403,7 +403,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setLanguage(?string $language)
+    public function setLanguage(?string $language = null)
     {
         $this->language = $language;
 
@@ -443,7 +443,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setResponsetype(?string $responsetype)
+    public function setResponsetype(?string $responsetype = null)
     {
         $this->responsetype = $responsetype;
 
@@ -451,19 +451,19 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getIt(): array
+    public function getIt(): ?array
     {
         return $this->it;
     }
 
     /**
-     * @param array $it
+     * @param array|null $it
      *
      * @return void
      */
-    public function setIt(array $it): void
+    public function setIt(?array $it = null): void
     {
         $this->it = $it;
     }
@@ -473,15 +473,15 @@ abstract class AbstractRequestContainer extends AbstractContainer
      */
     public function getId(): array
     {
-        return $this->id;
+        return $this->id ?? [];
     }
 
     /**
-     * @param array $id
+     * @param array|null $id
      *
      * @return void
      */
-    public function setId(array $id): void
+    public function setId(?array $id = null): void
     {
         $this->id = $id;
     }
@@ -559,27 +559,27 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
      * @return void
      */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email = null): void
     {
         $this->email = $email;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBackUrl(): string
+    public function getBackUrl(): ?string
     {
         return $this->backurl;
     }
@@ -589,7 +589,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setBackUrl(?string $backUrl)
+    public function setBackUrl(?string $backUrl = null)
     {
         $this->backurl = $backUrl;
 
@@ -597,9 +597,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSuccessUrl(): string
+    public function getSuccessUrl(): ?string
     {
         return $this->successurl;
     }
@@ -609,7 +609,7 @@ abstract class AbstractRequestContainer extends AbstractContainer
      *
      * @return $this
      */
-    public function setSuccessUrl(?string $successUrl)
+    public function setSuccessUrl(?string $successUrl = null)
     {
         $this->successurl = $successUrl;
 
@@ -617,9 +617,9 @@ abstract class AbstractRequestContainer extends AbstractContainer
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getErrorUrl(): string
+    public function getErrorUrl(): ?string
     {
         return $this->errorurl;
     }

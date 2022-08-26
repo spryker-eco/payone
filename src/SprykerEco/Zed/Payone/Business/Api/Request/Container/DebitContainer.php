@@ -20,12 +20,12 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
     protected $request = PayoneApiConstants::REQUEST_TYPE_DEBIT;
 
     /**
-     * @var string
+     * @var int|null
      */
     protected $txid;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $sequencenumber;
 
@@ -35,7 +35,7 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
     protected $amount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
@@ -173,11 +173,11 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
     }
 
     /**
-     * @param int $sequencenumber
+     * @param int|null $sequencenumber
      *
      * @return void
      */
-    public function setSequenceNumber(int $sequencenumber): void
+    public function setSequenceNumber(?int $sequencenumber = null): void
     {
         $this->sequencenumber = $sequencenumber;
     }
@@ -191,19 +191,19 @@ class DebitContainer extends AbstractRequestContainer implements DebitContainerI
     }
 
     /**
-     * @param string $txid
+     * @param int|null $txid
      *
      * @return void
      */
-    public function setTxid(string $txid): void
+    public function setTxid(?int $txid = null): void
     {
         $this->txid = $txid;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getTxid(): string
+    public function getTxid(): ?int
     {
         return $this->txid;
     }

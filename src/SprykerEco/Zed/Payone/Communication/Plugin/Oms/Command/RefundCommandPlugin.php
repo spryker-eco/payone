@@ -18,11 +18,15 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 /**
  * @method \SprykerEco\Zed\Payone\Communication\PayoneCommunicationFactory getFactory()
  * @method \SprykerEco\Zed\Payone\Business\PayoneFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\Payone\PayoneConfig getConfig()
+ * @method \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface getQueryContainer()
  */
 class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrderInterface
 {
     /**
      * {@inheritDoc}
+     * - Throws `PaymentNotFoundException` if SpyPaymentPayone not found.
+     * - Throws `TransactionMissingException` if SpyPaymentPayone.transactionId is missing.
      *
      * @api
      *

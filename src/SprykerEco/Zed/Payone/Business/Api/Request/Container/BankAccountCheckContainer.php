@@ -17,95 +17,95 @@ class BankAccountCheckContainer extends AbstractRequestContainer
     protected $request = PayoneApiConstants::REQUEST_TYPE_BANKACCOUNTCHECK;
 
     /**
-     * @var int
+     * @var string|null
      */
     protected $aid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $checktype;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankaccount;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcode;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bankcountry;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $language;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $iban;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bic;
 
     /**
-     * @param string $bankaccount
+     * @param string|null $bankaccount
      *
      * @return void
      */
-    public function setBankAccount($bankaccount): void
+    public function setBankAccount(?string $bankaccount = null): void
     {
         $this->bankaccount = $bankaccount;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankAccount()
+    public function getBankAccount(): ?string
     {
         return $this->bankaccount;
     }
 
     /**
-     * @param string $bankcode
+     * @param string|null $bankcode
      *
      * @return void
      */
-    public function setBankCode($bankcode): void
+    public function setBankCode(?string $bankcode = null): void
     {
         $this->bankcode = $bankcode;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCode()
+    public function getBankCode(): ?string
     {
         return $this->bankcode;
     }
 
     /**
-     * @param string $bankcountry
+     * @param string|null $bankcountry
      *
      * @return void
      */
-    public function setBankCountry($bankcountry): void
+    public function setBankCountry(?string $bankcountry = null): void
     {
         $this->bankcountry = $bankcountry;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBankCountry()
+    public function getBankCountry(): ?string
     {
         return $this->bankcountry;
     }
@@ -115,51 +115,51 @@ class BankAccountCheckContainer extends AbstractRequestContainer
      *
      * @return void
      */
-    public function setCheckType($checktype): void
+    public function setCheckType(string $checktype): void
     {
         $this->checktype = $checktype;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCheckType()
+    public function getCheckType(): ?string
     {
         return $this->checktype;
     }
 
     /**
-     * @param string $iban
+     * @param string|null $iban
      *
      * @return void
      */
-    public function setIban($iban): void
+    public function setIban(?string $iban = null): void
     {
         $this->iban = $iban;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIban()
+    public function getIban(): ?string
     {
         return $this->iban;
     }
 
     /**
-     * @param string $bic
+     * @param string|null $bic
      *
      * @return void
      */
-    public function setBic($bic): void
+    public function setBic(?string $bic = null): void
     {
         $this->bic = $bic;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic()
+    public function getBic(): ?string
     {
         return $this->bic;
     }

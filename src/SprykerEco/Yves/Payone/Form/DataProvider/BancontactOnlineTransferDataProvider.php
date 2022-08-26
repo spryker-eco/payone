@@ -9,6 +9,7 @@ namespace SprykerEco\Yves\Payone\Form\DataProvider;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
 use SprykerEco\Yves\Payone\Form\BancontactOnlineTransferSubForm;
@@ -36,14 +37,13 @@ class BancontactOnlineTransferDataProvider implements StepEngineFormDataProvider
      */
     public function getData(AbstractTransfer $quoteTransfer): AbstractTransfer
     {
-        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
-        if ($quoteTransfer->getPayment() !== null) {
+        if ($quoteTransfer instanceof QuoteTransfer && $quoteTransfer->getPayment() !== null) {
             return $quoteTransfer;
         }
 
-        $paymentTransfer = new PaymentTransfer();
-        $paymentTransfer->setPayone(new PayonePaymentTransfer());
-        $quoteTransfer->setPayment($paymentTransfer);
+        if ($quoteTransfer instanceof QuoteTransfer) {
+            $quoteTransfer->setPayment((new PaymentTransfer())->setPayone(new PayonePaymentTransfer()));
+        }
 
         return $quoteTransfer;
     }

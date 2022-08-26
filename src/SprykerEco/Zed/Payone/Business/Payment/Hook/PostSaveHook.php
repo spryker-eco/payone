@@ -26,6 +26,11 @@ use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 class PostSaveHook implements PostSaveHookInterface
 {
     /**
+     * @var string
+     */
+    protected const PAYONE_API_UNKNOWN_ERROR_MESSAGE = 'payone.payment.unknown_error';
+
+    /**
      * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
      */
     protected $payoneRepository;
@@ -124,7 +129,7 @@ class PostSaveHook implements PostSaveHookInterface
      */
     protected function checkApiLogRedirectAndError(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
     {
-        $apiLogTransfer = $this->payoneRepository->findLastApiLogByOrderId($quoteTransfer->getPayment()->getPayone()->getFkSalesOrder());
+        $apiLogTransfer = $this->payoneRepository->findLastApiLogByOrderId($quoteTransfer->getPaymentOrFail()->getPayoneOrFail()->getFkSalesOrderOrFail());
 
         if (!$apiLogTransfer) {
             return $checkoutResponse;
@@ -139,7 +144,7 @@ class PostSaveHook implements PostSaveHookInterface
         $errorCode = $apiLogTransfer->getErrorCode();
 
         if ($errorCode) {
-            $checkoutResponse->addError($this->createCheckoutErrorTransfer($apiLogTransfer->getErrorMessageUser(), $errorCode));
+            $checkoutResponse->addError($this->createCheckoutErrorTransfer($apiLogTransfer->getErrorMessageUser() ?? static::PAYONE_API_UNKNOWN_ERROR_MESSAGE, $errorCode));
             $checkoutResponse->setIsSuccess(false);
         }
 
@@ -148,38 +153,41 @@ class PostSaveHook implements PostSaveHookInterface
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponse
+     * @param \Generated\Shared\Transfer\CheckoutResponseTransfer $checkoutResponseTransfer
      *
      * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
      */
-    protected function checkApiAuthorizationRedirectAndError(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): CheckoutResponseTransfer
-    {
-        $paymentEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponse->getSaveOrder()->getIdSalesOrder())->findOne();
-        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentEntity->getPaymentMethod());
-        $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentEntity, $quoteTransfer);
+    protected function checkApiAuthorizationRedirectAndError(
+        QuoteTransfer $quoteTransfer,
+        CheckoutResponseTransfer $checkoutResponseTransfer
+    ): CheckoutResponseTransfer {
+        $paymentPayoneEntity = $this->payoneRepository->createPaymentPayoneQueryByOrderId($checkoutResponseTransfer->getSaveOrderOrFail()->getIdSalesOrderOrFail())->findOne();
+        $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper($paymentPayoneEntity->getPaymentMethod());
+        /** @var \SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer $requestContainer */
+        $requestContainer = $this->getPostSaveHookRequestContainer($paymentMethodMapper, $paymentPayoneEntity, $quoteTransfer);
 
-        if ($paymentEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
+        if ($paymentPayoneEntity->getPaymentMethod() === PayoneApiConstants::PAYMENT_METHOD_KLARNA) {
             $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($quoteTransfer, $requestContainer);
         }
 
-        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
+        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentPayoneEntity, $requestContainer);
 
         if ($responseContainer->getErrorcode()) {
-            $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage(), $responseContainer->getErrorcode());
-            $checkoutResponse->addError($checkoutErrorTransfer);
-            $checkoutResponse->setIsSuccess(false);
+            $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomerMessage() ?? static::PAYONE_API_UNKNOWN_ERROR_MESSAGE, $responseContainer->getErrorcode());
+            $checkoutResponseTransfer->addError($checkoutErrorTransfer);
+            $checkoutResponseTransfer->setIsSuccess(false);
 
-            return $checkoutResponse;
+            return $checkoutResponseTransfer;
         }
 
         if (!$responseContainer->getRedirecturl()) {
-            return $checkoutResponse;
+            return $checkoutResponseTransfer;
         }
 
-        $checkoutResponse->setIsExternalRedirect(true);
-        $checkoutResponse->setRedirectUrl($responseContainer->getRedirecturl());
+        $checkoutResponseTransfer->setIsExternalRedirect(true);
+        $checkoutResponseTransfer->setRedirectUrl($responseContainer->getRedirecturl());
 
-        return $checkoutResponse;
+        return $checkoutResponseTransfer;
     }
 
     /**
@@ -200,30 +208,30 @@ class PostSaveHook implements PostSaveHookInterface
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMethodMapperInterface $paymentMethodMapper
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface
      */
     protected function getPostSaveHookRequestContainer(
         PaymentMethodMapperInterface $paymentMethodMapper,
-        SpyPaymentPayone $paymentEntity,
+        SpyPaymentPayone $paymentPayoneEntity,
         QuoteTransfer $quoteTransfer
     ): AuthorizationContainerInterface {
         if (method_exists($paymentMethodMapper, 'mapPaymentToPreAuthorization')) {
             if ($paymentMethodMapper instanceof KlarnaPaymentMapper) {
-                return $paymentMethodMapper->mapKlarnaPaymentToPreAuthorization($paymentEntity, $quoteTransfer);
+                return $paymentMethodMapper->mapKlarnaPaymentToPreAuthorization($paymentPayoneEntity, $quoteTransfer);
             }
 
-            return $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity);
+            return $paymentMethodMapper->mapPaymentToPreAuthorization($paymentPayoneEntity);
         }
 
         $orderTransfer = (new OrderTransfer())
             ->setTotals(
                 (new TotalsTransfer())
-                    ->setGrandTotal($quoteTransfer->getTotals()->getGrandTotal())
+                    ->setGrandTotal($quoteTransfer->getTotals()->getGrandTotal()),
             );
 
-        return $paymentMethodMapper->mapPaymentToAuthorization($paymentEntity, $orderTransfer);
+        return $paymentMethodMapper->mapPaymentToAuthorization($paymentPayoneEntity, $orderTransfer);
     }
 }

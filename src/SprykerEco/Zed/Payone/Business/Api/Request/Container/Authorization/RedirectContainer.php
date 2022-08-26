@@ -12,17 +12,17 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractContainer;
 class RedirectContainer extends AbstractContainer
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $successurl;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $errorurl;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $backurl;
 
@@ -31,15 +31,15 @@ class RedirectContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setBackUrl($backurl)
+    public function setBackUrl(string $backurl): void
     {
         $this->backurl = $backurl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBackUrl()
+    public function getBackUrl(): ?string
     {
         return $this->backurl;
     }
@@ -49,15 +49,15 @@ class RedirectContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setErrorUrl($errorurl)
+    public function setErrorUrl(string $errorurl): void
     {
         $this->errorurl = $errorurl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getErrorUrl()
+    public function getErrorUrl(): ?string
     {
         return $this->errorurl;
     }
@@ -67,15 +67,15 @@ class RedirectContainer extends AbstractContainer
      *
      * @return void
      */
-    public function setSuccessUrl($successurl)
+    public function setSuccessUrl(string $successurl): void
     {
         $this->successurl = $successurl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSuccessUrl()
+    public function getSuccessUrl(): ?string
     {
         return $this->successurl;
     }

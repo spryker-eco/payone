@@ -30,7 +30,7 @@ class PayoneBankAccountChecker implements PayoneBankAccountCheckerInterface
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface
@@ -41,17 +41,17 @@ class PayoneBankAccountChecker implements PayoneBankAccountCheckerInterface
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper
+        StandartParameterMapperInterface $standardParameterMapper
     ) {
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
         $this->paymentMapperReader = $paymentMapperReader;
     }
 
@@ -65,7 +65,7 @@ class PayoneBankAccountChecker implements PayoneBankAccountCheckerInterface
         /** @var \SprykerEco\Zed\Payone\Business\Payment\MethodMapper\DirectDebit $paymentMethodMapper */
         $paymentMethodMapper = $this->paymentMapperReader->getRegisteredPaymentMethodMapper(PayoneApiConstants::PAYMENT_METHOD_ONLINE_BANK_TRANSFER);
         $requestContainer = $paymentMethodMapper->mapBankAccountCheck($bankAccountCheckTransfer);
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new BankAccountCheckResponseContainer($rawResponse);
@@ -84,7 +84,7 @@ class PayoneBankAccountChecker implements PayoneBankAccountCheckerInterface
         BankAccountCheckResponseContainer $responseContainer
     ): PayoneBankAccountCheckTransfer {
         $bankAccountCheckTransfer->setErrorCode($responseContainer->getErrorcode());
-        $bankAccountCheckTransfer->setCustomerErrorMessage($responseContainer->getCustomermessage());
+        $bankAccountCheckTransfer->setCustomerErrorMessage($responseContainer->getCustomerMessage());
         $bankAccountCheckTransfer->setStatus($responseContainer->getStatus());
         $bankAccountCheckTransfer->setInternalErrorMessage($responseContainer->getErrormessage());
 

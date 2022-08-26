@@ -7,27 +7,27 @@
 
 namespace SprykerEco\Client\Payone\ClientApi\Request;
 
-use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
+use SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface;
 
 abstract class AbstractContainer implements ContainerInterface
 {
     /**
-     * @var \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
+     * @var \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface
      */
-    protected $utilEncodingService;
+    protected $payoneToUtilEncodingServiceBridge;
 
     /**
-     * @param \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface $utilEncodingService
+     * @param \SprykerEco\Client\Payone\Dependency\Client\PayoneToUtilEncodingServiceInterface $payoneToUtilEncodingServiceBridge
      */
-    public function __construct(UtilEncodingServiceInterface $utilEncodingService)
+    public function __construct(PayoneToUtilEncodingServiceInterface $payoneToUtilEncodingServiceBridge)
     {
-        $this->utilEncodingService = $utilEncodingService;
+        $this->payoneToUtilEncodingServiceBridge = $payoneToUtilEncodingServiceBridge;
     }
 
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $result = [];
         foreach ($this as $key => $value) {
@@ -48,7 +48,7 @@ abstract class AbstractContainer implements ContainerInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $stringArray = [];
         foreach ($this->toArray() as $key => $value) {
@@ -62,8 +62,8 @@ abstract class AbstractContainer implements ContainerInterface
     /**
      * @return string
      */
-    public function toJson()
+    public function toJson(): string
     {
-        return $this->utilEncodingService->encodeJson($this->toArray());
+        return (string)$this->payoneToUtilEncodingServiceBridge->encodeJson($this->toArray());
     }
 }

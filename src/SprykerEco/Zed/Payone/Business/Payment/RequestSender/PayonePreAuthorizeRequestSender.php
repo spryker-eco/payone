@@ -48,10 +48,10 @@ class PayonePreAuthorizeRequestSender extends AbstractPayoneRequestSender implem
      */
     public function preAuthorizePayment(int $idSalesOrder): AuthorizationResponseTransfer
     {
-        $paymentEntity = $this->getPaymentEntity($idSalesOrder);
-        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
-        $requestContainer = $paymentMethodMapper->mapPaymentToPreAuthorization($paymentEntity);
-        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
+        $paymentPayoneEntity = $this->getPaymentEntity($idSalesOrder);
+        $paymentMethodMapper = $this->getPaymentMethodMapper($paymentPayoneEntity);
+        $requestContainer = $paymentMethodMapper->mapPaymentToPreAuthorization($paymentPayoneEntity);
+        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentPayoneEntity, $requestContainer);
 
         $responseTransfer = $this->authorizationResponseMapper->getAuthorizationResponseTransfer($responseContainer);
 

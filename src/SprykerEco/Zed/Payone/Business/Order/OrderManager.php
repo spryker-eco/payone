@@ -56,7 +56,7 @@ class OrderManager implements OrderManagerInterface
      */
     public function saveOrder(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse): void
     {
-        $this->doSaveOrderPayment($quoteTransfer, $checkoutResponse->getSaveOrder());
+        $this->doSaveOrderPayment($quoteTransfer, $checkoutResponse->getSaveOrderOrFail());
     }
 
     /**
@@ -84,11 +84,11 @@ class OrderManager implements OrderManagerInterface
 
         $quoteTransfer->getPayment()->requirePayone();
         $this->getTransactionHandler()->handleTransaction(function () use ($quoteTransfer, $saveOrderTransfer): void {
-            $paymentTransfer = $quoteTransfer->getPayment()->getPayone();
+            $paymentTransfer = $quoteTransfer->getPaymentOrFail()->getPayoneOrFail();
             $paymentTransfer->setFkSalesOrder($saveOrderTransfer->getIdSalesOrder());
             $paymentPayoneEntity = $this->savePayment($paymentTransfer);
 
-            $paymentDetailTransfer = $paymentTransfer->getPaymentDetail();
+            $paymentDetailTransfer = $paymentTransfer->getPaymentDetailOrFail();
             $this->savePaymentDetail($paymentPayoneEntity, $paymentDetailTransfer);
             $this->savePaymentPayoneOrderItems($saveOrderTransfer, $paymentPayoneEntity->getIdPaymentPayone());
         });
@@ -104,7 +104,7 @@ class OrderManager implements OrderManagerInterface
         $payment = new SpyPaymentPayone();
         $payment->fromArray(($paymentTransfer->toArray()));
 
-        if ($payment->getReference() === null) {
+        if (empty($payment->getReference())) {
             $orderEntity = $payment->getSpySalesOrder();
             $payment->setReference($this->payoneConfig->generatePayoneReference($paymentTransfer, $orderEntity));
         }

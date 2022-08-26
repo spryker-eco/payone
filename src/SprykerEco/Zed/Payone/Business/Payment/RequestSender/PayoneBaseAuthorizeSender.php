@@ -12,7 +12,7 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLog;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface;
-use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
+use SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer;
 use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
@@ -33,60 +33,60 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
     /**
      * @var \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface
      */
-    protected $standartParameterMapper;
+    protected $standardParameterMapper;
 
     /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
-     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
+     * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standardParameterMapper
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper
+        StandartParameterMapperInterface $standardParameterMapper
     ) {
         parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
-        $this->standartParameterMapper = $standartParameterMapper;
+        $this->standardParameterMapper = $standardParameterMapper;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
-     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface $requestContainer
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
+     * @param \SprykerEco\Zed\Payone\Business\Api\Request\Container\AbstractRequestContainer $requestContainer
      *
      * @return \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer
      */
     public function performAuthorizationRequest(
-        SpyPaymentPayone $paymentEntity,
-        AuthorizationContainerInterface $requestContainer
+        SpyPaymentPayone $paymentPayoneEntity,
+        AbstractRequestContainer $requestContainer
     ): AuthorizationResponseContainer {
-        $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
+        $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
-        $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
+        $apiLogEntity = $this->initializeApiLog($paymentPayoneEntity, $requestContainer);
         $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new AuthorizationResponseContainer($rawResponse);
-        $this->updatePaymentAfterAuthorization($paymentEntity, $responseContainer);
+        $this->updatePaymentAfterAuthorization($paymentPayoneEntity, $responseContainer);
         $this->updateApiLogAfterAuthorization($apiLogEntity, $responseContainer);
-        $this->updatePaymentDetailAfterAuthorization($paymentEntity, $responseContainer);
+        $this->updatePaymentDetailAfterAuthorization($paymentPayoneEntity, $responseContainer);
 
         return $responseContainer;
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer $responseContainer
      *
      * @return void
      */
-    protected function updatePaymentAfterAuthorization(SpyPaymentPayone $paymentEntity, AuthorizationResponseContainer $responseContainer): void
+    protected function updatePaymentAfterAuthorization(SpyPaymentPayone $paymentPayoneEntity, AuthorizationResponseContainer $responseContainer): void
     {
-        $paymentEntity->setTransactionId($responseContainer->getTxid());
-        $paymentEntity->save();
+        $paymentPayoneEntity->setTransactionId($responseContainer->getTxid());
+        $paymentPayoneEntity->save();
     }
 
     /**
@@ -98,27 +98,27 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
     protected function updateApiLogAfterAuthorization(SpyPaymentPayoneApiLog $apiLogEntity, AuthorizationResponseContainer $responseContainer): void
     {
         $apiLogEntity->setStatus($responseContainer->getStatus());
-        $apiLogEntity->setUserId($responseContainer->getUserid());
+        $apiLogEntity->setUserId((string)$responseContainer->getUserid());
         $apiLogEntity->setTransactionId($responseContainer->getTxid());
         $apiLogEntity->setErrorMessageInternal($responseContainer->getErrormessage());
-        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomermessage());
+        $apiLogEntity->setErrorMessageUser($responseContainer->getCustomerMessage());
         $apiLogEntity->setErrorCode($responseContainer->getErrorcode());
         $apiLogEntity->setRedirectUrl($responseContainer->getRedirecturl());
         $apiLogEntity->setSequenceNumber(0);
 
-        $apiLogEntity->setRawResponse(json_encode($responseContainer->toArray()));
+        $apiLogEntity->setRawResponse((string)json_encode($responseContainer->toArray()));
         $apiLogEntity->save();
     }
 
     /**
-     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentPayoneEntity
      * @param \SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer $responseContainer
      *
      * @return void
      */
-    protected function updatePaymentDetailAfterAuthorization(SpyPaymentPayone $paymentEntity, AuthorizationResponseContainer $responseContainer): void
+    protected function updatePaymentDetailAfterAuthorization(SpyPaymentPayone $paymentPayoneEntity, AuthorizationResponseContainer $responseContainer): void
     {
-        $paymentDetailEntity = $paymentEntity->getSpyPaymentPayoneDetail();
+        $paymentDetailEntity = $paymentPayoneEntity->getSpyPaymentPayoneDetail();
 
         $paymentDetailEntity->setClearingBankAccountHolder($responseContainer->getClearingBankaccountholder());
         $paymentDetailEntity->setClearingBankCountry($responseContainer->getClearingBankcountry());
@@ -133,8 +133,8 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
             $paymentDetailEntity->setMandateIdentification($responseContainer->getMandateIdentification());
         }
 
-        if ($paymentEntity->getPaymentMethod() == PayoneApiConstants::PAYMENT_METHOD_INVOICE) {
-            $invoiceTitle = $this->getInvoiceTitle($paymentEntity->getTransactionId());
+        if ($paymentPayoneEntity->getPaymentMethod() == PayoneApiConstants::PAYMENT_METHOD_INVOICE) {
+            $invoiceTitle = $this->getInvoiceTitle($paymentPayoneEntity->getTransactionId());
             $paymentDetailEntity->setInvoiceTitle($invoiceTitle);
         }
 
