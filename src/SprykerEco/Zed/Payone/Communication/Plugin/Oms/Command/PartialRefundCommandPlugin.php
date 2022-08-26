@@ -23,6 +23,7 @@ class PartialRefundCommandPlugin extends AbstractPlugin implements CommandByOrde
 {
     /**
      * {@inheritDoc}
+     * - Requires `PayonePartialOperationRequestTransfer.order.idSalesOrder` to be set.
      *
      * @api
      *

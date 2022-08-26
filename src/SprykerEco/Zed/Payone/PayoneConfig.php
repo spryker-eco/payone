@@ -19,6 +19,8 @@ use SprykerEco\Shared\Payone\PayoneConstants;
 class PayoneConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const PROVIDER_NAME = 'Payone';
@@ -45,6 +47,8 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYMENT_METHOD_DIRECT_DEBIT = 'payoneDirectDebit';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_ONLINE_TRANSFER = 'payoneOnlineTransfer';
@@ -120,11 +124,15 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYMENT_METHOD_INVOICE = 'payoneInvoice';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_SECURITY_INVOICE = 'payoneSecurityInvoice';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYMENT_METHOD_CASH_ON_DELIVERY = 'payoneCashOnDelivery';
@@ -151,26 +159,36 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYONE_ADDRESS_CHECK_BASIC = 'BA';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_ADDRESS_CHECK_PERSON = 'PE';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_ADDRESS_CHECK_NOT_CARRY_OUT_ADDRESS_CHECK = 'NO';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_BONIVERSUM_ADDRESS_CHECK_BASIC = 'BB';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_BONIVERSUM_ADDRESS_CHECK_PERSON = 'PB';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_SCHUFA_ADDRESS_CHECK_BASIC_SHORT = 'BS';
@@ -183,31 +201,43 @@ class PayoneConfig extends AbstractBundleConfig
     public const PAYONE_ARVATO_CONSUMER_SCORE_HARD_CRITERIA = 'IH';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_ARVATO_CONSUMER_SCORE_ALL_CRITERIA = 'IA';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_ARVATO_CONSUMER_SCORE_ALL_CRITERIA_BONUS = 'IB';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_ARVATO_CONSUMER_SCORE_ALL_CRITERIA_BONUS_INFORMATION = 'IF';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_BONIVERSUM_CONSUMER_SCORE = 'CE';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_SCHUFA_CONSUMER_SCORE_SHORT = 'SFS';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const PAYONE_SCHUFA_CONSUMER_SCORE_MIDDLE = 'SFM';

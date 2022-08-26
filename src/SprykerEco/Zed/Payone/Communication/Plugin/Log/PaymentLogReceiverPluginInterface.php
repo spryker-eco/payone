@@ -22,5 +22,5 @@ interface PaymentLogReceiverPluginInterface
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
-    public function getPaymentLogs(ObjectCollection $orders): PayonePaymentLogCollectionTransfer;
+    public function getPaymentLogs(ObjectCollection $orders);
 }

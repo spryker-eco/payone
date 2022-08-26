@@ -25,6 +25,8 @@ class RefundCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
 {
     /**
      * {@inheritDoc}
+     * - Throws `PaymentNotFoundException` if SpyPaymentPayone not found.
+     * - Throws `TransactionMissingException` if SpyPaymentPayone.transactionId is missing.
      *
      * @api
      *

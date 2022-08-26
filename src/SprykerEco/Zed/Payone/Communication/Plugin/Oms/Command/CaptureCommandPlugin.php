@@ -23,6 +23,8 @@ class CaptureCommandPlugin extends AbstractPayonePlugin implements CommandByOrde
 {
     /**
      * {@inheritDoc}
+     * - Requires `PayoneCaptureTransfer.order` to be set.
+     * - Requires `PayoneCaptureTransfer.payment.fkSalesOrder` to be set.
      *
      * @api
      *

@@ -23,6 +23,8 @@ class CancelCommandPlugin extends AbstractPayonePlugin implements CommandByOrder
 {
     /**
      * {@inheritDoc}
+     * - Requires `PayoneCaptureTransfer.order` to be set.
+     * - Requires `PayoneCaptureTransfer.payment.fkSalesOrder` to be set.
      *
      * @api
      *

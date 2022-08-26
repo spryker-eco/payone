@@ -21,6 +21,7 @@ class AuthorizeCommandPlugin extends AbstractPayonePlugin implements CommandByOr
 {
     /**
      * {@inheritDoc}
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      *
      * @api
      *

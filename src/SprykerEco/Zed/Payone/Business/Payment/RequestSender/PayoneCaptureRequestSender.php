@@ -127,16 +127,14 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
             $requestContainer = $this->expenseMapper->mapExpenses($captureTransfer->getOrderOrFail(), $requestContainer);
         }
 
-        if ($requestContainer instanceof CaptureContainer) {
-            if (!empty($captureTransfer->getSettleaccount())) {
-                $businnessContainer = new BusinessContainer();
-                $businnessContainer->setSettleAccount($captureTransfer->getSettleaccount());
-                $requestContainer->setBusiness($businnessContainer);
-            }
+        if ($requestContainer instanceof CaptureContainer && !empty($captureTransfer->getSettleaccount())) {
+            $businnessContainer = new BusinessContainer();
+            $businnessContainer->setSettleAccount($captureTransfer->getSettleaccount());
+            $requestContainer->setBusiness($businnessContainer);
+        }
 
-            if ($captureTransfer->getAmount() !== null) {
-                $requestContainer->setAmount($captureTransfer->getAmount());
-            }
+        if ($requestContainer instanceof CaptureContainer && $captureTransfer->getAmount() !== null) {
+            $requestContainer->setAmount($captureTransfer->getAmount());
         }
 
         $this->standardParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);

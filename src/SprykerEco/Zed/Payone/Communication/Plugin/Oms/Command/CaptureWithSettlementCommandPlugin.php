@@ -24,6 +24,8 @@ class CaptureWithSettlementCommandPlugin extends AbstractPayonePlugin implements
 {
     /**
      * {@inheritDoc}
+     * - Requires `PayoneCaptureTransfer.order` to be set.
+     * - Requires `PayoneCaptureTransfer.payment.fkSalesOrder` to be set.
      *
      * @api
      *

@@ -24,6 +24,7 @@ class PayonePostSaveHookPlugin extends AbstractPlugin implements CheckoutPostChe
 {
     /**
      * {@inheritDoc}
+     * - Requires `QuoteTransfer.payment.payone.fkSalesOrder` to be set.
      *
      * @api
      *

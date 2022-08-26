@@ -235,7 +235,7 @@ class PayoneFacade extends AbstractFacade implements PayoneFacadeInterface
      *
      * @return \Generated\Shared\Transfer\PayoneGetSecurityInvoiceTransfer
      */
-    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer)
+    public function getSecurityInvoice(PayoneGetSecurityInvoiceTransfer $getSecurityInvoiceTransfer): PayoneGetSecurityInvoiceTransfer
     {
         return $this->getFactory()->createPayoneSecurityInvoiceReader()->getSecurityInvoice($getSecurityInvoiceTransfer);
     }

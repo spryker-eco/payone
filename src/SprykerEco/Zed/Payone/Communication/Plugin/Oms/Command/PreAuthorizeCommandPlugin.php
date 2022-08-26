@@ -22,6 +22,7 @@ class PreAuthorizeCommandPlugin extends AbstractPlugin implements CommandByOrder
 {
     /**
      * {@inheritDoc}
+     * - Requires `OrderTransfer.idSalesOrder` to be set.
      *
      * @api
      *

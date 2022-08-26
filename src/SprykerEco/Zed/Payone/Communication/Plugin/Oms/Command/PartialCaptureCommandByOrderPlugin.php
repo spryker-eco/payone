@@ -24,6 +24,7 @@ class PartialCaptureCommandByOrderPlugin extends AbstractPlugin implements Comma
     /**
      * {@inheritDoc}
      * - Performs partial capture call to Payone API.
+     * - Requires `PayonePartialOperationRequestTransfer.order.idSalesOrder` to be set.
      *
      * @api
      *

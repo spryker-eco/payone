@@ -21,6 +21,8 @@ class PayoneCashOnDeliverySubFormPlugin extends AbstractPlugin implements SubFor
      * {@inheritDoc}
      * - Creates `CashOnDeliverySubForm` subform.
      *
+     * @api
+     *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface
      */
     public function createSubForm(): SubFormInterface
@@ -31,6 +33,8 @@ class PayoneCashOnDeliverySubFormPlugin extends AbstractPlugin implements SubFor
     /**
      * {@inheritDoc}
      * - Creates subform data provider.
+     *
+     * @api
      *
      * @return \Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface
      */
