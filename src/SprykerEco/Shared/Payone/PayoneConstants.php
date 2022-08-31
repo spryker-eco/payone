@@ -12,9 +12,6 @@ namespace SprykerEco\Shared\Payone;
  */
 interface PayoneConstants
 {
-    public const ROUTE_LOGIN = 'login';
-    public const CHECKOUT_PAYMENT = 'checkout-payment';
-
     public const COUNTRY_AT = 'AT';
     public const COUNTRY_DE = 'DE';
     public const COUNTRY_NL = 'NL';
