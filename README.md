@@ -15,4 +15,4 @@ composer require spryker-eco/payone
 
 ## Documentation
 
-[Documentation](https://documentation.spryker.com/docs/payone-v1-1)
+[Documentation](https://docs.spryker.com/docs/scos/user/technology-partners/202204.0/payment-partners/bs-payone/bs-payone.html)
