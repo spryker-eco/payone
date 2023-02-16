@@ -33,7 +33,7 @@
         "spryker/checkout": "*",
         "spryker/code-sniffer": "*",
         "spryker/container": "*",
-        "spryker/country": "^3.2.0",
+        "spryker/country": "^4.0.0",
         "spryker/payment": "*",
         "spryker/propel": "*",
         "spryker/router": "*",
