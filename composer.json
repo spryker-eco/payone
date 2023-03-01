@@ -10,7 +10,7 @@
         "spryker/checkout-extension": "^1.3.0",
         "spryker/config": "^3.0.0",
         "spryker/customer": "^7.0.0",
-        "spryker/decimal-object": "^1.0.0",
+        "spryker/decimal-object": "dev-remove-composer-lowest-check",
         "spryker/glossary": "^3.0.0",
         "spryker/guzzle": "^2.1.0",
         "spryker/kernel": "^3.33.0",
@@ -46,6 +46,12 @@
         "spryker/router": "Use this module if you want use the RouterProviderPlugin.",
         "spryker/silex": "If you want to use Silex plugins you need to install spryker/silex."
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:spryker/decimal-object.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "SprykerEco\\": "src/SprykerEco/"
