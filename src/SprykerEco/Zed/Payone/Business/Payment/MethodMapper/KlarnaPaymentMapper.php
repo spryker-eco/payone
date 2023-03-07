@@ -27,6 +27,7 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContain
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
+use SprykerEco\Zed\Payone\Business\Model\StoreReaderInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -45,15 +46,23 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     protected $storeFacade;
 
     /**
+     * @var \SprykerEco\Zed\Payone\Business\Model\StoreReaderInterface
+     */
+    protected StoreReaderInterface $storeReader;
+
+    /**
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeInterface $storeFacade
+     * @param \SprykerEco\Zed\Payone\Business\Model\StoreReaderInterface $storeReader
      */
     public function __construct(
         PayoneToStoreFacadeInterface $storeFacade,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        StoreReaderInterface $storeReader
     ) {
         $this->storeFacade = $storeFacade;
         $this->requestStack = $requestStack;
+        $this->storeReader = $storeReader;
     }
 
     /**
@@ -310,6 +319,6 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
      */
     protected function getCurrentCountry(): string
     {
-        return current($this->storeFacade->getCurrentStore()->getCountries());
+        return $this->storeReader->getDefaultStoreCountry();
     }
 }

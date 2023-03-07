@@ -443,7 +443,7 @@ class PayoneFactory extends AbstractFactory
     public function createStoreReader(): StoreReaderInterface
     {
         if ($this->storeReader === null) {
-            $this->storeReader = new StoreReader();
+            $this->storeReader = new StoreReader($this->getClientStore());
         }
 
         return $this->storeReader;

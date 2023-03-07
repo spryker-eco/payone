@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\Payone\Business;
 
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Shared\Payone\Dependency\HashInterface;
 use SprykerEco\Shared\Payone\Dependency\ModeDetectorInterface;
@@ -44,6 +43,8 @@ use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Mode\ModeDetector;
 use SprykerEco\Zed\Payone\Business\Model\ParametersReader;
 use SprykerEco\Zed\Payone\Business\Model\ParametersReaderInterface;
+use SprykerEco\Zed\Payone\Business\Model\StoreReader;
+use SprykerEco\Zed\Payone\Business\Model\StoreReaderInterface;
 use SprykerEco\Zed\Payone\Business\Order\OrderManager;
 use SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface;
 use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinder;
@@ -141,11 +142,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class PayoneBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @var \Generated\Shared\Transfer\PayoneStandardParameterTransfer
-     */
-    private $standardParameter;
-
     /**
      * @return \SprykerEco\Zed\Payone\Business\Payment\RequestSender\PayonePreAuthorizeRequestSenderInterface
      */
@@ -816,6 +812,14 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     public function getStoreFacade(): PayoneToStoreFacadeInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::FACADE_STORE);
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Business\Model\StoreReaderInterface
+     */
+    public function createStoreReader(): StoreReaderInterface
+    {
+        return new StoreReader($this->getStoreFacade());
     }
 
     /**

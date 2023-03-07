@@ -11,6 +11,8 @@ use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
+use SprykerEco\Zed\Payone\Communication\Model\ParametersReader;
+use SprykerEco\Zed\Payone\Communication\Model\ParametersReaderInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToCalculationInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundInterface;
@@ -76,15 +78,21 @@ class PayoneCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Payone\Communication\Model\ParametersReaderInterface
+     */
+    public function createParametersReader(): ParametersReaderInterface
+    {
+        return new ParametersReader(
+            $this->getStoreFacade(),
+            $this->getConfig(),
+        );
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
     public function getStandardParameter(): PayoneStandardParameterTransfer
     {
-        $storeTransfer = $this->getStoreFacade()->getCurrentStore();
-
-        return $this->getConfig()->getRequestStandardParameter(
-            current($storeTransfer->getAvailableCurrencyIsoCodes()),
-            current($storeTransfer->getCountries())
-        );
+        return $this->createParametersReader()->getRequestStandardParameter();
     }
 }
