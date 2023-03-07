@@ -30,7 +30,7 @@ class PayoneSubFormsPlugin extends AbstractPlugin
     public function getPaymentMethodsSubForms()
     {
         $subFormsCreator = $this->pluginCountryFactory->createSubFormsCreator(
-            current($this->getFactory()->getClientStore()->getCurrentStore()->getCountries())
+            $this->getFactory()->createStoreReader()->getDefaultStoreCountry(),
         );
 
         $paymentMethodsSubForms = $subFormsCreator->createPaymentMethodsSubForms();

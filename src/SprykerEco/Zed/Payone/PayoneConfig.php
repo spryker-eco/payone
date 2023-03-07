@@ -98,7 +98,7 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
-    public function getRequestStandardParameter(string $currencyIsoCode, string $countryIsoCode): PayoneStandardParameterTransfer
+    public function getRequestStandardParameter()
     {
         $settings = $this->get(PayoneConstants::PAYONE);
         $standardParameter = new PayoneStandardParameterTransfer();
@@ -109,9 +109,6 @@ class PayoneConfig extends AbstractBundleConfig
         $standardParameter->setPortalId($settings[PayoneConstants::PAYONE_CREDENTIALS_PORTAL_ID]);
         $standardParameter->setKey($settings[PayoneConstants::PAYONE_CREDENTIALS_KEY]);
         $standardParameter->setPaymentGatewayUrl($settings[PayoneConstants::PAYONE_PAYMENT_GATEWAY_URL]);
-
-        $standardParameter->setCurrency($currencyIsoCode);
-        $standardParameter->setLanguage($countryIsoCode);
 
         $standardParameter->setRedirectSuccessUrl($settings[PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL]);
         $standardParameter->setRedirectBackUrl($settings[PayoneConstants::PAYONE_REDIRECT_BACK_URL]);

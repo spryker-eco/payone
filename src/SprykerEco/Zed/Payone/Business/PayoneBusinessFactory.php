@@ -42,6 +42,8 @@ use SprykerEco\Zed\Payone\Business\Key\HashProvider;
 use SprykerEco\Zed\Payone\Business\Key\HmacGeneratorInterface;
 use SprykerEco\Zed\Payone\Business\Key\UrlHmacGenerator;
 use SprykerEco\Zed\Payone\Business\Mode\ModeDetector;
+use SprykerEco\Zed\Payone\Business\Model\ParametersReader;
+use SprykerEco\Zed\Payone\Business\Model\ParametersReaderInterface;
 use SprykerEco\Zed\Payone\Business\Order\OrderManager;
 use SprykerEco\Zed\Payone\Business\Order\OrderManagerInterface;
 use SprykerEco\Zed\Payone\Business\Order\PayoneOrderItemStatusFinder;
@@ -809,16 +811,6 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @deprecated Will be removed without replacement
-     *
-     * @return \Spryker\Shared\Kernel\Store
-     */
-    public function getStore(): Store
-    {
-        return $this->getProvidedDependency(PayoneDependencyProvider::STORE_CONFIG);
-    }
-
-    /**
      * @return \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeInterface
      */
     public function getStoreFacade(): PayoneToStoreFacadeInterface
@@ -827,20 +819,22 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\Payone\Business\Model\ParametersReaderInterface
+     */
+    public function createParametersReader(): ParametersReaderInterface
+    {
+        return new ParametersReader(
+            $this->getStoreFacade(),
+            $this->getConfig(),
+        );
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
      */
     public function getStandardParameter(): PayoneStandardParameterTransfer
     {
-        $storeTransfer = $this->getStoreFacade()->getCurrentStore();
-
-        if ($this->standardParameter === null) {
-            $this->standardParameter = $this->getConfig()->getRequestStandardParameter(
-                current($storeTransfer->getAvailableCurrencyIsoCodes()),
-                current($storeTransfer->getCountries())
-            );
-        }
-
-        return $this->standardParameter;
+        return $this->createParametersReader()->getRequestStandardParameter();
     }
 
     /**

@@ -19,15 +19,33 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
-    public const FACADE_OMS = 'oms facade';
-    public const FACADE_REFUND = 'refund facade';
     /**
-     * @deprecated Will be removed without replacement
+     * @var string
      */
-    public const STORE_CONFIG = 'store config';
+    public const FACADE_OMS = 'oms facade';
+    /**
+     * @var string
+     */
+    public const FACADE_REFUND = 'refund facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_SALES = 'sales facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_GLOSSARY = 'glossary facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_CALCULATION = 'calculation facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_STORE = 'FACADE_STORE';
 
     /**
@@ -132,22 +150,6 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::FACADE_GLOSSARY, function (Container $container) {
             return new PayoneToGlossaryFacadeBridge($container->getLocator()->glossary()->facade());
-        });
-
-        return $container;
-    }
-
-    /**
-     * @deprecated Will be removed without replacement
-     *
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    protected function addStore(Container $container): Container
-    {
-        $container->set(static::STORE_CONFIG, function () {
-            return Store::getInstance();
         });
 
         return $container;
