@@ -161,6 +161,8 @@ class PayoneConfig extends AbstractBundleConfig
      *
      * @api
      *
+     * @deprecated No longer used. Will be removed without replacement.
+     *
      * @return string
      */
     public function getTranslationFilePath()
