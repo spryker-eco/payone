@@ -589,7 +589,11 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
      */
     public function createKlarnaPaymentMapper(): KlarnaPaymentMapperInterface
     {
-        return new KlarnaPaymentMapper($this->getStoreFacade(), $this->getRequestStack());
+        return new KlarnaPaymentMapper(
+            $this->getStoreFacade(),
+            $this->getRequestStack(),
+            $this->createStoreReader()
+        );
     }
 
     /**

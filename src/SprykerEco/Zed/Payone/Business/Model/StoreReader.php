@@ -19,7 +19,7 @@ class StoreReader implements StoreReaderInterface
     /**
      * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeInterface $storeClient
      */
-    public function __construct(PayoneToStoreClientInterface $storeFacade)
+    public function __construct(PayoneToStoreFacadeInterface $storeFacade)
     {
         $this->storeFacade = $storeFacade;
     }
