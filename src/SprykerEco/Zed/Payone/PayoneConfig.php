@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\Payone;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Generated\Shared\Transfer\PayoneStandardParameterTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrder;
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
+use Spryker\Shared\Kernel\Store;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
@@ -109,6 +109,8 @@ class PayoneConfig extends AbstractBundleConfig
         $standardParameter->setPortalId($settings[PayoneConstants::PAYONE_CREDENTIALS_PORTAL_ID]);
         $standardParameter->setKey($settings[PayoneConstants::PAYONE_CREDENTIALS_KEY]);
         $standardParameter->setPaymentGatewayUrl($settings[PayoneConstants::PAYONE_PAYMENT_GATEWAY_URL]);
+
+        $standardParameter = $this->addLegacyParameters($standardParameter);
 
         $standardParameter->setRedirectSuccessUrl($settings[PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL]);
         $standardParameter->setRedirectBackUrl($settings[PayoneConstants::PAYONE_REDIRECT_BACK_URL]);
@@ -264,5 +266,24 @@ class PayoneConfig extends AbstractBundleConfig
         $settings = $this->get(PayoneConstants::PAYONE);
 
         return $settings[PayoneConstants::PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA] ?? static::DEFAULT_PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA;
+    }
+
+    /**
+     * @deprecated Will be removed when Dynamic Store is always enabled.
+     *
+     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
+     *
+     * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
+     */
+    protected function addLegacyParameters(PayoneStandardParameterTransfer $standardParameter): PayoneStandardParameterTransfer
+    {
+        if (Store::isDynamicStoreMode()) {
+            return $standardParameter;
+        }
+
+        $standardParameter->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+        $standardParameter->setLanguage(Store::getInstance()->getCurrentLanguage());
+
+        return $standardParameter;
     }
 }
