@@ -78,7 +78,6 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = parent::provideBusinessLayerDependencies($container);
         $container = $this->addGlossaryFacade($container);
-        $container = $this->addStore($container);
         $container = $this->addStoreFacade($container);
         $container = $this->addRequestStack($container);
 
