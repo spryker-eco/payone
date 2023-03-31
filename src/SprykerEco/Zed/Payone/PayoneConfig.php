@@ -110,8 +110,7 @@ class PayoneConfig extends AbstractBundleConfig
         $standardParameter->setKey($settings[PayoneConstants::PAYONE_CREDENTIALS_KEY]);
         $standardParameter->setPaymentGatewayUrl($settings[PayoneConstants::PAYONE_PAYMENT_GATEWAY_URL]);
 
-        $standardParameter->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-        $standardParameter->setLanguage(Store::getInstance()->getCurrentLanguage());
+        $standardParameter = $this->addLegacyParameters($standardParameter);
 
         $standardParameter->setRedirectSuccessUrl($settings[PayoneConstants::PAYONE_REDIRECT_SUCCESS_URL]);
         $standardParameter->setRedirectBackUrl($settings[PayoneConstants::PAYONE_REDIRECT_BACK_URL]);
@@ -163,6 +162,8 @@ class PayoneConfig extends AbstractBundleConfig
      * Returns path to glossary translations file.
      *
      * @api
+     *
+     * @deprecated No longer used. Will be removed without replacement.
      *
      * @return string
      */
@@ -265,5 +266,24 @@ class PayoneConfig extends AbstractBundleConfig
         $settings = $this->get(PayoneConstants::PAYONE);
 
         return $settings[PayoneConstants::PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA] ?? static::DEFAULT_PAYONE_PAYMENT_METHODS_WITH_OPTIONAL_PAYMENT_DATA;
+    }
+
+    /**
+     * @deprecated Will be removed when Dynamic Store is always enabled.
+     *
+     * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
+     *
+     * @return \Generated\Shared\Transfer\PayoneStandardParameterTransfer
+     */
+    protected function addLegacyParameters(PayoneStandardParameterTransfer $standardParameter): PayoneStandardParameterTransfer
+    {
+        if (Store::isDynamicStoreMode()) {
+            return $standardParameter;
+        }
+
+        $standardParameter->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+        $standardParameter->setLanguage(Store::getInstance()->getCurrentLanguage());
+
+        return $standardParameter;
     }
 }

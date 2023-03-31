@@ -15,15 +15,38 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesBridge;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const FACADE_OMS = 'oms facade';
+    /**
+     * @var string
+     */
     public const FACADE_REFUND = 'refund facade';
-    public const STORE_CONFIG = 'store config';
+
+    /**
+     * @var string
+     */
     public const FACADE_SALES = 'sales facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_GLOSSARY = 'glossary facade';
+
+    /**
+     * @var string
+     */
     public const FACADE_CALCULATION = 'calculation facade';
+
+    /**
+     * @var string
+     */
+    public const FACADE_STORE = 'FACADE_STORE';
 
     /**
      * @uses \Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
@@ -55,7 +78,7 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = parent::provideBusinessLayerDependencies($container);
         $container = $this->addGlossaryFacade($container);
-        $container = $this->addStore($container);
+        $container = $this->addStoreFacade($container);
         $container = $this->addRequestStack($container);
 
         return $container;
@@ -136,10 +159,10 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addStore(Container $container): Container
+    protected function addStoreFacade(Container $container): Container
     {
-        $container->set(static::STORE_CONFIG, function () {
-            return Store::getInstance();
+        $container->set(static::FACADE_STORE, function (Container $container) {
+            return new PayoneToStoreFacadeBridge($container->getLocator()->store()->facade());
         });
 
         return $container;

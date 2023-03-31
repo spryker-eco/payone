@@ -57,6 +57,8 @@ use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandler;
 use SprykerEco\Yves\Payone\Handler\ExpressCheckoutHandlerInterface;
 use SprykerEco\Yves\Payone\Handler\PayoneHandler;
 use SprykerEco\Yves\Payone\Handler\PayoneHandlerInterface;
+use SprykerEco\Yves\Payone\Model\StoreReader;
+use SprykerEco\Yves\Payone\Model\StoreReaderInterface;
 use SprykerEco\Yves\Payone\Plugin\PayoneCreditCardSubFormPlugin;
 use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
 
@@ -65,6 +67,11 @@ use SprykerEco\Yves\Payone\Plugin\PayonePrePaymentSubFormPlugin;
  */
 class PayoneFactory extends AbstractFactory
 {
+    /**
+     * @var \SprykerEco\Yves\Payone\Model\StoreReaderInterface|null
+     */
+    protected ?StoreReaderInterface $storeReader = null;
+
     /**
      * @return \SprykerEco\Yves\Payone\Form\AbstractPayoneSubForm
      */
@@ -227,7 +234,9 @@ class PayoneFactory extends AbstractFactory
      */
     public function createDirectDebitSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
-        return new DirectDebitDataProvider();
+        return new DirectDebitDataProvider(
+            $this->getClientStore()
+        );
     }
 
     /**
@@ -275,7 +284,9 @@ class PayoneFactory extends AbstractFactory
      */
     public function createInstantOnlineTransferSubFormDataProvider(): StepEngineFormDataProviderInterface
     {
-        return new InstantOnlineTransferDataProvider();
+        return new InstantOnlineTransferDataProvider(
+            $this->getClientStore(),
+        );
     }
 
     /**
@@ -424,5 +435,17 @@ class PayoneFactory extends AbstractFactory
             $this->getCustomerClient(),
             $this->getCalculationClient()
         );
+    }
+
+    /**
+     * @return \SprykerEco\Yves\Payone\Model\StoreReaderInterface
+     */
+    public function createStoreReader(): StoreReaderInterface
+    {
+        if ($this->storeReader === null) {
+            $this->storeReader = new StoreReader($this->getClientStore());
+        }
+
+        return $this->storeReader;
     }
 }

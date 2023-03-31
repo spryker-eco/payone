@@ -56,6 +56,8 @@ interface PayoneConstants
 
     /**
      * Path to bundle glossary file.
+     *
+     * @deprecated No longer used. Will be removed without replacement.
      */
     public const GLOSSARY_FILE_PATH = 'Business/Internal/glossary.yml';
 

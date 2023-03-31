@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\PayoneKlarnaStartSessionRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
-use Spryker\Shared\Kernel\Store;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\AbstractAuthorizationContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\Authorization\PersonalContainer;
@@ -28,6 +27,8 @@ use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContain
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\PreAuthorizationContainerInterface;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainer;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\RefundContainerInterface;
+use SprykerEco\Zed\Payone\Business\Model\StoreReaderInterface;
+use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperInterface
@@ -40,14 +41,28 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
     protected $requestStack;
 
     /**
-     * @param \Spryker\Shared\Kernel\Store $storeConfig
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @var \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeInterface
      */
-    public function __construct(Store $storeConfig, RequestStack $requestStack)
-    {
-        parent::__construct($storeConfig);
+    protected $storeFacade;
 
+    /**
+     * @var \SprykerEco\Zed\Payone\Business\Model\StoreReaderInterface
+     */
+    protected StoreReaderInterface $storeReader;
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param \SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeInterface $storeFacade
+     * @param \SprykerEco\Zed\Payone\Business\Model\StoreReaderInterface $storeReader
+     */
+    public function __construct(
+        PayoneToStoreFacadeInterface $storeFacade,
+        RequestStack $requestStack,
+        StoreReaderInterface $storeReader
+    ) {
+        $this->storeFacade = $storeFacade;
         $this->requestStack = $requestStack;
+        $this->storeReader = $storeReader;
     }
 
     /**
@@ -188,7 +203,7 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $personalContainer->setEmail($billingAddress->getEmail());
         $personalContainer->setCity($billingAddress->getCity());
 
-        $personalContainer->setCountry($this->storeConfig->getCurrentCountry());
+        $personalContainer->setCountry($this->getCurrentCountry());
         $personalContainer->setFirstName($billingAddress->getFirstName());
         $personalContainer->setLastName($billingAddress->getLastName());
         $personalContainer->setSalutation($billingAddress->getSalutation());
@@ -297,5 +312,13 @@ class KlarnaPaymentMapper extends AbstractMapper implements KlarnaPaymentMapperI
         $personalContainer->setIp($currentRequest->getClientIp());
 
         return $personalContainer;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCurrentCountry(): string
+    {
+        return $this->storeReader->getDefaultStoreCountry();
     }
 }

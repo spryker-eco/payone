@@ -9,7 +9,6 @@ namespace SprykerEco\Yves\Payone\Form;
 
 use Generated\Shared\Transfer\PaymentTransfer;
 use Generated\Shared\Transfer\PayonePaymentDirectDebitTransfer;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\StepEngine\Dependency\Form\SubFormInterface;
 use SprykerEco\Shared\Payone\PayoneConstants;
 use SprykerEco\Yves\Payone\Form\Constraint\ManageMandate;
@@ -20,6 +19,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+
+/**
+ * @method \SprykerEco\Yves\Payone\PayoneFactory getFactory()
+ */
 class DirectDebitSubForm extends AbstractPayoneSubForm
 {
     public const PAYMENT_METHOD = 'direct_debit';
@@ -31,6 +34,7 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
     public const FIELD_BANK_CODE = 'bankcode';
     public const OPTION_BANK_COUNTRIES = 'direct debit bank countries';
     public const OPTION_BANK_ACCOUNT_MODE = 'direct debit bank account mode';
+    protected const COUNTRY_DE = 'DE';
 
     /**
      * @return string
@@ -89,7 +93,9 @@ class DirectDebitSubForm extends AbstractPayoneSubForm
         $this->addIBAN($builder)
             ->addBIC($builder);
 
-        if (Store::getInstance()->getCurrentCountry() === 'DE') {
+        $currentCountry = $this->getFactory()->createStoreReader()->getDefaultStoreCountry();
+
+        if ($currentCountry === static::COUNTRY_DE) {
             $this->addBankAccount($builder)
                 ->addBankCode($builder)
                 ->addBankCountry($builder, $options)

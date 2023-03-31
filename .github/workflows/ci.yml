@@ -25,7 +25,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.3', ]
+                php: [ '8.0', '8.1']
+                ruby: 2.6
                 product: [ 'suite' ]
                 composer_preference: ['', '--prefer-lowest']
         services:
@@ -79,7 +80,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [ '7.3', ]
+                php: [ '8.0', '8.1']
+                ruby: 2.6
                 product: [ 'suite' ]
                 composer_preference: [ '', '--prefer-lowest' ]
         services:
