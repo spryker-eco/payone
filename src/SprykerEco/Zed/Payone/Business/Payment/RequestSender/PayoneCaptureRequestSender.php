@@ -107,11 +107,7 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
      */
     public function capturePayment(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
     {
-        $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
-            $captureTransfer->getOrder()
-        );
-        $captureTransfer->setOrder($distributedPriceOrderTransfer);
-        $captureTransfer->setAmount($distributedPriceOrderTransfer->getTotals()->getGrandTotal());
+        $captureTransfer = $this->addDataToCaptureTransferFromDistributedOrder($captureTransfer);
 
         $paymentEntity = $this->getPaymentEntity($captureTransfer->getPayment()->getFkSalesOrder());
         $paymentMethodMapper = $this->getPaymentMethodMapper($paymentEntity);
@@ -143,6 +139,26 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
         $this->updateApiLogAfterCapture($apiLogEntity, $responseContainer);
 
         return $this->captureResponseMapper->getCaptureResponseTransfer($responseContainer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
+     *
+     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     */
+    protected function addDataToCaptureTransferFromDistributedOrder(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
+    {
+        $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
+            $captureTransfer->getOrder()
+        );
+
+        $captureTransfer->setOrder($distributedPriceOrderTransfer);
+
+        if ($captureTransfer->getAmount() === null) {
+            $captureTransfer->setAmount($distributedPriceOrderTransfer->getTotals()->getGrandTotal());
+        }
+
+        return $captureTransfer;
     }
 
     /**
