@@ -21,7 +21,7 @@ interface PayoneRepositoryInterface
     /**
      * @param \Generated\Shared\Transfer\PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer
      *
-     * @return array<\Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer>
+     * @return \Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer[]
      */
     public function findPaymentPayoneOrderItemByFilter(PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer): array;
 
@@ -49,7 +49,7 @@ interface PayoneRepositoryInterface
     /**
      * Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
-     * @param \ArrayObject<\Generated\Shared\Transfer\OrderTransfer> $orders
+     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orders
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */

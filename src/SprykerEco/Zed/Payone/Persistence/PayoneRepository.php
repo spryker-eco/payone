@@ -30,14 +30,7 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
  */
 class PayoneRepository extends AbstractRepository implements PayoneRepositoryInterface
 {
-    /**
-     * @var string
-     */
     protected const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
-
-    /**
-     * @var string
-     */
     protected const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
 
     /**
@@ -48,14 +41,14 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     /**
      * @param \Generated\Shared\Transfer\PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer
      *
-     * @return array<\Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer>
+     * @return \Generated\Shared\Transfer\PaymentPayoneOrderItemTransfer[]
      */
     public function findPaymentPayoneOrderItemByFilter(PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer): array
     {
         $paymentPayoneOrderItemQuery = $this->getFactory()->createPaymentPayoneOrderItemQuery();
         $paymentPayoneOrderItemQuery = $this->setPayoneOrderItemFilters(
             $paymentPayoneOrderItemQuery,
-            $payoneOrderItemFilerTransfer,
+            $payoneOrderItemFilerTransfer
         );
 
         $paymentPayoneOrderItemEntities = $paymentPayoneOrderItemQuery->find();
@@ -101,7 +94,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     /**
      * Gets payment logs (both api and transaction status) for specific orders in chronological order.
      *
-     * @param \ArrayObject<\Generated\Shared\Transfer\OrderTransfer> $orderTransfers
+     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
      *
      * @return \Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer
      */
@@ -231,7 +224,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
 
         if (count($payoneOrderItemFilerTransfer->getSalesOrderItemIds())) {
             $paymentPayoneOrderItemQuery->filterByFkSalesOrderItem_In(
-                $payoneOrderItemFilerTransfer->getSalesOrderItemIds(),
+                $payoneOrderItemFilerTransfer->getSalesOrderItemIds()
             );
         }
 
@@ -239,7 +232,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \ArrayObject<\Generated\Shared\Transfer\OrderTransfer> $orderTransfers
+     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery
      */
@@ -260,7 +253,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param \ArrayObject<\Generated\Shared\Transfer\OrderTransfer> $orderTransfers
+     * @param \ArrayObject|\Generated\Shared\Transfer\OrderTransfer[] $orderTransfers
      *
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery
      */
