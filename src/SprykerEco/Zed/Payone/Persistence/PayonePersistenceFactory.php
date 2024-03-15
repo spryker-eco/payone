@@ -14,6 +14,8 @@ use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogOrderItemQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
+use SprykerEco\Zed\Payone\Dependency\Service\PayoneToUtilEncodingServiceInterface;
+use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 use SprykerEco\Zed\Payone\Persistence\Propel\Mapper\PayonePersistenceMapper;
 
 /**
@@ -78,5 +80,13 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
     public function createPayonePersistenceMapper(): PayonePersistenceMapper
     {
         return new PayonePersistenceMapper();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\Payone\Dependency\Service\PayoneToUtilEncodingServiceInterface
+     */
+    public function getServiceUtilEncoding(): PayoneToUtilEncodingServiceInterface
+    {
+        return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_UTIL_ENCODING);
     }
 }

@@ -131,6 +131,7 @@ use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateMana
 use SprykerEco\Zed\Payone\Business\TransactionStatus\TransactionStatusUpdateManagerInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToGlossaryFacadeInterface;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeInterface;
+use SprykerEco\Zed\Payone\Dependency\Service\PayoneToUtilEncodingServiceInterface;
 use SprykerEco\Zed\Payone\PayoneDependencyProvider;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -507,6 +508,7 @@ class PayoneBusinessFactory extends AbstractBusinessFactory
             $this->createPaymentMapperReader(),
             $this->getStandardParameter(),
             $this->createStandartParameterMapper(),
+            $this->getRepository(),
         );
     }
 
