@@ -162,7 +162,11 @@ class PostSaveHook implements PostSaveHookInterface
             $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($quoteTransfer, $requestContainer);
         }
 
-        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
+        $rawResponse = $this->payoneRepository->getPreauthorizedPaymentByReference($requestContainer->getReference());
+
+        if ($rawResponse === []) {
+            $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
+        }
 
         if ($responseContainer->getErrorcode()) {
             $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage(), $responseContainer->getErrorcode());

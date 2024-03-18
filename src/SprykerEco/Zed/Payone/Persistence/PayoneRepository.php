@@ -196,13 +196,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
             return [];
         }
 
-        $formattedPaymentData = array_merge(
-            $paymentData->toArray(),
-            $this->getFactory()->getServiceUtilEncoding()->decodeJson($paymentData->getVirtualColumn(static::RAW_RESPONSE_COLUMN_NAME), true),
-        );
-        unset($formattedPaymentData[static::RAW_RESPONSE_COLUMN_NAME]);
-
-        return $formattedPaymentData;
+        return $this->getFormattedPaymentData($paymentData);
     }
 
     /**
@@ -271,5 +265,27 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
             ->orderByCreatedAt();
 
         return $query;
+    }
+
+    /**
+     * @param array<string, mixed> $paymentData
+     *
+     * @return array<string, mixed>
+     */
+    protected function getFormattedPaymentData(array $paymentData): array
+    {
+        $paymentResponseData = $this->getFactory()->getServiceUtilEncoding()->decodeJson($paymentData[static::RAW_RESPONSE_COLUMN_NAME], true);
+
+        if ($paymentResponseData === null) {
+            return [];
+        }
+
+        $formattedPaymentData = array_merge(
+            $paymentData,
+            $paymentResponseData,
+        );
+        unset($formattedPaymentData[static::RAW_RESPONSE_COLUMN_NAME]);
+
+        return $formattedPaymentData;
     }
 }

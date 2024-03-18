@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\Payone\Business\Order;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEcoTest\Zed\Payone\Business\AbstractPayoneTest;
 
@@ -39,5 +40,24 @@ class HookTest extends AbstractPayoneTest
         $this->assertInstanceOf(CheckoutResponseTransfer::class, $newCheckoutResponseTransfer);
         $this->assertTrue($newCheckoutResponseTransfer->getIsExternalRedirect());
         $this->assertEquals('redirect url', $newCheckoutResponseTransfer->getRedirectUrl());
+    }
+
+    /**
+     * @return void
+     */
+    public function testPostSaveHookDoesNotSendPreauthorizeRequestTwice()
+    {
+        $this->createPayonePayment();
+        $paymentApiLog = $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
+
+        $checkoutResponseTransfer = new CheckoutResponseTransfer();
+        $this->quoteTransfer->getPayment()
+            ->getPayone()
+            ->setFkSalesOrder($this->orderEntity->getIdSalesOrder());
+        $newCheckoutResponseTransfer = $this->payoneFacade->postSaveHook($this->quoteTransfer, $checkoutResponseTransfer);
+
+        $preauthorizedRequestsCount = (new SpyPaymentPayoneApiLogQuery())->filterByTransactionId('213552995')->find()->count();
+        $this->assertTrue($newCheckoutResponseTransfer->getIsExternalRedirect());
+        $this->assertEquals(1, $preauthorizedRequestsCount);
     }
 }

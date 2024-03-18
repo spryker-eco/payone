@@ -17,7 +17,6 @@ use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseC
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
 use SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface;
-use SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface;
 
 class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements PayoneBaseAuthorizeSenderInterface
 {
@@ -37,31 +36,23 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
     protected $standartParameterMapper;
 
     /**
-     * @var \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface
-     */
-    protected PayoneRepositoryInterface $repository;
-
-    /**
      * @param \SprykerEco\Zed\Payone\Business\Api\Adapter\AdapterInterface $executionAdapter
      * @param \SprykerEco\Zed\Payone\Persistence\PayoneQueryContainerInterface $queryContainer
      * @param \SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface $paymentMapperReader
      * @param \Generated\Shared\Transfer\PayoneStandardParameterTransfer $standardParameter
      * @param \SprykerEco\Zed\Payone\Business\Payment\DataMapper\StandartParameterMapperInterface $standartParameterMapper
-     * @param \SprykerEco\Zed\Payone\Persistence\PayoneRepositoryInterface $repository
      */
     public function __construct(
         AdapterInterface $executionAdapter,
         PayoneQueryContainerInterface $queryContainer,
         PaymentMapperReaderInterface $paymentMapperReader,
         PayoneStandardParameterTransfer $standardParameter,
-        StandartParameterMapperInterface $standartParameterMapper,
-        PayoneRepositoryInterface $repository
+        StandartParameterMapperInterface $standartParameterMapper
     ) {
         parent::__construct($queryContainer, $paymentMapperReader);
         $this->executionAdapter = $executionAdapter;
         $this->standardParameter = $standardParameter;
         $this->standartParameterMapper = $standartParameterMapper;
-        $this->repository = $repository;
     }
 
     /**
@@ -77,12 +68,7 @@ class PayoneBaseAuthorizeSender extends AbstractPayoneRequestSender implements P
         $this->standartParameterMapper->setStandardParameter($requestContainer, $this->standardParameter);
 
         $apiLogEntity = $this->initializeApiLog($paymentEntity, $requestContainer);
-        $rawResponse = $this->repository->getPreauthorizedPaymentByReference($requestContainer->getReference());
-
-        if ($rawResponse === []) {
-            $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
-        }
-
+        $rawResponse = $this->executionAdapter->sendRequest($requestContainer);
         $responseContainer = new AuthorizationResponseContainer($rawResponse);
         $this->updatePaymentAfterAuthorization($paymentEntity, $responseContainer);
         $this->updateApiLogAfterAuthorization($apiLogEntity, $responseContainer);
