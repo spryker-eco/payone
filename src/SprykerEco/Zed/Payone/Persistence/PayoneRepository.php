@@ -190,13 +190,13 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
                 ->filterByStatus(PayoneApiConstants::RESPONSE_TYPE_APPROVED)
             ->endUse()
             ->withColumn(SpyPaymentPayoneApiLogTableMap::COL_RAW_RESPONSE, static::RAW_RESPONSE_COLUMN_NAME);
-        $paymentData = $paymentPayoneQuery->findOne();
+        $paymentEntity = $paymentPayoneQuery->findOne();
 
-        if ($paymentData === null) {
+        if ($paymentEntity === null) {
             return [];
         }
 
-        return $this->getFormattedPaymentData($paymentData);
+        return $this->getFormattedPaymentData($paymentEntity->toArray());
     }
 
     /**
