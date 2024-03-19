@@ -45,7 +45,7 @@ class HookTest extends AbstractPayoneTest
     /**
      * @return void
      */
-    public function testPostSaveHookDoesNotSendPreauthorizeRequestTwice()
+    public function testPostSaveHookDoesNotSendPreauthorizeRequestTwice(): void
     {
         $this->createPayonePayment();
         $paymentApiLog = $this->createPayoneApiLog(PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION, PayoneApiConstants::RESPONSE_TYPE_APPROVED);
@@ -56,7 +56,7 @@ class HookTest extends AbstractPayoneTest
             ->setFkSalesOrder($this->orderEntity->getIdSalesOrder());
         $newCheckoutResponseTransfer = $this->payoneFacade->postSaveHook($this->quoteTransfer, $checkoutResponseTransfer);
 
-        $preauthorizedRequestsCount = (new SpyPaymentPayoneApiLogQuery())->filterByTransactionId('213552995')->find()->count();
+        $preauthorizedRequestsCount = (new SpyPaymentPayoneApiLogQuery())->filterByTransactionId(static::TRANSACTION_ID)->find()->count();
         $this->assertTrue($newCheckoutResponseTransfer->getIsExternalRedirect());
         $this->assertEquals(1, $preauthorizedRequestsCount);
     }

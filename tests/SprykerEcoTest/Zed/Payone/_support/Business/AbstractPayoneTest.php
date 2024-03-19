@@ -26,6 +26,11 @@ use SprykerEco\Shared\Payone\PayoneApiConstants;
 abstract class AbstractPayoneTest extends AbstractBusinessTest
 {
     /**
+     * @var string
+     */
+    protected const TRANSACTION_ID = '213552995';
+
+    /**
      * @var \Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLog
      */
     protected $spyPayoneTransactionStatusLog;
@@ -41,7 +46,7 @@ abstract class AbstractPayoneTest extends AbstractBusinessTest
             ->setSpySalesOrder($this->orderEntity)
             ->setPaymentMethod($method)
             ->setReference('TX15887428dd2212')
-            ->setTransactionId('213552995');
+            ->setTransactionId(static::TRANSACTION_ID);
         $this->spyPaymentPayone->save();
     }
 

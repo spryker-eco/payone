@@ -17,6 +17,7 @@ use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
 use Orm\Zed\Payone\Persistence\Map\SpyPaymentPayoneApiLogTableMap;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItemQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
@@ -196,7 +197,7 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
             return [];
         }
 
-        return $this->getFormattedPaymentData($paymentEntity->toArray());
+        return $this->getFormattedPaymentData($paymentEntity);
     }
 
     /**
@@ -268,20 +269,20 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
-     * @param array<string, mixed> $paymentData
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
      *
      * @return array<string, mixed>
      */
-    protected function getFormattedPaymentData(array $paymentData): array
+    protected function getFormattedPaymentData(SpyPaymentPayone $paymentEntity): array
     {
-        $paymentResponseData = $this->getFactory()->getServiceUtilEncoding()->decodeJson($paymentData[static::RAW_RESPONSE_COLUMN_NAME], true);
+        $paymentResponseData = $this->getFactory()->getUtilEncodingService()->decodeJson($paymentEntity->getVirtualColumn(static::RAW_RESPONSE_COLUMN_NAME), true);
 
         if ($paymentResponseData === null) {
             return [];
         }
 
         $formattedPaymentData = array_merge(
-            $paymentData,
+            $paymentEntity->toArray(),
             $paymentResponseData,
         );
         unset($formattedPaymentData[static::RAW_RESPONSE_COLUMN_NAME]);

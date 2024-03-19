@@ -85,7 +85,7 @@ class PayonePersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \SprykerEco\Zed\Payone\Dependency\Service\PayoneToUtilEncodingServiceInterface
      */
-    public function getServiceUtilEncoding(): PayoneToUtilEncodingServiceInterface
+    public function getUtilEncodingService(): PayoneToUtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(PayoneDependencyProvider::SERVICE_UTIL_ENCODING);
     }
