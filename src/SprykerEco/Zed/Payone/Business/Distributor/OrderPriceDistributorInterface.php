@@ -7,14 +7,11 @@
 
 namespace SprykerEco\Zed\Payone\Business\Distributor;
 
-use Generated\Shared\Transfer\OrderTransfer;
+use SprykerEco\Service\Payone\Model\Distributor\OrderPriceDistributorInterface as SprykerOrderPriceDistributorInterface;
 
-interface OrderPriceDistributorInterface
+/**
+ * @deprecated Use service instead!
+ */
+interface OrderPriceDistributorInterface extends SprykerOrderPriceDistributorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
-     *
-     * @return \Generated\Shared\Transfer\OrderTransfer
-     */
-    public function distributeOrderPrice(OrderTransfer $orderTransfer): OrderTransfer;
 }
