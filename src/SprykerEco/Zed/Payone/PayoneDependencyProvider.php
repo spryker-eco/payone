@@ -16,6 +16,7 @@ use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToOmsBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToRefundBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToSalesBridge;
 use SprykerEco\Zed\Payone\Dependency\Facade\PayoneToStoreFacadeBridge;
+use SprykerEco\Zed\Payone\Dependency\Service\PayoneToUtilEncodingServiceBridge;
 
 class PayoneDependencyProvider extends AbstractBundleDependencyProvider
 {
@@ -49,6 +50,11 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     public const FACADE_STORE = 'FACADE_STORE';
 
     /**
+     * @var string
+     */
+    public const SERVICE_UTIL_ENCODING = 'SERVICE_UTIL_ENCODING';
+
+    /**
      * @uses \Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
      */
     public const SERVICE_REQUEST_STACK = 'request_stack';
@@ -80,6 +86,19 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addGlossaryFacade($container);
         $container = $this->addStoreFacade($container);
         $container = $this->addRequestStack($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function providePersistenceLayerDependencies(Container $container): Container
+    {
+        $container = parent::providePersistenceLayerDependencies($container);
+        $container = $this->addUtilEncodingService($container);
 
         return $container;
     }
@@ -177,6 +196,22 @@ class PayoneDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::SERVICE_REQUEST_STACK, function (Container $container) {
             return $container->getApplicationService(static::SERVICE_REQUEST_STACK);
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addUtilEncodingService(Container $container): Container
+    {
+        $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
+            return new PayoneToUtilEncodingServiceBridge(
+                $container->getLocator()->utilEncoding()->service(),
+            );
         });
 
         return $container;

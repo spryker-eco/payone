@@ -61,4 +61,11 @@ interface PayoneRepositoryInterface
      * @return \Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery
      */
     public function createPaymentPayoneQueryByOrderId(int $orderId): SpyPaymentPayoneQuery;
+
+    /**
+     * @param string
+     *
+     * @return array<string, mixed>
+     */
+    public function getPreauthorizedPaymentByReference(string $reference): array;
 }

@@ -15,6 +15,8 @@ use Generated\Shared\Transfer\TotalsTransfer;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use SprykerEco\Shared\Payone\PayoneApiConstants;
 use SprykerEco\Zed\Payone\Business\Api\Request\Container\AuthorizationContainerInterface;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\AbstractResponseContainer;
+use SprykerEco\Zed\Payone\Business\Api\Response\Container\AuthorizationResponseContainer;
 use SprykerEco\Zed\Payone\Business\Payment\DataMapper\PayoneRequestProductDataMapperInterface;
 use SprykerEco\Zed\Payone\Business\Payment\MethodMapper\KlarnaPaymentMapper;
 use SprykerEco\Zed\Payone\Business\Payment\PaymentMapperReaderInterface;
@@ -162,7 +164,8 @@ class PostSaveHook implements PostSaveHookInterface
             $requestContainer = $this->payoneRequestProductDataMapper->mapProductData($quoteTransfer, $requestContainer);
         }
 
-        $responseContainer = $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer);
+        $rawResponse = $this->payoneRepository->getPreauthorizedPaymentByReference($requestContainer->getReference());
+        $responseContainer = $rawResponse === [] ? $this->baseAuthorizeSender->performAuthorizationRequest($paymentEntity, $requestContainer) : new AuthorizationResponseContainer($rawResponse);
 
         if ($responseContainer->getErrorcode()) {
             $checkoutErrorTransfer = $this->createCheckoutErrorTransfer($responseContainer->getCustomermessage(), $responseContainer->getErrorcode());

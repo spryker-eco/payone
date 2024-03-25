@@ -16,12 +16,15 @@ use Generated\Shared\Transfer\PayoneOrderItemFilterTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogCollectionTransfer;
 use Generated\Shared\Transfer\PayonePaymentLogTransfer;
 use Generated\Shared\Transfer\PayonePaymentTransfer;
+use Orm\Zed\Payone\Persistence\Map\SpyPaymentPayoneApiLogTableMap;
+use Orm\Zed\Payone\Persistence\SpyPaymentPayone;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneApiLogQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItemQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneQuery;
 use Orm\Zed\Payone\Persistence\SpyPaymentPayoneTransactionStatusLogQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
+use SprykerEco\Shared\Payone\PayoneApiConstants;
 
 /**
  * @method \SprykerEco\Zed\Payone\Persistence\PayonePersistenceFactory getFactory()
@@ -30,6 +33,11 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
 {
     protected const LOG_TYPE_API_LOG = 'SpyPaymentPayoneApiLog';
     protected const LOG_TYPE_TRANSACTION_STATUS_LOG = 'SpyPaymentPayoneTransactionStatusLog';
+
+    /**
+     * @var string
+     */
+    protected const RAW_RESPONSE_COLUMN_NAME = 'rawResponse';
 
     /**
      * @param \Generated\Shared\Transfer\PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer
@@ -169,6 +177,30 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
     }
 
     /**
+     * @param string $reference
+     *
+     * @return array<string, mixed>
+     */
+    public function getPreauthorizedPaymentByReference(string $reference): array
+    {
+        $paymentPayoneQuery = $this->getFactory()->createPaymentPayoneQuery();
+        $paymentPayoneQuery->filterByReference($reference)
+            ->joinSpyPaymentPayoneApiLog()
+            ->useSpyPaymentPayoneApiLogQuery()
+                ->filterByRequest(PayoneApiConstants::REQUEST_TYPE_PREAUTHORIZATION)
+                ->filterByStatus(PayoneApiConstants::RESPONSE_TYPE_APPROVED)
+            ->endUse()
+            ->withColumn(SpyPaymentPayoneApiLogTableMap::COL_RAW_RESPONSE, static::RAW_RESPONSE_COLUMN_NAME);
+        $paymentEntity = $paymentPayoneQuery->findOne();
+
+        if ($paymentEntity === null) {
+            return [];
+        }
+
+        return $this->getFormattedPaymentData($paymentEntity);
+    }
+
+    /**
      * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayoneOrderItemQuery $paymentPayoneOrderItemQuery
      * @param \Generated\Shared\Transfer\PayoneOrderItemFilterTransfer $payoneOrderItemFilerTransfer
      *
@@ -234,5 +266,27 @@ class PayoneRepository extends AbstractRepository implements PayoneRepositoryInt
             ->orderByCreatedAt();
 
         return $query;
+    }
+
+    /**
+     * @param \Orm\Zed\Payone\Persistence\SpyPaymentPayone $paymentEntity
+     *
+     * @return array<string, mixed>
+     */
+    protected function getFormattedPaymentData(SpyPaymentPayone $paymentEntity): array
+    {
+        $paymentResponseData = $this->getFactory()->getUtilEncodingService()->decodeJson($paymentEntity->getVirtualColumn(static::RAW_RESPONSE_COLUMN_NAME), true);
+
+        if ($paymentResponseData === null) {
+            return [];
+        }
+
+        $formattedPaymentData = array_merge(
+            $paymentEntity->toArray(),
+            $paymentResponseData,
+        );
+        unset($formattedPaymentData[static::RAW_RESPONSE_COLUMN_NAME]);
+
+        return $formattedPaymentData;
     }
 }
