@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\PayoneGetFileTransfer;
 use Generated\Shared\Transfer\PayoneGetInvoiceTransfer;
 use Generated\Shared\Transfer\PayoneTransactionStatusUpdateTransfer;
 use Spryker\Yves\Kernel\Controller\AbstractController;
-use SprykerEco\Yves\Payone\Plugin\Provider\PayoneControllerProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -32,6 +31,11 @@ class IndexController extends AbstractController
      * @uses \SprykerShop\Yves\CheckoutPage\Plugin\Router\CheckoutPageRouteProviderPlugin::CHECKOUT_ERROR
      */
     protected const ROUTE_CHECKOUT_ERROR = 'checkout-error';
+
+    /** @var string */
+    protected const ROUTE_LOGIN = 'login';
+    /** @var string */
+    protected const ROUTE_CHECKOUT_PAYMENT = 'checkout-payment';
 
     protected const REQUEST_PARAM_ORDER_REFERENCE = 'orderReference';
 
@@ -106,7 +110,7 @@ class IndexController extends AbstractController
         $customerTransfer = $customerClient->getCustomer();
 
         if (!$customerTransfer) {
-            return $this->redirectResponseInternal(PayoneControllerProvider::ROUTE_LOGIN);
+            return $this->redirectResponseInternal(static::ROUTE_LOGIN);
         }
 
         $getFileTransfer = new PayoneGetFileTransfer();
@@ -137,7 +141,7 @@ class IndexController extends AbstractController
         $customerTransfer = $customerClient->getCustomer();
 
         if (!$customerTransfer) {
-            return $this->redirectResponseInternal(PayoneControllerProvider::ROUTE_LOGIN);
+            return $this->redirectResponseInternal(static::ROUTE_LOGIN);
         }
 
         $getInvoiceTransfer = new PayoneGetInvoiceTransfer();
@@ -168,7 +172,7 @@ class IndexController extends AbstractController
         $customerTransfer = $customerClient->getCustomer();
 
         if (!$customerTransfer) {
-            return $this->redirectResponseInternal(PayoneControllerProvider::ROUTE_LOGIN);
+            return $this->redirectResponseInternal(static::ROUTE_LOGIN);
         }
 
         $getInvoiceTransfer = new PayoneGetInvoiceTransfer();
@@ -210,7 +214,7 @@ class IndexController extends AbstractController
         $quoteTransfer->setOrderReference(null);
         $this->getFactory()->getQuoteClient()->setQuote($quoteTransfer);
 
-        return $this->redirectResponseInternal(PayoneControllerProvider::CHECKOUT_PAYMENT);
+        return $this->redirectResponseInternal(static::ROUTE_CHECKOUT_PAYMENT);
     }
 
     /**
