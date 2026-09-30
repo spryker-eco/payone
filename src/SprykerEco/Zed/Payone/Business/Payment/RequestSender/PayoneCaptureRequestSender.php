@@ -144,9 +144,9 @@ class PayoneCaptureRequestSender extends AbstractPayoneRequestSender implements 
     /**
      * @param \Generated\Shared\Transfer\PayoneCaptureTransfer $captureTransfer
      *
-     * @return \Generated\Shared\Transfer\CaptureResponseTransfer
+     * @return \Generated\Shared\Transfer\PayoneCaptureTransfer
      */
-    protected function addDataToCaptureTransferFromDistributedOrder(PayoneCaptureTransfer $captureTransfer): CaptureResponseTransfer
+    protected function addDataToCaptureTransferFromDistributedOrder(PayoneCaptureTransfer $captureTransfer): PayoneCaptureTransfer
     {
         $distributedPriceOrderTransfer = $this->orderPriceDistributor->distributeOrderPrice(
             $captureTransfer->getOrder()
